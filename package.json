@@ -29,7 +29,7 @@
     "exceljs": "^1.15.0",
     "file-saver": "^2.0.5",
     "jquery": "^3.6.0",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.25",
     "moment": "^2.29.3",
     "multilingual-number-to-words": "^5.0.4",
