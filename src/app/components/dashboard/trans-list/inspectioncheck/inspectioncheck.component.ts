@@ -69,6 +69,7 @@ export class InspectioncheckComponent implements OnInit {
   data: any;
   balanceCertificateData: any;
   date = new Date();
+  icmasters: any;
   
   constructor(private commonService: CommonService,
     private formBuilder: FormBuilder,
@@ -308,6 +309,7 @@ export class InspectioncheckComponent implements OnInit {
 
   onEditEmit(event: any) {
     this.getQCissueDetail(event.saleOrderNumber, event.materialCode);
+    this.getInspectionDetail(event.saleOrderNumber, event.materialCode);
   }
 
   getQCissueDetail(val, val1) {
@@ -367,6 +369,23 @@ export class InspectioncheckComponent implements OnInit {
 
               // this.sendDynTableData = { type: 'edit', data: res.response['goodsissueastersDetail'] };
               // this.formData.disable();
+            }
+          }
+        });
+  }
+
+  getInspectionDetail(val, val1) {
+    this.tableComponent.defaultValues();
+    const jvDetUrl = String.Join('/', this.apiConfigService.getInspectionDetail, val1, val);
+    this.apiService.apiGetRequest(jvDetUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          debugger
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.icmasters = res.response['icmasters'];
             }
           }
         });
@@ -693,8 +712,9 @@ export class InspectioncheckComponent implements OnInit {
         poNumber: res.SaleorderMaster.poNumber,
         poDate: res.SaleorderMaster.poDate,
         description: res.QCData.materialName,
-        heatNumber: res.QCData.heatNumber,
-        drgNo: res.QCData.drgNo,
+        heatNumber: this.icmasters.heatNumber,
+        drgNo: this.icmasters.partDrgNo,
+        drawingRevNo: this.icmasters.drawingRevNo,
       },
       detailArray: arr
     }
