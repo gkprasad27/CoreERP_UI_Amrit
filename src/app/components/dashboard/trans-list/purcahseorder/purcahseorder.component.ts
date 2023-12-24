@@ -115,7 +115,7 @@ export class PurchaseOrderComponent implements OnInit {
       supplierCode: [null, [Validators.required]],
       gstno: [null],
       profitcenterName: [''],
-      modelPattern: [''],
+      material: [''],
       companyName: [null],
       supplierName: [null],
       deliveryDate: [null],
@@ -129,6 +129,9 @@ export class PurchaseOrderComponent implements OnInit {
       editDate: [null],
       filePath: [null],
       advance: [null],
+      dispatchMode: [null],
+      termsOfDelivery: [null],
+      termsOfPayment: [null],
       igst: [0],
       cgst: [0],
       sgst: [0],
@@ -815,7 +818,19 @@ export class PurchaseOrderComponent implements OnInit {
     // this.sendDynTableData = { type: 'reset', data: this.tableData };
   }
 
+  setArray(length: number) {
+    let newArr = [];
+    if (length < 10) {
+      for (let i = 0; i < (10 - length); i++) {
+        newArr.push({ })
+      }
+    }
+    return newArr;
+  }
+
+
   print() {
+    debugger
     let formObj = this.formData.value;
     if (this.companyList.length) {
       const cObj = this.companyList.find((c: any) => c.companyCode == formObj.company);
@@ -848,8 +863,8 @@ export class PurchaseOrderComponent implements OnInit {
       const cObj = this.profitCenterList.find((c: any) => c.code == formObj.profitCenter);
       formObj['pAddress'] = {
         name: cObj.name,
-        address: cObj.address,
-        address1: cObj.address1,
+        address: cObj.address1,
+        address1: cObj.address2,
         city: cObj.city,
         stateName: cObj.stateName,
         pin: cObj.pin,
@@ -858,10 +873,13 @@ export class PurchaseOrderComponent implements OnInit {
         gstno: cObj.gstno,
       }
     }
+    let list  = [...this.tableData];
+    list = [...list, ...this.setArray(list.length)];
+
     const obj = {
       heading: 'PURCHASE ORDER',
       headingObj: formObj,
-      detailArray: this.tableData,
+      detailArray: list,
       headingObj1: this.formData1.value
       //  {
       //   Company: this.formData.value.company,

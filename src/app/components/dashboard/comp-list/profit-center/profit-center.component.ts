@@ -37,7 +37,7 @@ export class ProfitCenterComponent implements OnInit {
     this.modelFormData = this.formBuilder.group({
       code: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(5)]],
       name: [null, [Validators.required, Validators.minLength(2)]],
-      description: [null],
+      gstNo: [null],
       address1: [null],
       address2: [null],
       city: [null],

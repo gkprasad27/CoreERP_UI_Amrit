@@ -124,10 +124,10 @@
                     <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
                     <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.netWeight }}
                     </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty *
-                        row.netWeight}} </td>
+                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ row.qty *
+                        row.netWeight}} </ng-container>  </td>
                     <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
+                    <td > {{ row.amount }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
@@ -141,7 +141,7 @@
                         data.headingObj1.amount }}</td>
                     <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Amount</td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{
+                    <td style="text-align: center;-webkit-print-color-adjust: exact;">{{
                         data.headingObj1.totalAmount }}</td>
                 </tr>
             </tbody>
@@ -211,6 +211,7 @@
         justify-content: space-around;
         display: flex;
         height: 50px;
+    margin: 0px;
     "> {{ data.heading }} </h3>
     </div>
 
@@ -391,7 +392,7 @@
 
                 <mat-form-field>
                     <mat-label>{{'purchaseorder.purchaseOrderType' | translate }}</mat-label>
-                    <mat-select formControlName="purchaseOrderType" appFocusOnEnter tabIndex="6">
+                    <mat-select formControlName="purchaseOrderType" appFocusOnEnter tabIndex="5">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let potype of porderList" [value]="potype.purchaseType">
                             {{potype.description}}
@@ -409,14 +410,14 @@
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'purchaseorder.purchaseOrderDate'"></mat-label>
                     <input matInput [matDatepicker]="picker3" [nonEditable]="picker3"
-                        formControlName="purchaseOrderDate" appFocusOnEnter tabIndex="7">
+                        formControlName="purchaseOrderDate" appFocusOnEnter tabIndex="6">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label [translate]="'purchaseorder.supplierCode'"></mat-label>
-                    <mat-select formControlName="supplierCode" appFocusOnEnter tabIndex="8">
+                    <mat-select formControlName="supplierCode" appFocusOnEnter tabIndex="7">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let bptype of bpaList" [value]="bptype.bpnumber">
                             {{bptype.name}}
@@ -434,7 +435,7 @@
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'purchaseorder.deliveryDate'"></mat-label>
                     <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="deliveryDate"
-                        appFocusOnEnter tabIndex="10">
+                        appFocusOnEnter tabIndex="8">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
@@ -447,7 +448,7 @@
 
                 <!-- 
                 <mat-form-field>
-                    <mat-label>{{'purchaseorder.termsofDelivery' | translate }}</mat-label>
+                    <mat-label>{{'purchaseorder.termsOfDelivery' | translate }}</mat-label>
                     <mat-select formControlName="termsofDelivery" appFocusOnEnter tabIndex="6">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let prod of termsofDeliveryList" [value]="prod.id">
@@ -468,17 +469,32 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'purchaseorder.advance'"></mat-label>
-                    <input matInput type="number" formControlName="advance" appFocusOnEnter tabIndex="11">
+                    <input matInput type="number" formControlName="advance" appFocusOnEnter tabIndex="9">
                 </mat-form-field>
 
                 <mat-form-field>
-                    <mat-label>{{'purchaseorder.modelPattern' | translate }}</mat-label>
-                    <mat-select formControlName="modelPattern" appFocusOnEnter tabIndex="8">
+                    <mat-label>{{'purchaseorder.material' | translate }}</mat-label>
+                    <mat-select formControlName="material" appFocusOnEnter tabIndex="10">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let mpattern of mpatternList" [value]="mpattern.code">
+                        <mat-option *ngFor="let mpattern of mpatternList" [value]="mpattern.description">
                             {{mpattern.description}}
                         </mat-option>
                     </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'purchaseorder.dispatchMode'"></mat-label>
+                    <input matInput type="text" formControlName="dispatchMode" appFocusOnEnter tabIndex="11">
+                </mat-form-field>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'purchaseorder.termsOfDelivery'"></mat-label>
+                    <input matInput type="text" formControlName="termsOfDelivery" appFocusOnEnter tabIndex="12">
+                </mat-form-field>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'purchaseorder.termsOfPayment'"></mat-label>
+                    <input matInput type="text" formControlName="termsOfPayment" appFocusOnEnter tabIndex="13">
                 </mat-form-field>
 
 

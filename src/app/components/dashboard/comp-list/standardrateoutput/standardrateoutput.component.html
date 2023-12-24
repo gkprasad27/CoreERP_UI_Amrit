@@ -78,7 +78,7 @@
             <mat-label>{{'standardrateoutput.uom' | translate }}</mat-label>
             <mat-select formControlName="uom" appFocusOnEnter tabIndex="3">
               <mat-option>None</mat-option>
-              <mat-option *ngFor="let uom of UomList" [value]="uom.id">
+              <mat-option *ngFor="let uom of UomList" [value]="uom.text">
                 {{uom.text}}
               </mat-option>
             </mat-select>
@@ -88,7 +88,7 @@
             <mat-label [translate]="'standardrateoutput.instrument'"></mat-label>
             <mat-select formControlName="instrument" appFocusOnEnter tabIndex="3">
               <mat-option>None</mat-option>
-              <mat-option *ngFor="let instrument of instruments" [value]="instrument.code">
+              <mat-option *ngFor="let instrument of instruments" [value]="instrument.description">
                 {{instrument.description}}
               </mat-option>
             </mat-select>

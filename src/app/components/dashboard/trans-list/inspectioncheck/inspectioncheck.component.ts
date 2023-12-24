@@ -668,9 +668,9 @@ export class InspectioncheckComponent implements OnInit {
           Specification: t.spec,
           UOM: t.uom,
           Instrument: t.instrument,
-          inspectionCheckNo: t.inspectionCheckNo,
+          // inspectionCheckNo: t.inspectionCheckNo,
           [t.tagName]: t.result,
-          description: t.description,
+          // description: t.description,
         }
         if (!arr.length) {
           arr.push(obj);
