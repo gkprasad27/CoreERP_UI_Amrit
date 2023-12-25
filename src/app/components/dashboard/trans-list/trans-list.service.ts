@@ -98,6 +98,14 @@ export class TransListService {
         return this.dynamicComp;
         break;
       }
+      case 'salesinvoice': {
+        this.dynamicComp.component = GoodsissueComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getGoodsissueMaster;
+        this.dynamicComp.list = 'Goodsissue';
+        this.dynamicComp.editKey = 'saleOrderNumber';
+        return this.dynamicComp;
+        break;
+      }
       case 'materialrequisition': {
         this.dynamicComp.component = MaterialrequisitionComponents;
         this.dynamicComp.tableUrl = this.apiConfigService.getProductionissue;
