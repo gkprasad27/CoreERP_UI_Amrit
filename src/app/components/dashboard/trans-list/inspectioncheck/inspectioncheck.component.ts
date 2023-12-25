@@ -703,6 +703,7 @@ export class InspectioncheckComponent implements OnInit {
         }
       })
     }
+    debugger
     const obj = {
       heading: 'INSPECTION REPORT',
       headingObj: {
@@ -715,6 +716,7 @@ export class InspectioncheckComponent implements OnInit {
         heatNumber: this.icmasters.heatNumber,
         drgNo: this.icmasters.partDrgNo,
         drawingRevNo: this.icmasters.drawingRevNo,
+        totalQty: res.SaleorderMaster.totalQty
       },
       detailArray: arr
     }
@@ -763,8 +765,10 @@ export class InspectioncheckComponent implements OnInit {
         poNumber: res.SaleorderMaster.poNumber,
         poDate: res.SaleorderMaster.poDate,
         description: res.QCData.materialName,
-        heatNumber: res.QCData.heatNumber,
-        drgNo: res.QCData.drgNo,
+        
+        heatNumber: this.icmasters.heatNumber,
+        drgNo: this.icmasters.partDrgNo,
+        materialCode: this.icmasters.materialCode,
       },
       detailArray: res.tagsDetail
     }

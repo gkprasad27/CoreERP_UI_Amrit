@@ -103,45 +103,45 @@
         <table style="width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
             <thead>
                 <tr>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Product Code </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Description </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Quantity </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Unit Weight </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Total Weight </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Price/KG </th>
-                    <th> Total Amount </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Product Code </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Description </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Quantity </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Unit Weight </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Total Weight </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Price/KG </th>
+                    <th style="border-bottom: 1px solid black; -webkit-print-color-adjust: exact;"> Total Amount </th>
                 </tr>
             </thead>
             <tbody>
                 <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
                     *ngFor="let row of data.detailArray; let i = index">
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialCode }}
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialCode }}
                     </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialName }}
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialName }}
                     </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.netWeight }}
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.netWeight }}
                     </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ row.qty *
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ row.qty *
                         row.netWeight}} </ng-container>  </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
-                    <td > {{ row.amount }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;" colspan="2"> Grand
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;" colspan="2"> Grand
                         Totals </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Weight</td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{
                         data.headingObj1.amount }}</td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Amount</td>
-                    <td style="text-align: center;-webkit-print-color-adjust: exact;">{{
+                    <td style="border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">{{
                         data.headingObj1.totalAmount }}</td>
                 </tr>
             </tbody>
@@ -149,7 +149,7 @@
     </div>
 
 
-    <div style="border-top: 1px solid black; display: flex; font-size: 15px;">
+    <div style="display: flex; font-size: 15px;">
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
             <b> Total amount in words: </b>
             <div> {{ convertNumberToWords(data.headingObj?.totalAmount) }} </div>

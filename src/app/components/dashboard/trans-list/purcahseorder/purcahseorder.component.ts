@@ -297,8 +297,7 @@ export class PurchaseOrderComponent implements OnInit {
               })
               this.tableData = obj['data1'];
               this.calculate();
-              // this.calculate();
-
+              debugger
             }
           }
         });
@@ -618,7 +617,7 @@ export class PurchaseOrderComponent implements OnInit {
               })
               this.tableData = res.response['poDetail'];
               this.calculate();
-              // this.calculate();
+              debugger
             }
           }
         });
@@ -875,12 +874,12 @@ export class PurchaseOrderComponent implements OnInit {
     }
     let list  = [...this.tableData];
     list = [...list, ...this.setArray(list.length)];
-
+debugger
     const obj = {
       heading: 'PURCHASE ORDER',
       headingObj: formObj,
       detailArray: list,
-      headingObj1: this.formData1.value
+      headingObj1: { ...this.formData1.value, ...this.formData.value }
       //  {
       //   Company: this.formData.value.company,
       //   "Profit Center": this.formData.value.profitCenter,
