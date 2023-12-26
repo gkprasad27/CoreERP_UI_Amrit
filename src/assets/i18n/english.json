@@ -2647,13 +2647,15 @@
     "remarks": "Remarks",
     "amount": "Amount",
     "percentage": "Percentage",
+    "structureCode": "Structure Code",
     "structureName": "Structure Name",
     "amountType": "Amount Type",
     "active": "Active"
   },
   "StructionCreation": {
     "fixedComponents": "Fixed Components",
-    "structionName": "Struction Name"
+    "structureName": "Structure Name",
+    "structureCode":"Structure Code"
   },
   "attendance": {
     "title": "Attendance",

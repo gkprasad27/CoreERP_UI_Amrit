@@ -22,7 +22,8 @@ import { MatPaginator } from '@angular/material/paginator';
 export class StructureCreationComponent implements OnInit {
 
   isSaveDisabled = false;
-  structionName: any;
+  structureName: any;
+  structureCode: any;
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ['id', "text", "amount", "percentage", "select"];
   componentList: any;
@@ -85,9 +86,13 @@ export class StructureCreationComponent implements OnInit {
 
   save() {
     this.isSaveDisabled = false;
-    if (this.commonService.checkNullOrUndefined(this.structionName) && this.structionName == '') {
+    if (this.commonService.checkNullOrUndefined(this.structureName) && this.structureName == '') {
       return;
     }
+    if (this.commonService.checkNullOrUndefined(this.structureCode) && this.structureCode == '') {
+      return;
+    }
+    
 
     let select = false;
     for (let s = 0; s < this.dataSource.data.length; s++) {
@@ -96,14 +101,14 @@ export class StructureCreationComponent implements OnInit {
       }
     }
     if (select) {
-      console.log(this.structionName, this.dataSource);
+      console.log(this.structureName, this.dataSource);
     }
 
     const arr = this.dataSource.data.filter((d: any) => d.select)
-
+   
     const obj = {
       item: {
-        structionName: this.structionName,
+        structureName:this.structureName,
         components: arr
       }
     }
