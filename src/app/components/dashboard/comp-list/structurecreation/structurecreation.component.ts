@@ -108,8 +108,11 @@ export class StructureCreationComponent implements OnInit {
    
     const obj = {
       item: {
-        structureName:this.structureName,
-        components: arr
+        stHdr:{
+          structureName:this.structureName,
+          structureCode:this.structureCode
+        },
+        stDtl: arr
       }
     }
 
