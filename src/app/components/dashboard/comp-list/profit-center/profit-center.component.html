@@ -10,8 +10,7 @@
         <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid&& formControls.code.status != 'DISABLED', 
           'ng--invalid': !formControls.code.valid&& formControls.code.status != 'DISABLED'}">
           <mat-label [translate]="'profitCenter.code'"></mat-label>
-          <input matInput formControlName="code" maxlength="5"
-            appFocusOnEnter tabIndex="1">
+          <input matInput formControlName="code" maxlength="5" appFocusOnEnter tabIndex="1">
           <mat-error *ngIf="!formControls.code.valid && formControls.code.status != 'DISABLED'"
             [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Profit
             Center Code is required</mat-error>
@@ -20,40 +19,30 @@
         <mat-form-field class="form-element"
           [ngClass]="{ 'ng--valid': formControls.name.valid, 'ng--invalid': !formControls.name.valid  }">
           <mat-label [translate]="'profitCenter.name'"></mat-label>
-          <input matInput formControlName="name" maxlength="50"
-            appFocusOnEnter tabIndex="2">
+          <input matInput formControlName="name" maxlength="50" appFocusOnEnter tabIndex="2">
           <mat-error *ngIf="!formControls.name.valid" [ngClass]="{ 'ng--invalid': !formControls.name.valid  }">Profit
             Center Name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
-          <mat-label [translate]="'profitCenter.gstNo'"></mat-label>
-          <input matInput formControlName="gstNo"
-            maxlength="50" appFocusOnEnter tabIndex="3">
-        </mat-form-field>
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'profitCenter.address1'"></mat-label>
-          <input matInput formControlName="address1"
-            maxlength="40" appFocusOnEnter tabIndex="4">
+          <input matInput formControlName="address1" maxlength="40" appFocusOnEnter tabIndex="4">
         </mat-form-field>
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'profitCenter.address2'"></mat-label>
-          <input matInput formControlName="address2"
-            maxlength="40" appFocusOnEnter tabIndex="5">
+          <input matInput formControlName="address2" maxlength="40" appFocusOnEnter tabIndex="5">
         </mat-form-field>
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'profitCenter.city'"></mat-label>
-          <input matInput formControlName="city" maxlength="50"
-            appFocusOnEnter tabIndex="6">
+          <input matInput formControlName="city" maxlength="50" appFocusOnEnter tabIndex="6">
         </mat-form-field>
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'profitCenter.pinCode'"></mat-label>
-          <input matInput formControlName="pinCode" maxlength="6"
-            appFocusOnEnter tabIndex="8">
+          <input matInput formControlName="pinCode" maxlength="6" appFocusOnEnter tabIndex="8">
         </mat-form-field>
 
         <mat-form-field>
@@ -108,20 +97,17 @@
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'profitCenter.phone'"></mat-label>
-          <input matInput formControlName="phone" maxlength="12"
-            appFocusOnEnter tabIndex="14">
+          <input matInput formControlName="phone" maxlength="12" appFocusOnEnter tabIndex="14">
         </mat-form-field>
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'profitCenter.mobile'"></mat-label>
-          <input matInput formControlName="mobile" maxlength="12"
-            appFocusOnEnter tabIndex="15">
+          <input matInput formControlName="mobile" maxlength="12" appFocusOnEnter tabIndex="15">
         </mat-form-field>
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'profitCenter.email'"></mat-label>
-          <input matInput formControlName="email" maxlength="50"
-            appFocusOnEnter tabIndex="16">
+          <input matInput formControlName="email" maxlength="50" appFocusOnEnter tabIndex="16">
         </mat-form-field>
 
         <mat-form-field>
@@ -134,16 +120,40 @@
           </mat-select>
         </mat-form-field>
 
+        <mat-form-field class="form-element">
+          <mat-label [translate]="'profitCenter.poNumber'"></mat-label>
+          <input matInput type="text" formControlName="poNumber" appFocusOnEnter tabIndex="18">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <mat-label [translate]="'profitCenter.poPrefix'"></mat-label>
+          <input matInput type="text" formControlName="poPrefix" appFocusOnEnter tabIndex="19">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <mat-label [translate]="'profitCenter.soNumber'"></mat-label>
+          <input matInput type="text" formControlName="soNumber" appFocusOnEnter tabIndex="20">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <mat-label [translate]="'profitCenter.soPrefix'"></mat-label>
+          <input matInput type="text" formControlName="soPrefix" appFocusOnEnter tabIndex="21">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <mat-label [translate]="'profitCenter.gstNo'"></mat-label>
+          <input matInput type="text" formControlName="gstNo" appFocusOnEnter tabIndex="22">
+        </mat-form-field>
       </div>
       <mat-divider></mat-divider>
     </form>
   </mat-card-content>
   <div class="form-element p-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="19">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="23">
       {{ 'COMMON.CANCEL' | translate }}
     </button>
     <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
-      tabIndex="20">
+      tabIndex="24">
       {{ 'COMMON.SAVE' | translate }}
     </button>
   </div>

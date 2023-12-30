@@ -132,7 +132,11 @@
     "responsiblePerson": "Responsible Person",
     "responsibleName": "Responsible Person",
     "phone": "Phone",
-    "mobile": "Mobile"
+    "mobile": "Mobile",
+    "poNumber": "Po Number",
+    "poPrefix": "Po Prefix",
+    "soNumber": "So Number",
+    "soPrefix": "So Prefix"
   },
   "branches": {
     "title": "Branch",
@@ -650,7 +654,8 @@
     "role": "Role",
     "branchCode": "Branch Code",
     "companyCode": "Company Code",
-    "addDate": "Add Date"
+    "addDate": "Add Date",
+    "active": "Active"
   },
   "depreciationcode": {
     "title": "Depreciation Code",
@@ -2647,7 +2652,6 @@
     "remarks": "Remarks",
     "amount": "Amount",
     "percentage": "Percentage",
-    "structureCode": "Structure Code",
     "structureName": "Structure Name",
     "amountType": "Amount Type",
     "active": "Active"
@@ -2667,7 +2671,7 @@
     "status" : "Status"
   },
   "salesinvoice": {
-    "TITLE": "Sales Invoice",
+    "title": "Sales Invoice",
     "RETURNTITLE": "Sales Return",
     "ViewSales": "Sales Invoice List View",
     "SlNo": "Sl No",

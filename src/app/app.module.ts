@@ -34,7 +34,7 @@ import {
   StandardRateComponent, DownTimeReasonComponent, TasksComponent, InvoiceverificationComponent, RoutingFileComponent, VehicleRequisitionsComponent,
   PTMasterComponent, PFMasterComponent, PermissionRequestComponent, CTCBreakupComponent, ComponentMasterComponent, 
   AdvanceComponent, ApplyodComponent, LeaveRequestComponent, LeaveopeningbalanceComponent, LeavetypeComponent, ApprovalTypeComponent, OpeningBalanceComponent, VehicleApprovalsComponent, advanceApprovalComponent, odApprovalComponent, PermissionApprovalsComponent, LeaveApprovalComponent, DesignationComponent,
-  StructureCreationComponent
+  StructureCreationComponent, CreateBillComponent, SalesInvoiceComponent
 } from './components/dashboard/comp-list/index';
 
 import {
@@ -78,7 +78,6 @@ import { InspectionComponent } from './components/dashboard/trans-list/inspectio
 import { BalanceCertificateComponent } from './components/dashboard/trans-list/inspectioncheck/balance-certificate/balance-certificate.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MaterialRequisitionViewComponent } from './components/dashboard/trans-list/materialrequisition/material-requisition-view/material-requisition-view.component';
-import { SalesInvoiceComponent } from './components/dashboard/trans-list/sales-invoice/sales-invoice.component';
 
 //import { AccountKeyComponent } from './components/dashboard/comp-list/assetblock/accountkey/accountkey.component';
 // AoT requires an exported function for factories
@@ -156,7 +155,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SalesorderComponent,
     FileUploadComponent,
     PreviewComponent,
-    InspectionComponent,StructureCreationComponent, BalanceCertificateComponent, InspectionPreviewComponent, MaterialRequisitionViewComponent, SalesInvoiceComponent
+    InspectionComponent,StructureCreationComponent, BalanceCertificateComponent, InspectionPreviewComponent, MaterialRequisitionViewComponent, SalesInvoiceComponent,
+    CreateBillComponent, SalesInvoiceComponent
   ],
   imports: [
     AppRoutingModule,
@@ -213,7 +213,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     PermissionApprovalsComponent, LeaveApprovalComponent,
 
     DesignationComponent,
-    SalesorderComponent,StructureCreationComponent
+    SalesorderComponent,StructureCreationComponent, CreateBillComponent, SalesInvoiceComponent
   ]
 })
 export class AppModule { }

@@ -140,3 +140,6 @@ export { PermissionApprovalsComponent } from './permissionapproval/permissionapp
 export { LeaveApprovalComponent } from './leaveapproval/leaveapproval.component';
 export { DesignationComponent } from './designation/designation.component';
 export { StructureCreationComponent} from './structurecreation/structurecreation.component';
+
+export { CreateBillComponent } from './sales-invoice/create-bill/create-bill.component';
+export { SalesInvoiceComponent } from './sales-invoice/sales-invoice.component';

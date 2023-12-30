@@ -486,11 +486,11 @@ export class ApiConfigService {
    addProductionissue = `${this.environment.runtimeConfig.serverUrl}Transactions/AddProductionissue`;
 
    getProductionStatus = `${this.environment.runtimeConfig.serverUrl}Transactions/GetProductionStatus`;
-   
+
    getPRList = `${this.environment.runtimeConfig.serverUrl}Common/GetPRList`;
    getBOMList = `${this.environment.runtimeConfig.serverUrl}Common/GetBOMList`;
    getFormList = `${this.environment.runtimeConfig.serverUrl}Common/GetFormList`;
-   
+
    registerStandardRate = `${this.environment.runtimeConfig.serverUrl}StandardRate/RegisterStandardRate`;
    
    getInspectionDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetInspectionDetail`;

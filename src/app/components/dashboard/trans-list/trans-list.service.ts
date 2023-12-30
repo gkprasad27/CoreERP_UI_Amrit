@@ -98,21 +98,12 @@ export class TransListService {
         return this.dynamicComp;
         break;
       }
-      case 'salesinvoice': {
-        this.dynamicComp.component = GoodsissueComponent;
-        this.dynamicComp.tableUrl = this.apiConfigService.getGoodsissueMaster;
-        this.dynamicComp.list = 'Goodsissue';
-        this.dynamicComp.editKey = 'saleOrderNumber';
-        return this.dynamicComp;
-        break;
-      }
       case 'materialrequisition': {
         this.dynamicComp.component = MaterialrequisitionComponents;
         this.dynamicComp.tableUrl = this.apiConfigService.getProductionissue;
         this.dynamicComp.list = 'Productionissue';
         this.dynamicComp.editKey = 'saleOrderNumber';
         return this.dynamicComp;
-        break;
       }
       case 'purcahserequisition': {
         this.dynamicComp.component = PurchasingComponent;
@@ -120,7 +111,6 @@ export class TransListService {
         this.dynamicComp.list = 'purchasereq';
         this.dynamicComp.editKey = 'requisitionNumber';
         return this.dynamicComp;
-        break;
       }
       case 'sourceofsupply': {
         this.dynamicComp.component = SourceOfSupplyComponent;
@@ -128,7 +118,6 @@ export class TransListService {
         this.dynamicComp.list = 'sorcesupply';
         this.dynamicComp.editKey = 'supplierCode';
         return this.dynamicComp;
-        break;
       }
       case 'supplierquotation': {
         this.dynamicComp.component = QuotationSupplierComponent;
@@ -136,7 +125,6 @@ export class TransListService {
         this.dynamicComp.list = 'quotationsupplier';
         this.dynamicComp.editKey = 'quotationNumber';
         return this.dynamicComp;
-        break;
       }
       case 'quotationanalysis': {
         this.dynamicComp.component = QuotationAnalysisComponent;
@@ -144,7 +132,6 @@ export class TransListService {
         this.dynamicComp.list = 'quotationanalysis';
         this.dynamicComp.editKey = 'quotationNumber';
         return this.dynamicComp;
-        break;
       }
       case 'purchaseorder': {
         this.dynamicComp.component = PurchaseOrderComponent;
@@ -152,7 +139,6 @@ export class TransListService {
         this.dynamicComp.list = 'podetails';
         this.dynamicComp.editKey = 'purchaseOrderNumber';
         return this.dynamicComp;
-        break;
       }
       case 'goodsreceipts': {
         this.dynamicComp.component = ReceiptOfGoodsComponent;
@@ -160,7 +146,6 @@ export class TransListService {
         this.dynamicComp.list = 'grdetails';
         this.dynamicComp.editKey = 'purchaseOrderNo';
         return this.dynamicComp;
-        break;
       }
       case 'inspectioncheck': {
         this.dynamicComp.component = InspectioncheckComponent;
@@ -168,7 +153,6 @@ export class TransListService {
         this.dynamicComp.list = 'Productionissue';
         this.dynamicComp.editKey = 'saleOrderNumber';
         return this.dynamicComp;
-        break;
       }
       case 'standardrateoutput': {
         this.dynamicComp.component = StandardRateComponent;
@@ -176,7 +160,6 @@ export class TransListService {
         this.dynamicComp.list = 'sropList';
         this.dynamicComp.editKey = 'code';
         return this.dynamicComp;
-        break;
       }
       case 'samplerequisitionform': {
         this.dynamicComp.component = SampleRequisitionFormComponent;
@@ -184,7 +167,6 @@ export class TransListService {
         this.dynamicComp.list = 'CashBankMasters';
         this.dynamicComp.editKey = 'voucherNumber';
         return this.dynamicComp;
-        break;
       }
       case 'sampleservice': {
         this.dynamicComp.component = SampleServiceComponent;
@@ -192,7 +174,6 @@ export class TransListService {
         this.dynamicComp.list = 'CashBankMasters';
         this.dynamicComp.editKey = 'voucherNumber';
         return this.dynamicComp;
-        break;
       }
       case 'saleorder': {
         this.dynamicComp.component = SalesorderComponent;
@@ -200,7 +181,13 @@ export class TransListService {
         this.dynamicComp.list = 'saleOrderMaster';
         this.dynamicComp.editKey = 'saleOrderNo';
         return this.dynamicComp;
-        break;
+      }
+      case 'salesinvoice': {
+        this.dynamicComp.component = SalesInvoiceComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getInvoiceList;
+        this.dynamicComp.list = 'InvoiceList';
+        this.dynamicComp.editKey = 'saleOrderNo';
+        return this.dynamicComp;
       }
       default:
         this.dynamicComp.component = NotFoundComponent;

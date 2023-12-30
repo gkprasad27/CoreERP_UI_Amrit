@@ -106,8 +106,8 @@ export class PermissionRequestComponent implements OnInit {
   //    .subscribe(
   //      response => {
   //        const res = response.body;
-  //        if (!isNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //          if (!isNullOrUndefined(res.response)) {
+  //        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //          if (!this.commonService.checkNullOrUndefined(res.response)) {
   //            console.log(res);
   //            this.advanceList = res.response['advancesList'];
   //          }

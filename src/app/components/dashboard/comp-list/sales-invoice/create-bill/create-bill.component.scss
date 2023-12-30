@@ -1,0 +1,130 @@
+
+@import "../../../../../../reuse";
+
+.table {
+  overflow-x: unset;
+}
+
+::ng-deep typeahead-container {
+  max-height: 300px !important;
+}
+
+#customerName,#memberName,#customerGstin,#suppliedTo{
+  text-transform: uppercase;
+}
+
+:host ::ng-deep table {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  & > thead {
+    & th {
+      text-align: center;
+    }
+  }
+  & > tbody  {
+    & tr {
+      border-bottom: 1px solid $color-ddd;
+    }
+    & td {
+      font-size: 13px;
+      vertical-align: middle;
+            // border: none !important;
+      border: 1px solid $color-gray;
+      text-align: center;
+      padding-left: 0% !important;
+    }
+    & th {
+      vertical-align: middle;
+      // border: none !important;
+    }
+    & tr:nth-child(even) {
+    background-color: $color-f9f9f9
+    }
+    & tr:nth-child(odd) {
+      background-color: $color-white
+      }
+      & tr:nth-child(even):hover {
+        background-color: $color-f9f9f9
+        }
+        & tr:nth-child(odd):hover {
+          background-color: $color-f9f9f9
+          }
+  }
+}
+
+// .mat-header-cell, .mat-cell {
+//   min-width: 150px;
+// }
+
+
+
+.table th, .table td {
+  vertical-align: middle;
+  // border: none !important;
+}
+
+.table th {
+  background-color: $color-blue;
+  color: $color-white;
+  font-size: 13px;
+}
+
+.table tr {
+  height: 40px !important;
+  cursor: pointer;
+}
+
+  .mat-form-field-height {
+    .mat-form-field {
+      margin: 5px;
+      flex: 0 0 19%;
+      height: 40px;
+
+    //   & .mat-form-field-wrapper {
+    //     padding-bottom: 0em !important;
+    // }
+    // & .mat-form-field-underline {
+    //   bottom: 0.1em;
+    // }
+    // & .mat-form-field-infix {
+    //   border: none;
+    // }
+    }
+  }
+
+
+.bill--width {
+  display: flex;
+  justify-content: space-between;
+  & mat-card:first-child {
+    width: 61%;
+  }
+  & mat-card:last-child {
+    width: 38%;
+  }
+}
+
+.delete-icon {
+  font-size: 17px;
+  color: #337ab7;
+}
+
+mat-form-field {
+  height: 40px;
+  font-size: 16px;
+  font-weight: 500;
+}
+mat-form-field {
+& input:focus {
+  background: #f6ff0091;
+}
+}
+
+.flashLight {
+  -webkit-animation: glowing 1500ms infinite;
+}
+
+@-webkit-keyframes glowing {
+  0% { border: #B20000; -webkit-box-shadow: 0 0 1px #B20000; }
+  50% { border: #FF0000; -webkit-box-shadow: 0 0 20px #FF0000; }
+  100% { border: #B20000; -webkit-box-shadow: 0 0 1px #B20000; }
+}

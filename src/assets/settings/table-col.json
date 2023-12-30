@@ -544,7 +544,8 @@
     "role": "Role",
     "branchCode": "Branch Code",
     "companyCode": "Company Code",
-    "addDate": "Add Date"
+    "addDate": "Add Date",
+    "active": "Active"
   },
   "businesspartner": {
     "title": "Busieness Partner Master",
@@ -2255,7 +2256,7 @@
         "status" : "status"
       },
       "salesinvoice": {
-        "TITLE": "Sales Invoice",
+        "title": "Sales Invoice",
         "RETURNTITLE": "Sales Return",
         "ViewSales": "Sales Invoice List View",
         "SlNo": "Sl No",

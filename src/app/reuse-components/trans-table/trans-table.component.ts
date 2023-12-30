@@ -198,10 +198,18 @@ export class TransTableComponent implements OnInit {
 
   setClass(element: any) {
     if (this.routeParam == 'saleorder') {
-      if (new Date(element.dateofSupply) > new Date() && element.status != "Completed") {
+      if (new Date(element.dateofSupply) < new Date() && element.status != "Completed") {
         return 'background-red';
       }
       if (new Date(element.dateofSupply) < new Date() && element.status == "Completed") {
+        return 'background-green';
+      }
+    }
+    if (this.routeParam == 'purchaseorder') {
+      if (new Date(element.deliveryDate) < new Date() && element.status != "Completed") {
+        return 'background-red';
+      }
+      if (new Date(element.deliveryDate) < new Date() && element.status == "Completed") {
         return 'background-green';
       }
     }
