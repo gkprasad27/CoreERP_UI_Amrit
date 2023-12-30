@@ -20,7 +20,7 @@ import { InspectioncheckComponent } from './inspectioncheck/inspectioncheck.comp
 import { SampleRequisitionFormComponent } from './samplerequisitionform/samplerequisitionform.component'
 import { SampleServiceComponent } from './sampleservice/sampleservice.component';
 import { SalesorderComponent } from './salesorder/salesorder.component';
-import { StandardRateComponent } from '../comp-list';
+import { SalesInvoiceComponent, StandardRateComponent } from '../comp-list';
 @Injectable({
   providedIn: 'root'
 })
