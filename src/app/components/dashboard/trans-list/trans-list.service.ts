@@ -201,7 +201,6 @@ export class TransListService {
         this.dynamicComp.editKey = 'saleOrderNo';
         return this.dynamicComp;
         break;
-        
       }
       default:
         this.dynamicComp.component = NotFoundComponent;
