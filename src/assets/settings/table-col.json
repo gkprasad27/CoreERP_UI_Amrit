@@ -2266,24 +2266,12 @@
         "NEWSALES": "Create New Sales",
         "invoiceMasterId": "Invoice No",
         "invoiceDate": "Invoice Date",
-        "branchCode": "Branch Code",
-        "branchName": "Branch Name",
-        "stateCode": "State Code",
-        "userId": "User Id",
-        "isManualEntry": "IsManual Entry",
-        "ledgerCode": "Cash/Pary Name",
-        "ledgerName": "Ledger Name",
         "totalAmount": "Total Amount",
         "CreatenewSales": " Create New Sales",
         "cashOrParty": "Cash / Party",
-        "vehicleRegNo": "Vehicle Reg No",
         "customerName": "Customer Name",
         "customerGstin": "Customer GSTIN",
-        "memberName": "Member Name",
-        "paymentMode": "Payment Mode",
         "mobile": "Mobile",
-        "generalNo": "General No",
-        "accountBalance": "Account Balance",
         "suppliedTo": "Supplied To",
         "AMOUNTINWORDS": "AMOUNTINWORDS",
         "productCode": "Product Code",
@@ -2305,7 +2293,6 @@
         "totalInvoiceAmount": "Total Invoice Amount",
         "totalCgst": "Total CGST",
         "totalSgst": "Total SGST",
-        "totalIgst": "Total IGST",
-        "userName": "User Name"
+        "totalIgst": "Total IGST"
       }
 }

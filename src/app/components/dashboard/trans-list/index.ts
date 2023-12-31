@@ -26,3 +26,6 @@ export { CreateStockTransferComponent } from './stocktransfer/create-stock-trans
 export { SalesorderComponent } from './salesorder/salesorder.component';
 export { PreviewComponent } from './purcahseorder/preview/preview.component';
 export { InspectionPreviewComponent } from './inspectioncheck/inspection-preview/inspection-preview.component';
+
+
+export { SalesInvoiceComponent } from './sales-invoice/sales-invoice.component';
