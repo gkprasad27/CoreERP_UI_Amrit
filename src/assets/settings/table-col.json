@@ -2260,11 +2260,14 @@
         "RETURNTITLE": "Sales Return",
         "ViewSales": "Sales Invoice List View",
         "SlNo": "Sl No",
+        "materialCode": "Material Code",
+        "materialName": "MaterialName",
         "VIEWSALESRETURN": "Sales Return View",
         "DATE": "Date",
         "INVOICENO": "Invoive No",
         "NEWSALES": "Create New Sales",
         "invoiceMasterId": "Invoice No",
+        "netWeight": "Net Weight",
         "invoiceDate": "Date",
         "totalAmount": "Total Amount",
         "CreatenewSales": " Create New Sales",
@@ -2293,6 +2296,8 @@
         "totalInvoiceAmount": "Total Invoice Amount",
         "totalCgst": "Total CGST",
         "totalSgst": "Total SGST",
-        "totalIgst": "Total IGST"
+        "totalIgst": "Total IGST",
+        "delete": "Delete",
+        "action": "Action"
       }
 }

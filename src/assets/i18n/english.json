@@ -2092,6 +2092,7 @@
        "purchaseOrderNumber": "Purchase Order Number",
     "title": "Goods Receipt",
     "purchaseOrderNo": "Purchase Order No",
+    "manualInvoiceNo": "Sale Order Number",
     "company": "Company",
     "supplierCode": "Supplier Code",
     "supplierReferenceNo": "Invoice No",
@@ -2676,11 +2677,17 @@
     "RETURNTITLE": "Sales Return",
     "ViewSales": "Sales Invoice List View",
     "SlNo": "Sl No",
+    "company": "Company",
+    "profitCenter": "Profit Center",
+    "manualInvoiceNo": "Sale Order Number",
+    "netWeight": "Net Weight",
+    "materialCode": "Material Code",
+    "materialName": "MaterialName",
     "VIEWSALESRETURN": "Sales Return View",
     "DATE": "Date",
     "INVOICENO": "Invoive No",
     "NEWSALES": "Create New Sales",
-    "invoiceMasterId": "Invoice No",
+    "invoiceMasterId": "Invoice Number",
     "invoiceDate": "Invoice Date",
     "branchCode": "Branch Code",
     "branchName": "Branch Name",
@@ -2723,6 +2730,8 @@
     "totalSgst": "Total SGST",
     "totalIgst": "Total IGST",
     "userName": "User Name",
-    "totalTcs": "Total TCS"
+    "totalTcs": "Total TCS",
+    "delete": "Delete",
+    "action": "Action"
   }
 }

@@ -668,7 +668,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
             }
             this.alertService.openSnackBar('Goods Receipt created Successfully..', Static.Close, SnackBar.success);
           }
-          this.reset();
           this.spinner.hide();
         }
       });
