@@ -9,6 +9,8 @@ import { ApiService } from '../../../../services/api.service';
 import { StatusCodes } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AddOrEditService } from '../add-or-edit.service';
+import { Router } from '@angular/router';
 ;
 @Component({
   selector: 'app-ctcbreakup',
@@ -23,21 +25,29 @@ export class CTCBreakupComponent implements OnInit {
   GetEmployeeListArray:[];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  formData: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private spinner: NgxSpinnerService,
-    public dialogRef: MatDialogRef<CTCBreakupComponent>,
+    private addOrEditService: AddOrEditService,
+    private router: Router,
+    // public dialogRef: MatDialogRef<CTCBreakupComponent>,
   ) {
     this.modelFormData = this.formBuilder.group({
-      myControl: [null],
+      empCode: [null],
       effectFrom: [null],
       structureName: [null],
       ctc: [null]
     });
-
+    this.formData = { ...this.addOrEditService.editData };
+    if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
+      this.modelFormData.patchValue(this.formData.item);
+    }
   }
 
   ngOnInit() {
@@ -99,10 +109,17 @@ export class CTCBreakupComponent implements OnInit {
   }
 
   save() {
-
+    this.formData.item = this.modelFormData.value;
+    this.addOrEditService[this.formData.action](this.formData, (res) => {
+      if (res) {
+        this.router.navigate(['/dashboard/master/structurecreation']);
+      }
+    });
   }
   cancel() {
-    this.dialogRef.close();
+    this.router.navigate(['dashboard/master/CTCBreakup'])
+
+    // this.dialogRef.close();
   }
 
 }

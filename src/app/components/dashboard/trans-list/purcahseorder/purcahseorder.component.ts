@@ -297,7 +297,6 @@ export class PurchaseOrderComponent implements OnInit {
               })
               this.tableData = obj['data1'];
               this.calculate();
-              debugger
             }
           }
         });
@@ -617,7 +616,6 @@ export class PurchaseOrderComponent implements OnInit {
               })
               this.tableData = res.response['poDetail'];
               this.calculate();
-              debugger
             }
           }
         });
@@ -829,7 +827,6 @@ export class PurchaseOrderComponent implements OnInit {
 
 
   print() {
-    debugger
     let formObj = this.formData.value;
     if (this.companyList.length) {
       const cObj = this.companyList.find((c: any) => c.companyCode == formObj.company);
@@ -874,7 +871,6 @@ export class PurchaseOrderComponent implements OnInit {
     }
     let list  = [...this.tableData];
     list = [...list, ...this.setArray(list.length)];
-debugger
     const obj = {
       heading: 'PURCHASE ORDER',
       headingObj: formObj,

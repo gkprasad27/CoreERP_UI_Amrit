@@ -382,7 +382,6 @@ export class InspectioncheckComponent implements OnInit {
         response => {
           this.spinner.hide();
           const res = response;
-          debugger
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.icmasters = res.response['icmasters'];
@@ -703,7 +702,6 @@ export class InspectioncheckComponent implements OnInit {
         }
       })
     }
-    debugger
     const obj = {
       heading: 'INSPECTION REPORT',
       headingObj: {

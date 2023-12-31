@@ -2657,6 +2657,7 @@
     "active": "Active"
   },
   "StructionCreation": {
+    "title": "Struction Creation",
     "fixedComponents": "Fixed Components",
     "structureName": "Structure Name",
     "structureCode":"Structure Code"
