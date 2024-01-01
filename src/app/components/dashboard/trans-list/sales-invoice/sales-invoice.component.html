@@ -33,7 +33,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label>{{ 'salesinvoice.manualInvoiceNo' | translate }}</mat-label>
-                    <mat-select formControlName="manualInvoiceNo" (selectionChange)="ponoselect()" appFocusOnEnter
+                    <mat-select formControlName="manualInvoiceNo" (selectionChange)="getsaleOrdernoList()" appFocusOnEnter
                         tabIndex="3">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let poNo of getSaleOrderData" [value]="poNo.saleOrderNo">
@@ -102,8 +102,8 @@
                             <mat-select formControlName="materialCode" appFocusOnEnter tabIndex="12"
                                 (selectionChange)="materialCodeChange()">
                                 <mat-option>None</mat-option>
-                                <mat-option *ngFor="let material of materialCodeList" [value]="material.id">
-                                    {{material.id}} -- {{material.text}}
+                                <mat-option *ngFor="let material of materialCodeList" [value]="material.materialCode">
+                                    {{material.materialCode}} -- {{material.materialName}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>

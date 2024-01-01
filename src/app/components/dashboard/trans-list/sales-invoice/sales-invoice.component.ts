@@ -31,7 +31,6 @@ export class SalesInvoiceComponent implements OnInit {
 
   materialCodeList: any[] = [];
   getSaleOrderData: any[] = [];
-  getsaleOrdernoData: any[] = [];
   customerList: any[] = [];
   profitCenterList: any[] = [];
   companyList: any[] = [];
@@ -61,7 +60,6 @@ export class SalesInvoiceComponent implements OnInit {
   ngOnInit(): void {
     this.formDataGroup();
     this.getSaleOrderList();
-    this.getsaleOrdernoList();
     this.getCustomerList();
     this.getProfitcenterData();
     this.getCompanyList();
@@ -108,20 +106,6 @@ export class SalesInvoiceComponent implements OnInit {
         });
   }
 
-  getsaleOrdernoList() {
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getsaleOrdernoList);
-    this.apiService.apiGetRequest(getSaleOrderUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.getsaleOrdernoData = res.response['saleordernoList'];
-            }
-          }
-        });
-  }
 
   getCustomerList() {
     const costCenUrl = String.Join('/', this.apiConfigService.getCustomerList);
@@ -175,18 +159,31 @@ export class SalesInvoiceComponent implements OnInit {
     })
   }
 
+  getsaleOrdernoList() {
+    debugger
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getsaleOrdernoListe, this.formData.get('manualInvoiceNo').value);
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
+              this.materialCodeList = res.response['saleordernoList'];
+              this.ponoselect();
+            }
+          }
+        });
+  }
+
   ponoselect() {
-    let data = [];
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('manualInvoiceNo').value)) {
-      data = this.getsaleOrdernoData.filter(resp => resp.id == this.formData.get('manualInvoiceNo').value);
-    }
     this.formData1.patchValue({
       qty: '',
       netWeight: '',
       materialCode: '',
     })
     this.tableData = null;
-    this.materialCodeList = data;
   }
 
   saveForm() {
@@ -217,7 +214,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   materialCodeChange() {
-    const obj = this.materialCodeList.find((p: any) => p.id == this.formData1.value.materialCode);
+    const obj = this.materialCodeList.find((p: any) => p.materialCode == this.formData1.value.materialCode);
     this.formData1.patchValue({
       qty: obj ? obj.qty : '',
       netWeight: obj ? obj.netWeight : '',

@@ -458,7 +458,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   // }
 
   getProfitcenterData() {
-    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCenterList);
+    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
     this.apiService.apiGetRequest(getpcUrl)
       .subscribe(
         response => {
