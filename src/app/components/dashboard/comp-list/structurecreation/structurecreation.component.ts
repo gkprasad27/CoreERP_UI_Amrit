@@ -45,14 +45,12 @@ export class StructureCreationComponent implements OnInit {
     // @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     // console.log(data);
-    debugger
     this.formData = { ...this.addOrEditService.editData };
     this.structureName = this.formData.item.structureName;
     this.structureCode = this.formData.item.structureCode;
   }
 
   ngOnInit() {
-    debugger
     this.getComponentsList();
   }
 

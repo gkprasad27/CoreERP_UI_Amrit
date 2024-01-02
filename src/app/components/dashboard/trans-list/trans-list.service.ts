@@ -187,7 +187,7 @@ export class TransListService {
         this.dynamicComp.component = SalesInvoiceComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getInvoiceList;
         this.dynamicComp.list = 'InvoiceList';
-        this.dynamicComp.editKey = 'invoiceMasterId';
+        this.dynamicComp.editKey = 'invoiceNo';
         return this.dynamicComp;
       }
       default:

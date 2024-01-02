@@ -13,7 +13,6 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
 import { TableComponent } from 'src/app/reuse-components';
 import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sales-invoice',
@@ -41,6 +40,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
 
+  invoicePrintData: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,6 +63,9 @@ export class SalesInvoiceComponent implements OnInit {
     this.getCustomerList();
     this.getProfitcenterData();
     this.getCompanyList();
+    if (this.routeEdit != '') {
+      this.getInvoiceDeatilList(this.routeEdit);
+    }
   }
 
   formDataGroup() {
@@ -71,7 +74,7 @@ export class SalesInvoiceComponent implements OnInit {
       company: ['', [Validators.required]],
       profitCenter: ['', Validators.required],
       manualInvoiceNo: ['', Validators.required],
-      invoiceMasterId: [''],
+      invoiceMasterId: 0,
       invoiceDate: [''],
       customerName: [''],
       customerGstin: [''],
@@ -83,6 +86,7 @@ export class SalesInvoiceComponent implements OnInit {
       materialCode: ['', Validators.required],
       materialName: [''],
       netWeight: [''],
+      invoiceDetailId: 0,
       qty: [''],
       highlight: false,
       type: [''],
@@ -118,7 +122,6 @@ export class SalesInvoiceComponent implements OnInit {
               const resp = res.response['bpList'];
               const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
               this.customerList = data;
-              debugger
             }
           }
         });
@@ -160,7 +163,6 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getsaleOrdernoList() {
-    debugger
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getsaleOrdernoListe, this.formData.get('manualInvoiceNo').value);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
@@ -169,7 +171,6 @@ export class SalesInvoiceComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
               this.materialCodeList = res.response['saleordernoList'];
               this.ponoselect();
             }
@@ -186,8 +187,48 @@ export class SalesInvoiceComponent implements OnInit {
     this.tableData = null;
   }
 
+  getInvoiceDeatilList(val) {
+    const cashDetUrl = String.Join('/', this.apiConfigService.getInvoiceDeatilList, val);
+    this.apiService.apiGetRequest(cashDetUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.formData.patchValue(res.response['InvoiceMasterList']);
+              // res.response['grDetail'].forEach((d: any, index: number) => {
+              //   const obj = {
+              //     materialCode: d.materialCode ? d.materialCode : '',
+              //     materialName: d.materialName ? d.materialName : '',
+              //     netWeight: d.netWeight ? d.netWeight : '',
+              //     // pendingQty: (d.qty - d.receivedQty),
+              //     purchaseOrderNumber: d.purchaseOrderNumber ? d.purchaseOrderNumber : '',
+              //     rejectQty: d.rejectQty ? d.rejectQty : '',
+              //     qty: d.qty ? d.qty : '',
+              //     lotNo: d.lotNo ? d.lotNo : '',
+              //     documentURL: d.documentURL ? d.documentURL : '',
+              //     invoiceURL: d.invoiceURL ? d.invoiceURL : '',
+              //     supplierReferenceNo: d.supplierReferenceNo ? d.supplierReferenceNo : '',
+              //     supplierRefno: d.supplierRefno ? d.supplierRefno : '',
+              //     receivedDate: d.receivedDate ? d.receivedDate : '',
+              //     receivedQty: d.receivedQty ? d.receivedQty : '',
+              //     description: d.description ? d.description : '',
+              //     type: 'edit',
+              //     // action: 'editDelete',
+              //     index: index + 1
+              //   }
+              //   this.perChaseOrderList.push(obj)
+              // })
+              this.tableData = res.response['invoiceDetailsList']
+              this.materialCodeChange();
+              this.formData.disable();
+            }
+          }
+        });
+  }
+
   saveForm() {
-    debugger
     if (this.formData1.invalid) {
       return;
     }
@@ -276,5 +317,126 @@ export class SalesInvoiceComponent implements OnInit {
     this.formData.reset();
   }
 
+  invoicePrint() {
+
+    const obj = {
+      headingObj: {
+        reverseCharge: 'test',
+        transportationMode: 'trans',
+        invoiceNo: '100'
+      },
+      vAddress: {
+        name: 'w323we',
+        address: 'w323we',
+        address1: 'w323we',
+        city: 'w323we',
+        stateName: 'w323we',
+        pin: 'w323we',
+        gstno: '234234234',
+      },
+      pAddress: {
+        name: 'w323we',
+        address: 'w323we',
+        address1: 'w323we',
+        city: 'w323we',
+        stateName: 'w323we',
+        pin: 'w323we',
+        gstno: '234234234',
+      },
+      detailArray: []
+    };
+    this.invoicePrintData = obj;
+
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('invoicePrintData').innerHTML;
+      w.document.body.innerHTML = html;
+      this.invoicePrintData = null;
+      w.print();
+    }, 1000);
+  }
+
+  convertNumberToWords(data) {
+    var words = new Array();
+    words[0] = '';
+    words[1] = 'One';
+    words[2] = 'Two';
+    words[3] = 'Three';
+    words[4] = 'Four';
+    words[5] = 'Five';
+    words[6] = 'Six';
+    words[7] = 'Seven';
+    words[8] = 'Eight';
+    words[9] = 'Nine';
+    words[10] = 'Ten';
+    words[11] = 'Eleven';
+    words[12] = 'Twelve';
+    words[13] = 'Thirteen';
+    words[14] = 'Fourteen';
+    words[15] = 'Fifteen';
+    words[16] = 'Sixteen';
+    words[17] = 'Seventeen';
+    words[18] = 'Eighteen';
+    words[19] = 'Nineteen';
+    words[20] = 'Twenty';
+    words[30] = 'Thirty';
+    words[40] = 'Forty';
+    words[50] = 'Fifty';
+    words[60] = 'Sixty';
+    words[70] = 'Seventy';
+    words[80] = 'Eighty';
+    words[90] = 'Ninety';
+    var amount = data.toString();
+    var atemp = amount.split(".");
+    var number = atemp[0].split(",").join("");
+    var n_length = number.length;
+    var words_string = "";
+            var value: any = "";
+
+    if (n_length <= 9) {
+        var n_array: any = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0);
+        var received_n_array = new Array();
+        for (var i = 0; i < n_length; i++) {
+            received_n_array[i] = number.substr(i, 1);
+        }
+        for (var i = 9 - n_length, j = 0; i < 9; i++, j++) {
+            n_array[i] = received_n_array[j];
+        }
+        for (var i = 0, j = 1; i < 9; i++, j++) {
+            if (i == 0 || i == 2 || i == 4 || i == 7) {
+                if (n_array[i] == 1) {
+                    n_array[j] = 10 + parseInt(n_array[j]);
+                    n_array[i] = 0;
+                }
+            }
+        }
+        for (var i = 0; i < 9; i++) {
+            if (i == 0 || i == 2 || i == 4 || i == 7) {
+                value = n_array[i] * 10;
+            } else {
+                value = n_array[i];
+            }
+            if (value != 0) {
+                words_string += words[value] + " ";
+            }
+            if ((i == 1 && value != 0) || (i == 0 && value != 0 && n_array[i + 1] == 0)) {
+                words_string += "Crores ";
+            }
+            if ((i == 3 && value != 0) || (i == 2 && value != 0 && n_array[i + 1] == 0)) {
+                words_string += "Lakhs ";
+            }
+            if ((i == 5 && value != 0) || (i == 4 && value != 0 && n_array[i + 1] == 0)) {
+                words_string += "Thousand ";
+            }
+            if (i == 6 && value != 0 && (n_array[i + 1] != 0 && n_array[i + 2] != 0)) {
+                words_string += "Hundred and ";
+            } else if (i == 6 && value != 0) {
+                words_string += "Hundred ";
+            }
+        }
+        words_string = words_string.split("  ").join(" ");
+    }
+    return words_string;
+}
 
 }
