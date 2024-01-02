@@ -68,6 +68,7 @@ export class PurchaseOrderComponent implements OnInit {
   imgShow: any;
   taxCodeList = [];
   mpatternList = [];
+  materialCodeList = [];
 
   data: any;
 
@@ -160,6 +161,7 @@ export class PurchaseOrderComponent implements OnInit {
       amount: [''],
       deliveryDate: [''],
       total: [''],
+      type: ['add'],
       action: 'editDelete',
       index: 0
     });
@@ -615,17 +617,37 @@ export class PurchaseOrderComponent implements OnInit {
                 s.index = index + 1;
               })
               this.tableData = res.response['poDetail'];
+              this.getsaleOrdernoList();
               this.calculate();
             }
           }
         });
   }
 
+  getsaleOrdernoList() {
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderDetail, this.formData.get('saleOrderNo').value);
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              const arr = res.response['SaleOrderDetails'];
+              this.materialCodeList = arr.filter((s: any) => !this.tableData.some((t: any) => t.materialCode == s.materialCode));
+              debugger
+            }
+          }
+        });
+  }
+
+
   resetForm() {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDelete'
+      action: 'editDelete',
+      type: 'add'
     });
   }
 
@@ -676,7 +698,9 @@ export class PurchaseOrderComponent implements OnInit {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       this.calculate();
+      this.resetForm();
     } else {
+      value.item['type'] = 'edit';
       this.formData1.patchValue(value.item);
     }
   }
@@ -722,6 +746,14 @@ export class PurchaseOrderComponent implements OnInit {
   //   this.tableData = data.data;
   // }
 
+  materialCodeChange() {
+    const obj = this.materialCodeList.find((m: any) => m.materialCode == this.formData1.value.materialCode);
+    if (obj) {
+      this.formData1.patchValue(obj);
+    } else {
+      this.resetForm();
+    }
+  }
 
   back() {
     this.router.navigate(['dashboard/transaction/purchaseorder'])
@@ -819,7 +851,7 @@ export class PurchaseOrderComponent implements OnInit {
     let newArr = [];
     if (length < 10) {
       for (let i = 0; i < (10 - length); i++) {
-        newArr.push({ })
+        newArr.push({})
       }
     }
     return newArr;
@@ -869,7 +901,7 @@ export class PurchaseOrderComponent implements OnInit {
         gstno: cObj.gstNo,
       }
     }
-    let list  = [...this.tableData];
+    let list = [...this.tableData];
     list = [...list, ...this.setArray(list.length)];
     debugger
     const obj = {
@@ -952,53 +984,53 @@ export class PurchaseOrderComponent implements OnInit {
     var number = atemp[0].split(",").join("");
     var n_length = number.length;
     var words_string = "";
-            var value: any = "";
+    var value: any = "";
 
     if (n_length <= 9) {
-        var n_array: any = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0);
-        var received_n_array = new Array();
-        for (var i = 0; i < n_length; i++) {
-            received_n_array[i] = number.substr(i, 1);
+      var n_array: any = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0);
+      var received_n_array = new Array();
+      for (var i = 0; i < n_length; i++) {
+        received_n_array[i] = number.substr(i, 1);
+      }
+      for (var i = 9 - n_length, j = 0; i < 9; i++, j++) {
+        n_array[i] = received_n_array[j];
+      }
+      for (var i = 0, j = 1; i < 9; i++, j++) {
+        if (i == 0 || i == 2 || i == 4 || i == 7) {
+          if (n_array[i] == 1) {
+            n_array[j] = 10 + parseInt(n_array[j]);
+            n_array[i] = 0;
+          }
         }
-        for (var i = 9 - n_length, j = 0; i < 9; i++, j++) {
-            n_array[i] = received_n_array[j];
+      }
+      for (var i = 0; i < 9; i++) {
+        if (i == 0 || i == 2 || i == 4 || i == 7) {
+          value = n_array[i] * 10;
+        } else {
+          value = n_array[i];
         }
-        for (var i = 0, j = 1; i < 9; i++, j++) {
-            if (i == 0 || i == 2 || i == 4 || i == 7) {
-                if (n_array[i] == 1) {
-                    n_array[j] = 10 + parseInt(n_array[j]);
-                    n_array[i] = 0;
-                }
-            }
+        if (value != 0) {
+          words_string += words[value] + " ";
         }
-        for (var i = 0; i < 9; i++) {
-            if (i == 0 || i == 2 || i == 4 || i == 7) {
-                value = n_array[i] * 10;
-            } else {
-                value = n_array[i];
-            }
-            if (value != 0) {
-                words_string += words[value] + " ";
-            }
-            if ((i == 1 && value != 0) || (i == 0 && value != 0 && n_array[i + 1] == 0)) {
-                words_string += "Crores ";
-            }
-            if ((i == 3 && value != 0) || (i == 2 && value != 0 && n_array[i + 1] == 0)) {
-                words_string += "Lakhs ";
-            }
-            if ((i == 5 && value != 0) || (i == 4 && value != 0 && n_array[i + 1] == 0)) {
-                words_string += "Thousand ";
-            }
-            if (i == 6 && value != 0 && (n_array[i + 1] != 0 && n_array[i + 2] != 0)) {
-                words_string += "Hundred and ";
-            } else if (i == 6 && value != 0) {
-                words_string += "Hundred ";
-            }
+        if ((i == 1 && value != 0) || (i == 0 && value != 0 && n_array[i + 1] == 0)) {
+          words_string += "Crores ";
         }
-        words_string = words_string.split("  ").join(" ");
+        if ((i == 3 && value != 0) || (i == 2 && value != 0 && n_array[i + 1] == 0)) {
+          words_string += "Lakhs ";
+        }
+        if ((i == 5 && value != 0) || (i == 4 && value != 0 && n_array[i + 1] == 0)) {
+          words_string += "Thousand ";
+        }
+        if (i == 6 && value != 0 && (n_array[i + 1] != 0 && n_array[i + 2] != 0)) {
+          words_string += "Hundred and ";
+        } else if (i == 6 && value != 0) {
+          words_string += "Hundred ";
+        }
+      }
+      words_string = words_string.split("  ").join(" ");
     }
     return words_string;
-}
+  }
 
 
 }
