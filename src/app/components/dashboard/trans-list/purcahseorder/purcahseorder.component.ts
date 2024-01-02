@@ -866,11 +866,12 @@ export class PurchaseOrderComponent implements OnInit {
         pin: cObj.pin,
         phone: cObj.phone,
         email: cObj.email,
-        gstno: cObj.gstno,
+        gstno: cObj.gstNo,
       }
     }
     let list  = [...this.tableData];
     list = [...list, ...this.setArray(list.length)];
+    debugger
     const obj = {
       heading: 'PURCHASE ORDER',
       headingObj: formObj,

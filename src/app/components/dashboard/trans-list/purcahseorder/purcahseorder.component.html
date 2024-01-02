@@ -40,27 +40,27 @@
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;">
             <div style="display: flex;">
                 <span style="width: 200px;"> Dispatch Mode </span>
-                <span style="padding-left: 20px;">: By Road </span>
+                <span style="padding-left: 20px;">: {{ data?.headingObj?.dispatchMode }} </span>
             </div>
             <div style="display: flex;">
                 <span style="width: 200px;"> Terms of delivery </span>
-                <span style="padding-left: 20px;">: </span>
+                <span style="padding-left: 20px;">:  {{  data?.headingObj?.termsOfDelivery }} </span>
             </div>
             <div style="display: flex;">
                 <span style="width: 200px;"> Terms of payment </span>
-                <span style="padding-left: 20px;">: </span>
+                <span style="padding-left: 20px;">: {{  data?.headingObj?.termsOfPayment }} </span>
             </div>
             <div style="display: flex;">
                 <span style="width: 200px;"> Currency </span>
-                <span style="padding-left: 20px;">: Rs </span>
+                <span style="padding-left: 20px;">: INR </span>
             </div>
             <div style="display: flex;">
                 <span style="width: 200px;"> Our enquiry reference </span>
-                <span style="padding-left: 20px;">: </span>
+                <span style="padding-left: 20px;">: NA </span>
             </div>
             <div style="display: flex;">
                 <span style="width: 200px;"> Material </span>
-                <span style="padding-left: 20px;">: </span>
+                <span style="padding-left: 20px;">: {{  data?.headingObj?.material }} </span>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
     <div style="border-top: 1px solid black; display: flex; ">
         <div
             style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
-            <div>{{ data?.headingObj?.vAddress?.companyName }}</div>
+            <div>{{ data?.headingObj?.vAddress?.name }}</div>
             <div>{{ data?.headingObj?.vAddress?.address }}, {{ data?.headingObj?.vAddress?.address1 }}</div>
             <div>{{ data?.headingObj?.vAddress?.city }}, {{ data?.headingObj?.vAddress?.stateName }}, {{
                 data?.headingObj?.vAddress?.pin }}</div>
@@ -87,9 +87,8 @@
             <b style="margin-top: 10px;"> GSTIN : {{ data?.headingObj?.vAddress?.gstno }}</b>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <div>{{ data?.headingObj?.pAddress?.companyName }}</div>
-            <div>{{ data?.headingObj?.pAddress?.address }}, {{ data?.headingObj?.pAddress?.address1 }}</div>
-            <div>{{ data?.headingObj?.pAddress?.city }}, {{ data?.headingObj?.pAddress?.stateName }}, {{
+            <div>{{ data?.headingObj?.pAddress?.address }} </div>
+            <div> {{ data?.headingObj?.pAddress?.address1 }}, {{ data?.headingObj?.pAddress?.city }}, {{ data?.headingObj?.pAddress?.stateName }}, {{
                 data?.headingObj?.pAddress?.pin }}</div>
             <div>Phone: {{ data?.headingObj?.pAddress?.phone }}</div>
             <div>Email: {{ data?.headingObj?.pAddress?.email }}</div>
@@ -116,18 +115,18 @@
             <tbody>
                 <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
                     *ngFor="let row of data.detailArray; let i = index">
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialCode }}
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> <span *ngIf="row.materialCode">  {{ i + 1 }} </span> </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.materialCode }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialName }}
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.materialName }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.netWeight }}
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.netWeight }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ row.qty *
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ row.qty *
                         row.netWeight}} </ng-container>  </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
+                    <td style="border-bottom: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">

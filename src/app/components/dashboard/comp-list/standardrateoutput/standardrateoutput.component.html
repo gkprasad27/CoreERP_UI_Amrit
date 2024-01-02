@@ -78,8 +78,8 @@
             <mat-label>{{'standardrateoutput.uom' | translate }}</mat-label>
             <mat-select formControlName="uom" appFocusOnEnter tabIndex="3">
               <mat-option>None</mat-option>
-              <mat-option *ngFor="let uom of UomList" [value]="uom.text">
-                {{uom.text}}
+              <mat-option *ngFor="let size of msizeList" [value]="size.unitId">
+                {{size.unitName}}
               </mat-option>
             </mat-select>
           </mat-form-field>

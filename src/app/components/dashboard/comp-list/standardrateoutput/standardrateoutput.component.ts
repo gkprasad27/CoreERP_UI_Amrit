@@ -34,7 +34,7 @@ export class StandardRateComponent implements OnInit {
   tableData = [];
   instruments = [];
   materialList = [];
-  UomList = [];
+  msizeList = [];
 
   Type: Type[] =
     [
@@ -83,7 +83,7 @@ export class StandardRateComponent implements OnInit {
 
   ngOnInit() {
     this.getmaterialData();
-    this.getuomTypeData();
+    this.getMaterialSizeTableData();
     this.getCommitmentList('instruments');
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
@@ -91,8 +91,8 @@ export class StandardRateComponent implements OnInit {
     }
   }
 
-  getuomTypeData() {
-    const getuomTypeUrl = String.Join('/', this.apiConfigService.getuomList);
+  getMaterialSizeTableData() {
+    const getuomTypeUrl = String.Join('/', this.apiConfigService.getmsizeList);
     this.apiService.apiGetRequest(getuomTypeUrl)
       .subscribe(
         response => {
@@ -100,7 +100,7 @@ export class StandardRateComponent implements OnInit {
           console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.UomList = res.response['UOMList'];
+              this.msizeList = res.response['msizeList'];
             }
           }
           this.spinner.hide();

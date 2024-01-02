@@ -80,6 +80,7 @@ export class SalesorderComponent {
       profitCenter: ['', Validators.required],
       profitcenterName: [''],
       poDate: [null],
+      poNumber: ['', Validators.required],
       gstNo: [null],
       dateofSupply: [null],
       placeofSupply: [null],
