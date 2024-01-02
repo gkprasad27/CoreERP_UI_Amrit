@@ -82,8 +82,7 @@ export class FileUploadComponent implements OnInit {
     let data = [...inputValue.target.files];
     for (let f = 0; f < data.length; f++) {
       if (this.fileExtension.length && !this.fileExtension.includes(this.getFileExtension(data[f].name).toLowerCase())) {
-        this.alertService.openSnackBar('Please upload ....', Static.Close, SnackBar.success);
-
+        this.alertService.openSnackBar(`Please upload ${this.fileExtension}`, Static.Close, SnackBar.success);
         this.myFileInput.nativeElement.value = '';
         return;
       }

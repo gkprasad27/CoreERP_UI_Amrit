@@ -298,7 +298,7 @@
         <form [formGroup]="formData" autocomplete="off">
 
             <h6>
-                Purchaseorder Master
+                Purchase Order Master
                 <hr>
             </h6>
 
@@ -512,7 +512,7 @@
         <div class="p-2 card">
 
             <h6>
-                Purchaseorder Details
+                Purchase Order Details
                 <hr>
             </h6>
 
@@ -534,7 +534,7 @@
                         </mat-form-field>
 
                         <mat-form-field class="form-element">
-                            <mat-label>{{ 'saleorder.taxCode' | translate }}</mat-label>
+                            <mat-label>{{ 'purchaseorder.taxCode' | translate }}</mat-label>
                             <mat-select formControlName="taxCode" appFocusOnEnter tabIndex="14">
                                 <mat-option>None</mat-option>
                                 <mat-option *ngFor="let tax of taxCodeList" [value]="tax.taxRateCode">
@@ -574,22 +574,22 @@
     <mat-card-content class="d-flex justify-content-end py-1">
 
         <div class="d-flex">
-            <div class="px-1"> <span class="px-1"> <b>{{ 'saleorder.igst' | translate }} </b></span> :
+            <div class="px-1"> <span class="px-1"> <b>{{ 'purchaseorder.igst' | translate }} </b></span> :
                 <b class="text-danger">{{ formData.value.igst }} </b>
             </div>
-            <div class="px-1"> <span class="px-1"> <b> {{'saleorder.cgst' | translate }} </b></span> :
+            <div class="px-1"> <span class="px-1"> <b> {{'purchaseorder.cgst' | translate }} </b></span> :
                 <b class="text-danger"> {{ formData.value.cgst}} </b>
             </div>
-            <div class="px-1"> <span class="px-1"> <b> {{'saleorder.sgst' | translate }} </b></span> :
+            <div class="px-1"> <span class="px-1"> <b> {{'purchaseorder.sgst' | translate }} </b></span> :
                 <b class="text-danger"> {{ formData.value.sgst}} </b>
             </div>
-            <div class="px-1"> <span class="px-1"> <b> {{'saleorder.amount' | translate }} </b></span> :
+            <div class="px-1"> <span class="px-1"> <b> {{'purchaseorder.amount' | translate }} </b></span> :
                 <b class="text-danger"> {{ formData.value.amount}} </b>
             </div>
-            <div class="px-1"> <span class="px-1"> <b> {{'saleorder.totalTax' | translate }} </b></span> :
+            <div class="px-1"> <span class="px-1"> <b> {{'purchaseorder.totalTax' | translate }} </b></span> :
                 <b class="text-danger"> {{ formData.value.totalTax}} </b>
             </div>
-            <div class="px-1"> <span class="px-1"> <b> {{'saleorder.totalAmount' | translate }} </b></span> :
+            <div class="px-1"> <span class="px-1"> <b> {{'purchaseorder.totalAmount' | translate }} </b></span> :
                 <b class="text-danger"> {{ formData.value.totalAmount}} </b>
             </div>
         </div>

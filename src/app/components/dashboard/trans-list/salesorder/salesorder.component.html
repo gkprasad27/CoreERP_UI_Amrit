@@ -5,7 +5,7 @@
         <form [formGroup]="formData" class="card p-2 mb-3" autocomplete="off">
 
             <h6>
-                Saleorder Master
+                Sale Order Master
                 <hr>
             </h6>
 
@@ -33,7 +33,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label>{{ 'saleorder.supplierName' | translate }}</mat-label>
-                    <mat-select formControlName="customerCode" appFocusOnEnter tabIndex="3">
+                    <mat-select formControlName="customerCode" appFocusOnEnter tabIndex="3" (selectionChange)="customerCodeChange()">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let comp of customerList" [value]="comp.id">
                             {{comp.text}}
@@ -43,7 +43,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'saleorder.customerGstin'"></mat-label>
-                    <input matInput type="text" formControlName="customerGstin" appFocusOnEnter tabIndex="5">
+                    <input matInput type="text" readonly formControlName="gstNo" appFocusOnEnter tabIndex="5">
                 </mat-form-field>
 
 
@@ -67,13 +67,8 @@
                     <mat-label [translate]="'saleorder.placeOfSupply'"></mat-label>
                     <input matInput type="text" formControlName="placeofSupply" appFocusOnEnter tabIndex="8">
                 </mat-form-field>
-                <!-- 
-                <div *ngIf="formData.value.documentURL" class="d-flex flex-column mt-3">
-                    <mat-label [translate]="'saleorder.attachedUrl'"></mat-label>
-                    <a [href]="url" download target="_blank"> <b> {{ formData.value.documentURL }} </b> </a>
-                </div> -->
+               
                 <div>
-                    <!-- <mat-label [translate]="'saleorder.attachedUrl'"></mat-label> -->
                     <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL" (uploadeFile)="downLoad($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
                 </div>
 
@@ -93,17 +88,6 @@
 
 
                 <div class="d--flex p-1 mat-form-field-height">
-
-                    <!-- <mat-form-field class="form-element">
-                        <mat-label>{{ 'saleorder.materialCode' | translate }}</mat-label>
-                        <mat-select formControlName="materialCode" tabIndex="10" (selectionChange)="materialCodeChange()">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let material of materialList" [value]="material.text">
-                                {{material.text}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field> -->
-
 
                     <div class="mat-mdc-form-field typeahead">
                         <input placeholder="{{ 'saleorder.materialCode' | translate }}" formControlName="materialCode"
@@ -211,10 +195,6 @@
             <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
                 {{ 'COMMON.SAVE' | translate }}
             </button>
-            <!-- <button [hidden]="routeEdit == ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-                (click)="save()">
-                {{ 'COMMON.UPDATE' | translate }}
-            </button> -->
             <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
                 {{ 'COMMON.BACK' | translate }}
             </button>

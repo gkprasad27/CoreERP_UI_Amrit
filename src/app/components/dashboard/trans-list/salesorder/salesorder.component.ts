@@ -44,7 +44,6 @@ export class SalesorderComponent {
   profitCenterList = [];
 
   routeEdit = '';
-  // url: string;
 
   constructor(
     public commonService: CommonService,
@@ -80,7 +79,6 @@ export class SalesorderComponent {
       orderDate: [null],
       profitCenter: ['', Validators.required],
       profitcenterName: [''],
-      poNumber: ['', Validators.required],
       poDate: [null],
       gstNo: [null],
       dateofSupply: [null],
@@ -113,7 +111,6 @@ export class SalesorderComponent {
       totalTax: [0],
       materialName: [''],
       highlight: false,
-      // documentURL: [''],
       action: 'editDelete',
       index: 0
     });
@@ -127,34 +124,7 @@ export class SalesorderComponent {
       id: 0
     });
   }
-
-  // companyChange() {
-  //   const obj = this.companyList.find((c: any) => c.id == this.formData.value.company);
-  //   this.formData.patchValue({
-  //     companyName: obj.text
-  //   })
-  // }
-
-  // profitChange() {
-  //   const obj = this.profitCenterList.find((c: any) => c.id == this.formData.value.profitCenter);
-  //   this.formData.patchValue({
-  //     profitcenterName: obj.text
-  //   })
-  // }
-
-  // customerChange() {
-  //   const obj = this.customerList.find((c: any) => c.id == this.formData.value.customerCode);
-  //   this.formData.patchValue({
-  //     supplierName: obj.text,
-  //     gstNo: obj.gstNo
-  //   })
-  // }
-
-
-  emitTypeAheadValue(event: any) {
-
-  }
-
+  
   saveForm() {
     if (this.formData1.invalid) {
       return;
@@ -235,7 +205,7 @@ export class SalesorderComponent {
       })
     })
     this.formData.patchValue({
-      totalAmount: (+this.formData.value.amount) + (+this.formData.value.totalTax),
+      totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
     })
   }
 
@@ -247,31 +217,6 @@ export class SalesorderComponent {
     } else {
       this.formData1.patchValue(value.item);
     }
-  }
-
-  // profitCenterChange() {
-  //   this.formData.patchValue({
-  //     saleOrderNo: ''
-  //   })
-  //   const costCenUrl = String.Join('/', this.apiConfigService.getSaleOrderNumber, this.formData.value.profitCenter);
-  //   this.apiService.apiGetRequest(costCenUrl)
-  //     .subscribe(
-  //       response => {
-  //         this.spinner.hide();
-  //         const res = response;
-  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //             this.formData.patchValue({
-  //               saleOrderNo: res.response['SaleOrderNumber']
-  //             })
-  //           }
-  //         }
-  //       });
-  // }
-
-  onSearchChange() {
-    this.formData1.value.materialCode;
-
   }
 
   getCustomerList() {
@@ -288,8 +233,14 @@ export class SalesorderComponent {
             }
           }
           this.getCompanyList();
-
         });
+  }
+
+  customerCodeChange() {
+    const obj = this.customerList.find((c: any) => c.id == this.formData.value.customerCode);
+    this.formData.patchValue({
+      gstNo: obj ? obj.gstNo : ''
+    })
   }
 
   getCompanyList() {
@@ -303,7 +254,6 @@ export class SalesorderComponent {
               this.companyList = res.response['companiesList'];
             }
           }
-
           this.getProfitcenterData();
         });
   }
@@ -319,7 +269,6 @@ export class SalesorderComponent {
               this.profitCenterList = res.response['profitCenterList'];
             }
           }
-
           this.getTaxRatesList()
         });
   }
@@ -370,20 +319,15 @@ export class SalesorderComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['SaleOrderMasters']);
-              // if (this.formData.value.documentURL) {
-              //   this.downLoad();
-              // }
-              // this.formData.disable();
               res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 s.materialName = obj.text
                 s.stockQty = obj.availQTY
-                // s.totalTax=obj.totalTax
-                // s.documentURL = s.documentURL ? s.documentURL : '',
                 s.action = 'editDelete'; s.index = index + 1;
               })
               this.tableData = res.response['SaleOrderDetails'];
               this.calculate();
+              this.customerCodeChange();
             }
           }
         });
@@ -453,7 +397,6 @@ export class SalesorderComponent {
     if (this.tableData.length == 0 || this.formData.invalid) {
       return;
     }
-    // this.uploadFile();
     this.addSaleOrder();
   }
 
@@ -467,7 +410,6 @@ export class SalesorderComponent {
     const arr = this.tableData;
     arr.forEach((a: any) => {
       a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';
-      // a.documentURL = a.documentURL ? a.documentURL : (this.fileList ? this.fileList.name.split('.')[0] : '');
     })
     const requestObj = { qsHdr: this.formData.value, qsDtl: arr };
     this.apiService.apiPostRequest(addsq, requestObj).subscribe(
