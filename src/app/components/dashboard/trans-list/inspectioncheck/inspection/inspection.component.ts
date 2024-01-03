@@ -46,7 +46,7 @@ export class InspectionComponent {
     return {
       tableData: {
         parameter: { value: null,  width: 150  },
-        uom: { value: null,  width: 150  },
+        uomName: { value: null,  width: 150  },
         spec: { value: null,  width: 150  },
         minValue: { value: null,  width: 150  },
         maxValue: { value: null,  width: 150  },
@@ -85,6 +85,7 @@ export class InspectionComponent {
                 arr.push({
                   parameter: s.parameter,
                   uom: s.uom,
+                  uomName: s.uomName,
                   spec: s.spec,
                   minValue: s.minValue,
                   id: s.id ? s.id : 0,

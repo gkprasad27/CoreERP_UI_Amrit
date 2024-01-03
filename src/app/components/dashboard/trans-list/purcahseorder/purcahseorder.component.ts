@@ -156,6 +156,8 @@ export class PurchaseOrderComponent implements OnInit {
       sgst: 0,
       igst: 0,
       id: 0,
+      changed: true,
+      trackqty: 0,
       netWeight: 0,
       highlight: false,
       amount: [''],
@@ -287,10 +289,12 @@ export class PurchaseOrderComponent implements OnInit {
                 s.id = 0;
                 s.index = index + 1;
                 s.qty = s.qty ? s.qty : 0;
+                s.trackqty = s.qty ? s.qty : 0;
                 s.rate = s.rate ? s.rate : 0;
                 s.discount = s.discount ? s.discount : 0;
                 s.cgst = s.cgst ? s.cgst : 0;
                 s.sgst = s.sgst ? s.sgst : 0;
+                s.changed = true;
                 s.igst = s.igst ? s.igst : 0;
                 s.taxCode = s.taxCode ? s.taxCode : '';
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
@@ -614,6 +618,7 @@ export class PurchaseOrderComponent implements OnInit {
               res.response['poDetail'].forEach((s: any, index: number) => {
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
                 s.action = 'edit';
+                s.changed = false;
                 s.index = index + 1;
               })
               this.tableData = res.response['poDetail'];
@@ -668,12 +673,21 @@ export class PurchaseOrderComponent implements OnInit {
 
 
   saveForm() {
+    debugger
     if (this.formData1.invalid) {
       return;
+    }
+    if (this.formData1.value.qty > this.formData1.value.trackqty) {
+      this.formData1.patchValue({
+        qty: 0,
+      });
+      this.alertService.openSnackBar(`Qty can't be greater than the sale order qty`, Static.Close, SnackBar.error);
+      return
     }
     this.dataChange();
     this.formData1.patchValue({
       highlight: true,
+      changed: true,
     });
     let data: any = this.tableData;
     this.tableData = null;
@@ -772,8 +786,10 @@ export class PurchaseOrderComponent implements OnInit {
     const obj = this.formData.value;
     // obj.quotationDate = obj.quotationDate ? this.datepipe.transform(obj.quotationDate, 'MM-dd-yyyy') : '';
     obj.purchaseOrderDate = obj.purchaseOrderDate ? this.datepipe.transform(obj.purchaseOrderDate, 'MM-dd-yyyy') : '';
-    obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : ''
-    const requestObj = { poHdr: obj, poDtl: this.tableData };
+    obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
+    const arr = this.tableData.filter((d: any) => d.changed);
+
+    const requestObj = { poHdr: obj, poDtl: arr };
     this.apiService.apiPostRequest(addprorder, requestObj).subscribe(
       response => {
         const res = response;

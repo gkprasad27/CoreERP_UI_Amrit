@@ -288,11 +288,6 @@
 
     <mat-card-content>
 
-        <div class="d-flex justify-content-end">
-            <button class="mx-2" mat-raised-button (click)="print()">
-                <mat-icon>print</mat-icon> Print
-            </button>
-        </div>
 
         <form [formGroup]="formData" autocomplete="off">
 
@@ -610,6 +605,10 @@
         </div>
 
         <div>
+
+            <button class="mx-2" mat-raised-button (click)="print()" class="button-color-bule mx-3 text-white">
+                <mat-icon>print</mat-icon> Print
+            </button>
             <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
                 {{ 'COMMON.SAVE' | translate }}
             </button>

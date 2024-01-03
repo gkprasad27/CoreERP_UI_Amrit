@@ -671,20 +671,37 @@ export class InspectioncheckComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               // this.profitCenterList = res.response['profitCenterList'];
-              this.printData(res.response);
+              this.getInvoiceDeatilListsaleorder(res.response);
             }
           }
         });
   }
 
+  getInvoiceDeatilListsaleorder(billingRes: any) {
+    const getQCReportDetail = String.Join('/', this.apiConfigService.getInvoiceDeatilListsaleorder, this.formData1.value.saleOrderNumber);
+    this.apiService.apiGetRequest(getQCReportDetail)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              billingRes = { ...billingRes, ...res.response['invoiceMasterList'] };
+            }
+          }
+          this.printData(billingRes);
+        });
+  }
+  
   printData(res) {
     let arr = [];
     if (res.tagsDetail && res.tagsDetail.length) {
+      debugger
       res.tagsDetail.forEach((t: any) => {
         const obj = {
           Parameter: t.parameter,
-          Specification: t.spec,
-          UOM: t.uom,
+          Specification: `${t.minValue} - ${t.maxValue}` ,
+          UOM: t.uomName,
           Instrument: t.instrument,
           // inspectionCheckNo: t.inspectionCheckNo,
           [t.tagName]: t.result,
@@ -706,6 +723,9 @@ export class InspectioncheckComponent implements OnInit {
       heading: 'INSPECTION REPORT',
       headingObj: {
         Amount: res.SaleorderMaster.amount,
+        invoiceDate: res.invoiceDate,
+        invoiceQty: res.SaleorderMaster.InvoiceQty,
+        invoiceNo: res.SaleorderMaster.InvoiceNo,
         'company': res.SaleorderMaster.company,
         supplierName: res.SaleorderMaster.supplierName,
         poNumber: res.SaleorderMaster.poNumber,

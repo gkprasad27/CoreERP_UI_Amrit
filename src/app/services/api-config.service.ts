@@ -159,6 +159,7 @@ export class ApiConfigService {
    getbpNumbers = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBPtNumberList`;
    getttingbpNumbers = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBPtNumber`;
    getttingbpNames = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBPtName`;
+   
    getMainAssetMasterList = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GetMainAssetMasterList`;
    getAssetnumber = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GetAssetNumber`;
    getasetnos = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GettingAssetNumber`;
@@ -442,6 +443,7 @@ export class ApiConfigService {
    getInvoiceReturnDetail = `${this.environment.runtimeConfig.serverUrl}transaction/SalesReturn/GetInvoiceReturnDetail`;
    getInvoiceGetInvoiceReturnList = `${this.environment.runtimeConfig.serverUrl}transaction/SalesReturn/GetInvoiceReturnList`;
    getmemberNamesByCode = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetmemberNamesByCode`;
+   getInvoiceDeatilListsaleorder = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceDeatilListsaleorder`;
 
    getStockTransferPrintReportData = `${this.environment.runtimeConfig.serverUrl}Reports/StockTransferPrintReport/GetStockTransferPrintReportData`;
 

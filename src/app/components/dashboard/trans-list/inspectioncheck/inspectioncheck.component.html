@@ -30,7 +30,7 @@
   <div style="border-top: 1px solid black; display: flex;">
     <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
       <b style="width: 140px;"> Invoice Number </b>
-      <span >: </span>
+      <span >: {{ data?.headingObj?.invoiceNo }} </span>
     </div>
     <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
       <b style="width: 140px;"> PO Number </b>
@@ -49,7 +49,7 @@
   <div style="border-top: 1px solid black; display: flex;">
     <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;display: flex;">
       <b style="width: 140px;"> Invoice Date </b>
-      <span >: </span>
+      <span >: {{ data?.headingObj?.invoiceDate | date }}</span>
     </div>
     <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;display: flex;">
       <b style="width: 140px;"> PO Date </b>
@@ -68,7 +68,7 @@
   <div style="border-top: 1px solid black; display: flex;">
     <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
       <b style="width: 140px;"> Invoice Quantity </b>
-      <span >: </span>
+      <span >: {{ data?.headingObj?.invoiceQty }}</span>
     </div>
     <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
       <b style="width: 140px;"> PO Quantity </b>

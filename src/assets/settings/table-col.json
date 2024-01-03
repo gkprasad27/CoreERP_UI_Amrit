@@ -1384,6 +1384,7 @@
     "maxValue": "Maximum Value",
     "instrument": "Instrument",
     "uom": "UOM Name",
+    "uomName":"UOM Name",
     "code": "Code",
     "materialCode": "Material Code",
     "result": "Result",

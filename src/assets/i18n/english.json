@@ -748,7 +748,14 @@
     "controlAccountName": "Control Account",
     "paymentTermsName": "Payment Terms",
     "tdsTypeName": "TDS Type",
-    "tdsStateName": "TDS State"
+    "tdsStateName": "TDS State",
+
+    "shiptoAddress1": "Ship To Address1",
+    "shiptoAddress2": "Ship To Address2",
+    "shiptoState": "Ship To State",
+    "shiptoCity": "Ship To City",
+    "shiptoZip": "Ship To Zip",
+    "shiptoPhone": "Ship To Phone"
   },
   "mainassetmaster": {
     "title": "Main asset Master",

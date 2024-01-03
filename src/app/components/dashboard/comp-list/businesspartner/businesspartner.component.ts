@@ -92,6 +92,13 @@ export class BusienessPartnerAccountComponent implements OnInit, OnDestroy {
       contactPersion: [null],
       contactPersionMobile: [null],
       narration: [null],
+      shiptoAddress1: [null],
+      shiptoAddress2: [null],
+      shiptoState: [null],
+      shiptoCity: [null],
+      shiptoZip: [null],
+      shiptoPhone: [null],
+      
       bpgroup: [null],
       ext: [null]
     });
