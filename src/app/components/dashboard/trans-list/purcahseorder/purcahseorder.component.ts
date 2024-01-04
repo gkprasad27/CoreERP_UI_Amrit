@@ -14,6 +14,7 @@ import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-
 import { TableComponent } from 'src/app/reuse-components';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
+import { PoHistoryComponent } from './po-history/po-history.component';
 
 @Component({
   selector: 'app-purcahseorder',
@@ -157,14 +158,15 @@ export class PurchaseOrderComponent implements OnInit {
       igst: 0,
       id: 0,
       changed: true,
-      trackqty: 0,
       netWeight: 0,
+      soQty: 0,
+      poQty: 0,
       highlight: false,
       amount: [''],
       deliveryDate: [''],
       total: [''],
       type: ['add'],
-      action: 'editDelete',
+      action: 'editDeleteView',
       index: 0
     });
 
@@ -285,11 +287,12 @@ export class PurchaseOrderComponent implements OnInit {
               //   saleOrderNo: obj['data'].saleOrderNo ? +obj['data'].saleOrderNo : ''
               // })
               obj['data1'].forEach((s: any, index: number) => {
-                s.action = 'editDelete';
+                s.action = 'editDeleteView';
                 s.id = 0;
                 s.index = index + 1;
                 s.qty = s.qty ? s.qty : 0;
-                s.trackqty = s.qty ? s.qty : 0;
+                s.poQty = s.poQty ? s.poQty : 0;
+                s.soQty = s.qty ? s.qty : 0;
                 s.rate = s.rate ? s.rate : 0;
                 s.discount = s.discount ? s.discount : 0;
                 s.cgst = s.cgst ? s.cgst : 0;
@@ -617,7 +620,7 @@ export class PurchaseOrderComponent implements OnInit {
               this.formData.disable();
               res.response['poDetail'].forEach((s: any, index: number) => {
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
-                s.action = 'edit';
+                s.action = 'editView';
                 s.changed = false;
                 s.index = index + 1;
               })
@@ -651,7 +654,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDelete',
+      action: 'editDeleteView',
       type: 'add'
     });
   }
@@ -677,7 +680,9 @@ export class PurchaseOrderComponent implements OnInit {
     if (this.formData1.invalid) {
       return;
     }
-    if (this.formData1.value.qty > this.formData1.value.trackqty) {
+    const checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - this.formData1.value.poQty) : this.formData1.value.soQty
+    
+    if (this.formData1.value.qty > checkqty) {
       this.formData1.patchValue({
         qty: 0,
       });
@@ -708,11 +713,18 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   editOrDeleteEvent(value) {
+    debugger
     if (value.action === 'Delete') {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       this.calculate();
       this.resetForm();
+    } else if (value.action === 'View') {
+      this.dialog.open(PoHistoryComponent, {
+        width: '100%',
+        height: '700px',
+        data: value
+      });
     } else {
       value.item['type'] = 'edit';
       this.formData1.patchValue(value.item);

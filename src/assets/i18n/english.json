@@ -2062,6 +2062,10 @@
     "materialName": "Material Name",
     "description": "Description",
     "qty": "QTY",
+    "purchaseOrderHistory": "Purchase Order History",
+    "soQty": "SO QTY",
+    "poQty": "PO QTY",
+    "saleOrder": "Sale Order Number",
     "rate": "Rate",
     "discount": "Discount",
     "availableQTY": "Available QTY",
@@ -2740,6 +2744,12 @@
     "totalIgst": "Total IGST",
     "userName": "User Name",
     "totalTcs": "Total TCS",
+    "shiptoAddress1": "Ship To Address1",
+    "shiptoAddress2": "Ship To Address2",
+    "shiptoState": "Ship To State",
+    "shiptoCity": "Ship To City",
+    "shiptoZip": "Ship To Zip",
+    "shiptoPhone": "Mobile",
     "delete": "Delete",
     "action": "Action"
   }

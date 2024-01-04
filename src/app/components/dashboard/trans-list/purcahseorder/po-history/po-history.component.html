@@ -1,0 +1,24 @@
+<div class="position-relative ">
+
+    <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+        <span> {{'purchaseorder.purchaseOrderHistory' | translate }} </span>
+        <mat-icon class="my-2 cursor--pointer" (click)="back()">close</mat-icon>
+    </mat-card-title>
+
+
+    <mat-card-content class="pt-5 p-2 m-0 ">
+
+        <div class="mt-3 table">
+            <app-table class="table-css" [tableData]="tableData" [routerParam]="'purchaseorder'" [showButtons]="false">
+        </app-table>
+        </div>
+
+
+    </mat-card-content>
+
+    <div class="form-element p-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="back()">
+            {{ 'COMMON.CANCEL' | translate }}
+        </button>
+    </div>
+</div>

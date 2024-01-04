@@ -303,7 +303,7 @@
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <!-- <mat-form-field class="form-element">
                     <mat-label>{{ 'salesinvoice.customerName' | translate }}</mat-label>
                     <mat-select formControlName="customerName" (selectionChange)="customerNameSelect()" appFocusOnEnter
                         tabIndex="3">
@@ -312,18 +312,45 @@
                             {{comp.text}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
 
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'salesinvoice.customerName'"></mat-label>
+                    <input matInput type="text" readonly formControlName="customerName" appFocusOnEnter tabIndex="6">
+                </mat-form-field>
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'salesinvoice.customerGstin'"></mat-label>
-                    <input matInput type="text" formControlName="customerGstin" appFocusOnEnter tabIndex="6">
+                    <input matInput type="text" readonly formControlName="customerGstin" appFocusOnEnter tabIndex="6">
                 </mat-form-field>
 
+
                 <mat-form-field class="form-element">
-                    <mat-label [translate]="'salesinvoice.mobile'"></mat-label>
-                    <input matInput type="text" formControlName="mobile" appFocusOnEnter tabIndex="6">
-                </mat-form-field>
+                    <mat-label [translate]="'salesinvoice.shiptoAddress1'"></mat-label>
+                    <input matInput formControlName="shiptoAddress1" appFocusOnEnter tabIndex="37">
+                  </mat-form-field>
+                  <mat-form-field class="form-element">
+                    <mat-label [translate]="'salesinvoice.shiptoAddress2'"></mat-label>
+                    <input matInput formControlName="shiptoAddress2" appFocusOnEnter tabIndex="37">
+                  </mat-form-field>
+                  <mat-form-field class="form-element">
+                    <mat-label [translate]="'salesinvoice.shiptoState'"></mat-label>
+                    <input matInput formControlName="shiptoState" appFocusOnEnter tabIndex="37">
+                  </mat-form-field>
+                  <mat-form-field class="form-element">
+                    <mat-label [translate]="'salesinvoice.shiptoCity'"></mat-label>
+                    <input matInput formControlName="shiptoCity" appFocusOnEnter tabIndex="37">
+                  </mat-form-field>
+                  <mat-form-field class="form-element">
+                    <mat-label [translate]="'salesinvoice.shiptoZip'"></mat-label>
+                    <input matInput formControlName="shiptoZip" appFocusOnEnter tabIndex="37">
+                  </mat-form-field>
+                  <mat-form-field class="form-element">
+                    <mat-label [translate]="'salesinvoice.shiptoPhone'"></mat-label>
+                    <input matInput formControlName="shiptoPhone" appFocusOnEnter tabIndex="37">
+                  </mat-form-field>
+
 
 
             </div>

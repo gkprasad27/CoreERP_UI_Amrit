@@ -47,7 +47,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   @Input() addOrUpdateData: any;
   @Input() showFilters = true;
   @Input() showButtons = true;
-  @Input() routerParam = true;
+  @Input() routerParam = '';
 
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -172,7 +172,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       // this.translate.get(this.routeParam).subscribe(res => {
       // let key;
       // tslint:disable-next-line: forin
-
+debugger
       if(!this.routeParam) {
         this.routeParam = this.routerParam
       }

@@ -159,7 +159,8 @@ export class ApiConfigService {
    getbpNumbers = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBPtNumberList`;
    getttingbpNumbers = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBPtNumber`;
    getttingbpNames = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBPtName`;
-   
+   getBusienessPartnerAccount = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBusienessPartnerAccount`;
+
    getMainAssetMasterList = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GetMainAssetMasterList`;
    getAssetnumber = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GetAssetNumber`;
    getasetnos = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GettingAssetNumber`;
@@ -305,6 +306,7 @@ export class ApiConfigService {
    addinvoice = `${this.environment.runtimeConfig.serverUrl}Transactions/AddInvoiceverificationDetail`;
    getinvoiceDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetInvoiceverificationDetail`;
    getQCReportDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetQCReportDetail`;
+   getPurchaseOrderData = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseOrderData`;
 
    /*******************************PrimeryCost****************************************************** */
    addpccost = `${this.environment.runtimeConfig.serverUrl}PrimaryCostElementsCreation/UpdatePcost`;

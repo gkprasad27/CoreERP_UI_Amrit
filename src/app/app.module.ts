@@ -41,7 +41,7 @@ import {
   CashbankComponent, JournalComponent, GoodsissueComponent, MemoinvoiceComponent, SourceOfSupplyComponent, InspectioncheckComponent, InspectionPreviewComponent,
   QuotationAnalysisComponent, QuotationSupplierComponent, PurchasingComponent, PurchaseOrderComponent, ReceiptOfGoodsComponent,
   ReceiptspaymentsComponent, BillOfMaterialComponent, MaterialrequisitionComponents, PurchasesaleassetComponent, SaleassetComponent,SampleRequisitionFormComponent,SampleServiceComponent, StockExcessComponent, CreateStockExcessComponent, CreateStockTransferComponent, StocktransferComponent, SalesorderComponent,
-  PreviewComponent, SalesInvoiceComponent
+  PreviewComponent, SalesInvoiceComponent, PoHistoryComponent
 } from './components/dashboard/trans-list/index';
 
 import { NavbarComponent, TableComponent, DeleteItemComponent, SearchFilterTableComponent, TransTableComponent, DynamicTableComponent, AutocompleteComponent, SaveItemComponent, FileUploadComponent } from './reuse-components/index';
@@ -156,7 +156,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FileUploadComponent,
     PreviewComponent,
     InspectionComponent,StructureCreationComponent, BalanceCertificateComponent, InspectionPreviewComponent, MaterialRequisitionViewComponent, SalesInvoiceComponent,
-    SalesInvoiceComponent
+    SalesInvoiceComponent,
+    PoHistoryComponent
   ],
   imports: [
     AppRoutingModule,

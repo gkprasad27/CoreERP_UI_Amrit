@@ -29,3 +29,4 @@ export { InspectionPreviewComponent } from './inspectioncheck/inspection-preview
 
 
 export { SalesInvoiceComponent } from './sales-invoice/sales-invoice.component';
+export { PoHistoryComponent } from './purcahseorder/po-history/po-history.component'

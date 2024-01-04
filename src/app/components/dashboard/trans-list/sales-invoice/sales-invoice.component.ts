@@ -60,7 +60,7 @@ export class SalesInvoiceComponent implements OnInit {
   ngOnInit(): void {
     this.formDataGroup();
     this.getSaleOrderList();
-    this.getCustomerList();
+    // this.getCustomerList();
     this.getProfitcenterData();
     this.getCompanyList();
     if (this.routeEdit != '') {
@@ -78,7 +78,13 @@ export class SalesInvoiceComponent implements OnInit {
       invoiceDate: [''],
       customerName: [''],
       customerGstin: [''],
-      mobile: [''],
+      // mobile: [''],
+      shiptoAddress1: [''],
+      shiptoAddress2: [''],
+      shiptoState: [''],
+      shiptoCity: [''],
+      shiptoZip: [''],
+      shiptoPhone: [''],
       id: [0]
     });
 
@@ -140,7 +146,7 @@ export class SalesInvoiceComponent implements OnInit {
           }
         });
   }
-  
+
   getCompanyList() {
     const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
     this.apiService.apiGetRequest(companyUrl)
@@ -172,11 +178,35 @@ export class SalesInvoiceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.materialCodeList = res.response['saleordernoList'];
+              debugger
+              this.getBusienessPartnerAccount(res.response.saleOrderMasterList);
               this.ponoselect();
             }
           }
         });
   }
+
+
+
+  getBusienessPartnerAccount(data: any) {
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getBusienessPartnerAccount, data.customerCode);
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.formData.patchValue(res.response.bpaList);
+              this.formData.patchValue({
+                customerName: res.response.bpaList.name,
+                customerGstin: res.response.bpaList.gstno,
+              })
+            }
+          }
+        });
+  }
+
 
   ponoselect() {
     this.formData1.patchValue({
@@ -391,52 +421,52 @@ export class SalesInvoiceComponent implements OnInit {
     var number = atemp[0].split(",").join("");
     var n_length = number.length;
     var words_string = "";
-            var value: any = "";
+    var value: any = "";
 
     if (n_length <= 9) {
-        var n_array: any = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0);
-        var received_n_array = new Array();
-        for (var i = 0; i < n_length; i++) {
-            received_n_array[i] = number.substr(i, 1);
+      var n_array: any = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0);
+      var received_n_array = new Array();
+      for (var i = 0; i < n_length; i++) {
+        received_n_array[i] = number.substr(i, 1);
+      }
+      for (var i = 9 - n_length, j = 0; i < 9; i++, j++) {
+        n_array[i] = received_n_array[j];
+      }
+      for (var i = 0, j = 1; i < 9; i++, j++) {
+        if (i == 0 || i == 2 || i == 4 || i == 7) {
+          if (n_array[i] == 1) {
+            n_array[j] = 10 + parseInt(n_array[j]);
+            n_array[i] = 0;
+          }
         }
-        for (var i = 9 - n_length, j = 0; i < 9; i++, j++) {
-            n_array[i] = received_n_array[j];
+      }
+      for (var i = 0; i < 9; i++) {
+        if (i == 0 || i == 2 || i == 4 || i == 7) {
+          value = n_array[i] * 10;
+        } else {
+          value = n_array[i];
         }
-        for (var i = 0, j = 1; i < 9; i++, j++) {
-            if (i == 0 || i == 2 || i == 4 || i == 7) {
-                if (n_array[i] == 1) {
-                    n_array[j] = 10 + parseInt(n_array[j]);
-                    n_array[i] = 0;
-                }
-            }
+        if (value != 0) {
+          words_string += words[value] + " ";
         }
-        for (var i = 0; i < 9; i++) {
-            if (i == 0 || i == 2 || i == 4 || i == 7) {
-                value = n_array[i] * 10;
-            } else {
-                value = n_array[i];
-            }
-            if (value != 0) {
-                words_string += words[value] + " ";
-            }
-            if ((i == 1 && value != 0) || (i == 0 && value != 0 && n_array[i + 1] == 0)) {
-                words_string += "Crores ";
-            }
-            if ((i == 3 && value != 0) || (i == 2 && value != 0 && n_array[i + 1] == 0)) {
-                words_string += "Lakhs ";
-            }
-            if ((i == 5 && value != 0) || (i == 4 && value != 0 && n_array[i + 1] == 0)) {
-                words_string += "Thousand ";
-            }
-            if (i == 6 && value != 0 && (n_array[i + 1] != 0 && n_array[i + 2] != 0)) {
-                words_string += "Hundred and ";
-            } else if (i == 6 && value != 0) {
-                words_string += "Hundred ";
-            }
+        if ((i == 1 && value != 0) || (i == 0 && value != 0 && n_array[i + 1] == 0)) {
+          words_string += "Crores ";
         }
-        words_string = words_string.split("  ").join(" ");
+        if ((i == 3 && value != 0) || (i == 2 && value != 0 && n_array[i + 1] == 0)) {
+          words_string += "Lakhs ";
+        }
+        if ((i == 5 && value != 0) || (i == 4 && value != 0 && n_array[i + 1] == 0)) {
+          words_string += "Thousand ";
+        }
+        if (i == 6 && value != 0 && (n_array[i + 1] != 0 && n_array[i + 2] != 0)) {
+          words_string += "Hundred and ";
+        } else if (i == 6 && value != 0) {
+          words_string += "Hundred ";
+        }
+      }
+      words_string = words_string.split("  ").join(" ");
     }
     return words_string;
-}
+  }
 
 }
