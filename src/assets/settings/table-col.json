@@ -1768,7 +1768,7 @@
     "customerName":"supplierName",
     "totalAmount":"Total Amount",
     "vehicleNo": "Vehicle No",
-    "receiptDate": "Date",
+    "receivedDate": "Receieved Date",
     "receivedBy": "Receieved By",
     "materialCode": "Material code",
         "materialName": "Material Name",
@@ -1783,8 +1783,6 @@
     "lotNo": "Lot No",
     "lotDate": "Lot Date",
     "description": "Description",
-    
-    "receivedDate": "Date",
     "documentURL": "link",
     "invoiceURL": "link",
     "delete": "Delete",

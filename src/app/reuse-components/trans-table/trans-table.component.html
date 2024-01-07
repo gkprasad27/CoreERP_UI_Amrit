@@ -12,17 +12,17 @@
             <input matInput formControlName="searchCriteria" (input)="doFilter($event.target.value)" />
           </mat-form-field>
         </div>
-        <div class="p-2 mx-3">
+        <div class="p-2 my-3 ms-5">
           <button mat-raised-button class="button-color-bule text-white" (click)="search()">
             {{ "COMMON.SEARCH" | translate }}
           </button>
         </div>
-        <div class="p-2">
+        <div class="p-2 my-3 ms-5">
           <button mat-raised-button class="button-color-red text-white" (click)="reset()">
             {{ "COMMON.RESET" | translate }}
           </button>
         </div>
-        <div class="ml-auto p-2" [hidden]="!commonService.userPermission?.canAdd">
+        <div class="ml-auto p-2 my-3 ms-5" [hidden]="!commonService.userPermission?.canAdd">
           <button mat-raised-button class="button-color-bule text-white" (click)="newTransOpen()">
             {{ "COMMON.NEW" | translate }}
           </button>
