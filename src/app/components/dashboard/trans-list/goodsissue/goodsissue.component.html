@@ -71,7 +71,7 @@
         <mat-form-field>
           <mat-label>{{'goodsissue.saleOrderNumber' | translate }}</mat-label>
           <mat-select formControlName="saleOrderNumber" appFocusOnEnter tabIndex="6"
-            (selectionChange)="getSaleOrderDetail()">
+            (selectionChange)="getGoodsissueDetail()">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let mreq of mreqList" [value]="mreq.saleOrderNo">
               {{mreq.saleOrderNo}}

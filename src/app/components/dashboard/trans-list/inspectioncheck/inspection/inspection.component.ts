@@ -49,7 +49,7 @@ export class InspectionComponent {
         uomName: { value: null,  width: 150  },
         spec: { value: null,  width: 150  },
         minValue: { value: null,  width: 150  },
-        maxValue: { value: null,  width: 150  },
+        // maxValue: { value: null,  width: 150  },
         instrument: { value: null,  width: 150  },
         result: { value: 0, type: 'text', addClass:"background-red", condition: 'inspection' },
         id: { value: 0, width: 150 }

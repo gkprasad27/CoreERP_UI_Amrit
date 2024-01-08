@@ -151,6 +151,7 @@ export class StandardRateComponent implements OnInit {
                 arr1.push({
                   parameter: flag == 'edit' ? s.parameter : s.description,
                   uom: s.uom,
+                  uomName: s.uomName,
                   spec: s.spec,
                   minValue: s.minValue,
                   maxValue: s.maxValue,

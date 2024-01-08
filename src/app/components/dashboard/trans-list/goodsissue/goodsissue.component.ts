@@ -104,6 +104,7 @@ export class GoodsissueComponent implements OnInit {
       id: 0,
       changed: true,
       availableqty: [''],
+      allocatedqty1: [''],
       highlight: false,
       requiredqty: [''],
       action: 'edit',
@@ -114,9 +115,13 @@ export class GoodsissueComponent implements OnInit {
   }
 
   allocatedqtyChange() {
+    debugger
     if ((this.formData1.value.requiredqty && (this.formData1.value.allocatedqty > this.formData1.value.requiredqty)) ||
       (this.formData1.value.allocatedqty > this.formData1.value.availableqty) ||
       ((this.formData1.value.availableqty > this.formData1.value.qty) && this.formData1.value.allocatedqty > this.formData1.value.qty)) {
+      this.qtyErrorMessage();
+    }
+    if (this.formData1.value.allocatedqty1 + this.formData1.value.allocatedqty > this.formData1.value.qty) {
       this.qtyErrorMessage();
     }
   }
@@ -258,6 +263,7 @@ export class GoodsissueComponent implements OnInit {
                   materialCode: s.materialCode ? s.materialCode : 0,
                   availableqty: qty.availQTY ? qty.availQTY : 0,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
+                  allocatedqty1: s.allocatedQTY ? s.allocatedQTY : 0,
                   requiredqty: s.qty - s.allocatedQTY
                 }
                 arr.push(obj);
@@ -544,7 +550,23 @@ export class GoodsissueComponent implements OnInit {
     this.sendDynTableData = { type: 'add', data: newData };
   }
 
-  getSaleOrderDetail() {
+
+  getGoodsissueDetail() {
+    const jvDetUrl = String.Join('/', this.apiConfigService.getGoodsissueDetail, this.formData.value.saleOrderNumber);
+    this.apiService.apiGetRequest(jvDetUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.getSaleOrderDetail(res.response['goodsissueastersDetail']);
+            }
+          }
+        });
+  }
+
+  getSaleOrderDetail(goodsissueastersDetail: any = []) {
     this.tableComponent.defaultValues();
     let url = '';
     if (this.formData.value.saleOrder == 'Sale Order') {
@@ -580,7 +602,8 @@ export class GoodsissueComponent implements OnInit {
               // })
               obj['data1'].forEach((s: any, index: number) => {
                 const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
-
+                const allocatedqty = goodsissueastersDetail.find(resp => resp.materialCode == s.materialCode);
+                debugger
                 s.action = 'edit';
                 s.id = 0;
                 s.index = index + 1;
@@ -588,7 +611,8 @@ export class GoodsissueComponent implements OnInit {
                 s.changed = true;
                 s.availableqty = qty.availQTY ? qty.availQTY : 0,
                   s.materialCode = s.materialCode ? s.materialCode : 0;
-                s.allocatedqty = s.allocatedqty ? s.allocatedqty : 0;
+                s.allocatedqty = allocatedqty ? allocatedqty.allocatedQTY : 0;
+                s.allocatedqty1 = allocatedqty ? allocatedqty.allocatedQTY : 0;
               })
 
               // this.sendDynTableData = { type: 'add', data: newData };

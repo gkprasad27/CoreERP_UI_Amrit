@@ -1655,7 +1655,7 @@
     "uomName": "UOM Name",
     "instrument": "Instrument",
     "qctype":"QC Type",
-    "minValue": "Minimum Value",
+    "minValue": "Tolerance",
     "maxValue": "Maximum Value",
     "materialCode": "Material Code",
     "result": "Result",

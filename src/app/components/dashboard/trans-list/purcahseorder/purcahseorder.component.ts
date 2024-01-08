@@ -110,7 +110,7 @@ export class PurchaseOrderComponent implements OnInit {
       plant: [null],
       branch: [null],
       profitCenter: [null, [Validators.required]],
-      saleOrderType: [true, [Validators.required]],
+      saleOrderType: [null, [Validators.required]],
       purchaseOrderNumber: [null],
       purchaseOrderType: [null, [Validators.required]],
       // quotationDate: [null],
@@ -254,6 +254,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   getSaleOrderDetail() {
+    debugger
     this.tableComponent.defaultValues();
     let url = '';
     if (this.formData.value.saleOrderType == 'Sale Order') {
@@ -297,7 +298,7 @@ export class PurchaseOrderComponent implements OnInit {
                 s.discount = s.discount ? s.discount : 0;
                 s.cgst = s.cgst ? s.cgst : 0;
                 s.sgst = s.sgst ? s.sgst : 0;
-                s.changed = true;
+                s.changed = false;
                 s.igst = s.igst ? s.igst : 0;
                 s.taxCode = s.taxCode ? s.taxCode : '';
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
@@ -603,6 +604,7 @@ export class PurchaseOrderComponent implements OnInit {
   // }
 
   getPurchaseorderDetails(val) {
+    debugger
     const cashDetUrl = String.Join('/', this.apiConfigService.getpurchaseorderDetail, val);
     this.apiService.apiGetRequest(cashDetUrl)
       .subscribe(
@@ -681,7 +683,7 @@ export class PurchaseOrderComponent implements OnInit {
       return;
     }
     const checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - this.formData1.value.poQty) : this.formData1.value.soQty
-    
+
     if (this.formData1.value.qty > checkqty) {
       this.formData1.patchValue({
         qty: 0,
@@ -786,13 +788,15 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   save() {
-    if (this.tableData.length == 0 && this.formData.invalid) {
+    if (this.tableData.length == 0 || this.formData.invalid || this.tableData.some((t: any) => t.changed)) {
+      this.formData.markAllAsTouched();
       return;
     }
     this.savepurcahseorder();
   }
 
   savepurcahseorder() {
+    debugger
     const addprorder = String.Join('/', this.apiConfigService.addpurchaseorder);
     this.formData.enable();
     const obj = this.formData.value;
