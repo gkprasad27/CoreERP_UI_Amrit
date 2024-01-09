@@ -68,6 +68,7 @@ export class StandardRateComponent implements OnInit {
     this.formData1 = this.formBuilder.group({
       parameter: [''],
       uom: [''],
+      uomName: [''],
       spec: [''],
       minValue: [''],
       maxValue: [''],
@@ -178,6 +179,10 @@ export class StandardRateComponent implements OnInit {
     this.tableData = null;
     this.tableComponent.defaultValues();
     const obj = data.find((d: any) => d.materialCode == this.formData1.value.materialCode)
+    const objU = this.msizeList.find((d: any) => d.unitId == this.formData1.value.uom)
+    this.formData1.patchValue({
+      uomName: objU ? objU.unitName : ''
+    });
     if (this.formData1.value.index == 0 && !obj) {
       this.formData1.patchValue({
         index: data ? (data.length + 1) : 1

@@ -561,6 +561,8 @@ export class GoodsissueComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.getSaleOrderDetail(res.response['goodsissueastersDetail']);
             }
+          } else {
+            this.getSaleOrderDetail([]);
           }
         });
   }

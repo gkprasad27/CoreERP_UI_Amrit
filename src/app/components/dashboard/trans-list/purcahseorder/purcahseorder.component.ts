@@ -675,6 +675,7 @@ export class PurchaseOrderComponent implements OnInit {
 
 
   saveForm() {
+    debugger
     if (this.formData1.invalid) {
       return;
     }
@@ -783,7 +784,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   save() {
-    if (this.tableData.length == 0 || this.formData.invalid || this.tableData.some((t: any) => t.changed)) {
+    if (this.tableData.length == 0 || this.formData.invalid || !(this.tableData.some((t: any) => t.changed))) {
       this.formData.markAllAsTouched();
       return;
     }
