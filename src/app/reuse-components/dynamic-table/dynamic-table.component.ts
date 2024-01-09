@@ -263,12 +263,14 @@ export class DynamicTableComponent implements OnInit {
   }
 
   setClass(element: any) {
-    // if (element.result && element.result.condition == 'inspection' && element.result.value) {
-    //   if((element.result.value < element.minValue.value) || (element.result.value > element.maxValue.value)) {
-    //     return element.result.addClass;
-    //   }
-    // }
-    // return ''
+    if (element.result && element.result.condition == 'inspection' && element.result.value) {
+      const str = element.minValue.value && element.minValue.value.includes('±') ? element.minValue.value.split('±')[1] : '';
+      console.log(str);
+      if (str && ((+element.result.value) < ((+element.spec.value) - (+str))) || ((+element.result.value) > ((+element.spec.value) + (+str)))) {
+        return element.result.addClass;
+      }
+    }
+    return ''
   }
 
 

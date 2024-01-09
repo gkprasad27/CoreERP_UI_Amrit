@@ -696,7 +696,6 @@ export class InspectioncheckComponent implements OnInit {
   printData(res) {
     let arr = [];
     if (res.tagsDetail && res.tagsDetail.length) {
-      debugger
       res.tagsDetail.forEach((t: any) => {
         const obj = {
           Parameter: t.parameter,

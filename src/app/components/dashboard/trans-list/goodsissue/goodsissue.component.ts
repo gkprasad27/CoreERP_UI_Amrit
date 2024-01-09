@@ -115,7 +115,6 @@ export class GoodsissueComponent implements OnInit {
   }
 
   allocatedqtyChange() {
-    debugger
     if ((this.formData1.value.requiredqty && (this.formData1.value.allocatedqty > this.formData1.value.requiredqty)) ||
       (this.formData1.value.allocatedqty > this.formData1.value.availableqty) ||
       ((this.formData1.value.availableqty > this.formData1.value.qty) && this.formData1.value.allocatedqty > this.formData1.value.qty)) {
@@ -603,7 +602,6 @@ export class GoodsissueComponent implements OnInit {
               obj['data1'].forEach((s: any, index: number) => {
                 const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 const allocatedqty = goodsissueastersDetail.find(resp => resp.materialCode == s.materialCode);
-                debugger
                 s.action = 'edit';
                 s.id = 0;
                 s.index = index + 1;

@@ -172,7 +172,6 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       // this.translate.get(this.routeParam).subscribe(res => {
       // let key;
       // tslint:disable-next-line: forin
-debugger
       if(!this.routeParam) {
         this.routeParam = this.routerParam
       }

@@ -37,7 +37,6 @@ export class PoHistoryComponent {
   }
 
   getCommitmentList() {
-    debugger
     this.tableData = [];
     const url = String.Join('/', this.apiConfigService.getPurchaseOrderData, this.data.item.saleOrder ? this.data.item.saleOrder : this.data.item.saleOrderNo, this.data.item.materialCode);
     this.apiService.apiGetRequest(url)

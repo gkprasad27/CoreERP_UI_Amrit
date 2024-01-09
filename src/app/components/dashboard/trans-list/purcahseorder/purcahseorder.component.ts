@@ -254,7 +254,6 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   getSaleOrderDetail() {
-    debugger
     this.tableComponent.defaultValues();
     let url = '';
     if (this.formData.value.saleOrderType == 'Sale Order') {
@@ -604,7 +603,6 @@ export class PurchaseOrderComponent implements OnInit {
   // }
 
   getPurchaseorderDetails(val) {
-    debugger
     const cashDetUrl = String.Join('/', this.apiConfigService.getpurchaseorderDetail, val);
     this.apiService.apiGetRequest(cashDetUrl)
       .subscribe(
@@ -645,7 +643,6 @@ export class PurchaseOrderComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const arr = res.response['SaleOrderDetails'];
               this.materialCodeList = arr.filter((s: any) => !this.tableData.some((t: any) => t.materialCode == s.materialCode));
-              debugger
             }
           }
         });
@@ -678,7 +675,6 @@ export class PurchaseOrderComponent implements OnInit {
 
 
   saveForm() {
-    debugger
     if (this.formData1.invalid) {
       return;
     }
@@ -715,7 +711,6 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   editOrDeleteEvent(value) {
-    debugger
     if (value.action === 'Delete') {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
@@ -796,7 +791,6 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   savepurcahseorder() {
-    debugger
     const addprorder = String.Join('/', this.apiConfigService.addpurchaseorder);
     this.formData.enable();
     const obj = this.formData.value;
@@ -935,7 +929,6 @@ export class PurchaseOrderComponent implements OnInit {
     }
     let list = [...this.tableData];
     list = [...list, ...this.setArray(list.length)];
-    debugger
     const obj = {
       heading: 'PURCHASE ORDER',
       headingObj: formObj,

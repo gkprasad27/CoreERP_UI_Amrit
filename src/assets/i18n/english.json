@@ -2751,5 +2751,13 @@
     "shiptoPhone": "Mobile",
     "delete": "Delete",
     "action": "Action"
+  },
+  "Rejections": {
+    "materialCode": "Material Code",
+    "saleOrderNo":"Sale Order Number",
+    "tagNo":"Tag Number",
+    "rejectdPerson":"Rejected Person",
+    "status": "Status",
+    "reason": "Reason"
   }
 }

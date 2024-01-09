@@ -178,7 +178,6 @@ export class SalesInvoiceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.materialCodeList = res.response['saleordernoList'];
-              debugger
               this.getBusienessPartnerAccount(res.response.saleOrderMasterList);
               this.ponoselect();
             }
