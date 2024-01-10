@@ -264,11 +264,29 @@ export class DynamicTableComponent implements OnInit {
 
   setClass(element: any) {
     if (element.result && element.result.condition == 'inspection' && element.result.value) {
+      let spec = element.spec.value;
+
+      if((element.parameter.value == "Hardness") && element.spec.value) {
+        spec = element.spec.value.split('-');
+        if ((+element.result.value) < (+spec[0]) || ((+element.result.value) > (+spec[1]))) {
+          return element.result.addClass;
+        }
+      }
+
+
+      if((element.parameter.value == "TLB Bore" || element.parameter.value == "Key Wey Width") && element.spec.value) {
+        spec = element.spec.value.split(' ')[0];
+      }
       const str = element.minValue.value && element.minValue.value.includes('±') ? element.minValue.value.split('±')[1] : '';
-      console.log(str);
-      if (str && ((+element.result.value) < ((+element.spec.value) - (+str))) || ((+element.result.value) > ((+element.spec.value) + (+str)))) {
+      if (str && (((+element.result.value) < ((+spec) - (+str))) || ((+element.result.value) > ((+spec) + (+str))))) {
         return element.result.addClass;
       }
+
+      const str1 = element.minValue.value && element.minValue.value.includes('+') ? element.minValue.value.split('+')[1] : '';
+      if (str1 && (((+element.result.value) < (+spec)) || ((+element.result.value) > ((+spec) + (+str1))))) {
+        return element.result.addClass;
+      }
+
     }
     return ''
   }

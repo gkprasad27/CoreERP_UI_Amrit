@@ -1314,7 +1314,7 @@
     "noRangeName": "NoRangeName",
     "companyName": "CompanyName",
     "plantName": "PlantName",
-    "materialName": "MaterialName"
+    "materialName": "Material Name"
   },
   "grnnumberseries": {
     "title": "Goods Receipt Note Numberseries",
@@ -1334,7 +1334,7 @@
     "grnseriesName": "GrnseriesName",
     "companyName": "CompanyName",
     "plantName": "PlantName",
-    "materialName": "MaterialName"
+    "materialName": "Material Name"
   },
   "ginassignment": {
     "title": "Goods Issue Note Assignment",
@@ -1375,7 +1375,7 @@
     "materialseriesName": "Material series Name",
     "companyName": "CompanyName",
     "plantName": "PlantName",
-    "materialName": "MaterialName"
+    "materialName": "Material Name"
   },
   "materialgroups": {
     "title": "Material Groups",
@@ -2693,7 +2693,7 @@
     "manualInvoiceNo": "Sale Order Number",
     "netWeight": "Net Weight",
     "materialCode": "Material Code",
-    "materialName": "MaterialName",
+    "materialName": "Material Name",
     "VIEWSALESRETURN": "Sales Return View",
     "DATE": "Date",
     "INVOICENO": "Invoive No",

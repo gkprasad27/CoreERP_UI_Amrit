@@ -86,8 +86,8 @@ export class FileUploadComponent implements OnInit {
         this.myFileInput.nativeElement.value = '';
         return;
       }
-      if (Math.round((data[f].size / 1024)) > 2048) {
-        this.alertService.openSnackBar('The maximum supported file size 2 MB', Static.Close, SnackBar.success);
+      if (Math.round((data[f].size / 1024)) > 6000) {
+        this.alertService.openSnackBar('The maximum supported file size 5 MB', Static.Close, SnackBar.success);
         this.myFileInput.nativeElement.value = '';
         return
       }
