@@ -500,4 +500,6 @@ export class ApiConfigService {
    registerStandardRate = `${this.environment.runtimeConfig.serverUrl}StandardRate/RegisterStandardRate`;
    
    getInspectionDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetInspectionDetail`;
+   getInspectionCheckDetailbySaleorder = `${this.environment.runtimeConfig.serverUrl}Transactions/GetInspectionCheckDetailbySaleorder`;
+   deletePurchaseOrder = `${this.environment.runtimeConfig.serverUrl}Common/DeletePurchaseOrder`;
 }

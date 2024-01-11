@@ -1,4 +1,5 @@
 <div style="margin: 10px;" *ngIf="data" id="inspectionPrintData">
+  <div style="text-align: end;"> <b> {{ data?.headingObj?.drawingRevNo }}</b> </div>
   <div style="display: flex;">
     <img src="/assets/images/header.jpg" style="height: 100px;
       width: 65%;">
@@ -61,7 +62,7 @@
     </div>
     <div style="width: 25%;padding-left: 15px;">
       <b style="width: 140px;"> Drawing Rev. No </b>
-      <span >: {{ data?.headingObj?.drawingRevNo }} </span>
+      <span >: NA </span>
     </div>
   </div>
 
@@ -72,7 +73,7 @@
     </div>
     <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
       <b style="width: 140px;"> PO Quantity </b>
-      <span >: {{ data?.headingObj?.drawingRevNo }} </span>
+      <span >: {{ data?.headingObj?.totalQty }} </span>
     </div>
     <div style="width: 25%;padding-left: 15px">
       <!-- <b> Page </b>

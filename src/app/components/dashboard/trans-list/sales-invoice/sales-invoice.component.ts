@@ -85,6 +85,14 @@ export class SalesInvoiceComponent implements OnInit {
       shiptoCity: [''],
       shiptoZip: [''],
       shiptoPhone: [''],
+
+      igst: [0],
+      cgst: [0],
+      sgst: [0],
+      amount: [0],
+      totalTax: [0],
+      totalAmount: [0],
+
       id: [0]
     });
 
@@ -180,6 +188,7 @@ export class SalesInvoiceComponent implements OnInit {
               this.materialCodeList = res.response['saleordernoList'];
               this.getBusienessPartnerAccount(res.response.saleOrderMasterList);
               this.ponoselect();
+              this.getInspectionCheckDetailbySaleorder();
             }
           }
         });
@@ -206,6 +215,62 @@ export class SalesInvoiceComponent implements OnInit {
         });
   }
 
+  getInspectionCheckDetailbySaleorder() {
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getInspectionCheckDetailbySaleorder, this.formData.get('manualInvoiceNo').value);
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.tableComponent.defaultValues();
+              res.response['icDetail'].forEach((i: any) => {
+                debugger
+                const obj = this.materialCodeList.find((m: any) => m.materialCode == i.materialCode)
+                i.igst = obj.igst
+                i.cgst = obj.cgst
+                i.sgst = obj.sgst
+                i.amount = obj.amount
+                i.totalTax = obj.totalTax
+                i.totalAmount = obj.totalAmount
+                i.checkbox = false
+              });
+              this.tableData = res.response['icDetail'];
+            }
+          }
+        });
+  }
+
+  tableCheckboxEvent(event: any) {
+    this.tableData.forEach((res: any) => res.checkbox = (res.id == event.item.id) ? event.flag.checked : res.checkbox);
+    this.calculate();
+  }
+
+  calculate() {
+    this.formData.patchValue({
+      igst: 0,
+      cgst: 0,
+      sgst: 0,
+      amount: 0,
+      totalTax: 0,
+      totalAmount: 0,
+    })
+    this.tableData && this.tableData.forEach((t: any) => {
+      if (t.checkbox) {
+        this.formData.patchValue({
+          igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
+          cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
+          sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
+          amount: ((+this.formData.value.amount) + (t.amount)).toFixed(2),
+          totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
+        })
+      }
+    })
+    this.formData.patchValue({
+      totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
+    })
+  }
 
   ponoselect() {
     this.formData1.patchValue({

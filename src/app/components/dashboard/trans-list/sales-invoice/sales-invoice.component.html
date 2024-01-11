@@ -415,7 +415,7 @@
 
             <div>
                 <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
-                    (editOrDeleteEvent)="editOrDeleteEvent($event)">
+                    (editOrDeleteEvent)="editOrDeleteEvent($event)" (tableCheckboxEvent)="tableCheckboxEvent($event)">
                 </app-table>
             </div>
         </div>
@@ -423,6 +423,30 @@
     </mat-card-content>
 
     <mat-card-content class="d-flex justify-content-end py-1">
+
+        <div class="d-flex">
+            <div class="px-1"> <span class="px-1"> <b>{{ 'saleorder.igst' | translate }} </b></span> :
+                <b class="text-danger">{{ formData.value.igst }} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'saleorder.cgst' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.cgst}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'saleorder.sgst' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.sgst}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'saleorder.amount' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.amount}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'saleorder.totalTax' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.totalTax}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'saleorder.totalAmount' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.totalAmount}} </b>
+            </div>
+        </div>
+
+        <div>
+
 
         <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="invoicePrint()">
             {{ 'salesinvoice.invoicePrint' | translate }}
@@ -437,6 +461,8 @@
             (click)="reset();">
             {{ 'COMMON.RESET' | translate }}
         </button>
+
+        </div>
 
     </mat-card-content>
 

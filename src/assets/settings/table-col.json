@@ -2259,6 +2259,7 @@
       "salesinvoice": {
         "title": "Sales Invoice",
         "RETURNTITLE": "Sales Return",
+        "checkbox": "",
         "ViewSales": "Sales Invoice List View",
         "SlNo": "Sl No",
         "materialCode": "Material Code",
@@ -2295,6 +2296,10 @@
         "totalGross": "Total Gross",
         "grandTotal": "Grand Total",
         "totalInvoiceAmount": "Total Invoice Amount",
+        "saleOrderNumber": "Sale Order Number",
+        "productionTag": "Production Tag",
+        "inspectionCheckNo": "Inspection Check No",
+        "status": "Status",
         "totalCgst": "Total CGST",
         "totalSgst": "Total SGST",
         "totalIgst": "Total IGST",

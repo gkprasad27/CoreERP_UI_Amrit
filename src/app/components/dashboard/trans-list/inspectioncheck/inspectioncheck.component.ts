@@ -360,6 +360,7 @@ export class InspectioncheckComponent implements OnInit {
                 }
                 arr.push(obj);
               })
+              this.formData1.patchValue(res.response['tagsData'])
               this.formData1.patchValue({
                 saleOrderNumber: val,
                 inspectionCheckNo: res.response.tagsData.inspectionCheckNo
@@ -699,7 +700,7 @@ export class InspectioncheckComponent implements OnInit {
       res.tagsDetail.forEach((t: any) => {
         const obj = {
           Parameter: t.parameter,
-          Specification: `${t.spec} --- ${t.minValue}` ,
+          Specification: `${t.spec}   ${t.minValue ? t.minValue : ''}` ,
           UOM: t.uomName,
           Instrument: t.instrument,
           // inspectionCheckNo: t.inspectionCheckNo,

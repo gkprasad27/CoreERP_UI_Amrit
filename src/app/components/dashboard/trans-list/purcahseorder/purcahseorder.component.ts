@@ -620,7 +620,7 @@ export class PurchaseOrderComponent implements OnInit {
               this.formData.disable();
               res.response['poDetail'].forEach((s: any, index: number) => {
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
-                s.action = 'editView';
+                s.action = 'editDeleteView';
                 s.changed = false;
                 s.index = index + 1;
               })
@@ -712,10 +712,14 @@ export class PurchaseOrderComponent implements OnInit {
 
   editOrDeleteEvent(value) {
     if (value.action === 'Delete') {
-      this.tableComponent.defaultValues();
-      this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
-      this.calculate();
-      this.resetForm();
+      if (value.item.id) {
+        this.deletePurchaseOrder(value.item)
+      } else {
+        this.tableComponent.defaultValues();
+        this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
+        this.calculate();
+        this.resetForm();
+      }
     } else if (value.action === 'View') {
       this.dialog.open(PoHistoryComponent, {
         width: '100%',
@@ -726,6 +730,25 @@ export class PurchaseOrderComponent implements OnInit {
       value.item['type'] = 'edit';
       this.formData1.patchValue(value.item);
     }
+  }
+
+  deletePurchaseOrder(item: any) {
+    const jvDetUrl = String.Join('/', this.apiConfigService.deletePurchaseOrder, item.id);
+    this.apiService.apiDeleteRequest(jvDetUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.tableComponent.defaultValues();
+              this.tableData = this.tableData.filter((res: any) => res.index != item.index);
+              this.calculate();
+              this.resetForm();
+              this.alertService.openSnackBar('Delected Record...', 'close', SnackBar.success);
+            }
+          }
+          this.spinner.hide();
+        });
   }
 
   dataChange() {
