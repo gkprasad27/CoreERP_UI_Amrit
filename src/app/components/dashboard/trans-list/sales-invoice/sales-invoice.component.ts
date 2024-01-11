@@ -290,7 +290,11 @@ export class SalesInvoiceComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
               this.formData.patchValue(res.response['InvoiceMasterList']);
+              this.formData.patchValue({
+                profitCenter: res.response['InvoiceMasterList']['profitcenter']
+              })
               // res.response['grDetail'].forEach((d: any, index: number) => {
               //   const obj = {
               //     materialCode: d.materialCode ? d.materialCode : '',

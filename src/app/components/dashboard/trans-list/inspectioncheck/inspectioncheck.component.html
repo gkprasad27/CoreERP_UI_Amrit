@@ -94,6 +94,7 @@
           <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> S.No </th>
           <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Parameter </th>
           <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Specification </th>
+          <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Tolerance </th>
           <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
           <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th>
           <ng-container *ngFor="let row of data.detailArray[0] | keyvalue; let i = index">
@@ -114,11 +115,12 @@
           </td>
           <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Specification
             }} </td>
+          <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Tolerance
+          }} </td>
           <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.UOM }} </td>
           <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Instrument }}
           </td>
           <ng-container *ngFor="let cell of row | keyvalue; let i = index">
-
             <td
               *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument'"
               style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ cell.value }}

@@ -700,7 +700,8 @@ export class InspectioncheckComponent implements OnInit {
       res.tagsDetail.forEach((t: any) => {
         const obj = {
           Parameter: t.parameter,
-          Specification: `${t.spec}   ${t.minValue ? t.minValue : ''}` ,
+          Specification: `${t.spec}`,
+          Tolerance: `${t.minValue ? t.minValue : ''}`,
           UOM: t.uomName,
           Instrument: t.instrument,
           // inspectionCheckNo: t.inspectionCheckNo,

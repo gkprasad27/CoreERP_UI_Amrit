@@ -49,6 +49,7 @@ export class QuotationSupplierComponent implements OnInit {
   materialList: any;
   UomList: any;
   ptypeList: any;
+  mpatternList = [];
 
   constructor(
     public commonService: CommonService,
@@ -67,6 +68,7 @@ export class QuotationSupplierComponent implements OnInit {
 
   ngOnInit() {
     this.formDataGroup();
+    this.getModelPatternList();
     this.getCompanyList();
   }
 
@@ -109,6 +111,22 @@ export class QuotationSupplierComponent implements OnInit {
   //   };
   // }
 
+
+  getModelPatternList() {
+    const getmpList = String.Join('/', this.apiConfigService.getModelPatternList);
+    this.apiService.apiGetRequest(getmpList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.mpatternList = res.response['mpatternList'];
+            }
+          }
+          this.spinner.hide();
+        });
+  }
+
   formDataGroup() {
     this.formData = this.formBuilder.group({
       company: [null, [Validators.required]],
@@ -122,12 +140,12 @@ export class QuotationSupplierComponent implements OnInit {
       quotationNumber: [null],
       quotationDate: [null, [Validators.required]],
       supplierQuoteDate: [null],
-      supplier: [null, [Validators.required]],
       deliveryPeriod: [null],
       creditDays: [null],
       deliveryMethod: [null],
       advance: [null],
       transportMethod: [null],
+      material: [''],
       gstNo: [null],
       igst: [0],
       cgst: [0],
@@ -270,7 +288,7 @@ export class QuotationSupplierComponent implements OnInit {
       })
     })
     this.formData.patchValue({
-      totalAmount: (+this.formData.value.amount) + (+this.formData.value.totalTax),
+      totalAmount: (+this.formData.value.amount) + (+this.formData.value.totalTax).toFixed(2),
     })
   }
 
@@ -479,8 +497,9 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
   save() {
+    debugger
     // this.tableData = this.commonService.formatTableData(this.tableData);
-    if (this.tableData.length == 0 && this.formData.invalid) {
+    if (this.tableData.length == 0 || this.formData.invalid) {
       return;
     }
     this.savesupplierquotation();

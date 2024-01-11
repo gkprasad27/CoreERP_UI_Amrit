@@ -1976,6 +1976,7 @@
     "company": "Company",
     "plant": "Plant",
     "branch": "Branch",
+    "material": "Material",
     "companyName":"Company Name",
     "profitcenterName":"Profit Center Name",
     "profitCenter": "Profit Center",
