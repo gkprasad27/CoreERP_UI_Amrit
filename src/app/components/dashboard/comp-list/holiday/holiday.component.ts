@@ -41,7 +41,7 @@ export class HolidayComponent implements OnInit {
     this.modelFormData = this.formBuilder.group({
       holidayId: ['0'],
       holidayName: ['', [Validators.required, Validators.minLength(2)]],
-      date:[null],
+      date:['', [Validators.required]],
       narration: [null],
       extraDate: [null]
     });

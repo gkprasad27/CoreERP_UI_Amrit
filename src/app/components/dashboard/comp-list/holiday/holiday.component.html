@@ -23,9 +23,12 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [matDatepicker]="picker1" placeholder="{{'holiday.date' | translate }}" formControlName="date">
+          <input matInput [matDatepicker]="picker1" placeholder="{{'holiday.date' | translate }}" formControlName="date" [ngClass]="{ 'ng--valid': formControls.date.valid }">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
+          <mat-error *ngIf="formControls.date.errors" class="help-block">
+            <div *ngIf="formControls.date.errors.required">Date is required</div>
+          </mat-error>
         </mat-form-field>
 
       </div>
