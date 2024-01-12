@@ -140,4 +140,5 @@ export { PermissionApprovalsComponent } from './permissionapproval/permissionapp
 export { LeaveApprovalComponent } from './leaveapproval/leaveapproval.component';
 export { DesignationComponent } from './designation/designation.component';
 export { StructureCreationComponent} from './structurecreation/structurecreation.component';
+export { HolidayComponent} from './holiday/holiday.component';
 

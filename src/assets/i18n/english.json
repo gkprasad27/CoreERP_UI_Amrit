@@ -2767,5 +2767,12 @@
     "rejectdPerson":"Rejected Person",
     "status": "Status",
     "reason": "Reason"
+  },
+  "holiday":{
+    "title":"Holiday Master",
+    "holidayId":"Holiday Id",
+    "holidayName":"Holiday Name",
+    "narration":"Narration",
+    "date":"Date"
   }
 }

@@ -537,6 +537,13 @@
     "narration": "Narration",
     "extraDate": "Date"
   },
+  "holiday": {
+    "title": "Holiday",
+    "holidayId": "HolidayId",
+    "holidayName": "HolidayName",
+    "narration": "Narration",
+    "date": "Date"
+  },
   "erpuser": {
     "title": "ErpUser",
     "userName": "User Name",
