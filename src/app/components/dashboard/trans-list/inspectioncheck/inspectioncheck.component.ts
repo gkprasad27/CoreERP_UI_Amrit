@@ -697,7 +697,7 @@ export class InspectioncheckComponent implements OnInit {
   printData(res) {
     let arr = [];
     if (res.tagsDetail && res.tagsDetail.length) {
-      res.tagsDetail.forEach((t: any) => {
+      res.tagsDetail.forEach((t: any, i: number) => {
         const obj = {
           Parameter: t.parameter,
           Specification: `${t.spec}`,
@@ -718,8 +718,14 @@ export class InspectioncheckComponent implements OnInit {
             arr.push(obj);
           }
         }
+        if(i == 71) {
+          debugger
+          console.log(obj, i, 'testttt')
+
+        }
       })
     }
+    debugger
     const obj = {
       heading: 'INSPECTION REPORT',
       headingObj: {
