@@ -99,7 +99,7 @@
           <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th>
           <ng-container *ngFor="let row of data.detailArray[0] | keyvalue; let i = index">
             <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
-              *ngIf="row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument'">
+              *ngIf="row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument' && row.key != 'Tolerance'">
               {{ row.key }}
             </th>
           </ng-container>
@@ -122,7 +122,7 @@
           </td>
           <ng-container *ngFor="let cell of row | keyvalue; let i = index">
             <td
-              *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument'"
+              *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument' && cell.key != 'Tolerance'"
               style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ cell.value }}
             </td>
           </ng-container>
