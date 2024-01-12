@@ -5,6 +5,8 @@ import { Event, NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteItemComponent } from '../reuse-components/delete-item/delete-item.component';
 
 declare var require: any
 const FileSaver = require('file-saver');
@@ -33,7 +35,9 @@ export class CommonService {
     public translate: TranslateService,
     private http: HttpClient,
     private spinner: NgxSpinnerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+
   ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -213,11 +217,16 @@ export class CommonService {
     return true;
   }
 
-  // showSpinner() {
-  //    this.spinner.show();
-  // }
+  deletePopup(data, callBack: any) {
+    const dialogRef = this.dialog.open(DeleteItemComponent, {
+      width: '1024px',
+      data: data,
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      callBack(result);
+    });
 
-  // hideSpinner() {
-  //  this.spinner.hide();
-  // }
+  }
+
 }

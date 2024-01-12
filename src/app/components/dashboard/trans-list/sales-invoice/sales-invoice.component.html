@@ -284,7 +284,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label>{{ 'salesinvoice.manualInvoiceNo' | translate }}</mat-label>
-                    <mat-select formControlName="manualInvoiceNo" (selectionChange)="getsaleOrdernoList()"
+                    <mat-select formControlName="saleOrderNo" (selectionChange)="getsaleOrdernoList()"
                         appFocusOnEnter tabIndex="3">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let poNo of getSaleOrderData" [value]="poNo.saleOrderNo">
@@ -426,22 +426,22 @@
 
         <div class="d-flex">
             <div class="px-1"> <span class="px-1"> <b>{{ 'saleorder.igst' | translate }} </b></span> :
-                <b class="text-danger">{{ formData.value.igst }} </b>
+                <b class="text-danger">{{ formData.value.totalIGST }} </b>
             </div>
             <div class="px-1"> <span class="px-1"> <b> {{'saleorder.cgst' | translate }} </b></span> :
-                <b class="text-danger"> {{ formData.value.cgst}} </b>
+                <b class="text-danger"> {{ formData.value.totalCGST}} </b>
             </div>
             <div class="px-1"> <span class="px-1"> <b> {{'saleorder.sgst' | translate }} </b></span> :
-                <b class="text-danger"> {{ formData.value.sgst}} </b>
+                <b class="text-danger"> {{ formData.value.totalSGST}} </b>
             </div>
             <div class="px-1"> <span class="px-1"> <b> {{'saleorder.amount' | translate }} </b></span> :
-                <b class="text-danger"> {{ formData.value.amount}} </b>
+                <b class="text-danger"> {{ formData.value.totalAmount}} </b>
             </div>
             <div class="px-1"> <span class="px-1"> <b> {{'saleorder.totalTax' | translate }} </b></span> :
                 <b class="text-danger"> {{ formData.value.totalTax}} </b>
             </div>
             <div class="px-1"> <span class="px-1"> <b> {{'saleorder.totalAmount' | translate }} </b></span> :
-                <b class="text-danger"> {{ formData.value.totalAmount}} </b>
+                <b class="text-danger"> {{ formData.value.grandTotal}} </b>
             </div>
         </div>
 

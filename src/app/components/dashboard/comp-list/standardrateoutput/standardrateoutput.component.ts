@@ -73,6 +73,7 @@ export class StandardRateComponent implements OnInit {
       minValue: [''],
       maxValue: [''],
       instrument: [''],
+      changed: true,
       id: [0],
       action: 'edit',
       index: 0
@@ -156,6 +157,7 @@ export class StandardRateComponent implements OnInit {
                   spec: s.spec,
                   minValue: s.minValue,
                   maxValue: s.maxValue,
+                  changed: false,
                   id: s.id,
                   instrument: s.instrument,
                   action: 'edit',
@@ -173,7 +175,8 @@ export class StandardRateComponent implements OnInit {
       return;
     }
     this.formData1.patchValue({
-      highlight: true
+      highlight: true,
+      changed: true,
     });
     let data: any = this.tableData;
     this.tableData = null;
@@ -223,7 +226,7 @@ export class StandardRateComponent implements OnInit {
   }
 
   save() {
-    if (this.tableData.length == 0 || this.formData.invalid) {
+    if (this.tableData.length == 0 || this.formData.invalid || !(this.tableData.some((t: any) => t.changed))) {
       return;
     }
     this.addSaleOrder();
@@ -231,7 +234,9 @@ export class StandardRateComponent implements OnInit {
 
   addSaleOrder() {
     const addsq = String.Join('/', this.apiConfigService.registerStandardRate);
-    const requestObj = { qcdHdr: this.formData.value, qcdDtl: this.tableData };
+    const arr = this.tableData.filter((d: any) => d.changed);
+
+    const requestObj = { qcdHdr: this.formData.value, qcdDtl: arr };
     this.apiService.apiPostRequest(addsq, requestObj).subscribe(
       response => {
         this.spinner.hide();

@@ -733,22 +733,34 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   deletePurchaseOrder(item: any) {
-    const jvDetUrl = String.Join('/', this.apiConfigService.deletePurchaseOrder, item.id);
-    this.apiService.apiDeleteRequest(jvDetUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.tableComponent.defaultValues();
-              this.tableData = this.tableData.filter((res: any) => res.index != item.index);
-              this.calculate();
-              this.resetForm();
-              this.alertService.openSnackBar('Delected Record...', 'close', SnackBar.success);
-            }
-          }
-          this.spinner.hide();
-        });
+    debugger
+    const obj = {
+      item: {
+        materialCode: item.materialCode
+      },
+      primary: 'materialCode'
+    }
+    this.commonService.deletePopup(obj, (flag: any) => {
+      if (flag) {
+        const jvDetUrl = String.Join('/', this.apiConfigService.deletePurchaseOrder, item.id);
+        this.apiService.apiDeleteRequest(jvDetUrl)
+          .subscribe(
+            response => {
+              const res = response;
+              if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+                if (!this.commonService.checkNullOrUndefined(res.response)) {
+                  this.tableComponent.defaultValues();
+                  this.tableData = this.tableData.filter((res: any) => res.index != item.index);
+                  this.calculate();
+                  this.resetForm();
+                  this.alertService.openSnackBar('Delected Record...', 'close', SnackBar.success);
+                }
+              }
+              this.spinner.hide();
+            });
+      }
+    })
+
   }
 
   dataChange() {

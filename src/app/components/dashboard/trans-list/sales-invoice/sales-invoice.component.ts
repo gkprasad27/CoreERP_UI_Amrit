@@ -33,6 +33,7 @@ export class SalesInvoiceComponent implements OnInit {
   customerList: any[] = [];
   profitCenterList: any[] = [];
   companyList: any[] = [];
+  taxCodeList: any[] = [];
 
   routeEdit = '';
 
@@ -62,6 +63,7 @@ export class SalesInvoiceComponent implements OnInit {
     this.getSaleOrderList();
     // this.getCustomerList();
     this.getProfitcenterData();
+    this.getTaxRatesList();
     this.getCompanyList();
     if (this.routeEdit != '') {
       this.getInvoiceDeatilList(this.routeEdit);
@@ -69,11 +71,14 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   formDataGroup() {
+    const user = JSON.parse(localStorage.getItem('user'));
+
     this.formData = this.formBuilder.group({
 
+      userId: [user.userName],
       company: ['', [Validators.required]],
       profitCenter: ['', Validators.required],
-      manualInvoiceNo: ['', Validators.required],
+      saleOrderNo: ['', Validators.required],
       invoiceMasterId: 0,
       invoiceDate: [''],
       customerName: [''],
@@ -86,12 +91,12 @@ export class SalesInvoiceComponent implements OnInit {
       shiptoZip: [''],
       shiptoPhone: [''],
 
-      igst: [0],
-      cgst: [0],
-      sgst: [0],
-      amount: [0],
-      totalTax: [0],
+      totalIGST: [0],
+      totalCGST: [0],
+      totalSGST: [0],
       totalAmount: [0],
+      totalTax: [0],
+      grandTotal: [0],
 
       id: [0]
     });
@@ -100,6 +105,15 @@ export class SalesInvoiceComponent implements OnInit {
       materialCode: ['', Validators.required],
       materialName: [''],
       netWeight: [''],
+      inspectionCheckNo: [''],
+      tagName: [''],
+      saleorder: [''],
+      igst: [''],
+      cgst: [''],
+      sgst: [''],
+      grossAmount: [''],
+      taxStructureId: [''],
+      rate: [''],
       invoiceDetailId: 0,
       qty: [''],
       highlight: false,
@@ -107,6 +121,21 @@ export class SalesInvoiceComponent implements OnInit {
       action: 'editDelete',
       index: 0
     });
+  }
+
+  getTaxRatesList() {
+    const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);
+    this.apiService.apiGetRequest(taxCodeUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              const resp = res.response['TaxratesList'];
+              this.taxCodeList = resp;
+            }
+          }
+        });
   }
 
   getSaleOrderList() {
@@ -177,7 +206,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getsaleOrdernoList() {
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getsaleOrdernoListe, this.formData.get('manualInvoiceNo').value);
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getsaleOrdernoListe, this.formData.get('saleOrderNo').value);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
         response => {
@@ -216,7 +245,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getInspectionCheckDetailbySaleorder() {
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getInspectionCheckDetailbySaleorder, this.formData.get('manualInvoiceNo').value);
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getInspectionCheckDetailbySaleorder, this.formData.get('saleOrderNo').value);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
         response => {
@@ -228,15 +257,28 @@ export class SalesInvoiceComponent implements OnInit {
               res.response['icDetail'].forEach((i: any) => {
                 debugger
                 const obj = this.materialCodeList.find((m: any) => m.materialCode == i.materialCode)
-                i.igst = obj.igst
-                i.cgst = obj.cgst
-                i.sgst = obj.sgst
-                i.amount = obj.amount
-                i.totalTax = obj.totalTax
-                i.totalAmount = obj.totalAmount
+
+                const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
+                const igst = objT.igst ? (obj.rate * objT.igst) / 100 : 0;
+                const cgst = objT.cgst ? (obj.rate * objT.cgst) / 100 : 0;
+                const sgst = objT.sgst ? (obj.rate * objT.sgst) / 100 : 0;
+                i.igst = igst;
+                i.cgst = cgst;
+                i.sgst = sgst;
+                i.grossAmount = obj.rate;
+                i.tagName = i.productionTag;
+                i.saleorder = i.saleOrderNumber;
+                i.materialCode = i.materialCode;
+                i.materialName = i.materialName;
+                i.inspectionCheckNo = i.inspectionCheckNo;
+                i.rate = obj.rate;
+                i.taxStructureId = obj.taxCode;
+                i.totalTax = (igst + sgst + cgst);
+                i.totalAmount = (obj.rate) + (igst + sgst + cgst)
                 i.checkbox = false
               });
               this.tableData = res.response['icDetail'];
+
             }
           }
         });
@@ -249,26 +291,26 @@ export class SalesInvoiceComponent implements OnInit {
 
   calculate() {
     this.formData.patchValue({
-      igst: 0,
-      cgst: 0,
-      sgst: 0,
-      amount: 0,
-      totalTax: 0,
+      totalIGST: 0,
+      totalCGST: 0,
+      totalSGST: 0,
       totalAmount: 0,
+      totalTax: 0,
+      grandTotal: 0,
     })
     this.tableData && this.tableData.forEach((t: any) => {
       if (t.checkbox) {
         this.formData.patchValue({
-          igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
-          cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
-          sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-          amount: ((+this.formData.value.amount) + (t.amount)).toFixed(2),
+          totalIGST: ((+this.formData.value.totalIGST) + t.igst).toFixed(2),
+          totalCGST: ((+this.formData.value.totalCGST) + t.cgst).toFixed(2),
+          totalSGST: ((+this.formData.value.totalSGST) + t.sgst).toFixed(2),
+          totalAmount: ((+this.formData.value.totalAmount) + (t.grossAmount)).toFixed(2),
           totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
         })
       }
     })
     this.formData.patchValue({
-      totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
+      grandTotal: ((+this.formData.value.totalAmount) + (+this.formData.value.totalTax)).toFixed(2),
     })
   }
 
@@ -295,30 +337,19 @@ export class SalesInvoiceComponent implements OnInit {
               this.formData.patchValue({
                 profitCenter: res.response['InvoiceMasterList']['profitcenter']
               })
-              // res.response['grDetail'].forEach((d: any, index: number) => {
-              //   const obj = {
-              //     materialCode: d.materialCode ? d.materialCode : '',
-              //     materialName: d.materialName ? d.materialName : '',
-              //     netWeight: d.netWeight ? d.netWeight : '',
-              //     // pendingQty: (d.qty - d.receivedQty),
-              //     purchaseOrderNumber: d.purchaseOrderNumber ? d.purchaseOrderNumber : '',
-              //     rejectQty: d.rejectQty ? d.rejectQty : '',
-              //     qty: d.qty ? d.qty : '',
-              //     lotNo: d.lotNo ? d.lotNo : '',
-              //     documentURL: d.documentURL ? d.documentURL : '',
-              //     invoiceURL: d.invoiceURL ? d.invoiceURL : '',
-              //     supplierReferenceNo: d.supplierReferenceNo ? d.supplierReferenceNo : '',
-              //     supplierRefno: d.supplierRefno ? d.supplierRefno : '',
-              //     receivedDate: d.receivedDate ? d.receivedDate : '',
-              //     receivedQty: d.receivedQty ? d.receivedQty : '',
-              //     description: d.description ? d.description : '',
-              //     type: 'edit',
-              //     // action: 'editDelete',
-              //     index: index + 1
-              //   }
-              //   this.perChaseOrderList.push(obj)
-              // })
-              this.tableData = res.response['invoiceDetailsList']
+              let arr = [];
+              res.response['invoiceDetailsList'].forEach((d: any, index: number) => {
+                const obj = {
+                  materialCode: d.materialCode ? d.materialCode : '',
+                  materialName: d.materialName ? d.materialName : '',
+                  saleOrderNumber: d.saleorder ? d.saleorder : '',
+                  productionTag: d.tagName ? d.tagName : '',
+                  inspectionCheckNo: d.inspectionCheckNo ? d.inspectionCheckNo : '',
+                  status: d.status ? d.status : '',
+                }
+                arr.push(obj)
+              })
+              this.tableData = arr;
               this.materialCodeChange();
               this.formData.disable();
             }
