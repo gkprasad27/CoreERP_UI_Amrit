@@ -497,7 +497,6 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
   save() {
-    debugger
     // this.tableData = this.commonService.formatTableData(this.tableData);
     if (this.tableData.length == 0 || this.formData.invalid) {
       return;

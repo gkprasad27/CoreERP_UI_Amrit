@@ -109,10 +109,13 @@ export class SalesInvoiceComponent implements OnInit {
       tagName: [''],
       saleorder: [''],
       igst: [''],
+      changed: false,
       cgst: [''],
       sgst: [''],
       grossAmount: [''],
       taxStructureId: [''],
+      checkbox: [''],
+      hideCheckbox: [''],
       rate: [''],
       invoiceDetailId: 0,
       qty: [''],
@@ -139,7 +142,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getSaleOrderList() {
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderList);
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrders);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
         response => {
@@ -147,7 +150,7 @@ export class SalesInvoiceComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.getSaleOrderData = res.response['BPList'];
+              this.getSaleOrderData = res.response['SOL'];
             }
           }
         });
@@ -255,7 +258,6 @@ export class SalesInvoiceComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.tableComponent.defaultValues();
               res.response['icDetail'].forEach((i: any) => {
-                debugger
                 const obj = this.materialCodeList.find((m: any) => m.materialCode == i.materialCode)
 
                 const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
@@ -272,6 +274,8 @@ export class SalesInvoiceComponent implements OnInit {
                 i.materialName = i.materialName;
                 i.inspectionCheckNo = i.inspectionCheckNo;
                 i.rate = obj.rate;
+                i.qty = 1;
+                i.changed = false;
                 i.hideCheckbox = i.status == "Invoice Generated";
                 i.taxStructureId = obj.taxCode;
                 i.totalTax = (igst + sgst + cgst);
@@ -333,7 +337,6 @@ export class SalesInvoiceComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
               this.formData.patchValue(res.response['InvoiceMasterList']);
               this.formData.patchValue({
                 profitCenter: res.response['InvoiceMasterList']['profitcenter']
@@ -364,7 +367,8 @@ export class SalesInvoiceComponent implements OnInit {
     }
     this.formData1.patchValue({
       type: '',
-      highlight: true
+      highlight: true,
+      changed: true
     })
     let data: any = this.tableData;
     data = (data && data.length) ? data : [];
@@ -412,7 +416,7 @@ export class SalesInvoiceComponent implements OnInit {
 
 
   save() {
-    if (this.tableData.length == 0 && this.formData.invalid) {
+    if (this.tableData.length == 0 || this.formData.invalid || !(this.tableData.some((t: any) => t.changed))) {
       return;
     }
     this.savegoodsreceipt();
@@ -420,7 +424,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   savegoodsreceipt() {
     this.formData.enable();
-    const arr = this.tableData.filter((d: any) => !d.type);
+    const arr = this.tableData.filter((d: any) => !d.type && d.changed);
     const registerInvoice = String.Join('/', this.apiConfigService.registerInvoice);
     const formData = this.formData.value;
     formData.receivedDate = this.formData.get('invoiceDate').value ? this.datepipe.transform(this.formData.get('invoiceDate').value, 'MM-dd-yyyy') : '';

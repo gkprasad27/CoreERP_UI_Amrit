@@ -719,13 +719,11 @@ export class InspectioncheckComponent implements OnInit {
           }
         }
         if(i == 71) {
-          debugger
           console.log(obj, i, 'testttt')
 
         }
       })
     }
-    debugger
     const obj = {
       heading: 'INSPECTION REPORT',
       headingObj: {

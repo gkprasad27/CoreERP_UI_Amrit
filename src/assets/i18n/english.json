@@ -2697,6 +2697,8 @@
     "manualInvoiceNo": "Sale Order Number",
     "netWeight": "Net Weight",
     "materialCode": "Material Code",
+    "saleOrderNo":"Sale Order Number",
+    "invoiceQty":"Invoice Qty",
     "materialName": "Material Name",
     "VIEWSALESRETURN": "Sales Return View",
     "DATE": "Date",

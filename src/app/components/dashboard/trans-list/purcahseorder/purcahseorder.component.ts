@@ -733,7 +733,6 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   deletePurchaseOrder(item: any) {
-    debugger
     const obj = {
       item: {
         materialCode: item.materialCode
