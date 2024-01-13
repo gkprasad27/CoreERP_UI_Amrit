@@ -82,7 +82,7 @@
               <ng-container *ngIf="column == 'documentURL' || column == 'invoiceURL'">
                 <span class="link--val" (click)="onLink(column, element)">  {{ element[column] }} </span>
               </ng-container>
-              <ng-container *ngIf="column == 'checkbox'">
+              <ng-container *ngIf="column == 'checkbox' && !element.hideCheckbox">
                   <mat-checkbox  (change)="tableCheckboxCheck($event, element)">  </mat-checkbox>
               </ng-container>
               <ng-container *ngIf="column == 'button' || column == 'button1'">

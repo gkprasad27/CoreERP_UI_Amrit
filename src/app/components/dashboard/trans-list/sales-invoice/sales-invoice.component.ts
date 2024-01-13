@@ -272,6 +272,7 @@ export class SalesInvoiceComponent implements OnInit {
                 i.materialName = i.materialName;
                 i.inspectionCheckNo = i.inspectionCheckNo;
                 i.rate = obj.rate;
+                i.hideCheckbox = i.status == "Invoice Generated";
                 i.taxStructureId = obj.taxCode;
                 i.totalTax = (igst + sgst + cgst);
                 i.totalAmount = (obj.rate) + (igst + sgst + cgst)
