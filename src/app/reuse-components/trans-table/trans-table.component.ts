@@ -174,6 +174,12 @@ export class TransTableComponent implements OnInit {
         }
       }
 
+      if(this.routeParam == 'GoodsReceiptApproval') {
+        this.columnDefinitions.unshift({ def: "checkbox", hide : true, label : ""})
+      }
+
+      
+
     }
 
 
@@ -219,6 +225,27 @@ export class TransTableComponent implements OnInit {
       }
     }
     return ''
+  }
+
+  checkboxCheck(flag: any, element: any) {
+    element.checked = flag.checked;
+  }
+
+  buttonClick(flag: string) {
+    const registerInvoiceUrl = String.Join('/', this.routeParam == 'GoodsReceiptApproval' ? this.apiConfigService.savePurchaseOrder: this.apiConfigService.saveGoodsReceipt);
+    const requestObj = this.tableData.filter((f: any) => f.checked).map((t: any) => { return { ApprovalStatus: flag, RecomendedBy: t.recommendedBy, ApprovedBy: t.approvedBy, ...t }});
+    debugger
+    this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
+      response => {
+        const res = response.body;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar('PermissionrqstApproval Successfully..', Static.Close, SnackBar.success);
+          }
+          this.spinner.hide();
+
+        }
+      });
   }
 
 }
