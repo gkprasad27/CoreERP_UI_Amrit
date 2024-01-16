@@ -39,6 +39,8 @@ export class SalesInvoiceComponent implements OnInit {
 
   tableData = [];
 
+  getInvoiceDeatilData: any;
+
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
 
   invoicePrintData: any;
@@ -112,6 +114,10 @@ export class SalesInvoiceComponent implements OnInit {
       changed: false,
       cgst: [''],
       sgst: [''],
+      igstCode: [''],
+      cgstCode: [''],
+      sgstCode: [''],
+      hsnNo: [''],
       grossAmount: [''],
       taxStructureId: [''],
       checkbox: [''],
@@ -267,11 +273,15 @@ export class SalesInvoiceComponent implements OnInit {
                 i.igst = igst;
                 i.cgst = cgst;
                 i.sgst = sgst;
+                i.igstCode = objT.igst;
+                i.cgstCode = objT.cgst;
+                i.sgstCode = objT.sgst;
                 i.grossAmount = obj.rate;
                 i.tagName = i.productionTag;
                 i.saleorder = i.saleOrderNumber;
                 i.materialCode = i.materialCode;
                 i.materialName = i.materialName;
+                i.hsnNo = i.hsnNo;
                 i.inspectionCheckNo = i.inspectionCheckNo;
                 i.rate = obj.rate;
                 i.qty = 1;
@@ -337,6 +347,7 @@ export class SalesInvoiceComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.getInvoiceDeatilData = res.response;
               this.formData.patchValue(res.response['InvoiceMasterList']);
               this.formData.patchValue({
                 profitCenter: res.response['InvoiceMasterList']['profitcenter']
@@ -452,32 +463,56 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   invoicePrint() {
-
+    const totalObj = {
+      qty: 0,
+      grossAmount: 0,
+      cgst: 0,
+      sgst: 0,
+      igst: 0,
+      total: 0
+    };
+    this.getInvoiceDeatilData.invoiceDetailsList.forEach((data: any) => {
+      totalObj.qty = totalObj.qty + data.qty,
+      totalObj.grossAmount = totalObj.grossAmount + data.grossAmount,
+      totalObj.cgst = totalObj.cgst + data.cgst,
+      totalObj.sgst = totalObj.sgst + data.sgst,
+      totalObj.igst = totalObj.igst + data.igst,
+      totalObj.total = totalObj.total + (data.grossAmount + data.cgst + data.sgst + data.igst)
+    })
     const obj = {
       headingObj: {
-        reverseCharge: 'test',
-        transportationMode: 'trans',
-        invoiceNo: '100'
+        reverseCharge: '',
+        transportationMode: '',
+        invoiceNo: this.getInvoiceDeatilData?.InvoiceMasterList?.invoiceNo || '',
+        poNo: '',
+        vehicleRegNo: this.getInvoiceDeatilData?.InvoiceMasterList?.vehicleRegNo || '',
+        invoiceDate: this.getInvoiceDeatilData?.InvoiceMasterList?.invoiceDate || '',
+        poDate: this.getInvoiceDeatilData?.InvoiceMasterList?.poDate || '',
+        dateOfSupply: this.getInvoiceDeatilData?.InvoiceMasterList?.dateOfSupply || '',
+        shiptoState: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoState || '',
+        shiptoCity: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoCity || '',
+
       },
       vAddress: {
-        name: 'w323we',
-        address: 'w323we',
-        address1: 'w323we',
-        city: 'w323we',
-        stateName: 'w323we',
-        pin: 'w323we',
-        gstno: '234234234',
+        name: this.getInvoiceDeatilData?.InvoiceMasterList?.customerName || '',
+        address: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress1 || '',
+        address1: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress2 || '',
+        city: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoCity || '',
+        stateName: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoState || '',
+        pin: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoZip || '',
+        gstno:  this.getInvoiceDeatilData?.InvoiceMasterList?.customerGstin || '',
       },
       pAddress: {
-        name: 'w323we',
-        address: 'w323we',
-        address1: 'w323we',
-        city: 'w323we',
-        stateName: 'w323we',
-        pin: 'w323we',
-        gstno: '234234234',
+        name: this.getInvoiceDeatilData?.InvoiceMasterList?.customerName || '',
+        address: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress1 || '',
+        address1: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress2 || '',
+        city: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoCity || '',
+        stateName: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoState || '',
+        pin: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoZip || '',
+        gstno:  this.getInvoiceDeatilData?.InvoiceMasterList?.customerGstin || '',
       },
-      detailArray: []
+      detailArray: this.getInvoiceDeatilData.invoiceDetailsList,
+      totalObj: totalObj
     };
     this.invoicePrintData = obj;
 

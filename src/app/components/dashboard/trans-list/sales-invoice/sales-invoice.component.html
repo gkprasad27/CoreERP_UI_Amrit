@@ -36,38 +36,38 @@
             </div>
             <div style="width: 50%;padding-left: 15px;display: flex;">
                 <div style="width: 150px;"><b> PO No </b></div>
-                <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.invoiceNo }} </div>
+                <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.poNo }} </div>
             </div>
         </div>
         <div style="width: 50%;padding-left: 15px;display: flex;">
             <div style="width: 150px;"><b> Vehicle Number </b></div>
-            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.invoiceNo }} </div>
+            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.vehicleRegNo }} </div>
         </div>
     </div>
     <div style="display: flex;margin-top: 10px;">
         <div style="width: 50%;display: flex;">
             <div style="width: 50%;padding-left: 15px;display: flex;">
                 <div style="width: 150px;"><b> Invoice Date</b></div>
-                <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.invoiceNo ? (invoicePrintData?.headingObj?.invoiceNo | date) : '' }} </div>
+                <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.invoiceDate ? (invoicePrintData?.headingObj?.invoiceDate | date) : '' }} </div>
             </div>
             <div style="width: 50%;padding-left: 15px;display: flex;">
                 <div style="width: 150px;"><b> PO Date  </b></div>
-                <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.invoiceNo ? (invoicePrintData?.headingObj?.invoiceNo | date) : '' }} </div>
+                <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.poDate ? (invoicePrintData?.headingObj?.poDate | date) : '' }} </div>
             </div>
         </div>
         <div style="width: 50%;padding-left: 15px;display: flex;">
             <div style="width: 150px;"><b> Date of Supply  </b></div>
-            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.invoiceNo ? (invoicePrintData?.headingObj?.invoiceNo | date) : '' }} </div>
+            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.dateOfSupply ? (invoicePrintData?.headingObj?.dateOfSupply | date) : '' }} </div>
         </div>
     </div>
     <div style="display: flex;margin-top: 10px;">
         <div style="width: 50%;padding-left: 15px;display: flex;">
             <div style="width: 150px;"><b> State </b></div>
-            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.drgNo }} </div>
+            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.shiptoState }} </div>
         </div>
         <div style="width: 50%;padding-left: 15px;display: flex;">
             <div style="width: 150px;"><b> Place of Supply </b></div>
-            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.materialCode }} </div>
+            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.shiptoCity }} </div>
         </div>
     </div>
 
@@ -132,35 +132,44 @@
                 <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
                     *ngFor="let row of invoicePrintData.detailArray; let i = index">
                     <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialCode }}
-                    </td>
                     <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialName }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.netWeight }}
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.hsnNo }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ row.qty *
-                        row.netWeight}} </ng-container>  </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> NOS </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty }}
+                    </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ 
+                        row.rate}} </ng-container>  </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.grossAmount }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.discount }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.grossAmount }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.cgstCode }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.cgst }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.sgstCode }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.sgst }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.igstCode }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.igst }} </td>
+
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.grossAmount + row.cgst + row.sgst + row.igst }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;" colspan="2"> Totals </td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.headingObj.amount }} 4</td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.qty }} </td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.headingObj.totalAmount }} 333</td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.grossAmount }} </td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.headingObj.totalAmount }} 333</td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.cgst }} </td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.headingObj.totalAmount }} 333</td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.sgst }} </td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.headingObj.totalAmount }} 333</td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.headingObj.totalAmount }} 333</td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.igst }} </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.total }} </td>
 
                 </tr>
             </tbody>
@@ -170,25 +179,25 @@
     <div style="display: flex; font-size: 15px;">
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
             <b> Total amount in words: </b>
-            <div> {{ convertNumberToWords(invoicePrintData.headingObj?.totalAmount) }} </div>
+            <div> {{ convertNumberToWords(invoicePrintData.totalObj?.total) }} </div>
         </div>
         <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
             <div style="padding-left: 15px;padding-top: 10px;">
                 <div style="">
                     <b style="width: 300px;"> Total Amount Before Tax </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.amount }}wwww </span>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.totalObj?.grossAmount }} </span>
                 </div>
                 <div style="">
                     <b style="width: 300px;"> Transportation Charges </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.amount }}wwww </span>
+                    <span style="padding-left: 80px;">  </span>
                 </div>
                 <div style="border-top: 1px solid black;">
                     <b style="width: 300px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.cgst }}wwwww </span>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.cgst }} </span>
                 </div>
                 <div style="border-top: 1px solid black;">
                     <b style="width: 300px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.sgst }}wwwww </span>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.sgst }} </span>
                 </div>
             </div>
         </div>
@@ -448,7 +457,7 @@
         <div>
 
 
-        <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="invoicePrint()">
+        <button mat-raised-button type="submit" *ngIf="routeEdit" class="button-color-bule mx-3 text-white" (click)="invoicePrint()">
             {{ 'salesinvoice.invoicePrint' | translate }}
         </button>
         <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
