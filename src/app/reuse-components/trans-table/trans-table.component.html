@@ -58,7 +58,7 @@
 
   </mat-card-content>
 
-  <div class="d-flex justify-content-end" *ngIf="routeParam == 'GoodsReceiptApproval'">
+  <div class="d-flex justify-content-end" *ngIf="routeParam == 'GoodsReceiptApproval' || routeParam == 'PurchaseorderApproval'">
     <button mat-raised-button class="button-color-bule text-white m-1" (click)="buttonClick('approve')">
       {{ "COMMON.APPROVE" | translate }}
     </button>

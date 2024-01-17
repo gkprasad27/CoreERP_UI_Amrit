@@ -174,7 +174,7 @@ export class TransTableComponent implements OnInit {
         }
       }
 
-      if(this.routeParam == 'GoodsReceiptApproval') {
+      if(this.routeParam == 'GoodsReceiptApproval' || this.routeParam == 'PurchaseorderApproval') {
         this.columnDefinitions.unshift({ def: "checkbox", hide : true, label : ""})
       }
 
@@ -232,10 +232,10 @@ export class TransTableComponent implements OnInit {
   }
 
   buttonClick(flag: string) {
-    const registerInvoiceUrl = String.Join('/', this.routeParam == 'GoodsReceiptApproval' ? this.apiConfigService.savePurchaseOrder: this.apiConfigService.saveGoodsReceipt);
-    const requestObj = this.tableData.filter((f: any) => f.checked).map((t: any) => { return { ApprovalStatus: flag, RecomendedBy: t.recommendedBy, ApprovedBy: t.approvedBy, ...t }});
-    debugger
-    this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
+    const user = JSON.parse(localStorage.getItem('user'));
+    const registerInvoiceUrl = String.Join('/', this.routeParam == 'PurchaseorderApproval' ? this.apiConfigService.savePurchaseOrder: this.apiConfigService.saveGoodsReceipt);
+    const requestObj = this.tableData.filter((f: any) => f.checked).map((t: any) => { return { ...t, approvalStatus: flag, approvedBy: user.userName, addWho: user.userName, editWho: user.userName }});
+    this.apiService.apiPostRequest(registerInvoiceUrl, {dtl:requestObj}).subscribe(
       response => {
         const res = response.body;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
