@@ -264,11 +264,10 @@ export class DynamicTableComponent implements OnInit {
 
   setClass(element: any) {
     if (element.result && element.result.condition == 'inspection' && element.result.value) {
-      debugger
       let spec = element.spec.value;
 
       if((element.parameter.value == "Hardness") && element.spec.value) {
-        spec = element.spec.value.split('-');
+        spec = element.spec.value.trim().split('-');
         if ((+element.result.value) < (+spec[0]) || ((+element.result.value) > (+spec[1]))) {
           return element.result.addClass;
         }
@@ -276,7 +275,7 @@ export class DynamicTableComponent implements OnInit {
 
 
       if((element.parameter.value == "TLB Bore" || element.parameter.value == "Key Wey Width") && element.spec.value) {
-        spec = element.spec.value.split(' ')[0];
+        spec = element.spec.value.trim().split(' ')[0];
       }
       const str = element.minValue.value && element.minValue.value.includes('±') ? element.minValue.value.split('±')[1] : '';
       if (str && (((+element.result.value) < ((+spec) - (+str))) || ((+element.result.value) > ((+spec) + (+str))))) {
@@ -289,7 +288,7 @@ export class DynamicTableComponent implements OnInit {
       }
 
       const str2 = element.minValue.value && element.minValue.value.includes('≤') ? element.minValue.value.split('≤')[1] : '';
-      if (str2 && (((+element.result.value) <= (+str2)))) {
+      if (str2 && (((+element.result.value) > (+str2)))) {
         return element.result.addClass;
       }
 

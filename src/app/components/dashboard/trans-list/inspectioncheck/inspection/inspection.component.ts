@@ -85,7 +85,7 @@ export class InspectionComponent {
                 arr.push({
                   parameter: s.parameter,
                   uom: s.uom,
-                  uomName: s.uomName,
+                  uomName: s.uom,
                   spec: s.spec,
                   minValue: s.minValue,
                   id: s.id ? s.id : 0,

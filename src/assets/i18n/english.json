@@ -2094,6 +2094,7 @@
     "total": "Total",
     "netWeight": "Net Weight",
     "deliveryDate": "Delivery Date",
+    "approvalStatus": "Approval Status",
     "delete": "Delete",
     "action": "Action"
   },
@@ -2139,6 +2140,9 @@
     "lotDate": "LotDate",
     "documentURL": "Document URL",
     "invoiceURL": "Invoice URL",
+    "approvalStatus": "Approval Status",
+    "recommendedBy": "Recommended By",
+    "approvedBy":"Approved BY",
     "delete": "Delete",
     "action": "Action"
   },

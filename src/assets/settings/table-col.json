@@ -1759,6 +1759,7 @@
     "amount": "Amount",
     "totalTax": "Total Tax",
     "totalAmount": "Total Amount",
+    "approvalStatus": "Approval Status",
     "total": "Total",
     "delete": "Delete",
     "action": "Action"
@@ -1788,6 +1789,9 @@
     "description": "Description",
     "documentURL": "link",
     "invoiceURL": "link",
+    "approvalStatus": "Approval Status",
+    "recommendedBy": "Recommended By",
+    "approvedBy":"Approved BY",
     "delete": "Delete",
     "action": "Action"
   },
