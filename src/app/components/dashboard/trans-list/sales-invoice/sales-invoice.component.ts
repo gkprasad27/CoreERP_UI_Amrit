@@ -427,7 +427,7 @@ export class SalesInvoiceComponent implements OnInit {
 
 
   save() {
-    if (this.tableData.length == 0 || this.formData.invalid || !(this.tableData.some((t: any) => t.changed))) {
+    if (this.tableData.length == 0 || this.formData.invalid || !(this.tableData.some((t: any) => t.checkbox))) {
       return;
     }
     this.savegoodsreceipt();
@@ -435,7 +435,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   savegoodsreceipt() {
     this.formData.enable();
-    const arr = this.tableData.filter((d: any) => !d.type && d.changed);
+    const arr = this.tableData.filter((d: any) => !d.type && d.checkbox);
     const registerInvoice = String.Join('/', this.apiConfigService.registerInvoice);
     const formData = this.formData.value;
     formData.receivedDate = this.formData.get('invoiceDate').value ? this.datepipe.transform(this.formData.get('invoiceDate').value, 'MM-dd-yyyy') : '';
