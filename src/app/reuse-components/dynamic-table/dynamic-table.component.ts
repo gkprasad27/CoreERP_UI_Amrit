@@ -264,6 +264,7 @@ export class DynamicTableComponent implements OnInit {
 
   setClass(element: any) {
     if (element.result && element.result.condition == 'inspection' && element.result.value) {
+      debugger
       let spec = element.spec.value;
 
       if((element.parameter.value == "Hardness") && element.spec.value) {
@@ -284,6 +285,11 @@ export class DynamicTableComponent implements OnInit {
 
       const str1 = element.minValue.value && element.minValue.value.includes('+') ? element.minValue.value.split('+')[1] : '';
       if (str1 && (((+element.result.value) < (+spec)) || ((+element.result.value) > ((+spec) + (+str1))))) {
+        return element.result.addClass;
+      }
+
+      const str2 = element.minValue.value && element.minValue.value.includes('≤') ? element.minValue.value.split('≤')[1] : '';
+      if (str2 && (((+element.result.value) <= (+str2)))) {
         return element.result.addClass;
       }
 

@@ -237,13 +237,11 @@ export class TransTableComponent implements OnInit {
     const requestObj = this.tableData.filter((f: any) => f.checked).map((t: any) => { return { ...t, approvalStatus: flag, approvedBy: user.userName, addWho: user.userName, editWho: user.userName }});
     this.apiService.apiPostRequest(registerInvoiceUrl, {dtl:requestObj}).subscribe(
       response => {
-        const res = response.body;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.alertService.openSnackBar('PermissionrqstApproval Successfully..', Static.Close, SnackBar.success);
+        if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(response.response)) {
+            this.alertService.openSnackBar(`${flag} Completed`, Static.Close, SnackBar.success);
+            this.reset();
           }
-          this.spinner.hide();
-
         }
       });
   }

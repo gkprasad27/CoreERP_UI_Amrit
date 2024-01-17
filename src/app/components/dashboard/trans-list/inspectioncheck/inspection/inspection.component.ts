@@ -46,7 +46,7 @@ export class InspectionComponent {
     return {
       tableData: {
         parameter: { value: null,  width: 150  },
-        uom: { value: null,  width: 150  },
+        uomName: { value: null,  width: 150  },
         spec: { value: null,  width: 150  },
         minValue: { value: null,  width: 150  },
         // maxValue: { value: null,  width: 150  },

@@ -2871,6 +2871,7 @@
     "poqty": "Purchase Order Qty",
     "pendingQty": "Pending Qty",
     "receivedQty": "Received QTY",
+    "approvedBy": "Approved By",
     "netWeight": "Net Weight",
     "companyName": "Company Name",
     "profitcenterName": "Profit Center Name",

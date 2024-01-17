@@ -1390,7 +1390,6 @@
     "minValue": "Minimum Value",
     "maxValue": "Maximum Value",
     "instrument": "Instrument",
-    "uom": "UOM",
     "uomName": "UOM Name",
     "code": "Code",
     "materialCode": "Material Code",
@@ -2378,6 +2377,7 @@
     "lotDate": "Lot Date",
     "description": "Description",
     "documentURL": "link",
+    "approvedBy": "Approved By",
     "invoiceURL": "link",
     "delete": "Delete",
     "action": "Action"
