@@ -2893,5 +2893,16 @@
     "invoiceURL": "Invoice URL",
     "delete": "Delete",
     "action": "Action"
+  },
+  "dispatchdetails": {
+    "title": "Dispatch Details",
+    "saleOrder": "Sale Order Number",
+    "lrNumber": "lr Number",
+    "invoiceNumber": "Invoice Number",
+    "lrDate": "lr Date",
+    "transporter": "Transporter",
+    "boxes": "Boxes",
+    "poNumber":"PO Number",
+    "imageURL": "Image URL"
   }
 }

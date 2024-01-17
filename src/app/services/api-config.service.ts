@@ -507,4 +507,6 @@ export class ApiConfigService {
    savePurchaseOrder = `${this.environment.runtimeConfig.serverUrl}Transactions/SavePurchaseOrder`;
    saveGoodsReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/SaveGoodsReceipt`;
 
+   getInvoiceData = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceData`;
+
 }

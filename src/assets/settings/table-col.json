@@ -2385,5 +2385,15 @@
     "invoiceURL": "link",
     "delete": "Delete",
     "action": "Action"
+  },
+  "dispatchdetails": {
+    "saleOrder": "Sale Order Number",
+    "lrNumber": "lr Number",
+    "invoiceNumber": "Invoice Number",
+    "lrDate": "Date",
+    "transporter": "Transporter",
+    "boxes": "Boxes",
+    "poNumber":"PO Number",
+    "imageURL": "Image URL"
   }
 }

@@ -79,6 +79,7 @@ import { InspectionComponent } from './components/dashboard/trans-list/inspectio
 import { BalanceCertificateComponent } from './components/dashboard/trans-list/inspectioncheck/balance-certificate/balance-certificate.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MaterialRequisitionViewComponent } from './components/dashboard/trans-list/materialrequisition/material-requisition-view/material-requisition-view.component';
+import { DispatchdetailsComponent } from './components/dashboard/comp-list/dispatchdetails/dispatchdetails.component';
 
 //import { AccountKeyComponent } from './components/dashboard/comp-list/assetblock/accountkey/accountkey.component';
 // AoT requires an exported function for factories
@@ -159,7 +160,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     InspectionComponent,StructureCreationComponent, BalanceCertificateComponent, InspectionPreviewComponent, MaterialRequisitionViewComponent, SalesInvoiceComponent,
     SalesInvoiceComponent,
     PoHistoryComponent,
-    HolidayComponent
+    HolidayComponent,
+    DispatchdetailsComponent
   ],
   imports: [
     AppRoutingModule,
