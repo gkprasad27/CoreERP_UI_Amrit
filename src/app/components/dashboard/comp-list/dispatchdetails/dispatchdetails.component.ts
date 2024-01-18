@@ -88,7 +88,7 @@ debugger
 
   downLoad() {
     debugger
-    const url = String.Join('/', this.apiConfigService.getFile, this.formData.get('imageURL').value);
+    const url = String.Join('/', this.apiConfigService.getFile, this.modelFormData.get('imageURL').value);
     this.apiService.apiGetRequest(url)
       .subscribe(
         response => {
@@ -111,6 +111,7 @@ debugger
     }
     // this.modelFormData.controls['languageCode'].enable();
     this.formData.item = this.modelFormData.value;
+    this.formData.item.imageURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     this.addOrEditService[this.formData.action](this.formData, (res) => {
       this.uploadFile();
       this.dialogRef.close(this.formData);
