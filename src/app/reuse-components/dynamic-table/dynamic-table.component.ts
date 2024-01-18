@@ -65,6 +65,8 @@ export class DynamicTableComponent implements OnInit {
   data: any;
   isDropdown = false;
 
+  @Input() addNew = true;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -141,7 +143,7 @@ export class DynamicTableComponent implements OnInit {
         });
       }
       this.dataSource.data[indx][col].value = data;
-      if (Object.keys(this.tableForm.value).length && this.tableForm.valid && (this.dataSource.data.length - 1) == indx) {
+      if (this.addNew && Object.keys(this.tableForm.value).length && this.tableForm.valid && (this.dataSource.data.length - 1) == indx) {
         this.dataSource.data.push(JSON.parse(JSON.stringify(this.tableData[0])));
         this.tableForm = this.formBuilder.group(this.formControl);
       }

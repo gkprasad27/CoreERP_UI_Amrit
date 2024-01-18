@@ -336,6 +336,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   materialCodeChange() {
+    debugger
     const obj = this.materialCodeList.find((p: any) => p.materialCode == this.formData1.value.materialCode);
     let pendingQty = 0;
     this.tableData && this.tableData.forEach((t: any) => {
@@ -585,6 +586,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
                 }
                 this.perChaseOrderList.push(obj)
               })
+              debugger
               this.tableData = this.perChaseOrderList;
               // const arr = this.podetailsList.filter(resp => !this.perChaseOrderList.some((p: any) => p.materialCode == resp.materialCode));
               // const unique = [...new Set(arr.map(item => item.materialCode))];
@@ -594,6 +596,19 @@ export class ReceiptOfGoodsComponent implements OnInit {
               this.formData.controls.company.disable();
               this.formData.controls.customerName.disable();
               this.formData.controls.profitCenter.disable();
+              this.tableData && this.tableData.forEach((t: any) => {
+                debugger
+                let pendingQty = 0;
+                const obj = this.materialCodeList.find((p: any) => p.materialCode == t.materialCode);
+                if (obj) {
+                  pendingQty = pendingQty + t.receivedQty
+                  pendingQty = obj.qty - pendingQty
+
+                if (pendingQty == 0) {
+                  this.materialCodeList = this.materialCodeList.filter((p: any) => p.materialCode != t.materialCode);
+                }
+                }
+              })
             }
           }
         });

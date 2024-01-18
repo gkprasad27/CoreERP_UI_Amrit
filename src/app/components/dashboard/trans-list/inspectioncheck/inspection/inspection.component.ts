@@ -47,6 +47,7 @@ export class InspectionComponent {
       tableData: {
         parameter: { value: null,  width: 150  },
         uomName: { value: null,  width: 150  },
+        uom: { value: null,  width: 150, hide: true  },
         spec: { value: null,  width: 150  },
         minValue: { value: null,  width: 150  },
         // maxValue: { value: null,  width: 150  },
@@ -85,7 +86,7 @@ export class InspectionComponent {
                 arr.push({
                   parameter: s.parameter,
                   uom: s.uom,
-                  uomName: s.uom,
+                  uomName: s.uomName,
                   spec: s.spec,
                   minValue: s.minValue,
                   id: s.id ? s.id : 0,
@@ -117,6 +118,7 @@ export class InspectionComponent {
     this.data['inspectionType'] = 'Inspection';
     const arr = [];
     this.tableData.forEach((t: any) => {
+      debugger
       const keys = Object.keys(t);
       let obj = {};
       keys.forEach((k: any) => {
@@ -125,6 +127,7 @@ export class InspectionComponent {
           [k]: t[k].value
         }
       })
+      obj
       arr.push(obj);
     })
     const addsq = String.Join('/', this.apiConfigService.registerQCResults);

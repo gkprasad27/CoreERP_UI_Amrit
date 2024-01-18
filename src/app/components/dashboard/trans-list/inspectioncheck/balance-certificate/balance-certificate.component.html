@@ -52,7 +52,7 @@
         </div> -->
 
         <div class="mt-3">
-            <app-dynamic-table class="table" [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
+            <app-dynamic-table class="table" [tableObJect]="dynTableProps" [addNew]="false" (emitColumnChanges)="emitColumnChanges($event);"
             [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
         </div>
 

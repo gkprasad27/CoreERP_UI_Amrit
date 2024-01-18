@@ -9,7 +9,7 @@
     <mat-card-content class="pt-5 p-2 m-0 ">
 
         <div class="mt-3 table">
-            <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
+            <app-dynamic-table [tableObJect]="dynTableProps" [addNew]="false" (emitColumnChanges)="emitColumnChanges($event);"
             [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
         </div>
 

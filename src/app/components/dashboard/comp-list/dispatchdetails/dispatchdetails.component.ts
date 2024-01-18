@@ -33,7 +33,6 @@ export class DispatchdetailsComponent {
     public dialogRef: MatDialogRef<DispatchdetailsComponent>,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
-debugger
     this.modelFormData = this.formBuilder.group({
       id: 0,
       saleOrder: ['', [Validators.required]],
@@ -87,7 +86,6 @@ debugger
 
 
   downLoad() {
-    debugger
     const url = String.Join('/', this.apiConfigService.getFile, this.modelFormData.get('imageURL').value);
     this.apiService.apiGetRequest(url)
       .subscribe(
@@ -99,13 +97,11 @@ debugger
 
 
   emitFilesList(event: any) {
-    debugger
     this.fileList = event[0];
   }
 
 
   save() {
-    debugger
     if (this.modelFormData.invalid) {
       return;
     }

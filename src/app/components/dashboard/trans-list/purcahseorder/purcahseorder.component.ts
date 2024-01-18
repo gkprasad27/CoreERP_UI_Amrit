@@ -104,6 +104,8 @@ export class PurchaseOrderComponent implements OnInit {
 
 
   formDataGroup() {
+    const user = JSON.parse(localStorage.getItem('user'));
+
     this.formData = this.formBuilder.group({
 
       company: [null, [Validators.required]],
@@ -125,9 +127,9 @@ export class PurchaseOrderComponent implements OnInit {
       termsofDelivery: null,
       paymentTerms: [null],
       purchaseOrderDate: [null, Validators.required],
-      addWho: [null],
+      addWho: user.userName,
       addDate: [null],
-      editWho: null,
+      editWho: user.userName,
       editDate: [null],
       filePath: [null],
       advance: [null],
@@ -271,6 +273,7 @@ export class PurchaseOrderComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
               let obj = { data: {}, data1: [] }
               if (this.formData.value.saleOrderType == 'Sale Order') {
                 obj.data = res.response['SaleOrderMasters'];
@@ -617,11 +620,13 @@ export class PurchaseOrderComponent implements OnInit {
               //   saleOrderNo: res.response['pomasters'].saleOrderNo ? +res.response['pomasters'].saleOrderNo : ''
               // })
               // this.sendDynTableData = { type: 'edit', data: res.response['poDetail'] };
+              debugger
               this.formData.disable();
               res.response['poDetail'].forEach((s: any, index: number) => {
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
                 s.action = 'editDeleteView';
                 s.changed = false;
+                s.poQty = s.qty ? s.qty : 0;
                 s.index = index + 1;
               })
               this.tableData = res.response['poDetail'];
@@ -678,7 +683,13 @@ export class PurchaseOrderComponent implements OnInit {
     if (this.formData1.invalid) {
       return;
     }
-    const checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - this.formData1.value.poQty) : this.formData1.value.soQty
+
+    let checkqty = 0;
+    if(this.routeEdit) {
+      checkqty = this.formData1.value.soQty
+    } else {
+      checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - this.formData1.value.poQty) : this.formData1.value.soQty
+    }
 
     if (this.formData1.value.qty > checkqty) {
       this.formData1.patchValue({

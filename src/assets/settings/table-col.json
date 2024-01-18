@@ -1789,6 +1789,7 @@
     "description": "Description",
     "documentURL": "link",
     "invoiceURL": "link",
+    "status":"Status",
     "approvalStatus": "Approval Status",
     "recommendedBy": "Recommended By",
     "approvedBy":"Approved BY",

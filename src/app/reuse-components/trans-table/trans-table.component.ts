@@ -203,6 +203,9 @@ export class TransTableComponent implements OnInit {
   }
 
   setClass(element: any) {
+    if (this.routeParam == 'goodsreceipts') {
+        return element.status == "Material Received" ? 'background-green' : '';
+    }
     if (this.routeParam == 'saleorder') {
       if (new Date(element.dateofSupply) < new Date() && element.status != "Completed") {
         return 'background-red';

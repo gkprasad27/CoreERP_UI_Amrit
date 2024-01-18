@@ -702,7 +702,7 @@ export class InspectioncheckComponent implements OnInit {
           Parameter: t.parameter,
           Specification: `${t.spec}`,
           Tolerance: `${t.minValue ? t.minValue : ''}`,
-          UOM: t.uom,
+          UOM: t.uomName,
           Instrument: t.instrument,
           // inspectionCheckNo: t.inspectionCheckNo,
           [t.tagName]: t.result,
