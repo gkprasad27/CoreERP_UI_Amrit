@@ -291,12 +291,14 @@ export class ApiConfigService {
    getpurchaseorderDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseOrderDetail`;
    getpurchaseorderMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseOrder`;
    returnpurchaseorder = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnPurchaseOrder`;
-
+   getPurchaseOrderApproveList = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseOrderApproveList`;
+   
    /*******************************Goods Receipt ****************************************************** */
    addgoodsreceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/AddGoodsReceipt`;
    getgoodsreceiptDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsReceiptDetail`;
    getgoodsreceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsReceipt`;
    returngoodsreceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnGoodsReceipt`;
+   getGoodsReceiptApproval = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsReceiptApproval`;
 
    /*******************************Inspection Check ****************************************************** */
    addinspectioncheck = `${this.environment.runtimeConfig.serverUrl}Transactions/AddInpectionCheck`;
@@ -484,6 +486,7 @@ export class ApiConfigService {
    getSaleOrderDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSaleOrderDetail`;
    getPurchaseRequisitionDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseRequisitionDetail`;
    addSaleOrder = `${this.environment.runtimeConfig.serverUrl}Transactions/AddSaleOrder`;
+   getSaleOrderDetailPO = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSaleOrderDetailPO`;
 
    getSaleOrderNumber = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSaleOrderNumber`;
    getPurchaseOrderNumber = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseOrderNumber`;

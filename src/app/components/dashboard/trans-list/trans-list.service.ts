@@ -143,7 +143,7 @@ export class TransListService {
       }
       case 'PurchaseorderApproval': {
         this.dynamicComp.component = PurchaseOrderComponent;
-        this.dynamicComp.tableUrl = this.apiConfigService.getpurchaseorderMaster;
+        this.dynamicComp.tableUrl = this.apiConfigService.getPurchaseOrderApproveList;
         this.dynamicComp.list = 'podetails';
         this.dynamicComp.editKey = 'purchaseOrderNumber';
         return this.dynamicComp;
@@ -157,7 +157,7 @@ export class TransListService {
       }
       case 'GoodsReceiptApproval': {
         this.dynamicComp.component = ReceiptOfGoodsComponent;
-        this.dynamicComp.tableUrl = this.apiConfigService.getgoodsreceipt;
+        this.dynamicComp.tableUrl = this.apiConfigService.getGoodsReceiptApproval;
         this.dynamicComp.list = 'grdetails';
         this.dynamicComp.editKey = 'purchaseOrderNo';
         return this.dynamicComp;

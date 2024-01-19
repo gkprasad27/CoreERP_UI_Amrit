@@ -259,7 +259,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.tableComponent.defaultValues();
     let url = '';
     if (this.formData.value.saleOrderType == 'Sale Order') {
-      url = this.apiConfigService.getSaleOrderDetail;
+      url = this.apiConfigService.getSaleOrderDetailPO;
     } else if (this.formData.value.saleOrderType == 'Master Saleorder') {
       url = this.apiConfigService.getPurchaseRequisitionDetail;
     } else if (this.formData.value.saleOrderType == 'Bill of Material') {
@@ -293,9 +293,10 @@ export class PurchaseOrderComponent implements OnInit {
                 s.action = 'editDeleteView';
                 s.id = 0;
                 s.index = index + 1;
-                s.qty = s.qty ? s.qty : 0;
+                // s.qty = s.qty ? s.qty : 0;
                 s.poQty = s.poQty ? s.poQty : 0;
                 s.soQty = s.qty ? s.qty : 0;
+                s.qty = 0;
                 s.rate = s.rate ? s.rate : 0;
                 s.discount = s.discount ? s.discount : 0;
                 s.cgst = s.cgst ? s.cgst : 0;
