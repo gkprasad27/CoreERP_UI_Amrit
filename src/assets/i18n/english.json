@@ -2905,5 +2905,8 @@
     "boxes": "Boxes",
     "poNumber":"PO Number",
     "imageURL": "Image URL"
+  },
+  "salaryprocess":{
+    "title":"Salary Process"
   }
 }

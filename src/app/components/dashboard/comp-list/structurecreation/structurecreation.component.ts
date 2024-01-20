@@ -46,8 +46,8 @@ export class StructureCreationComponent implements OnInit {
   ) {
     // console.log(data);
     this.formData = { ...this.addOrEditService.editData };
-    this.structureName = this.formData.item.structureName;
-    this.structureCode = this.formData.item.structureCode;
+    // this.structureName = this.formData.item.structureName;
+    // this.structureCode = this.formData.item.structureCode;
   }
 
   ngOnInit() {

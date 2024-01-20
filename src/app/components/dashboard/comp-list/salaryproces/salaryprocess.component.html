@@ -1,0 +1,39 @@
+<mat-card>
+  <div class="table-boarder">
+  <mat-card-title class="table-boarder-color">
+    {{'salaryprocess.title' | translate }}
+
+  </mat-card-title>
+  <mat-card-content class="m-2">
+      <form [formGroup]="modelFormData" autocomplete="off">
+          <div class="d--flex mat-form-field-height">
+            <mat-form-field class="form-element" >
+              <input matInput placeholder="{{'salaryprocess.emp_Code' | translate }}" formControlName="emp_Code" appFocusOnEnter tabIndex="1">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>{{'salaryprocess.sal_Month' | translate }}</mat-label>
+              <mat-select formControlName="sal_Month" placeholder="sal_Month" >
+                <mat-option *ngFor="let month of month" [value]="month.value">
+                  {{month.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field>
+              <mat-label>{{'salaryprocess.sal_Year' | translate }}</mat-label>
+              <mat-select formControlName="sal_Year" placeholder="sal_Year" >
+                <mat-option *ngFor="let year of year" [value]="year.value">
+                  {{year.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+          </form>
+          </mat-card-content>
+          <div  class="form-element p-2 d-flex justify-content-end">
+            
+            <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="save()" > {{ 'COMMON.SAVE' | translate }}</button>
+          </div>
+          </div>
+          </mat-card>
