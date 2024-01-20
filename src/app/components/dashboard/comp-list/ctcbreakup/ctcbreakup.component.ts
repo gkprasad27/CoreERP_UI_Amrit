@@ -22,7 +22,7 @@ export class CTCBreakupComponent implements OnInit {
   structureList: any;
   filteredOptions: any;
   displayedColumns: string[] = ['componentCode', 'componentName', 'amount', 'duration', 'specificMonth'];
-  GetEmployeeListArray:[];
+  GetEmployeeListArray: [];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -54,7 +54,7 @@ export class CTCBreakupComponent implements OnInit {
     this.getStructureList();
     this.getctcComponentsList();
   }
-  
+
   getStructureList() {
     const getStructureList = String.Join('/', this.apiConfigService.getStructureList);
     this.apiService.apiGetRequest(getStructureList)
@@ -64,6 +64,30 @@ export class CTCBreakupComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.structureList = res.response['structuresList'];
+            }
+          }
+          this.spinner.hide();
+        });
+  }
+
+  getStructures() {
+    const getStructuresUrl = String.Join('/', this.apiConfigService.getStructures, this.modelFormData.value.structureName);
+    this.apiService.apiGetRequest(getStructuresUrl)
+      .subscribe(
+        response => {
+          debugger
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response) && res.response['structureList'] && res.response['structureList'].length) {
+              const data = [...this.dataSource.data];
+              data.forEach((d: any) => {
+                const obj = res.response['structureList'].find((s: any) => s.componentCode == d.componentCode);
+                if (obj) {
+                  d.amount = obj.amount
+                }
+              })
+              this.dataSource = new MatTableDataSource(data);
+              this.dataSource.paginator = this.paginator;
             }
           }
           this.spinner.hide();
