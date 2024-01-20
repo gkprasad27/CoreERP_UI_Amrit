@@ -409,15 +409,15 @@
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field>
-                    <mat-label [translate]="'purchaseorder.supplierCode'"></mat-label>
-                    <mat-select formControlName="supplierCode" appFocusOnEnter tabIndex="7">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let bptype of bpaList" [value]="bptype.bpnumber">
-                            {{bptype.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <div class="mat-mdc-form-field typeahead">
+                    <input placeholder="{{ 'purchaseorder.supplierCode' | translate }}" formControlName="supplierName"
+                        [typeahead]="bpaList" typeaheadOptionField='name' appFocusOnEnter tabIndex="7"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"  (typeaheadOnSelect)="supplierCodeChange()">
+                    <ng-template #customItemTemplate let-model="item">
+                        <span><strong>{{model.bpnumber}}</strong> - {{model.name}}</span>
+                    </ng-template>
+                </div>
+
 
 
                 <!-- <mat-form-field class="form-element">

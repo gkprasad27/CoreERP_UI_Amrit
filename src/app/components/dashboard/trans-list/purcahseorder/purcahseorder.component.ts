@@ -117,11 +117,11 @@ export class PurchaseOrderComponent implements OnInit {
       purchaseOrderType: [null, [Validators.required]],
       // quotationDate: [null],
       supplierCode: [null, [Validators.required]],
+      supplierName: [null, [Validators.required]],
       gstno: [null],
       profitcenterName: [''],
       material: [''],
       companyName: [null],
-      supplierName: [null],
       deliveryDate: [null],
       deliveryPeriod: [null],
       termsofDelivery: null,
@@ -244,13 +244,13 @@ export class PurchaseOrderComponent implements OnInit {
     }
   }
 
-  // supplierCodeChange() {
-  //   const obj = this.bpaList.find((b: any) => b.id == this.formData.value.supplierCode);
-  //   this.formData.patchValue({
-  //     gstno: obj.gstNo,
-  //     supplierName: obj.text,
-  //   })
-  // }
+  supplierCodeChange() {
+    const obj = this.bpaList.find((b: any) => b.name == this.formData.value.supplierName);
+    this.formData.patchValue({
+      supplierCode: obj.bpnumber,
+    })
+  }
+
   quotationNumberChange() {
     this.getSaleOrderDetail();
   }
