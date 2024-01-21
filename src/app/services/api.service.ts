@@ -43,6 +43,11 @@ export class ApiService {
 
   // Post API request
   public apiPostRequest(url: any, obj?: any): Observable<any> {
+    if (obj) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      obj.addWho = user.userName;
+      obj.editWho = user.userName;
+    }
     this.spinner.show();
     return this.http.post(url, obj, this.options)
       .pipe((tap<any>(res => {
@@ -73,6 +78,11 @@ export class ApiService {
 
   // Update API request
   public apiUpdateRequest(url: any, obj?: any): Observable<any> {
+    if (obj) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      obj.addWho = user.userName;
+      obj.editWho = user.userName;
+    }
     this.spinner.show();
     return this.http.put(url, obj, this.options)
       .pipe((tap<any>(res => {

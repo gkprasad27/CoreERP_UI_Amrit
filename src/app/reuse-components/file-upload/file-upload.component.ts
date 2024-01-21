@@ -26,7 +26,7 @@ export class FileUploadComponent implements OnInit {
   @Output() emitFilesList = new EventEmitter();
   @Output() emitImage = new EventEmitter();
   @Output() clearUploadedFile = new EventEmitter();
-  @Output() uploadeFile = new EventEmitter();
+  @Output() uploadFile = new EventEmitter();
 
   fileList: any = [];
 
@@ -54,7 +54,7 @@ export class FileUploadComponent implements OnInit {
   }
   openFile(filePath: any) {
     if (filePath?.image) {
-      this.uploadeFile.emit(filePath);
+      this.uploadFile.emit(filePath);
       // window.open(domain + filePath?.image, "_blank");
     } else {
       this.showImage(filePath);

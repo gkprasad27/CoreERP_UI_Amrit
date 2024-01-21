@@ -83,7 +83,7 @@
                 </mat-form-field>
                
                 <div>
-                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL" (uploadeFile)="downLoad($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
+                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL" (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
                 </div>
 
             </div>

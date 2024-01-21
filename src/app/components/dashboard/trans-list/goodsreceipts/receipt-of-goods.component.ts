@@ -140,6 +140,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
       netWeight: [''],
       purchaseOrderNumber: [''],
       description: [''],
+      heatNumber: [''],
       pendingQty: [''],
       qty: [''],
       highlight: false,
@@ -314,6 +315,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
           qty: d.qty ? d.qty : '',
           receivedQty: d.receivedQty ? d.receivedQty : '',
           description: d.description ? d.description : '',
+          heatNumber: d.heatNumber ? d.heatNumber : '',
           action: '',
           index: index + 1
         }
@@ -580,6 +582,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
                   receivedDate: d.receivedDate ? d.receivedDate : '',
                   receivedQty: d.receivedQty ? d.receivedQty : '',
                   description: d.description ? d.description : '',
+                  heatNumber: d.heatNumber ? d.heatNumber : '',
                   type: 'edit',
                   // action: 'editDelete',
                   index: index + 1

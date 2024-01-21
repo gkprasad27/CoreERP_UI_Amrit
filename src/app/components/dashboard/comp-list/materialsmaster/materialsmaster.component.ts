@@ -9,6 +9,7 @@ import { StatusCodes } from '../../../../enums/common/common';
 import { AddOrEditService } from '../add-or-edit.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
 
 interface Valuation {
   value: string;
@@ -91,10 +92,13 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
   materialnum: any;
   hsnsacList: any;
 
+  fileList: any;
+
   constructor(private commonService: CommonService,
     private apiService: ApiService,
     private addOrEditService: AddOrEditService,
     private apiConfigService: ApiConfigService,
+    private httpClient: HttpClient,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -130,6 +134,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       hsnsac: [null],
       classification: [null],
       taxable: [null],
+      fileUpload: [null],
       schedule: [null],
       chapter: [null],
       netWeightUom: [null],
@@ -137,7 +142,9 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       openingValue: [null],
       closingPrice: [null],
       closingValue: [null],
-      goodsServiceDescription: null
+      goodsServiceDescription: null,
+      partDragNo: null,
+      dragRevNo: null
     });
 
     this.formData = { ...this.addOrEditService.editData };
@@ -357,6 +364,10 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
 
   get formControls() { return this.modelFormData.controls; }
 
+  emitFilesList(event: any) {
+    this.fileList = event[0];
+  }
+
   save() {
     if (this.modelFormData.invalid) {
       this.isSubmitted = true;
@@ -364,12 +375,47 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
     }
     this.modelFormData.controls['materialCode'].enable();
     this.formData.item = this.modelFormData.value;
+    this.formData.item.fileUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
     this.addOrEditService[this.formData.action](this.formData, (res) => {
-      this.router.navigate(['/dashboard/master/materialsmaster']);
+      if (this.fileList) {
+        this.uploadFile();
+      } else {
+        this.router.navigate(['/dashboard/master/materialsmaster']);
+      }
     });
     if (this.formData.action == 'Edit') {
       this.modelFormData.controls['materialCode'].disable();
     }
+  }
+
+  
+  uploadFile() {
+    const addsq = String.Join('/', this.apiConfigService.uploadFile, this.fileList.name.split('.')[0]);
+    const formData = new FormData();
+    formData.append("file", this.fileList);
+    return this.httpClient.post<any>(addsq, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).subscribe(
+      (response: any) => {
+        this.spinner.hide();
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+          }
+        }
+        this.router.navigate(['/dashboard/master/materialsmaster']);
+      });
+  }
+
+  downLoadFile(event: any) {
+    const url = String.Join('/', this.apiConfigService.getFile, event.name);
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          window.open(response.response, '_blank');
+        });
   }
 
   cancel() {
