@@ -43,8 +43,8 @@ export class ApiService {
 
   // Post API request
   public apiPostRequest(url: any, obj?: any): Observable<any> {
-    if (obj) {
-      const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (obj && user) {
       obj.addWho = user.userName;
       obj.editWho = user.userName;
     }
@@ -78,8 +78,8 @@ export class ApiService {
 
   // Update API request
   public apiUpdateRequest(url: any, obj?: any): Observable<any> {
-    if (obj) {
-      const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (obj && user) {
       obj.addWho = user.userName;
       obj.editWho = user.userName;
     }
