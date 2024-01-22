@@ -66,11 +66,11 @@ export class InspectioncheckComponent implements OnInit {
 
   materialcode: any;
 
-  data: any;
+  inspectionPrint: any;
   balanceCertificateData: any;
   date = new Date();
   icmasters: any;
-  
+
   constructor(private commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -104,9 +104,9 @@ export class InspectioncheckComponent implements OnInit {
       inspectionTypeValue: [''],
       completedBy: [''],
       description: [''],
-      heatNumber : [''],
-      partDrgNo  : [''],
-      inspectionCheckNo  : [''],
+      heatNumber: [''],
+      partDrgNo: [''],
+      inspectionCheckNo: [''],
 
 
       // typeofWork: [''],
@@ -635,10 +635,10 @@ export class InspectioncheckComponent implements OnInit {
 
 
   tableButtonEvent(event: any) {
-    if(event.flag == 'button') {
+    if (event.flag == 'button') {
       this.inspectioncheck(event);
     }
-    if(event.flag == 'button1') {
+    if (event.flag == 'button1') {
       this.balanceCertificate(event);
     }
   }
@@ -693,37 +693,9 @@ export class InspectioncheckComponent implements OnInit {
           this.printData(billingRes);
         });
   }
-  
+
   printData(res) {
     let arr = [];
-    if (res.tagsDetail && res.tagsDetail.length) {
-      res.tagsDetail.forEach((t: any, i: number) => {
-        const obj = {
-          Parameter: t.parameter,
-          Specification: `${t.spec}`,
-          Tolerance: `${t.minValue ? t.minValue : ''}`,
-          UOM: t.uomName,
-          Instrument: t.instrument,
-          // inspectionCheckNo: t.inspectionCheckNo,
-          [t.tagName]: t.result,
-          // description: t.description,
-        }
-        if (!arr.length) {
-          arr.push(obj);
-        } else {
-          const index = arr.findIndex((a: any) => a.Parameter == t.parameter);
-          if(index != -1) {
-            arr[index][t.tagName] = t.result
-          } else {
-            arr.push(obj);
-          }
-        }
-        if(i == 71) {
-          console.log(obj, i, 'testttt')
-
-        }
-      })
-    }
     const obj = {
       heading: 'INSPECTION REPORT',
       headingObj: {
@@ -741,22 +713,43 @@ export class InspectioncheckComponent implements OnInit {
         drawingRevNo: this.icmasters.drawingRevNo,
         totalQty: res.SaleorderMaster.totalQty
       },
-      detailArray: arr
     }
-    // localStorage.setItem('inspectionPrintData', JSON.stringify(obj));
-    // const url = this.router.serializeUrl(
-    //   this.router.createUrlTree([`dashboard/inspection-preview`])
-    // );
+    debugger
+    if (res.tagsDetail && res.tagsDetail.length) {
+      res.tagsDetail.forEach((t: any, i: number) => {
+        const tObj = {
+          Parameter: t.parameter,
+          Specification: `${t.spec}`,
+          Tolerance: `${t.minValue ? t.minValue : ''}`,
+          UOM: t.uomName,
+          Instrument: t.instrument,
+          [t.tagName]: t.result,
+        }
+        if (!arr.length) {
+          arr.push({ detailArray: [tObj], ...obj });
+        } else {
+          const key = Object.keys(arr[arr.length - 1].detailArray[arr[arr.length - 1].detailArray.length - 1]);
+          if (key.filter((f: any) => f.includes('AMT-')).length > 4) {
+            arr.push({ detailArray: [], ...obj });
+          }
+          let dObj = arr[arr.length - 1].detailArray.find((d: any) => d.Parameter == t.parameter);
+          if (dObj) {
+            dObj[t.tagName] = t.result
+          } else {
+            arr[arr.length - 1].detailArray.push(tObj);
+          }
+        }
+      })
+    }
 
-    // window.open(url, "_blank");
+    this.inspectionPrint = arr;
 
-    this.data = obj;
 
     setTimeout(() => {
       var w = window.open();
       var html = document.getElementById('inspectionPrintData').innerHTML;
       w.document.body.innerHTML = html;
-      this.data = null;
+      this.inspectionPrint = null;
       w.print();
     }, 1000);
 
@@ -779,6 +772,7 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   printBalanceingCertificateData(res) {
+    let arr = [];
     const obj = {
       heading: 'DYNAMIC BALANCING CERTIFICATE',
       headingObj: {
@@ -788,12 +782,35 @@ export class InspectioncheckComponent implements OnInit {
         poNumber: res.SaleorderMaster.poNumber,
         poDate: res.SaleorderMaster.poDate,
         description: res.QCData.materialName,
-        
+
         heatNumber: this.icmasters.heatNumber,
         drgNo: this.icmasters.partDrgNo,
         materialCode: this.icmasters.materialCode,
       },
-      detailArray: res.tagsDetail
+    }
+
+    if (res.tagsDetail && res.tagsDetail.length) {
+      res.tagsDetail.forEach((t: any, i: number) => {
+        debugger
+        const tObj = {
+          Parameter: t.parameter,
+          [t.tagName]: t.result,
+        }
+        if (!arr.length) {
+          arr.push({ detailArray: [tObj], ...obj });
+        } else {
+          const key = Object.keys(arr[arr.length - 1].detailArray[arr[arr.length - 1].detailArray.length - 1]);
+          if (key.filter((f: any) => f.includes('AMT-')).length > 4) {
+            arr.push({ detailArray: [], ...obj });
+          }
+          let dObj = arr[arr.length - 1].detailArray.find((d: any) => d.Parameter == t.parameter);
+          if (dObj) {
+            dObj[t.tagName] = t.result
+          } else {
+            arr[arr.length - 1].detailArray.push(tObj);
+          }
+        }
+      })
     }
     // localStorage.setItem('balanceCertificatePrintData', JSON.stringify(obj));
     // const url = this.router.serializeUrl(
@@ -802,7 +819,7 @@ export class InspectioncheckComponent implements OnInit {
 
     // window.open(url, "_self");
 
-    this.balanceCertificateData = obj;
+    this.balanceCertificateData = arr;
 
     setTimeout(() => {
       var w = window.open();

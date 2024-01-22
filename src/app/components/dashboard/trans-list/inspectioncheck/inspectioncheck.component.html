@@ -1,5 +1,167 @@
-<div style="margin: 10px;" *ngIf="data" id="inspectionPrintData">
-  <div style="text-align: end;"> <b> {{ data?.headingObj?.drawingRevNo }}</b> </div>
+<div style="margin: 10px;" *ngIf="inspectionPrint" id="inspectionPrintData">
+
+  <ng-container *ngFor="let data of inspectionPrint">
+
+    <div style="text-align: end;"> <b> {{ data?.headingObj?.drawingRevNo }}</b> </div>
+
+    <div style="display: flex;">
+      <img src="/assets/images/header.jpg" style="height: 100px;
+        width: 65%;">
+      <div style="padding: 24px;
+        border-top: 1px solid black;
+        -webkit-print-color-adjust: exact;
+        background: rgb(22 106 132) !important;
+        color: white;
+        font-size: 20px;
+        width: 35%;
+        align-items: center;
+        justify-content: space-around;
+        display: flex;
+        height: 50px;
+    "> {{ data.heading }} </div>
+    </div>
+
+    <div style="border-top: 1px solid black; display: flex;">
+      <div style="width: 50%;padding-left: 15px;border-right: 1px solid black; display: flex;">
+        <b style="width: 140px;"> Customer Name </b>
+        <span >: {{ data?.headingObj?.supplierName }} </span>
+      </div>
+      <div style="width: 50%;padding-left: 15px;display: flex;">
+        <b style="width: 140px;"> Item Description </b>
+        <span >: {{ data?.headingObj?.description }} </span>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid black; display: flex;">
+      <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
+        <b style="width: 140px;"> Invoice Number </b>
+        <span >: {{ data?.headingObj?.invoiceNo }} </span>
+      </div>
+      <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
+        <b style="width: 140px;"> PO Number </b>
+        <span >: {{ data?.headingObj?.poNumber }} </span>
+      </div>
+      <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
+        <b style="width: 140px;"> Heat Number </b>
+        <span >: {{ data?.headingObj?.heatNumber }} </span>
+      </div>
+      <div style="width: 25%;padding-left: 15px; display: flex;">
+        <b style="width: 140px;"> Report Date </b>
+        <span >: {{ date | date }} </span>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid black; display: flex;">
+      <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;display: flex;">
+        <b style="width: 140px;"> Invoice Date </b>
+        <span >: {{ data?.headingObj?.invoiceDate | date }}</span>
+      </div>
+      <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;display: flex;">
+        <b style="width: 140px;"> PO Date </b>
+        <span >: {{ data?.headingObj?.poDate | date }} </span>
+      </div>
+      <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;display: flex;">
+        <b style="width: 140px;"> Part/Drg No </b>
+        <span >: {{ data?.headingObj?.drgNo }} </span>
+      </div>
+      <div style="width: 25%;padding-left: 15px;">
+        <b style="width: 140px;"> Drawing Rev. No </b>
+        <span >: NA </span>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid black; display: flex;">
+      <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
+        <b style="width: 140px;"> Invoice Quantity </b>
+        <span >: {{ data?.headingObj?.invoiceQty }}</span>
+      </div>
+      <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
+        <b style="width: 140px;"> PO Quantity </b>
+        <span >: {{ data?.headingObj?.totalQty }} </span>
+      </div>
+      <div style="width: 25%;padding-left: 15px">
+        <!-- <b> Page </b>
+            <span style="padding-left: 80px;">: {{ data?.headingObj?.purchaseOrderNumber }} </span> -->
+      </div>
+      <div style="width: 25%;padding-left: 15px;">
+
+      </div>
+    </div>
+
+
+
+    <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+      *ngIf="data.detailArray && data.detailArray.length">
+      <table style="width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+        <thead>
+          <tr>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> S.No </th>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Parameter </th>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Specification </th>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Tolerance </th>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th>
+            <ng-container *ngFor="let row of data.detailArray[0] | keyvalue; let i = index">
+              <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
+                *ngIf="row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument' && row.key != 'Tolerance'">
+                {{ row.key }}
+              </th>
+            </ng-container>
+            <!-- <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Remarks </th> -->
+            <th style="border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Remarks </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+            *ngFor="let row of data.detailArray; let i = index">
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ i + 1 }} </td>
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ row.Parameter }}
+            </td>
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Specification
+              }} </td>
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Tolerance
+            }} </td>
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.UOM }} </td>
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Instrument }}
+            </td>
+            <ng-container *ngFor="let cell of row | keyvalue; let i = index">
+              <td
+                *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument' && cell.key != 'Tolerance'"
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ cell.value }}
+              </td>
+            </ng-container>
+            <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ row.description }} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div style="border-top: 1px solid black;border-bottom: 1px solid black; display: flex;margin-top: 40px;">
+      <div style="width: 33.33%;padding: 15px;border-right: 1px solid black;">
+        <b> Prepared By : </b>
+        <span style="padding-left: 80px;">: </span>
+      </div>
+      <div style="width: 33.33%;padding: 15px;border-right: 1px solid black;">
+        <b> Checked By : </b>
+        <span style="padding-left: 80px;">: </span>
+      </div>
+      <div style="width: 33.33%;padding: 15px">
+        <b> Approved By : </b>
+        <span style="padding-left: 80px;">: </span>
+      </div>
+    </div>
+
+  </ng-container>
+
+</div>
+
+
+<div style="margin: 10px;" *ngIf="balanceCertificateData" id="balanceCertificatePrintData">
+
+  <ng-container *ngFor="let data of balanceCertificateData">
+
+
   <div style="display: flex;">
     <img src="/assets/images/header.jpg" style="height: 100px;
       width: 65%;">
@@ -17,217 +179,97 @@
   "> {{ data.heading }} </div>
   </div>
 
-  <div style="border-top: 1px solid black; display: flex;">
-    <div style="width: 50%;padding-left: 15px;border-right: 1px solid black; display: flex;">
-      <b style="width: 140px;"> Customer Name </b>
-      <span >: {{ data?.headingObj?.supplierName }} </span>
-    </div>
-    <div style="width: 50%;padding-left: 15px;display: flex;">
-      <b style="width: 140px;"> Item Description </b>
-      <span >: {{ data?.headingObj?.description }} </span>
-    </div>
-  </div>
-
-  <div style="border-top: 1px solid black; display: flex;">
-    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
-      <b style="width: 140px;"> Invoice Number </b>
-      <span >: {{ data?.headingObj?.invoiceNo }} </span>
-    </div>
-    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
-      <b style="width: 140px;"> PO Number </b>
-      <span >: {{ data?.headingObj?.poNumber }} </span>
-    </div>
-    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
-      <b style="width: 140px;"> Heat Number </b>
-      <span >: {{ data?.headingObj?.heatNumber }} </span>
-    </div>
-    <div style="width: 25%;padding-left: 15px; display: flex;">
-      <b style="width: 140px;"> Report Date </b>
-      <span >: {{ date | date }} </span>
-    </div>
-  </div>
-
-  <div style="border-top: 1px solid black; display: flex;">
-    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;display: flex;">
-      <b style="width: 140px;"> Invoice Date </b>
-      <span >: {{ data?.headingObj?.invoiceDate | date }}</span>
-    </div>
-    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;display: flex;">
-      <b style="width: 140px;"> PO Date </b>
-      <span >: {{ data?.headingObj?.poDate | date }} </span>
-    </div>
-    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;display: flex;">
-      <b style="width: 140px;"> Part/Drg No </b>
-      <span >: {{ data?.headingObj?.drgNo }} </span>
-    </div>
-    <div style="width: 25%;padding-left: 15px;">
-      <b style="width: 140px;"> Drawing Rev. No </b>
-      <span >: NA </span>
-    </div>
-  </div>
-
-  <div style="border-top: 1px solid black; display: flex;">
-    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
-      <b style="width: 140px;"> Invoice Quantity </b>
-      <span >: {{ data?.headingObj?.invoiceQty }}</span>
-    </div>
-    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black; display: flex;">
-      <b style="width: 140px;"> PO Quantity </b>
-      <span >: {{ data?.headingObj?.totalQty }} </span>
-    </div>
-    <div style="width: 25%;padding-left: 15px">
-      <!-- <b> Page </b>
-          <span style="padding-left: 80px;">: {{ data?.headingObj?.purchaseOrderNumber }} </span> -->
-    </div>
-    <div style="width: 25%;padding-left: 15px;">
-
-    </div>
-  </div>
-
-
-
-  <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-    *ngIf="data.detailArray && data.detailArray.length">
-    <table style="width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
-      <thead>
-        <tr>
-          <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> S.No </th>
-          <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Parameter </th>
-          <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Specification </th>
-          <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Tolerance </th>
-          <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
-          <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th>
-          <ng-container *ngFor="let row of data.detailArray[0] | keyvalue; let i = index">
-            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
-              *ngIf="row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument' && row.key != 'Tolerance'">
-              {{ row.key }}
-            </th>
-          </ng-container>
-          <!-- <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Remarks </th> -->
-          <th style="border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Remarks </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-          *ngFor="let row of data.detailArray; let i = index">
-          <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ i + 1 }} </td>
-          <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ row.Parameter }}
-          </td>
-          <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Specification
-            }} </td>
-          <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Tolerance
-          }} </td>
-          <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.UOM }} </td>
-          <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Instrument }}
-          </td>
-          <ng-container *ngFor="let cell of row | keyvalue; let i = index">
-            <td
-              *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument' && cell.key != 'Tolerance'"
-              style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ cell.value }}
-            </td>
-          </ng-container>
-          <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ row.description }} </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-
-  <div style="border-top: 1px solid black;border-bottom: 1px solid black; display: flex;margin-top: 20px;">
-    <div style="width: 33.33%;padding-left: 15px;border-right: 1px solid black;">
-      <b> Prepared By : </b>
-      <span style="padding-left: 80px;">: </span>
-    </div>
-    <div style="width: 33.33%;padding-left: 15px;border-right: 1px solid black;">
-      <b> Checked By : </b>
-      <span style="padding-left: 80px;">: </span>
-    </div>
-    <div style="width: 33.33%;padding-left: 15px">
-      <b> Approved By : </b>
-      <span style="padding-left: 80px;">: </span>
-    </div>
-  </div>
-
-
-</div>
-<div style="margin: 10px;" *ngIf="balanceCertificateData" id="balanceCertificatePrintData">
-  <div style="display: flex;">
-    <img src="/assets/images/header.jpg" style="height: 100px;
-      width: 65%;">
-    <div style="padding: 24px;
-      border-top: 1px solid black;
-      -webkit-print-color-adjust: exact;
-      background: rgb(22 106 132) !important;
-      color: white;
-      font-size: 20px;
-      width: 35%;
-      align-items: center;
-      justify-content: space-around;
-      display: flex;
-      height: 50px;
-  "> {{ balanceCertificateData.heading }} </div>
-  </div>
-
   <div style="display: flex;margin-top: 10px;">
     <div style="width: 50%;padding-left: 15px;display: flex;">
       <div style="width: 150px;"><b> Customer Name </b></div>
-      <div style="padding-left: 50px;">: {{ balanceCertificateData?.headingObj?.supplierName }}  </div>
+      <div style="padding-left: 50px;">: {{ data?.headingObj?.supplierName }}  </div>
     </div>
     <div style="width: 50%;padding-left: 15px;display: flex;">
       <div style="width: 150px;"><b> Date </b></div>
-      <div style="padding-left: 50px;">: {{ balanceCertificateData?.headingObj?.poDate | date }}</div>
+      <div style="padding-left: 50px;">: {{ data?.headingObj?.poDate | date }}</div>
     </div>
   </div>
+
   <div style="display: flex;margin-top: 10px;">
     <div style="width: 50%;padding-left: 15px;display: flex;">
       <div style="width: 150px;"><b> Description </b></div>
-      <div style="padding-left: 50px;">: {{ balanceCertificateData?.headingObj?.description }} </div>
+      <div style="padding-left: 50px;">: {{ data?.headingObj?.description }} </div>
     </div>
     <div style="width: 50%;padding-left: 15px;display: flex;">
       <div style="width: 150px;"><b> Reference No. </b></div>
       <div style="padding-left: 50px;">: NA </div>
     </div>
   </div>
+
   <div style="display: flex;margin-top: 10px;">
     <div style="width: 50%;padding-left: 15px;display: flex;">
       <div style="width: 150px;"><b> Part/Drg No. </b></div>
-      <div style="padding-left: 50px;">: {{ balanceCertificateData?.headingObj?.drgNo }} </div>
+      <div style="padding-left: 50px;">: {{ data?.headingObj?.drgNo }} </div>
     </div>
     <div style="width: 50%;padding-left: 15px;display: flex;">
       <div style="width: 150px;"><b> AMT Item Code </b></div>
-      <div style="padding-left: 50px;">: {{  balanceCertificateData?.headingObj?.materialCode }} </div>
+      <div style="padding-left: 50px;">: {{  data?.headingObj?.materialCode }} </div>
     </div>
   </div>
 
-
   <div style="border-top: 1px solid black;border-bottom: 1px solid black;">
-
-    <div style="margin: 50px 75px">
-      <ol>
-        <li *ngFor="let arr of balanceCertificateData?.detailArray" style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> {{ arr.parameter }} </b> </div> <div> : {{ arr.result }} </div> </div> </li>
-        <!-- <li style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> Service RPM </b> </div> <div> : 24323 </div> </div> </li>
-        <li style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> Job Weight </b> </div> <div> : 24323 </div> </div> </li>
-        <li style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> Balancing Speed RPM </b> </div> <div> : 24323 </div> </div> </li>
-        <li style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> Unbalance Tolerance </b> </div> <div> : 24323 </div> </div> </li>
-        <li style="padding: 7px;"> <div style="display: flex;"><div style="width: 195px;"><b> Plane Seperation </b> </div> <div> <ol>
-         <li style="padding-bottom: 7px;"> 175 mm </li>
-          <li style="padding: 7px;"> 213 mm </li>
-          <li style="padding: 7px;"> 200 mm </li>
-        </ol> </div></div>  </li>
-        <li style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> Radius Correction </b> </div> <div> : 24323 </div> </div> </li>
-        <li style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> Mode of Correction </b> </div> <div> : 24323 </div> </div> </li>
-        <li style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> Initial Unbalance Plane 1 </b> </div> <div> : 24323 </div> </div> </li>
-        <div style="display: flex;margin: 7px;"> <div style="width: 220px;"><b> Initial Unbalance Plane 2 </b> </div> <div> : 24323 </div> </div>
-        <li style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> Couple Final Unbalance </b> </div> <div> : 24323 </div> </div> </li> -->
-      </ol>
-      
-          <div style="margin:10px 15px"><b>The above values are well within Limits.</b></div>
-          <div style="margin:10px 15px"><b>Reference Standard : ISO 1940-2003(E)</b></div>
+    
+    <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+      *ngIf="data.detailArray && data.detailArray.length">
+      <table style="width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+        <thead>
+          <tr>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> S.No </th>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Parameter </th>
+            <!-- <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Specification </th>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Tolerance </th>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
+            <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th> -->
+            <ng-container *ngFor="let row of data.detailArray[0] | keyvalue; let i = index">
+              <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
+                *ngIf="row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument' && row.key != 'Tolerance'">
+                {{ row.key }}
+              </th>
+            </ng-container>
+            <!-- <th style="border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Remarks </th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+            *ngFor="let row of data.detailArray; let i = index">
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ i + 1 }} </td>
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ row.Parameter }}
+            </td>
+            <!-- <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Specification
+              }} </td>
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Tolerance
+            }} </td>
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.UOM }} </td>
+            <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Instrument }}
+            </td> -->
+            <ng-container *ngFor="let cell of row | keyvalue; let i = index">
+              <td
+                *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument' && cell.key != 'Tolerance'"
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ cell.value }}
+              </td>
+            </ng-container>
+            <!-- <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ row.description }} </td> -->
+          </tr>
+        </tbody>
+      </table>
     </div>
 
+    <!-- <div style="margin: 50px 75px">
+      <ol>
+        <li *ngFor="let arr of balanceCertificateData?.detailArray" style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> {{ arr.parameter }} </b> </div> <div> : {{ arr.result }} </div> </div> </li>
+      </ol>
+    </div> -->
+    
+    <div style="margin:5px 15px"><b>The above values are well within Limits.</b></div>
+    <div style="margin:5px 15px"><b>Reference Standard : ISO 1940-2003(E)</b></div>
 
 
-    <div style="display: flex;margin: 20px;justify-content: space-around;">
+    <div style="display: flex;margin: 15px;justify-content: space-around;">
       <div style="padding-left: 15px">
         <b> Operator </b>
       </div>
@@ -241,12 +283,12 @@
 
   <div style="text-align: center;">
     <img src="/assets/images/footer.jpg" style="height: 100px;
-    width: 30%;margin: 25px;">
+    width: 30%;margin: 15px;">
     <div> <b> An ISO 9001:2015 Certified Company </b> </div>
-</div>
+  </div>
 
 
-
+</ng-container>
 
 </div>
 
