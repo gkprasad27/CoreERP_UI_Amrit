@@ -479,6 +479,10 @@ export class SalesInvoiceComponent implements OnInit {
       totalObj.igst = totalObj.igst + data.igst,
       totalObj.total = totalObj.total + (data.grossAmount + data.cgst + data.sgst + data.igst)
     })
+
+    let list = [...this.getInvoiceDeatilData.invoiceDetailsList];
+    list = [...list, ...this.setArray(list.length)];
+
     const obj = {
       headingObj: {
         reverseCharge: '',
@@ -511,7 +515,7 @@ export class SalesInvoiceComponent implements OnInit {
         pin: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoZip || '',
         gstno:  this.getInvoiceDeatilData?.InvoiceMasterList?.customerGstin || '',
       },
-      detailArray: this.getInvoiceDeatilData.invoiceDetailsList,
+      detailArray: list,
       totalObj: totalObj
     };
     this.invoicePrintData = obj;
@@ -523,6 +527,16 @@ export class SalesInvoiceComponent implements OnInit {
       this.invoicePrintData = null;
       w.print();
     }, 1000);
+  }
+
+  setArray(length: number) {
+    let newArr = [];
+    if (length < 20) {
+      for (let i = 0; i < (20 - length); i++) {
+        newArr.push({})
+      }
+    }
+    return newArr;
   }
 
   convertNumberToWords(data) {

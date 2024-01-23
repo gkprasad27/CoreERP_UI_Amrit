@@ -14,88 +14,88 @@
         display: flex;
         height: 50px;
         flex-direction: column;
-    "> <span style="font-size: 30px;"> INVOICE </span> <br> <span style="font-size: 13px;"> ORIGINAL FRO RECEIPENT
-            </span> </div>
+    "> 
+    <span style="font-size: 35px;font-weight: 700;font-family: Segoe UI;"> INVOICE </span> <br> <span style="font-size: 15px;font-family: Calibri;margin-bottom: 5px;"> ORIGINAL F0R RECEIPENT</span> </div>
     </div>
 
-    <div style="display: flex;margin-top: 10px;">
-        <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div style="width: 150px;"><b> Reverse Charge </b></div>
-            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.reverseCharge }} </div>
+    <div style="display: flex;">
+        <div style="width: 50%;padding-left: 15px;display: flex;border-right: 1px solid;">
+            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> Reverse Charge </b></div>
+            <div style="padding-left: 18px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.reverseCharge }} </div>
         </div>
         <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div style="width: 150px;"><b> Transportation Mode </b></div>
-            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.transportationMode }}</div>
+            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> Transportation Mode </b></div>
+            <div style="padding-left: 10px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.transportationMode }}</div>
         </div>
     </div>
-    <div style="display: flex;margin-top: 10px;">
+    <div style="display: flex;">
+        <div style="width: 50%;display: flex;border-right: 1px solid;">
+            <div style="width: 50%;padding-left: 15px;display: flex;">
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> Invoice No</b></div>
+                <div style="padding-left: 50px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.invoiceNo }} </div>
+            </div>
+            <div style="width: 50%;padding-left: 15px;display: flex;">
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> PO No </b></div>
+                <div style="padding-left: 15px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.poNo }} </div>
+            </div>
+        </div>
         <div style="width: 50%;display: flex;">
-            <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div style="width: 150px;"><b> Invoice No</b></div>
-                <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.invoiceNo }} </div>
-            </div>
-            <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div style="width: 150px;"><b> PO No </b></div>
-                <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.poNo }} </div>
-            </div>
-        </div>
-        <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div style="width: 150px;"><b> Vehicle Number </b></div>
-            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.vehicleRegNo }} </div>
+            <div style="width: 100px;padding-left: 15px;"><b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Vehicle Number </b></div>
+            <div style="padding-left: 58px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.vehicleRegNo }} </div>
         </div>
     </div>
-    <div style="display: flex;margin-top: 10px;">
+    <div style="display: flex;">
+        <div style="width: 50%;display: flex;border-right: 1px solid;">
+            <div style="width: 50%;padding-left: 15px;display: flex;">
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> Invoice Date</b></div>
+                <div style="padding-left: 38px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.invoiceDate ? (invoicePrintData?.headingObj?.invoiceDate | date) : '' }} </div>
+            </div>
+            <div style="width: 50%;padding-left: 15px;display: flex;">
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> PO Date  </b></div>
+                <div style="padding-left: 3px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.poDate ? (invoicePrintData?.headingObj?.poDate | date) : '' }} </div>
+            </div>
+        </div>
         <div style="width: 50%;display: flex;">
-            <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div style="width: 150px;"><b> Invoice Date</b></div>
-                <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.invoiceDate ? (invoicePrintData?.headingObj?.invoiceDate | date) : '' }} </div>
-            </div>
-            <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div style="width: 150px;"><b> PO Date  </b></div>
-                <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.poDate ? (invoicePrintData?.headingObj?.poDate | date) : '' }} </div>
-            </div>
-        </div>
-        <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div style="width: 150px;"><b> Date of Supply  </b></div>
-            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.dateOfSupply ? (invoicePrintData?.headingObj?.dateOfSupply | date) : '' }} </div>
+            <div style="width: 100px;padding-left: 15px;"><b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Date of Supply  </b></div>
+            <div style="padding-left: 58px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.dateOfSupply ? (invoicePrintData?.headingObj?.dateOfSupply | date) : '' }} </div>
         </div>
     </div>
-    <div style="display: flex;margin-top: 10px;">
-        <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div style="width: 150px;"><b> State </b></div>
-            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.shiptoState }} </div>
+    <div style="display: flex;">
+        <div style="width: 50%;padding-left: 15px;display: flex;border-right: 1px solid;">
+            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> State </b></div>
+            <div style="padding-left: 88px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.shiptoState }} </div>
         </div>
         <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div style="width: 150px;"><b> Place of Supply </b></div>
-            <div style="padding-left: 50px;">: {{ invoicePrintData?.headingObj?.shiptoCity }} </div>
+            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> Place of Supply </b></div>
+            <div style="padding-left: 52px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.shiptoCity }} </div>
         </div>
     </div>
 
 
     <div style="border-top: 1px solid black; display: flex;text-align: center;">
         <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Details of Receiver Billed to: </b>
+            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Details of Receiver Billed to: </b>
         </div>
         <div style="width: 50%;padding-left: 15px;">
-            <b> Details of Receiver Shipped to: </b>
+            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Details of Receiver Shipped to: </b>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex; ">
         <div
             style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
-            <div>{{ invoicePrintData?.vAddress?.companyName }}</div>
-            <div>{{ invoicePrintData?.vAddress?.address }}, {{ invoicePrintData?.vAddress?.address1 }}</div>
-            <div>{{ invoicePrintData?.vAddress?.city }}, {{ invoicePrintData?.vAddress?.stateName }}, {{
+            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 800;">{{ invoicePrintData?.vAddress?.companyName }}</div>
+            <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.vAddress?.address }}, {{ invoicePrintData?.vAddress?.address1 }}</div>
+            <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.vAddress?.city }}, {{ invoicePrintData?.vAddress?.stateName }}, {{
                 invoicePrintData?.vAddress?.pin }}</div>
-            <b style="margin-top: 10px;"> GSTIN : {{ invoicePrintData?.vAddress?.gstno }}</b>
+            <b style="margin-top: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 800;"> GSTIN : {{ invoicePrintData?.vAddress?.gstno }}</b>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <div>{{ invoicePrintData?.pAddress?.companyName }}</div>
-            <div>{{ invoicePrintData?.pAddress?.address }}, {{ invoicePrintData?.pAddress?.address1 }}</div>
-            <div>{{ invoicePrintData?.pAddress?.city }}, {{ invoicePrintData?.pAddress?.stateName }}, {{
+            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 800;">{{ invoicePrintData?.pAddress?.companyName }}</div>
+            <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.pAddress?.address }}, {{ invoicePrintData?.pAddress?.address1 }}</div>
+            <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.pAddress?.city }}, {{ invoicePrintData?.pAddress?.stateName }}, {{
                 invoicePrintData?.pAddress?.pin }}</div>
-            <b style="margin-top: 10px;"> GSTIN : {{ invoicePrintData?.pAddress?.gstno }}</b>
+            <b style="margin-top: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 800;"> GSTIN : {{ invoicePrintData?.pAddress?.gstno }}</b>
         </div>
     </div>
 
@@ -103,123 +103,123 @@
         <table style="width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
             <thead>
                 <tr>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" rowspan="2"> S.No </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" rowspan="2"> Product/Service </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" rowspan="2"> HSN ACS </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" rowspan="2"> UOM </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" rowspan="2"> Qty </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" rowspan="2"> Rate </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" rowspan="2"> Amount </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" rowspan="2"> Less Discount </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" rowspan="2"> Taxible Value </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" colspan="2"> CGST </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" colspan="2"> SGST </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" colspan="2"> IGST </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> S.No </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> Product/Service </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> HSN ACS </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> UOM </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> Qty </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> Rate </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> Amount </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> Less Discount </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> Taxible Value </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 800;" colspan="2"> CGST </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 800;" colspan="2"> SGST </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 800;" colspan="2"> IGST </th>
                     <th style="border-bottom: 1px solid black; -webkit-print-color-adjust: exact;"> Total </th>
                 </tr>
 
                 <tr>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" > Rate </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" > Amount </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" > Rate </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" > Amount </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" > Rate </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;" > Amount </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" > Rate </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" > Amount </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" > Rate </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" > Amount </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" > Rate </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" > Amount </th>
                   </tr>
 
             </thead>
             <tbody>
                 <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
                     *ngFor="let row of invoicePrintData.detailArray; let i = index">
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialName }}
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ i + 1 }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.materialName }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.hsnNo }}
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.hsnNo }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> NOS </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty }}
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.materialName ? 'NOS' : ''}} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.qty }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ 
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> <ng-container *ngIf="row.qty"> {{ 
                         row.rate}} </ng-container>  </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.grossAmount }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.discount }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.grossAmount }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.cgstCode }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.cgst }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.sgstCode }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.sgst }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.igstCode }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.igst }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.grossAmount }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.discount }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.grossAmount }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.cgstCode }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.cgst }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.sgstCode }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.sgst }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.igstCode }} </td>
+                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.igst }} </td>
 
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.grossAmount + row.cgst + row.sgst + row.igst }} </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"> {{ row.materialName ? row.grossAmount + row.cgst + row.sgst + row.igst : '' }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;" colspan="2"> Totals </td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.qty }} </td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.grossAmount }} </td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.cgst }} </td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.sgst }} </td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.igst }} </td>
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;">{{ invoicePrintData.totalObj.total }} </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;font-size: 12px;font-family: Segoe UI;font-weight: 800;" colspan="2"> Totals </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"></td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"></td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">{{ invoicePrintData.totalObj.qty }} </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"></td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"></td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"></td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">{{ invoicePrintData.totalObj.grossAmount }} </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"></td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">{{ invoicePrintData.totalObj.cgst }} </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"></td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">{{ invoicePrintData.totalObj.sgst }} </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"></td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">{{ invoicePrintData.totalObj.igst }} </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">{{ invoicePrintData.totalObj.total }} </td>
 
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div style="display: flex; font-size: 15px;">
-        <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
+    <div style="display: flex; font-size: 15px;border-bottom: 1px solid;">
+        <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 800;border-right: 1px solid;">
             <b> Total amount in words: </b>
             <div> {{ convertNumberToWords(invoicePrintData.totalObj?.total) }} </div>
         </div>
-        <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
-            <div style="padding-left: 15px;padding-top: 10px;">
-                <div style="">
-                    <b style="width: 300px;"> Total Amount Before Tax </b>
+        <div style="width: 50%;font-size: 12px;font-family: Calibri;">
+            <div style="">
+                <div style="display: flex;justify-content: space-between;">
+                    <b style="width: 300px;padding-left: 5px;"> Total Amount Before Tax </b>
                     <span style="padding-left: 80px;"> {{ invoicePrintData.totalObj?.grossAmount }} </span>
                 </div>
-                <div style="">
-                    <b style="width: 300px;"> Transportation Charges </b>
+                <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
+                    <b style="width: 300px;padding-left: 5px;"> Transportation Charges </b>
                     <span style="padding-left: 80px;">  </span>
                 </div>
-                <div style="border-top: 1px solid black;">
-                    <b style="width: 300px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
+                <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
+                    <b style="width: 300px;padding-left: 5px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
                     <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.cgst }} </span>
                 </div>
-                <div style="border-top: 1px solid black;">
-                    <b style="width: 300px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
+                <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
+                    <b style="width: 300px;padding-left: 5px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
                     <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.sgst }} </span>
                 </div>
             </div>
         </div>
     </div>
     <div style="display: flex; font-size: 15px;">
-        <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <b> Bank Details: </b>
-            <div> Bank Account Number : {{ invoicePrintData.headingObj?.totalAmount }} </div>
-            <div> Bank Branch and IFSC Code : {{ invoicePrintData.headingObj?.totalAmount }} </div>
+        <div style="width: 50%;padding-left: 15px;padding-top: 3px;padding-bottom: 3px;border-right: 1px solid;">
+            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Bank Details: </b>
+            <div style="font-size: 12px;font-family: Calibri;"> Bank Account Number : {{ invoicePrintData.headingObj?.totalAmount }} </div>
+            <div style="font-size: 12px;font-family: Calibri;"> Bank Branch and IFSC Code : {{ invoicePrintData.headingObj?.totalAmount }} </div>
         </div>
-        <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
-            <div style="padding-left: 15px;padding-top: 10px;">
-                <div style="border-top: 1px solid black;">
-                    <b style="width: 300px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
+        <div style="width: 50%;font-size: 12px;font-family: Calibri;">
+            <div style="">
+                <div style="display: flex;justify-content: space-between;">
+                    <b style="width: 300px;padding-left: 5px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
                     <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.cgst }}wwwww </span>
                 </div>
-                <div style="border-top: 1px solid black;">
-                    <b style="width: 300px;"> Total amount : {{ invoicePrintData.headingObj?.taxCode }} </b>
+                <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
+                    <b style="width: 300px;padding-left: 5px;"> Total amount : {{ invoicePrintData.headingObj?.taxCode }} </b>
                     <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.sgst }}wwwww </span>
                 </div>
-                <div style="border-top: 1px solid black;">
-                    <b style="width: 300px;"> Total amount after GST + Transportation {{ invoicePrintData.headingObj?.taxCode }} </b>
+                <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
+                    <b style="width: 300px;padding-left: 5px;"> Total amount after GST + Transportation {{ invoicePrintData.headingObj?.taxCode }} </b>
                     <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.igst }} </span>
                 </div>
             </div>
@@ -231,19 +231,19 @@
 
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 40%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Terms & Conditions: </b>
+            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Terms & Conditions: </b>
         </div>
         <div style="width: 20%;padding-left: 15px;border-right: 1px solid black;">
             <b>  </b>
         </div>
-        <div style="width: 40%;padding-left: 15px;">
-            <b> GST Payable on reverse charges </b>
+        <div style="width: 40%;">
+            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;padding: 5px 0px 10px 2px;"> GST Payable on reverse charges </b>
         </div>
     </div>
 
 
 
-    <div style="border-top: 1px solid black; display: flex;">
+    <div style="border-top: 1px solid black;border-bottom: 1px solid black; display: flex;">
         <div style="width: 40%;padding-left: 15px;border-right: 1px solid black;">
           
         </div>
@@ -251,8 +251,10 @@
            
             
         </div>
-        <div style="width: 40%;padding-left: 15px;">
-            <span>Certified that the particulars given above are true and correct</span>
+        <div style="width: 40%;font-size: 12px;font-family: Calibri;">
+            <div style="border-bottom: 1px solid black;padding: 5px 0px 10px 2px;">Certified that the particulars given above are true and correct</div>
+            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 800;text-align: center;padding-top: 5px;">For AMT Power Transmission</div>
+            <div style="text-align: center;padding: 30px 10px 6px 10px">Authorised Signatory</div>
         </div>
     </div>
 
