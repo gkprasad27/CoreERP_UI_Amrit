@@ -20,53 +20,53 @@
 
     <div style="display: flex;">
         <div style="width: 50%;padding-left: 15px;display: flex;border-right: 1px solid;">
-            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> Reverse Charge </b></div>
+            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Reverse Charge </b></div>
             <div style="padding-left: 18px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.reverseCharge }} </div>
         </div>
         <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> Transportation Mode </b></div>
+            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Transportation Mode </b></div>
             <div style="padding-left: 10px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.transportationMode }}</div>
         </div>
     </div>
     <div style="display: flex;">
         <div style="width: 50%;display: flex;border-right: 1px solid;">
             <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> Invoice No</b></div>
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice No</b></div>
                 <div style="padding-left: 50px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.invoiceNo }} </div>
             </div>
             <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> PO No </b></div>
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO No </b></div>
                 <div style="padding-left: 15px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.poNo }} </div>
             </div>
         </div>
         <div style="width: 50%;display: flex;">
-            <div style="width: 100px;padding-left: 15px;"><b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Vehicle Number </b></div>
+            <div style="width: 100px;padding-left: 15px;"><b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Vehicle Number </b></div>
             <div style="padding-left: 58px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.vehicleRegNo }} </div>
         </div>
     </div>
     <div style="display: flex;">
         <div style="width: 50%;display: flex;border-right: 1px solid;">
             <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> Invoice Date</b></div>
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice Date</b></div>
                 <div style="padding-left: 38px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.invoiceDate ? (invoicePrintData?.headingObj?.invoiceDate | date) : '' }} </div>
             </div>
             <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> PO Date  </b></div>
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO Date  </b></div>
                 <div style="padding-left: 3px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.poDate ? (invoicePrintData?.headingObj?.poDate | date) : '' }} </div>
             </div>
         </div>
         <div style="width: 50%;display: flex;">
-            <div style="width: 100px;padding-left: 15px;"><b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Date of Supply  </b></div>
+            <div style="width: 100px;padding-left: 15px;"><b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Date of Supply  </b></div>
             <div style="padding-left: 58px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.dateOfSupply ? (invoicePrintData?.headingObj?.dateOfSupply | date) : '' }} </div>
         </div>
     </div>
     <div style="display: flex;">
         <div style="width: 50%;padding-left: 15px;display: flex;border-right: 1px solid;">
-            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> State </b></div>
+            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> State </b></div>
             <div style="padding-left: 88px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.shiptoState }} </div>
         </div>
         <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 800;"> Place of Supply </b></div>
+            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Place of Supply </b></div>
             <div style="padding-left: 52px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.shiptoCity }} </div>
         </div>
     </div>
@@ -74,28 +74,28 @@
 
     <div style="border-top: 1px solid black; display: flex;text-align: center;">
         <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Details of Receiver Billed to: </b>
+            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Details of Receiver Billed to: </b>
         </div>
         <div style="width: 50%;padding-left: 15px;">
-            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Details of Receiver Shipped to: </b>
+            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Details of Receiver Shipped to: </b>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex; ">
         <div
             style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 800;">{{ invoicePrintData?.vAddress?.companyName }}</div>
+            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 700;">{{ invoicePrintData?.vAddress?.companyName }}</div>
             <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.vAddress?.address }}, {{ invoicePrintData?.vAddress?.address1 }}</div>
             <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.vAddress?.city }}, {{ invoicePrintData?.vAddress?.stateName }}, {{
                 invoicePrintData?.vAddress?.pin }}</div>
-            <b style="margin-top: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 800;"> GSTIN : {{ invoicePrintData?.vAddress?.gstno }}</b>
+            <b style="margin-top: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 700;"> GSTIN : {{ invoicePrintData?.vAddress?.gstno }}</b>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 800;">{{ invoicePrintData?.pAddress?.companyName }}</div>
+            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 700;">{{ invoicePrintData?.pAddress?.companyName }}</div>
             <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.pAddress?.address }}, {{ invoicePrintData?.pAddress?.address1 }}</div>
             <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.pAddress?.city }}, {{ invoicePrintData?.pAddress?.stateName }}, {{
                 invoicePrintData?.pAddress?.pin }}</div>
-            <b style="margin-top: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 800;"> GSTIN : {{ invoicePrintData?.pAddress?.gstno }}</b>
+            <b style="margin-top: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 700;"> GSTIN : {{ invoicePrintData?.pAddress?.gstno }}</b>
         </div>
     </div>
 
@@ -112,9 +112,9 @@
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> Amount </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> Less Discount </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;" rowspan="2"> Taxible Value </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 800;" colspan="2"> CGST </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 800;" colspan="2"> SGST </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 800;" colspan="2"> IGST </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 700;" colspan="2"> CGST </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 700;" colspan="2"> SGST </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 700;" colspan="2"> IGST </th>
                     <th style="border-bottom: 1px solid black; -webkit-print-color-adjust: exact;"> Total </th>
                 </tr>
 
@@ -155,7 +155,7 @@
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;font-size: 12px;font-family: Segoe UI;font-weight: 800;" colspan="2"> Totals </td>
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;font-size: 12px;font-family: Segoe UI;font-weight: 700;" colspan="2"> Totals </td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"></td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;"></td>
                     <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">{{ invoicePrintData.totalObj.qty }} </td>
@@ -177,7 +177,7 @@
     </div>
 
     <div style="display: flex; font-size: 15px;border-bottom: 1px solid;">
-        <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 800;border-right: 1px solid;">
+        <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 700;border-right: 1px solid;">
             <b> Total amount in words: </b>
             <div> {{ convertNumberToWords(invoicePrintData.totalObj?.total) }} </div>
         </div>
@@ -204,7 +204,7 @@
     </div>
     <div style="display: flex; font-size: 15px;">
         <div style="width: 50%;padding-left: 15px;padding-top: 3px;padding-bottom: 3px;border-right: 1px solid;">
-            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Bank Details: </b>
+            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Bank Details: </b>
             <div style="font-size: 12px;font-family: Calibri;"> Bank Account Number : {{ invoicePrintData.headingObj?.totalAmount }} </div>
             <div style="font-size: 12px;font-family: Calibri;"> Bank Branch and IFSC Code : {{ invoicePrintData.headingObj?.totalAmount }} </div>
         </div>
@@ -212,11 +212,11 @@
             <div style="">
                 <div style="display: flex;justify-content: space-between;">
                     <b style="width: 300px;padding-left: 5px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.cgst }}wwwww </span>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.cgst }} </span>
                 </div>
                 <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
                     <b style="width: 300px;padding-left: 5px;"> Total amount : {{ invoicePrintData.headingObj?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.sgst }}wwwww </span>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.sgst }} </span>
                 </div>
                 <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
                     <b style="width: 300px;padding-left: 5px;"> Total amount after GST + Transportation {{ invoicePrintData.headingObj?.taxCode }} </b>
@@ -231,13 +231,13 @@
 
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 40%;padding-left: 15px;border-right: 1px solid black;">
-            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;"> Terms & Conditions: </b>
+            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Terms & Conditions: </b>
         </div>
         <div style="width: 20%;padding-left: 15px;border-right: 1px solid black;">
             <b>  </b>
         </div>
         <div style="width: 40%;">
-            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 800;padding: 5px 0px 10px 2px;"> GST Payable on reverse charges </b>
+            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;padding: 5px 0px 10px 2px;"> GST Payable on reverse charges </b>
         </div>
     </div>
 
@@ -253,7 +253,7 @@
         </div>
         <div style="width: 40%;font-size: 12px;font-family: Calibri;">
             <div style="border-bottom: 1px solid black;padding: 5px 0px 10px 2px;">Certified that the particulars given above are true and correct</div>
-            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 800;text-align: center;padding-top: 5px;">For AMT Power Transmission</div>
+            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 700;text-align: center;padding-top: 5px;">For AMT Power Transmission</div>
             <div style="text-align: center;padding: 30px 10px 6px 10px">Authorised Signatory</div>
         </div>
     </div>

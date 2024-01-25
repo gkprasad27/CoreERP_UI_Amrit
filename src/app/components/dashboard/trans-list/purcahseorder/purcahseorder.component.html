@@ -13,87 +13,89 @@
         justify-content: space-around;
         display: flex;
         height: 50px;
-    "> {{ data.heading }} </div>
+        flex-direction: column;
+    "> 
+    <span style="font-size: 22px;font-weight: 700;font-family: Segoe UI;"> {{ data.heading }} </span>  </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
-        <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b> PO Number </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.purchaseOrderNumber }} </span>
+        <div style="width: 50%;padding: 3px 15px;display: flex;border-right: 1px solid;">
+            <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> PO Number </b>
+            <span style="padding-left: 60px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.purchaseOrderNumber }} </span>
         </div>
-        <div style="width: 50%;padding-left: 15px;">
-            <b> Date </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.purchaseOrderDate | date }} </span>
+        <div style="width: 50%;padding: 3px 15px;display: flex;">
+            <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> Date </b>
+            <span style="padding-left: 60px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.purchaseOrderDate | date }} </span>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
-        <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;">
-            <b> ADDRESS </b>
-            <div>{{ data?.headingObj?.address.companyName }}</div>
-            <div>{{ data?.headingObj?.address.address }}, {{ data?.headingObj?.address.address1 }}</div>
-            <div>{{ data?.headingObj?.address.city }}, {{ data?.headingObj?.address.stateName }}, {{
+        <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 8px;">
+            <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> ADDRESS </b>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{ data?.headingObj?.address.companyName }}</div>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{ data?.headingObj?.address.address }}, {{ data?.headingObj?.address.address1 }}</div>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{ data?.headingObj?.address.city }}, {{ data?.headingObj?.address.stateName }}, {{
                 data?.headingObj?.address.pin }}</div>
-            <div>Phone: {{ data?.headingObj?.address.phone }}</div>
-            <div>Email: {{ data?.headingObj?.address.email }}</div>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">Phone: {{ data?.headingObj?.address.phone }}</div>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">Email: {{ data?.headingObj?.address.email }}</div>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;">
-            <div style="display: flex;">
-                <span style="width: 200px;"> Dispatch Mode </span>
+            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+                <span style="width: 140px;"> Dispatch Mode </span>
                 <span style="padding-left: 20px;">: {{ data?.headingObj?.dispatchMode }} </span>
             </div>
-            <div style="display: flex;">
-                <span style="width: 200px;"> Terms of delivery </span>
+            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+                <span style="width: 140px;"> Terms of delivery </span>
                 <span style="padding-left: 20px;">:  {{  data?.headingObj?.termsOfDelivery }} </span>
             </div>
-            <div style="display: flex;">
-                <span style="width: 200px;"> Terms of payment </span>
+            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+                <span style="width: 140px;"> Terms of payment </span>
                 <span style="padding-left: 20px;">: {{  data?.headingObj?.termsOfPayment }} </span>
             </div>
-            <div style="display: flex;">
-                <span style="width: 200px;"> Currency </span>
+            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+                <span style="width: 140px;"> Currency </span>
                 <span style="padding-left: 20px;">: INR </span>
             </div>
-            <div style="display: flex;">
-                <span style="width: 200px;"> Our enquiry reference </span>
+            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+                <span style="width: 140px;"> Our enquiry reference </span>
                 <span style="padding-left: 20px;">: NA </span>
             </div>
-            <div style="display: flex;">
-                <span style="width: 200px;"> Material </span>
+            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+                <span style="width: 140px;"> Material </span>
                 <span style="padding-left: 20px;">: {{  data?.headingObj?.material }} </span>
             </div>
         </div>
     </div>
 
-    <div style="border-top: 1px solid black; display: flex;">
+    <div style="border-top: 1px solid black; display: flex;text-align: center;">
         <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Vendor Name & Address </b>
+            <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> Vendor Name & Address </b>
         </div>
         <div style="width: 50%;padding-left: 15px;">
-            <b> Deliver to this address </b>
+            <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> Deliver to this address </b>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex; ">
         <div
             style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
-            <div>{{ data?.headingObj?.vAddress?.name }}</div>
+            <div style="font-size: 15px;font-family: Calibri;font-weight: 900;">{{ data?.headingObj?.vAddress?.name }}</div>
             <div>{{ data?.headingObj?.vAddress?.address }}, {{ data?.headingObj?.vAddress?.address1 }}</div>
             <div>{{ data?.headingObj?.vAddress?.city }}, {{ data?.headingObj?.vAddress?.stateName }}, {{
                 data?.headingObj?.vAddress?.pin }}</div>
             <!-- <div>Phone: {{ data?.headingObj?.vAddress?.phone  }}</div>
             <div>Email: {{ data?.headingObj?.vAddress?.email  }}</div> -->
 
-            <b style="margin-top: 10px;"> GSTIN : {{ data?.headingObj?.vAddress?.gstno }}</b>
+            <b style="margin-top: 10px;font-size: 15px;font-family: Calibri;font-weight: 900;"> GSTIN : {{ data?.headingObj?.vAddress?.gstno }}</b>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <div>{{ data?.headingObj?.pAddress?.address }} </div>
+            <div style="font-size: 15px;font-family: Calibri;font-weight: 900;">{{ data?.headingObj?.pAddress?.address }} </div>
             <div> {{ data?.headingObj?.pAddress?.address1 }}, {{ data?.headingObj?.pAddress?.city }}, {{ data?.headingObj?.pAddress?.stateName }}, {{
                 data?.headingObj?.pAddress?.pin }}</div>
             <div>Phone: {{ data?.headingObj?.pAddress?.phone }}</div>
             <div>Email: {{ data?.headingObj?.pAddress?.email }}</div>
 
-            <b style="margin-top: 10px;"> GSTIN : {{ data?.headingObj?.pAddress?.gstno }}</b>
+            <b style="margin-top: 10px;font-size: 15px;font-family: Calibri;font-weight: 900;"> GSTIN : {{ data?.headingObj?.pAddress?.gstno }}</b>
         </div>
     </div>
 
@@ -102,45 +104,45 @@
         <table style="width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
             <thead>
                 <tr>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Product Code </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Description </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Quantity </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Unit Weight </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Total Weight </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Price/KG </th>
-                    <th style="border-bottom: 1px solid black; -webkit-print-color-adjust: exact;"> Total Amount </th>
+                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
+                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Product Code </th>
+                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Description </th>
+                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Quantity </th>
+                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Unit Weight </th>
+                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Total Weight </th>
+                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Price/KG </th>
+                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;"> Total Amount </th>
                 </tr>
             </thead>
             <tbody>
                 <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
                     *ngFor="let row of data.detailArray; let i = index">
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> <span *ngIf="row.materialCode">  {{ i + 1 }} </span> </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.materialCode }}
+                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> <span *ngIf="row.materialCode">  {{ i + 1 }} </span> </td>
+                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.materialCode }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.materialName }}
+                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.materialName }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.netWeight }}
+                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
+                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.netWeight }}
                     </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ row.qty *
+                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ row.qty *
                         row.netWeight}} </ng-container>  </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
-                    <td style="border-bottom: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
+                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
+                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;" colspan="2"> Grand
+                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;" colspan="2"> Grand
                         Totals </td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
+                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
+                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Weight</td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{
+                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{
                         data.headingObj1.amount }}</td>
-                    <td style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Amount</td>
-                    <td style="border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">{{
+                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">{{
                         data.headingObj1.totalAmount }}</td>
                 </tr>
             </tbody>
@@ -150,41 +152,41 @@
 
     <div style="display: flex; font-size: 15px;">
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <b> Total amount in words: </b>
-            <div> {{ convertNumberToWords(data.headingObj?.totalAmount) }} </div>
+            <b style="font-size: 14px;font-family: Calibri;font-weight: 900;"> Total amount in words: </b>
+            <div style="font-size: 14px;font-family: Calibri;"> {{ convertNumberToWords(data.headingObj?.totalAmount) }} </div>
 
         </div>
         <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
             <div style="padding-left: 15px;padding-top: 10px;">
                 <div style="display: flex;">
-                    <b style="width: 300px;"> Total Amount Before Tax </b>
-                    <span style="padding-left: 80px;"> {{ data.headingObj?.amount }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Amount Before Tax </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.amount }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;"> Add: {{ data.headingObj1?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ data.headingObj?.cgst }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: {{ data.headingObj1?.taxCode }} </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.cgst }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;"> Add: {{ data.headingObj1?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ data.headingObj?.sgst }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: {{ data.headingObj1?.taxCode }} </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.sgst }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;"> Add: {{ data.headingObj1?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ data.headingObj?.igst }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: {{ data.headingObj1?.taxCode }} </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.igst }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;"> Total Amount with GST </b>
-                    <span style="padding-left: 80px;"> {{ data.headingObj?.totalAmount }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Amount with GST </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.totalAmount }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;"> Total Payable Reverse Charges </b>
-                    <span style="padding-left: 80px;"> </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Payable Reverse Charges </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> </span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div style="border-top: 1px solid black;font-size: 15px;">
+    <div style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: Calibri;margin-bottom: 5px;">
         The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
         PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
         SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMT POWER TRANSMISSION RESERVES THE RIGHT TO WITH HOLD
@@ -199,7 +201,7 @@
     <div style="display: flex;">
         <img src="/assets/images/header.jpg" style="height: 100px;
         width: 65%;">
-        <h3 style="padding: 24px;
+        <div style="padding: 24px;
         border-top: 1px solid black;
         -webkit-print-color-adjust: exact;
         background: rgb(22 106 132) !important;
@@ -210,13 +212,14 @@
         justify-content: space-around;
         display: flex;
         height: 50px;
-    margin: 0px;
-    "> {{ data.heading }} </h3>
+        flex-direction: column;
+    "> 
+    <span style="font-size: 22px;font-weight: 700;font-family: Segoe UI;"> {{ data.heading }} </span>  </div>
     </div>
 
-    <div style="margin-bottom: 15px;">
-        <b>WARRANTIES:</b>
-        <div>
+    <div style="margin-bottom: 20px;margin-top: 15px;">
+        <b style="font-size: 16px;font-family: Calibri;font-weight: 900;">WARRANTIES:</b>
+        <div style="font-size: 16px;font-family: Calibri;">
             The supplier shall guarantee that the goods are made from best material with first class workmanship and
             will qualify to all quality
             specifications and performance specification with us. The supplier shall guarantee the goods will give
@@ -228,8 +231,8 @@
     </div>
 
     <div style="margin-bottom: 15px;">
-        <b>GENERAL NOTES:</b>
-        <ol>
+        <b style="font-size: 16px;font-family: Calibri;font-weight: 900;">GENERAL NOTES:</b>
+        <ol style="font-size: 16px;font-family: Calibri;">
             <li>The supplier shall thoroughly inspect before dispatch of goods.</li>
             <li>A pre dispatch inspection report is mandatory which will state clearly the invoice Number and our PO
                 details.</li>
@@ -246,9 +249,9 @@
 
     </div>
 
-    <div style="margin-bottom: 15px;">
-        <b>GENERAL TERMS:</b>
-        <ol>
+    <div style="margin-bottom: 80px;">
+        <b style="font-size: 16px;font-family: Calibri;font-weight: 900;">GENERAL TERMS:</b>
+        <ol style="font-size: 16px;font-family: Calibri;">
             <li>Please send acceptance of PO within seven days; Non-receipt of acceptance within seven days shall be
                 considered as acceptance of
                 the order.</li>
@@ -264,7 +267,7 @@
 
     </div>
 
-    <div style="margin-bottom: 15px;display: flex;">
+    <div style="font-size: 16px;font-family: Calibri;font-weight: 900;margin-top: 30px;margin-bottom: 20px;display: flex;">
 
         <div style="width: 50%;">
             <b> Prepared By: </b>
@@ -275,10 +278,15 @@
 
     </div>
 
-    <div style="margin-bottom: 15px;">
+    <div style="margin-bottom: 15px;font-size: 16px;font-family: Calibri;font-weight: 900;">
 
         <b> Signature/Date..................................................................... </b>
 
+    </div>
+
+    <div style="text-align: center;">
+        <img src="/assets/images/footer.jpg" style="height: 100px;
+        width: 20%;">
     </div>
 
 </div>
