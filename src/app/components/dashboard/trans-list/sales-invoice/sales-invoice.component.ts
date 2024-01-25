@@ -481,7 +481,7 @@ export class SalesInvoiceComponent implements OnInit {
     })
 
     let list = [...this.getInvoiceDeatilData.invoiceDetailsList];
-    list = [...list, ...this.setArray(list.length)];
+    // list = [...list, ...this.setArray(list.length)];
 
     const obj = {
       headingObj: {
