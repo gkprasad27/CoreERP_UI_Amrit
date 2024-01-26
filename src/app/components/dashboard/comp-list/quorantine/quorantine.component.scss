@@ -1,0 +1,14 @@
+.mat-mdc-form-field.typeahead {
+    margin-top: 25px;
+    input {
+       border: none;
+       border-bottom: 1px solid;
+       border-radius: 0px;
+       padding: 0px;
+ padding-bottom: 12px;
+    }
+    input:focus {
+       box-shadow: none !important;
+       background-color: none !important;
+    }
+ }

@@ -142,4 +142,4 @@ export { DesignationComponent } from './designation/designation.component';
 export { StructureCreationComponent} from './structurecreation/structurecreation.component';
 export { HolidayComponent} from './holiday/holiday.component';
 export { SalaryProcessComponent} from './salaryproces/salaryprocess.component';
-
+export { QuorantineComponent } from './quorantine/quorantine.component';

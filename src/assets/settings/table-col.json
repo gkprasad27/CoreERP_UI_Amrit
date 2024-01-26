@@ -2394,5 +2394,12 @@
     "boxes": "Boxes",
     "poNumber":"PO Number",
     "imageURL": "Image URL"
+  },
+  "quorantine": {
+    "title": "Quorantine",
+    "saleOrderNo": "Sale Order Number",
+    "materialDescription": "Material Description",
+    "itemCode": "Item Code",
+    "capanum": "Capanum"
   }
 }

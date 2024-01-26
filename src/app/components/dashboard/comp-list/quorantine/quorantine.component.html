@@ -1,0 +1,68 @@
+<div class="position-relative popup-class">
+    <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+        <span> {{'purchasingtype.title' | translate }} </span>
+        <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+    </mat-card-title>
+
+    <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+        <form [formGroup]="modelFormData" autocomplete="off">
+
+            <div class="d--flex">
+
+                <div class="mat-mdc-form-field typeahead">
+                    <input placeholder="{{ 'quorantine.tagName' | translate }}" formControlName="tagName"
+                        (typeaheadOnSelect)="tagNameChange()" [typeahead]="getInvoiceDetail"
+                        typeaheadOptionField='materialCode' appFocusOnEnter tabIndex="1" class="form-control typeahead"
+                        [typeaheadItemTemplate]="customItemTemplate" >
+                        <!-- [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200"> -->
+                    <ng-template #customItemTemplate let-model="item">
+                        <span> {{model.materialCode}} </span> 
+                    </ng-template>
+                </div>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'quorantine.product'"></mat-label>
+                    <input matInput readonly formControlName="product" >
+                </mat-form-field>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'quorantine.QCRefNo'"></mat-label>
+                    <input matInput readonly formControlName="QCRefNo" >
+                </mat-form-field>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'quorantine.invoiceNumber'"></mat-label>
+                    <input matInput readonly formControlName="invoiceNumber" >
+                </mat-form-field>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'quorantine.saleOrder'"></mat-label>
+                    <input matInput readonly formControlName="saleOrder" >
+                </mat-form-field>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'quorantine.custoMer'"></mat-label>
+                    <input matInput readonly formControlName="custoMer" >
+                </mat-form-field>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'quorantine.custmerPO'"></mat-label>
+                    <input matInput readonly formControlName="custmerPO" >
+                </mat-form-field>
+
+            </div>
+            <mat-divider></mat-divider>
+        </form>
+
+    </mat-card-content>
+    <div class="form-element p-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+
+            {{ 'COMMON.CANCEL' | translate }}
+        </button>
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+
+            {{ 'COMMON.SAVE' | translate }}
+        </button>
+    </div>
+</div>

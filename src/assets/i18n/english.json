@@ -2914,5 +2914,19 @@
   },
   "salaryprocess":{
     "title":"Salary Process"
+  },
+  "quorantine": {
+    "title": "Quorantine",
+    "saleOrderNo": "Sale Order Number",
+    "materialDescription": "Material Description",
+    "itemCode": "Item Code",
+    "tagName": "Tag Name",
+    "product": "Product",
+    "custmerPO": "Custmer PO",
+    "custoMer": "Custo Mer",
+    "saleOrder": "Sale Order",
+    "invoiceNumber": "Invoic eNumber",
+    "QCRefNo": "QC Ref Number",
+    "capanum": "Capanum"
   }
 }

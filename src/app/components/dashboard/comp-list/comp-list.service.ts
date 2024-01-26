@@ -143,6 +143,7 @@ import { HolidayComponent } from './holiday/holiday.component';
 import { StructureCreationComponent } from './structurecreation/structurecreation.component';
 import { DispatchdetailsComponent } from './dispatchdetails/dispatchdetails.component';
 import { SalaryProcessComponent} from './salaryproces/salaryprocess.component';
+import { QuorantineComponent } from './quorantine/quorantine.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -721,6 +722,10 @@ export class CompListService {
         break;
         case 'salaryprocess':
         this.dynamicComp.component = SalaryProcessComponent;
+        return this.dynamicComp.component;
+        break;
+        case 'quorantine':
+        this.dynamicComp.component = QuorantineComponent;
         return this.dynamicComp.component;
         break;
       default:
