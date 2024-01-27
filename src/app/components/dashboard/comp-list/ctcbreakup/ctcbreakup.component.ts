@@ -18,10 +18,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./ctcbreakup.component.scss']
 })
 export class CTCBreakupComponent implements OnInit {
+  structure: any;
+  ctc: any;
   modelFormData: FormGroup;
   structureList: any;
   filteredOptions: any;
-  displayedColumns: string[] = ['componentCode', 'componentName', 'amount', 'duration', 'specificMonth'];
+  displayedColumns: string[] = ['componentCode', 'componentName', 'EarnDednAmount', 'duration', 'specificMonth'];
   GetEmployeeListArray: [];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -69,13 +71,12 @@ export class CTCBreakupComponent implements OnInit {
           this.spinner.hide();
         });
   }
-
+  
   getStructures() {
-    const getStructuresUrl = String.Join('/', this.apiConfigService.getStructures, this.modelFormData.value.structureName);
+    const getStructuresUrl = String.Join('/', this.apiConfigService.getStructures, this.modelFormData.value.structureName, this.modelFormData.value.ctc);
     this.apiService.apiGetRequest(getStructuresUrl)
       .subscribe(
         response => {
-          debugger
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response['structureList'] && res.response['structureList'].length) {
@@ -83,7 +84,7 @@ export class CTCBreakupComponent implements OnInit {
               data.forEach((d: any) => {
                 const obj = res.response['structureList'].find((s: any) => s.componentCode == d.componentCode);
                 if (obj) {
-                  d.amount = obj.amount
+                  d.EarnDednAmount = obj.amount
                 }
               })
               this.dataSource = new MatTableDataSource(data);
@@ -133,10 +134,22 @@ export class CTCBreakupComponent implements OnInit {
   }
 
   save() {
+    const arr = this.dataSource.data.filter((d: any) => d.EarnDednAmount)
+    const obj = {
+      item: {
+        structure:{
+          structureName:this.modelFormData.value.structureName,
+          ctc:this.modelFormData.value.ctc,
+          empcode:this.modelFormData.value.empCode,
+          effectfrom:this.modelFormData.value.effectFrom
+        },
+        components: arr
+      }
+    }
     this.formData.item = this.modelFormData.value;
-    this.addOrEditService[this.formData.action](this.formData, (res) => {
+    this.addOrEditService[this.formData.action](obj, (res) => {
       if (res) {
-        this.router.navigate(['/dashboard/master/structurecreation']);
+        this.router.navigate(['/dashboard/master/CTCBreakup']);
       }
     });
   }

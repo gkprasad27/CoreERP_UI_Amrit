@@ -2056,11 +2056,8 @@
     "title": "CTC Breakup",
     "companyCode": "Company Code",
     "empCode": "Emp Code",
-    "effectFrom": "Date",
-    "earnDednCode": "Earn Dedn Code",
-    "earnDednAmount": "Earn Dedn Amount",
+    "effectFrom": "Effect From",
     "ctc": "CTC",
-    "earnDednName": "Earn Dedn Name",
     "structureName": "Structure Name"
   },
   "vehiclerequisition": {
