@@ -2917,13 +2917,15 @@
     "saleOrderNo": "Sale Order Number",
     "materialDescription": "Material Description",
     "itemCode": "Item Code",
-    "tagName": "Tag Name",
+    "tag": "Tag Name",
     "product": "Product",
-    "custmerPO": "Custmer PO",
-    "custoMer": "Custo Mer",
+    "custmerPO": "Po Number",
+    "custoMer": "Customer Name",
     "saleOrder": "Sale Order",
-    "invoiceNumber": "Invoic eNumber",
+    "invoiceNumber": "Invoice Number",
+    "saveTitle": "Quorantine",
     "QCRefNo": "QC Ref Number",
+    "id": "CAPA Number",
     "capanum": "Capanum"
   }
 }

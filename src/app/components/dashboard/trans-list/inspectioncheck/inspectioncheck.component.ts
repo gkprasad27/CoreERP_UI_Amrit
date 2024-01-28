@@ -594,7 +594,7 @@ export class InspectioncheckComponent implements OnInit {
 
 
   back() {
-    this.router.navigate(['dashboard/transaction/materialrequisition']);
+    this.router.navigate(['dashboard/transaction/inspectioncheck']);
   }
 
   save() {
@@ -711,7 +711,7 @@ export class InspectioncheckComponent implements OnInit {
         heatNumber: this.icmasters.heatNumber,
         drgNo: this.icmasters.partDrgNo,
         drawingRevNo: this.icmasters.drawingRevNo,
-        totalQty: res.SaleorderMaster.totalQty
+        matQty: res.SaleorderMaster.matQty
       },
     }
     debugger

@@ -73,6 +73,7 @@ export class StandardRateComponent implements OnInit {
       minValue: [''],
       maxValue: [''],
       instrument: [''],
+      highlight: false,
       changed: true,
       id: [0],
       action: 'edit',
@@ -178,6 +179,16 @@ export class StandardRateComponent implements OnInit {
       highlight: true,
       changed: true,
     });
+
+    if(!this.formData1.value.spec && !this.formData1.value.minValue && !this.formData1.value.maxValue && !this.formData1.value.uom && !this.formData1.value.instrument) {
+      this.formData1.patchValue({
+        changed: false,
+        highlight: false,
+      });
+
+    }
+
+
     let data: any = this.tableData;
     this.tableData = null;
     this.tableComponent.defaultValues();
@@ -193,7 +204,7 @@ export class StandardRateComponent implements OnInit {
       data = [this.formData1.value, ...data];
     } else {
       if (this.formData1.value.index == 0) {
-        data.forEach((res: any) => { if (res.materialCode == this.formData1.value.materialCode) { (res.qty = res.qty + this.formData1.value.qty) } });
+        // data.forEach((res: any) => { if (res.materialCode == this.formData1.value.materialCode) { (res.qty = res.qty + this.formData1.value.qty) } });
       } else {
         data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
       }
@@ -222,7 +233,7 @@ export class StandardRateComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['dashboard/transaction/saleorder'])
+    this.router.navigate(['dashboard/transaction/standardrateoutput'])
   }
 
   save() {

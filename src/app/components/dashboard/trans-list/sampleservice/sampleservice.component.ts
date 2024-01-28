@@ -525,7 +525,7 @@ export class SampleServiceComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['dashboard/transaction/samplerequisitionform'])
+    this.router.navigate(['dashboard/transaction/sampleservice'])
   }
 
   save() {

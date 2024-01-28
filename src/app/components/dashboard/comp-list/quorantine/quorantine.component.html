@@ -1,6 +1,6 @@
 <div class="position-relative popup-class">
     <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
-        <span> {{'purchasingtype.title' | translate }} </span>
+        <span> {{'quorantine.title' | translate }} </span>
         <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
     </mat-card-title>
 
@@ -10,19 +10,19 @@
             <div class="d--flex">
 
                 <div class="mat-mdc-form-field typeahead">
-                    <input placeholder="{{ 'quorantine.tagName' | translate }}" formControlName="tagName"
+                    <input placeholder="{{ 'quorantine.tag' | translate }}" formControlName="tag" (input)="getInvoiceDetailList($event.target.value)"
                         (typeaheadOnSelect)="tagNameChange()" [typeahead]="getInvoiceDetail"
-                        typeaheadOptionField='materialCode' appFocusOnEnter tabIndex="1" class="form-control typeahead"
+                        typeaheadOptionField='tagname' appFocusOnEnter tabIndex="1" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate" >
                         <!-- [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200"> -->
                     <ng-template #customItemTemplate let-model="item">
-                        <span> {{model.materialCode}} </span> 
+                        <span> {{model.tagname}} </span> 
                     </ng-template>
                 </div>
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'quorantine.product'"></mat-label>
-                    <input matInput readonly formControlName="product" >
+                    <input matInput readonly formControlName="itemCode" >
                 </mat-form-field>
 
                 <mat-form-field class="form-element">
@@ -37,7 +37,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'quorantine.saleOrder'"></mat-label>
-                    <input matInput readonly formControlName="saleOrder" >
+                    <input matInput readonly formControlName="saleOrderNo" >
                 </mat-form-field>
 
                 <mat-form-field class="form-element">
@@ -62,7 +62,7 @@
         </button>
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
 
-            {{ 'COMMON.SAVE' | translate }}
+            {{ 'quorantine.saveTitle' | translate }}
         </button>
     </div>
 </div>

@@ -2393,10 +2393,11 @@
     "imageURL": "Image URL"
   },
   "quorantine": {
+    "id": "Capanum",
     "title": "Quorantine",
+    "tag": "Tag Name",
     "saleOrderNo": "Sale Order Number",
     "materialDescription": "Material Description",
-    "itemCode": "Item Code",
-    "capanum": "Capanum"
+    "itemCode": "Item Code"
   }
 }

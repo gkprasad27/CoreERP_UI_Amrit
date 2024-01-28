@@ -32,11 +32,11 @@ export class QuorantineComponent {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.modelFormData = this.formBuilder.group({
-      tagName: ['', [Validators.required]],
-      product: [''],
+      tag: ['', [Validators.required]],
+      itemCode: [''],
       QCRefNo: [''],
       invoiceNumber: [''],
-      saleOrder: [''],
+      saleOrderNo: [''],
       custoMer: [''],
       custmerPO: [''],
     });
@@ -44,59 +44,54 @@ export class QuorantineComponent {
     this.formData = { ...data };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
+      this.modelFormData.controls['tag'].disable();
     }
 
   }
 
   ngOnInit() {
-    this.getInvoiceDetailList();
   }
 
   get formControls() { return this.modelFormData.controls; }
 
-  getInvoiceDetailList() {
-    const getInvoiceDetailList = String.Join('/', this.apiConfigService.getInvoiceDetailList);
-    this.apiService.apiGetRequest(getInvoiceDetailList)
-      .subscribe(
-        response => {
-          if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
-            debugger
-            if (!this.commonService.checkNullOrUndefined(response.response)) {
-              this.getInvoiceDetail = response.response['invoiceDetailsList'];
-            }
-          }
-          this.spinner.hide();
-        });
-  }
 
   tagNameChange() {
-    const obj = this.getInvoiceDetail.find((i: any) => i.materialCode == this.modelFormData.value.tagName);
+    const obj = this.getInvoiceDetail.find((i: any) => i.tagname == this.modelFormData.value.tag);
     this.modelFormData.patchValue({
-      product: obj?.materialCode,
+      itemCode: obj?.materialCode,
       QCRefNo: obj?.qcRefNo,
       invoiceNumber: obj?.invoiceNo,
-      saleOrder: obj?.saleorder,
+      saleOrderNo: obj?.saleorder,
       custoMer: obj?.custoMer,
       custmerPO: obj?.custmerPO,
     })
-    // if (!this.commonService.checkNullOrUndefined(value) && value != '') {
-    //   const getProductByProductCodeUrl = String.Join('/', this.apiConfigService.getEmpCode);
-    //   this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
-    //     response => {
-    //       const res = response.body;
-    //       if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-    //         if (!this.commonService.checkNullOrUndefined(res.response)) {
-    //           if (!this.commonService.checkNullOrUndefined(res.response['Empcodes'])) {
-    //             this.getProductByProductCodeArray = res.response['Empcodes'];
-    //             this.spinner.hide();
-    //           }
-    //         }
-    //       }
+  
+  }
 
-    //     });
-    // } else {
-    //   this.getProductByProductCodeArray = [];
-    // }
+  getInvoiceDetailList(value) {
+    debugger
+  if (!this.commonService.checkNullOrUndefined(value) && value != '') {
+      const getProductByProductCodeUrl = String.Join('/', this.apiConfigService.getInvoiceDetailList, value);
+      this.apiService.apiGetRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
+        response => {
+          if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(response.response)) {
+              debugger
+              this.spinner.hide();
+              if (!this.commonService.checkNullOrUndefined(response.response['invoiceDetailsList'])) {
+                this.getInvoiceDetail = response.response['invoiceDetailsList'];
+                this.modelFormData.patchValue({
+                  custoMer: response.response['invoiceDetailsList']?.customerName,
+                  custmerPO: response.response['invoiceDetailsList']?.poNumber,
+                })
+              }
+            }
+          }
+
+        });
+    } else {
+      this.getInvoiceDetail = [];
+    }
   }
 
   save() {
@@ -104,10 +99,14 @@ export class QuorantineComponent {
     if (this.modelFormData.invalid) {
       return;
     }
+    this.modelFormData.controls['tag'].enable();
     this.formData.item = this.modelFormData.value;
     this.addOrEditService[this.formData.action](this.formData, (res) => {
       this.dialogRef.close(this.formData);
     });
+    if (this.formData.action == 'Edit') {
+      this.modelFormData.controls['tag'].disable();
+    }
   }
 
   cancel() {
