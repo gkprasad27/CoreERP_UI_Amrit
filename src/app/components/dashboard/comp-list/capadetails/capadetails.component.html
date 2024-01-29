@@ -1,0 +1,296 @@
+<div class="">
+
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+        <mat-card-content class="p-2 m-0 overflow-auto">
+
+            <div>
+
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="{{'CAPAdetails.dateOfDeadline' | translate }}"
+                        formControlName="deadlineMonitorDate" appFocusOnEnter tabIndex="1">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+            </div>
+
+            <mat-card>
+
+                <div class="position-relative popup-class">
+
+                    <div class="d-flex align-items-center">
+                        <div> {{'CAPAdetails.notificationNo' | translate }} : </div>
+                        <mat-form-field class="form-element">
+                            <input matInput formControlName="notificationNo" appFocusOnEnter tabIndex="2">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <div> {{'CAPAdetails.receivedPartsDate' | translate }}: </div>
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker1" formControlName="receivedPartsDate"
+                                appFocusOnEnter tabIndex="3">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <div> {{'CAPAdetails.itemCode' | translate }}: </div>
+                        <mat-form-field class="form-element">
+                            <input matInput formControlName="itemCode" appFocusOnEnter tabIndex="4">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <div> {{'CAPAdetails.materialDescription' | translate }}: </div>
+                        <mat-form-field class="form-element">
+                            <input matInput formControlName="materialDescription" appFocusOnEnter tabIndex="5">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <div> {{'CAPAdetails.complaintQty' | translate }}: </div>
+                        <mat-form-field class="form-element">
+                            <input matInput formControlName="complaintQty" appFocusOnEnter tabIndex="6">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <div> {{'CAPAdetails.tag' | translate }}: </div>
+                        <mat-form-field class="form-element">
+                            <input matInput formControlName="tag" appFocusOnEnter tabIndex="7">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </mat-card>
+
+            <div>
+                <b> {{'CAPAdetails.receivedPartsDate' | translate }} </b>
+                <div class="d-flex">
+                    <mat-checkbox class="mt-5" formControlName="receivedParts" appFocusOnEnter tabIndex="8">non Numaric
+                    </mat-checkbox>
+                </div>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker2" formControlName="receivedPartsDate" appFocusOnEnter
+                        tabIndex="9">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <b> {{'CAPAdetails.analysisBugunDate' | translate }} </b>
+                <div class="d-flex">
+                    <mat-checkbox class="mt-5" formControlName="analysisBugun" appFocusOnEnter tabIndex="10">non Numaric
+                    </mat-checkbox>
+                </div>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker3" formControlName="analysisBugunDate" appFocusOnEnter
+                        tabIndex="11">
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <b> {{'CAPAdetails.shortTermSolDate' | translate }} </b>
+                <div class="d-flex">
+                    <mat-checkbox class="mt-5" formControlName="defectCauseAcknowledge" appFocusOnEnter tabIndex="12">
+                        non Numaric
+                    </mat-checkbox>
+                </div>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker4" formControlName="defectCauseAcknowledgeDate"
+                        appFocusOnEnter tabIndex="13">
+                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker #picker4></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <b> {{'CAPAdetails.longTermSolDate' | translate }} </b>
+                <div class="d-flex">
+                    <mat-checkbox class="mt-5" formControlName="longTermSol" appFocusOnEnter tabIndex="14">non Numaric
+                    </mat-checkbox>
+                </div>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker5" formControlName="longTermSolDate" appFocusOnEnter
+                        tabIndex="15">
+                    <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                    <mat-datepicker #picker5></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <b> {{'CAPAdetails.containmentReqdDate' | translate }} </b>
+                <div class="d-flex">
+                    <mat-checkbox class="mt-5" formControlName="containmentReqd" appFocusOnEnter tabIndex="16">non
+                        Numaric
+                    </mat-checkbox>
+                </div>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker6" formControlName="containmentReqdDate" appFocusOnEnter
+                        tabIndex="17">
+                    <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                    <mat-datepicker #picker6></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <b> {{'CAPAdetails.solutionInspectedDate' | translate }} </b>
+                <div class="d-flex">
+                    <mat-checkbox class="mt-5" formControlName="solutionInspected" appFocusOnEnter tabIndex="18">non
+                        Numaric
+                    </mat-checkbox>
+                </div>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker7" formControlName="solutionInspectedDate" appFocusOnEnter
+                        tabIndex="19">
+                    <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+                    <mat-datepicker #picker7></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field class="form-element">
+                <input matInput placeholder="{{'CAPAdetails.decfectDescription' | translate }}"
+                    formControlName="decfectDescription" appFocusOnEnter tabIndex="20">
+            </mat-form-field>
+
+            <mat-form-field class="form-element">
+                <input matInput placeholder="{{'CAPAdetails.defectCasuseResp' | translate }}"
+                    formControlName="defectCasuseResp" appFocusOnEnter tabIndex="21">
+            </mat-form-field>
+
+            <div>
+                <b> {{'CAPAdetails.longTermSolution' | translate }} </b>
+                <mat-form-field class="form-element">
+                    <input matInput formControlName="shortTermSolution" appFocusOnEnter tabIndex="22">
+                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <input matInput 
+                            formControlName="shortTermSolutionResp" appFocusOnEnter tabIndex="23">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker8" formControlName="shortTermSolutionDate"
+                            appFocusOnEnter tabIndex="24">
+                        <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
+                        <mat-datepicker #picker8></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div>
+                <b> {{'CAPAdetails.longTermSolution' | translate }} </b>
+                <mat-form-field class="form-element">
+                    <input matInput formControlName="longTermSolution" appFocusOnEnter tabIndex="25">
+                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <input matInput 
+                            formControlName="longTermSolutionResp" appFocusOnEnter tabIndex="26">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker9" formControlName="longTermSolutionDate" appFocusOnEnter
+                            tabIndex="27">
+                        <mat-datepicker-toggle matSuffix [for]="picker9"></mat-datepicker-toggle>
+                        <mat-datepicker #picker9></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div>
+                <b> {{'CAPAdetails.identificationOfDelvrdMaterial' | translate }} </b>
+                <mat-form-field class="form-element">
+                    <input matInput placeholder="{{'CAPAdetails.identificationOfDelvrdMaterial' | translate }}"
+                        formControlName="identificationOfDelvrdMaterial" appFocusOnEnter tabIndex="28">
+                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <input matInput 
+                            formControlName="identificationOfDelvrdMaterialResp" appFocusOnEnter tabIndex="29">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker10" formControlName="identificationOfDelvrdMaterialDate"
+                            appFocusOnEnter tabIndex="30">
+                        <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
+                        <mat-datepicker #picker10></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div>
+                <b> {{'CAPAdetails.checkSuccessDelrdMaterail' | translate }} </b>
+                <mat-form-field class="form-element">
+                    <input matInput formControlName="checkSuccessDelrdMaterail" appFocusOnEnter tabIndex="31">
+                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <input matInput 
+                            formControlName="checkSuccessDelrdMaterailResp" appFocusOnEnter tabIndex="32">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker11" formControlName="checkSuccessDelrdMaterailDate"
+                            appFocusOnEnter tabIndex="33">
+                        <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
+                        <mat-datepicker #picker11></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div>
+                <b> {{'CAPAdetails.containmentAccess' | translate }} </b>
+                <mat-form-field class="form-element">
+                    <input matInput formControlName="containmentAccess" appFocusOnEnter tabIndex="34">
+                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <input matInput
+                            formControlName="containmentAccessResp" appFocusOnEnter tabIndex="35">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker12" formControlName="containmentAccessDate"
+                            appFocusOnEnter tabIndex="36">
+                        <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
+                        <mat-datepicker #picker12></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div>
+                <b> {{'CAPAdetails.custVerification' | translate }} </b>
+                <mat-form-field class="form-element">
+                    <input matInput placeholder="{{'CAPAdetails.custVerification' | translate }}"
+                        formControlName="custVerification" appFocusOnEnter tabIndex="37">
+                </mat-form-field>
+                <div>
+                    {{ 'CAPAdetails.pletionDate' | translate }}
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker13" formControlName="custVerificationDate"
+                            appFocusOnEnter tabIndex="38">
+                        <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
+                        <mat-datepicker #picker13></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="form-element p-2 d-flex justify-content-end">
+                <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+
+                    {{ 'COMMON.CANCEL' | translate }}
+                </button>
+                <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()">
+
+                    {{ 'COMMON.SAVE' | translate }}
+                </button>
+            </div>
+
+        </mat-card-content>
+
+    </form>
+
+</div>

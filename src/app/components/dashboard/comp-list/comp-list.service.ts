@@ -144,6 +144,7 @@ import { StructureCreationComponent } from './structurecreation/structurecreatio
 import { DispatchdetailsComponent } from './dispatchdetails/dispatchdetails.component';
 import { SalaryProcessComponent} from './salaryproces/salaryprocess.component';
 import { QuorantineComponent } from './quorantine/quorantine.component';
+import { CAPAdetailsComponent } from './capadetails/capadetails.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -726,6 +727,10 @@ export class CompListService {
         break;
         case 'quorantine':
         this.dynamicComp.component = QuorantineComponent;
+        return this.dynamicComp.component;
+        break;
+        case 'CAPAdetails':
+        this.dynamicComp.component = CAPAdetailsComponent;
         return this.dynamicComp.component;
         break;
       default:

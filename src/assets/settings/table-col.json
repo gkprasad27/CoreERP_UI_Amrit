@@ -2399,5 +2399,13 @@
     "saleOrderNo": "Sale Order Number",
     "materialDescription": "Material Description",
     "itemCode": "Item Code"
+  },
+  "CAPAdetails": {
+    "id": "Capanum",
+    "title": "Quorantine",
+    "tag": "Tag Name",
+    "saleOrderNo": "Sale Order Number",
+    "materialDescription": "Material Description",
+    "itemCode": "Item Code"
   }
 }

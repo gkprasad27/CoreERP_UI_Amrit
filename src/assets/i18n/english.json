@@ -2927,5 +2927,33 @@
     "QCRefNo": "QC Ref Number",
     "id": "CAPA Number",
     "capanum": "Capanum"
+  },
+  "CAPAdetails": {
+    "id": "Capanum",
+    "title": "CAPA Details",
+    "tag": "Tag Name",
+    "saleOrderNo": "Sale Order Number",
+    "materialDescription": "Material Description",
+    "dateOfDeadline": "Date Of Deadline monitoring",
+    "notificationNo": "Notification #",
+    "itemCode": "Item Code",
+    "complaintQty": "Complaint Qty",
+    "receivedPartsDate": "Parts Received",
+    "analysisBugunDate": "Analysis Bugun",
+    "defectCauseAcknowledgeDate": "Defect Cause Acknowledged",
+    "shortTermSolDate": "Short Term Solution",
+    "longTermSolDate": "Long Term Solution",
+    "containmentReqdDate": "Containment Required",
+    "solutionInspectedDate": "Solution Inspected",
+    "decfectDescription": "Decfect Description",
+    "defectCasuseResp": "Defect Cause",
+    "shortTermSolution": "Short-Term Solution",
+    "longTermSolution": "Long-Term Solution",
+    "identificationOfDelvrdMaterial": "Delvrd Material Identification",
+    "checkSuccessDelrdMaterail": "Check Success of Delrd Materail",
+    "containmentAccess": "Containment Action",
+    "custVerification": "Customer Verification",
+    "pletionDate": "Pletion Date"
+
   }
 }
