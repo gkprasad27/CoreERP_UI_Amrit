@@ -38,7 +38,7 @@ export class CAPAdetailsComponent {
       notificationNo : [null],
       notificationDate : [null],
       itemCode : [null],
-      materialDescription : [null],
+      // materialDescription : [null],
       complaintQty : [null],
       tag : [null],
 
@@ -64,6 +64,9 @@ export class CAPAdetailsComponent {
       solutionInspectedDate : [null],
 
       decfectDescription : [null],
+
+      defectCasuse : [null],
+      defectCasuseDate : [null],
       defectCasuseResp : [null],
 
       shortTermSolution : [null],
@@ -88,6 +91,7 @@ export class CAPAdetailsComponent {
 
       custVerification : [null],
       custVerificationDate : [null],
+      custVerificationResp : [null],
 
 
     });

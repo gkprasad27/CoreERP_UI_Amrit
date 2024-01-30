@@ -13,7 +13,7 @@
                     <input placeholder="{{ 'quorantine.tag' | translate }}" formControlName="tag" (input)="getInvoiceDetailList($event.target.value)"
                         (typeaheadOnSelect)="tagNameChange()" [typeahead]="getInvoiceDetail"
                         typeaheadOptionField='tagname' appFocusOnEnter tabIndex="1" class="form-control typeahead"
-                        [typeaheadItemTemplate]="customItemTemplate" >
+                        [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200">
                         <!-- [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200"> -->
                     <ng-template #customItemTemplate let-model="item">
                         <span> {{model.tagname}} </span> 

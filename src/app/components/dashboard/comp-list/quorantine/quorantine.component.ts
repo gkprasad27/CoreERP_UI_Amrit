@@ -61,28 +61,24 @@ export class QuorantineComponent {
       itemCode: obj?.materialCode,
       QCRefNo: obj?.qcRefNo,
       invoiceNumber: obj?.invoiceNo,
-      saleOrderNo: obj?.saleorder,
-      custoMer: obj?.custoMer,
-      custmerPO: obj?.custmerPO,
+      saleOrderNo: obj?.saleorder
     })
   
   }
 
   getInvoiceDetailList(value) {
-    debugger
   if (!this.commonService.checkNullOrUndefined(value) && value != '') {
       const getProductByProductCodeUrl = String.Join('/', this.apiConfigService.getInvoiceDetailList, value);
       this.apiService.apiGetRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
         response => {
           if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(response.response)) {
-              debugger
               this.spinner.hide();
               if (!this.commonService.checkNullOrUndefined(response.response['invoiceDetailsList'])) {
                 this.getInvoiceDetail = response.response['invoiceDetailsList'];
                 this.modelFormData.patchValue({
-                  custoMer: response.response['invoiceDetailsList']?.customerName,
-                  custmerPO: response.response['invoiceDetailsList']?.poNumber,
+                  custoMer: response.response['invoiceMasterList']?.customerName,
+                  custmerPO: response.response['invoiceMasterList']?.poNumber,
                 })
               }
             }
@@ -95,7 +91,6 @@ export class QuorantineComponent {
   }
 
   save() {
-    debugger
     if (this.modelFormData.invalid) {
       return;
     }

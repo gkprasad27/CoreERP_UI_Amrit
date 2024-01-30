@@ -273,7 +273,6 @@ export class PurchaseOrderComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
               let obj = { data: {}, data1: [] }
               if (this.formData.value.saleOrderType == 'Sale Order') {
                 obj.data = res.response['SaleOrderMasters'];
@@ -621,7 +620,6 @@ export class PurchaseOrderComponent implements OnInit {
               //   saleOrderNo: res.response['pomasters'].saleOrderNo ? +res.response['pomasters'].saleOrderNo : ''
               // })
               // this.sendDynTableData = { type: 'edit', data: res.response['poDetail'] };
-              debugger
               this.formData.disable();
               res.response['poDetail'].forEach((s: any, index: number) => {
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';

@@ -93,7 +93,6 @@ export class CompListComponent implements OnInit, OnDestroy {
     } else {
       if (this.tableUrl.tabScreen == 'True') {
         this.addOrEditService.editData = value;
-        debugger
         if (value.action == 'Add') {
           this.router.navigate([this.activatedRoute.snapshot['_routerState'].url, value.action]);
         } else if (value.action == 'Edit') {

@@ -76,7 +76,7 @@ export class StandardRateComponent implements OnInit {
       highlight: false,
       changed: true,
       id: [0],
-      action: 'edit',
+      action: 'editDelete',
       index: 0
     });
 
@@ -161,7 +161,7 @@ export class StandardRateComponent implements OnInit {
                   changed: false,
                   id: s.id,
                   instrument: s.instrument,
-                  action: 'edit',
+                  action: this.routeEdit ? 'edit' : 'editDelete',
                   index: index + 1
                 })
               })
@@ -219,7 +219,7 @@ export class StandardRateComponent implements OnInit {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'edit',
+      action: 'editDelete',
       id: 0
     });
   }

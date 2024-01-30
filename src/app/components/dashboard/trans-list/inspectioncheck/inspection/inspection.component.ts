@@ -118,7 +118,6 @@ export class InspectionComponent {
     this.data['inspectionType'] = 'Inspection';
     const arr = [];
     this.tableData.forEach((t: any) => {
-      debugger
       const keys = Object.keys(t);
       let obj = {};
       keys.forEach((k: any) => {

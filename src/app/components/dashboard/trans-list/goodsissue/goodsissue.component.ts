@@ -634,7 +634,7 @@ export class GoodsissueComponent implements OnInit {
 
   save() {
     // this.tableData = this.commonService.formatTableData(this.tableData, 0);
-    if (this.tableData.length == 0 && this.formData.invalid) {
+    if (this.tableData.length == 0 || this.formData.invalid) {
       return;
     }
 

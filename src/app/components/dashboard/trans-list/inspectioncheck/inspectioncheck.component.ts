@@ -714,7 +714,6 @@ export class InspectioncheckComponent implements OnInit {
         matQty: res.SaleorderMaster.matQty
       },
     }
-    debugger
     if (res.tagsDetail && res.tagsDetail.length) {
       res.tagsDetail.forEach((t: any, i: number) => {
         const tObj = {
@@ -791,7 +790,6 @@ export class InspectioncheckComponent implements OnInit {
 
     if (res.tagsDetail && res.tagsDetail.length) {
       res.tagsDetail.forEach((t: any, i: number) => {
-        debugger
         const tObj = {
           Parameter: t.parameter,
           [t.tagName]: t.result,
