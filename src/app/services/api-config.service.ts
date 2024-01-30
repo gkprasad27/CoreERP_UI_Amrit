@@ -396,6 +396,7 @@ export class ApiConfigService {
    getctcEmployeeList = `${this.environment.runtimeConfig.serverUrl}CTC/GetEmployeeList`;
    getStructures = `${this.environment.runtimeConfig.serverUrl}CTC/GetStructures`;
    getctcComponentsList = `${this.environment.runtimeConfig.serverUrl}payroll/ComponentMaster/GetComponentsList`;
+   getctcDetailList = `${this.environment.runtimeConfig.serverUrl}CTC/GetctcDetailList`;
    
    //Leaveopeningbalance
 

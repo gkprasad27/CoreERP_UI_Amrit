@@ -10,7 +10,7 @@ import { StatusCodes } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddOrEditService } from '../add-or-edit.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 ;
 @Component({
   selector: 'app-ctcbreakup',
@@ -29,6 +29,7 @@ export class CTCBreakupComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   formData: any;
+  routeEdit = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,8 +37,9 @@ export class CTCBreakupComponent implements OnInit {
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private spinner: NgxSpinnerService,
-    private addOrEditService: AddOrEditService,
+    public route: ActivatedRoute,
     private router: Router,
+    private addOrEditService: AddOrEditService,
     // public dialogRef: MatDialogRef<CTCBreakupComponent>,
   ) {
     this.modelFormData = this.formBuilder.group({
@@ -49,12 +51,17 @@ export class CTCBreakupComponent implements OnInit {
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
+      this.getctcDetailList();
+    }
+    if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
+      this.routeEdit = this.route.snapshot.params.value;
     }
   }
 
   ngOnInit() {
     this.getStructureList();
     this.getctcComponentsList();
+    
   }
 
   getStructureList() {
@@ -70,6 +77,31 @@ export class CTCBreakupComponent implements OnInit {
           }
           this.spinner.hide();
         });
+  }
+
+  getctcDetailList() {
+    const qsDetUrl = String.Join('/', this.apiConfigService.getctcDetailList, this.modelFormData.value.empCode);
+    this.apiService.apiGetRequest(qsDetUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response) && res.response['ctcDetailList'] && res.response['ctcDetailList'].length) {
+              const data = [...this.dataSource.data];
+              data.forEach((d: any) => {
+                const obj = res.response['ctcDetailList'].find((s: any) => s.componentCode == d.componentCode);
+                if (obj) {
+                  d.EarnDednAmount = obj.earnDednAmount
+                }
+              })
+              this.dataSource = new MatTableDataSource(data);
+              this.dataSource.paginator = this.paginator;
+            }
+              // this.tableData = res.response['ctcDetailList'];
+          }
+        });
+       
   }
   
   getStructures() {
