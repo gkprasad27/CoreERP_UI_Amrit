@@ -51,7 +51,6 @@ export class CTCBreakupComponent implements OnInit {
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
-      this.getctcDetailList();
     }
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
@@ -137,6 +136,10 @@ export class CTCBreakupComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.dataSource = new MatTableDataSource(res.response['ComponentTypesList']);
               this.dataSource.paginator = this.paginator;
+              
+              if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
+                this.getctcDetailList();
+              }
             }
           }
           this.spinner.hide();
