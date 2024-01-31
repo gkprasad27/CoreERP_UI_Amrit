@@ -41,6 +41,8 @@ export class CAPAdetailsComponent {
       // materialDescription : [null],
       complaintQty : [null],
       tag : [null],
+      saleOrderNo : [null],
+      custmerPO : [null],
 
       receivedParts : [null],
       receivedPartsDate : [null],
@@ -111,13 +113,25 @@ export class CAPAdetailsComponent {
         this.router.navigate(['/dashboard/master/CAPAdetails']);
       }
     });
-
   }
 
 
   cancel() {
     this.router.navigate(['/dashboard/master/CAPAdetails']);
   }
+
+  data: any;
+  print() {
+    this.data = this.modelFormData.value;
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('printData').innerHTML;
+      w.document.body.innerHTML = html;
+      this.data = null;
+      w.print();
+    }, 1000);
+  }
+
 
 
 }

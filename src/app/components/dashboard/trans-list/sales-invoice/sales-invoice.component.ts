@@ -83,6 +83,7 @@ export class SalesInvoiceComponent implements OnInit {
       saleOrderNo: ['', Validators.required],
       invoiceMasterId: 0,
       invoiceDate: [''],
+      customerCode: [''],
       customerName: [''],
       customerGstin: [''],
       // mobile: [''],
@@ -245,7 +246,8 @@ export class SalesInvoiceComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response.bpaList);
               this.formData.patchValue({
-                customerName: res.response.bpaList.name,
+                customerCode: res.response.bpaList.name,
+                customerName: res.response.bpaList.bpnumber,
                 customerGstin: res.response.bpaList.gstno,
               })
             }

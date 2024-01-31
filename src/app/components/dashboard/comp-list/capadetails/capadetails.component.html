@@ -1,10 +1,380 @@
+<div style="margin: 10px;" id="printData" *ngIf="data">
+    <div style="display: flex;">
+        <img src="/assets/images/header.jpg" style="height: 100px;width: 100%;">
+    </div>
+    <div style="-webkit-print-color-adjust: exact;background: #29166f;
+                height: 45px;text-align: center;color: white;align-items: center;display: flex;
+                justify-content: center;font-size: 30px;font-weight: 900;font-family: Segoe UI;">
+        <span> CORRECTIVE ACTION REPORT (CAR) </span>
+    </div>
+    <div
+        style="-webkit-print-color-adjust: exact;display: flex;justify-content: space-between;color: #736464;font-size: 22px;font-family: Calibri;font-weight: 900;padding: 12px 0px;">
+        <div> Customer </div>
+        <div> AQMS STANDARDS : 9001:2015 </div>
+        <div> Date : {{ data.addDate ? (data.addDate | date) : '' }} </div>
+    </div>
+    <div
+        style="-webkit-print-color-adjust: exact;display: flex;justify-content: space-between;color: #736464;font-size: 22px;font-family: Calibri;font-weight: 900;padding: 12px 0px;">
+        <div> {{ data.customerName }} </div>
+        <div> APPLICABLE 9001 CLAUSE </div>
+        <div> Dead line of monitoring date : {{ data.deadlineMonitorDate ? (data.deadlineMonitorDate | date) : '' }}
+        </div>
+    </div>
+    <hr>
+    <div style="-webkit-print-color-adjust: exact;color: #736464;
+    height: 45px;text-align: center;align-items: center;display: flex;
+    justify-content: center;font-size: 28px;font-weight: 600;font-family: Segoe UI;">
+        <span> STAGE MONITORING </span>
+    </div>
+    <div style="webkit-print-color-adjust: exact;display: flex;width: 100%;">
+        <div
+            style="webkit-print-color-adjust: exact;border: 1px solid #9d8e8e;text-align: center;margin: 10px;margin-left:0px;width: 22%;">
+            <div
+                style="-webkit-print-color-adjust: exact;color: gray;font-size: 15px;font-weight: 400;font-family: Segoe UI;height: 40px;">
+                PARTS RECEIVED</div>
+            <div>
+                <div *ngIf="data.receivedPartsDate"
+                    style="-webkit-print-color-adjust: exact;color: #458501;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    OK</div>
+                <div *ngIf="!data.receivedPartsDate"
+                    style="-webkit-print-color-adjust: exact;color: lightgray;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    NOT OK</div>
+                <div
+                    style="-webkit-print-color-adjust: exact;color: #736464;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    {{ data.receivedPartsDate ? (data.receivedPartsDate | date) : '' }} </div>
+            </div>
+        </div>
+        <div
+            style="webkit-print-color-adjust: exact;border: 1px solid #9d8e8e;text-align: center;margin: 10px;width: 22%;">
+            <div
+                style="-webkit-print-color-adjust: exact;color: gray;font-size: 15px;font-weight: 400;font-family: Segoe UI;height: 40px;">
+                ALANYSIS BEGUN</div>
+            <div>
+                <div *ngIf="data.analysisBugunDate"
+                    style="-webkit-print-color-adjust: exact;color: #458501;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    OK</div>
+                <div *ngIf="!data.analysisBugunDate"
+                    style="-webkit-print-color-adjust: exact;color: lightgray;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    NOT OK</div>
+                <div
+                    style="-webkit-print-color-adjust: exact;color: #736464;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    {{ data.analysisBugunDate ? (data.analysisBugunDate | date) : '' }}</div>
+            </div>
+        </div>
+        <div
+            style="webkit-print-color-adjust: exact;border: 1px solid #9d8e8e;text-align: center;margin: 10px;width: 22%;">
+            <div
+                style="-webkit-print-color-adjust: exact;color: gray;font-size: 15px;font-weight: 400;font-family: Segoe UI;height: 40px;">
+                DEFECT CAUSE ACKNOWLEDGED</div>
+            <div>
+                <div *ngIf="data.defectCasuseDate"
+                    style="-webkit-print-color-adjust: exact;color: #458501;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    OK</div>
+                <div *ngIf="!data.defectCasuseDate"
+                    style="-webkit-print-color-adjust: exact;color: lightgray;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    NOT OK</div>
+                <div
+                    style="-webkit-print-color-adjust: exact;color: #736464;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    {{ data.defectCasuseDate ? (data.defectCasuseDate | date) : '' }}
+                </div>
+            </div>
+        </div>
+        <div
+            style="webkit-print-color-adjust: exact;border: 1px solid #9d8e8e;text-align: center;margin: 10px;width: 22%;">
+            <div
+                style="-webkit-print-color-adjust: exact;color: gray;font-size: 15px;font-weight: 400;font-family: Segoe UI;height: 40px;">
+                SHORT-TERM SOLUTION</div>
+            <div>
+                <div *ngIf="data.shortTermSolutionDate"
+                    style="-webkit-print-color-adjust: exact;color: #458501;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    OK</div>
+                <div *ngIf="!data.shortTermSolutionDate"
+                    style="-webkit-print-color-adjust: exact;color: lightgray;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    NOT OK</div>
+                <div
+                    style="-webkit-print-color-adjust: exact;color: #736464;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    {{ data.shortTermSolutionDate ? (data.shortTermSolutionDate | date) : '' }}</div>
+            </div>
+        </div>
+        <div
+            style="webkit-print-color-adjust: exact;border: 1px solid #9d8e8e;text-align: center;margin: 10px;width: 22%;">
+            <div
+                style="-webkit-print-color-adjust: exact;color: gray;font-size: 15px;font-weight: 400;font-family: Segoe UI;height: 40px;">
+                LONG-TERM SOLUTION</div>
+            <div>
+                <div *ngIf="data.longTermSolutionDate"
+                    style="-webkit-print-color-adjust: exact;color: #458501;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    OK</div>
+                <div *ngIf="!data.longTermSolutionDate"
+                    style="-webkit-print-color-adjust: exact;color: lightgray;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    NOT OK</div>
+                <div
+                    style="-webkit-print-color-adjust: exact;color: #736464;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    {{ data.longTermSolutionDate ? (data.longTermSolutionDate | date) : '' }}
+                </div>
+            </div>
+        </div>
+        <div
+            style="webkit-print-color-adjust: exact;border: 1px solid #9d8e8e;text-align: center;margin: 10px;width: 22%;">
+            <div
+                style="-webkit-print-color-adjust: exact;color: gray;font-size: 15px;font-weight: 400;font-family: Segoe UI;height: 40px;">
+                CONTAINMENT REQUIRED </div>
+            <div>
+                <div *ngIf="data.containmentReqdDate"
+                    style="-webkit-print-color-adjust: exact;color: #458501;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    OK</div>
+                <div *ngIf="!data.containmentReqdDate"
+                    style="-webkit-print-color-adjust: exact;color: lightgray;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    NOT OK</div>
+                <div
+                    style="-webkit-print-color-adjust: exact;color: #736464;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    {{ data.containmentReqdDate ? (data.containmentReqdDate | date) : '' }}</div>
+            </div>
+        </div>
+        <div
+            style="webkit-print-color-adjust: exact;border: 1px solid #9d8e8e;text-align: center;margin: 10px;margin-right:0px;width: 22%;">
+            <div
+                style="-webkit-print-color-adjust: exact;color: gray;font-size: 15px;font-weight: 400;font-family: Segoe UI;height: 40px;">
+                SOLUTION INSPECTED</div>
+            <div>
+                <div *ngIf="data.solutionInspectedDate"
+                    style="-webkit-print-color-adjust: exact;color: #458501;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    OK</div>
+                <div *ngIf="!data.solutionInspectedDate"
+                    style="-webkit-print-color-adjust: exact;color: lightgray;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    NOT OK</div>
+                <div
+                    style="-webkit-print-color-adjust: exact;color: #736464;font-size: 15px;font-weight: 700;font-family: Segoe UI;">
+                    {{ data.solutionInspectedDate ? (data.solutionInspectedDate | date) : '' }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+                height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+        <span> 1. REFERENCE </span>
+    </div>
+    <div style="-webkit-print-color-adjust: exact;padding: 10px 40px;border: 1px solid #9d8e8e;margin-bottom: 10px;">
+        <div
+            style="-webkit-print-color-adjust: exact;display: flex;justify-content: space-between;color: #736464;font-size: 22px;font-family: Calibri;font-weight: 900;padding: 12px 0px;">
+            <div> Notification # : {{ data.notificationNo }} </div>
+            <div> {{ data.notificationDate ? (data.notificationDate | date) : '' }} </div>
+            <div> Comaplaint Qty : {{ data.complaintQty }} </div>
+        </div>
+        <div
+            style="-webkit-print-color-adjust: exact;display: flex;justify-content: space-between;color: #736464;font-size: 22px;font-family: Calibri;font-weight: 900;padding: 12px 0px;">
+            <div> Item Code : {{ data.itemCode }} </div>
+            <div> Material Description : {{ data.materialDescription }} </div>
+            <div> TAG : {{ data.tag }} </div>
+        </div>
+    </div>
+
+
+    <div style="-webkit-print-color-adjust: exact;display: flex; margin-bottom: 10px;">
+        <div style="width: 70%;margin-right: 10px;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> 2. DEFECT DESCRIPTION </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.decfectDescription }}
+            </div>
+        </div>
+        <div style="width: 30%;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> RESPONSIBLE </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+            </div>
+        </div>
+    </div>
+
+
+    <div style="-webkit-print-color-adjust: exact;display: flex; margin-bottom: 10px;">
+        <div style="width: 70%;margin-right: 10px;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> 3. DEFECT Cause </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.defectCause }}
+            </div>
+        </div>
+        <div style="width: 30%;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> RESPONSIBLE </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.defectCasuseResp }}
+            </div>
+        </div>
+    </div>
+
+    <div style="-webkit-print-color-adjust: exact;display: flex; margin-bottom: 10px;">
+        <div style="width: 70%;margin-right: 10px;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> 4. SHORT-TERM SOLUTION (Activities)
+                </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.shortTermSolution }}
+
+            </div>
+        </div>
+        <div style="width: 30%;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> RESPONSIBLE </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.shortTermSolutionResp }}
+
+            </div>
+        </div>
+    </div>
+
+    <div style="-webkit-print-color-adjust: exact;display: flex; margin-bottom: 10px;">
+        <div style="width: 70%;margin-right: 10px;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> 5. LONG-TERM SOLUTION (Tasks)
+                </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.longTermSolution }}
+
+            </div>
+        </div>
+        <div style="width: 30%;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> RESPONSIBLE </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.longTermSolutionResp }}
+
+            </div>
+        </div>
+    </div>
+
+    <div style="-webkit-print-color-adjust: exact;display: flex; margin-bottom: 10px;">
+        <div style="width: 70%;margin-right: 10px;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> 6. IDENTIFICATION OF DELIVERED MATERIAL
+                </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.identificationOfDelvrdMaterial }}
+
+            </div>
+        </div>
+        <div style="width: 30%;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> RESPONSIBLE </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.identificationOfDelvrdMaterialResp }}
+
+            </div>
+        </div>
+    </div>
+
+    <div style="-webkit-print-color-adjust: exact;display: flex; margin-bottom: 10px;">
+        <div style="width: 70%;margin-right: 10px;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> 7. CHECK SUCCESS OF DELIVERED MATERIAL
+                </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.checkSuccessDelrdMaterail }}
+
+            </div>
+        </div>
+        <div style="width: 30%;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> RESPONSIBLE </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.checkSuccessDelrdMaterailResp }}
+
+            </div>
+        </div>
+    </div>
+
+    <div style="-webkit-print-color-adjust: exact;display: flex; margin-bottom: 10px;">
+        <div style="width: 70%;margin-right: 10px;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> 8. CONTAINMENT ACTIONS(S)
+                </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.containmentAccess }}
+
+            </div>
+        </div>
+        <div style="width: 30%;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> RESPONSIBLE </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.containmentAccessResp }}
+
+            </div>
+        </div>
+    </div>
+
+    <div style="-webkit-print-color-adjust: exact;display: flex; margin-bottom: 10px;">
+        <div style="width: 70%;margin-right: 10px;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> 9. CUSTOMER VERIFICATION & COMPLAINT CLOSURE
+                </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.custVerification }}
+
+            </div>
+        </div>
+        <div style="width: 30%;">
+            <div style="-webkit-print-color-adjust: exact;background: #29166f;padding: 2px 14px;align-items: center;display: flex;
+            height: 35px;color: white;font-size: 20px;font-weight: 400;font-family: Segoe UI;">
+                <span> RESPONSIBLE </span>
+            </div>
+            <div style="-webkit-print-color-adjust: exact;padding: 10px 20px;border: 1px solid #9d8e8e;height: 40px;">
+                {{ data.custVerificationResp }}
+
+            </div>
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+</div>
+
 <div>
 
     <form [formGroup]="modelFormData" class="card p-2 mb-3" autocomplete="off">
 
         <mat-card class="mb-3">
 
-            <div class="d--flex p-1 mat-form-field-height">
+            <h6 style="padding: 15px;">
+                REFERENCE
+                <hr>
+            </h6>
+
+            <div class="d--flex px-3 mat-form-field-height">
+
 
 
                 <mat-form-field>
@@ -52,6 +422,18 @@
                         appFocusOnEnter tabIndex="7">
                 </mat-form-field>
 
+            </div>
+
+            <hr>
+
+            <h6 style="padding: 15px;">
+                STAGE MONITORING
+                <hr>
+            </h6>
+
+            <div class="d--flex px-3 mat-form-field-height">
+
+                
 
                 <mat-form-field>
                     <mat-label [translate]="'CAPAdetails.receivedPartsDate'"></mat-label>
@@ -301,12 +683,13 @@
 </div>
 
 <div class="form-element p-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
-
+    <button class="mx-2" mat-raised-button (click)="print()" class="button-color-bule mx-3 text-white">
+        <mat-icon>print</mat-icon> Print
+    </button>
+    <button mat-raised-button class="button-color-red text-white mx-3" (click)="cancel()">
         {{ 'COMMON.CANCEL' | translate }}
     </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()">
-
+    <button mat-raised-button type="submit" class="button-color-bule text-white mx-3" (click)="save()">
         {{ 'COMMON.SAVE' | translate }}
     </button>
 </div>
