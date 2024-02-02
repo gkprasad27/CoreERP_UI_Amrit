@@ -19,7 +19,8 @@
     "RETURN": "Reverse",
     "BACK": "Back",
     "REJECT": "Reject",
-    "APPROVE": "Approve"
+    "APPROVE": "Approve",
+    "COMPANYCODE": "Company Code"
   },
   "LOGIN": {
     "USERNAME": "Username",
@@ -2956,5 +2957,16 @@
     "custVerification": "Customer Verification",
     "pletionDate": "Pletion Date"
 
+  },
+  "salesanalysis": {
+    "companyName": "Company Name",
+    "invoiceDate": "Invoice Date",
+    "invoiceNo": "Invoice No",
+    "productcode": "Product Code",
+    "qty": "Qty",
+    "rate": "Rate",
+    "grossAmount": "Gross Amount",
+    "taxamount": "Tax Amount",
+    "totalamount": "Total Amount"
   }
 }
