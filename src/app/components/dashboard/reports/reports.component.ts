@@ -115,8 +115,7 @@ export class ReportsComponent {
 
 
   print() {
-    // const getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.getComponentData.url, this.modelFormData.value.fromDate, this.modelFormData.value.toDate, this.modelFormData.value.companyCode);
-    const getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetSalesReport/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
+    const getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
         response => {
