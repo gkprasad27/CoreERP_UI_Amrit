@@ -49,8 +49,8 @@ export class ReportsComponent {
     this.model();
     this.getcompaniesList();
     activatedRoute.params.subscribe(params => {
-      debugger
       this.routeParam = params.id
+      this.reset();
       this.getParameters(params.id);
     });
   }
@@ -62,6 +62,18 @@ export class ReportsComponent {
       fromDate: [null],
       toDate: [null],
     });
+    this.setValidator();
+  }
+
+  setValidator() {
+    
+    if (this.routeParam == 'materialinward') {
+      this.modelFormData.controls['selected'].removeValidators(Validators.required);
+      this.modelFormData.controls['selected'].updateValueAndValidity();
+    } else {
+      this.modelFormData.controls['selected'].addValidators(Validators.required);
+      this.modelFormData.controls['selected'].updateValueAndValidity();
+    }
   }
 
   getcompaniesList() {
@@ -81,7 +93,6 @@ export class ReportsComponent {
   }
 
   getParameters(id) {
-    debugger
     const getUrl = String.Join('/', this.apiConfigService.getComponentInfo, id);
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
@@ -97,6 +108,11 @@ export class ReportsComponent {
   }
 
   ngOnInit() {
+  }
+
+  reset() {
+    this.modelFormData.reset();
+    this.setValidator();
   }
 
   search() {
@@ -115,14 +131,18 @@ export class ReportsComponent {
 
 
   print() {
-    const getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
+    let getUrl
+    if (this.routeParam == 'materialinward') {
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
+    } else {
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
+    }
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
-              debugger
               const keys = [];
               const tableResp = res.response[this.getComponentData.listName];
               tableResp.forEach(obj => {
@@ -134,8 +154,6 @@ export class ReportsComponent {
                 keys.push(cols);
               });
               this.data = keys;
-
-
               setTimeout(() => {
                 var w = window.open();
                 var html = document.getElementById('printData').innerHTML;

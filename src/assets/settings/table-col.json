@@ -2418,5 +2418,16 @@
     "grossAmount": "grossAmount",
     "taxamount": "taxamount",
     "totalamount": "totalamount"
+  },
+  "purchaseanalysis": {
+    "companyName": "companyName",
+    "invoiceDate": "Date",
+    "invoiceNo": "invoiceNo",
+    "productcode": "productcode",
+    "qty": "qty",
+    "rate": "rate",
+    "grossAmount": "grossAmount",
+    "taxamount": "taxamount",
+    "totalamount": "totalamount"
   }
 }

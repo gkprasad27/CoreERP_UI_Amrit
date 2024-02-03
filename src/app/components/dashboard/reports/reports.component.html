@@ -1,23 +1,24 @@
 <div style="margin: 10px;" id="printData" *ngIf="data && data.length">
 
-    <!-- <div style="display: flex;">
+    <div style="display: flex;">
         <img src="/assets/images/header.jpg" style="height: 100px;
-        width: 100%;">
+          width: 65%;">
         <div style="padding: 24px;
-        border-top: 1px solid black;
-        -webkit-print-color-adjust: exact;
-        color: white;
-        font-size: 20px;
-        width: 35%;
-        align-items: center;
-        justify-content: space-around;
-        display: flex;
-        height: 50px;
-        flex-direction: column;
-    ">
+          border-top: 1px solid black;
+          -webkit-print-color-adjust: exact;
+          background: rgb(22 106 132) !important;
+          color: white;
+          font-size: 20px;
+          width: 35%;
+          justify-content: space-around;
+          display: flex;
+          height: 50px;
+          flex-direction: column;
+      ">
+            <span style="font-size: 15px;font-weight: 400;font-family: Segoe UI;background: #8180c3;width: 70%;padding: 8px;"> Sales Analsyss </span>
+            <span style="font-size: 35px;font-weight: 700;font-family: Segoe UI;text-align: center;"> Report </span>
         </div>
-
-    </div> -->
+    </div>
 
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
@@ -42,10 +43,10 @@
     <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;">
         <table style="width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
             <thead>
-                <tr >
+                <tr>
                     <th *ngFor="let keys of data[0]"
                         style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                         {{ ( routeParam + '.' + keys.label) | translate }} </th>
+                        {{ ( routeParam + '.' + keys.label) | translate }} </th>
                 </tr>
             </thead>
             <tbody>
@@ -55,7 +56,7 @@
                         <span *ngIf="key.type == 'Date';else other_content">
                             {{ key.val ? (key.val | date): '' }}
                         </span>
-                        <ng-template #other_content><span > {{ key.val }} </span></ng-template>
+                        <ng-template #other_content><span> {{ key.val }} </span></ng-template>
                     </td>
                 </tr>
             </tbody>
@@ -63,7 +64,7 @@
     </div>
 
 
-<!-- 
+    <!-- 
     <div style="text-align: center;">
         <img src="/assets/images/footer.jpg" style="height: 100px;
         width: 20%;">
@@ -93,7 +94,7 @@
                 </mat-form-field>
 
 
-                <div class="p-2 range-picker">
+                <div class="p-2 range-picker" *ngIf="routeParam != 'materialinward'">
                     <input type="text" ngxDaterangepickerMd startKey="start"
                         [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}" endKey="end" placeholder="Choose date"
                         formControlName="selected" class="form-control" />
@@ -106,8 +107,11 @@
                 </div>
 
                 <div class="p-2 my-3 ms-5">
-                    <button mat-raised-button class="button-color-bule text-white" (click)="search()">
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()">
                         {{ "COMMON.PRINT" | translate }}
+                    </button>
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="reset()">
+                        {{ "COMMON.RESET" | translate }}
                     </button>
                 </div>
 

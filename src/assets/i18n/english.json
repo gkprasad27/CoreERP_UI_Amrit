@@ -2959,6 +2959,7 @@
 
   },
   "salesanalysis": {
+    "title": "Sales Analysis",
     "companyName": "Company Name",
     "invoiceDate": "Invoice Date",
     "invoiceNo": "Invoice No",
@@ -2968,5 +2969,16 @@
     "grossAmount": "Gross Amount",
     "taxamount": "Tax Amount",
     "totalamount": "Total Amount"
+  },
+  "purchaseanalysis": {
+    "companyName": "companyName",
+    "invoiceDate": "Invoice Date",
+    "invoiceNo": "invoiceNo",
+    "productcode": "productcode",
+    "qty": "qty",
+    "rate": "rate",
+    "grossAmount": "grossAmount",
+    "taxamount": "taxamount",
+    "totalamount": "totalamount"
   }
 }
