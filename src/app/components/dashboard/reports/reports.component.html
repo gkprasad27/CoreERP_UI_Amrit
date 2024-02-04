@@ -10,12 +10,13 @@
           color: white;
           font-size: 20px;
           width: 35%;
+          text-align: center;
           justify-content: space-around;
           display: flex;
           height: 50px;
           flex-direction: column;
       ">
-            <span style="font-size: 15px;font-weight: 400;font-family: Segoe UI;background: #8180c3;width: 70%;padding: 8px;"> Sales Analsyss </span>
+            <span style="font-size: 15px;font-weight: 400;font-family: Segoe UI;padding: 8px;"> {{ ( routeParam + '.' + 'title') | translate }}  </span>
             <span style="font-size: 35px;font-weight: 700;font-family: Segoe UI;text-align: center;"> Report </span>
         </div>
     </div>
@@ -26,12 +27,12 @@
             <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{
                 modelFormData.value.companyCode }} </span>
         </div>
-        <div style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
+        <div *ngIf="routeParam != 'stockvaluation'" style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"> From Date </b>
             <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{
                 modelFormData.value.fromDate }} </span>
         </div>
-        <div style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
+        <div *ngIf="routeParam != 'stockvaluation'" style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"> To Date </b>
             <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{
                 modelFormData.value.toDate }} </span>
@@ -94,7 +95,7 @@
                 </mat-form-field>
 
 
-                <div class="p-2 range-picker" *ngIf="routeParam != 'materialinward'">
+                <div class="p-2 range-picker" *ngIf="routeParam != 'stockvaluation'">
                     <input type="text" ngxDaterangepickerMd startKey="start"
                         [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}" endKey="end" placeholder="Choose date"
                         formControlName="selected" class="form-control" />

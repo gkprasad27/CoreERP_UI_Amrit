@@ -2972,7 +2972,6 @@
   },
   "purchaseanalysis": {
     "title": "Purchase Analysis",
-    "companyName": "companyName",
     "purchaseOrderDate": "Invoice Date",
     "purchaseOrderNumber": "PO Number",
     "materialCode": "Material Code",
@@ -2994,13 +2993,13 @@
     "totalamount": "Total Amount"
   },
   "materialinward": {
-    "companyName": "companyName",
-    "ReceivedDate": "ReceivedDate",
-    "InvoiceNo": "InvoiceNo",
+    "title": "Material Inward",
+    "receivedDate": "Received Date",
+    "invoiceNo": "InvoiceNo",
     "materialCode": "Material Code",
     "materialName": "Material Name",
-    "ReceivedQty": "ReceivedQty",
-    "Netweight": "Netweight",
-    "LotNo": "LotNo"
+    "receivedQty": "Received Qty",
+    "netweight": "Net Weight",
+    "lotNo": "Lot No"
   }
 }

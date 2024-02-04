@@ -67,7 +67,7 @@ export class ReportsComponent {
 
   setValidator() {
     
-    if (this.routeParam == 'materialinward') {
+    if (this.routeParam == 'stockvaluation') {
       this.modelFormData.controls['selected'].removeValidators(Validators.required);
       this.modelFormData.controls['selected'].updateValueAndValidity();
     } else {
@@ -120,7 +120,7 @@ export class ReportsComponent {
       this.submitted = true;
       return;
     }
-    if (!this.commonService.checkNullOrUndefined(this.modelFormData.value.selected)) {
+    if (!this.commonService.checkNullOrUndefined(this.modelFormData.value.selected) && this.modelFormData.value.selected.start) {
       this.modelFormData.patchValue({
         fromDate: this.commonService.formatDateValue(this.modelFormData.value.selected.start.$d),
         toDate: this.commonService.formatDateValue(this.modelFormData.value.selected.end.$d)
@@ -132,7 +132,7 @@ export class ReportsComponent {
 
   print() {
     let getUrl
-    if (this.routeParam == 'materialinward') {
+    if (this.routeParam == 'stockvaluation') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
