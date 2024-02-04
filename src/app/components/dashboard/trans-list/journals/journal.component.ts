@@ -67,7 +67,7 @@ export class JournalComponent implements OnInit {
   ngOnInit() {
     this.formDataGroup();
     this.getCompanyList();
-    this.getfunctionaldeptList();
+    //this.getfunctionaldeptList();
     this.formData.controls['voucherNumber'].disable();
   }
 
@@ -103,7 +103,7 @@ export class JournalComponent implements OnInit {
           value: 0, type: 'autoInc', width: 10, disabled: true
         },
         glaccount: {
-          value: null, type: 'dropdown', list: this.glAccountList, id: 'id', text: 'text', displayMul: true, width: 100, primary: true
+          value: null, type: 'dropdown', list: this.glAccountList, id: 'id', text: 'text', displayMul: true, width: 200, primary: true
         },
         accountingIndicator: {
           value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100, disabled: false
@@ -123,48 +123,48 @@ export class JournalComponent implements OnInit {
         igstamount: {
           value: 0, type: 'number', disabled: true, width: 75
         },
-        ugstamount: {
-          value: 0, type: 'number', disabled: true, width: 75
-        },
-        referenceNo: {
-          value: null, type: 'number', maxLength: 50, width: 75
-        },
-        referenceDate: {
-          value: new Date(), type: 'datepicker', width: 100
-        },
-        functionalDept: {
-          value: null, type: 'dropdown', list: this.functionaldeptList, id: 'code', text: 'description', displayMul: false, width: 100
-        },
-        profitCenter: {
-          value: null, type: 'dropdown', list: this.profitCenterList, id: 'id', text: 'text', displayMul: false, width: 100
-        },
-        segment: {
-          value: null, type: 'dropdown', list: this.segmentList, id: 'id', text: 'name', displayMul: false, width: 100
-        },
+        // ugstamount: {
+        //   value: 0, type: 'number', disabled: true, width: 75
+        // },
+        // referenceNo: {
+        //   value: null, type: 'number', maxLength: 50, width: 75
+        // },
+        // referenceDate: {
+        //   value: new Date(), type: 'datepicker', width: 100
+        // },
+        // functionalDept: {
+        //   value: null, type: 'dropdown', list: this.functionaldeptList, id: 'code', text: 'description', displayMul: false, width: 100
+        // },
+        // profitCenter: {
+        //   value: null, type: 'dropdown', list: this.profitCenterList, id: 'id', text: 'text', displayMul: false, width: 100
+        // },
+        // segment: {
+        //   value: null, type: 'dropdown', list: this.segmentList, id: 'id', text: 'name', displayMul: false, width: 100
+        // },
         bttypes: {
-          value: null, type: 'dropdown', list: this.btList, id: 'code', text: 'description', displayMul: false, width: 100
+          value: null, type: 'dropdown', list: this.btList, id: 'code', text: 'description', displayMul: false, width: 150
         },
-        costCenter: {
-          value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
-        },
-        narration: {
-          value: null, type: 'text', width: 100, maxLength: 50
-        },
-        workBreakStructureElement: {
-          value: null, type: 'dropdown', list: this.wbsList, id: 'id', text: 'text', displayMul: false, width: 100
-        },
-        netWork: {
-          value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
-        },
+        // costCenter: {
+        //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
+        // },
+        // narration: {
+        //   value: null, type: 'text', width: 100, maxLength: 50
+        // },
+        // workBreakStructureElement: {
+        //   value: null, type: 'dropdown', list: this.wbsList, id: 'id', text: 'text', displayMul: false, width: 100
+        // },
+        // netWork: {
+        //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
+        // },
         orderNo: {
           value: null, type: 'dropdown', list: this.ordertypeList, id: 'orderType', text: 'description', displayMul: false, width: 100
         },
-        fundCenter: {
-          value: null, type: 'dropdown', list: this.fcList, id: 'code', text: 'description', displayMul: false, width: 100
-        },
-        commitment: {
-          value: null, type: 'dropdown', list: this.citemList, id: 'code', text: 'description', displayMul: false, width: 100
-        },
+        // fundCenter: {
+        //   value: null, type: 'dropdown', list: this.fcList, id: 'code', text: 'description', displayMul: false, width: 100
+        // },
+        // commitment: {
+        //   value: null, type: 'dropdown', list: this.citemList, id: 'code', text: 'description', displayMul: false, width: 100
+        // },
         hsnsac: {
           value: null, type: 'dropdown', list: this.hsnsacList, id: 'code', text: 'description', displayMul: false, width: 100
         },
@@ -207,24 +207,24 @@ export class JournalComponent implements OnInit {
               this.companyList = res.response['companiesList'];
             }
           }
-          this.getBranchList();
-        });
-  }
-
-  getBranchList() {
-    const branchUrl = String.Join('/', this.apiConfigService.getBranchList);
-    this.apiService.apiGetRequest(branchUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.branchList = res.response['branchsList'];
-            }
-          }
           this.getTransVoucherClassList();
         });
   }
+
+  // getBranchList() {
+  //   const branchUrl = String.Join('/', this.apiConfigService.getBranchList);
+  //   this.apiService.apiGetRequest(branchUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.branchList = res.response['branchsList'];
+  //           }
+  //         }
+  //         this.getTransVoucherClassList();
+  //       });
+  // }
 
   getTransVoucherClassList() {
     const voucherClassList = String.Join('/', this.apiConfigService.getvocherclassList);
@@ -271,19 +271,19 @@ export class JournalComponent implements OnInit {
         });
   }
 
-  getfunctionaldeptList() {
-    const taxCodeUrl = String.Join('/', this.apiConfigService.getfunctionaldeptList);
-    this.apiService.apiGetRequest(taxCodeUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.functionaldeptList = res.response['fdeptList'];
-            }
-          }
-        });
-  }
+  // getfunctionaldeptList() {
+  //   const taxCodeUrl = String.Join('/', this.apiConfigService.getfunctionaldeptList);
+  //   this.apiService.apiGetRequest(taxCodeUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.functionaldeptList = res.response['fdeptList'];
+  //           }
+  //         }
+  //       });
+  // }
 
   getTaxRatesList() {
     const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);
@@ -296,24 +296,24 @@ export class JournalComponent implements OnInit {
               this.taxCodeList = res.response['TaxratesList'];
             }
           }
-          this.getProfitCentersList();
-        });
-  }
-
-  getProfitCentersList() {
-    const profCentUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
-    this.apiService.apiGetRequest(profCentUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.profitCenterList = res.response['profitCenterList'];
-            }
-          }
           this.getBusienessTransactionTypeList();
         });
   }
+
+  // getProfitCentersList() {
+  //   const profCentUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
+  //   this.apiService.apiGetRequest(profCentUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.profitCenterList = res.response['profitCenterList'];
+  //           }
+  //         }
+  //         this.getBusienessTransactionTypeList();
+  //       });
+  // }
 
   getBusienessTransactionTypeList() {
     const segUrl = String.Join('/', this.apiConfigService.getBusienessTransactionTypeList);
@@ -326,24 +326,24 @@ export class JournalComponent implements OnInit {
               this.btList = res.response['bpttList'];
             }
           }
-          this.getSegments();
-        });
-  }
-
-  getSegments() {
-    const segUrl = String.Join('/', this.apiConfigService.getSegmentList);
-    this.apiService.apiGetRequest(segUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.segmentList = res.response['segmentList'];
-            }
-          }
           this.getHsnSacList();
         });
   }
+
+  // getSegments() {
+  //   const segUrl = String.Join('/', this.apiConfigService.getSegmentList);
+  //   this.apiService.apiGetRequest(segUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.segmentList = res.response['segmentList'];
+  //           }
+  //         }
+  //         this.getHsnSacList();
+  //       });
+  // }
 
   getHsnSacList() {
     const segUrl = String.Join('/', this.apiConfigService.getHsnSacList);
@@ -356,54 +356,54 @@ export class JournalComponent implements OnInit {
               this.hsnsacList = res.response['hsnsacList'];
             }
           }
-          this.getWbsList();
-        });
-  }
-
-
-
-  getWbsList() {
-    const segUrl = String.Join('/', this.apiConfigService.getwbselement);
-    this.apiService.apiGetRequest(segUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.wbsList = res.response['wbsList'];
-            }
-          }
-          this.getFundCenterList();
-        });
-  }
-  getFundCenterList() {
-    const fcUrl = String.Join('/', this.apiConfigService.getfundcenterList);
-    this.apiService.apiGetRequest(fcUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.fcList = res.response['fcList'];
-            }
-          }
-          this.getCommitmentList();
-        });
-  }
-  getCommitmentList() {
-    const cmntUrl = String.Join('/', this.apiConfigService.getCommitmentList);
-    this.apiService.apiGetRequest(cmntUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.citemList = res.response['citemList'];
-            }
-          }
           this.getordernoList();
         });
   }
+
+
+
+  // getWbsList() {
+  //   const segUrl = String.Join('/', this.apiConfigService.getwbselement);
+  //   this.apiService.apiGetRequest(segUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.wbsList = res.response['wbsList'];
+  //           }
+  //         }
+  //         this.getFundCenterList();
+  //       });
+  // }
+  // getFundCenterList() {
+  //   const fcUrl = String.Join('/', this.apiConfigService.getfundcenterList);
+  //   this.apiService.apiGetRequest(fcUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.fcList = res.response['fcList'];
+  //           }
+  //         }
+  //         this.getCommitmentList();
+  //       });
+  // }
+  // getCommitmentList() {
+  //   const cmntUrl = String.Join('/', this.apiConfigService.getCommitmentList);
+  //   this.apiService.apiGetRequest(cmntUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.citemList = res.response['citemList'];
+  //           }
+  //         }
+  //         this.getordernoList();
+  //       });
+  // }
   getordernoList() {
     const onoUrl = String.Join('/', this.apiConfigService.getordernolist);
     this.apiService.apiGetRequest(onoUrl)
@@ -415,28 +415,31 @@ export class JournalComponent implements OnInit {
               this.ordertypeList = res.response['ordertypeList'];
             }
           }
-          this.getCostcenters();
-        });
-  }
-
-  getCostcenters() {
-    const costCenUrl = String.Join('/', this.apiConfigService.getCostCentersList);
-    this.apiService.apiGetRequest(costCenUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.costCenterList = res.response['costcenterList'];
-            }
-          }
           this.dynTableProps = this.tablePropsFunc();
           if (this.routeEdit != '') {
             this.getJVDetail(this.routeEdit);
           }
         });
   }
+
+  // getCostcenters() {
+  //   const costCenUrl = String.Join('/', this.apiConfigService.getCostCentersList);
+  //   this.apiService.apiGetRequest(costCenUrl)
+  //     .subscribe(
+  //       response => {
+  //         this.spinner.hide();
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.costCenterList = res.response['costcenterList'];
+  //           }
+  //         }
+  //         this.dynTableProps = this.tablePropsFunc();
+  //         if (this.routeEdit != '') {
+  //           this.getJVDetail(this.routeEdit);
+  //         }
+  //       });
+  // }
 
   voucherTypeSelect() {
     const record = this.voucherTypeList.find(res => res.id == this.formData.get('voucherClass').value)

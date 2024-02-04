@@ -132,7 +132,7 @@ export class MemoinvoiceComponent implements OnInit {
           value: 0, type: 'autoInc', width: 10, disabled: true
         },
         glaccount: {
-          value: null, type: 'dropdown', list: this.glAccountList, id: 'id', text: 'text', displayMul: true, width: 100
+          value: null, type: 'dropdown', list: this.glAccountList, id: 'id', text: 'text', displayMul: true, width: 200
         },
         accountingIndicator: {
           value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100
@@ -152,33 +152,33 @@ export class MemoinvoiceComponent implements OnInit {
         igstamount: {
           value: 0, type: 'number', disabled: true, width: 75
         },
-        ugstamount: {
-          value: 0, type: 'number', disabled: true, width: 75
-        },
-        referenceNo: {
-          value: null, type: 'number', width: 75
-        },
-        referenceDate: {
-          value: new Date(), type: 'datepicker', width: 100
-        },
+        // ugstamount: {
+        //   value: 0, type: 'number', disabled: true, width: 75
+        // },
+        // referenceNo: {
+        //   value: null, type: 'number', width: 75
+        // },
+        // referenceDate: {
+        //   value: new Date(), type: 'datepicker', width: 100
+        // },
         // functionalDept: {
         //   value: null, type: 'dropdown', list: this.functionaldeptList, id: 'code', text: 'description', displayMul: false, width: 100
         // },
-        profitCenter: {
-          value: null, type: 'dropdown', list: this.profitCenterList, id: 'id', text: 'text', displayMul: false, width: 100
-        },
-        segment: {
-          value: null, type: 'dropdown', list: this.segmentList, id: 'id', text: 'name', displayMul: false, width: 100
-        },
+        // profitCenter: {
+        //   value: null, type: 'dropdown', list: this.profitCenterList, id: 'id', text: 'text', displayMul: false, width: 100
+        // },
+        // segment: {
+        //   value: null, type: 'dropdown', list: this.segmentList, id: 'id', text: 'name', displayMul: false, width: 100
+        // },
         bttypes: {
-          value: null, type: 'dropdown', list: this.btList, id: 'code', text: 'description', displayMul: false, width: 100
+          value: null, type: 'dropdown', list: this.btList, id: 'code', text: 'description', displayMul: false, width: 150
         },
         // costCenter: {
         //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
         // },
-        narration: {
-          value: null, type: 'text', width: 100, maxLength: 50
-        },
+        // narration: {
+        //   value: null, type: 'text', width: 100, maxLength: 50
+        // },
         // workBreakStructureElement: {
         //   value: null, type: 'dropdown', list: this.wbsList, id: 'id', text: 'text', displayMul: false, width: 100
         // },
@@ -304,24 +304,24 @@ export class MemoinvoiceComponent implements OnInit {
               this.taxCodeList = res.response['TaxratesList'];
             }
           }
-          this.getProfitCentersList();
-        });
-  }
-
-  getProfitCentersList() {
-    const profCentUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
-    this.apiService.apiGetRequest(profCentUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.profitCenterList = res.response['profitCenterList'];
-            }
-          }
           this.getBusienessTransactionTypeList();
         });
   }
+
+  // getProfitCentersList() {
+  //   const profCentUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
+  //   this.apiService.apiGetRequest(profCentUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.profitCenterList = res.response['profitCenterList'];
+  //           }
+  //         }
+  //         this.getBusienessTransactionTypeList();
+  //       });
+  // }
   getBusienessTransactionTypeList() {
     const segUrl = String.Join('/', this.apiConfigService.getBusienessTransactionTypeList);
     this.apiService.apiGetRequest(segUrl)
@@ -333,23 +333,23 @@ export class MemoinvoiceComponent implements OnInit {
               this.btList = res.response['bpttList'];
             }
           }
-          this.getSegments();
-        });
-  }
-  getSegments() {
-    const segUrl = String.Join('/', this.apiConfigService.getSegmentList);
-    this.apiService.apiGetRequest(segUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.segmentList = res.response['segmentList'];
-            }
-          }
           this.getPartnerTypeList();
         });
   }
+  // getSegments() {
+  //   const segUrl = String.Join('/', this.apiConfigService.getSegmentList);
+  //   this.apiService.apiGetRequest(segUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.segmentList = res.response['segmentList'];
+  //           }
+  //         }
+  //         this.getPartnerTypeList();
+  //       });
+  // }
   // getfunctionaldeptList() {
   //   const taxCodeUrl = String.Join('/', this.apiConfigService.getfunctionaldeptList);
   //   this.apiService.apiGetRequest(taxCodeUrl)

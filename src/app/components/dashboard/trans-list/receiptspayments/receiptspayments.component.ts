@@ -246,29 +246,29 @@ export class ReceiptspaymentsComponent implements OnInit {
               }
             }
           }
-          this.getBranchList();
-        });
-  }
-
-  getBranchList() {
-    const branchUrl = String.Join('/', this.apiConfigService.getBranchList);
-    this.apiService.apiGetRequest(branchUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.branchList = res.response['branchsList'];
-              if (this.routeEdit == '') {
-                this.formData.patchValue({
-                  branch: this.branchList.length ? this.branchList[0].id : null
-                })
-              }
-            }
-          }
           this.getTransVoucherClassList();
         });
   }
+
+  // getBranchList() {
+  //   const branchUrl = String.Join('/', this.apiConfigService.getBranchList);
+  //   this.apiService.apiGetRequest(branchUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.branchList = res.response['branchsList'];
+  //             if (this.routeEdit == '') {
+  //               this.formData.patchValue({
+  //                 branch: this.branchList.length ? this.branchList[0].id : null
+  //               })
+  //             }
+  //           }
+  //         }
+  //         this.getTransVoucherClassList();
+  //       });
+  // }
 
   getTransVoucherClassList() {
     const voucherClassList = String.Join('/', this.apiConfigService.getvocherclassList);
@@ -319,7 +319,7 @@ export class ReceiptspaymentsComponent implements OnInit {
 
             }
           }
-          this.getfunctionaldeptList();
+          this.getTaxRatesList();
         });
   }
 
@@ -346,20 +346,20 @@ export class ReceiptspaymentsComponent implements OnInit {
 
 
 
-  getfunctionaldeptList() {
-    const taxCodeUrl = String.Join('/', this.apiConfigService.getpurchaseinvoiceList);
-    this.apiService.apiGetRequest(taxCodeUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.functionaldeptList = res.response['purchaseinvoiceList'];
-            }
-          }
-          this.getTaxRatesList();
-        });
-  }
+  // getfunctionaldeptList() {
+  //   const taxCodeUrl = String.Join('/', this.apiConfigService.getpurchaseinvoiceList);
+  //   this.apiService.apiGetRequest(taxCodeUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.functionaldeptList = res.response['purchaseinvoiceList'];
+  //           }
+  //         }
+  //         this.getTaxRatesList();
+  //       });
+  // }
 
   getTaxRatesList() {
     const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);
@@ -372,39 +372,39 @@ export class ReceiptspaymentsComponent implements OnInit {
               this.taxCodeList = res.response['TaxratesList'];
             }
           }
-          this.getProfitCentersList();
-        });
-  }
-
-  getProfitCentersList() {
-    const profCentUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
-    this.apiService.apiGetRequest(profCentUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.profitCenterList = res.response['profitCenterList'];
-            }
-          }
-          this.getSegments();
-        });
-  }
-
-  getSegments() {
-    const segUrl = String.Join('/', this.apiConfigService.getSegmentList);
-    this.apiService.apiGetRequest(segUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.segmentList = res.response['segmentList'];
-            }
-          }
           this.getbpList();
         });
   }
+
+  // getProfitCentersList() {
+  //   const profCentUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
+  //   this.apiService.apiGetRequest(profCentUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.profitCenterList = res.response['profitCenterList'];
+  //           }
+  //         }
+  //         this.getSegments();
+  //       });
+  // }
+
+  // getSegments() {
+  //   const segUrl = String.Join('/', this.apiConfigService.getSegmentList);
+  //   this.apiService.apiGetRequest(segUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.segmentList = res.response['segmentList'];
+  //           }
+  //         }
+  //         this.getbpList();
+  //       });
+  // }
 
 
   getbpList() {
@@ -442,29 +442,32 @@ export class ReceiptspaymentsComponent implements OnInit {
               }
             }
           }
-          this.getCostcenters();
-        });
-  }
-
-
-  getCostcenters() {
-    const costCenUrl = String.Join('/', this.apiConfigService.getCostCentersList);
-    this.apiService.apiGetRequest(costCenUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.costCenterList = res.response['costcenterList'];
-            }
-          }
           if (this.routeEdit != '') {
             this.getreceiptpaymentDetail(this.routeEdit);
           }
           this.spinner.hide();
         });
   }
+
+
+  // getCostcenters() {
+  //   const costCenUrl = String.Join('/', this.apiConfigService.getCostCentersList);
+  //   this.apiService.apiGetRequest(costCenUrl)
+  //     .subscribe(
+  //       response => {
+  //         this.spinner.hide();
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.costCenterList = res.response['costcenterList'];
+  //           }
+  //         }
+  //         if (this.routeEdit != '') {
+  //           this.getreceiptpaymentDetail(this.routeEdit);
+  //         }
+  //         this.spinner.hide();
+  //       });
+  // }
 
 
   voucherTypeSelect() {
