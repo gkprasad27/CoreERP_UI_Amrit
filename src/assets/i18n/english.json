@@ -2971,14 +2971,36 @@
     "totalamount": "Total Amount"
   },
   "purchaseanalysis": {
+    "title": "Purchase Analysis",
     "companyName": "companyName",
-    "invoiceDate": "Invoice Date",
-    "invoiceNo": "invoiceNo",
-    "productcode": "productcode",
-    "qty": "qty",
-    "rate": "rate",
-    "grossAmount": "grossAmount",
-    "taxamount": "taxamount",
-    "totalamount": "totalamount"
+    "purchaseOrderDate": "Invoice Date",
+    "purchaseOrderNumber": "PO Number",
+    "materialCode": "Material Code",
+    "materialName": "Material Name",
+    "poQty": "Qty",
+    "rate": "Rate",
+    "totalTax": "Total Tax",
+    "amount": "Amount",
+    "total": "TotalAmount"
+  },
+  "stockvaluation": {
+    "title": "Stock Valuation",
+    "companyName": "Company Name",
+    "materialCode": "Material Code",
+    "materialName": "Material Name",    
+    "weight": "Weight",
+    "qty":" QTY",
+    "rate": "Rate",
+    "totalamount": "Total Amount"
+  },
+  "materialinward": {
+    "companyName": "companyName",
+    "ReceivedDate": "ReceivedDate",
+    "InvoiceNo": "InvoiceNo",
+    "materialCode": "Material Code",
+    "materialName": "Material Name",
+    "ReceivedQty": "ReceivedQty",
+    "Netweight": "Netweight",
+    "LotNo": "LotNo"
   }
 }
