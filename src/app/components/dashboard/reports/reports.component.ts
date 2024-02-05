@@ -145,6 +145,9 @@ export class ReportsComponent {
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
               const keys = [];
               const tableResp = res.response[this.getComponentData.listName];
+              if(res.response.SalesReportTotals && res.response[this.getComponentData.totals].length) {
+                tableResp.push(res.response[this.getComponentData.totals][0]);
+              }
               tableResp.forEach(obj => {
                 const cols = [];
                 Object.keys(this.environment.tableColumnsData[this.routeParam]).forEach(col => {

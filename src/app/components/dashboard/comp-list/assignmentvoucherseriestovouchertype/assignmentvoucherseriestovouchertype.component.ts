@@ -36,6 +36,7 @@ export class AssignmentVoucherSeriestoVoucherTypesComponent implements OnInit {
       voucherType: [null],
       voucherSeries: [null],
       lastNumber: null,
+      id: null,
       suffix: null
     });
 

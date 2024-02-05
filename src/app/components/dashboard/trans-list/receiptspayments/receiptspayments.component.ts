@@ -188,6 +188,7 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   puchaseinvoiceselect() {
+    debugger
     let data = [];
     let newData = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('partyAccount').value)) {
@@ -408,6 +409,7 @@ export class ReceiptspaymentsComponent implements OnInit {
 
 
   getbpList() {
+    debugger
     const costCenUrl = String.Join('/', this.apiConfigService.getBPList);
     this.apiService.apiGetRequest(costCenUrl)
       .subscribe(
@@ -415,7 +417,7 @@ export class ReceiptspaymentsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.bpList = res.response['bpList'];
+              this.bpList = res.response['BPList'];
             }
           }
           this.getPartnerTypeList();
@@ -436,12 +438,14 @@ export class ReceiptspaymentsComponent implements OnInit {
                 this.formData.patchValue({
                   bpcategory: this.bpTypeList.length ? this.bpTypeList[0].code : null
                 })
+                debugger
                 this.onbpChange();
                 this.accountSelect();
                 this.voucherTypeSelect();
               }
             }
           }
+          debugger
           if (this.routeEdit != '') {
             this.getreceiptpaymentDetail(this.routeEdit);
           }
