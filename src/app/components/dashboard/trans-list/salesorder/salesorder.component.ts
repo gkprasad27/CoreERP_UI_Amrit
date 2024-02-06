@@ -14,6 +14,7 @@ import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-
 import { TableComponent } from 'src/app/reuse-components';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-salesorder',
@@ -27,6 +28,20 @@ import { HttpClient } from '@angular/common/http';
 export class SalesorderComponent {
 
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
+
+
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings : IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
 
 
   // form control
@@ -237,11 +252,16 @@ export class SalesorderComponent {
         });
   }
 
-  customerCodeChange() {
-    const obj = this.customerList.find((c: any) => c.id == this.formData.value.customerCode);
+  customerCodeChange(event?: any) {
+    const obj = this.customerList.find((c: any) => c.id == (event ? event.id : this.formData.value.customerCode));
     this.formData.patchValue({
       gstNo: obj ? obj.gstNo : ''
     })
+    if(!event) {
+      this.formData.patchValue({
+        customerCode: [{ id: obj.id, text: obj.text}]
+      })
+    }
   }
 
   getCompanyList() {
@@ -408,6 +428,7 @@ export class SalesorderComponent {
     obj.poDate = obj.poDate ? this.datepipe.transform(obj.poDate, 'MM-dd-yyyy') : '';
     obj.dateofSupply = obj.dateofSupply ? this.datepipe.transform(obj.dateofSupply, 'MM-dd-yyyy') : '';
     obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
+    obj.customerCode = this.formData.value.customerCode[0].id;
     const arr = this.tableData;
     arr.forEach((a: any) => {
       a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';

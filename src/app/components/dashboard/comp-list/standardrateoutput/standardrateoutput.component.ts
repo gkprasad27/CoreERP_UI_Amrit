@@ -227,6 +227,8 @@ export class StandardRateComponent implements OnInit {
 
   editOrDeleteEvent(value) {
     if (value.action === 'Delete') {
+      this.tableComponent.defaultValues();
+      this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
     } else {
       this.formData1.patchValue(value.item);
     }
