@@ -357,7 +357,6 @@ export class MaterialrequisitionComponents implements OnInit {
   }
 
   downLoadFile() {
-    debugger
     const url = String.Join('/', this.apiConfigService.getFile, this.filePath);
     this.apiService.apiGetRequest(url)
       .subscribe(

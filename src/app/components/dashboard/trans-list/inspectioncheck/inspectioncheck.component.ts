@@ -308,7 +308,6 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   onEditEmit(event: any) {
-    debugger
     this.getQCissueDetail(event.saleOrderNumber, event.materialCode);
     this.getInspectionDetail(event.saleOrderNumber, event.materialCode);
   }
@@ -394,7 +393,6 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   downLoadFile() {
-    debugger
     const url = String.Join('/', this.apiConfigService.getFile, this.icmasters.filePath);
     this.apiService.apiGetRequest(url)
       .subscribe(
