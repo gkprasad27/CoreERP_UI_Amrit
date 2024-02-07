@@ -168,11 +168,17 @@
               <mat-option value="Assigned to QC"> Assigned to QC </mat-option>
             </mat-select>
           </mat-form-field>
+
+          <div *ngIf="filePath" class="mb-2">
+            <h6> {{ 'inspectioncheck.designDocument' | translate }} </h6>
+            <span class="underscore" (click)="downLoadFile()"> {{ filePath }} </span>
+          </div>
+
         </div>
 
 
-        
-        
+
+
       </div>
       <div class="mb-3 d-flex justify-content-end">
 
@@ -188,7 +194,8 @@
     </form>
 
     <div>
-      <app-table #tableRef class="table-css" [tableData]="tableData1"  [showButtons]="false"  (editOrDeleteEvent)="editOrDeleteEvent($event)">
+      <app-table #tableRef class="table-css" [tableData]="tableData1" [showButtons]="false"
+        (editOrDeleteEvent)="editOrDeleteEvent($event)">
       </app-table>
     </div>
 

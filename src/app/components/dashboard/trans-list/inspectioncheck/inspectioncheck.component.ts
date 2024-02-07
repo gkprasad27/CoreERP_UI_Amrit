@@ -308,6 +308,7 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   onEditEmit(event: any) {
+    debugger
     this.getQCissueDetail(event.saleOrderNumber, event.materialCode);
     this.getInspectionDetail(event.saleOrderNumber, event.materialCode);
   }
@@ -377,6 +378,7 @@ export class InspectioncheckComponent implements OnInit {
 
   getInspectionDetail(val, val1) {
     this.tableComponent.defaultValues();
+    this.icmasters = null;
     const jvDetUrl = String.Join('/', this.apiConfigService.getInspectionDetail, val1, val);
     this.apiService.apiGetRequest(jvDetUrl)
       .subscribe(
@@ -388,6 +390,17 @@ export class InspectioncheckComponent implements OnInit {
               this.icmasters = res.response['icmasters'];
             }
           }
+        });
+  }
+
+  downLoadFile() {
+    debugger
+    const url = String.Join('/', this.apiConfigService.getFile, this.icmasters.filePath);
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          window.open(response.response, '_blank');
         });
   }
 

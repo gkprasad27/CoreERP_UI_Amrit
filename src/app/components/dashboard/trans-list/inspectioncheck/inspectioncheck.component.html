@@ -488,6 +488,11 @@
             <input matInput formControlName="partDrgNo" appFocusOnEnter tabIndex="5">
           </mat-form-field>
 
+          <div *ngIf="icmasters?.filePath" class="mb-2">
+            <h6 >  {{ 'inspectioncheck.designDocument'  | translate  }}  </h6>
+            <span class="underscore" (click)="downLoadFile()"> {{ icmasters?.filePath }} </span>
+          </div>
+
           <!-- <mat-form-field>
                         <mat-label>{{'inspectioncheck.typeofWork' | translate }}</mat-label>
                         <mat-select formControlName="typeofWork" appFocusOnEnter tabIndex="1">

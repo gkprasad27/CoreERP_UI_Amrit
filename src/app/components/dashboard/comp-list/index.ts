@@ -144,3 +144,4 @@ export { HolidayComponent} from './holiday/holiday.component';
 export { SalaryProcessComponent} from './salaryproces/salaryprocess.component';
 export { QuorantineComponent } from './quorantine/quorantine.component';
 export { CAPAdetailsComponent } from './capadetails/capadetails.component';
+export { QcparamconfigurationComponent } from './qcparamconfiguration/qcparamconfiguration.component';

@@ -15,6 +15,7 @@ import { TableComponent } from 'src/app/reuse-components';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { PoHistoryComponent } from './po-history/po-history.component';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-purcahseorder',
@@ -72,6 +73,18 @@ export class PurchaseOrderComponent implements OnInit {
   materialCodeList = [];
 
   data: any;
+
+  dropdownSettings : IDropdownSettings = {
+    singleSelection: true,
+    idField: 'saleOrderNo',
+    textField: 'saleOrderNo',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
 
   constructor(
     private commonService: CommonService,
@@ -175,6 +188,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   toggle() {
+    debugger
     if (this.formData.value.saleOrderType == 'Sale Order') {
       this.getSaleOrderList();
     } else if (this.formData.value.saleOrderType == 'Master Saleorder') {
@@ -256,6 +270,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   getSaleOrderDetail() {
+    debugger
     this.tableComponent.defaultValues();
     let url = '';
     if (this.formData.value.saleOrderType == 'Sale Order') {
@@ -265,7 +280,7 @@ export class PurchaseOrderComponent implements OnInit {
     } else if (this.formData.value.saleOrderType == 'Bill of Material') {
       url = this.apiConfigService.getBOMDetail;
     }
-    const qsDetUrl = String.Join('/', url, this.formData.value.saleOrderNo);
+    const qsDetUrl = String.Join('/', url, this.formData.value.saleOrderNo[0].saleOrderNo);
     this.apiService.apiGetRequest(qsDetUrl)
       .subscribe(
         response => {
@@ -637,6 +652,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   getsaleOrdernoList() {
+    debugger
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderDetail, this.formData.get('saleOrderNo').value);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
@@ -841,6 +857,9 @@ export class PurchaseOrderComponent implements OnInit {
     // obj.quotationDate = obj.quotationDate ? this.datepipe.transform(obj.quotationDate, 'MM-dd-yyyy') : '';
     obj.purchaseOrderDate = obj.purchaseOrderDate ? this.datepipe.transform(obj.purchaseOrderDate, 'MM-dd-yyyy') : '';
     obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
+    if(typeof obj.saleOrderNo != 'string') {
+      obj.saleOrderNo = this.formData.value.saleOrderNo[0].id;
+    }
     const arr = this.tableData.filter((d: any) => d.changed);
 
     const requestObj = { poHdr: obj, poDtl: arr };

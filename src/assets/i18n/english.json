@@ -1681,6 +1681,13 @@
     "description": "Description",
     "type": "Type"
   },
+  "qcparamconfiguration": {
+    "title": "QC Param Configuration",
+    "paramName": "Param Name",
+    "product": "Product Type",
+    "sortOrder": "Sort Order",
+    "type": "Type"
+  },
   "fundcenter": {
     "title": "Fund Center",
     "code": "Code",
@@ -2165,6 +2172,7 @@
     "receivedQty": "Received QTY",
     "rejectedQty": "Rejected QTY",
     "plant": "Plant",
+    "designDocument": "Design Document",
     "location": "Location",
     "branch": "Branch",
     "movementTo": "Movement To",

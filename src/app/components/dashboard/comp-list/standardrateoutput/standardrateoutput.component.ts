@@ -17,6 +17,7 @@ interface Type {
   value: string;
   viewValue: string;
 }
+
 @Component({
   selector: 'app-standardrateoutput',
   templateUrl: './standardrateoutput.component.html',
@@ -44,6 +45,21 @@ export class StandardRateComponent implements OnInit {
 
   routeEdit = '';
 
+
+ProductType: Type[] =
+  [
+    { value: 'Pulley', viewValue: 'Pulley' },
+    { value: 'Taperlock Bush', viewValue: 'Taperlock Bush' },
+    { value: 'Adapter', viewValue: 'Adapter' },
+    { value: 'Coupling', viewValue: 'Coupling' },
+    { value: 'Belts', viewValue: 'Belts' },
+    { value: 'Forgings', viewValue: 'Forgings' },
+    { value: 'Castings', viewValue: 'Castings' },
+    { value: 'Flanges', viewValue: 'Flanges' },
+  ];
+
+  QCConfigDetailData: any[] = [];
+
   constructor(private commonService: CommonService,
     private addOrEditService: AddOrEditService,
     private formBuilder: FormBuilder,
@@ -62,6 +78,7 @@ export class StandardRateComponent implements OnInit {
     this.formData = this.formBuilder.group({
       code: [null, Validators.required],
       type: [null, Validators.required],
+      product: [''],
       materialCode: [null, Validators.required],
     });
 
@@ -125,6 +142,15 @@ export class StandardRateComponent implements OnInit {
         });
   }
 
+  onProductChange() {
+    this.tableData = [];
+    if (this.tableComponent) {
+      this.tableComponent.defaultValues();
+    }
+    const arr = this.QCConfigDetailData.filter((l: any) => l.product == this.formData.value.product);
+    this.tableData = arr;
+  }
+
   getCommitmentList(flag) {
     this.tableData = [];
     if (this.tableComponent) {
@@ -152,11 +178,12 @@ export class StandardRateComponent implements OnInit {
               }
               arr.forEach((s: any, index: number) => {
                 arr1.push({
-                  parameter: flag == 'edit' ? s.parameter : s.description,
+                  parameter: flag == 'edit' ? s.parameter : s.paramName,
                   uom: s.uom,
                   uomName: s.uomName,
                   spec: s.spec,
                   minValue: s.minValue,
+                  product: s.product,
                   maxValue: s.maxValue,
                   changed: false,
                   id: s.id,
@@ -165,6 +192,7 @@ export class StandardRateComponent implements OnInit {
                   index: index + 1
                 })
               })
+              this.QCConfigDetailData = arr1;
               this.tableData = arr1;
             }
           }

@@ -35,7 +35,7 @@ export class ApiConfigService {
    getsaleOrdernoListe  = `${this.environment.runtimeConfig.serverUrl}Common/GetsaleOrdernoListe`;
    getsaleOrdernoList  = `${this.environment.runtimeConfig.serverUrl}Common/GetsaleOrdernoList`;
    getSaleOrderData   = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrderData`;
-   getCommitmentList = `${this.environment.runtimeConfig.serverUrl}CommitmentItem/GetCommitmentItemList`;
+   getCommitmentList = `${this.environment.runtimeConfig.serverUrl}QCParamConfig/GetCommitmentItemList`;
    getfundcenterList = `${this.environment.runtimeConfig.serverUrl}FundCenter/GetFundCenterList`;
    getWCList = `${this.environment.runtimeConfig.serverUrl}Common/GetWorkcenterList`;
    getFormulaList = `${this.environment.runtimeConfig.serverUrl}Formulas/GetFormulasList`;

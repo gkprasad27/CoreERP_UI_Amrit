@@ -369,7 +369,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <mat-label>{{'purchaseorder.quotationNumber' | translate }}</mat-label>
                     <mat-select formControlName="saleOrderNo" appFocusOnEnter tabIndex="4" *ngIf="!routeEdit"
                         (selectionChange)="quotationNumberChange()">
@@ -380,8 +380,16 @@
                     </mat-select>
                     <input matInput type="text" *ngIf="routeEdit" formControlName="saleOrderNo" maxlength="20"
                         appFocusOnEnter tabIndex="5">
+                </mat-form-field> -->
 
-                </mat-form-field>
+                <div class="multiselect-dropdown">
+                    <ng-multiselect-dropdown *ngIf="!routeEdit" placeholder="{{ 'purchaseorder.quotationNumber' | translate }}"
+                        formControlName="saleOrderNo" (onSelect)="quotationNumberChange()"
+                        [settings]="dropdownSettings" [data]="qnoList">
+                    </ng-multiselect-dropdown>
+                    <input matInput type="text" *ngIf="routeEdit" formControlName="saleOrderNo" maxlength="20"
+                    appFocusOnEnter tabIndex="5">
+                </div>
 
 
                 <!-- <mat-form-field class="form-element">

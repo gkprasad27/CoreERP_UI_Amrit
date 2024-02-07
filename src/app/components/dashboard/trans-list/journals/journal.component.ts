@@ -418,6 +418,8 @@ export class JournalComponent implements OnInit {
           this.dynTableProps = this.tablePropsFunc();
           if (this.routeEdit != '') {
             this.getJVDetail(this.routeEdit);
+          } else {
+            this.spinner.hide();
           }
         });
   }

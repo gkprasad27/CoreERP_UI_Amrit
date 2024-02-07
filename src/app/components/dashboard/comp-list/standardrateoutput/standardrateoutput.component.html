@@ -32,6 +32,16 @@
             [ngClass]="{ 'ng--invalid': !formControls.type.valid  }">Type is required</mat-error>
         </mat-form-field>
 
+        <mat-form-field>
+          <mat-label>{{'qcparamconfiguration.product' | translate }}</mat-label>
+          <mat-select formControlName="product" appFocusOnEnter tabIndex="3" (selectionChange)="onProductChange()">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let type of ProductType" [value]="type.value" >
+                  {{type.viewValue}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+
         <div class="mat-mdc-form-field typeahead">
           <input placeholder="{{ 'standardrateoutput.materialCode' | translate }}" formControlName="materialCode"
             [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"

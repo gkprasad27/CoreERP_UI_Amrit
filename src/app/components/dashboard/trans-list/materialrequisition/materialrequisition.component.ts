@@ -64,6 +64,8 @@ export class MaterialrequisitionComponents implements OnInit {
   mmasterList: any;
   costunitList: any;
 
+  filePath: any;
+
   constructor(private commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -298,6 +300,7 @@ export class MaterialrequisitionComponents implements OnInit {
   }
 
   getTagsissueDetail(val, val1) {
+    this.filePath = '';
     this.tableComponent.defaultValues();
     const jvDetUrl = String.Join('/', this.apiConfigService.getTagsissueDetail, val, val1);
     this.apiService.apiGetRequest(jvDetUrl)
@@ -340,9 +343,11 @@ export class MaterialrequisitionComponents implements OnInit {
                   action: 'editView',
                   index: index + 1,
                 }
+                this.filePath = s.filePath;
                 arr.push(obj);
               })
               this.tableData1 = arr;
+
 
               // this.sendDynTableData = { type: 'editView', data: res.response['goodsissueastersDetail'] };
               // this.formData.disable();
@@ -350,6 +355,18 @@ export class MaterialrequisitionComponents implements OnInit {
           }
         });
   }
+
+  downLoadFile() {
+    debugger
+    const url = String.Join('/', this.apiConfigService.getFile, this.filePath);
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          window.open(response.response, '_blank');
+        });
+  }
+
 
 
   inspectioncheck(event: any) {
