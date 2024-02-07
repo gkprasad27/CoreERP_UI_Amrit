@@ -188,7 +188,6 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   toggle() {
-    debugger
     if (this.formData.value.saleOrderType == 'Sale Order') {
       this.getSaleOrderList();
     } else if (this.formData.value.saleOrderType == 'Master Saleorder') {
@@ -270,7 +269,6 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   getSaleOrderDetail() {
-    debugger
     this.tableComponent.defaultValues();
     let url = '';
     if (this.formData.value.saleOrderType == 'Sale Order') {
@@ -652,7 +650,6 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   getsaleOrdernoList() {
-    debugger
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderDetail, this.formData.get('saleOrderNo').value);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
