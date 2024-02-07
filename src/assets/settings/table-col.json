@@ -2450,5 +2450,18 @@
     "receivedQty": "ReceivedQty",
     "netweight": "Netweight",
     "lotNo": "LotNo"
+  },
+  "pendingsales": {
+    "date": "Date",
+    "customer": "Customer Name",
+    "saleOrderNo": "Sale Order Number",
+    "poNumber": "PO Number",
+    "itemCode": "Material Code",
+    "description": "Material Name",
+    "commitmentDate": "Commitment Date",
+    "qty": "Qty",
+    "unitPrice": "Rate",
+    "total": "TotalAmount",
+    "remarks":"Remarks"
   }
 }
