@@ -67,7 +67,7 @@ export class ReportsComponent {
 
   setValidator() {
     
-    if (this.routeParam == 'stockvaluation') {
+    if (this.routeParam == 'stockvaluation' || this.routeParam != 'pendingpurchaseorders' || this.routeParam != 'pendingsales') {
       this.modelFormData.controls['selected'].removeValidators(Validators.required);
       this.modelFormData.controls['selected'].updateValueAndValidity();
     } else {
@@ -132,7 +132,7 @@ export class ReportsComponent {
 
   print() {
     let getUrl
-    if (this.routeParam == 'stockvaluation') {
+    if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
