@@ -2459,8 +2459,18 @@
     "description": "Material Name",
     "commitmentDate": "Commitment Date",
     "qty": "Qty",
-    "unitPrice": "Rate",
+    "unitpPice": "Unit Price",
     "total": "TotalAmount",
+    "remarks":"Remarks"
+  },
+  "pendingpurchaseorders": {
+    "poNo": "PO Number",
+    "poDate": "PO Date",
+    "vendor": "Vendor Name",   
+    "materialCode": "Material Code",
+    "description": "Material Name",
+    "poQty": "Qty",
+    "targetDate": "Target Date",
     "remarks":"Remarks"
   }
 }
