@@ -145,3 +145,4 @@ export { SalaryProcessComponent} from './salaryproces/salaryprocess.component';
 export { QuorantineComponent } from './quorantine/quorantine.component';
 export { CAPAdetailsComponent } from './capadetails/capadetails.component';
 export { QcparamconfigurationComponent } from './qcparamconfiguration/qcparamconfiguration.component';
+export {  StandardRateOComponent } from './materialsmaster/standard-rate-o/standard-rate-o.component';

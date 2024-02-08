@@ -31,8 +31,7 @@
 
             <mat-form-field>
               <mat-label>{{'materialsmaster.materialType' | translate }}</mat-label>
-              <mat-select formControlName="materialType" appFocusOnEnter
-                tabIndex="3">
+              <mat-select formControlName="materialType" appFocusOnEnter tabIndex="3">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let mtype of matypeList" [value]="mtype.code">
                   {{mtype.description}}
@@ -42,10 +41,10 @@
 
             <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.materialCode.valid && formControls.materialCode.status != 'DISABLED',
             'ng--invalid': !formControls.materialCode.valid && formControls.materialCode.status != 'DISABLED'  }">
-                <mat-label [translate]="'materialsmaster.materialCode'"> </mat-label>
-              <input matInput
-                formControlName="materialCode" maxlength="50" appFocusOnEnter tabIndex="3">
-              <mat-error *ngIf="isSubmitted && !formControls.materialCode.valid && formControls.materialCode.status != 'DISABLED'"
+              <mat-label [translate]="'materialsmaster.materialCode'"> </mat-label>
+              <input matInput formControlName="materialCode" maxlength="50" appFocusOnEnter tabIndex="3">
+              <mat-error
+                *ngIf="isSubmitted && !formControls.materialCode.valid && formControls.materialCode.status != 'DISABLED'"
                 [ngClass]="{ 'ng--invalid': !formControls.materialCode.valid  }">Material Code is required</mat-error>
             </mat-form-field>
 
@@ -54,8 +53,7 @@
 
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.description'"></mat-label>
-              <input matInput formControlName="description"
-                maxlength="500" appFocusOnEnter tabIndex="5">
+              <input matInput formControlName="description" maxlength="500" appFocusOnEnter tabIndex="5">
             </mat-form-field>
 
             <mat-form-field>
@@ -112,8 +110,7 @@
 
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.grossWeight'"></mat-label>
-              <input matInput formControlName="grossWeight"
-                maxlength="12" appFocusOnEnter tabIndex="11">
+              <input matInput formControlName="grossWeight" maxlength="12" appFocusOnEnter tabIndex="11">
             </mat-form-field>
 
             <!-- <mat-form-field class="form-element">
@@ -134,8 +131,7 @@
 
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.netWeight'"></mat-label>
-              <input matInput formControlName="netWeight"
-                maxlength="12" appFocusOnEnter tabIndex="13">
+              <input matInput formControlName="netWeight" maxlength="12" appFocusOnEnter tabIndex="13">
             </mat-form-field>
 
 
@@ -149,23 +145,22 @@
               </mat-select>
             </mat-form-field>
 
-            
+
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.partDragNo'"></mat-label>
-              <input matInput formControlName="partDragNo"
-                 appFocusOnEnter tabIndex="15">
+              <input matInput formControlName="partDragNo" appFocusOnEnter tabIndex="15">
             </mat-form-field>
 
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.dragRevNo'"></mat-label>
-              <input matInput formControlName="dragRevNo"
-                 appFocusOnEnter tabIndex="16">
+              <input matInput formControlName="dragRevNo" appFocusOnEnter tabIndex="16">
             </mat-form-field>
 
-          <div class="mx-2">
-              <label > {{ 'materialsmaster.fileUpload' | translate }} </label>
-              <app-file-upload [type]="'card'" [oldFileList]="modelFormData.value.fileUpload" (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
-          </div>
+            <div class="mx-2">
+              <label> {{ 'materialsmaster.fileUpload' | translate }} </label>
+              <app-file-upload [type]="'card'" [oldFileList]="modelFormData.value.fileUpload"
+                (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
+            </div>
 
           </div>
           <mat-divider></mat-divider>
@@ -197,18 +192,17 @@
         </mat-card-content>
 
       </mat-tab>
+
       <mat-tab label="Inventory Level">
         <mat-card-content class="py-5 p-2 m-0">
           <div class="d--flex">
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.minLevel'"></mat-label>
-              <input matInput formControlName="minLevel"
-                maxlength="12" appFocusOnEnter tabIndex="16">
+              <input matInput formControlName="minLevel" maxlength="12" appFocusOnEnter tabIndex="16">
             </mat-form-field>
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.maxLevel'"></mat-label>
-              <input matInput formControlName="maxLevel"
-                maxlength="12" appFocusOnEnter tabIndex="17">
+              <input matInput formControlName="maxLevel" maxlength="12" appFocusOnEnter tabIndex="17">
             </mat-form-field>
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.reOrderLevel'"></mat-label>
@@ -216,8 +210,7 @@
             </mat-form-field>
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.dangerLevel'"></mat-label>
-              <input matInput formControlName="dangerLevel"
-                maxlength="12" appFocusOnEnter tabIndex="19">
+              <input matInput formControlName="dangerLevel" maxlength="12" appFocusOnEnter tabIndex="19">
             </mat-form-field>
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.economicOrderQty'"></mat-label>
@@ -248,14 +241,14 @@
 
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.openingQty'"></mat-label>
-              <input matInput formControlName="openingQty"
-                maxlength="50" (change)="calculation()" appFocusOnEnter tabIndex="23">
+              <input matInput formControlName="openingQty" maxlength="50" (change)="calculation()" appFocusOnEnter
+                tabIndex="23">
             </mat-form-field>
 
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.closingQty'"></mat-label>
-              <input matInput formControlName="closingQty"
-                maxlength="50" (change)="closingqtycalculation()" appFocusOnEnter tabIndex="24">
+              <input matInput formControlName="closingQty" maxlength="50" (change)="closingqtycalculation()"
+                appFocusOnEnter tabIndex="24">
             </mat-form-field>
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.transferPrice'"></mat-label>
@@ -264,25 +257,29 @@
 
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.openingPrice'"></mat-label>
-              <input matInput formControlName="openingPrice" (change)="calculation()" maxlength="50" appFocusOnEnter tabIndex="26">
-            </mat-form-field>
-            <mat-form-field class="form-element">
-              <mat-label [translate]="'materialsmaster.openingValue'"></mat-label>
-              <input matInput formControlName="openingValue" readonly="readonly" maxlength="50" appFocusOnEnter tabIndex="26">
-            </mat-form-field>
-            <mat-form-field class="form-element">
-              <mat-label [translate]="'materialsmaster.closingPrice'"></mat-label>
-              <input matInput formControlName="closingPrice" (change)="closingqtycalculation()" maxlength="50" appFocusOnEnter
+              <input matInput formControlName="openingPrice" (change)="calculation()" maxlength="50" appFocusOnEnter
                 tabIndex="26">
             </mat-form-field>
             <mat-form-field class="form-element">
+              <mat-label [translate]="'materialsmaster.openingValue'"></mat-label>
+              <input matInput formControlName="openingValue" readonly="readonly" maxlength="50" appFocusOnEnter
+                tabIndex="26">
+            </mat-form-field>
+            <mat-form-field class="form-element">
+              <mat-label [translate]="'materialsmaster.closingPrice'"></mat-label>
+              <input matInput formControlName="closingPrice" (change)="closingqtycalculation()" maxlength="50"
+                appFocusOnEnter tabIndex="26">
+            </mat-form-field>
+            <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.closingValue'"></mat-label>
-              <input matInput formControlName="closingValue" readonly="readonly" maxlength="50" appFocusOnEnter tabIndex="26">
+              <input matInput formControlName="closingValue" readonly="readonly" maxlength="50" appFocusOnEnter
+                tabIndex="26">
             </mat-form-field>
           </div>
         </mat-card-content>
 
       </mat-tab>
+
       <mat-tab label="TAX Data">
 
         <mat-card-content class="py-5 p-2 m-0">
@@ -332,8 +329,7 @@
 
             <mat-form-field class="form-element">
               <mat-label [translate]="'materialsmaster.chapter'"></mat-label>
-              <input matInput formControlName="chapter"
-                maxlength="20" appFocusOnEnter tabIndex="30">
+              <input matInput formControlName="chapter" maxlength="20" appFocusOnEnter tabIndex="30">
             </mat-form-field>
 
             <mat-form-field class="form-element">
@@ -342,6 +338,16 @@
             </mat-form-field>
 
           </div>
+        </mat-card-content>
+
+      </mat-tab>
+
+      <mat-tab label="QC Configurations">
+
+        <mat-card-content class="py-5 p-2 m-0">
+
+            <app-standard-rate-o [materialCode]="formData.item ? materialCode : modelFormData.value.materialCode"></app-standard-rate-o>
+
         </mat-card-content>
 
       </mat-tab>

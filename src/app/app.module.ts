@@ -35,7 +35,7 @@ import {
   PTMasterComponent, PFMasterComponent, PermissionRequestComponent, CTCBreakupComponent, ComponentMasterComponent, 
   AdvanceComponent, ApplyodComponent, LeaveRequestComponent, LeaveopeningbalanceComponent, LeavetypeComponent, ApprovalTypeComponent, OpeningBalanceComponent, VehicleApprovalsComponent, advanceApprovalComponent, odApprovalComponent, PermissionApprovalsComponent, LeaveApprovalComponent, DesignationComponent,
   StructureCreationComponent,
-  HolidayComponent,SalaryProcessComponent, QuorantineComponent, CAPAdetailsComponent, QcparamconfigurationComponent
+  HolidayComponent,SalaryProcessComponent, QuorantineComponent, CAPAdetailsComponent, QcparamconfigurationComponent, StandardRateOComponent
 } from './components/dashboard/comp-list/index';
 
 import {
@@ -162,7 +162,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SalesInvoiceComponent,
     PoHistoryComponent,
     HolidayComponent,
-    DispatchdetailsComponent,SalaryProcessComponent, QuorantineComponent, CAPAdetailsComponent, ReportsComponent, QcparamconfigurationComponent
+    DispatchdetailsComponent,SalaryProcessComponent, QuorantineComponent, CAPAdetailsComponent, ReportsComponent, QcparamconfigurationComponent, StandardRateOComponent
   ],
   imports: [
     AppRoutingModule,

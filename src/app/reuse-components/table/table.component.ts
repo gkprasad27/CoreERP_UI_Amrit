@@ -60,7 +60,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   doubleClick = 0;
   keys = [];
   user: User;
-  routeParam: any;
+  @Input() routeParam: any;
   tableIndex: any;
 
   constructor(
@@ -172,6 +172,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       // this.translate.get(this.routeParam).subscribe(res => {
       // let key;
       // tslint:disable-next-line: forin
+      debugger
       if(!this.routeParam) {
         this.routeParam = this.routerParam
       }

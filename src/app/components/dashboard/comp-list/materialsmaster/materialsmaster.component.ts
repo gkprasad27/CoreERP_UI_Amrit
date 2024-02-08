@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Optional, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Optional, Inject, ViewChild } from '@angular/core';
 import { String } from 'typescript-string-operations';
 import { ApiService } from '../../../../services/api.service';
 import { CommonService } from '../../../../services/common.service';
@@ -10,6 +10,7 @@ import { AddOrEditService } from '../add-or-edit.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+import { StandardRateOComponent } from './standard-rate-o/standard-rate-o.component';
 
 interface Valuation {
   value: string;
@@ -35,6 +36,9 @@ interface Schedule {
 })
 
 export class MaterialMasterComponent implements OnInit, OnDestroy {
+
+  @ViewChild(StandardRateOComponent) standardRateOComponent:StandardRateOComponent;
+
   modelFormData: FormGroup;
   formData: any;
   companyList: any;
@@ -93,6 +97,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
   hsnsacList: any;
 
   fileList: any;
+  materialCode: any
 
   constructor(private commonService: CommonService,
     private apiService: ApiService,
@@ -150,6 +155,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
+      this.materialCode =  this.formData.item.materialCode
       this.modelFormData.patchValue({
         uom: this.formData.item.uom ? +this.formData.item.uom : null,
         ouom: this.formData.item.ouom ? +this.formData.item.ouom : null,
@@ -369,22 +375,26 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    debugger
     if (this.modelFormData.invalid) {
       this.isSubmitted = true;
       return;
     }
-    this.modelFormData.controls['materialCode'].enable();
-    this.formData.item = this.modelFormData.value;
-    this.formData.item.fileUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
-    this.addOrEditService[this.formData.action](this.formData, (res) => {
-      if (this.fileList) {
-        this.uploadFile();
-      } else {
-        this.router.navigate(['/dashboard/master/materialsmaster']);
+    const flag = this.standardRateOComponent.save();
+    if(flag) {
+      this.modelFormData.controls['materialCode'].enable();
+      this.formData.item = this.modelFormData.value;
+      this.formData.item.fileUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
+      this.addOrEditService[this.formData.action](this.formData, (res) => {
+        if (this.fileList) {
+          this.uploadFile();
+        } else {
+          this.router.navigate(['/dashboard/master/materialsmaster']);
+        }
+      });
+      if (this.formData.action == 'Edit') {
+        this.modelFormData.controls['materialCode'].disable();
       }
-    });
-    if (this.formData.action == 'Edit') {
-      this.modelFormData.controls['materialCode'].disable();
     }
   }
 
