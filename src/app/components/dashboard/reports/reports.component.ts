@@ -34,6 +34,8 @@ export class ReportsComponent {
 
   routeParam: any;
 
+  date = new Date()
+
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
@@ -58,12 +60,14 @@ export class ReportsComponent {
   model() {
     this.modelFormData = this.formBuilder.group({
       companyCode: [null, [Validators.required]],
+      companyName: [null],
       selected: [null, [Validators.required]],
       fromDate: [null],
       toDate: [null],
     });
     this.setValidator();
   }
+  
 
   setValidator() {
     
@@ -142,6 +146,7 @@ export class ReportsComponent {
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            debugger
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
               const keys = [];
               const tableResp = res.response[this.getComponentData.listName];
@@ -156,6 +161,10 @@ export class ReportsComponent {
                 })
                 keys.push(cols);
               });
+              const obj = this.companyList.find((c: any) => c.id == this.modelFormData.value.companyCode);
+              this.modelFormData.patchValue({
+                companyName: obj.text
+              })
               this.data = keys;
               setTimeout(() => {
                 var w = window.open();

@@ -105,6 +105,7 @@ ProductType: Type[] =
   ngOnInit() {
     this.getmaterialData();
     this.getMaterialSizeTableData();
+    debugger
     this.getCommitmentList('instruments');
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
@@ -115,7 +116,8 @@ ProductType: Type[] =
   ngOnChanges(changes: SimpleChanges): void {
     if(changes.materialCode) {
       this.formData.patchValue({
-        materialCode: changes.materialCode.currentValue
+        materialCode: changes.materialCode.currentValue,
+        code: changes.materialCode.currentValue,
       })
     }
   }
@@ -185,6 +187,7 @@ ProductType: Type[] =
               } else {
                 arr = res.response['citemList'];
               }
+              debugger
               arr.forEach((s: any, index: number) => {
                 arr1.push({
                   parameter: flag == 'edit' ? s.parameter : s.paramName,
