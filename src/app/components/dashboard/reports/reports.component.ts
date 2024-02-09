@@ -52,6 +52,7 @@ export class ReportsComponent {
     this.getcompaniesList();
     activatedRoute.params.subscribe(params => {
       this.routeParam = params.id
+      this.commonService.routeParam = params.id
       this.reset();
       this.getParameters(params.id);
     });
@@ -184,6 +185,7 @@ export class ReportsComponent {
 
 
   ngOnDestroy() {
+    this.commonService.routeParam = null;
   }
 
 }
