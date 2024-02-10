@@ -30,3 +30,6 @@ export { InspectionPreviewComponent } from './inspectioncheck/inspection-preview
 
 export { SalesInvoiceComponent } from './sales-invoice/sales-invoice.component';
 export { PoHistoryComponent } from './purcahseorder/po-history/po-history.component'
+
+export { JobworkmaterialissueComponent } from './jobworkmaterialissue/jobworkmaterialissue.component';
+export { JobworkmaterialreceivingComponent } from './jobworkmaterialreceiving/jobworkmaterialreceiving.component';

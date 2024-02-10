@@ -16,15 +16,11 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-receipt-of-goods',
-  templateUrl: './receipt-of-goods.component.html',
-  styleUrls: ['./receipt-of-goods.component.scss'],
-  providers: [
-    { provide: DateAdapter, useClass: AppDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
-  ]
+  selector: 'app-jobworkmaterialreceiving',
+  templateUrl: './jobworkmaterialreceiving.component.html',
+  styleUrls: ['./jobworkmaterialreceiving.component.scss']
 })
-export class ReceiptOfGoodsComponent implements OnInit {
+export class JobworkmaterialreceivingComponent {
 
   formData: FormGroup;
   formData1: FormGroup;
@@ -48,7 +44,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   movementList = [];
   stlocList = [];
   materialList = [];
-  purchaseordernoList: any;
+  getJobworkListData: any;
   podetailsList: any;
   bpaList: any;
 
@@ -97,37 +93,28 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
   formDataGroup() {
     this.formData = this.formBuilder.group({
-      purchaseOrderNo: [null, Validators.required],
       company: [null, [Validators.required]],
-      // plant: [null],
-      // branch: [null],
-      profitCenter: [null, Validators.required],
-      supplierCode: [null],
-      //supplierName: [null],
-      supplierReferenceNo: [null, Validators.required],
-      profitcenterName: [''],
       companyName: [null],
-      receivedBy: [null, Validators.required],
+      profitCenter: [null, Validators.required],
+      jobWorkNumber: [null, Validators.required],
+
+      vendor: [null],
+      VendorGSTN: [null],
       receivedDate: [null, Validators.required],
-      receiptDate: [null],
-      // supplierGinno: [null],
-      // movementType: [null],
-      // grnno: [null],
-      // grndate: [null],
-      // qualityCheck: [null],
-      // storageLocation: [null],
-      customerName: [null],
-      id: ['0'],
-      // rrno: [null],
       vehicleNo: [null, Validators.required],
+      receivedBy: [null, Validators.required],
+      lotNo: ['', Validators.required],
+      totalAmount: [''],
+      
+      id: ['0'],
+
+      documentURL: [''],
+      invoiceURL: [''],
+
       addWho: [null],
       addDate: [null],
       editWho: [null],
       editDate: [null],
-      totalAmount: [''],
-      lotNo: ['', Validators.required],
-      documentURL: [''],
-      invoiceURL: [''],
 
     });
 
@@ -137,12 +124,11 @@ export class ReceiptOfGoodsComponent implements OnInit {
       receivedQty: ['', Validators.required],
       materialCode: ['', Validators.required],
       materialName: [''],
-      netWeight: [''],
+      weight: [''],
       purchaseOrderNumber: [''],
       description: [''],
       heatNumber: [''],
       pendingQty: [''],
-      qty: [''],
       highlight: false,
       type: [''],
       action: 'editDelete',
@@ -302,8 +288,8 @@ export class ReceiptOfGoodsComponent implements OnInit {
   ponoselect() {
     let data = [];
     this.perChaseOrderList = [];
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('purchaseOrderNo').value)) {
-      data = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.get('purchaseOrderNo').value);
+    if (!this.commonService.checkNullOrUndefined(this.formData.get('jobWorkNumber').value)) {
+      data = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.get('jobWorkNumber').value);
     }
     if (data.length) {
       data.forEach((d: any, index: number) => {
@@ -332,9 +318,11 @@ export class ReceiptOfGoodsComponent implements OnInit {
       })
       this.tableData = null;
     }
-    const obj = this.purchaseordernoList.find(resp => resp.id == this.formData.get('purchaseOrderNo').value);
+    debugger
+    const obj = this.getJobworkListData.find(resp => resp.id == this.formData.get('jobWorkNumber').value);
     this.formData.patchValue({
-      customerName: obj.text
+      vendor: obj.text,
+      vendorGSTN: obj.gstNo
     })
   }
 
@@ -395,18 +383,18 @@ export class ReceiptOfGoodsComponent implements OnInit {
               this.podetailsList = res.response['podetailsList'];
             }
           }
-          this.getpurchasenoList();
+          this.getJobworkList();
         });
   }
-  getpurchasenoList() {
-    const poUrl = String.Join('/', this.apiConfigService.getpurchasenoList);
+  getJobworkList() {
+    const poUrl = String.Join('/', this.apiConfigService.getJobworkList);
     this.apiService.apiGetRequest(poUrl)
       .subscribe(
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.purchaseordernoList = res.response['purchaseordernoList'];
+              this.getJobworkListData = res.response['JobWorkList'];
             }
           }
           this.getProfitcenterData();
@@ -489,7 +477,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
             }
           }
           if (this.routeEdit != '') {
-            this.getRecepitOfGoodsDetails(this.routeEdit);
+            this.getJWReceiptDetail(this.routeEdit);
           }
           // this.getmaterialData();
         });
@@ -540,13 +528,13 @@ export class ReceiptOfGoodsComponent implements OnInit {
           }
           // this.dynTableProps = this.tablePropsFunc();
           // if (this.routeEdit != '') {
-          //   this.getRecepitOfGoodsDetails(this.routeEdit);
+          //   this.getJWReceiptDetail(this.routeEdit);
           // }
         });
   }
 
-  getRecepitOfGoodsDetails(val) {
-    const cashDetUrl = String.Join('/', this.apiConfigService.getgoodsreceiptDetail, val);
+  getJWReceiptDetail(val) {
+    const cashDetUrl = String.Join('/', this.apiConfigService.getJWReceiptDetail, val);
     this.apiService.apiGetRequest(cashDetUrl)
       .subscribe(
         response => {
@@ -556,7 +544,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['grmasters']);
               // this.formData.patchValue({
-              //   purchaseOrderNo: +res.response['grmasters'].purchaseOrderNo
+              //   jobWorkNumber: +res.response['grmasters'].jobWorkNumber
               // })
               // if (this.formData.value.documentURL) {
               //   this.downLoad(this.formData.value.documentURL, 'document');
@@ -593,10 +581,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
               // const arr = this.podetailsList.filter(resp => !this.perChaseOrderList.some((p: any) => p.materialCode == resp.materialCode));
               // const unique = [...new Set(arr.map(item => item.materialCode))];
               // this.materialCodeList = this.podetailsList;
-              this.materialCodeList = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.get('purchaseOrderNo').value);
-              this.formData.controls.purchaseOrderNo.disable();
+              this.materialCodeList = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.get('jobWorkNumber').value);
+              this.formData.controls.jobWorkNumber.disable();
               this.formData.controls.company.disable();
-              this.formData.controls.customerName.disable();
+              this.formData.controls.vendor.disable();
               this.formData.controls.profitCenter.disable();
               this.tableData && this.tableData.forEach((t: any) => {
                 let pendingQty = 0;
@@ -657,22 +645,22 @@ export class ReceiptOfGoodsComponent implements OnInit {
     if (this.tableData.length == 0 && this.formData.invalid) {
       return;
     }
-    this.savegoodsreceipt();
+    this.addJWReceipt();
   }
 
-  savegoodsreceipt() {
-    this.formData.controls.purchaseOrderNo.enable();
+  addJWReceipt() {
+    this.formData.controls.jobWorkNumber.enable();
     this.formData.controls.company.enable();
-    this.formData.controls.customerName.enable();
+    this.formData.controls.vendor.enable();
     this.formData.controls.profitCenter.enable();
     const arr = this.tableData.filter((d: any) => !d.type);
-    const addgoodsreceipt = String.Join('/', this.apiConfigService.addgoodsreceipt);
+    const addJWReceipt = String.Join('/', this.apiConfigService.addJWReceipt);
     const formData = this.formData.value;
     formData.receivedDate = this.formData.get('receivedDate').value ? this.datepipe.transform(this.formData.get('receivedDate').value, 'MM-dd-yyyy') : '';
     formData.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     formData.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
     const requestObj = { grHdr: formData, grDtl: arr };
-    this.apiService.apiPostRequest(addgoodsreceipt, requestObj).subscribe(
+    this.apiService.apiPostRequest(addJWReceipt, requestObj).subscribe(
       response => {
         const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {

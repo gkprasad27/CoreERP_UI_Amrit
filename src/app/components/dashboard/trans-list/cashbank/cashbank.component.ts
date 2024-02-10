@@ -460,6 +460,7 @@ export class CashbankComponent implements OnInit {
   // }
 
   voucherTypeSelect() {
+    this.spinner.hide();
     const record = this.voucherTypeList.find(res => res.id == this.formData.get('voucherClass').value)
     this.formData.patchValue({
       voucherClass: !this.commonService.checkNullOrUndefined(record) ? record.voucherClass : null

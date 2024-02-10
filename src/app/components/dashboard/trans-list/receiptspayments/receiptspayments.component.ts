@@ -64,6 +64,7 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   onbpChange() {
+    debugger
     this.bpgLists = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('bpcategory').value)) {
       let data = this.bpTypeList.find(res => res.code == this.formData.get('bpcategory').value);
@@ -319,7 +320,7 @@ export class ReceiptspaymentsComponent implements OnInit {
 
             }
           }
-          this.getTaxRatesList();
+          this.getpurchaseinvoiceList();
         });
   }
 
@@ -346,20 +347,20 @@ export class ReceiptspaymentsComponent implements OnInit {
 
 
 
-  // getfunctionaldeptList() {
-  //   const taxCodeUrl = String.Join('/', this.apiConfigService.getpurchaseinvoiceList);
-  //   this.apiService.apiGetRequest(taxCodeUrl)
-  //     .subscribe(
-  //       response => {
-  //         const res = response;
-  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //             this.functionaldeptList = res.response['purchaseinvoiceList'];
-  //           }
-  //         }
-  //         this.getTaxRatesList();
-  //       });
-  // }
+  getpurchaseinvoiceList() {
+    const taxCodeUrl = String.Join('/', this.apiConfigService.getpurchaseinvoiceList);
+    this.apiService.apiGetRequest(taxCodeUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.functionaldeptList = res.response['purchaseinvoiceList'];
+            }
+          }
+          this.getTaxRatesList();
+        });
+  }
 
   getTaxRatesList() {
     const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);

@@ -22,6 +22,8 @@ import { SampleServiceComponent } from './sampleservice/sampleservice.component'
 import { SalesorderComponent } from './salesorder/salesorder.component';
 import { StandardRateComponent } from '../comp-list';
 import { SalesInvoiceComponent } from './sales-invoice/sales-invoice.component';
+import { JobworkmaterialreceivingComponent } from './jobworkmaterialreceiving/jobworkmaterialreceiving.component';
+import { JobworkmaterialissueComponent } from './jobworkmaterialissue/jobworkmaterialissue.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -155,6 +157,13 @@ export class TransListService {
         this.dynamicComp.editKey = 'purchaseOrderNo';
         return this.dynamicComp;
       }
+      case 'jobworkmaterialreceiving': {
+        this.dynamicComp.component = JobworkmaterialreceivingComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getJWReceipt;
+        this.dynamicComp.list = 'jwdetails';
+        this.dynamicComp.editKey = 'purchaseOrderNo';
+        return this.dynamicComp;
+      }
       case 'GoodsReceiptApproval': {
         this.dynamicComp.component = ReceiptOfGoodsComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getGoodsReceiptApproval;
@@ -195,6 +204,13 @@ export class TransListService {
         this.dynamicComp.tableUrl = this.apiConfigService.getSaleOrder;
         this.dynamicComp.list = 'saleOrderMaster';
         this.dynamicComp.editKey = 'saleOrderNo';
+        return this.dynamicComp;
+      }
+      case 'jobworkmaterialissue': {
+        this.dynamicComp.component = JobworkmaterialissueComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getJobWork;
+        this.dynamicComp.list = 'jobWorkMaster';
+        this.dynamicComp.editKey = 'id';
         return this.dynamicComp;
       }
       case 'salesinvoice': {

@@ -29,6 +29,7 @@ export class ApiConfigService {
    gettinglotNumbers = `${this.environment.runtimeConfig.serverUrl}GoodsReceipt/GetLotNumber`;
    getpodetailsList = `${this.environment.runtimeConfig.serverUrl}Common/GetPOdetailsList`;
    getpurchasenoList = `${this.environment.runtimeConfig.serverUrl}Common/GetPurchaseOrdernoList`;
+   getJobworkList = `${this.environment.runtimeConfig.serverUrl}Common/GetJobworkList`;
    getquotationnoList = `${this.environment.runtimeConfig.serverUrl}Common/GetQuotationnoList`;
    getSaleOrderList  = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrderList`;
    getSaleOrders  = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrder`;
@@ -36,6 +37,7 @@ export class ApiConfigService {
    getsaleOrdernoList  = `${this.environment.runtimeConfig.serverUrl}Common/GetsaleOrdernoList`;
    getSaleOrderData   = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrderData`;
    getCommitmentList = `${this.environment.runtimeConfig.serverUrl}QCParamConfig/GetCommitmentItemList`;
+   getCommitmentLists = `${this.environment.runtimeConfig.serverUrl}CommitmentItem/GetCommitmentItemList`;
    getfundcenterList = `${this.environment.runtimeConfig.serverUrl}FundCenter/GetFundCenterList`;
    getWCList = `${this.environment.runtimeConfig.serverUrl}Common/GetWorkcenterList`;
    getFormulaList = `${this.environment.runtimeConfig.serverUrl}Formulas/GetFormulasList`;
@@ -511,8 +513,15 @@ export class ApiConfigService {
 
    savePurchaseOrder = `${this.environment.runtimeConfig.serverUrl}Transactions/SavePurchaseOrder`;
    saveGoodsReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/SaveGoodsReceipt`;
-
+   
    getInvoiceData = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceData`;
    getInvoiceDetailList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceDetailList`;
-
+   
+   getJobWork = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJobWork`;
+   addJobWork = `${this.environment.runtimeConfig.serverUrl}Transactions/AddJobWork`;
+   getJobworkDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJobworkDetail`;
+   
+   getJWReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJWReceipt`;
+   addJWReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/AddJWReceipt`;
+   getJWReceiptDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJWReceiptDetail`;
 }

@@ -74,7 +74,7 @@ export class PurchaseOrderComponent implements OnInit {
 
   data: any;
 
-  dropdownSettings : IDropdownSettings = {
+  dropdownSettings: IDropdownSettings = {
     singleSelection: true,
     idField: 'saleOrderNo',
     textField: 'saleOrderNo',
@@ -629,9 +629,14 @@ export class PurchaseOrderComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['pomasters']);
               // this.toggle();
-              // this.formData.patchValue({
-              //   saleOrderNo: res.response['pomasters'].saleOrderNo ? +res.response['pomasters'].saleOrderNo : ''
-              // })
+              if (res.response['poDetail'] && res.response['poDetail'].length) {
+                let str = res.response['poDetail'][0].taxCode;
+                // str = str.split('-')[0].substring(1, 3)
+                const obj = this.taxCodeList.find((t: any) => t.taxRateCode == str);
+                this.formData1.patchValue({
+                  taxCode: obj.igst ? obj.igst : obj.sgst
+                })
+              }
               // this.sendDynTableData = { type: 'edit', data: res.response['poDetail'] };
               this.formData.disable();
               res.response['poDetail'].forEach((s: any, index: number) => {
@@ -697,7 +702,7 @@ export class PurchaseOrderComponent implements OnInit {
     }
 
     let checkqty = 0;
-    if(this.routeEdit) {
+    if (this.routeEdit) {
       checkqty = this.formData1.value.soQty
     } else {
       checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - this.formData1.value.poQty) : this.formData1.value.soQty
@@ -854,7 +859,7 @@ export class PurchaseOrderComponent implements OnInit {
     // obj.quotationDate = obj.quotationDate ? this.datepipe.transform(obj.quotationDate, 'MM-dd-yyyy') : '';
     obj.purchaseOrderDate = obj.purchaseOrderDate ? this.datepipe.transform(obj.purchaseOrderDate, 'MM-dd-yyyy') : '';
     obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
-    if(typeof obj.saleOrderNo != 'string') {
+    if (typeof obj.saleOrderNo != 'string') {
       obj.saleOrderNo = this.formData.value.saleOrderNo[0].id;
     }
     const arr = this.tableData.filter((d: any) => d.changed);
@@ -989,6 +994,7 @@ export class PurchaseOrderComponent implements OnInit {
     }
     let list = [...this.tableData];
     list = [...list, ...this.setArray(list.length)];
+    debugger
     const obj = {
       heading: 'PURCHASE ORDER',
       headingObj: formObj,

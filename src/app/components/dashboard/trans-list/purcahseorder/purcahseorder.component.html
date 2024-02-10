@@ -163,15 +163,15 @@
                     <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.amount }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: {{ data.headingObj1?.taxCode }} </b>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;" > Add: CGST @ {{ data.headingObj?.cgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
                     <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.cgst }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: {{ data.headingObj1?.taxCode }} </b>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;" > Add: SGST @ {{ data.headingObj?.sgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
                     <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.sgst }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: {{ data.headingObj1?.taxCode }} </b>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;" > Add: IGST @ {{ data.headingObj?.igst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
                     <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.igst }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">

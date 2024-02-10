@@ -156,7 +156,7 @@ ProductType: Type[] =
     if (this.tableComponent) {
       this.tableComponent.defaultValues();
     }
-    const bomUrl = String.Join('/', flag == 'edit' ? this.apiConfigService.getQCConfigDetail : this.apiConfigService.getCommitmentList, flag == 'edit' ? this.routeEdit : flag);
+    const bomUrl = String.Join('/', flag == 'edit' ? this.apiConfigService.getQCConfigDetail : this.apiConfigService.getCommitmentLists, flag == 'edit' ? this.routeEdit : flag);
     this.apiService.apiGetRequest(bomUrl)
       .subscribe(
         response => {

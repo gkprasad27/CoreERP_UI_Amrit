@@ -191,7 +191,7 @@ export class MaterialrequisitionComponents implements OnInit {
   }
 
   getCommitmentList(type: any) {
-    const cmntUrl = String.Join('/', this.apiConfigService.getCommitmentList, type);
+    const cmntUrl = String.Join('/', this.apiConfigService.getCommitmentLists, type);
     this.apiService.apiGetRequest(cmntUrl)
       .subscribe(
         response => {
