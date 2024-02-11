@@ -83,8 +83,11 @@ export class JobworkmaterialissueComponent {
 
 
   formDataGroup() {
+    const user = JSON.parse(localStorage.getItem('user'));
+
     this.formData = this.formBuilder.group({
 
+      id : [0],
       jobWorkNumber : [0],
 
       company: [null, Validators.required],
@@ -95,7 +98,11 @@ export class JobworkmaterialissueComponent {
       vendor: ['', Validators.required],
       vendorGSTN: [null],
 
+      addWho: user.userName,
+      editWho: user.userName,
+
       orderDate: [null],
+      deliveryDate: [null],
       
       materialCode: [''],
 
@@ -121,7 +128,6 @@ export class JobworkmaterialissueComponent {
       amount: [''],
       total: [''],
       weight: [''],
-      netWeight: [''],
       deliveryDate: [''],
       stockQty: [0],
       totalTax: [0],
@@ -176,7 +182,7 @@ export class JobworkmaterialissueComponent {
     const formObj = this.formData1.value
     const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == formObj.taxCode);
     const discountAmount = (((+formObj.qty * +formObj.rate) * ((+formObj.discount) / 100)));
-    const amount = (+formObj.qty * +formObj.rate * (+(formObj.netWeight ? formObj.netWeight : 1))) - discountAmount
+    const amount = (+formObj.qty * +formObj.rate * (+(formObj.weight ? formObj.weight : 1))) - discountAmount
     const igst = obj.igst ? (amount * obj.igst) / 100 : 0;
     const cgst = obj.cgst ? (amount * obj.cgst) / 100 : 0;
     const sgst = obj.sgst ? (amount * obj.sgst) / 100 : 0;
@@ -216,7 +222,7 @@ export class JobworkmaterialissueComponent {
         igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
         cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
         sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-        amount: ((+this.formData.value.amount) + (t.qty * t.rate * t.netWeight)).toFixed(2),
+        amount: ((+this.formData.value.amount) + (t.qty * t.rate * t.weight)).toFixed(2),
         totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
       })
     })
@@ -257,7 +263,7 @@ export class JobworkmaterialissueComponent {
     debugger
     const obj = this.customerList.find((c: any) => c.id == (event ? event.id : this.formData.value.vendor));
     this.formData.patchValue({
-      vendorGSTN: obj ? obj.vendorGSTN : ''
+      vendorGSTN: obj ? obj.gstNo : ''
     })
     if(!event) {
       this.formData.patchValue({
@@ -341,14 +347,14 @@ export class JobworkmaterialissueComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.formData.patchValue(res.response['SaleOrderMasters']);
-              res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
+              this.formData.patchValue(res.response['JobWorkMasters']);
+              res.response['JobWorkDetails'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 s.materialName = obj.text
                 s.stockQty = obj.availQTY
                 s.action = 'editDelete'; s.index = index + 1;
               })
-              this.tableData = res.response['SaleOrderDetails'];
+              this.tableData = res.response['JobWorkDetails'];
               this.calculate();
               this.vendorChange();
             }
@@ -374,7 +380,7 @@ export class JobworkmaterialissueComponent {
   materialCodeChange() {
     const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
     this.formData1.patchValue({
-      netWeight: obj.netWeight,
+      weight: obj.netWeight,
       stockQty: obj.availQTY,
       materialName: obj.text,
 
@@ -388,7 +394,7 @@ export class JobworkmaterialissueComponent {
 
 
   back() {
-    this.router.navigate(['dashboard/transaction/saleorder'])
+    this.router.navigate(['dashboard/transaction/jobworkmaterialissue'])
   }
 
   save() {
@@ -402,6 +408,7 @@ export class JobworkmaterialissueComponent {
     const addsq = String.Join('/', this.apiConfigService.addJobWork);
     const obj = this.formData.value;
     obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
+    obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
     obj.vendor = this.formData.value.vendor[0].id;
     const arr = this.tableData;
     arr.forEach((a: any) => {
@@ -415,6 +422,7 @@ export class JobworkmaterialissueComponent {
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
+            this.back();
           }
         }
       });

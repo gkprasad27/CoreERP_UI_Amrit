@@ -210,7 +210,7 @@ export class TransListService {
         this.dynamicComp.component = JobworkmaterialissueComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getJobWork;
         this.dynamicComp.list = 'jobWorkMaster';
-        this.dynamicComp.editKey = 'id';
+        this.dynamicComp.editKey = 'jobWorkNumber';
         return this.dynamicComp;
       }
       case 'salesinvoice': {

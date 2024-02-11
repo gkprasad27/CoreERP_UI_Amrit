@@ -105,7 +105,7 @@ export class JobworkmaterialreceivingComponent {
       receivedBy: [null, Validators.required],
       lotNo: ['', Validators.required],
       totalAmount: [''],
-      
+
       id: ['0'],
 
       documentURL: [''],
@@ -128,6 +128,7 @@ export class JobworkmaterialreceivingComponent {
       purchaseOrderNumber: [''],
       description: [''],
       heatNumber: [''],
+      qty: [''],
       pendingQty: [''],
       highlight: false,
       type: [''],
@@ -173,7 +174,7 @@ export class JobworkmaterialreceivingComponent {
     let qtyT = 0
     data.forEach((t: any) => {
       if (t.materialCode == this.formData1.value.materialCode) {
-        qtyT = qtyT + (this.formData1.value.index == t.index ? ((+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty))  :  ((+t.receivedQty) + (+t.rejectQty))) 
+        qtyT = qtyT + (this.formData1.value.index == t.index ? ((+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty)) : ((+t.receivedQty) + (+t.rejectQty)))
       }
     })
     // const remainigQ = this.formData1.value.qty - qtyT;
@@ -286,44 +287,32 @@ export class JobworkmaterialreceivingComponent {
   }
 
   ponoselect() {
-    let data = [];
-    this.perChaseOrderList = [];
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('jobWorkNumber').value)) {
-      data = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.get('jobWorkNumber').value);
-    }
-    if (data.length) {
-      data.forEach((d: any, index: number) => {
-        const obj = {
-          materialCode: d.materialCode ? d.materialCode : '',
-          materialName: d.materialName ? d.materialName : '',
-          netWeight: d.netWeight ? d.netWeight : '',
-          purchaseOrderNumber: d.purchaseOrderNumber ? d.purchaseOrderNumber : '',
-          rejectQty: d.rejectQty ? d.rejectQty : '',
-          qty: d.qty ? d.qty : '',
-          receivedQty: d.receivedQty ? d.receivedQty : '',
-          description: d.description ? d.description : '',
-          heatNumber: d.heatNumber ? d.heatNumber : '',
-          action: '',
-          index: index + 1
-        }
-        this.perChaseOrderList.push(obj)
-      })
-      // this.tableData = this.perChaseOrderList;
-      // const unique = [...new Set(this.perChaseOrderList.map(item => item.materialCode))]
 
-      this.materialCodeList = this.perChaseOrderList;
-      this.formData1.patchValue({
-        qty: '',
-        netWeight: '',
-      })
-      this.tableData = null;
-    }
-    debugger
-    const obj = this.getJobworkListData.find(resp => resp.id == this.formData.get('jobWorkNumber').value);
-    this.formData.patchValue({
-      vendor: obj.text,
-      vendorGSTN: obj.gstNo
-    })
+    const getJobWorkDetailsUrl = String.Join('/', this.apiConfigService.getJobWorkDetails, this.formData.value.jobWorkNumber);
+    this.apiService.apiGetRequest(getJobWorkDetailsUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          if (response && response.response.JWDList && response.response.JWDList.length) {
+            response.response.JWDList.forEach((d: any, index: number) => {
+              d.action = '',
+                d.index = index + 1
+            })
+            this.materialCodeList = response.response.JWDList;
+            this.formData1.patchValue({
+              qty: '',
+              weight: '',
+            })
+            this.tableData = null;
+          }
+          const obj = this.getJobworkListData.find(resp => resp.id == this.formData.get('jobWorkNumber').value);
+          this.formData.patchValue({
+            vendor: obj.text,
+            vendorGSTN: obj.gstNo
+          })
+
+        })
+
   }
 
   materialCodeChange() {
@@ -336,7 +325,7 @@ export class JobworkmaterialreceivingComponent {
     })
     this.formData1.patchValue({
       qty: obj ? obj.qty : '',
-      netWeight: obj ? obj.netWeight : '',
+      weight: obj ? obj.weight : '',
       materialName: obj ? obj.materialName : '',
       pendingQty: obj.qty - pendingQty
     })
@@ -557,7 +546,7 @@ export class JobworkmaterialreceivingComponent {
                 const obj = {
                   materialCode: d.materialCode ? d.materialCode : '',
                   materialName: d.materialName ? d.materialName : '',
-                  netWeight: d.netWeight ? d.netWeight : '',
+                  weight: d.weight ? d.weight : '',
                   // pendingQty: (d.qty - d.receivedQty),
                   purchaseOrderNumber: d.purchaseOrderNumber ? d.purchaseOrderNumber : '',
                   rejectQty: d.rejectQty ? d.rejectQty : '',
@@ -593,9 +582,9 @@ export class JobworkmaterialreceivingComponent {
                   pendingQty = pendingQty + t.receivedQty
                   pendingQty = obj.qty - pendingQty
 
-                if (pendingQty == 0) {
-                  this.materialCodeList = this.materialCodeList.filter((p: any) => p.materialCode != t.materialCode);
-                }
+                  if (pendingQty == 0) {
+                    this.materialCodeList = this.materialCodeList.filter((p: any) => p.materialCode != t.materialCode);
+                  }
                 }
               })
             }
