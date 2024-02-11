@@ -67,7 +67,7 @@ export class MaterialRequisitionViewComponent {
     if (this.tableComponent) {
       this.tableComponent.defaultValues();
     }
-    const url = String.Join('/', this.apiConfigService.getProductionStatus, this.data.saleOrderNumber, this.data.materialCode, this.data.productionTag);
+    const url = String.Join('/', this.apiConfigService.getProductionStatus, this.data.row.saleOrderNumber, this.data.row.materialCode, this.data.row.productionTag);
     this.apiService.apiGetRequest(url)
       .subscribe(
         response => {

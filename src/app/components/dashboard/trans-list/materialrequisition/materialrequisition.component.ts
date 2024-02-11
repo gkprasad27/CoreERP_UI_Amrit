@@ -372,7 +372,11 @@ export class MaterialrequisitionComponents implements OnInit {
     this.dialog.open(MaterialRequisitionViewComponent, {
       width: '100%',
       height: '700px',
-      data: event.item
+      data: {
+        row: event.item,
+        employeesList: this.employeesList,
+        mechenaryList: this.mechenaryList
+      } 
     });
   }
 
