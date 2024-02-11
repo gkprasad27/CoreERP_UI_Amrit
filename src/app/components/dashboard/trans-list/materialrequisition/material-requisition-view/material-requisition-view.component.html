@@ -14,7 +14,7 @@
 
                 <mat-form-field>
                     <mat-label>{{'materialrequisition.allocatedPerson' | translate }}</mat-label>
-                    <mat-select formControlName="allocatedPerson" appFocusOnEnter tabIndex="2">
+                    <mat-select formControlName="allocatedPerson" appFocusOnEnter tabIndex="1">
                       <mat-option>None</mat-option>
                       <mat-option *ngFor="let emp of data.employeesList" [value]="emp.text">
                         {{emp.id}}- {{emp.text}}
@@ -23,7 +23,7 @@
                   </mat-form-field>
                   <mat-form-field>
                     <mat-label>{{'materialrequisition.mechine' | translate }}</mat-label>
-                    <mat-select formControlName="mechine" appFocusOnEnter tabIndex="3">
+                    <mat-select formControlName="mechine" appFocusOnEnter tabIndex="2">
                       <mat-option>None</mat-option>
                       <mat-option *ngFor="let emp of data.mechenaryList" [value]="emp.description">
                         {{emp.description}}
@@ -33,17 +33,28 @@
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'materialrequisition.startDate'"></mat-label>
                     <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="startDate"
-                        appFocusOnEnter tabIndex="8">
+                        appFocusOnEnter tabIndex="3">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'materialrequisition.endDate'"></mat-label>
                     <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="endDate"
-                        appFocusOnEnter tabIndex="8">
+                        appFocusOnEnter tabIndex="4">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{'materialrequisition.workStatus' | translate }}</mat-label>
+                    <mat-select formControlName="workStatus" appFocusOnEnter tabIndex="3">
+                      <mat-option>None</mat-option>
+                      <mat-option value="Assigned"> Assigned </mat-option>
+                      <mat-option value="In Progress"> In Progress </mat-option>
+                      <mat-option value="Completed"> Completed </mat-option>
+                      <mat-option value="Rejected"> Rejected </mat-option>
+                      <mat-option value="Assigned to QC"> Assigned to QC </mat-option>
+                    </mat-select>
+                  </mat-form-field>
 
             </div>
 

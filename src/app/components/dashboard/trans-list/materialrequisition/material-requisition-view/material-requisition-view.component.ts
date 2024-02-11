@@ -51,6 +51,7 @@ export class MaterialRequisitionViewComponent {
       mechine: [null],
       startDate: [null],
       endDate: [null],
+      workStatus: [null],
       
       highlight: false,
       action: 'edit',
