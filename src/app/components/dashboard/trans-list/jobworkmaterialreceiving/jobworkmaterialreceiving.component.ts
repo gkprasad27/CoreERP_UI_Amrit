@@ -106,7 +106,7 @@ export class JobworkmaterialreceivingComponent {
       lotNo: ['', Validators.required],
       totalAmount: [''],
 
-      id: ['0'],
+      id: [0],
 
       documentURL: [''],
       invoiceURL: [''],
@@ -130,6 +130,7 @@ export class JobworkmaterialreceivingComponent {
       heatNumber: [''],
       qty: [''],
       pendingQty: [''],
+      id: [0],
       highlight: false,
       type: [''],
       action: 'editDelete',
@@ -161,7 +162,6 @@ export class JobworkmaterialreceivingComponent {
   // }
 
   saveForm() {
-    debugger
     if (this.formData1.invalid) {
       return;
     }

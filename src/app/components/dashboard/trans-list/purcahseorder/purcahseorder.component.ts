@@ -994,7 +994,6 @@ export class PurchaseOrderComponent implements OnInit {
     }
     let list = [...this.tableData];
     list = [...list, ...this.setArray(list.length)];
-    debugger
     const obj = {
       heading: 'PURCHASE ORDER',
       headingObj: formObj,

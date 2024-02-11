@@ -174,7 +174,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
   // }
 
   saveForm() {
-    debugger
     if (this.formData1.invalid) {
       return;
     }

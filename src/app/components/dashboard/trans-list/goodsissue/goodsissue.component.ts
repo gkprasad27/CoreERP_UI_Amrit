@@ -92,8 +92,9 @@ export class GoodsissueComponent implements OnInit {
       movementType: [null],
       profitCenter: [''],
       profitcenterName: [''],
-      DepartmentName: [''],
+      departmentName: [''],
       companyName: [null],
+      productionPlanDate: [null],
       // status: [null],
     });
 
@@ -107,6 +108,7 @@ export class GoodsissueComponent implements OnInit {
       allocatedqty1: [''],
       highlight: false,
       requiredqty: [''],
+      productionPlanDate: [null],
       action: 'edit',
       index: 0
     });
@@ -188,7 +190,7 @@ export class GoodsissueComponent implements OnInit {
   // customerChange() {
   //   const obj = this.fdeptList.find((c: any) => c.id == this.formData.value.customerCode);
   //   this.formData.patchValue({
-  //     DepartmentName: obj.description
+  //     departmentName: obj.description
   //   })
   // }
 

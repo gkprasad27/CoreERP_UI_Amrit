@@ -251,7 +251,6 @@ export class JobworkmaterialissueComponent {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const resp = res.response['bpList'];
               const data = resp.length && resp.filter((t: any) => t.bptype == 'Vendor');
-              debugger
               this.customerList = data;
             }
           }
@@ -260,7 +259,6 @@ export class JobworkmaterialissueComponent {
   }
 
   vendorChange(event?: any) {
-    debugger
     const obj = this.customerList.find((c: any) => c.id == (event ? event.id : this.formData.value.vendor));
     this.formData.patchValue({
       vendorGSTN: obj ? obj.gstNo : ''

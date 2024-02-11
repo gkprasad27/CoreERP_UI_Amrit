@@ -1861,6 +1861,7 @@
     "title": "Goods Issue",
     "goodsIssueId": "ID",
     "company": "Company",
+    "productionPlanDate": "Production Plan Date",
     "companyName": "Company Name",
     "profitcenterName": "Profit Center Name",
     "departmentName": "Department Name",

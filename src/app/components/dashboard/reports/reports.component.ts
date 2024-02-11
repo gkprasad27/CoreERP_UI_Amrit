@@ -147,7 +147,6 @@ export class ReportsComponent {
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            debugger
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
               const keys = [];
               const tableResp = res.response[this.getComponentData.listName];

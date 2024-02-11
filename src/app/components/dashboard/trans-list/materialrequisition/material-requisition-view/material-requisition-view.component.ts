@@ -39,7 +39,23 @@ export class MaterialRequisitionViewComponent {
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
+      this.formDataGroup();
+  }
 
+  formDataGroup() {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    this.formData = this.formBuilder.group({
+
+      allocatedPerson: [null],
+      mechine: [null],
+      startDate: [null],
+      endDate: [null],
+      
+      highlight: false,
+      action: 'edit',
+      index: 0
+    });
   }
 
   ngOnInit() {
@@ -59,12 +75,72 @@ export class MaterialRequisitionViewComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
+              response.response.tagsDetailStatus.forEach((d: any, index: number) => {
+                d.action = 'edit',
+                  d.index = index + 1
+              })
               this.tableData = res.response.tagsDetailStatus;
             }
           }
         });
   }
 
+  
+  editOrDeleteEvent(value) {
+    if (value.action === 'Delete') {
+      this.tableComponent.defaultValues();
+      this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
+    } else {
+      this.formData.patchValue(value.item);
+    }
+  }
+
+  resetForm() {
+    this.formData.reset();
+    this.formData.patchValue({
+      index: 0,
+      action: 'edit'
+    });
+  };
+
+  saveForm() {
+    debugger
+    if (this.formData.invalid) {
+      return;
+    }
+    this.formData.patchValue({
+      type: '',
+      highlight: true
+    })
+    let data: any = this.tableData;
+    this.tableData = null;
+    this.tableComponent.defaultValues();
+    if (this.formData.value.index == 0) {
+      this.formData.patchValue({
+        index: data ? (data.length + 1) : 1
+      });
+      data = [this.formData.value, ...data];
+    } else {
+      data = data.map((res: any) => res = res.index == this.formData.value.index ? { ...res, ...this.formData.value } : res);
+    }
+    setTimeout(() => {
+      this.tableData = data;
+    });
+    this.resetForm();
+  }
+
+  save() {
+    const url = String.Join('/', this.apiConfigService.updateProductionStatus);
+    const requestObj = { prodissueetails : this.tableData };
+    this.apiService.apiPostRequest(url, requestObj).subscribe(
+      response => {
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          this.spinner.hide();
+          this.back();
+        }
+      });
+  }
 
   back() {
     this.dialogRef.close();

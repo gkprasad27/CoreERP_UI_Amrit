@@ -64,7 +64,6 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   onbpChange() {
-    debugger
     this.bpgLists = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('bpcategory').value)) {
       let data = this.bpTypeList.find(res => res.code == this.formData.get('bpcategory').value);

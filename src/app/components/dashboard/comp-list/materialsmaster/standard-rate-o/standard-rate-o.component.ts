@@ -71,7 +71,6 @@ ProductType: Type[] =
     private alertService: AlertService,
 
   ) {
-    debugger
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
     }
@@ -105,7 +104,6 @@ ProductType: Type[] =
   ngOnInit() {
     this.getmaterialData();
     this.getMaterialSizeTableData();
-    debugger
     this.getCommitmentList('instruments');
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
@@ -187,7 +185,6 @@ ProductType: Type[] =
               } else {
                 arr = res.response['citemList'];
               }
-              debugger
               arr.forEach((s: any, index: number) => {
                 arr1.push({
                   parameter: flag == 'edit' ? s.parameter : s.paramName,

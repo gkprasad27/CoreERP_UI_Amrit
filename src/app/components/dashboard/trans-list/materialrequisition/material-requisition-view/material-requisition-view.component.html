@@ -8,10 +8,52 @@
 
     <mat-card-content class="pt-5 p-2 m-0 ">
 
+        <form [formGroup]="formData" autocomplete="off">
+
+            <div class="d--flex p-1 mat-form-field-height justify-content-between align-items-end">
+
+                <mat-form-field>
+                    <mat-label>{{ 'materialrequisition.allocatedPerson' | translate }}</mat-label>
+                    <input matInput type="text"  formControlName="allocatedPerson" appFocusOnEnter tabIndex="1">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{ 'materialrequisition.mechine' | translate }}</mat-label>
+                    <input matInput type="text"  formControlName="mechine" appFocusOnEnter tabIndex="2">
+                </mat-form-field>
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'materialrequisition.startDate'"></mat-label>
+                    <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="startDate"
+                        appFocusOnEnter tabIndex="8">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'materialrequisition.endDate'"></mat-label>
+                    <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="endDate"
+                        appFocusOnEnter tabIndex="8">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+
+            </div>
+
+            <div class="mb-3 d-flex justify-content-end">
+
+                <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white"
+                    (click)="saveForm()">
+                    {{ 'COMMON.ADD' | translate }}
+                </button>
+                <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
+                    {{ 'COMMON.RESET' | translate }}
+                </button>
+
+            </div>
+
+        </form>
 
         <div>
             <app-table #tableRef class="table-css" [routerParam]="'materialrequisition'" [tableData]="tableData"
-                [showButtons]="false" >
+            (editOrDeleteEvent)="editOrDeleteEvent($event)"  [showButtons]="false">
             </app-table>
         </div>
 
@@ -22,8 +64,8 @@
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="back()">
             {{ 'COMMON.CANCEL' | translate }}
         </button>
-        <!-- <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
             {{ 'COMMON.SAVE' | translate }}
-        </button> -->
+        </button>
     </div>
 </div>
