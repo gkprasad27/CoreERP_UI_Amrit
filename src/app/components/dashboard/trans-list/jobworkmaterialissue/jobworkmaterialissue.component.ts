@@ -29,7 +29,9 @@ export class JobworkmaterialissueComponent {
 
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
 
+  data: any;
 
+  date = new Date()
   dropdownList = [];
   selectedItems = [];
   dropdownSettings : IDropdownSettings = {
@@ -49,6 +51,7 @@ export class JobworkmaterialissueComponent {
   formData1: FormGroup;
   companyList = [];
   tableData: any[] = [];
+  bpaList: any[] = [];
 
 
   // header props
@@ -271,7 +274,7 @@ export class JobworkmaterialissueComponent {
   }
 
   getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+    const companyUrl = String.Join('/', this.apiConfigService.getCompanysList);
     this.apiService.apiGetRequest(companyUrl)
       .subscribe(
         response => {
@@ -281,12 +284,29 @@ export class JobworkmaterialissueComponent {
               this.companyList = res.response['companiesList'];
             }
           }
+          this.getsuppliercodeList();
+        });
+  }
+
+  getsuppliercodeList() {
+    const getsuppliercodeList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList);
+    this.apiService.apiGetRequest(getsuppliercodeList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              const resp = res.response['bpaList'];
+              const data = resp.length && resp.filter((t: any) => t.bpTypeName == 'Vendor');
+              this.bpaList = data;
+            }
+          }
           this.getProfitcenterData();
         });
   }
 
   getProfitcenterData() {
-    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
+    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCenterList);
     this.apiService.apiGetRequest(getpcUrl)
       .subscribe(
         response => {
@@ -346,6 +366,16 @@ export class JobworkmaterialissueComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['JobWorkMasters']);
+
+              if (res.response['JobWorkDetails'] && res.response['JobWorkDetails'].length) {
+                let str = res.response['JobWorkDetails'][0].taxCode;
+                // str = str.split('-')[0].substring(1, 3)
+                const obj = this.taxCodeList.find((t: any) => t.taxRateCode == str);
+                this.formData1.patchValue({
+                  taxCode: obj.igst ? obj.igst : obj.sgst
+                })
+              }
+
               res.response['JobWorkDetails'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 s.materialName = obj.text
@@ -426,11 +456,88 @@ export class JobworkmaterialissueComponent {
       });
   }
 
+  print() {
+    debugger
+    let formObj = this.formData.value;
+    if (this.companyList.length) {
+      const cObj = this.companyList.find((c: any) => c.companyCode == formObj.company);
+      formObj['address'] = {
+        companyName: cObj.companyName,
+        address: cObj.address,
+        address1: cObj.address1,
+        city: cObj.city,
+        stateName: cObj.stateName,
+        pin: cObj.pin,
+        phone: cObj.phone,
+        email: cObj.email,
+      }
+    }
+    if (this.bpaList.length) {
+      const str = (this.formData.value.vendor && this.formData.value.vendor) ? this.formData.value.vendor[0].id : ''
+      const bpaObj = this.bpaList.find((c: any) => c.bpnumber == str);
+      formObj['vAddress'] = {
+        name: bpaObj.name,
+        address: bpaObj.address,
+        address1: bpaObj.address1,
+        city: bpaObj.city,
+        stateName: bpaObj.stateName,
+        pin: bpaObj.pin,
+        phone: bpaObj.phone,
+        email: bpaObj.email,
+        gstno: bpaObj.gstno,
+      }
+    }
+    if (this.profitCenterList.length) {
+      const cObj = this.profitCenterList.find((c: any) => c.code == formObj.profitCenter);
+      formObj['pAddress'] = {
+        name: cObj.name,
+        address: cObj.address1,
+        address1: cObj.address2,
+        city: cObj.city,
+        stateName: cObj.stateName,
+        pin: cObj.pin,
+        phone: cObj.phone,
+        email: cObj.email,
+        gstno: cObj.gstNo,
+      }
+    }
+    let list = [...this.tableData];
+    list = [...list, ...this.setArray(list.length)];
+    const obj = {
+      heading: 'Job Work Material Issue',
+      headingObj: formObj,
+      detailArray: list,
+      headingObj1: { ...this.formData1.value, ...this.formData.value }
+    }
+
+    this.data = obj;
+
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('printData').innerHTML;
+      w.document.body.innerHTML = html;
+      this.data = null;
+      w.print();
+    }, 1000);
+
+  }
   
+  setArray(length: number) {
+    let newArr = [];
+    if (length < 10) {
+      for (let i = 0; i < (10 - length); i++) {
+        newArr.push({})
+      }
+    }
+    return newArr;
+  }
+
   reset() {
     this.tableData = [];
     this.formData.reset();
   }
 
+
+  
 
 }
