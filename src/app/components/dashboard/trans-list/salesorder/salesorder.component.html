@@ -42,7 +42,7 @@
                     </mat-select>
                 </mat-form-field> -->
 
-                <div class="multiselect-dropdown">
+                <div class="multiselect-dropdown-list">
                     <ng-multiselect-dropdown placeholder="{{ 'saleorder.supplierName' | translate }}"
                         formControlName="customerCode"   (onSelect)="customerCodeChange($event)"
                         [settings]="dropdownSettings" [data]="customerList">

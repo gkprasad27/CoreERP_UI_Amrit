@@ -382,7 +382,7 @@
                         appFocusOnEnter tabIndex="5">
                 </mat-form-field> -->
 
-                <div class="multiselect-dropdown">
+                <div class="multiselect-dropdown-list">
                     <ng-multiselect-dropdown *ngIf="!routeEdit" placeholder="{{ 'purchaseorder.quotationNumber' | translate }}"
                         formControlName="saleOrderNo" (onSelect)="quotationNumberChange()"
                         [settings]="dropdownSettings" [data]="qnoList">

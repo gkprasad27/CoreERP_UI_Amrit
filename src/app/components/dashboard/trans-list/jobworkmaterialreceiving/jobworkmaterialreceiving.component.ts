@@ -531,9 +531,9 @@ export class JobworkmaterialreceivingComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.formData.patchValue(res.response['grmasters']);
+              this.formData.patchValue(res.response['jwMasterlist']);
               // this.formData.patchValue({
-              //   jobWorkNumber: +res.response['grmasters'].jobWorkNumber
+              //   jobWorkNumber: +res.response['jwMasterlist'].jobWorkNumber
               // })
               // if (this.formData.value.documentURL) {
               //   this.downLoad(this.formData.value.documentURL, 'document');
@@ -542,7 +542,7 @@ export class JobworkmaterialreceivingComponent {
               //   this.downLoad(this.formData.value.invoiceURL, 'invoice');
               // }
               this.perChaseOrderList = []
-              res.response['grDetail'].forEach((d: any, index: number) => {
+              res.response['jwDetail'].forEach((d: any, index: number) => {
                 const obj = {
                   materialCode: d.materialCode ? d.materialCode : '',
                   materialName: d.materialName ? d.materialName : '',
@@ -626,7 +626,7 @@ export class JobworkmaterialreceivingComponent {
 
 
   back() {
-    this.router.navigate(['dashboard/transaction/goodsreceipts'])
+    this.router.navigate(['dashboard/transaction/jobworkmaterialreceiving'])
   }
 
   save() {

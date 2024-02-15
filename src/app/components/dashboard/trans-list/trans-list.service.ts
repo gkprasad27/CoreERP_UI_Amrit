@@ -161,7 +161,7 @@ export class TransListService {
         this.dynamicComp.component = JobworkmaterialreceivingComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getJWReceipt;
         this.dynamicComp.list = 'jwdetails';
-        this.dynamicComp.editKey = 'purchaseOrderNo';
+        this.dynamicComp.editKey = 'jobWorkNumber';
         return this.dynamicComp;
       }
       case 'GoodsReceiptApproval': {
