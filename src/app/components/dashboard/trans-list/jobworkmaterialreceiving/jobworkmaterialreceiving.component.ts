@@ -105,6 +105,7 @@ export class JobworkmaterialreceivingComponent {
       receivedBy: [null, Validators.required],
       lotNo: ['', Validators.required],
       totalAmount: [''],
+      invoiceNumber: [''],
 
       id: [0],
 

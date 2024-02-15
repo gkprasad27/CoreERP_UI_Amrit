@@ -253,7 +253,7 @@ export class JobworkmaterialissueComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const resp = res.response['bpList'];
-              const data = resp.length && resp.filter((t: any) => t.bptype == 'Vendor' || t.bpgroup == "Jobwork Vendors");
+              const data = resp.length && resp.filter((t: any) => t.bptype == 'Vendor' && t.bpgroup == "Jobwork Vendors");
               this.customerList = data;
             }
           }

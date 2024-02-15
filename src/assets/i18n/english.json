@@ -2176,6 +2176,7 @@
     "vehicleNo": "Vehicle No",
     "jobWorkNumber": "Job Work Number",
     "supplierGinno": "Supplier GIN No",
+    "invoiceNumber":"Invoice Number",
     "rejectQty": "Reject QTY",
     "receivedDate": "Receieved Date",
     "receivedBy": "Receieved By",
