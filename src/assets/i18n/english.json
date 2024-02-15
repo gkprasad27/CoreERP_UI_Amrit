@@ -3132,5 +3132,18 @@
     "poQty": "Qty",
     "targetDate": "Target Date",
     "remarks":"Remarks"
+  },
+  "pendingjobworkreport": {
+    "title": "Pending Jobwrok",
+    "date": "Date",
+    "customer": "Vendor Name",
+    "jobWorkNumber": "JobWork Number",
+    "itemCode": "Material Code",
+    "description": "Material Name",
+    "commitmentDate": "Commitment Date",
+    "qty": "Qty",
+    "unitpPice": "Unit Price",
+    "total": "TotalAmount",
+    "remarks":"Remarks"
   }
 }
