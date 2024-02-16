@@ -95,6 +95,7 @@ export class GoodsissueComponent implements OnInit {
       departmentName: [''],
       companyName: [null],
       productionPlanDate: [null],
+      productionTargetDate: [null]
       // status: [null],
     });
 
@@ -109,6 +110,7 @@ export class GoodsissueComponent implements OnInit {
       highlight: false,
       requiredqty: [''],
       productionPlanDate: [null],
+      productionTargetDate: [null],
       action: 'edit',
       index: 0
     });

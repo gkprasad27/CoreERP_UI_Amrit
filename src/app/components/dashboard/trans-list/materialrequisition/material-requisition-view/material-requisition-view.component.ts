@@ -53,6 +53,8 @@ export class MaterialRequisitionViewComponent {
       endDate: [null],
       workStatus: [null],
       
+      productionPlanDate: [null],
+      productionTargetDate: [null],
       highlight: false,
       action: 'edit',
       index: 0

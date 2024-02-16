@@ -1590,6 +1590,8 @@
     "allocatedqty": "Allocated QTY",
     "delete": "Delete",
     "requiredqty": "Required QTY",
+    "productionPlanDate": "Date",
+    "productionTargetDate": "Date",
     "action": "Action"
   },
   "materialrequisition": {
@@ -1623,6 +1625,8 @@
     "duration": "Duration",
     "workStatus": "workStatus",
     "wbs": "WBS",
+    "productionPlanDate": "Production Plan Date",
+    "productionTargetDate": "Production Target Date",
     "order": "Order",
     "price": "Price",
     "value": "Value",

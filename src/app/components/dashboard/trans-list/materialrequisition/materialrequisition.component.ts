@@ -100,6 +100,8 @@ export class MaterialrequisitionComponents implements OnInit {
       remarks: [''],
       workStatus: [''],
 
+      productionPlanDate: [null],
+      productionTargetDate: [null],
       materialName: [''],
       materialCode: [''],
       productionTag: [''],
