@@ -250,7 +250,7 @@ export class JournalComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               // this.voucherTypeList = res.response['vouchertypeList'].filter(resp => resp.voucherClass == '003' || resp.voucherClass == '03');
-              this.voucherTypeList = res.response['vouchertypeList'].filter(resp => resp.voucherClass == '20');
+              this.voucherTypeList = res.response['vouchertypeList'].filter(resp => resp.voucherClass == '18');
             }
           }
           this.getGLAccountsList();
