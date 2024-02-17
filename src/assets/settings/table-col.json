@@ -2555,7 +2555,6 @@
     "invoiceNo": "Invoice Number",
     "invoiceDate": "Invoice Date",
     "TotalInvoiceValue": "Total Invoice Value",
-    "tgst_5": "Tax Amount",
     "igst_5": "IGST",
     "cgst_5": "CGST",
     "sgst_5":"SGST",
