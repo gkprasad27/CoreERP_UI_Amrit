@@ -46,6 +46,7 @@ export class CTCBreakupComponent implements OnInit {
       empCode: [null],
       effectFrom: [null],
       structureName: [null],
+      id: 0,
       ctc: [null]
     });
     this.formData = { ...this.addOrEditService.editData };
@@ -176,7 +177,8 @@ export class CTCBreakupComponent implements OnInit {
           structureName:this.modelFormData.value.structureName,
           ctc:this.modelFormData.value.ctc,
           empcode:this.modelFormData.value.empCode,
-          effectfrom:this.modelFormData.value.effectFrom
+          effectfrom:this.modelFormData.value.effectFrom,
+          id:this.modelFormData.value.id,
         },
         components: arr
       }
