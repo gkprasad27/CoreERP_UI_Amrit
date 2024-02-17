@@ -2548,5 +2548,25 @@
     "unitpPice": "Unit Price",
     "total": "TotalAmount",
     "remarks":"Remarks"
+  },
+  "salesgst": {
+    "customerGSTIN": "Customer GST Number",
+    "receivername": "Customer Name",
+    "invoiceNo": "Invoice Number",
+    "invoiceDate": "Invoice Date",
+    "TotalInvoiceValue": "Total Invoice Value",
+    "tgst_5": "Tax Amount",
+    "igst_5": "IGST",
+    "cgst_5": "CGST",
+    "sgst_5":"SGST",
+    "igst_12": "IGST",
+    "cgst_12": "CGST",
+    "sgst_12":"SGST",
+    "igst_18": "IGST",
+    "cgst_18": "CGST",
+    "sgst_18":"SGST",
+    "igst_28": "IGST",
+    "cgst_28": "CGST",
+    "sgst_28":"SGST"
   }
 }
