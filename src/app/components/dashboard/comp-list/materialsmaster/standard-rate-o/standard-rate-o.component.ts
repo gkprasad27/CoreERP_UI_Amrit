@@ -45,6 +45,8 @@ export class StandardRateOComponent {
 
   routeEdit = '';
 
+  isEdit = false;
+
 
 ProductType: Type[] =
   [
@@ -104,7 +106,7 @@ ProductType: Type[] =
   ngOnInit() {
     this.getmaterialData();
     this.getMaterialSizeTableData();
-    this.getCommitmentList('instruments');
+    this.getCommitmentLists();
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
       this.getCommitmentList('edit');
@@ -160,7 +162,27 @@ ProductType: Type[] =
     this.tableData = arr;
   }
 
+  getCommitmentLists() {
+    this.tableData = [];
+    if (this.tableComponent) {
+      this.tableComponent.defaultValues();
+    }
+    const bomUrl = String.Join('/', this.apiConfigService.getCommitmentLists, 'instruments');
+    this.apiService.apiGetRequest(bomUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+                this.instruments = res.response.citemList;
+            }
+          }
+        });
+  }
+
   getCommitmentList(flag) {
+    debugger
     this.tableData = [];
     if (this.tableComponent) {
       this.tableComponent.defaultValues();
@@ -175,10 +197,8 @@ ProductType: Type[] =
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               let arr = [];
               let arr1 = [];
-              if (flag == 'instruments') {
-                this.instruments = res.response.citemList;
-                return;
-              } else if (flag == 'edit') {
+              if (flag == 'edit') {
+                this.isEdit = true;
                 this.formData.patchValue(res.response.QCConfigDetailMaster);
                 arr = res.response['QCConfigDetail'];
                 this.formData.disable();
@@ -195,7 +215,7 @@ ProductType: Type[] =
                   product: s.product,
                   maxValue: s.maxValue,
                   changed: false,
-                  id: s.id,
+                  id: this.isEdit ? s.id : 0,
                   instrument: s.instrument,
                   action: this.routeEdit ? 'edit' : 'editDelete',
                   index: index + 1
@@ -204,6 +224,8 @@ ProductType: Type[] =
               this.QCConfigDetailData = arr1;
               this.tableData = arr1;
             }
+          } else {
+            this.isEdit = false;
           }
         });
   }

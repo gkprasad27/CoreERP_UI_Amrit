@@ -375,12 +375,13 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    debugger
+    this.standardRateOComponent.save();
     if (this.modelFormData.invalid) {
       this.isSubmitted = true;
       return;
     }
-    const flag = this.standardRateOComponent.save();
-    if(flag) {
+    // if(flag) {
       this.modelFormData.controls['materialCode'].enable();
       this.formData.item = this.modelFormData.value;
       this.formData.item.fileUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
@@ -394,7 +395,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       if (this.formData.action == 'Edit') {
         this.modelFormData.controls['materialCode'].disable();
       }
-    }
+    // }
   }
 
   
