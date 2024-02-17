@@ -2095,7 +2095,7 @@
     "title": "CTC Breakup",
     "companyCode": "Company Code",
     "empCode": "Emp Code",
-    "effectFrom": "Effect From",
+    "effectFrom": "Date",
     "ctc": "CTC",
     "structureName": "Structure Name"
   },
