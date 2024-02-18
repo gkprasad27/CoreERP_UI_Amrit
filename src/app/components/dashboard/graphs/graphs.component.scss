@@ -1,0 +1,94 @@
+@import "../../../../reuse";
+
+.table {
+  overflow-x: scroll;
+  min-height: 70vh;
+}
+
+:host ::ng-deep table {
+  font-family: sans-serif;
+  & > tbody  {
+    & tr {
+      border-bottom: 1px solid $color-ddd;
+    }
+    & td {
+      font-size: 11px;
+      vertical-align: middle;
+      border: none !important;
+    }
+    & th {
+      vertical-align: middle;
+      border: none !important;
+    }
+    & tr:nth-child(even) {
+    background-color: $color-f9f9f9
+    }
+    & tr:nth-child(odd) {
+      background-color: $color-white
+      }
+      & tr:nth-child(even):hover {
+        background-color: $color-f9f9f9
+        }
+        & tr:nth-child(odd):hover {
+          background-color: $color-f9f9f9
+          }
+  }
+}
+
+
+.mat-header-cell, .mat-cell {
+  white-space:nowrap;
+  padding: 5px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  border: none !important;
+}
+
+.table th {
+  font-size: 11px;
+  background-color: $color-orange;
+  color: $color-white;
+}
+
+.table tr {
+  height: 25px !important;
+  cursor: pointer;
+}
+
+:host ::ng-deep .filter {
+  & .mat-form-field-wrapper {
+      padding-bottom: 0em !important;
+  }
+  & .mat-form-field-underline {
+    bottom: 0.1em;
+  }
+  & .mat-form-field-infix {
+    border: none;
+  }
+}
+
+.dropdown--width {
+  width: 20rem;
+}
+
+.range-picker {
+  width: 200px;
+  & input {
+    border: none;
+    border-radius : unset;
+    border-bottom: 1px solid $color-color;
+    padding: 0rem;
+    font-size: 0.9rem;
+    height: 53px;
+  }
+}
+
+
+.background-red {
+  color: red;
+}
+.background-green {
+  color: green;
+}

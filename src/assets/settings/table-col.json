@@ -2549,6 +2549,12 @@
     "total": "TotalAmount",
     "remarks":"Remarks"
   },
+  "salestarget": {
+    "sNo": "S NO",
+    "month": "month",
+    "suppliedQty": "suppliedQty",
+    "rejectionQty": "rejectionQty"
+  },
   "salesgst": {
     "customerGSTIN": "Customer GST Number",
     "receivername": "Customer Name",

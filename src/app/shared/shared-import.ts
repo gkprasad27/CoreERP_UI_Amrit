@@ -39,6 +39,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
 
@@ -81,7 +82,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    HighchartsChartModule
   ],
   exports: [
     BrowserModule,
@@ -122,7 +124,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    HighchartsChartModule
   ]
 
 })

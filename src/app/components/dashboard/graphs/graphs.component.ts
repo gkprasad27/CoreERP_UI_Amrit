@@ -11,12 +11,35 @@ import { ApiConfigService } from '../../../services/api-config.service';
 import { CommonService } from '../../../services/common.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import * as Highcharts from 'highcharts';
+import { Options } from "highcharts";
+
+
 @Component({
-  selector: 'app-reports',
-  templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.scss']
+  selector: 'app-graphs',
+  templateUrl: './graphs.component.html',
+  styleUrls: ['./graphs.component.scss']
 })
-export class ReportsComponent {
+export class GraphsComponent {
+
+  Highcharts: typeof Highcharts = Highcharts;
+
+  chartOptions: Highcharts.Options = {
+    series: [
+      {
+        type: "line",
+        data: [1, 2, 3]
+      }
+    ]
+  };
+
+  tableData = [
+    { 'sNo': 1, month: 'Apr-23', 'suppliedQty': 602, 'rejectionQty': 5 },
+    { 'sNo': 2, month: 'Apr-23', 'suppliedQty': 602, 'rejectionQty': 5 },
+    { 'sNo': 3, month: 'Apr-23', 'suppliedQty': 602, 'rejectionQty': 5 },
+    { 'sNo': 4, month: 'Apr-23', 'suppliedQty': 602, 'rejectionQty': 5 },
+  ];
+
 
   getComponentData: any;
 
@@ -44,6 +67,7 @@ export class ReportsComponent {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
+    debugger
     this.model();
     this.getcompaniesList();
     activatedRoute.params.subscribe(params => {

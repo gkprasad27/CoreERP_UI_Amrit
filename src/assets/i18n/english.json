@@ -3150,6 +3150,13 @@
     "total": "TotalAmount",
     "remarks":"Remarks"
   },
+  "salestarget": {
+    "title": "Sales Target",
+    "sNo": "S NO",
+    "month": "Month",
+    "suppliedQty": "Supplied Qty",
+    "rejectionQty": "Rejection Qty"
+  },
   "salesgst": {
     "title": "Sales GST Report",
     "customerGSTIN": "Customer GST Number",
