@@ -1451,7 +1451,6 @@
     "bomtype": "Bom Type",
     "bomnumber": "Bom Number",
     "materialCode": "Material Code",
-    "materialName": "Material Name",
     "costUnit": "Cost Unit",
     "levelType": "Level Type",
     "bomLevel": "Level",
