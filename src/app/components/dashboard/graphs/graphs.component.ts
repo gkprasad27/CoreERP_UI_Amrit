@@ -67,7 +67,6 @@ export class GraphsComponent {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-    debugger
     this.model();
     this.getcompaniesList();
     activatedRoute.params.subscribe(params => {

@@ -187,17 +187,28 @@ export class BillOfMaterialComponent implements OnInit {
   }
 
   profitCenterChange() {
-    debugger
     this.filterQnoList = this.qnoList.filter((q: any) => q.profitCenter == this.formData.value.profitCenter);
     
   }
 
   saleOrderChange() {
-    const obj = this.qnoList.find((q: any) => q.saleOrderNo == this.formData.value.saleOrder);
-    this.formData.patchValue({
-      materialCode: obj.materialCode,
-      materialName: obj.materialName,
-    })
+    const getsaleOrdernoListe = String.Join('/', this.apiConfigService.getsaleOrdernoListe, this.formData.value.saleOrder);
+    this.apiService.apiGetRequest(getsaleOrdernoListe)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response) && res.response.saleordernoList.length) {
+              this.formData.patchValue({
+                materialCode: res.response.saleordernoList[0].materialCode,
+                materialName: res.response.saleordernoList[0].materialName,
+              })
+          
+            }
+          }
+        });
+        
   }
 
   tablePropsFunc() {

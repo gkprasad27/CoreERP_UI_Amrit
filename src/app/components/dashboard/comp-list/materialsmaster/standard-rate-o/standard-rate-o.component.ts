@@ -182,7 +182,6 @@ ProductType: Type[] =
   }
 
   getCommitmentList(flag) {
-    debugger
     this.tableData = [];
     if (this.tableComponent) {
       this.tableComponent.defaultValues();

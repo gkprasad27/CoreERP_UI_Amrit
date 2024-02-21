@@ -188,7 +188,6 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   puchaseinvoiceselect() {
-    debugger
     let data = [];
     let newData = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('partyAccount').value)) {
@@ -219,7 +218,7 @@ export class ReceiptspaymentsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+        
               this.formData.setValue(res.response['paymentreceiptMasters']);
               this.sendDynTableData = { type: 'edit', data: res.response['paymentreceiptDetail'] };
               this.formData.disable();
@@ -502,7 +501,6 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   emitColumnChanges(data) {
-    debugger
     this.tableData = data.data;
     if (data.column == 'adjustmentAmount') {
       this.loopTableData(data);
@@ -522,7 +520,6 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   loopTableData(row) {
-    debugger
     const dublicateRow = [...row.data];
     let flag = false;
     // let checkAjectAmount = 0;
@@ -560,7 +557,7 @@ export class ReceiptspaymentsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+        
               row.data[row.index].discount.value = res.response['discount']
               this.sendDynTableData = { type: 'add', data: row.data };
               this.tableData = row.data;
