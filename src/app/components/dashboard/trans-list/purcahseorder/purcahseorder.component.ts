@@ -258,9 +258,11 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   supplierCodeChange() {
+    debugger
     const obj = this.bpaList.find((b: any) => b.name == this.formData.value.supplierName);
     this.formData.patchValue({
       supplierCode: obj.bpnumber,
+      gstno: obj.gstno
     })
   }
 

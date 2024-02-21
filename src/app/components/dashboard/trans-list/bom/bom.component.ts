@@ -62,6 +62,8 @@ export class BillOfMaterialComponent implements OnInit {
   natureofTransactionList = ['Receipts', 'Payment'];
   accountList = [];
   qnoList = [];
+  filterQnoList = [];
+
   accountFilterList = [];
   glAccountList = [];
   // level = [{ id: '0', text: '0' }, { id: '1', text: '1' }, { id: '2', text: '2' }, { id: '3', text: '3' },
@@ -182,6 +184,12 @@ export class BillOfMaterialComponent implements OnInit {
             }
           }
         });
+  }
+
+  profitCenterChange() {
+    debugger
+    this.filterQnoList = this.qnoList.filter((q: any) => q.profitCenter == this.formData.value.profitCenter);
+    
   }
 
   saleOrderChange() {

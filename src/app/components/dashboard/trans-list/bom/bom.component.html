@@ -23,7 +23,7 @@
 
         <mat-form-field>
           <mat-label>{{'bom.profitCenter' | translate }}</mat-label>
-          <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2" >
+          <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2"  (selectionChange)="profitCenterChange()">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
               {{pft.text}}
@@ -65,7 +65,7 @@
           <mat-label>{{'bom.saleOrder' | translate }}</mat-label>
           <mat-select formControlName="saleOrder" appFocusOnEnter tabIndex="4" (selectionChange)="saleOrderChange()">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let qno of qnoList" [value]="qno.saleOrderNo">
+            <mat-option *ngFor="let qno of filterQnoList" [value]="qno.saleOrderNo">
               {{qno.saleOrderNo}}
             </mat-option>
           </mat-select>
