@@ -148,6 +148,7 @@ export class BillOfMaterialComponent implements OnInit {
       // bomnumber: [null, [Validators.required]],
       profitCenter: ['', Validators.required],
       product: ['', Validators.required],
+      materialCode: [''],
       materialName: [''],
       // saleOrder: [null],
     });
@@ -181,6 +182,14 @@ export class BillOfMaterialComponent implements OnInit {
             }
           }
         });
+  }
+
+  saleOrderChange() {
+    const obj = this.qnoList.find((q: any) => q.saleOrderNo == this.formData.value.saleOrder);
+    this.formData.patchValue({
+      materialCode: obj.materialCode,
+      materialName: obj.materialName,
+    })
   }
 
   tablePropsFunc() {

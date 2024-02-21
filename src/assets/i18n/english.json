@@ -1740,6 +1740,7 @@
     "createdBy": "Created By",
     "levelType": "Level Type",
     "materialCode": "Material Code",
+    "materialName": "Material Name",
     "bomLevel": "Level",
     "totalAmount": "Total Amount",
     "profitCenter": "Profit Center",
