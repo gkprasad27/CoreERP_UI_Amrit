@@ -3176,6 +3176,12 @@
     "sgst_18":"SGST",
     "igst_28": "IGST",
     "cgst_28": "CGST",
-    "sgst_28":"SGST"
+    "sgst_28":"SGST",
+    "multiple": "Multiple",
+    "multiple1": "Multiple1",
+    "taxAmount": "Tax Amount",
+    "IGST": "IGST",
+    "CGST": "CGST",
+    "SGST": "SGST"
 }
 }

@@ -54,6 +54,18 @@ export class ReportsComponent {
     });
   }
 
+  getColSpan(keys: any) {
+    return (keys.val instanceof Array) ? Object.keys(keys['val'][0]).length+1 : '1'
+  }
+
+  getRowSpan(keys: any) {
+    return (keys.val instanceof Array) ? '1' : '2'
+  }
+
+  isArray(keys: any) {
+    return (keys.val instanceof Array)
+  }
+
   model() {
     this.modelFormData = this.formBuilder.group({
       companyCode: [null, [Validators.required]],
@@ -64,11 +76,11 @@ export class ReportsComponent {
     });
     this.setValidator();
   }
-  
+
 
   setValidator() {
-    
-    if (this.routeParam == 'stockvaluation' || this.routeParam != 'pendingpurchaseorders' || this.routeParam != 'pendingsales'|| this.routeParam == 'pendingjobworkreport') {
+
+    if (this.routeParam == 'stockvaluation' || this.routeParam != 'pendingpurchaseorders' || this.routeParam != 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
       this.modelFormData.controls['selected'].removeValidators(Validators.required);
       this.modelFormData.controls['selected'].updateValueAndValidity();
     } else {
@@ -133,7 +145,7 @@ export class ReportsComponent {
 
   print() {
     let getUrl
-    if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales'|| this.routeParam == 'pendingjobworkreport') {
+    if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
@@ -152,7 +164,18 @@ export class ReportsComponent {
               tableResp.forEach(obj => {
                 const cols = [];
                 Object.keys(this.environment.tableColumnsData[this.routeParam]).forEach(col => {
-                  const nObj = { val: obj[col], label: col, type: this.environment.tableColumnsData[this.routeParam][col] };
+                  let nObj: any;
+                  if ((obj[col] instanceof Array)) {
+                    let arr = [];
+                    obj[col].forEach(key => {
+                      Object.keys(this.environment.tableColumnsData[this.routeParam][col]).forEach(col1 => {
+                        arr.push({ val: key[col1], label: col1, type: this.environment.tableColumnsData[this.routeParam][key] });
+                      })
+                    })
+                    nObj = { val: arr, label: col, type: this.environment.tableColumnsData[this.routeParam][col] };
+                  } else {
+                    nObj = { val: obj[col], label: col, type: this.environment.tableColumnsData[this.routeParam][col] };
+                  }
                   cols.push(nObj);
                 })
                 keys.push(cols);
