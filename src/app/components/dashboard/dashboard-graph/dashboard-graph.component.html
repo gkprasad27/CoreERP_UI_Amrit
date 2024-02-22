@@ -1,0 +1,29 @@
+<mat-card>
+    
+    <mat-card-content>
+
+        <div  class="row">
+            <div class="col-6">
+                <app-table [tableData]="tableData" [routeParam]="'dashboardGraph'"></app-table>
+            </div>
+            <div class="col-6">
+                <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
+            </div>
+        </div>
+        
+    </mat-card-content>
+
+    <mat-card-content>
+
+        <div  class="row">
+            <div class="col-6">
+                <app-table [tableData]="tableData1" [routeParam]="'dashboardGraph'"></app-table>
+            </div>
+            <div class="col-6">
+                <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions1"></highcharts-chart>
+            </div>
+        </div>
+        
+    </mat-card-content>
+
+</mat-card>

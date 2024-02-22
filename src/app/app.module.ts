@@ -82,6 +82,7 @@ import { MaterialRequisitionViewComponent } from './components/dashboard/trans-l
 import { DispatchdetailsComponent } from './components/dashboard/comp-list/dispatchdetails/dispatchdetails.component';
 import { ReportsComponent } from './components/dashboard/reports/reports.component';
 import { GraphsComponent } from './components/dashboard/graphs/graphs.component';
+import { DashboardGraphComponent } from './components/dashboard/dashboard-graph/dashboard-graph.component';
 
 //import { AccountKeyComponent } from './components/dashboard/comp-list/assetblock/accountkey/accountkey.component';
 // AoT requires an exported function for factories
@@ -163,7 +164,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SalesInvoiceComponent,
     PoHistoryComponent,
     HolidayComponent,
-    DispatchdetailsComponent,SalaryProcessComponent, QuorantineComponent, CAPAdetailsComponent, ReportsComponent, QcparamconfigurationComponent, StandardRateOComponent, JobworkmaterialreceivingComponent, JobworkmaterialissueComponent, GraphsComponent
+    DispatchdetailsComponent,SalaryProcessComponent, QuorantineComponent, CAPAdetailsComponent, ReportsComponent, QcparamconfigurationComponent, StandardRateOComponent, JobworkmaterialreceivingComponent, JobworkmaterialissueComponent, GraphsComponent, DashboardGraphComponent
   ],
   imports: [
     AppRoutingModule,

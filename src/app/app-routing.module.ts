@@ -10,12 +10,16 @@ import { PrimaryComponent } from './components/dashboard/primary/primary.compone
 import { CreateStockExcessComponent, CreateStockTransferComponent, InspectionPreviewComponent, PreviewComponent } from './components/dashboard/trans-list';
 import { ReportsComponent } from './components/dashboard/reports/reports.component';
 import { GraphsComponent } from './components/dashboard/graphs/graphs.component';
+import { DashboardGraphComponent } from './components/dashboard/dashboard-graph/dashboard-graph.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'dashboard', component: DashboardComponent,
     children: [
+
+      { path: '', redirectTo: 'dashboardGraph', pathMatch: 'full' },
+      { path: 'dashboardGraph', component: DashboardGraphComponent },
 
       // standard screens
       { path: 'rolePrevilages/role', component: RolesprevilagesComponent },

@@ -1,13 +1,16 @@
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RuntimeSettings } from '../models/common/RuntimeSettings';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
 @Injectable()
 export class RuntimeConfigService {
   runtimeConfig: any = null; 
   tableColumnsData: any;
+
+  tableDataLoaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 
 constructor(private injector: Injector, private httpClient: HttpClient) { }
 
@@ -18,7 +21,10 @@ constructor(private injector: Injector, private httpClient: HttpClient) { }
 
     public getTableColumns():Promise<any>  {
       return this.httpClient.get(`../../assets/settings/table-col.json`)
-        .pipe(tap((res) => this.tableColumnsData = res)).toPromise();
+        .pipe(tap((res) => {
+          this.tableColumnsData = res;
+          this.tableDataLoaded.next(true);
+        })).toPromise();
     }
 
 }

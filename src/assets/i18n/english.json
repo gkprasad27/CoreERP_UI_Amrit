@@ -3210,5 +3210,12 @@
   "IGST": "IGST",
   "CGST": "CGST",
   "SGST": "SGST"
-}
+},
+  "dashboardGraph": {
+    "ORDER": "ORDER",
+    "SALES": "SALES",
+    "totalEmployes": "Total Employes",
+    "totalPresent": "Total Present",
+    "totalObsent": "Total Obsent"
+  }
 }
