@@ -42,8 +42,17 @@
                     </mat-select>
                     <input *ngIf="routeEdit != ''" matInput type="text" readonly formControlName="purchaseOrderNo"
                         appFocusOnEnter tabIndex="4">
-
                 </mat-form-field>
+
+                <div class="multiselect-dropdown-list">
+                    <ng-multiselect-dropdown *ngIf="!routeEdit" placeholder="{{ 'goodsreceipts.purchaseOrderNo' | translate }}"
+                        formControlName="purchaseOrderNo" (onSelect)="ponoselect()"
+                        [settings]="dropdownSettings" [data]="purchaseordernoList">
+                    </ng-multiselect-dropdown>
+                    <input matInput type="text" readonly *ngIf="routeEdit" formControlName="purchaseOrderNo" 
+                    appFocusOnEnter tabIndex="4">
+                </div>
+
 
                 
                 <!-- <mat-form-field>

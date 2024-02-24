@@ -22,7 +22,6 @@ export class DashboardGraphComponent {
   constructor(private RuntimeConfigService: RuntimeConfigService) {
 
     this.RuntimeConfigService.tableDataLoaded.subscribe((t: any) => {
-      debugger
       if (t) {
         this.tableData = [
           { ORDER: '2', SALES: 602 },

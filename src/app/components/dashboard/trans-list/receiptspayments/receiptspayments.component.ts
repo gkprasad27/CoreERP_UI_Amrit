@@ -69,7 +69,7 @@ export class ReceiptspaymentsComponent implements OnInit {
       let data = this.bpTypeList.find(res => res.code == this.formData.get('bpcategory').value);
       this.bpgLists = this.bpList.filter(res => res.bptype == data.code);
       this.formData.patchValue({
-        partyAccount: this.bpgLists.length ? this.bpgLists[0].id : null
+        partyAccount: this.bpgLists.length ? this.bpgLists[0].text : null
       })
       this.puchaseinvoiceselect();
     }
@@ -188,10 +188,14 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   puchaseinvoiceselect() {
+    debugger
     let data = [];
     let newData = [];
+
+    const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
+
     if (!this.commonService.checkNullOrUndefined(this.formData.get('partyAccount').value)) {
-      data = this.functionaldeptList.filter(resp => resp.partyAccount == this.formData.get('partyAccount').value);
+      data = this.functionaldeptList.filter(resp => resp.partyAccount == bObj.text);
     }
     if (data.length) {
       console.log(data, this.tablePropsFunc());
@@ -220,6 +224,10 @@ export class ReceiptspaymentsComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
         
               this.formData.setValue(res.response['paymentreceiptMasters']);
+
+              const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
+              this.formData.patchValue({ partyAccount: bObj.text });
+
               this.sendDynTableData = { type: 'edit', data: res.response['paymentreceiptDetail'] };
               this.formData.disable();
               if (this.routeEdit == '') {
@@ -592,6 +600,10 @@ export class ReceiptspaymentsComponent implements OnInit {
     if (this.tableData.length == 0) {
       return;
     }
+
+    const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
+    this.formData.patchValue({ partyAccount: bObj.id });
+
     this.savePaymentsReceipts();
   }
 

@@ -2,3 +2,19 @@ mat-form-field {
     margin: 5px;
     flex: 0 0 15.75%;
   }
+
+.mat-mdc-form-field.typeahead {
+    margin-top: 25px;
+    width: 16%;
+    input {
+       border: none;
+       border-bottom: 1px solid;
+       border-radius: 0px;
+       padding: 0px;
+       padding-bottom: 12px;
+    }
+    input:focus {
+       box-shadow: none !important;
+       background-color: none !important;
+    }
+ }

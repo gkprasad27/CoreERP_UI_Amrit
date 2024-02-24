@@ -150,7 +150,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <!-- <mat-form-field class="form-element">
                     <mat-label>{{ 'receiptspayments.partyAccount' | translate }}</mat-label>
                     <mat-select formControlName="partyAccount" (selectionChange)="puchaseinvoiceselect()">
                         <mat-option>None</mat-option>
@@ -158,7 +158,16 @@
                             {{acc.text}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
+
+                <div class="mat-mdc-form-field typeahead">
+                    <input placeholder="{{ 'receiptspayments.partyAccount' | translate }}" formControlName="partyAccount"
+                        [typeahead]="bpgLists" typeaheadOptionField='text' appFocusOnEnter tabIndex="3" (typeaheadOnSelect)="puchaseinvoiceselect()"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"  >
+                    <ng-template #customItemTemplate let-model="item">
+                        <span>{{model.text}}</span>
+                    </ng-template>
+                </div>
 
             </div>
         </form>

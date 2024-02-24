@@ -472,6 +472,9 @@ export class QuotationSupplierComponent implements OnInit {
               this.formData.patchValue(res.response['qsmasters']);
               //console.log(res.response['qsDetail']);
               // this.sendDynTableData = { type: 'edit', data: res.response['qsDetail'] };
+              const pObj = this.ptypeList.find((p: any) => p.id == this.formData.value.customerCode);
+              this.formData.patchValue({ customerCode: pObj ? pObj.text: '' });
+
               res.response['qsDetail'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 s.materialName = obj.text
@@ -501,6 +504,8 @@ export class QuotationSupplierComponent implements OnInit {
     if (this.tableData.length == 0 || this.formData.invalid) {
       return;
     }
+    const obj = this.ptypeList.find((p: any) => p.text == this.formData.value.customerCode);
+    this.formData.patchValue({ customerCode: obj.id });
     this.savesupplierquotation();
   }
 
@@ -524,6 +529,11 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
   convertToSaleOrder() {
+    if (this.tableData.length == 0 || this.formData.invalid) {
+      return;
+    }
+    const pObj = this.ptypeList.find((p: any) => p.text == this.formData.value.customerCode);
+    this.formData.patchValue({ customerCode: pObj.id });
     const addsq = String.Join('/', this.apiConfigService.addSaleOrder);
     const obj = this.formData.value;
     obj.PONumber = this.formData.value.quotationNumber;

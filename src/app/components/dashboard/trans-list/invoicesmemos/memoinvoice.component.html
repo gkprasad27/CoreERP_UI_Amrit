@@ -88,7 +88,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <!-- <mat-form-field class="form-element">
                     <mat-label>{{ 'invoicesmemos.partyAccount' | translate }}</mat-label>
                     <mat-select formControlName="partyAccount">
                         <mat-option>None</mat-option>
@@ -96,7 +96,17 @@
                             {{acc.text}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
+
+                <div class="mat-mdc-form-field typeahead">
+                    <input placeholder="{{ 'invoicesmemos.partyAccount' | translate }}" formControlName="partyAccount"
+                        [typeahead]="bpgLists" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"  >
+                    <ng-template #customItemTemplate let-model="item">
+                        <span>{{model.text}}</span>
+                    </ng-template>
+                </div>
+
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'invoicesmemos.referenceNumber'"></mat-label>

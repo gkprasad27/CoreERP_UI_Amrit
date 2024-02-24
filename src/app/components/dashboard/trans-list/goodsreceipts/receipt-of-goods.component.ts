@@ -14,6 +14,7 @@ import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-
 import { TableComponent } from 'src/app/reuse-components';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-receipt-of-goods',
@@ -60,6 +61,16 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
 
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'id',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -299,10 +310,11 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   ponoselect() {
+    debugger
     let data = [];
     this.perChaseOrderList = [];
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('purchaseOrderNo').value)) {
-      data = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.get('purchaseOrderNo').value);
+    if (!this.commonService.checkNullOrUndefined(this.formData.get('purchaseOrderNo').value) && this.formData.value.purchaseOrderNo[0].id) {
+      data = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.value.purchaseOrderNo[0].id);
     }
     if (data.length) {
       data.forEach((d: any, index: number) => {
@@ -331,7 +343,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
       })
       this.tableData = null;
     }
-    const obj = this.purchaseordernoList.find(resp => resp.id == this.formData.get('purchaseOrderNo').value);
+    const obj = this.purchaseordernoList.find(resp => resp.id == this.formData.value.purchaseOrderNo[0].id);
     this.formData.patchValue({
       customerName: obj.text
     })
@@ -660,6 +672,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   savegoodsreceipt() {
+    debugger
     this.formData.controls.purchaseOrderNo.enable();
     this.formData.controls.company.enable();
     this.formData.controls.customerName.enable();
@@ -667,6 +680,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
     const arr = this.tableData.filter((d: any) => !d.type);
     const addgoodsreceipt = String.Join('/', this.apiConfigService.addgoodsreceipt);
     const formData = this.formData.value;
+    if (typeof formData.purchaseOrderNo != 'string') {
+      formData.purchaseOrderNo = this.formData.value.purchaseOrderNo[0].id;
+    }
     formData.receivedDate = this.formData.get('receivedDate').value ? this.datepipe.transform(this.formData.get('receivedDate').value, 'MM-dd-yyyy') : '';
     formData.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     formData.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';

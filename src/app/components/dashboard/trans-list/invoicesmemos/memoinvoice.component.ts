@@ -224,6 +224,12 @@ export class MemoinvoiceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.setValue(res.response['imMasters']);
+
+              const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
+              this.formData.patchValue({
+                partyAccount: bObj.text
+              })
+
               this.sendDynTableData = { type: 'edit', data: res.response['ImDetail'] };
               this.onbpChange();
               this.formData.disable();
@@ -582,8 +588,11 @@ export class MemoinvoiceComponent implements OnInit {
     if (this.tableData.length == 0) {
       return;
     }
+    const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
+
     this.formData.patchValue({
-      totalAmount: this.debitValue + this.creditValue + this.totalTaxValue
+      totalAmount: this.debitValue + this.creditValue + this.totalTaxValue,
+      partyAccount: bObj.id
     })
     this.saveInvoiceMemo();
   }

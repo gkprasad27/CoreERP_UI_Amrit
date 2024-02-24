@@ -35,9 +35,7 @@ export class GraphsComponent {
 
   tableData = [
     { 'sNo': 1, month: 'Apr-23', 'suppliedQty': 602, 'rejectionQty': 5 },
-    { 'sNo': 2, month: 'Apr-23', 'suppliedQty': 602, 'rejectionQty': 5 },
-    { 'sNo': 3, month: 'Apr-23', 'suppliedQty': 602, 'rejectionQty': 5 },
-    { 'sNo': 4, month: 'Apr-23', 'suppliedQty': 602, 'rejectionQty': 5 },
+    { 'sNo': 2, month: 'May-23', 'suppliedQty': 610, 'rejectionQty': 0 }
   ];
 
 

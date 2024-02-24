@@ -20,7 +20,6 @@ export class AppComponent {
     commonService.showNavbar.subscribe(res => {
       this.showNavbar = res;
     })
-    debugger
     this.runtimeConfigService.getTableColumns();
 
   }
