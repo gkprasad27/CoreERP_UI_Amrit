@@ -641,7 +641,9 @@ export class ReceiptspaymentsComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Payments Receipts created Successfully..', Static.Close, SnackBar.success);
           }
-          this.reset();
+          // this.reset();
+          this.router.navigate(['/dashboard/transaction/receiptspayments'])
+
           this.spinner.hide();
         }
       });
