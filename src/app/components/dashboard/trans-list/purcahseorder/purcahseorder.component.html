@@ -383,6 +383,7 @@
                 </mat-form-field> -->
 
                 <div class="multiselect-dropdown-list">
+                    <!-- <mat-label>{{'purchaseorder.quotationNumber' | translate }}</mat-label> -->
                     <ng-multiselect-dropdown *ngIf="!routeEdit" placeholder="{{ 'purchaseorder.quotationNumber' | translate }}"
                         formControlName="saleOrderNo" (onSelect)="quotationNumberChange()"
                         [settings]="dropdownSettings" [data]="qnoList">

@@ -861,7 +861,7 @@ export class PurchaseOrderComponent implements OnInit {
     obj.purchaseOrderDate = obj.purchaseOrderDate ? this.datepipe.transform(obj.purchaseOrderDate, 'MM-dd-yyyy') : '';
     obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
     if (typeof obj.saleOrderNo != 'string') {
-      obj.saleOrderNo = this.formData.value.saleOrderNo[0].id;
+      obj.saleOrderNo = this.formData.value.saleOrderNo[0].saleOrderNo;
     }
     const arr = this.tableData.filter((d: any) => d.changed);
 
