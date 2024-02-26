@@ -31,7 +31,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <!-- <mat-form-field class="form-element">
                     <mat-label>{{ 'goodsreceipts.purchaseOrderNo' | translate }}</mat-label>
                     <mat-select formControlName="purchaseOrderNo" (selectionChange)="ponoselect()"
                         *ngIf="routeEdit == ''" appFocusOnEnter tabIndex="3">
@@ -42,7 +42,7 @@
                     </mat-select>
                     <input *ngIf="routeEdit != ''" matInput type="text" readonly formControlName="purchaseOrderNo"
                         appFocusOnEnter tabIndex="4">
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <div class="multiselect-dropdown-list">
                     <ng-multiselect-dropdown *ngIf="!routeEdit" placeholder="{{ 'goodsreceipts.purchaseOrderNo' | translate }}"
