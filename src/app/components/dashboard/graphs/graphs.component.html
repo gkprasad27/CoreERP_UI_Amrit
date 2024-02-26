@@ -54,7 +54,9 @@
                 <app-table [tableData]="tableData" ></app-table>
             </div>
             <div class="col-6">
-                <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
+                <ng-container *ngIf="chartOptions">
+                    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
+                </ng-container>
             </div>
         </div>
         

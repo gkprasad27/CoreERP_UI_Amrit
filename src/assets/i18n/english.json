@@ -3217,5 +3217,14 @@
     "totalEmployes": "Total Employes",
     "totalPresent": "Total Present",
     "totalObsent": "Total Obsent"
+  },
+  "ordervssales": {
+    "title": "Order vs Sales",
+    "monthYear": "Month Year",
+    "totalSaleAmount": "Total Sale Amount",
+    "totalInvoiceAmount": "Total Invoice Amount",
+    "reportTitle": "Order vs Sales",
+    "yAxis": "Amount",
+    "xAxis": "Year"
   }
 }

@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import * as Highcharts from 'highcharts';
 import { Options } from "highcharts";
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -24,19 +25,9 @@ export class GraphsComponent {
 
   Highcharts: typeof Highcharts = Highcharts;
 
-  chartOptions: Highcharts.Options = {
-    series: [
-      {
-        type: "line",
-        data: [1, 2, 3]
-      }
-    ]
-  };
+  chartOptions: Highcharts.Options = null;
 
-  tableData = [
-    { 'sNo': 1, month: 'Apr-23', 'suppliedQty': 602, 'rejectionQty': 5 },
-    { 'sNo': 2, month: 'May-23', 'suppliedQty': 610, 'rejectionQty': 0 }
-  ];
+  tableData = null;
 
 
   getComponentData: any;
@@ -45,13 +36,9 @@ export class GraphsComponent {
 
   companyList: any[] = [];
 
-  data: any;
-
   submitted = false;
 
   routeParam: any;
-
-  date = new Date()
 
   constructor(
     private apiService: ApiService,
@@ -61,15 +48,18 @@ export class GraphsComponent {
     private alertService: AlertService,
     private environment: RuntimeConfigService,
     private apiConfigService: ApiConfigService,
+    private translate: TranslateService,
     private commonService: CommonService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
     this.model();
-    this.getcompaniesList();
+    this.getcompaniesList(); 0
     activatedRoute.params.subscribe(params => {
       this.routeParam = params.id
-      this.commonService.routeParam = params.id
+      this.commonService.routeParam = params.id;
+      this.tableData = null;
+      this.chartOptions = null;
       this.reset();
       this.getParameters(params.id);
     });
@@ -78,18 +68,17 @@ export class GraphsComponent {
   model() {
     this.modelFormData = this.formBuilder.group({
       companyCode: [null, [Validators.required]],
-      companyName: [null],
       selected: [null, [Validators.required]],
       fromDate: [null],
       toDate: [null],
     });
     this.setValidator();
   }
-  
+
 
   setValidator() {
-    
-    if (this.routeParam == 'stockvaluation' || this.routeParam != 'pendingpurchaseorders' || this.routeParam != 'pendingsales'|| this.routeParam == 'pendingjobworkreport') {
+
+    if (this.routeParam == 'stockvaluation' || this.routeParam != 'pendingpurchaseorders' || this.routeParam != 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
       this.modelFormData.controls['selected'].removeValidators(Validators.required);
       this.modelFormData.controls['selected'].updateValueAndValidity();
     } else {
@@ -148,13 +137,14 @@ export class GraphsComponent {
         toDate: this.commonService.formatDateValue(this.modelFormData.value.selected.end.$d)
       });
     }
+    this.tableData = null;
     this.print();
   }
 
 
   print() {
     let getUrl
-    if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales'|| this.routeParam == 'pendingjobworkreport') {
+    if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
@@ -165,31 +155,39 @@ export class GraphsComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
-              const keys = [];
-              const tableResp = res.response[this.getComponentData.listName];
-              if(res.response[this.getComponentData.totals] && res.response[this.getComponentData.totals].length) {
-                tableResp.push(res.response[this.getComponentData.totals][0]);
-              }
-              tableResp.forEach(obj => {
-                const cols = [];
-                Object.keys(this.environment.tableColumnsData[this.routeParam]).forEach(col => {
-                  const nObj = { val: obj[col], label: col, type: this.environment.tableColumnsData[this.routeParam][col] };
-                  cols.push(nObj);
-                })
-                keys.push(cols);
+              this.tableData = res.response[this.getComponentData.listName];
+              debugger
+              this.translate.get(this.routeParam).subscribe((data: any) => {
+
+
+                const categories = this.tableData.map((d: any) => d.monthYear);
+                let series = [];
+                for (const key in this.environment.tableColumnsData[this.routeParam]) {
+                  // tslint:disable-next-line: prefer-for-of
+                  if (key != 'monthYear') {
+                    series.push({ name: data[key], data: this.tableData.map((d: any) => d[key]), type: 'line' })
+                  }
+                }
+
+                this.chartOptions = {
+                  title: {
+                    text: data.reportTitle
+                  },
+                  yAxis: {
+                    title: {
+                      text: data.yAxis
+                    }
+                  },
+                  xAxis: {
+                    title: {
+                      text: data.xAxis
+                    },
+                    categories: categories
+                  },
+                  series: series
+                }
+
               });
-              const obj = this.companyList.find((c: any) => c.id == this.modelFormData.value.companyCode);
-              this.modelFormData.patchValue({
-                companyName: obj.text
-              })
-              this.data = keys;
-              setTimeout(() => {
-                var w = window.open();
-                var html = document.getElementById('printData').innerHTML;
-                w.document.body.innerHTML = html;
-                this.data = null;
-                w.print();
-              }, 50);
 
             }
           }
