@@ -235,7 +235,6 @@ export class JobworkmaterialissueComponent {
   }
 
   editOrDeleteEvent(value) {
-    debugger
     if (value.action === 'Delete') {
       this.deleteRecord(value);
     } else {

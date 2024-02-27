@@ -83,7 +83,6 @@ export class DashboardGraphComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response['OrdersvsSales'] && res.response['OrdersvsSales'].length) {
               this.tableData = res.response['OrdersvsSales'];
-              debugger
               this.translate.get('ordervssales').subscribe((data: any) => {
                 const categories = this.tableData.map((d: any) => d.monthYear);
                 let series = [];

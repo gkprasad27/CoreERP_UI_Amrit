@@ -310,7 +310,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   ponoselect() {
-    debugger
     let data = [];
     this.perChaseOrderList = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('purchaseOrderNo').value) && this.formData.value.purchaseOrderNo[0].id) {
@@ -672,7 +671,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   savegoodsreceipt() {
-    debugger
     this.formData.controls.purchaseOrderNo.enable();
     this.formData.controls.company.enable();
     this.formData.controls.customerName.enable();

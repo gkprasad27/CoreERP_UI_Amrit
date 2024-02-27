@@ -188,7 +188,6 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   puchaseinvoiceselect() {
-    debugger
     let data = [];
     let newData = [];
 

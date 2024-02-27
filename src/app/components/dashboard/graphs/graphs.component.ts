@@ -145,7 +145,6 @@ export class GraphsComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
               this.tableData = res.response[this.getComponentData.listName];
-              debugger
               this.translate.get(this.routeParam).subscribe((data: any) => {
 
 
