@@ -1,8 +1,15 @@
 import { Component } from '@angular/core';
 
 import * as Highcharts from 'highcharts';
+import { ApiConfigService } from 'src/app/services/api-config.service';
 
 import { RuntimeConfigService } from '../../../services/runtime-config.service';
+import { String } from 'typescript-string-operations';
+import { ApiService } from 'src/app/services/api.service';
+import { CommonService } from 'src/app/services/common.service';
+import { StatusCodes } from 'src/app/enums/common/common';
+import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard-graph',
@@ -19,40 +26,20 @@ export class DashboardGraphComponent {
   tableData = [];
   tableData1 = [];
 
-  constructor(private RuntimeConfigService: RuntimeConfigService) {
+
+
+
+  constructor(
+    private RuntimeConfigService: RuntimeConfigService, private apiConfigService: ApiConfigService,
+    private apiService: ApiService,     private commonService: CommonService,
+    private translate: TranslateService,      private spinner: NgxSpinnerService,
+
+    ) {
 
     this.RuntimeConfigService.tableDataLoaded.subscribe((t: any) => {
       if (t) {
-        this.tableData = [
-          { ORDER: '2', SALES: 602 },
-          { ORDER: '3', SALES: 234 },
-          { ORDER: '23', SALES: 6032 },
-          { ORDER: '221', SALES: 60432 },
-          { ORDER: '212', SALES: 6032 },
-        ];
-        this.chartOptions = {
-          title: {
-            text: 'Order && Sales'
-          },
-          yAxis: {
-            title: {
-              text: 'Order && Sales'
-            }
-          },
-          series: [
-            {
-              name: 'ORDER',
-              data: [2, 3, 4],
-              type: 'line'
-            },
-            {
-              name: 'SALES',
-              data: [1, 2, 3],
-              type: 'line'
-            }
-          ],
-        }
-
+      
+        this.print();
 
         this.tableData1 = [
           { totalEmployes: 100, totalPresent: 20, totalObsent: 80 },
@@ -81,9 +68,57 @@ export class DashboardGraphComponent {
             },
           ],
         }
+
       }
     })
   }
+
+  
+  print() {
+    let getUrl = String.Join('', this.apiConfigService.getOrdersvsSales, '/2023-01-01/2024-01-01/1000');
+    this.apiService.apiGetRequest(getUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response) && res.response['OrdersvsSales'] && res.response['OrdersvsSales'].length) {
+              this.tableData = res.response['OrdersvsSales'];
+              debugger
+              this.translate.get('ordervssales').subscribe((data: any) => {
+                const categories = this.tableData.map((d: any) => d.monthYear);
+                let series = [];
+                for (const key in this.RuntimeConfigService.tableColumnsData['ordervssales']) {
+                  // tslint:disable-next-line: prefer-for-of
+                  if (key != 'monthYear') {
+                    series.push({ name: data[key], data: this.tableData.map((d: any) => d[key]), type: 'line' })
+                  }
+                }
+                this.chartOptions = {
+                  title: {
+                    text: data.reportTitle
+                  },
+                  yAxis: {
+                    title: {
+                      text: data.yAxis
+                    }
+                  },
+                  xAxis: {
+                    title: {
+                      text: data.xAxis
+                    },
+                    categories: categories
+                  },
+                  series: series
+                }
+              });
+
+            }
+          }
+          this.spinner.hide();
+        });
+
+  }
+
 
 
 

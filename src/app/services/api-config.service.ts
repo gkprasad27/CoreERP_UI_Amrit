@@ -526,4 +526,6 @@ export class ApiConfigService {
    getJWReceiptDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJWReceiptDetail`;
    getJobWorkDetails = `${this.environment.runtimeConfig.serverUrl}Common/GetJobWorkDetails`;
    updateProductionStatus = `${this.environment.runtimeConfig.serverUrl}Transactions/UpdateProductionStatus`;
+
+   getOrdersvsSales = `${this.environment.runtimeConfig.serverUrl}Reports/GetOrdersvsSales`;
 }

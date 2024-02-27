@@ -34,7 +34,7 @@ export class JobworkmaterialissueComponent {
   date = new Date()
   dropdownList = [];
   selectedItems = [];
-  dropdownSettings : IDropdownSettings = {
+  dropdownSettings: IDropdownSettings = {
     singleSelection: true,
     idField: 'id',
     textField: 'text',
@@ -90,12 +90,12 @@ export class JobworkmaterialissueComponent {
 
     this.formData = this.formBuilder.group({
 
-      id : [0],
-      jobWorkNumber : [0],
+      id: [0],
+      jobWorkNumber: [0],
 
       company: [null, Validators.required],
       companyName: [null],
-      
+
       profitCenter: ['', Validators.required],
 
       vendor: ['', Validators.required],
@@ -106,7 +106,7 @@ export class JobworkmaterialissueComponent {
 
       orderDate: [null],
       deliveryDate: [null],
-      
+
       materialCode: [''],
 
       igst: [0],
@@ -149,7 +149,7 @@ export class JobworkmaterialissueComponent {
       id: 0
     });
   }
-  
+
   saveForm() {
     if (this.formData1.invalid) {
       return;
@@ -192,7 +192,7 @@ export class JobworkmaterialissueComponent {
 
     this.formData1.patchValue({
       amount: amount,
-      totalTax:(igst + sgst + cgst),
+      totalTax: (igst + sgst + cgst),
       total: (amount) + (igst + sgst + cgst),
       igst: igst,
       cgst: cgst,
@@ -235,13 +235,40 @@ export class JobworkmaterialissueComponent {
   }
 
   editOrDeleteEvent(value) {
+    debugger
     if (value.action === 'Delete') {
-      this.tableComponent.defaultValues();
-      this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
-      this.calculate();
+      this.deleteRecord(value);
     } else {
       this.formData1.patchValue(value.item);
     }
+  }
+
+  deleteRecord(value) {
+    const obj = {
+      item: {
+        materialCode: value.item.materialCode
+      },
+      primary: 'materialCode'
+    }
+    this.commonService.deletePopup(obj, (flag: any) => {
+      if (flag) {
+        const jvDetUrl = String.Join('/', this.apiConfigService.deletePurchaseOrder, value.item.id);
+        this.apiService.apiDeleteRequest(jvDetUrl)
+          .subscribe(
+            response => {
+              const res = response;
+              if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+                if (!this.commonService.checkNullOrUndefined(res.response)) {
+                  this.tableComponent.defaultValues();
+                  this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
+                  this.calculate();
+                  this.alertService.openSnackBar('Delected Record...', 'close', SnackBar.success);
+                }
+              }
+              this.spinner.hide();
+            });
+      }
+    })
   }
 
   getCustomerList() {
@@ -266,9 +293,9 @@ export class JobworkmaterialissueComponent {
     this.formData.patchValue({
       vendorGSTN: obj ? obj.gstNo : ''
     })
-    if(!event) {
+    if (!event) {
       this.formData.patchValue({
-        vendor: [{ id: obj.id, text: obj.text}]
+        vendor: [{ id: obj.id, text: obj.text }]
       })
     }
   }
@@ -520,7 +547,7 @@ export class JobworkmaterialissueComponent {
     }, 1000);
 
   }
-  
+
   setArray(length: number) {
     let newArr = [];
     if (length < 10) {
@@ -537,6 +564,6 @@ export class JobworkmaterialissueComponent {
   }
 
 
-  
+
 
 }

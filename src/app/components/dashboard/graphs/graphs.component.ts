@@ -77,14 +77,8 @@ export class GraphsComponent {
 
 
   setValidator() {
-
-    if (this.routeParam == 'stockvaluation' || this.routeParam != 'pendingpurchaseorders' || this.routeParam != 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
-      this.modelFormData.controls['selected'].removeValidators(Validators.required);
-      this.modelFormData.controls['selected'].updateValueAndValidity();
-    } else {
       this.modelFormData.controls['selected'].addValidators(Validators.required);
       this.modelFormData.controls['selected'].updateValueAndValidity();
-    }
   }
 
   getcompaniesList() {
@@ -143,12 +137,7 @@ export class GraphsComponent {
 
 
   print() {
-    let getUrl
-    if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
-    } else {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
-    }
+    let getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
         response => {
