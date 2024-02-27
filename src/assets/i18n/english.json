@@ -3021,7 +3021,9 @@
     "imageURL": "Image URL"
   },
   "salaryprocess":{
-    "title":"Salary Process"
+    "title":"Salary Process",
+    "sal_Month": "Month",
+    "sal_Year": "Year"
   },
   "quorantine": {
     "title": "Quorantine",
