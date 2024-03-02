@@ -2830,7 +2830,7 @@
     "cashOrParty": "Cash / Party",
     "invoicePrint": "Invoice Print",
     "vehicleRegNo": "Vehicle Reg No",
-    "customerName": "Customer Name",
+    "custName": "Customer Name",
     "customerGstin": "Customer GSTIN",
     "memberName": "Member Name",
     "paymentMode": "Payment Mode",

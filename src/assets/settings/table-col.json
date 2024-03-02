@@ -2338,7 +2338,7 @@
     "NEWSALES": "Create New Sales",
     "netWeight": "Net Weight",
     "invoiceDate": "Date",
-    "customerName": "Customer Name",
+    "custName": "Customer Name",
     "customerGstin": "Customer GSTIN",
     "taxGroupName": "Tax GroupName",
     "availStock": "Avail Stock",
