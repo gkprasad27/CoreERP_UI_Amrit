@@ -70,13 +70,12 @@ export class TransTableComponent implements OnInit {
     public commonService: CommonService,
     private alertService: AlertService
   ) {
-    let obj = JSON.parse(localStorage.getItem("user"));
     this.headerForm = this.formBuilder.group({
       selected: [null],
       FromDate: [null],
       ToDate: [null],
       searchCriteria: [null],
-      companyCode: obj.companyCode
+      companyCode: ''
     });
     activatedRoute.params.subscribe(params => {
       this.routeParam = params.id;
@@ -106,6 +105,10 @@ export class TransTableComponent implements OnInit {
 
   getTableList() {
     debugger
+    let obj = JSON.parse(localStorage.getItem("user"));
+    this.headerForm.patchValue({
+      companyCode: obj.companyCode
+    })
     const getInvoiceListUrl = String.Join('/', this.transListService.getDynComponents(this.routeParam).tableUrl);
     this.apiService.apiPostRequest(getInvoiceListUrl, this.headerForm.value).subscribe(
       response => {

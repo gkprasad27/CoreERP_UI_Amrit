@@ -70,7 +70,8 @@ export class BinsCreationComponent implements OnInit {
     this.getEmployeetData();
   }
   getMaterielData() {
-    const getMaterielUrl = String.Join('/', this.apiConfigService.getmaterialdata);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getMaterielUrl = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
     this.apiService.apiGetRequest(getMaterielUrl)
       .subscribe(
         response => {

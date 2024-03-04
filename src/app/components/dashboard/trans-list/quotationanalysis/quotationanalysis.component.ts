@@ -133,7 +133,8 @@ export class QuotationAnalysisComponent implements OnInit {
         });
   }
   getsuppliercodeList() {
-    const getsuppliercodeList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getsuppliercodeList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList, obj.companyCode);
     this.apiService.apiGetRequest(getsuppliercodeList)
       .subscribe(
         response => {

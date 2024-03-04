@@ -70,7 +70,14 @@ export class CompListComponent implements OnInit, OnDestroy {
   }
 
   getTableData() {
-    const getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.tableUrl.url);
+    debugger
+    let getUrl = ''
+    if(this.tableUrl.url == "MaterialMaster/GetMaterialMasterList") {
+      let obj = JSON.parse(localStorage.getItem("user"));
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.tableUrl.url,  `/${obj.companyCode}`);
+    } else {
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.tableUrl.url);
+    }
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
         response => {

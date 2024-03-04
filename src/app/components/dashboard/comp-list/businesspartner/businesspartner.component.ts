@@ -89,6 +89,7 @@ export class BusienessPartnerAccountComponent implements OnInit, OnDestroy {
       swiftcode: [null],
       bankBranch: [null],
       bankBranchNo: [null],
+      closingBalance: [null],
       contactPersion: [null],
       contactPersionMobile: [null],
       narration: [null],

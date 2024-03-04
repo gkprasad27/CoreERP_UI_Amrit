@@ -138,7 +138,8 @@ export class ProcessComponent implements OnInit {
   }
 
   getmaterialData() {
-    const getmaterialUrl = String.Join('/', this.apiConfigService.getmaterialdata);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getmaterialUrl = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
     this.apiService.apiGetRequest(getmaterialUrl)
       .subscribe(
         response => {

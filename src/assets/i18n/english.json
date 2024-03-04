@@ -746,6 +746,7 @@
     "regionName": "Region",
     "countryName": "Country",
     "companyName": "Company",
+    "closingBalance": "Closing Balance",
     "bpGroupName": "BP Group",
     "bpTypeName": "BP Type",
     "controlAccountName": "Control Account",

@@ -399,7 +399,8 @@ export class GoodsissueComponent implements OnInit {
   //       });
   // }
   getmaterialList() {
-    const getmaterialList = String.Join('/', this.apiConfigService.getmaterialdata);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getmaterialList = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
     this.apiService.apiGetRequest(getmaterialList)
       .subscribe(
         response => {
