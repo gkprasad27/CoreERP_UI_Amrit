@@ -1,6 +1,6 @@
 <div style="margin: 10px;" *ngIf="inspectionPrint" id="inspectionPrintData">
 
-  <ng-container *ngFor="let data of inspectionPrint">
+  <div *ngFor="let data of inspectionPrint">
 
     <div style="text-align: end;"> <b> {{ data?.headingObj?.drawingRevNo }}</b> </div>
 
@@ -92,7 +92,7 @@
 
 
 
-    <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+    <div style="min-height: 350px;border-top: 1px solid black;-webkit-print-color-adjust: exact;"
       *ngIf="data.detailArray && data.detailArray.length">
       <table style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
         <thead>
@@ -178,7 +178,7 @@
       </div>
     </div>
 
-  </ng-container>
+  </div>
 
 </div>
 
