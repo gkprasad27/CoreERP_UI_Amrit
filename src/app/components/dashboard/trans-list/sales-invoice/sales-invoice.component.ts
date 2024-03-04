@@ -503,7 +503,7 @@ export class SalesInvoiceComponent implements OnInit {
         dateOfSupply: this.getInvoiceDeatilData?.InvoiceMasterList?.dateOfSupply || '',
         shiptoState: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoState || '',
         shiptoCity: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoCity || '',
-
+        ...this.formData.value
       },
       vAddress: {
         name: this.getInvoiceDeatilData?.InvoiceMasterList?.customerName || '',
@@ -524,7 +524,7 @@ export class SalesInvoiceComponent implements OnInit {
         gstno:  this.getInvoiceDeatilData?.InvoiceMasterList?.customerGstin || '',
       },
       detailArray: list,
-      totalObj: totalObj
+      totalObj: totalObj,
     };
     this.invoicePrintData = obj;
 

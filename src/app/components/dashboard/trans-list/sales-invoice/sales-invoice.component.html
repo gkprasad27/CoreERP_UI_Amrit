@@ -187,42 +187,45 @@
             <div style="">
                 <div style="display: flex;justify-content: space-between;">
                     <b style="width: 300px;padding-left: 5px;"> Total Amount Before Tax </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.totalObj?.grossAmount }} </span>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.totalAmount }} </span>
                 </div>
                 <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
                     <b style="width: 300px;padding-left: 5px;"> Transportation Charges </b>
                     <span style="padding-left: 80px;">  </span>
                 </div>
+
+
                 <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
-                    <b style="width: 300px;padding-left: 5px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.cgst }} </span>
+                    <b style="width: 300px;padding-left: 5px;"> Add CGST  </b>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.totalCgst || '0.0'}} </span>
                 </div>
                 <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
-                    <b style="width: 300px;padding-left: 5px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.sgst }} </span>
+                    <b style="width: 300px;padding-left: 5px;"> Add SGST  </b>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.totalSGST || '0.0' }} </span>
                 </div>
+
             </div>
         </div>
     </div>
     <div style="display: flex; font-size: 15px;">
         <div style="width: 50%;padding-left: 15px;padding-top: 3px;padding-bottom: 3px;border-right: 1px solid;">
             <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Bank Details: </b>
-            <div style="font-size: 12px;font-family: Calibri;"> Bank Account Number : {{ invoicePrintData.headingObj?.totalAmount }} </div>
-            <div style="font-size: 12px;font-family: Calibri;"> Bank Branch and IFSC Code : {{ invoicePrintData.headingObj?.totalAmount }} </div>
+            <div style="font-size: 12px;font-family: Calibri;"> Bank Account Number :  </div>
+            <div style="font-size: 12px;font-family: Calibri;"> Bank Branch and IFSC Code :  </div>
         </div>
         <div style="width: 50%;font-size: 12px;font-family: Calibri;">
             <div style="">
                 <div style="display: flex;justify-content: space-between;">
-                    <b style="width: 300px;padding-left: 5px;"> Add: {{ invoicePrintData.headingObj?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.cgst }} </span>
+                    <b style="width: 300px;padding-left: 5px;"> Add IGST  </b>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.totalIGST || '0.0'}} </span>
                 </div>
                 <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
-                    <b style="width: 300px;padding-left: 5px;"> Total amount : {{ invoicePrintData.headingObj?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.sgst }} </span>
+                    <b style="width: 300px;padding-left: 5px;"> Total tax amount  </b>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.totalTax }} </span>
                 </div>
                 <div style="border-top: 1px solid black;display: flex;justify-content: space-between;">
-                    <b style="width: 300px;padding-left: 5px;"> Total amount after GST + Transportation {{ invoicePrintData.headingObj?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.igst }} </span>
+                    <b style="width: 300px;padding-left: 5px;"> Total amount after GST + Transportation  </b>
+                    <span style="padding-left: 80px;"> {{ invoicePrintData.headingObj?.grandTotal }} </span>
                 </div>
             </div>
         </div>
