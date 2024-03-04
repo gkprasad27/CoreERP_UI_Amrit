@@ -12,6 +12,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
 import { TableComponent } from 'src/app/reuse-components';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 @Component({
   selector: 'app-goodsissue',
   templateUrl: './goodsissue.component.html',
@@ -28,6 +29,18 @@ export class GoodsissueComponent implements OnInit {
 
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
 
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'saleOrderNo',
+    textField: 'saleOrderNo',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+  isDropdownDisabled = false;
 
   formData: FormGroup;
   formData1: FormGroup;
@@ -82,7 +95,7 @@ export class GoodsissueComponent implements OnInit {
   formDataGroup() {
     this.formData = this.formBuilder.group({
       company: [null, [Validators.required]],
-      plant: [null, [Validators.required]],
+      // plant: [null, [Validators.required]],
       goodsIssueId: ['0'],
       storesPerson: [null, Validators.required],
       saleOrder: [true, Validators.required],
@@ -251,6 +264,11 @@ export class GoodsissueComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['goodsissueasters']);
+              debugger
+              this.formData.patchValue({
+                saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }]: ''
+              })
+              this.isDropdownDisabled = true;
               console.log(res.response['goodsissueastersDetail']);
               // this.sendDynTableData = { type: 'edit', data: res.response['goodsissueastersDetail'] };
               this.formData.disable();
@@ -469,21 +487,7 @@ export class GoodsissueComponent implements OnInit {
           this.getfunctionaldeptList()
         });
   }
-  // getlocationList() {
-  //   const getlocationUrl = String.Join('/', this.apiConfigService.getlocationList);
-  //   this.apiService.apiGetRequest(getlocationUrl)
-  //     .subscribe(
-  //       response => {
-  //         const res = response;
-  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //             this.locationList = res.response['locationList'];
-  //           }
-  //         }
-  //         this.getfunctionaldeptList();
-  //       });
-  // }
-
+  
   getfunctionaldeptList() {
     const taxCodeUrl = String.Join('/', this.apiConfigService.getfunctionaldeptList);
     this.apiService.apiGetRequest(taxCodeUrl)
@@ -502,60 +506,9 @@ export class GoodsissueComponent implements OnInit {
           }
         });
   }
-  // getCostcenters() {
-  //   const costCenUrl = String.Join('/', this.apiConfigService.getCostCentersList);
-  //   this.apiService.apiGetRequest(costCenUrl)
-  //     .subscribe(
-  //       response => {
-  //         this.spinner.hide();
-  //         const res = response;
-  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //             this.costCenterList = res.response['costcenterList'];
-  //           }
-  //         }
-  //         this.dynTableProps = this.tablePropsFunc();
-  //         if (this.routeEdit != '') {
-  //           this.getGIDetail(this.routeEdit);
-  //         }
-  //       });
-  // }
-
-  emitColumnChanges(data) {
-    this.tableData = data.data;
-  }
-
-  dataChange(row) {
-    //this.sendDynTableData = { type: 'add', data: row.data };
-  }
-  reqnoselect() {
-    let data = [];
-    let newData = [];
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('saleOrderNumber').value)) {
-      data = this.mreqdetailsList.filter(resp => resp.saleOrderNumber == this.formData.get('saleOrderNumber').value);
-    }
-    if (data.length) {
-      console.log(data, this.tablePropsFunc());
-      data.forEach((res, index) => {
-        newData.push(this.tablePropsFunc().tableData);
-        newData[index].qty.value = res.qty;
-        newData[index].materialCode.value = res.materialCode;
-        newData[index].location.value = res.sotrageLocation;
-        newData[index].joborProject.value = res.joborProject;
-        newData[index].jobOrder.value = res.order;
-        newData[index].costCenter.value = res.costCenter;
-        newData[index].wbs.value = res.wbs;
-        const qty = this.mmasterList.find(resp => resp.id == res.materialCode);
-        newData[index].availableqty.value = qty.availQTY;
-      })
-    }
-    //
-    this.sendDynTableData = { type: 'add', data: newData };
-  }
-
 
   getGoodsissueDetail() {
-    const jvDetUrl = String.Join('/', this.apiConfigService.getGoodsissueDetail, this.formData.value.saleOrderNumber);
+    const jvDetUrl = String.Join('/', this.apiConfigService.getGoodsissueDetail, this.formData.value.saleOrderNumber[0].saleOrderNo);
     this.apiService.apiGetRequest(jvDetUrl)
       .subscribe(
         response => {
@@ -581,7 +534,7 @@ export class GoodsissueComponent implements OnInit {
     } else if (this.formData.value.saleOrder == 'Bill of Material') {
       url = this.apiConfigService.getBOMDetail;
     }
-    const qsDetUrl = String.Join('/', url, this.formData.value.saleOrderNumber);
+    const qsDetUrl = String.Join('/', url, this.formData.value.saleOrderNumber[0].saleOrderNo);
     this.apiService.apiGetRequest(qsDetUrl)
       .subscribe(
         response => {
@@ -641,7 +594,6 @@ export class GoodsissueComponent implements OnInit {
     if (this.tableData.length == 0 || this.formData.invalid) {
       return;
     }
-
     this.savegoodsissue();
   }
 
@@ -654,6 +606,10 @@ export class GoodsissueComponent implements OnInit {
   }
 
   savegoodsissue() {
+    const formData = this.formData.value;
+    if (typeof formData.saleOrderNumber != 'string') {
+      formData.saleOrderNumber = this.formData.value.saleOrderNumber[0].saleOrderNo;
+    }
     const arr = this.tableData.filter((d: any) => d.changed);
     const addJournal = String.Join('/', this.apiConfigService.addGoodsissue);
     const requestObj = { gibHdr: this.formData.value, gibDtl: arr };

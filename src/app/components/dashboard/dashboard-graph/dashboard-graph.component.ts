@@ -90,7 +90,7 @@ export class DashboardGraphComponent {
                 for (const key in this.RuntimeConfigService.tableColumnsData['ordervssales']) {
                   // tslint:disable-next-line: prefer-for-of
                   if (key != 'monthYear') {
-                    series.push({ name: data[key], data: this.tableData.map((d: any) => d[key]), type: 'line' })
+                    series.push({ name: data[key], data: this.tableData.map((d: any) => d[key]), type: 'column' })
                   }
                 }
                 this.chartOptions = {
