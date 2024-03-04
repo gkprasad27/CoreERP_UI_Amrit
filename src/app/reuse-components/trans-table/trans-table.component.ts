@@ -103,7 +103,9 @@ export class TransTableComponent implements OnInit {
 
 
   getTableList() {
-    const getInvoiceListUrl = String.Join('/', this.transListService.getDynComponents(this.routeParam).tableUrl);
+    debugger
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getInvoiceListUrl = String.Join('/', this.transListService.getDynComponents(this.routeParam).tableUrl, obj.companyCode);
     this.apiService.apiPostRequest(getInvoiceListUrl, this.headerForm.value).subscribe(
       response => {
         this.spinner.hide();
