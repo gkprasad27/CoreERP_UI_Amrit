@@ -115,9 +115,55 @@ export class DynamicTableComponent implements OnInit {
   }
 
   setTypeAheadValue(val, col, indx) {
+    debugger
     this.dataSource.data[indx][col].value = val;
     this.formControlValid(col, this.dataSource.data[indx][col], val, indx);
   }
+
+  dropdownSettings  = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+  data1 = [
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+
+    {id: 1, text: 'sss'},
+    {id: 1, text: 'sss'},
+
+  ]
+
 
   setBackgroundClass(element: any) {
     return 'lightred'

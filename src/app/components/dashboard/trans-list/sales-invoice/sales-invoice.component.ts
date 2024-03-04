@@ -82,7 +82,7 @@ export class SalesInvoiceComponent implements OnInit {
       profitCenter: ['', Validators.required],
       saleOrderNo: ['', Validators.required],
       invoiceMasterId: 0,
-      invoiceDate: [''],
+      invoiceDate: ['', Validators.required],
       customerCode: [''],
       customerName: [''],
       customerGstin: [''],
@@ -355,19 +355,24 @@ export class SalesInvoiceComponent implements OnInit {
                 profitCenter: res.response['InvoiceMasterList']['profitcenter']
               })
               let arr = [];
+              debugger
               res.response['invoiceDetailsList'].forEach((d: any, index: number) => {
                 const obj = {
+                  ...d,
                   materialCode: d.materialCode ? d.materialCode : '',
                   materialName: d.materialName ? d.materialName : '',
                   saleOrderNumber: d.saleorder ? d.saleorder : '',
                   productionTag: d.tagName ? d.tagName : '',
                   inspectionCheckNo: d.inspectionCheckNo ? d.inspectionCheckNo : '',
                   status: d.status ? d.status : '',
+                  checkbox:true
                 }
                 arr.push(obj)
               })
+              debugger
               this.tableData = arr;
               this.materialCodeChange();
+             this.calculate();
               this.formData.disable();
             }
           }
@@ -465,6 +470,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   invoicePrint() {
+    debugger
     const totalObj = {
       qty: 0,
       grossAmount: 0,
@@ -490,7 +496,7 @@ export class SalesInvoiceComponent implements OnInit {
         reverseCharge: '',
         transportationMode: '',
         invoiceNo: this.getInvoiceDeatilData?.InvoiceMasterList?.invoiceNo || '',
-        poNo: '',
+        poNo: this.getInvoiceDeatilData?.InvoiceMasterList?.poNo,
         vehicleRegNo: this.getInvoiceDeatilData?.InvoiceMasterList?.vehicleRegNo || '',
         invoiceDate: this.getInvoiceDeatilData?.InvoiceMasterList?.invoiceDate || '',
         poDate: this.getInvoiceDeatilData?.InvoiceMasterList?.poDate || '',

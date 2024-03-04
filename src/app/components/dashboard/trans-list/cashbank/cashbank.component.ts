@@ -112,7 +112,13 @@ export class CashbankComponent implements OnInit {
           value: 0, type: 'autoInc', width: 10, disabled: true
         },
         glaccount: {
-          value: null, type: 'dropdown', list: this.glAccountList, id: 'id', text: 'text', displayMul: false, width: 200
+          value: null, type: 'multiSelect', list: this.glAccountList, dropdownSettings: {
+            singleSelection: true,
+            idField: 'id',
+            textField: 'text',
+            enableCheckAll: false,
+            allowSearchFilter: true
+          }, width: 200
         },
         amount: {
           value: null, type: 'number', width: 100, maxLength: 15

@@ -1,5 +1,11 @@
-
-<div class="table">
+<div class="multiselect-dropdown-list">
+  <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="data1">
+  </ng-multiselect-dropdown>
+</div>
+<div class="table"><div class="multiselect-dropdown-list">
+  <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="data1">
+  </ng-multiselect-dropdown>
+</div>
   <table class="w-100" mat-table [dataSource]="dataSource" matSort #mytableb cellspacing="0" cellpadding="0">
     <ng-container *ngFor="let column of getDisplayedColumns()" [matColumnDef]="column">
 
@@ -83,6 +89,16 @@
             (emitTypeAheadValue)="setTypeAheadValue($event, column, dataSource.filteredData.indexOf(element)); setFocus(column, dataSource.filteredData.indexOf(element));">
           </app-autocomplete>
         </mat-form-field>
+
+        <div class="multiselect-dropdown-list" *ngSwitchCase="'multiSelect'"
+          [ngStyle]="{'width': element[column].width + 'px'}">
+          <ng-multiselect-dropdown id="{{column}}{{dataSource.filteredData.indexOf(element)}}" 
+          [(ngModel)]="element[column].value" 
+          (onSelect)="formControlValid(column, element, element[column].value, dataSource.filteredData.indexOf(element)); setFocus(column, dataSource.filteredData.indexOf(element), element[column].value);"
+          [settings]="element[column].dropdownSettings"
+            [data]="element[column].list">
+          </ng-multiselect-dropdown>
+        </div>
 
         <div *ngSwitchCase="'none'">
           <span> {{ element[column].value }} </span>

@@ -2810,6 +2810,7 @@
     "manualInvoiceNo": "Sale Order Number",
     "netWeight": "Net Weight",
     "materialCode": "Material Code",
+    "customerName": "Customer Name",
     "saleOrderNo": "Sale Order Number",
     "invoiceQty": "Invoice Qty",
     "materialName": "Material Name",

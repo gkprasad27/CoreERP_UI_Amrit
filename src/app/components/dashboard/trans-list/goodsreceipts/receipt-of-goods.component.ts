@@ -95,7 +95,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   approveOrReject(event) {
     if (event) {
       this.formData.patchValue({
-        qualityCheck: "Accpt",
+        qualityCheck: "Accept",
         reject: null
       });
     } else {
@@ -663,6 +663,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   save() {
+    this.formData.markAsTouched();
     // this.tableData = this.commonService.formatTableData(this.tableData, 0);
     if (this.tableData.length == 0 && this.formData.invalid) {
       return;

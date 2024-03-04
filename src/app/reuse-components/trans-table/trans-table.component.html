@@ -59,10 +59,10 @@
   </mat-card-content>
 
   <div class="d-flex justify-content-end" *ngIf="routeParam == 'GoodsReceiptApproval' || routeParam == 'PurchaseorderApproval'">
-    <button mat-raised-button class="button-color-bule text-white m-1" (click)="buttonClick('approve')">
+    <button mat-raised-button class="button-color-bule text-white m-1" (click)="buttonClick('Approved')">
       {{ "COMMON.APPROVE" | translate }}
     </button>
-    <button mat-raised-button class="button-color-bule text-white m-1" (click)="buttonClick('reject')">
+    <button mat-raised-button class="button-color-bule text-white m-1" (click)="buttonClick('Rejected')">
       {{ "COMMON.REJECT" | translate }}
     </button>
   </div>
