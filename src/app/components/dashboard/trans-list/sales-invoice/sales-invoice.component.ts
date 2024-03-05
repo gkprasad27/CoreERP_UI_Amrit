@@ -149,7 +149,8 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getSaleOrderList() {
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrders);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderData, obj.companyCode);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
         response => {
@@ -157,7 +158,7 @@ export class SalesInvoiceComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.getSaleOrderData = res.response['SOL'];
+              this.getSaleOrderData = res.response['BPList'];
             }
           }
         });
@@ -355,7 +356,6 @@ export class SalesInvoiceComponent implements OnInit {
                 profitCenter: res.response['InvoiceMasterList']['profitcenter']
               })
               let arr = [];
-              debugger
               res.response['invoiceDetailsList'].forEach((d: any, index: number) => {
                 const obj = {
                   ...d,
@@ -369,7 +369,6 @@ export class SalesInvoiceComponent implements OnInit {
                 }
                 arr.push(obj)
               })
-              debugger
               this.tableData = arr;
               this.materialCodeChange();
              this.calculate();
@@ -445,7 +444,7 @@ export class SalesInvoiceComponent implements OnInit {
     const arr = this.tableData.filter((d: any) => !d.type && d.checkbox);
     const registerInvoice = String.Join('/', this.apiConfigService.registerInvoice);
     const formData = this.formData.value;
-    formData.receivedDate = this.formData.get('invoiceDate').value ? this.datepipe.transform(this.formData.get('invoiceDate').value, 'MM-dd-yyyy') : '';
+    formData.receivedDate = this.formData.get('invoiceDate').value ? this.datepipe.transform(this.formData.get('invoiceDate').value, 'yyyy-MM-dd') : '';
     const requestObj = { grHdr: formData, grDtl: arr };
     this.apiService.apiPostRequest(registerInvoice, requestObj).subscribe(
       response => {
@@ -470,7 +469,6 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   invoicePrint() {
-    debugger
     const totalObj = {
       qty: 0,
       grossAmount: 0,

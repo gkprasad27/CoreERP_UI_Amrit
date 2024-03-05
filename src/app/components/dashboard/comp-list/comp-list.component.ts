@@ -70,7 +70,6 @@ export class CompListComponent implements OnInit, OnDestroy {
   }
 
   getTableData() {
-    debugger
     let getUrl = ''
     if(this.tableUrl.url == "MaterialMaster/GetMaterialMasterList") {
       let obj = JSON.parse(localStorage.getItem("user"));

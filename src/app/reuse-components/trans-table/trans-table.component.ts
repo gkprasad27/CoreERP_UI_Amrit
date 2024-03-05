@@ -104,7 +104,6 @@ export class TransTableComponent implements OnInit {
 
 
   getTableList() {
-    debugger
     let obj = JSON.parse(localStorage.getItem("user"));
     this.headerForm.patchValue({
       companyCode: obj.companyCode

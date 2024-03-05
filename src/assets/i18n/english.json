@@ -2845,6 +2845,7 @@
     "productName": "Product Name",
     "pumpNo": "Pump",
     "fQty": "F/Qty",
+    "taxStructureId": "Tax Code",
     "unitName": "Unit Name",
     "taxGroupName": "Tax GroupName",
     "availStock": "Avail Stock",

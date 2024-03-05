@@ -115,7 +115,6 @@ export class DynamicTableComponent implements OnInit {
   }
 
   setTypeAheadValue(val, col, indx) {
-    debugger
     this.dataSource.data[indx][col].value = val;
     this.formControlValid(col, this.dataSource.data[indx][col], val, indx);
   }
