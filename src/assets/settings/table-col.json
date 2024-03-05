@@ -2341,7 +2341,6 @@
     "custName": "Customer Name",
     "customerGstin": "Customer GSTIN",
     "taxGroupName": "Tax GroupName",
-    "availStock": "Avail Stock",
     "hsnNo": "HsnNo",
     "taxStructureId": "taxStructureId",
     "discount": "Discount",
