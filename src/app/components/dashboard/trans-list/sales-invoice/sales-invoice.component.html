@@ -18,56 +18,54 @@
     <span style="font-size: 35px;font-weight: 700;font-family: Segoe UI;"> INVOICE </span> <br> <span style="font-size: 15px;font-family: Calibri;margin-bottom: 5px;"> ORIGINAL F0R RECEIPENT</span> </div>
     </div>
 
-    <div style="display: flex;">
-        <div style="width: 50%;padding-left: 15px;display: flex;border-right: 1px solid;">
-            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Reverse Charge </b></div>
-            <div style="padding-left: 18px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.reverseCharge }} </div>
-        </div>
-        <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Transportation Mode </b></div>
-            <div style="padding-left: 10px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.transportationMode }}</div>
-        </div>
-    </div>
-    <div style="display: flex;">
-        <div style="width: 50%;display: flex;border-right: 1px solid;">
-            <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice No</b></div>
-                <div style="padding-left: 50px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.invoiceNo }} </div>
+    <div  style="display: flex;">
+        <div style="width: 60%;border-right: 1px solid;">
+            <div style="width: 100%;padding-left: 15px;display: flex;">
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Reverse Charge </b></div>
+                <div style="padding-left: 18px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.reverseCharge }} </div>
             </div>
-            <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO No </b></div>
-                <div style="padding-left: 15px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.poNo }} </div>
+            <div style="width: 100%;display: flex;">
+                <div style="width: 50%;padding-left: 15px;display: flex;">
+                    <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice No</b></div>
+                    <div style="padding-left: 49px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.invoiceNo }} </div>
+                </div>
+                <div style="width: 50%;padding-left: 15px;display: flex;">
+                    <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO No </b></div>
+                    <div style="padding-left: 15px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.poNo }} </div>
+                </div>
             </div>
-        </div>
-        <div style="width: 50%;display: flex;">
-            <div style="width: 100px;padding-left: 15px;"><b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Vehicle Number </b></div>
-            <div style="padding-left: 58px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.vehicleRegNo }} </div>
-        </div>
-    </div>
-    <div style="display: flex;">
-        <div style="width: 50%;display: flex;border-right: 1px solid;">
-            <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice Date</b></div>
-                <div style="padding-left: 38px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.invoiceDate ? (invoicePrintData?.headingObj?.invoiceDate | date) : '' }} </div>
+            <div style="width: 100%;display: flex;border-right: 1px solid;">
+                <div style="width: 50%;padding-left: 15px;display: flex;">
+                    <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice Date</b></div>
+                    <div style="padding-left: 38px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.invoiceDate ? (invoicePrintData?.headingObj?.invoiceDate | date) : '' }} </div>
+                </div>
+                <div style="width: 50%;padding-left: 15px;display: flex;">
+                    <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO Date  </b></div>
+                    <div style="padding-left: 4px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.poDate ? (invoicePrintData?.headingObj?.poDate | date) : '' }} </div>
+                </div>
             </div>
-            <div style="width: 50%;padding-left: 15px;display: flex;">
-                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO Date  </b></div>
-                <div style="padding-left: 3px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.poDate ? (invoicePrintData?.headingObj?.poDate | date) : '' }} </div>
+            <div style="width: 100%;padding-left: 15px;display: flex;">
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> State </b></div>
+                <div style="padding-left: 83px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.shiptoState }} </div>
             </div>
         </div>
-        <div style="width: 50%;display: flex;">
-            <div style="width: 100px;padding-left: 15px;"><b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Date of Supply  </b></div>
-            <div style="padding-left: 58px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.dateOfSupply ? (invoicePrintData?.headingObj?.dateOfSupply | date) : '' }} </div>
-        </div>
-    </div>
-    <div style="display: flex;">
-        <div style="width: 50%;padding-left: 15px;display: flex;border-right: 1px solid;">
-            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> State </b></div>
-            <div style="padding-left: 88px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.shiptoState }} </div>
-        </div>
-        <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Place of Supply </b></div>
-            <div style="padding-left: 52px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.shiptoCity }} </div>
+        <div style="width: 40%;padding-left: 15px;">
+            <div style="width: 100%;padding-left: 15px;display: flex;">
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Transportation Mode </b></div>
+                <div style="padding-left: 8px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.transportationMode }}</div>
+            </div>
+            <div style="width: 100%;display: flex;">
+                <div style="width: 100px;padding-left: 15px;"><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Vehicle Number </b></div>
+                <div style="padding-left: 36px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.vehicleRegNo }} </div>
+            </div>
+            <div style="width: 100%;display: flex;">
+                <div style="width: 100px;padding-left: 15px;"><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Date of Supply  </b></div>
+                <div style="padding-left: 36px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.dateOfSupply ? (invoicePrintData?.headingObj?.dateOfSupply | date) : '' }} </div>
+            </div>
+            <div style="width: 100%;padding-left: 15px;display: flex;">
+                <div ><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Place of Supply </b></div>
+                <div style="padding-left: 44px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ invoicePrintData?.headingObj?.shiptoCity }} </div>
+            </div>
         </div>
     </div>
 
@@ -292,8 +290,8 @@
                     <mat-label>{{'salesinvoice.profitCenter' | translate }}</mat-label>
                     <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.code">
-                            {{pft.name}}
+                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
+                            {{pft.text}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
