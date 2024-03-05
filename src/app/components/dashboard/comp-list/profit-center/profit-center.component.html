@@ -7,6 +7,23 @@
     <form [formGroup]="modelFormData" autocomplete="off">
 
       <div class="d--flex">
+
+        <mat-form-field>
+          <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
+          <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="11">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+              {{comp.text}}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="!formControls.companyCode.valid && formControls.companyCode.status != 'DISABLED'"
+            [ngClass]="{ 'ng--invalid': !formControls.companyCode.valid  }"> Company Code is
+            required
+          </mat-error>
+        </mat-form-field>
+
+
         <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid&& formControls.code.status != 'DISABLED', 
           'ng--invalid': !formControls.code.valid&& formControls.code.status != 'DISABLED'}">
           <mat-label [translate]="'profitCenter.code'"></mat-label>
@@ -20,8 +37,7 @@
           [ngClass]="{ 'ng--valid': formControls.name.valid, 'ng--invalid': !formControls.name.valid  }">
           <mat-label [translate]="'profitCenter.name'"></mat-label>
           <input matInput formControlName="name" maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.name.valid" [ngClass]="{ 'ng--invalid': !formControls.name.valid  }">Profit
-            Center Name is required</mat-error>
+          <mat-error *ngIf="!formControls.name.valid" [ngClass]="{ 'ng--invalid': !formControls.name.valid  }"> Name is required</mat-error>
         </mat-form-field>
 
 

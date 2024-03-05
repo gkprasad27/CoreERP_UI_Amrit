@@ -24,6 +24,9 @@ export class ProfitCenterComponent implements OnInit {
   countrysList: any;
   languageList: any;
 
+  companyList: any[] = [];
+
+
   constructor(private commonService: CommonService,
     private apiService: ApiService,
     private addOrEditService: AddOrEditService,
@@ -35,6 +38,7 @@ export class ProfitCenterComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.modelFormData = this.formBuilder.group({
+      companyCode: [null, Validators.required],
       code: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(5)]],
       name: [null, [Validators.required, Validators.minLength(2)]],
       address1: [null],
@@ -74,6 +78,25 @@ export class ProfitCenterComponent implements OnInit {
     this.getcountrysList();
     this.getcurrencyList();
     this.getEmployeesList();
+    this.getcompaniesList();
+  }
+
+
+
+  getcompaniesList() {
+    const getcompanyList = String.Join('/', this.apiConfigService.getCompanyList);
+    this.apiService.apiGetRequest(getcompanyList)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.companyList = res.response['companiesList'];
+            }
+          }
+          this.spinner.hide();
+        });
   }
 
   getLanguageList() {

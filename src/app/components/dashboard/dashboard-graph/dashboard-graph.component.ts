@@ -75,7 +75,8 @@ export class DashboardGraphComponent {
 
   
   print() {
-    let getUrl = String.Join('', this.apiConfigService.getOrdersvsSales, '/2023-01-01/2024-01-01/1000');
+    let obj = JSON.parse(localStorage.getItem("user"));
+    let getUrl = String.Join('', this.apiConfigService.getOrdersvsSales, '/2023-01-01/2024-01-01/', obj.companyCode);
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
         response => {
