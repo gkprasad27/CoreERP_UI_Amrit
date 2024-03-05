@@ -444,7 +444,7 @@ export class SalesInvoiceComponent implements OnInit {
     const arr = this.tableData.filter((d: any) => !d.type && d.checkbox);
     const registerInvoice = String.Join('/', this.apiConfigService.registerInvoice);
     const formData = this.formData.value;
-    formData.receivedDate = this.formData.get('invoiceDate').value ? this.datepipe.transform(this.formData.get('invoiceDate').value, 'yyyy-MM-dd') : '';
+    formData.invoiceDate = this.formData.get('invoiceDate').value ? this.datepipe.transform(this.formData.get('invoiceDate').value, 'yyyy-MM-dd') : '';
     const requestObj = { grHdr: formData, grDtl: arr };
     this.apiService.apiPostRequest(registerInvoice, requestObj).subscribe(
       response => {
