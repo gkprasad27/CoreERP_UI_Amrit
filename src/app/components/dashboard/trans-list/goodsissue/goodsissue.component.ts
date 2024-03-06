@@ -321,7 +321,8 @@ export class GoodsissueComponent implements OnInit {
     if (obj) {
       this.formData1.patchValue(obj);
       this.formData1.patchValue({
-        availableqty: qty.availQTY
+        availableqty: qty.availQTY,
+        id: 0
       })
     } else {
       this.resetForm();
