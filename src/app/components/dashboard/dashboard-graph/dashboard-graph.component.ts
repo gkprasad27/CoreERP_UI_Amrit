@@ -26,7 +26,7 @@ export class DashboardGraphComponent {
   tableData = [];
   tableData1 = [];
 
-
+  companyList: any[] =[];
 
 
   constructor(
@@ -35,11 +35,10 @@ export class DashboardGraphComponent {
     private translate: TranslateService,      private spinner: NgxSpinnerService,
 
     ) {
-
+      this.getcompaniesList();
     this.RuntimeConfigService.tableDataLoaded.subscribe((t: any) => {
       if (t) {
       
-        this.print();
 
         this.tableData1 = [
           { totalEmployes: 100, totalPresent: 20, totalObsent: 80 },
@@ -73,15 +72,33 @@ export class DashboardGraphComponent {
     })
   }
 
+  getcompaniesList() {
+    debugger
+    const getcompanyList = String.Join('/', this.apiConfigService.getCompanyList);
+    this.apiService.apiGetRequest(getcompanyList)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.companyList = res.response['companiesList'];
+            }
+          }
+        this.print();
+          this.spinner.hide();
+        });
+  }
+
+
   
   print() {
     let obj = JSON.parse(localStorage.getItem("user"));
-    let getUrl = String.Join('', this.apiConfigService.getOrdersvsSales, '/2023-01-01/2024-01-01/', obj.companyCode);
+    let getUrl = String.Join('', this.apiConfigService.getOrdersvsSales, `/${this.commonService.formatDateValue(this.companyList[0].financialYear)}/${this.commonService.formatDateValue(new Date())}/`, obj.companyCode);
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
         response => {
           const res = response;
-          debugger
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response['OrdersvsSales'] && res.response['OrdersvsSales'].length) {
               this.tableData = res.response['OrdersvsSales'];
@@ -103,6 +120,15 @@ export class DashboardGraphComponent {
                       text: data.yAxis
                     }
                   },
+                  // yAxis: {
+                  //   min: 0,
+                  //   tickInterval: this.tickInterval(series),
+                  //   max: this.tickInterval(series) > 10 ? (this.tickInterval(series) * 10) : 100,
+                  //   visible: true,
+                  //   title: {
+                  //     text: data.yAxis
+                  //   }
+                  // },
                   xAxis: {
                     title: {
                       text: data.xAxis
@@ -121,6 +147,13 @@ export class DashboardGraphComponent {
   }
 
 
+  tickInterval(data) {
+    if(!(data && data.length)) {
+      return 10
+    }
+    let value = Math.max.apply(Math, data.map(function(o) { return o[1]; }))
+    return (value  ? (Math.ceil(value / 100) * 10) : 10)
+  }
 
 
 

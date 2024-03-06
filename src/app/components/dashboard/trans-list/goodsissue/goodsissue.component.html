@@ -70,9 +70,9 @@
 
 
         <div class="multiselect-dropdown-list">
-          <ng-multiselect-dropdown [disabled]="isDropdownDisabled" placeholder="{{ 'goodsissue.saleOrderNumber' | translate }}"
-            formControlName="saleOrderNumber" (onSelect)="getGoodsissueDetail()" [settings]="dropdownSettings"
-            [data]="mreqList">
+          <ng-multiselect-dropdown [disabled]="isDropdownDisabled"
+            placeholder="{{ 'goodsissue.saleOrderNumber' | translate }}" formControlName="saleOrderNumber"
+            (onSelect)="getGoodsissueDetail()" [settings]="dropdownSettings" [data]="mreqList">
           </ng-multiselect-dropdown>
         </div>
 
@@ -134,6 +134,16 @@
 
 
           <div>
+            <mat-form-field class="form-element" *ngIf="routeEdit">
+              <mat-label>{{ 'purchaseorder.materialCode' | translate }}</mat-label>
+              <mat-select formControlName="materialCode" appFocusOnEnter tabIndex="12"
+                (selectionChange)="materialCodeChange()">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let material of materialCodeList" [value]="material.materialCode">
+                  {{material.materialCode}} -- {{material.materialName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
             <mat-form-field class="form-element">
               <mat-label [translate]="'goodsissue.qty'"></mat-label>
               <input matInput type="number" readonly formControlName="qty" appFocusOnEnter tabIndex="8">

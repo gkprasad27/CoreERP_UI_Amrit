@@ -73,6 +73,8 @@ export class GoodsissueComponent implements OnInit {
   mreqdetailsList: any;
   mmasterList: any;
 
+  materialCodeList = [];
+
   constructor(private commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -265,7 +267,7 @@ export class GoodsissueComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['goodsissueasters']);
               this.formData.patchValue({
-                saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }]: ''
+                saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }] : ''
               })
               this.isDropdownDisabled = true;
               console.log(res.response['goodsissueastersDetail']);
@@ -289,11 +291,40 @@ export class GoodsissueComponent implements OnInit {
                 arr.push(obj);
               })
               this.tableData = arr;
+              this.getsaleOrdernoList(val);
               this.toggle();
             }
           }
         });
   }
+
+
+  getsaleOrdernoList(val: any) {
+    debugger
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderDetail, val);
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              const arr = res.response['SaleOrderDetails'];
+              this.materialCodeList = arr.filter((s: any) => !this.tableData.some((t: any) => t.materialCode == s.materialCode));
+            }
+          }
+        });
+  }
+
+  materialCodeChange() {
+    const obj = this.materialCodeList.find((m: any) => m.materialCode == this.formData1.value.materialCode);
+    if (obj) {
+      this.formData1.patchValue(obj);
+    } else {
+      this.resetForm();
+    }
+  }
+
 
   getCompanyList() {
     const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
@@ -488,7 +519,7 @@ export class GoodsissueComponent implements OnInit {
           this.getfunctionaldeptList()
         });
   }
-  
+
   getfunctionaldeptList() {
     const taxCodeUrl = String.Join('/', this.apiConfigService.getfunctionaldeptList);
     this.apiService.apiGetRequest(taxCodeUrl)
