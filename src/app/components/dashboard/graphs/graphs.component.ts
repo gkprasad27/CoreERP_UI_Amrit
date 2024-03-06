@@ -77,8 +77,8 @@ export class GraphsComponent {
 
 
   setValidator() {
-      this.modelFormData.controls['selected'].addValidators(Validators.required);
-      this.modelFormData.controls['selected'].updateValueAndValidity();
+    this.modelFormData.controls['selected'].addValidators(Validators.required);
+    this.modelFormData.controls['selected'].updateValueAndValidity();
   }
 
   getcompaniesList() {
@@ -153,10 +153,9 @@ export class GraphsComponent {
                 for (const key in this.environment.tableColumnsData[this.routeParam]) {
                   // tslint:disable-next-line: prefer-for-of
                   if (key != 'monthYear') {
-                    series.push({ name: data[key], data: this.tableData.map((d: any) => d[key]), type: 'line' })
+                    series.push({ name: data[key], data: this.tableData.map((d: any) => d[key]), type: this.getChartName() })
                   }
                 }
-
                 this.chartOptions = {
                   title: {
                     text: data.reportTitle
@@ -184,7 +183,14 @@ export class GraphsComponent {
 
   }
 
-
+  getChartName() {
+    switch (this.routeParam) {
+      case 'ordervssales':
+        return 'column'
+      default:
+        return 'line'
+    }
+  }
 
   ngOnDestroy() {
     this.commonService.routeParam = null;
