@@ -300,7 +300,6 @@ export class GoodsissueComponent implements OnInit {
 
 
   getsaleOrdernoList(val: any) {
-    debugger
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderDetail, val);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
@@ -318,8 +317,12 @@ export class GoodsissueComponent implements OnInit {
 
   materialCodeChange() {
     const obj = this.materialCodeList.find((m: any) => m.materialCode == this.formData1.value.materialCode);
+    const qty = this.mmasterList.find(resp => resp.id == this.formData1.value.materialCode);
     if (obj) {
       this.formData1.patchValue(obj);
+      this.formData1.patchValue({
+        availableqty: qty.availQTY
+      })
     } else {
       this.resetForm();
     }

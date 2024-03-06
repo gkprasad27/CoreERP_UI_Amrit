@@ -73,7 +73,6 @@ export class DashboardGraphComponent {
   }
 
   getcompaniesList() {
-    debugger
     const getcompanyList = String.Join('/', this.apiConfigService.getCompanyList);
     this.apiService.apiGetRequest(getcompanyList)
       .subscribe(
