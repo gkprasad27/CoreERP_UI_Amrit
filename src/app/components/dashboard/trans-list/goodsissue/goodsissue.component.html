@@ -69,12 +69,17 @@
         </mat-form-field>
 
 
-        <div class="multiselect-dropdown-list">
-          <ng-multiselect-dropdown [disabled]="isDropdownDisabled"
+        <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
+          <ng-multiselect-dropdown  
             placeholder="{{ 'goodsissue.saleOrderNumber' | translate }}" formControlName="saleOrderNumber"
             (onSelect)="getGoodsissueDetail()" [settings]="dropdownSettings" [data]="mreqList">
           </ng-multiselect-dropdown>
         </div>
+        <mat-form-field *ngIf="routeEdit">
+          <mat-label>{{'goodsissue.saleOrderNumber' | translate }}</mat-label>
+          <input matInput type="text" readonly  formControlName="saleOrderNumber" appFocusOnEnter
+            tabIndex="4">
+        </mat-form-field>
 
         <mat-form-field>
           <mat-label>{{'goodsissue.productionPerson' | translate }}</mat-label>

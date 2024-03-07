@@ -40,7 +40,6 @@ export class GoodsissueComponent implements OnInit {
     allowSearchFilter: true
   };
 
-  isDropdownDisabled = false;
 
   formData: FormGroup;
   formData1: FormGroup;
@@ -266,10 +265,9 @@ export class GoodsissueComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['goodsissueasters']);
-              this.formData.patchValue({
-                saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }] : ''
-              })
-              this.isDropdownDisabled = true;
+              // this.formData.patchValue({
+              //   saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }] : ''
+              // })
               console.log(res.response['goodsissueastersDetail']);
               // this.sendDynTableData = { type: 'edit', data: res.response['goodsissueastersDetail'] };
               this.formData.disable();
