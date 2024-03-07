@@ -14,30 +14,38 @@
         display: flex;
         height: 50px;
         flex-direction: column;
-    "> 
-    <span style="font-size: 22px;font-weight: 700;font-family: Segoe UI;"> {{ data.heading }} </span>  </div>
+    ">
+            <span style="font-size: 22px;font-weight: 700;font-family: Segoe UI;"> {{ data.heading }} </span>
+        </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 50%;padding: 3px 15px;display: flex;border-right: 1px solid;">
             <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> PO Number </b>
-            <span style="padding-left: 60px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.purchaseOrderNumber }} </span>
+            <span style="padding-left: 60px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">:
+                {{ data?.headingObj?.purchaseOrderNumber }} </span>
         </div>
         <div style="width: 50%;padding: 3px 15px;display: flex;">
             <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> Date </b>
-            <span style="padding-left: 60px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.purchaseOrderDate | date }} </span>
+            <span style="padding-left: 60px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">:
+                {{ data?.headingObj?.purchaseOrderDate | date }} </span>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 8px;">
             <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> ADDRESS </b>
-            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{ data?.headingObj?.address.companyName }}</div>
-            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{ data?.headingObj?.address.address }}, {{ data?.headingObj?.address.address1 }}</div>
-            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{ data?.headingObj?.address.city }}, {{ data?.headingObj?.address.stateName }}, {{
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{
+                data?.headingObj?.address.companyName }}</div>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{
+                data?.headingObj?.address.address }}, {{ data?.headingObj?.address.address1 }}</div>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{
+                data?.headingObj?.address.city }}, {{ data?.headingObj?.address.stateName }}, {{
                 data?.headingObj?.address.pin }}</div>
-            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">Phone: {{ data?.headingObj?.address.phone }}</div>
-            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">Email: {{ data?.headingObj?.address.email }}</div>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">Phone: {{
+                data?.headingObj?.address.phone }}</div>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">Email: {{
+                data?.headingObj?.address.email }}</div>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;">
             <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
@@ -46,11 +54,11 @@
             </div>
             <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
                 <span style="width: 140px;"> Terms of delivery </span>
-                <span style="padding-left: 20px;">:  {{  data?.headingObj?.termsOfDelivery }} </span>
+                <span style="padding-left: 20px;">: {{ data?.headingObj?.termsOfDelivery }} </span>
             </div>
             <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
                 <span style="width: 140px;"> Terms of payment </span>
-                <span style="padding-left: 20px;">: {{  data?.headingObj?.termsOfPayment }} </span>
+                <span style="padding-left: 20px;">: {{ data?.headingObj?.termsOfPayment }} </span>
             </div>
             <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
                 <span style="width: 140px;"> Currency </span>
@@ -62,7 +70,7 @@
             </div>
             <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
                 <span style="width: 140px;"> Material </span>
-                <span style="padding-left: 20px;">: {{  data?.headingObj?.material }} </span>
+                <span style="padding-left: 20px;">: {{ data?.headingObj?.material }} </span>
             </div>
         </div>
     </div>
@@ -79,70 +87,119 @@
     <div style="border-top: 1px solid black; display: flex; ">
         <div
             style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 15px;font-family: Calibri;font-weight: 900;">{{ data?.headingObj?.vAddress?.name }}</div>
+            <div style="font-size: 15px;font-family: Calibri;font-weight: 900;">{{ data?.headingObj?.vAddress?.name }}
+            </div>
             <div>{{ data?.headingObj?.vAddress?.address }}, {{ data?.headingObj?.vAddress?.address1 }}</div>
             <div>{{ data?.headingObj?.vAddress?.city }}, {{ data?.headingObj?.vAddress?.stateName }}, {{
                 data?.headingObj?.vAddress?.pin }}</div>
             <!-- <div>Phone: {{ data?.headingObj?.vAddress?.phone  }}</div>
             <div>Email: {{ data?.headingObj?.vAddress?.email  }}</div> -->
 
-            <b style="margin-top: 10px;font-size: 15px;font-family: Calibri;font-weight: 900;"> GSTIN : {{ data?.headingObj?.vAddress?.gstno }}</b>
+            <b style="margin-top: 10px;font-size: 15px;font-family: Calibri;font-weight: 900;"> GSTIN : {{
+                data?.headingObj?.vAddress?.gstno }}</b>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 15px;font-family: Calibri;font-weight: 900;">{{ data?.headingObj?.pAddress?.address }} </div>
-            <div> {{ data?.headingObj?.pAddress?.address1 }}, {{ data?.headingObj?.pAddress?.city }}, {{ data?.headingObj?.pAddress?.stateName }}, {{
+            <div style="font-size: 15px;font-family: Calibri;font-weight: 900;">{{ data?.headingObj?.pAddress?.address
+                }} </div>
+            <div> {{ data?.headingObj?.pAddress?.address1 }}, {{ data?.headingObj?.pAddress?.city }}, {{
+                data?.headingObj?.pAddress?.stateName }}, {{
                 data?.headingObj?.pAddress?.pin }}</div>
             <div>Phone: {{ data?.headingObj?.pAddress?.phone }}</div>
             <div>Email: {{ data?.headingObj?.pAddress?.email }}</div>
 
-            <b style="margin-top: 10px;font-size: 15px;font-family: Calibri;font-weight: 900;"> GSTIN : {{ data?.headingObj?.pAddress?.gstno }}</b>
+            <b style="margin-top: 10px;font-size: 15px;font-family: Calibri;font-weight: 900;"> GSTIN : {{
+                data?.headingObj?.pAddress?.gstno }}</b>
         </div>
     </div>
 
     <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
         *ngIf="data.detailArray && data.detailArray.length">
-        <table style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+        <table
+            style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
             <thead>
                 <tr>
-                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
-                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Product Code </th>
-                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Description </th>
-                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Quantity </th>
-                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Unit Weight </th>
-                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Total Weight </th>
-                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Price/KG </th>
-                    <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;"> Total Amount </th>
+                    <th
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        S.No </th>
+                    <th
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Product Code </th>
+                    <th
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Description </th>
+                    <th
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Quantity </th>
+                    <th
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Unit Weight </th>
+                    <th
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Total Weight </th>
+                    <th
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Price/KG </th>
+                    <th
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Total Amount </th>
                 </tr>
             </thead>
             <tbody>
                 <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
                     *ngFor="let row of data.detailArray; let i = index">
-                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> <span *ngIf="row.materialCode">  {{ i + 1 }} </span> </td>
-                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.materialCode }}
+                    <td
+                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        <span *ngIf="row.materialCode"> {{ i + 1 }} </span> </td>
+                    <td
+                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.materialCode }}
                     </td>
-                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.materialName }}
+                    <td
+                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.materialName }}
                     </td>
-                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
-                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.netWeight }}
+                    <td
+                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.qty }} </td>
+                    <td
+                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.netWeight }}
                     </td>
-                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ row.qty *
-                        row.netWeight}} </ng-container>  </td>
-                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
-                    <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
+                    <td
+                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        <ng-container *ngIf="row.qty"> {{ row.qty *
+                            row.netWeight}} </ng-container> </td>
+                    <td
+                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.rate }} </td>
+                    <td
+                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.amount }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
-                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;" colspan="2"> Grand
+                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"
+                        colspan="2"> Grand
                         Totals </td>
-                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                    <td
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                    </td>
+                    <td
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                    </td>
+                    <td
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Weight</td>
-                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{
+                    <td
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                        {{
                         data.headingObj1.amount }}</td>
-                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                    <td
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Amount</td>
-                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">{{
+                    <td
+                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">
+                        {{
                         data.headingObj1.totalAmount }}</td>
                 </tr>
             </tbody>
@@ -153,33 +210,45 @@
     <div style="display: flex; font-size: 15px;">
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
             <b style="font-size: 14px;font-family: Calibri;font-weight: 900;"> Total amount in words: </b>
-            <div style="font-size: 14px;font-family: Calibri;"> {{ commonService.convertNumberToWords(data.headingObj?.totalAmount) }} </div>
+            <div style="font-size: 14px;font-family: Calibri;"> {{
+                commonService.convertNumberToWords(data.headingObj?.totalAmount) }} </div>
 
         </div>
         <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
             <div style="padding-left: 15px;padding-top: 10px;">
                 <div style="display: flex;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Amount Before Tax </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.amount }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Amount Before
+                        Tax </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.amount
+                        }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;" > Add: CGST @ {{ data.headingObj?.cgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.cgst }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: CGST @ {{
+                        data.headingObj?.cgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.cgst }}
+                    </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;" > Add: SGST @ {{ data.headingObj?.sgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.sgst }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: SGST @ {{
+                        data.headingObj?.sgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.sgst }}
+                    </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;" > Add: IGST @ {{ data.headingObj?.igst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.igst }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: IGST @ {{
+                        data.headingObj?.igst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.igst }}
+                    </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Amount with GST </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.totalAmount }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Amount with
+                        GST </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{
+                        data.headingObj?.totalAmount }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Payable Reverse Charges </b>
+                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Payable
+                        Reverse Charges </b>
                     <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> </span>
                 </div>
             </div>
@@ -213,8 +282,9 @@
         display: flex;
         height: 50px;
         flex-direction: column;
-    "> 
-    <span style="font-size: 22px;font-weight: 700;font-family: Segoe UI;"> {{ data.heading }} </span>  </div>
+    ">
+            <span style="font-size: 22px;font-weight: 700;font-family: Segoe UI;"> {{ data.heading }} </span>
+        </div>
     </div>
 
     <div style="margin-bottom: 20px;margin-top: 15px;">
@@ -267,7 +337,8 @@
 
     </div>
 
-    <div style="font-size: 16px;font-family: Calibri;font-weight: 900;margin-top: 30px;margin-bottom: 20px;display: flex;">
+    <div
+        style="font-size: 16px;font-family: Calibri;font-weight: 900;margin-top: 30px;margin-bottom: 20px;display: flex;">
 
         <div style="width: 50%;">
             <b> Prepared By: </b>
@@ -382,16 +453,18 @@
                         appFocusOnEnter tabIndex="5">
                 </mat-form-field> -->
 
-                <div class="multiselect-dropdown-list">
-                    <!-- <mat-label>{{'purchaseorder.quotationNumber' | translate }}</mat-label> -->
-                    <ng-multiselect-dropdown *ngIf="!routeEdit" placeholder="{{ 'purchaseorder.quotationNumber' | translate }}"
-                        formControlName="saleOrderNo" (onSelect)="quotationNumberChange()"
-                        [settings]="dropdownSettings" [data]="qnoList">
-                    </ng-multiselect-dropdown>
-                    <input matInput type="text" *ngIf="routeEdit" formControlName="saleOrderNo" maxlength="20"
-                    appFocusOnEnter tabIndex="5">
-                </div>
+             
 
+                <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
+                    <ng-multiselect-dropdown 
+                        placeholder="{{ 'purchaseorder.quotationNumber' | translate }}" formControlName="saleOrderNo"
+                        (onSelect)="quotationNumberChange()" [settings]="dropdownSettings" [data]="qnoList">
+                    </ng-multiselect-dropdown>
+                </div>
+                <mat-form-field *ngIf="routeEdit">
+                    <mat-label>{{'purchaseorder.quotationNumber' | translate }}</mat-label>
+                    <input matInput type="text" readonly formControlName="saleOrderNo" appFocusOnEnter tabIndex="4">
+                </mat-form-field>
 
                 <!-- <mat-form-field class="form-element">
                     <mat-label [translate]="'purchaseorder.quotationDate'"></mat-label>
@@ -426,14 +499,19 @@
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead">
+                <div class="mat-mdc-form-field typeahead" *ngIf="!routeEdit">
                     <input placeholder="{{ 'purchaseorder.supplierCode' | translate }}" formControlName="supplierName"
                         [typeahead]="bpaList" typeaheadOptionField='name' appFocusOnEnter tabIndex="7"
-                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"  (typeaheadOnSelect)="supplierCodeChange()">
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
+                        (typeaheadOnSelect)="supplierCodeChange()">
                     <ng-template #customItemTemplate let-model="item">
                         <span><strong>{{model.bpnumber}}</strong> - {{model.name}}</span>
                     </ng-template>
                 </div>
+                <mat-form-field *ngIf="routeEdit">
+                    <mat-label>{{'purchaseorder.supplierCode' | translate }}</mat-label>
+                    <input matInput type="text" readonly formControlName="supplierName" appFocusOnEnter tabIndex="4">
+                </mat-form-field>
 
 
 
@@ -537,7 +615,8 @@
 
                         <mat-form-field class="form-element" *ngIf="routeEdit && formData1.value.type == 'add'">
                             <mat-label>{{ 'purchaseorder.materialCode' | translate }}</mat-label>
-                            <mat-select formControlName="materialCode" appFocusOnEnter tabIndex="12" (selectionChange)="materialCodeChange()" >
+                            <mat-select formControlName="materialCode" appFocusOnEnter tabIndex="12"
+                                (selectionChange)="materialCodeChange()">
                                 <mat-option>None</mat-option>
                                 <mat-option *ngFor="let material of materialCodeList" [value]="material.materialCode">
                                     {{material.materialCode}} -- {{material.materialName}}
@@ -546,10 +625,11 @@
                         </mat-form-field>
                         <mat-form-field class="form-element" *ngIf="routeEdit && formData1.value.type == 'edit'">
                             <mat-label>{{ 'purchaseorder.materialCode' | translate }}</mat-label>
-                            <input matInput type="text" readonly formControlName="materialCode" appFocusOnEnter tabIndex="12">
+                            <input matInput type="text" readonly formControlName="materialCode" appFocusOnEnter
+                                tabIndex="12">
                         </mat-form-field>
 
-                        
+
                         <mat-form-field class="form-element">
                             <mat-label [translate]="'purchaseorder.qty'"></mat-label>
                             <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="12">
