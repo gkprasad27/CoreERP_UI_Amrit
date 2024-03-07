@@ -3226,8 +3226,8 @@
   "ordervssales": {
     "title": "Order vs Sales",
     "monthYear": "Month Year",
-    "totalSaleAmount": "Total Sale Amount",
-    "totalInvoiceAmount": "Total Invoice Amount",
+    "totalSaleAmount": "Total Sales",
+    "totalInvoiceAmount": "Total Order",
     "reportTitle": "Order vs Sales",
     "yAxis": "Amount",
     "xAxis": "Year"
