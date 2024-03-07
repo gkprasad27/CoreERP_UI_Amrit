@@ -107,7 +107,7 @@ export class DashboardGraphComponent {
                 for (const key in this.RuntimeConfigService.tableColumnsData['ordervssales']) {
                   // tslint:disable-next-line: prefer-for-of
                   if (key != 'monthYear') {
-                    series.push({ name: data[key], data: this.tableData.map((d: any) => d[key]), type: 'column' })
+                    series.push({ name: data[key], data: this.tableData.map((d: any) => d[key]), type: 'column', color: this.RuntimeConfigService.tableColumnsData['ordervssales'][key] })
                   }
                 }
                 this.chartOptions = {

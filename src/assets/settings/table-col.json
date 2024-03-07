@@ -2613,7 +2613,7 @@
   },
   "ordervssales": {
     "monthYear": "monthYear",
-    "totalSaleAmount": "totalSaleAmount",
-    "totalInvoiceAmount": "totalInvoiceAmount"
+    "totalSaleAmount": "#7cb5ec",
+    "totalInvoiceAmount": "orange"
   }
 }
