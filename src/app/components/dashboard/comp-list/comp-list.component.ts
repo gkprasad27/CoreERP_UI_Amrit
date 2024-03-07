@@ -71,7 +71,7 @@ export class CompListComponent implements OnInit, OnDestroy {
 
   getTableData() {
     let getUrl = ''
-    if(this.tableUrl.url == "MaterialMaster/GetMaterialMasterList" || this.tableUrl.url == "BusienessPartnerAccount/GetBusienessPartnerAccountList") {
+    if(this.tableUrl.url == "MaterialMaster/GetMaterialMasterList" || this.tableUrl.url == "BusienessPartnerAccount/GetBusienessPartnerAccountList" || this.tableUrl.url == "Employee/GetEmployeeList") {
       let obj = JSON.parse(localStorage.getItem("user"));
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.tableUrl.url,  `/${obj.companyCode}`);
     } else {
