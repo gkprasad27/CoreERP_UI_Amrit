@@ -28,6 +28,7 @@ export class QcparamconfigurationComponent {
     [
       { value: 'Balancing', viewValue: 'Balancing' },
       { value: 'Inspection', viewValue: 'Inspection' },
+      { value: 'Instruments', viewValue: 'Instruments' },
     ];
   ProductType: Type[] =
     [
