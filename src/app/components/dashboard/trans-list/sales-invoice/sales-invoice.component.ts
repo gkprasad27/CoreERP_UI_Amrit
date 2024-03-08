@@ -13,6 +13,7 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
 import { TableComponent } from 'src/app/reuse-components';
 import { DatePipe } from '@angular/common';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-sales-invoice',
@@ -44,6 +45,18 @@ export class SalesInvoiceComponent implements OnInit {
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
 
   invoicePrintData: any;
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'saleOrderNo',
+    textField: 'saleOrderNo',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -217,7 +230,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getsaleOrdernoList() {
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getsaleOrdernoListe, this.formData.get('saleOrderNo').value);
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getsaleOrdernoListe, this.formData.value.saleOrderNo[0].saleOrderNo);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
         response => {
@@ -257,7 +270,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getInspectionCheckDetailbySaleorder() {
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getInspectionCheckDetailbySaleorder, this.formData.get('saleOrderNo').value);
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getInspectionCheckDetailbySaleorder, this.formData.value.saleOrderNo[0].saleOrderNo);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
         response => {
@@ -444,6 +457,9 @@ export class SalesInvoiceComponent implements OnInit {
     const arr = this.tableData.filter((d: any) => !d.type && d.checkbox);
     const registerInvoice = String.Join('/', this.apiConfigService.registerInvoice);
     const formData = this.formData.value;
+    if (typeof formData.saleOrderNo != 'string') {
+      formData.saleOrderNo = this.formData.value.saleOrderNo[0].saleOrderNo;
+    }
     formData.invoiceDate = this.formData.get('invoiceDate').value ? this.datepipe.transform(this.formData.get('invoiceDate').value, 'yyyy-MM-dd') : '';
     const requestObj = { grHdr: formData, grDtl: arr };
     this.apiService.apiPostRequest(registerInvoice, requestObj).subscribe(
