@@ -179,7 +179,8 @@ export class SalesInvoiceComponent implements OnInit {
 
 
   getCustomerList() {
-    const costCenUrl = String.Join('/', this.apiConfigService.getCustomerList);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const costCenUrl = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
     this.apiService.apiGetRequest(costCenUrl)
       .subscribe(
         response => {

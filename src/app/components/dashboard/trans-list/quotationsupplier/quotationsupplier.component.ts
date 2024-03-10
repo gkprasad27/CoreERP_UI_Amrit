@@ -361,7 +361,8 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
   getCustomerList() {
-    const getcurrencyList = String.Join('/', this.apiConfigService.getCustomerList);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getcurrencyList = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
     this.apiService.apiGetRequest(getcurrencyList)
       .subscribe(
         response => {
