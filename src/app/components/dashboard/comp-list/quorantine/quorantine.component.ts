@@ -40,7 +40,7 @@ export class QuorantineComponent {
       custoMer: [''],
       custmerPO: [''],
     });
-
+debugger
     this.formData = { ...data };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);

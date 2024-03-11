@@ -12,6 +12,7 @@ import { TableComponent } from 'src/app/reuse-components';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { Static } from 'src/app/enums/common/static';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 interface Type {
   value: string;
@@ -37,6 +38,18 @@ export class StandardRateComponent implements OnInit {
   materialList = [];
   msizeList = [];
 
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'paramName',
+    textField: 'paramName',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+
   Type: Type[] =
     [
       { value: 'Balancing', viewValue: 'Balancing' },
@@ -46,19 +59,20 @@ export class StandardRateComponent implements OnInit {
   routeEdit = '';
 
 
-ProductType: Type[] =
-  [
-    { value: 'Pulley', viewValue: 'Pulley' },
-    { value: 'Taperlock Bush', viewValue: 'Taperlock Bush' },
-    { value: 'Adapter', viewValue: 'Adapter' },
-    { value: 'Coupling', viewValue: 'Coupling' },
-    { value: 'Belts', viewValue: 'Belts' },
-    { value: 'Forgings', viewValue: 'Forgings' },
-    { value: 'Castings', viewValue: 'Castings' },
-    { value: 'Flanges', viewValue: 'Flanges' },
-  ];
+  ProductType: Type[] =
+    [
+      { value: 'Pulley', viewValue: 'Pulley' },
+      { value: 'Taperlock Bush', viewValue: 'Taperlock Bush' },
+      { value: 'Adapter', viewValue: 'Adapter' },
+      { value: 'Coupling', viewValue: 'Coupling' },
+      { value: 'Belts', viewValue: 'Belts' },
+      { value: 'Forgings', viewValue: 'Forgings' },
+      { value: 'Castings', viewValue: 'Castings' },
+      { value: 'Flanges', viewValue: 'Flanges' },
+    ];
 
   QCConfigDetailData: any[] = [];
+  citemList: any[] = [];
 
   constructor(private commonService: CommonService,
     private addOrEditService: AddOrEditService,
@@ -164,13 +178,14 @@ ProductType: Type[] =
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-                this.instruments = res.response.citemList;
+              this.instruments = res.response.citemList;
             }
           }
         });
   }
 
   getCommitmentList(flag) {
+    debugger
     this.tableData = [];
     if (this.tableComponent) {
       this.tableComponent.defaultValues();
@@ -210,10 +225,28 @@ ProductType: Type[] =
               })
               this.QCConfigDetailData = arr1;
               this.tableData = arr1;
+              this.getCommitmentParameterList();
             }
           }
         });
   }
+
+  getCommitmentParameterList() {
+    const bomUrl = String.Join('/', this.apiConfigService.getCommitmentList, this.formData.value.type);
+    this.apiService.apiGetRequest(bomUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
+              this.citemList = res.response['citemList'].filter((c: any) => !this.QCConfigDetailData.some((q: any) => q.parameter == c.paramName));
+            }
+          }
+        });
+  }
+
 
   saveForm() {
     if (this.formData1.invalid) {
@@ -224,7 +257,7 @@ ProductType: Type[] =
       changed: true,
     });
 
-    if(!this.formData1.value.spec && !this.formData1.value.minValue && !this.formData1.value.maxValue && !this.formData1.value.uom && !this.formData1.value.instrument) {
+    if (!this.formData1.value.spec && !this.formData1.value.minValue && !this.formData1.value.maxValue && !this.formData1.value.uom && !this.formData1.value.instrument) {
       this.formData1.patchValue({
         changed: false,
         highlight: false,
@@ -248,7 +281,7 @@ ProductType: Type[] =
       data = [this.formData1.value, ...data];
     } else {
       if (this.formData1.value.index == 0) {
-        // data.forEach((res: any) => { if (res.materialCode == this.formData1.value.materialCode) { (res.qty = res.qty + this.formData1.value.qty) } });
+        data.push(this.formData1.value);
       } else {
         data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
       }
@@ -274,6 +307,9 @@ ProductType: Type[] =
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
     } else {
+      if (typeof value.item.parameter == 'string') {
+        value.item.parameter = [{ parameter: value.item.parameter }]
+      }
       this.formData1.patchValue(value.item);
     }
   }
