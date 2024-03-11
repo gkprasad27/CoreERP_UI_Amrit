@@ -2465,6 +2465,10 @@
     "title": "Quorantine",
     "tag": "Tag Name",
     "saleOrderNo": "Sale Order Number",
+    "invoiceNumber":"Invoice Number",
+    "qcRefNo":"QcRefNo",
+    "custmerPO":"Custmer PO",
+    "customerName":"CustomerName",
     "materialDescription": "Material Description",
     "itemCode": "Item Code"
   },

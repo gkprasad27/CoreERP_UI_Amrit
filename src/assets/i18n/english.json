@@ -3038,13 +3038,14 @@
     "tag": "Tag Name",
     "product": "Product",
     "custmerPO": "Po Number",
-    "custoMer": "Customer Name",
+    "custoMer": "Customer",
+    "customerName":"CustomerName",
     "saleOrder": "Sale Order",
     "invoiceNumber": "Invoice Number",
     "saveTitle": "Quorantine",
-    "QCRefNo": "QC Ref Number",
     "id": "CAPA Number",
-    "capanum": "Capanum"
+    "capanum": "Capanum",
+    "qcRefNo":"QcRefNo"
   },
   "CAPAdetails": {
     "id": "Capanum",
