@@ -38,6 +38,7 @@ export class QuorantineComponent {
       invoiceNumber: [''],
       saleOrderNo: [''],
       custoMer: [''],
+      customerName: [''],
       custmerPO: [''],
     });
 debugger
@@ -79,6 +80,7 @@ debugger
                 debugger
                 this.modelFormData.patchValue({
                   custoMer: response.response['invoiceMasterList']?.customerName,
+                  customerName: response.response['invoiceMasterList']?.custName,
                   custmerPO: response.response['invoiceMasterList']?.poNumber,
                 })
               }
