@@ -60,7 +60,7 @@ debugger
     const obj = this.getInvoiceDetail.find((i: any) => i.tagname == this.modelFormData.value.tag);
     this.modelFormData.patchValue({
       itemCode: obj?.materialCode,
-      QCRefNo: obj?.qcRefNo,
+      qcRefNo: obj?.qcRefNo,
       invoiceNumber: obj?.invoiceNo,
       saleOrderNo: obj?.saleorder
     })
