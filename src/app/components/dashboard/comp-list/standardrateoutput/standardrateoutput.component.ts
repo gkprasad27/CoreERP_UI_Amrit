@@ -280,10 +280,13 @@ export class StandardRateComponent implements OnInit {
       });
       data = [this.formData1.value, ...data];
     } else {
+      debugger
+      let fObj = this.formData1.value;
+      fObj.parameter = fObj.parameter[0].paramName
       if (this.formData1.value.index == 0) {
-        data.push(this.formData1.value);
+        data.push(fObj);
       } else {
-        data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
+        data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
       }
     }
     setTimeout(() => {
@@ -307,10 +310,11 @@ export class StandardRateComponent implements OnInit {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
     } else {
-      if (typeof value.item.parameter == 'string') {
-        value.item.parameter = [{ parameter: value.item.parameter }]
+      let item = { ...value.item };
+      if (typeof item.parameter == 'string') {
+        item.parameter = [{ paramName: item.parameter }]
       }
-      this.formData1.patchValue(value.item);
+      this.formData1.patchValue(item);
     }
   }
 

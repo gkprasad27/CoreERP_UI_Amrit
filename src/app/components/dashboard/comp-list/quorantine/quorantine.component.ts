@@ -34,7 +34,7 @@ export class QuorantineComponent {
     this.modelFormData = this.formBuilder.group({
       tag: ['', [Validators.required]],
       itemCode: [''],
-      QCRefNo: [''],
+      qcRefNo: [''],
       invoiceNumber: [''],
       saleOrderNo: [''],
       custoMer: [''],
@@ -76,6 +76,7 @@ debugger
               this.spinner.hide();
               if (!this.commonService.checkNullOrUndefined(response.response['invoiceDetailsList'])) {
                 this.getInvoiceDetail = response.response['invoiceDetailsList'];
+                debugger
                 this.modelFormData.patchValue({
                   custoMer: response.response['invoiceMasterList']?.customerName,
                   custmerPO: response.response['invoiceMasterList']?.poNumber,

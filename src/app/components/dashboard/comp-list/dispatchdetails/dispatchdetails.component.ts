@@ -62,7 +62,8 @@ export class DispatchdetailsComponent {
 
 
   getInvoiceData() {
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getInvoiceData);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getInvoiceData, obj.companyCode);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
         response => {
