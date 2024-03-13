@@ -194,7 +194,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
     })
     let data: any = this.tableData;
     data = (data && data.length) ? data : [];
-    let qtyT = 0
+    let qtyT = this.formData1.value.receivedQty;
     data.forEach((t: any) => {
       if (t.materialCode == this.formData1.value.materialCode) {
         qtyT = qtyT + (this.formData1.value.index == t.index ? ((+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty))  :  ((+t.receivedQty) + (+t.rejectQty))) 

@@ -13,7 +13,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label>{{ 'goodsreceipts.company' | translate }}</mat-label>
-                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1" >
+                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let comp of companyList" [value]="comp.id">
                             {{comp.text}}
@@ -23,7 +23,7 @@
 
                 <mat-form-field>
                     <mat-label>{{'goodsreceipts.profitCenter' | translate }}</mat-label>
-                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2" >
+                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
                             {{pft.text}}
@@ -44,17 +44,20 @@
                         appFocusOnEnter tabIndex="4">
                 </mat-form-field> -->
 
-                <div class="multiselect-dropdown-list">
-                    <ng-multiselect-dropdown *ngIf="!routeEdit" placeholder="{{ 'goodsreceipts.purchaseOrderNo' | translate }}"
-                        formControlName="purchaseOrderNo" (onSelect)="ponoselect()"
-                        [settings]="dropdownSettings" [data]="purchaseordernoList">
+                <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
+                    <ng-multiselect-dropdown placeholder="{{ 'goodsreceipts.purchaseOrderNo' | translate }}"
+                        formControlName="purchaseOrderNo" (onSelect)="ponoselect()" [settings]="dropdownSettings"
+                        [data]="purchaseordernoList">
                     </ng-multiselect-dropdown>
-                    <input matInput type="text" readonly *ngIf="routeEdit" formControlName="purchaseOrderNo" 
-                    appFocusOnEnter tabIndex="4">
                 </div>
+                <mat-form-field *ngIf="routeEdit">
+                    <mat-label>{{'goodsreceipts.purchaseOrderNo' | translate }}</mat-label>
+                    <input matInput type="text" readonly formControlName="purchaseOrderNo">
+                </mat-form-field>
 
 
-                
+
+
                 <!-- <mat-form-field>
                     <mat-label>{{'goodsreceipts.plant' | translate }}</mat-label>
                     <mat-select formControlName="plant" appFocusOnEnter tabIndex="12">
@@ -82,7 +85,7 @@
                 </mat-form-field>
 
 
-                
+
 
 
 
@@ -187,9 +190,9 @@
                     <mat-label [translate]="'goodsreceipts.attachedUrl'"></mat-label>
                     <a [href]="url" download target="_blank"> <b> {{ formData.value.documentURL }} </b> </a>
                 </div> -->
-                
+
                 <div class="mx-2">.
-                    <label > {{ 'goodsreceipts.mtcDocumentUpload' | translate }} </label>
+                    <label> {{ 'goodsreceipts.mtcDocumentUpload' | translate }} </label>
                     <app-file-upload [type]="'card'" (emitFilesList)="emitFilesList($event)"></app-file-upload>
                 </div>
 
@@ -198,7 +201,7 @@
                     <a [href]="url1" download target="_blank"> <b> {{ formData.value.invoiceURL }} </b> </a>
                 </div> -->
                 <div class="mx-2">
-                    <label > {{ 'goodsreceipts.invoiceUpload' | translate }} </label>
+                    <label> {{ 'goodsreceipts.invoiceUpload' | translate }} </label>
                     <app-file-upload [type]="'card'" (emitFilesList)="emitFilesList1($event)"></app-file-upload>
                 </div>
 
@@ -232,7 +235,7 @@
                                 (selectionChange)="materialCodeChange()">
                                 <mat-option>None</mat-option>
                                 <mat-option *ngFor="let material of materialCodeList" [value]="material.materialCode">
-                                {{material.materialCode}} --  {{material.materialName}}
+                                    {{material.materialCode}} -- {{material.materialName}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -248,7 +251,8 @@
                         </mat-form-field>
                         <mat-form-field class="form-element">
                             <mat-label [translate]="'goodsreceipts.pendingQty'"></mat-label>
-                            <input matInput type="text" readonly formControlName="pendingQty" appFocusOnEnter tabIndex="15">
+                            <input matInput type="text" readonly formControlName="pendingQty" appFocusOnEnter
+                                tabIndex="15">
                         </mat-form-field>
 
                         <mat-form-field class="form-element">
@@ -265,7 +269,7 @@
                             <mat-label [translate]="'goodsreceipts.heatNumber'"></mat-label>
                             <input matInput type="text" formControlName="heatNumber" appFocusOnEnter tabIndex="18">
                         </mat-form-field>
-                       
+
                     </div>
 
 

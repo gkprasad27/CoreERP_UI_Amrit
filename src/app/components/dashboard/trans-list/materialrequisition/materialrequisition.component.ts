@@ -213,6 +213,7 @@ export class MaterialrequisitionComponents implements OnInit {
         });
   }
   saveForm() {
+    debugger
     if (this.formData1.invalid) {
       return;
     }
@@ -224,10 +225,12 @@ export class MaterialrequisitionComponents implements OnInit {
     this.tableData1 = null;
     this.tableComponent.defaultValues();
     if (this.formData1.value.index == 0) {
-      this.formData1.patchValue({
-        index: data ? (data.length + 1) : 1
-      });
-      data = [this.formData1.value, ...data];
+      data.forEach((d: any) => {
+        const obj = this.formData1.value;
+        Object.keys(obj).forEach((key: any) => {
+          d[key] = obj[key] ? obj[key] : d[key]
+        })
+      })
     } else {
       data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
     }
@@ -250,7 +253,7 @@ export class MaterialrequisitionComponents implements OnInit {
     if (value.action === 'Delete') {
       this.tableComponent.defaultValues();
       this.tableData1 = this.tableData1.filter((res: any) => res.index != value.item.index);
-    } else if(value.action === 'Edit') {
+    } else if (value.action === 'Edit') {
       this.formData1.patchValue(value.item);
     } else {
       this.inspectioncheck(value);
@@ -378,7 +381,7 @@ export class MaterialrequisitionComponents implements OnInit {
         row: event.item,
         employeesList: this.employeesList,
         mechenaryList: this.mechenaryList
-      } 
+      }
     });
   }
 
