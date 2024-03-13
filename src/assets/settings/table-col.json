@@ -1596,6 +1596,7 @@
   },
   "materialrequisition": {
     "title": "Production Planning",
+    "checkbox": "",
     "companyName": "Company Name",
     "profitcenterName": "ProfitcenterName",
     "saleOrderNumber": "saleOrderNumber",

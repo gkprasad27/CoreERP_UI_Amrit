@@ -226,10 +226,13 @@ export class MaterialrequisitionComponents implements OnInit {
     this.tableComponent.defaultValues();
     if (this.formData1.value.index == 0) {
       data.forEach((d: any) => {
-        const obj = this.formData1.value;
-        Object.keys(obj).forEach((key: any) => {
-          d[key] = obj[key] ? obj[key] : d[key]
-        })
+        if (d.checkbox) {
+          const obj = this.formData1.value;
+          Object.keys(obj).forEach((key: any) => {
+            d[key] = obj[key] ? obj[key] : d[key]
+          })
+        }
+        d.checkbox = false
       })
     } else {
       data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
@@ -347,6 +350,7 @@ export class MaterialrequisitionComponents implements OnInit {
                   id: s.id ? s.id : '',
                   action: 'editView',
                   index: index + 1,
+                  checkbox: false
                 }
                 this.filePath = s.filePath;
                 arr.push(obj);
