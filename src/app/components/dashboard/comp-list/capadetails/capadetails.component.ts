@@ -10,6 +10,7 @@ import { AddOrEditService } from '../add-or-edit.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-capadetails',
@@ -30,6 +31,7 @@ export class CAPAdetailsComponent {
     private spinner: NgxSpinnerService,
     private addOrEditService: AddOrEditService,
     private router: Router,
+    private datepipe: DatePipe,
   ) {
     this.modelFormData = this.formBuilder.group({
 
@@ -38,11 +40,14 @@ export class CAPAdetailsComponent {
       notificationNo : [null],
       notificationDate : [null],
       itemCode : [null],
-      // materialDescription : [null],
+      materialDescription : [null],
       complaintQty : [null],
       tag : [null],
       saleOrderNo : [null],
       custmerPO : [null],
+
+      addDate: [this.datepipe.transform(new Date(), 'dd-MM-yyyy')],
+      customerName: [''],
 
       receivedParts : [null],
       receivedPartsDate : [null],
@@ -67,7 +72,7 @@ export class CAPAdetailsComponent {
 
       decfectDescription : [null],
 
-      defectCasuse : [null],
+      defectCause : [null],
       defectCasuseDate : [null],
       defectCasuseResp : [null],
 
@@ -108,6 +113,9 @@ export class CAPAdetailsComponent {
   }
 
   save() {
+    this.modelFormData.patchValue({
+      addDate: new Date(),
+    })
     this.addOrEditService[this.formData.action]({ item: this.modelFormData.value }, (res) => {
       if (res) {
         this.router.navigate(['/dashboard/master/CAPAdetails']);
