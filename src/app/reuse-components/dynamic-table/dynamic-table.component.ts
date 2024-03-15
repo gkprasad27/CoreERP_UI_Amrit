@@ -130,39 +130,6 @@ export class DynamicTableComponent implements OnInit {
     allowSearchFilter: true
   };
 
-  data1 = [
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-
-    {id: 1, text: 'sss'},
-    {id: 1, text: 'sss'},
-
-  ]
-
 
   setBackgroundClass(element: any) {
     return 'lightred'
