@@ -1599,6 +1599,7 @@
     "checkbox": "",
     "companyName": "Company Name",
     "profitcenterName": "ProfitcenterName",
+    "customerName":"CustomerName",
     "saleOrderNumber": "saleOrderNumber",
     "plant": "Plant",
     "branch": "Branch",

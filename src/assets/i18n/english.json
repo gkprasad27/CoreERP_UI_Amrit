@@ -1894,6 +1894,7 @@
     "company": "Company",
     "companyName": "Company Name",
     "profitcenterName": "ProfitcenterName",
+    "customerName":"CustomerName",
     "plant": "Plant",
     "branch": "Branch",
     "project": "Project",
