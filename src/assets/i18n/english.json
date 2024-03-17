@@ -1162,11 +1162,11 @@
     "ugstamount": "UGST",
     "transferDate": "TransferDate",
     "senderBranch": "SenderBranch",
-    "senderProfitCenter": "SenderProfitCenter",
+    "senderProfitCenter": "Sender Profit Center",
     "senderSegment": "SenderSegment",
     "SenderCostCenter": "SenderCostCenter",
     "receiverBranch": "ReceiverBranch",
-    "receiverProfitCenter": "ReceiverProfitCenter",
+    "receiverProfitCenter": "Receiver Profit Center",
     "receiverSegment": "ReceiverSegment",
     "receiverCostCenter": "ReceiverCostCenter",
     "acquisitionValue": "AcquisitionValue",
@@ -2229,7 +2229,7 @@
     "title": "Quality Control",
     "inspectionCheckNo": "Inspection Check Number",
     "companyName": "Company Name",
-    "profitcenterName": "ProfitCenter",
+    "profitcenterName": "Profit Center",
     "customerName": "Customer Name",
     "materialCode": "Material code",
     "description": "Description",
@@ -3215,5 +3215,11 @@
     "reportTitle": "Order vs Sales",
     "yAxis": "Amount",
     "xAxis": "Year"
+  },
+  "supplyvsrejection": {
+    "title": "Supply vs Rejection",
+    "monthYear": "Month && Year",
+    "totalRejectedQty": "Total Rejected Qty",
+    "totalSuppliedQty": "Total Supplied Qty"
   }
 }

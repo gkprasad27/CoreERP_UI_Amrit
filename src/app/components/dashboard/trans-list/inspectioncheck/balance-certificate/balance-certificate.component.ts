@@ -35,7 +35,7 @@ export class BalanceCertificateComponent {
   }
 
   ngOnInit() {
-    this.getCommitmentList();
+    this.getSaleOrderDetailbymaterialcode();
   }
 
   tablePropsFunc() {
@@ -68,7 +68,7 @@ export class BalanceCertificateComponent {
     this.sendDynTableData = { type: 'reset', data: this.tableData };
   }
 
-  getCommitmentList() {
+  getCommitmentList(list: any[]) {
     this.tableData = [];
     const url = String.Join('/', this.apiConfigService.getCommitmentList, this.data.materialCode, this.data.productionTag, 'Balancing');
     this.apiService.apiGetRequest(url)
@@ -79,11 +79,13 @@ export class BalanceCertificateComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               let arr = [];
+              debugger
               res.response.citemList.forEach((s: any, index: number) => {
+                const obj = list.find((l: any) => s.description == l.parameter);
                 arr.push({
                   parameter: s.description,
                   // action: 'edit',
-                  result: s.result,
+                  result: obj ? obj.spec : s.result,
                   // index: index + 1
                   id: s.id ? s.id : 0,
                 })
@@ -95,6 +97,22 @@ export class BalanceCertificateComponent {
           }
         });
   }
+
+  getSaleOrderDetailbymaterialcode() {
+    const url = String.Join('/', this.apiConfigService.getSaleOrderDetailbymaterialcode, this.data.materialCode, this.data.productionTag, 'Balancing');
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.getCommitmentList(res.response.QCConfigDetail);
+            }
+          }
+        });
+  }
+
 
   save() {
     if (!this.tableData.length) {

@@ -288,7 +288,7 @@ export class DynamicTableComponent implements OnInit {
       }
 
 
-      if((element.parameter.value == "TLB Bore" || element.parameter.value == "Key Wey Width") && element.spec.value) {
+      if(element.parameter.value && (element.parameter.value.trim() == "TLB Bore" || element.parameter.value.trim() == "Key Wey Width" || element.parameter.value.trim() == "Key Way Width") && element.spec.value) {
         spec = element.spec.value.trim().split(' ')[0];
       }
       const str = element.minValue.value && element.minValue.value.includes('±') ? element.minValue.value.split('±')[1] : '';

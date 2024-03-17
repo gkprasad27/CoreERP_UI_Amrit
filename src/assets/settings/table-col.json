@@ -2603,5 +2603,10 @@
     "monthYear": "monthYear",
     "totalSaleAmount": "#7cb5ec",
     "totalInvoiceAmount": "orange"
+  },
+  "supplyvsrejection": {
+    "monthYear": "monthYear",
+    "totalRejectedQty": "totalRejectedQty",
+    "totalSuppliedQty": "totalSuppliedQty"
   }
 }

@@ -4,7 +4,7 @@
 
         <div  class="row">
             <div class="col-6">
-                <app-table [showButtons]="false" [tableData]="tableData" [routeParam]="'ordervssales'"></app-table>
+                <app-table class="table-css" [showButtons]="false" [tableData]="tableData" [routeParam]="'ordervssales'"></app-table>
             </div>
             <div class="col-6" *ngIf="chartOptions">
                 <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
@@ -17,7 +17,7 @@
 
         <div  class="row">
             <div class="col-6">
-                <app-table [showButtons]="false" [tableData]="tableData1" [routeParam]="'dashboardGraph'"></app-table>
+                <app-table class="table-css" [showButtons]="false" [tableData]="tableData1" [routeParam]="'dashboardGraph'"></app-table>
             </div>
             <div class="col-6" *ngIf="chartOptions1">
                 <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions1"></highcharts-chart>
