@@ -20,6 +20,7 @@ export class QuorantineComponent {
   formData: any;
 
   getInvoiceDetail: any[] = [];
+  getInvoiceDetailData: any;
 
   constructor(private commonService: CommonService,
     private addOrEditService: AddOrEditService,
@@ -57,14 +58,16 @@ debugger
 
 
   tagNameChange() {
-    const obj = this.getInvoiceDetail.find((i: any) => i.tagname == this.modelFormData.value.tag);
+    const obj = this.getInvoiceDetailData['invoiceDetailsList'].find((i: any) => i.tagname == this.modelFormData.value.tag);
     this.modelFormData.patchValue({
       itemCode: obj?.materialCode,
       qcRefNo: obj?.qcRefNo,
       invoiceNumber: obj?.invoiceNo,
-      saleOrderNo: obj?.saleorder
-    })
-  
+      saleOrderNo: obj?.saleorder,
+      custoMer: this.getInvoiceDetailData['invoiceMasterList']?.customerName,
+      customerName: this.getInvoiceDetailData['invoiceMasterList']?.custName,
+      custmerPO: this.getInvoiceDetailData['invoiceMasterList']?.poNumber,
+    })  
   }
 
   getInvoiceDetailList(value) {
@@ -77,12 +80,7 @@ debugger
               this.spinner.hide();
               if (!this.commonService.checkNullOrUndefined(response.response['invoiceDetailsList'])) {
                 this.getInvoiceDetail = response.response['invoiceDetailsList'];
-                debugger
-                this.modelFormData.patchValue({
-                  custoMer: response.response['invoiceMasterList']?.customerName,
-                  customerName: response.response['invoiceMasterList']?.custName,
-                  custmerPO: response.response['invoiceMasterList']?.poNumber,
-                })
+                this.getInvoiceDetailData = response.response;
               }
             }
           }
