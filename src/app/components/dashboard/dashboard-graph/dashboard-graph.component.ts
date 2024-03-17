@@ -26,51 +26,68 @@ export class DashboardGraphComponent {
   tableData = [];
   tableData1 = [];
 
-  companyList: any[] =[];
+  companyList: any[] = [];
 
 
   constructor(
     private RuntimeConfigService: RuntimeConfigService, private apiConfigService: ApiConfigService,
-    private apiService: ApiService,     private commonService: CommonService,
-    private translate: TranslateService,      private spinner: NgxSpinnerService,
+    private apiService: ApiService, private commonService: CommonService,
+    private translate: TranslateService, private spinner: NgxSpinnerService,
 
-    ) {
-      this.getcompaniesList();
+  ) {
     this.RuntimeConfigService.tableDataLoaded.subscribe((t: any) => {
+      debugger
       if (t) {
-      
-
-        this.tableData1 = [
-          { totalEmployes: 100, totalPresent: 20, totalObsent: 80 },
-        ];
-        this.chartOptions1 = {
-          title: {
-            text: 'Employess'
-          },
-          series: [
-            {
-              // name: 'Total Employes',
-              data: [{
-                y: 100,
-                name: "Total Employes",
-                color: "blue"
-              }, {
-                y: 20,
-                name: "Total Present",
-                color: "green"
-              }, {
-                y: 80,
-                name: "Total Obsent",
-                color: "red"
-              }],
-              type: 'pie'
-            },
-          ],
-        }
-
+        this.getEmpPresent();
+    this.getcompaniesList();
       }
     })
   }
+
+
+
+  getEmpPresent() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getEmpPresent = String.Join('/', this.apiConfigService.getEmpPresent, obj.companyCode);
+    this.apiService.apiGetRequest(getEmpPresent)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
+              this.tableData1 = res.response['StockReport'];
+              this.chartOptions1 = {
+                title: {
+                  text: 'Employess'
+                },
+                series: [
+                  {
+                    // name: 'Total Employes',
+                    data: [{
+                      y: this.tableData1[0].totalEmployees,
+                      name: "Total Employes",
+                      color: "blue"
+                    }, {
+                      y: this.tableData1[0].totalPresent,
+                      name: "Total Present",
+                      color: "green"
+                    }, {
+                      y: this.tableData1[0].totalAbsent,
+                      name: "Total Absent",
+                      color: "red"
+                    }],
+                    type: 'pie'
+                  },
+                ],
+              }
+            }
+          }
+          this.spinner.hide();
+        });
+  }
+
 
   getcompaniesList() {
     const getcompanyList = String.Join('/', this.apiConfigService.getCompanyList);
@@ -84,13 +101,13 @@ export class DashboardGraphComponent {
               this.companyList = res.response['companiesList'];
             }
           }
-        this.print();
+          this.print();
           this.spinner.hide();
         });
   }
 
 
-  
+
   print() {
     let obj = JSON.parse(localStorage.getItem("user"));
     let getUrl = String.Join('', this.apiConfigService.getOrdersvsSales, `/${this.commonService.formatDateValue(this.companyList[0].financialYear)}/${this.commonService.formatDateValue(new Date())}/`, obj.companyCode);
@@ -147,11 +164,11 @@ export class DashboardGraphComponent {
 
 
   tickInterval(data) {
-    if(!(data && data.length)) {
+    if (!(data && data.length)) {
       return 10
     }
-    let value = Math.max.apply(Math, data.map(function(o) { return o[1]; }))
-    return (value  ? (Math.ceil(value / 100) * 10) : 10)
+    let value = Math.max.apply(Math, data.map(function (o) { return o[1]; }))
+    return (value ? (Math.ceil(value / 100) * 10) : 10)
   }
 
 

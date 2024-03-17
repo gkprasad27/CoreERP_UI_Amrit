@@ -528,4 +528,6 @@ export class ApiConfigService {
    updateProductionStatus = `${this.environment.runtimeConfig.serverUrl}Transactions/UpdateProductionStatus`;
 
    getOrdersvsSales = `${this.environment.runtimeConfig.serverUrl}Reports/GetOrdersvsSales`;
+
+   getEmpPresent = `${this.environment.runtimeConfig.serverUrl}Reports/GetEmpPresent`;
 }

@@ -3203,9 +3203,9 @@
   "dashboardGraph": {
     "ORDER": "ORDER",
     "SALES": "SALES",
-    "totalEmployes": "Total Employes",
+    "totalEmployees": "Total Employees",
     "totalPresent": "Total Present",
-    "totalObsent": "Total Obsent"
+    "totalAbsent": "Total Absent"
   },
   "ordervssales": {
     "title": "Order vs Sales",

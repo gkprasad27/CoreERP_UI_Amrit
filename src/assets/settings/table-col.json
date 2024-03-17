@@ -2493,7 +2493,7 @@
     "totalamount": "totalamount"
   },
   "purchaseanalysis": {
-    "purchaseOrderDate": "Invoice Date",
+    "purchaseOrderDate": "Date",
     "purchaseOrderNumber": "PO Number",
     "materialCode": "Material Code",
     "materialName": "Material Name",
@@ -2595,9 +2595,9 @@
   "dashboardGraph": {
     "ORDER": "ORDER",
     "SALES": "SALES",
-    "totalEmployes": "totalEmployes",
+    "totalEmployees": "totalEmployees",
     "totalPresent": "totalPresent",
-    "totalObsent": "totalObsent"
+    "totalAbsent": "totalAbsent"
   },
   "ordervssales": {
     "monthYear": "monthYear",

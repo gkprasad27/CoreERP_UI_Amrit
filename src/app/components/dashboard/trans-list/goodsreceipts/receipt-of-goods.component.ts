@@ -342,9 +342,11 @@ export class ReceiptOfGoodsComponent implements OnInit {
       })
       this.tableData = null;
     }
+    debugger
     const obj = this.purchaseordernoList.find(resp => resp.id == this.formData.value.purchaseOrderNo[0].id);
     this.formData.patchValue({
-      customerName: obj.text
+      customerName: obj.text,
+      supplierCode: obj.supplierCode
     })
   }
 
