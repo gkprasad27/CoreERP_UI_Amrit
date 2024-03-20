@@ -72,6 +72,17 @@ export class ReceiptOfGoodsComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -683,6 +694,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
     const formData = this.formData.value;
     if (typeof formData.purchaseOrderNo != 'string') {
       formData.purchaseOrderNo = this.formData.value.purchaseOrderNo[0].id;
+    }
+    if (typeof formData.receivedBy != 'string') {
+      formData.receivedBy = this.formData.value.receivedBy[0].id;
     }
     formData.receivedDate = this.formData.get('receivedDate').value ? this.datepipe.transform(this.formData.get('receivedDate').value, 'MM-dd-yyyy') : '';
     formData.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';

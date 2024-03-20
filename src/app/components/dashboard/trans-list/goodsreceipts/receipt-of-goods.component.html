@@ -129,15 +129,16 @@
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
-
-                <mat-form-field>
+                
+                <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
+                    <ng-multiselect-dropdown placeholder="{{ 'goodsreceipts.receivedBy' | translate }}"
+                        formControlName="receivedBy"  [settings]="dropdownSettings1"
+                        [data]="employeesList">
+                    </ng-multiselect-dropdown>
+                </div>
+                <mat-form-field *ngIf="routeEdit">
                     <mat-label>{{'goodsreceipts.receivedBy' | translate }}</mat-label>
-                    <mat-select formControlName="receivedBy" appFocusOnEnter tabIndex="9">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-                            {{emp.id}}-{{emp.text}}
-                        </mat-option>
-                    </mat-select>
+                    <input matInput type="text" readonly formControlName="receivedBy">
                 </mat-form-field>
 
 
