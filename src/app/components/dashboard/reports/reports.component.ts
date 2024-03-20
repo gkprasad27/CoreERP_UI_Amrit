@@ -23,6 +23,8 @@ export class ReportsComponent {
   modelFormData: FormGroup;
 
   companyList: any[] = [];
+  customerList: any[] = [];
+  materialList: any[] = [];
 
   data: any;
 
@@ -46,6 +48,8 @@ export class ReportsComponent {
   ) {
     this.model();
     this.getcompaniesList();
+    this.getmaterialData();
+    this.getCustomerList();
     activatedRoute.params.subscribe(params => {
       this.routeParam = params.id
       this.commonService.routeParam = params.id
@@ -55,7 +59,7 @@ export class ReportsComponent {
   }
 
   getColSpan(keys: any) {
-    return (keys.val instanceof Array) ? Object.keys(keys['val'][0]).length+1 : '1'
+    return (keys.val instanceof Array) ? Object.keys(keys['val'][0]).length + 1 : '1'
   }
 
   getRowSpan(keys: any) {
@@ -69,6 +73,8 @@ export class ReportsComponent {
   model() {
     this.modelFormData = this.formBuilder.group({
       companyCode: [null, [Validators.required]],
+      customerCode: ['-1'],
+      materialCode: ['-1'],
       companyName: [null],
       selected: [null, [Validators.required]],
       fromDate: [null],
@@ -102,6 +108,39 @@ export class ReportsComponent {
             }
           }
           this.spinner.hide();
+        });
+  }
+
+  
+  getmaterialData() {
+    const getmaterialUrl = String.Join('/', this.apiConfigService.getMaterialList);
+    this.apiService.apiGetRequest(getmaterialUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.materialList = res.response['materialList'];
+            }
+          }
+        });
+  }
+
+  getCustomerList() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const costCenUrl = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
+    this.apiService.apiGetRequest(costCenUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              const resp = res.response['bpList'];
+              const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
+              this.customerList = data;
+            }
+          }
         });
   }
 
@@ -147,6 +186,8 @@ export class ReportsComponent {
     let getUrl
     if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
+    }  else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward') {
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${this.modelFormData.value.customerCode}/${this.modelFormData.value.materialCode}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }
@@ -158,7 +199,7 @@ export class ReportsComponent {
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
               const keys = [];
               const tableResp = res.response[this.getComponentData.listName];
-              if(res.response[this.getComponentData.totals] && res.response[this.getComponentData.totals].length) {
+              if (res.response[this.getComponentData.totals] && res.response[this.getComponentData.totals].length) {
                 tableResp.push(res.response[this.getComponentData.totals][0]);
               }
               tableResp.forEach(obj => {

@@ -90,7 +90,7 @@
                             </td>
                         </ng-container>
                         <ng-template #text_content>
-                            <td 
+                            <td
                                 style="font-size: 12px;font-family: Calibri;border: 1px solid black;;padding: 10px; -webkit-print-color-adjust: exact;">
                                 <span *ngIf="key.type == 'Date';else other_content">
                                     {{ key.val ? (key.val | date): '' }}
@@ -121,7 +121,7 @@
 
                 <mat-form-field>
                     <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
-                    <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="11">
+                    <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let comp of companyList" [value]="comp.id">
                             {{comp.text}}
@@ -133,6 +133,25 @@
                         required
                     </mat-error>
                 </mat-form-field>
+
+                <mat-form-field *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
+                    <mat-label [translate]="'COMMON.CUSTOMERCODE'"></mat-label>
+                    <mat-select formControlName="customerCode" appFocusOnEnter tabIndex="2">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let comp of customerList" [value]="comp.id">
+                            {{comp.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="mat-mdc-form-field typeahead" *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
+                    <input placeholder="{{ 'COMMON.MATERIALCODE' | translate }}" formControlName="materialCode"
+                        [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="3"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
+                    <ng-template #customItemTemplate let-model="item">
+                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+                    </ng-template>
+                </div>
 
 
                 <div class="p-2 range-picker"

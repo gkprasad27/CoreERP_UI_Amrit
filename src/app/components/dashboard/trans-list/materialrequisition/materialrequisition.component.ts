@@ -345,6 +345,8 @@ export class MaterialrequisitionComponents implements OnInit {
                   status: s.status ? s.status : '',
                   saleOrderNumber: s.saleOrderNumber ? s.saleOrderNumber : '',
                   startDate: s.startDate ? s.startDate : '',
+                  productionPlanDate: s.productionPlanDate ? s.productionPlanDate : '',
+                  productionTargetDate: s.productionTargetDate ? s.productionTargetDate : '',
                   typeofWork: s.typeofWork ? s.typeofWork : '',
                   workStatus: s.workStatus ? s.workStatus : '',
                   id: s.id ? s.id : '',
