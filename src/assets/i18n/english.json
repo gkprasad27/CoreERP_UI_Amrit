@@ -20,6 +20,8 @@
     "BACK": "Back",
     "REJECT": "Reject",
     "APPROVE": "Approve",
+    "CUSTOMERCODE": "Customer Code",
+    "MATERIALCODE": "Material Code",
     "COMPANYCODE": "Company Code"
   },
   "LOGIN": {
