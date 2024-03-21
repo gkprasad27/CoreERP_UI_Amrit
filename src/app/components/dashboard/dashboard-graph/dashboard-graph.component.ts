@@ -36,7 +36,6 @@ export class DashboardGraphComponent {
 
   ) {
     this.RuntimeConfigService.tableDataLoaded.subscribe((t: any) => {
-      debugger
       if (t) {
         this.getEmpPresent();
     this.getcompaniesList();
@@ -56,7 +55,6 @@ export class DashboardGraphComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
               this.tableData1 = res.response['EmpPresent'];
               this.chartOptions1 = {
                 title: {

@@ -79,7 +79,6 @@ export class BalanceCertificateComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               let arr = [];
-              debugger
               res.response.citemList.forEach((s: any, index: number) => {
                 const obj = list.find((l: any) => s.description == l.parameter);
                 arr.push({

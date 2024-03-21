@@ -185,7 +185,6 @@ export class StandardRateComponent implements OnInit {
   }
 
   getCommitmentList(flag) {
-    debugger
     this.tableData = [];
     if (this.tableComponent) {
       this.tableComponent.defaultValues();
@@ -240,7 +239,6 @@ export class StandardRateComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
               this.citemList = res.response['citemList'].filter((c: any) => !this.QCConfigDetailData.some((q: any) => q.parameter == c.paramName));
             }
           }
@@ -280,7 +278,6 @@ export class StandardRateComponent implements OnInit {
       });
       data = [this.formData1.value, ...data];
     } else {
-      debugger
       let fObj = this.formData1.value;
       fObj.parameter = fObj.parameter[0].paramName
       if (this.formData1.value.index == 0) {

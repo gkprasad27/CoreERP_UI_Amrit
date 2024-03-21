@@ -134,21 +134,20 @@
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
-                    <mat-label [translate]="'COMMON.CUSTOMERCODE'"></mat-label>
-                    <mat-select formControlName="customerCode" appFocusOnEnter tabIndex="2">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let comp of customerList" [value]="comp.id">
-                            {{comp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <div class="mat-mdc-form-field typeahead" *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
-                    <input placeholder="{{ 'COMMON.MATERIALCODE' | translate }}" formControlName="materialCode"
-                        [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="3"
+                <div class="mat-mdc-form-field typeahead mx-3" *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
+                    <input placeholder="{{ 'COMMON.CUSTOMERCODE' | translate }}" formControlName="customerCode"
+                        [typeahead]="customerList" typeaheadOptionField='text' appFocusOnEnter tabIndex="2"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
                     <ng-template #customItemTemplate let-model="item">
+                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+                    </ng-template>
+                </div>
+
+                <div class="mat-mdc-form-field typeahead mx-3" *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
+                    <input placeholder="{{ 'COMMON.MATERIALCODE' | translate }}" formControlName="materialCode"
+                        [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="3"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1">
+                    <ng-template #customItemTemplate1 let-model="item">
                         <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                     </ng-template>
                 </div>
