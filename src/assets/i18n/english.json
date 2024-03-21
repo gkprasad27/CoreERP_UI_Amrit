@@ -20,6 +20,8 @@
     "BACK": "Back",
     "REJECT": "Reject",
     "APPROVE": "Approve",
+    "DATE": "Date",
+    "DESCRIPTION": "Description",
     "CUSTOMERCODE": "Customer Code",
     "MATERIALCODE": "Material Code",
     "COMPANYCODE": "Company Code"
@@ -3076,7 +3078,8 @@
     "checkSuccessDelrdMaterail": "Check Success of Delrd Materail",
     "containmentAccess": "Containment Action",
     "custVerification": "Customer Verification",
-    "pletionDate": "Pletion Date"
+    "pletionDate": "Pletion Date",
+    "responsibleTitle": "Responsible Title"
 
   },
   "salesanalysis": {

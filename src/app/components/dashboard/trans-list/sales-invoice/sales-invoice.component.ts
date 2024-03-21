@@ -364,6 +364,7 @@ export class SalesInvoiceComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
               this.getInvoiceDeatilData = res.response;
               this.formData.patchValue(res.response['InvoiceMasterList']);
               this.formData.patchValue({
@@ -486,6 +487,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   invoicePrint() {
+    debugger
     const totalObj = {
       qty: 0,
       grossAmount: 0,
@@ -521,7 +523,7 @@ export class SalesInvoiceComponent implements OnInit {
         ...this.formData.value
       },
       vAddress: {
-        name: this.getInvoiceDeatilData?.InvoiceMasterList?.customerName || '',
+        custName: this.getInvoiceDeatilData?.InvoiceMasterList?.custName || '',
         address: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress1 || '',
         address1: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress2 || '',
         city: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoCity || '',
@@ -530,7 +532,7 @@ export class SalesInvoiceComponent implements OnInit {
         gstno:  this.getInvoiceDeatilData?.InvoiceMasterList?.customerGstin || '',
       },
       pAddress: {
-        name: this.getInvoiceDeatilData?.InvoiceMasterList?.customerName || '',
+        custName: this.getInvoiceDeatilData?.InvoiceMasterList?.custName || '',
         address: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress1 || '',
         address1: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress2 || '',
         city: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoCity || '',
