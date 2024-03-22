@@ -134,13 +134,11 @@
                     </mat-error>
                 </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead mx-3" *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
-                    <input placeholder="{{ 'COMMON.CUSTOMERCODE' | translate }}" formControlName="customerCode"
-                        [typeahead]="customerList" typeaheadOptionField='text' appFocusOnEnter tabIndex="2"
-                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
-                    <ng-template #customItemTemplate let-model="item">
-                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
-                    </ng-template>
+                <div class="multiselect-dropdown-list mx-3" *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
+                    <ng-multiselect-dropdown  
+                      placeholder="{{ 'COMMON.CUSTOMERCODE' | translate }}" formControlName="customerCode"
+                      [settings]="dropdownSettings" [data]="customerList">
+                    </ng-multiselect-dropdown>
                 </div>
 
                 <div class="mat-mdc-form-field typeahead mx-3" *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">

@@ -10,6 +10,7 @@ import { RuntimeConfigService } from '../../../services/runtime-config.service';
 import { ApiConfigService } from '../../../services/api-config.service';
 import { CommonService } from '../../../services/common.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-reports',
@@ -32,7 +33,19 @@ export class ReportsComponent {
 
   routeParam: any;
 
-  date = new Date()
+  date = new Date();
+
+  
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
 
   constructor(
     private apiService: ApiService,
@@ -136,8 +149,19 @@ export class ReportsComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              const resp = res.response['bpList'];
-              const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
+              const resp = res.response['bpList']; 
+              let type = ''
+              switch (this.routeParam) {
+                case 'salesanalysis':
+                  type = 'Customer';
+                  break;
+                case 'materialinward':
+                  type = 'Vendor';
+                  break;
+                default:
+                  break;
+              }
+              const data = resp.length && resp.filter((t: any) => t.bptype == type);
               this.customerList = data;
             }
           }
@@ -187,8 +211,8 @@ export class ReportsComponent {
     if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
     }  else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward') {
-      const obj = this.customerList.find((c: any) => c.text == this.modelFormData.value.customerCode);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id: '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode: '-1'}`);
+      debugger
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${this.modelFormData.value.customerCode ? this.modelFormData.value.customerCode[0].id: '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode: '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }
