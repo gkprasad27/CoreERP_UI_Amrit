@@ -35,7 +35,7 @@ export class ReportsComponent {
 
   date = new Date();
 
-  
+
   dropdownSettings: IDropdownSettings = {
     singleSelection: true,
     idField: 'id',
@@ -62,10 +62,17 @@ export class ReportsComponent {
     this.model();
     this.getcompaniesList();
     this.getmaterialData();
-    this.getCustomerList();
     activatedRoute.params.subscribe(params => {
-      this.routeParam = params.id
-      this.commonService.routeParam = params.id
+      this.routeParam = params.id;
+      this.commonService.routeParam = params.id;
+      switch (this.routeParam) {
+        case 'salesanalysis':
+          this.getCustomerList();
+          break;
+        case 'materialinward':
+          this.getsuppliercodeList();
+          break;
+      }
       this.reset();
       this.getParameters(params.id);
     });
@@ -124,7 +131,7 @@ export class ReportsComponent {
         });
   }
 
-  
+
   getmaterialData() {
     const getmaterialUrl = String.Join('/', this.apiConfigService.getMaterialList);
     this.apiService.apiGetRequest(getmaterialUrl)
@@ -149,19 +156,27 @@ export class ReportsComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              const resp = res.response['bpList']; 
-              let type = ''
-              switch (this.routeParam) {
-                case 'salesanalysis':
-                  type = 'Customer';
-                  break;
-                case 'materialinward':
-                  type = 'Vendor';
-                  break;
-                default:
-                  break;
-              }
-              const data = resp.length && resp.filter((t: any) => t.bptype == type);
+              const resp = res.response['bpList'];
+              const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
+              this.customerList = data;
+            }
+          }
+        });
+  }
+
+
+  getsuppliercodeList() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getsuppliercodeList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList, obj.companyCode);
+    this.apiService.apiGetRequest(getsuppliercodeList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              const resp = res.response['bpaList'];
+              debugger
+              const data = resp.length && resp.filter((t: any) => t.bpTypeName == 'Vendor').map((d: any) => { return { id: d.bpnumber, text: d.name }});
               this.customerList = data;
             }
           }
@@ -210,9 +225,9 @@ export class ReportsComponent {
     let getUrl
     if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
-    }  else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward') {
+    } else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward') {
       debugger
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${this.modelFormData.value.customerCode ? this.modelFormData.value.customerCode[0].id: '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode: '-1'}`);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${this.modelFormData.value.customerCode ? this.modelFormData.value.customerCode[0].id : '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode : '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }

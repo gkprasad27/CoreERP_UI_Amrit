@@ -2566,7 +2566,7 @@
     "hsnsac": "HSN Code", 
     "invoiceNo": "Invoice Number",
     "invoiceDate": "Date",
-    "totalItems": "Billed Qty",
+    "billedqty": "Billed Qty",
     "taxableValue": "Taxable Value",
     "cgst_12": "CGST-6",
     "sgst_12": "SGST-6",
