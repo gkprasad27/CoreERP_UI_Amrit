@@ -111,14 +111,17 @@ export class CashbankComponent implements OnInit {
         id: {
           value: 0, type: 'autoInc', width: 10, disabled: true
         },
+        // glaccount: {
+        //   value: null, type: 'multiSelect', list: this.glAccountList, dropdownSettings: {
+        //     singleSelection: true,
+        //     idField: 'accountNumber',
+        //     textField: 'glaccountName',
+        //     enableCheckAll: false,
+        //     allowSearchFilter: true
+        //   }, width: 200
+        // },
         glaccount: {
-          value: null, type: 'multiSelect', list: this.glAccountList, dropdownSettings: {
-            singleSelection: true,
-            idField: 'id',
-            textField: 'text',
-            enableCheckAll: false,
-            allowSearchFilter: true
-          }, width: 200
+          value: null, type: 'dropdown', list: this.glAccountList, id: 'accountNumber', text: 'glaccountName', displayMul: false, width: 200
         },
         amount: {
           value: null, type: 'number', width: 100, maxLength: 15
@@ -268,12 +271,12 @@ export class CashbankComponent implements OnInit {
               this.voucherTypeList = res.response['vouchertypeList'];
             }
           }
-          this.getGLAccountsList();
+          this.getGLAccountList();
         });
   }
 
-  getGLAccountsList() {
-    const glAccUrl = String.Join('/', this.apiConfigService.getGLAccountsList);
+  getGLAccountList() {
+    const glAccUrl = String.Join('/', this.apiConfigService.getGLAccountList);
     this.apiService.apiGetRequest(glAccUrl)
       .subscribe(
         response => {

@@ -202,7 +202,7 @@ export class CommonService {
 
   // to check null or undefined
   checkNullOrUndefined(val) {
-    if (val === null || val === undefined) {
+    if (val === null || val === undefined || Number.isNaN(val)) {
       return true;
     } else {
       return false;

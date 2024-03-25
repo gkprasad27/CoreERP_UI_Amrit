@@ -50,6 +50,8 @@ export class JournalComponent implements OnInit {
   citemList: any;
   ordertypeList: any;
 
+  disableSave = true;
+
   constructor(private commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -103,7 +105,7 @@ export class JournalComponent implements OnInit {
           value: 0, type: 'autoInc', width: 10, disabled: true
         },
         glaccount: {
-          value: null, type: 'dropdown', list: this.glAccountList, id: 'id', text: 'text', displayMul: true, width: 200, primary: true
+          value: null, type: 'dropdown', list: this.glAccountList, id: 'accountNumber', text: 'glaccountName', displayMul: true, width: 200, primary: true
         },
         accountingIndicator: {
           value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100, disabled: false
@@ -253,19 +255,20 @@ export class JournalComponent implements OnInit {
               this.voucherTypeList = res.response['vouchertypeList'].filter(resp => resp.voucherClass == '18');
             }
           }
-          this.getGLAccountsList();
+          this.getGLAccountList();
         });
   }
 
-  getGLAccountsList() {
-    const glAccUrl = String.Join('/', this.apiConfigService.getGLAccountsList);
+  getGLAccountList() {
+    const glAccUrl = String.Join('/', this.apiConfigService.getGLAccountList);
     this.apiService.apiGetRequest(glAccUrl)
       .subscribe(
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.glAccountList = res.response['glList'].filter(resp => resp.taxCategory != 'Cash' || resp.taxCategory != 'Bank' || resp.taxCategory != 'Control Account');
+              this.glAccountList = res.response['glList'];
+              // this.glAccountList = res.response['glList'].filter(resp => resp.taxCategory != 'Cash' || resp.taxCategory != 'Bank' || resp.taxCategory != 'Control Account');
             }
           }
           this.getTaxRatesList();
@@ -476,6 +479,7 @@ export class JournalComponent implements OnInit {
   emitColumnChanges(data) {
     this.tableData = data.data;
     this.dataChange(data);
+    this.checkCreditDebit();
   }
 
   dataChange(row) {
@@ -508,24 +512,26 @@ export class JournalComponent implements OnInit {
 
 
   checkCreditDebit() {
+    debugger
     this.debitValue = 0;
     this.creditValue = 0;
     this.totalTaxValue = 0;
     if (!this.commonService.checkNullOrUndefined(this.tableData)) {
       if (this.tableData.length) {
         this.tableData.forEach(res => {
-          if (res.accountingIndicator == 'Debit') {
-            this.debitValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount)) ? (this.debitValue + parseInt(res.amount)) : 0;
+          if (res.accountingIndicator.value == 'Debit') {
+            this.debitValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount.value)) ? (this.debitValue + parseInt(res.amount.value)) : 0;
           }
-          if (res.accountingIndicator == 'Credit') {
-            this.creditValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount)) ? (this.creditValue + parseInt(res.amount)) : 0;
+          if (res.accountingIndicator.value == 'Credit') {
+            this.creditValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount.value)) ? (this.creditValue + parseInt(res.amount.value)) : 0;
           }
-          this.totalTaxValue = this.totalTaxValue + res.sgstamount + res.cgstamount + res.ugstamount + res.igstamount
+          // this.totalTaxValue = this.totalTaxValue + res.sgstamount.value + res.cgstamount.value + res.ugstamount.value + res.igstamount.value
+          this.totalTaxValue = this.totalTaxValue + res.sgstamount.value + res.cgstamount.value  + res.igstamount.value
         });
-        return (this.debitValue == this.creditValue) ? false : true;
+        this.disableSave = (this.debitValue == this.creditValue) ? false : true;
       }
     }
-    return true;
+    this.disableSave = true;
   }
 
 

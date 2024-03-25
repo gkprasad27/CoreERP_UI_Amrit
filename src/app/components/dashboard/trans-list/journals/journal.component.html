@@ -105,7 +105,7 @@
         </div>
 
         <div>
-            <button [hidden]="routeEdit != ''" [disabled]="checkCreditDebit()" mat-raised-button type="submit"
+            <button [hidden]="routeEdit != ''" [disabled]="disableSave" mat-raised-button type="submit"
                 class="button-color-bule mx-3 text-white" (click)="save()">
                 {{ 'COMMON.SAVE' | translate }}
             </button>
