@@ -30,6 +30,7 @@ export class DynamicTableComponent implements OnInit {
   }
 
   @Input() set dynamicTableUpdate(res) {
+    debugger
     if (!this.commonService.checkNullOrUndefined(res)) {
       this.dataSource = new MatTableDataSource();
       if (res.type == 'editValue') {

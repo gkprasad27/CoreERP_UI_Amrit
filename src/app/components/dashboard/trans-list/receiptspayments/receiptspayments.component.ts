@@ -28,7 +28,7 @@ export class ReceiptspaymentsComponent implements OnInit {
   routeEdit = '';
   bpList = [];
   tableData = [];
-  dynTableProps = this.tablePropsFunc();
+  dynTableProps: any;
   bpgLists: any;
   companyList = [];
   branchList = [];
@@ -207,9 +207,8 @@ export class ReceiptspaymentsComponent implements OnInit {
         newData[index].postingDate.value = res.postingDate;
         newData[index].totalAmount.value = res.totalAmount;
       })
+      this.sendDynTableData = { type: 'add', data: newData };
     }
-    //
-    this.sendDynTableData = { type: 'add', data: newData };
   }
 
   getreceiptpaymentDetail(val) {
@@ -221,7 +220,7 @@ export class ReceiptspaymentsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-        
+              debugger
               this.formData.setValue(res.response['paymentreceiptMasters']);
 
               const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
@@ -324,7 +323,6 @@ export class ReceiptspaymentsComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.accountFilterList = res.response['glList'];
               this.glAccountList = res.response['glList'].filter(resp => resp.taxCategory != 'Cash' || resp.taxCategory != 'Bank' || resp.taxCategory != 'Control Account');
-
             }
           }
           this.getpurchaseinvoiceList();
@@ -450,6 +448,7 @@ export class ReceiptspaymentsComponent implements OnInit {
               }
             }
           }
+          this.dynTableProps = this.tablePropsFunc();
           if (this.routeEdit != '') {
             this.getreceiptpaymentDetail(this.routeEdit);
           }
@@ -519,6 +518,7 @@ export class ReceiptspaymentsComponent implements OnInit {
       }
       else {
         data.data[data.index].discount.value = 0;
+        debugger
         this.sendDynTableData = { type: 'add', data: data.data };
         this.tableData = data.data;
       }
@@ -545,6 +545,7 @@ export class ReceiptspaymentsComponent implements OnInit {
     // }
     if (flag) {
       this.spinner.show();
+      debugger
       this.sendDynTableData = { type: 'add', data: dublicateRow };
       this.tableData = dublicateRow;
     }
@@ -564,7 +565,7 @@ export class ReceiptspaymentsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-        
+              debugger
               row.data[row.index].discount.value = res.response['discount']
               this.sendDynTableData = { type: 'add', data: row.data };
               this.tableData = row.data;

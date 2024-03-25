@@ -132,7 +132,7 @@ export class MemoinvoiceComponent implements OnInit {
           value: 0, type: 'autoInc', width: 10, disabled: true
         },
         glaccount: {
-          value: null, type: 'dropdown', list: this.glAccountList, id: 'id', text: 'text', displayMul: true, width: 200
+          value: null, type: 'dropdown', list: this.glAccountList, id: 'accountNumber', text: 'glaccountName', displayMul: true, width: 200
         },
         accountingIndicator: {
           value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100
@@ -223,15 +223,14 @@ export class MemoinvoiceComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.formData.setValue(res.response['imMasters']);
-
+              this.formData.patchValue(res.response['imMasters']);
+              this.onbpChange();
               const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
               this.formData.patchValue({
                 partyAccount: bObj.text
               })
-
+              res.response['ImDetail'].forEach((d: any) => d.delete = true);
               this.sendDynTableData = { type: 'edit', data: res.response['ImDetail'] };
-              this.onbpChange();
               this.formData.disable();
             }
           }
@@ -279,20 +278,22 @@ export class MemoinvoiceComponent implements OnInit {
               this.voucherTypeList = res.response['vouchertypeList'];
             }
           }
-          this.getGLAccountsList();
+          this.getGLAccountList();
         });
   }
 
-  getGLAccountsList() {
-    const glAccUrl = String.Join('/', this.apiConfigService.getGLAccountsList);
+  getGLAccountList() {
+    const glAccUrl = String.Join('/', this.apiConfigService.getGLAccountList);
     this.apiService.apiGetRequest(glAccUrl)
       .subscribe(
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.accountList = res.response['glList'].filter(resp => resp.taxCategory == 'Cash' || resp.taxCategory == 'Bank');
-              this.glAccountList = res.response['glList'].filter(resp => resp.taxCategory != 'Cash' || resp.taxCategory != 'Bank' || resp.taxCategory != 'Control Account');
+              this.glAccountList = res.response['glList'];
+              this.accountList = res.response['glList'];
+              // this.accountList = res.response['glList'].filter(resp => resp.taxCategory == 'Cash' || resp.taxCategory == 'Bank');
+              // this.glAccountList = res.response['glList'].filter(resp => resp.taxCategory != 'Cash' || resp.taxCategory != 'Bank' || resp.taxCategory != 'Control Account');
             }
           }
           this.getTaxRatesList();
