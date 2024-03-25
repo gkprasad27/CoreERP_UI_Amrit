@@ -190,7 +190,6 @@ export class JournalComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
               this.formData.patchValue(res.response['jvMasters']);
               res.response['JvDetail'].forEach((d: any) => d.delete = true);
               this.sendDynTableData = { type: 'edit', data: res.response['JvDetail'] };
@@ -422,7 +421,6 @@ export class JournalComponent implements OnInit {
               this.ordertypeList = res.response['ordertypeList'];
             }
           }
-          debugger
           this.dynTableProps = this.tablePropsFunc();
           if (this.routeEdit != '') {
             this.getJVDetail(this.routeEdit);
@@ -516,7 +514,6 @@ export class JournalComponent implements OnInit {
 
 
   checkCreditDebit() {
-    debugger
     this.debitValue = 0;
     this.creditValue = 0;
     this.totalTaxValue = 0;

@@ -364,7 +364,6 @@ export class SalesInvoiceComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
               this.getInvoiceDeatilData = res.response;
               this.formData.patchValue(res.response['InvoiceMasterList']);
               this.formData.patchValue({
@@ -487,7 +486,6 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   invoicePrint() {
-    debugger
     const totalObj = {
       qty: 0,
       grossAmount: 0,

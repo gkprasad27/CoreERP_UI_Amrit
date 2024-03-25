@@ -175,7 +175,6 @@ export class ReportsComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const resp = res.response['bpaList'];
-              debugger
               const data = resp.length && resp.filter((t: any) => t.bpTypeName == 'Vendor').map((d: any) => { return { id: d.bpnumber, text: d.name }});
               this.customerList = data;
             }
@@ -226,7 +225,6 @@ export class ReportsComponent {
     if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
     } else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward') {
-      debugger
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${this.modelFormData.value.customerCode ? this.modelFormData.value.customerCode[0].id : '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode : '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);

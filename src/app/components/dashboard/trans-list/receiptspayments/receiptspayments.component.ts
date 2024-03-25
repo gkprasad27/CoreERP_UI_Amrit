@@ -220,7 +220,7 @@ export class ReceiptspaymentsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+              
               this.formData.setValue(res.response['paymentreceiptMasters']);
 
               const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
@@ -518,7 +518,7 @@ export class ReceiptspaymentsComponent implements OnInit {
       }
       else {
         data.data[data.index].discount.value = 0;
-        debugger
+        
         this.sendDynTableData = { type: 'add', data: data.data };
         this.tableData = data.data;
       }
@@ -545,7 +545,7 @@ export class ReceiptspaymentsComponent implements OnInit {
     // }
     if (flag) {
       this.spinner.show();
-      debugger
+      
       this.sendDynTableData = { type: 'add', data: dublicateRow };
       this.tableData = dublicateRow;
     }
@@ -565,7 +565,7 @@ export class ReceiptspaymentsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+              
               row.data[row.index].discount.value = res.response['discount']
               this.sendDynTableData = { type: 'add', data: row.data };
               this.tableData = row.data;
