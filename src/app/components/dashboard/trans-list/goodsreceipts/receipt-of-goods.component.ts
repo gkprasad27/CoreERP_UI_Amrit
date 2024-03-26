@@ -82,6 +82,18 @@ export class ReceiptOfGoodsComponent implements OnInit {
     // itemsShowLimit: 3,
     allowSearchFilter: true
   };
+
+  dropdownSettings2: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'materialCode',
+    textField: 'materialName',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
   taxCodeList = [];
 
   constructor(
@@ -222,7 +234,8 @@ export class ReceiptOfGoodsComponent implements OnInit {
     data = (data && data.length) ? data : [];
     let qtyT = this.formData1.value.receivedQty;
     data.forEach((t: any) => {
-      if (t.materialCode == this.formData1.value.materialCode) {
+      debugger
+      if (t.materialCode == this.formData1.value.materialCode[0]['materialCode']) {
         qtyT = qtyT + (this.formData1.value.index == t.index ? ((+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty))  :  ((+t.receivedQty) + (+t.rejectQty))) 
       }
     })
@@ -234,13 +247,19 @@ export class ReceiptOfGoodsComponent implements OnInit {
     this.dataChange();
     this.tableData = null;
     this.tableComponent.defaultValues();
+    let fObj = this.formData1.value;
+    fObj.materialCode = fObj.materialCode[0].materialCode
     if (this.formData1.value.index == 0) {
-      this.formData1.patchValue({
-        index: data ? (data.length + 1) : 1
-      });
-      data = [this.formData1.value, ...data];
+      // this.formData1.patchValue({
+        fObj.index = data ? (data.length + 1) : 1
+      // });
+      data = [fObj, ...data];
     } else {
-      data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
+      if (this.formData1.value.index == 0) {
+        data.push(fObj);
+      } else {
+        data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
+      }
     }
     setTimeout(() => {
       this.tableData = data;
@@ -250,13 +269,19 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   editOrDeleteEvent(value) {
+    debugger
     if (value.action === 'Delete') {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       this.calculate();
       this.resetForm();
     } else {
-      this.formData1.patchValue(value.item);
+      debugger
+      let item = { ...value.item };
+      if (typeof item.materialCode == 'string') {
+        item.materialCode = [{ materialCode: item.materialCode, materialName: item.materialName }]
+      }
+      this.formData1.patchValue(item);
     }
   }
 
@@ -389,10 +414,11 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   materialCodeChange() {
-    const obj = this.materialCodeList.find((p: any) => p.materialCode == this.formData1.value.materialCode);
+    debugger
+    const obj = this.materialCodeList.find((p: any) => p.materialCode == this.formData1.value.materialCode[0]['materialCode']);
     let pendingQty = 0;
     this.tableData && this.tableData.forEach((t: any) => {
-      if (t.materialCode == this.formData1.value.materialCode) {
+      if (t.materialCode == obj.materialCode) {
         pendingQty = pendingQty + t.receivedQty
       }
     })

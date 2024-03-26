@@ -40,6 +40,17 @@ export class GoodsissueComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
 
   formData: FormGroup;
   formData1: FormGroup;
@@ -99,10 +110,12 @@ export class GoodsissueComponent implements OnInit {
       // plant: [null, [Validators.required]],
       goodsIssueId: ['0'],
       storesPerson: [null, Validators.required],
+      storesPersonName: [null],
       saleOrder: [true, Validators.required],
       department: [null, Validators.required],
       saleOrderNumber: [null, Validators.required],
       productionPerson: [null, Validators.required],
+      productionPersonName: [null],
       movementType: [null],
       profitCenter: [''],
       profitcenterName: [''],
@@ -264,6 +277,7 @@ export class GoodsissueComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
               this.formData.patchValue(res.response['goodsissueasters']);
               // this.formData.patchValue({
               //   saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }] : ''
@@ -643,6 +657,14 @@ export class GoodsissueComponent implements OnInit {
     const formData = this.formData.value;
     if (typeof formData.saleOrderNumber != 'string') {
       formData.saleOrderNumber = this.formData.value.saleOrderNumber[0].saleOrderNo;
+    }
+    if (typeof formData.storesPerson != 'string') {
+      formData.storesPerson = this.formData.value.storesPerson[0].id;
+      formData.storesPersonName = this.formData.value.storesPerson[0].text;
+    }
+    if (typeof formData.productionPerson != 'string') {
+      formData.productionPerson = this.formData.value.productionPerson[0].id;
+      formData.productionPersonName = this.formData.value.productionPerson[0].text;
     }
     const arr = this.tableData.filter((d: any) => d.changed);
     const addJournal = String.Join('/', this.apiConfigService.addGoodsissue);
