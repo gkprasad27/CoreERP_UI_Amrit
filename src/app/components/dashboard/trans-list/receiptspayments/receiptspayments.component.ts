@@ -192,13 +192,14 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   puchaseinvoiceselect() {
+    debugger
     let data = [];
     let newData = [];
 
     const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
 
     if (!this.commonService.checkNullOrUndefined(this.formData.get('partyAccount').value)) {
-      data = this.functionaldeptList.filter(resp => resp.partyAccount == bObj.text);
+      data = this.functionaldeptList.filter(resp => resp.partyAccount == bObj.id);
     }
     if (data.length) {
       console.log(data, this.tablePropsFunc());
