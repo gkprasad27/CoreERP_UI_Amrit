@@ -125,6 +125,7 @@ export class SalesorderComponent {
       deliveryDate: [''],
       stockQty: [0],
       totalTax: [0],
+      hsnsac: [''],
       materialName: [''],
       highlight: false,
       action: 'editDelete',
@@ -343,8 +344,10 @@ export class SalesorderComponent {
               this.formData.patchValue(res.response['SaleOrderMasters']);
               res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
+                debugger
                 s.materialName = obj.text
                 s.stockQty = obj.availQTY
+                s.hsnsac = obj.hsnsac
                 s.action = 'editDelete'; s.index = index + 1;
               })
               this.tableData = res.response['SaleOrderDetails'];
@@ -371,12 +374,13 @@ export class SalesorderComponent {
   }
 
   materialCodeChange() {
+    debugger
     const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
     this.formData1.patchValue({
       netWeight: obj.netWeight,
       stockQty: obj.availQTY,
       materialName: obj.text,
-
+      hsnsac: obj.hsnsac
     })
     if (!obj.netWeight) {
       this.alertService.openSnackBar('Net Weight has not provided for selected material..', Static.Close, SnackBar.error);

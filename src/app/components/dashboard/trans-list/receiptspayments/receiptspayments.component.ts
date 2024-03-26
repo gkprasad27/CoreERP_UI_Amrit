@@ -68,9 +68,9 @@ export class ReceiptspaymentsComponent implements OnInit {
     if (!this.commonService.checkNullOrUndefined(this.formData.get('bpcategory').value)) {
       let data = this.bpTypeList.find(res => res.code == this.formData.get('bpcategory').value);
       this.bpgLists = this.bpList.filter(res => res.bptype == data.code);
-      this.formData.patchValue({
-        partyAccount: this.bpgLists.length ? this.bpgLists[0].text : null
-      })
+      // this.formData.patchValue({
+      //   partyAccount: this.bpgLists.length ? this.bpgLists[0].text : null
+      // })
       this.puchaseinvoiceselect();
     }
   }
@@ -87,12 +87,16 @@ export class ReceiptspaymentsComponent implements OnInit {
       branch: [null, [Validators.required]],
       voucherClass: [null],
       voucherType: [null, [Validators.required]],
-      voucherDate: [new Date()],
-      postingDate: [new Date()],
+      // voucherDate: [new Date()],
+      // postingDate: [new Date()],
+      voucherDate: [],
+      postingDate: [],
       period: [null],
       voucherNumber: [null, [Validators.required]],
-      transactionType: ['Cash', [Validators.required]],
-      natureofTransaction: ['Receipts', [Validators.required]],
+      // transactionType: ['Cash', [Validators.required]],
+      // natureofTransaction: ['Receipts', [Validators.required]],
+      transactionType: ['', [Validators.required]],
+      natureofTransaction: ['', [Validators.required]],
       account: [null],
       accountingIndicator: [null],
       referenceNo: [null],
@@ -228,10 +232,10 @@ export class ReceiptspaymentsComponent implements OnInit {
 
               this.sendDynTableData = { type: 'edit', data: res.response['paymentreceiptDetail'] };
               this.formData.disable();
-              if (this.routeEdit == '') {
-                this.accountSelect();
-                this.onbpChange();
-              }
+              // if (this.routeEdit == '') {
+              //   this.accountSelect();
+              //   this.onbpChange();
+              // }
             }
           }
         });
@@ -246,11 +250,11 @@ export class ReceiptspaymentsComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.companyList = res.response['companiesList'];
-              if (this.routeEdit == '') {
-                this.formData.patchValue({
-                  company: this.companyList.length ? this.companyList[0].id : null
-                })
-              }
+              // if (this.routeEdit == '') {
+              //   this.formData.patchValue({
+              //     company: this.companyList.length ? this.companyList[0].id : null
+              //   })
+              // }
             }
           }
           this.getTransVoucherClassList();
@@ -301,11 +305,11 @@ export class ReceiptspaymentsComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.voucherTypeList = res.response['vouchertypeList'];
-              if (this.routeEdit == '') {
-                this.formData.patchValue({
-                  voucherType: this.voucherTypeList.length ? this.voucherTypeList[0].voucherTypeId : null
-                })
-              }
+              // if (this.routeEdit == '') {
+              //   this.formData.patchValue({
+              //     voucherType: this.voucherTypeList.length ? this.voucherTypeList[0].voucherTypeId : null
+              //   })
+              // }
             }
           }
           this.getGLAccountsList();
@@ -438,14 +442,14 @@ export class ReceiptspaymentsComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.bpTypeList = res.response['ptypeList'];
-              if (this.routeEdit == '') {
-                this.formData.patchValue({
-                  bpcategory: this.bpTypeList.length ? this.bpTypeList[0].code : null
-                })
-                this.onbpChange();
-                this.accountSelect();
-                this.voucherTypeSelect();
-              }
+              // if (this.routeEdit == '') {
+              //   this.formData.patchValue({
+              //     bpcategory: this.bpTypeList.length ? this.bpTypeList[0].code : null
+              //   })
+              //   this.onbpChange();
+              //   this.accountSelect();
+              //   this.voucherTypeSelect();
+              // }
             }
           }
           this.dynTableProps = this.tablePropsFunc();

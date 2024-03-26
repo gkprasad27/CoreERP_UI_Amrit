@@ -174,6 +174,7 @@ export class PurchaseOrderComponent implements OnInit {
       id: 0,
       changed: true,
       netWeight: 0,
+      hsnsac: [''],
       soQty: 0,
       poQty: 0,
       highlight: false,
@@ -317,6 +318,7 @@ export class PurchaseOrderComponent implements OnInit {
                 s.changed = false;
                 s.igst = s.igst ? s.igst : 0;
                 s.taxCode = s.taxCode ? s.taxCode : '';
+                s.hsnsac = s.hsnsac ? s.hsnsac : '';
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
                 s.amount = s.amount ? s.amount : 0;
                 s.total = s.total ? s.total : 0;

@@ -82,6 +82,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
     // itemsShowLimit: 3,
     allowSearchFilter: true
   };
+  taxCodeList = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -146,10 +147,16 @@ export class ReceiptOfGoodsComponent implements OnInit {
       addDate: [null],
       editWho: [null],
       editDate: [null],
-      totalAmount: [''],
       lotNo: ['', Validators.required],
       documentURL: [''],
       invoiceURL: [''],
+
+      igst: [0],
+      cgst: [0],
+      sgst: [0],
+      amount: [0],
+      totalTax: [0],
+      totalAmount: [''],
 
     });
 
@@ -165,8 +172,16 @@ export class ReceiptOfGoodsComponent implements OnInit {
       heatNumber: [''],
       pendingQty: [''],
       qty: [''],
+      hsnsac: [''],
       highlight: false,
       type: [''],
+
+      rate: 0,
+      cgst: 0,
+      sgst: 0,
+      igst: 0,
+      taxCode: 0,
+
       action: 'editDelete',
       index: 0
     });
@@ -216,6 +231,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
       this.alertService.openSnackBar("You can't recevie more Quantity", Static.Close, SnackBar.error);
       return;
     }
+    this.dataChange();
     this.tableData = null;
     this.tableComponent.defaultValues();
     if (this.formData1.value.index == 0) {
@@ -228,6 +244,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
     }
     setTimeout(() => {
       this.tableData = data;
+      this.calculate();
     });
     this.resetForm();
   }
@@ -236,6 +253,8 @@ export class ReceiptOfGoodsComponent implements OnInit {
     if (value.action === 'Delete') {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
+      this.calculate();
+      this.resetForm();
     } else {
       this.formData1.patchValue(value.item);
     }
@@ -321,12 +340,14 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   ponoselect() {
+    debugger
     let data = [];
     this.perChaseOrderList = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('purchaseOrderNo').value) && this.formData.value.purchaseOrderNo[0].id) {
       data = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.value.purchaseOrderNo[0].id);
     }
     if (data.length) {
+      debugger
       data.forEach((d: any, index: number) => {
         const obj = {
           materialCode: d.materialCode ? d.materialCode : '',
@@ -338,8 +359,15 @@ export class ReceiptOfGoodsComponent implements OnInit {
           receivedQty: d.receivedQty ? d.receivedQty : '',
           description: d.description ? d.description : '',
           heatNumber: d.heatNumber ? d.heatNumber : '',
+          hsnsac: d.hsnsac ? d.hsnsac : '',
           action: '',
-          index: index + 1
+          index: index + 1,
+
+          cgst: d.cgst ? d.cgst : 0,
+          sgst: d.sgst ? d.sgst : 0,
+          igst: d.igst ? d.igst : 0,
+          taxCode: d.taxCode ? d.taxCode : 0,
+          rate: d.rate ? d.rate : 0,
         }
         this.perChaseOrderList.push(obj)
       })
@@ -372,7 +400,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
       qty: obj ? obj.qty : '',
       netWeight: obj ? obj.netWeight : '',
       materialName: obj ? obj.materialName : '',
-      pendingQty: obj.qty - pendingQty
+      pendingQty: obj.qty - pendingQty,
+      hsnsac: obj.hsnsac,
+      taxCode: obj.taxCode,
+      rate: obj.rate,
     })
   }
 
@@ -493,7 +524,24 @@ export class ReceiptOfGoodsComponent implements OnInit {
               this.profitCenterList = res.response['profitCenterList'];
             }
           }
-          this.getEmployeesList()
+          this.getTaxRatesList()
+        });
+  }
+
+  getTaxRatesList() {
+    const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);
+    this.apiService.apiGetRequest(taxCodeUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              const resp = res.response['TaxratesList'];
+              const data = resp.length && resp.filter((t: any) => t.taxType == 'Output');
+              this.taxCodeList = data;
+              this.getEmployeesList()
+            }
+          }
         });
   }
 
@@ -503,7 +551,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
       .subscribe(
         response => {
           this.spinner.hide();
-
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
@@ -586,7 +633,17 @@ export class ReceiptOfGoodsComponent implements OnInit {
               // if (this.formData.value.invoiceURL) {
               //   this.downLoad(this.formData.value.invoiceURL, 'invoice');
               // }
-              this.perChaseOrderList = []
+              this.perChaseOrderList = [];
+
+              if (res.response['grDetail'] && res.response['grDetail'].length) {
+                debugger
+                let str = res.response['grDetail'][0].taxCode;
+                const obj = this.taxCodeList.find((t: any) => t.taxRateCode == str);
+                this.formData1.patchValue({
+                  taxCode: obj ? (obj.igst ? obj.igst : obj.sgst) : ''
+                })
+              }
+
               res.response['grDetail'].forEach((d: any, index: number) => {
                 const obj = {
                   materialCode: d.materialCode ? d.materialCode : '',
@@ -603,6 +660,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
                   supplierRefno: d.supplierRefno ? d.supplierRefno : '',
                   receivedDate: d.receivedDate ? d.receivedDate : '',
                   receivedQty: d.receivedQty ? d.receivedQty : '',
+                  hsnsac: d.hsnsac ? d.hsnsac : '',
                   description: d.description ? d.description : '',
                   heatNumber: d.heatNumber ? d.heatNumber : '',
                   type: 'edit',
@@ -612,6 +670,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
                 this.perChaseOrderList.push(obj)
               })
               this.tableData = this.perChaseOrderList;
+              this.calculate();
               // const arr = this.podetailsList.filter(resp => !this.perChaseOrderList.some((p: any) => p.materialCode == resp.materialCode));
               // const unique = [...new Set(arr.map(item => item.materialCode))];
               // this.materialCodeList = this.podetailsList;
@@ -636,6 +695,45 @@ export class ReceiptOfGoodsComponent implements OnInit {
           }
         });
   }
+
+  calculate() {
+    this.formData.patchValue({
+      igst: 0,
+      cgst: 0,
+      sgst: 0,
+      amount: 0,
+      totalTax: 0,
+      totalAmount: 0,
+    })
+    this.tableData && this.tableData.forEach((t: any) => {
+      this.formData.patchValue({
+        igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
+        cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
+        sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
+        amount: ((+this.formData.value.amount) + (t.qty * t.rate * t.netWeight)).toFixed(2),
+        totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
+      })
+    })
+    this.formData.patchValue({
+      totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
+    })
+  }
+
+  dataChange() {
+    const formObj = this.formData1.value;
+    const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == formObj.taxCode);
+    const igst = obj.igst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.igst) / 100 : 0;
+    const cgst = obj.cgst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.cgst) / 100 : 0;
+    const sgst = obj.sgst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.sgst) / 100 : 0;
+    this.formData1.patchValue({
+      amount: (+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)),
+      total: (+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) + (igst + sgst + cgst),
+      igst: igst,
+      cgst: cgst,
+      sgst: sgst,
+    })
+  }
+
   getLotNumData(row) {
 
     const getlotnos = String.Join('/', this.apiConfigService.gettinglotNumbers, row.data[row.index].materialCode.value);

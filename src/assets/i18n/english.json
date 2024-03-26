@@ -24,7 +24,14 @@
     "DESCRIPTION": "Description",
     "CUSTOMERCODE": "Customer Code",
     "MATERIALCODE": "Material Code",
-    "COMPANYCODE": "Company Code"
+    "COMPANYCODE": "Company Code",
+    "sgst": "SGST",
+    "cgst": "CGST",
+    "igst": "IGST",
+    "amount": "Amount",
+    "taxCode": "Tax Code",
+    "totalTax": "Total Tax",
+    "totalAmount": "Total Amount"
   },
   "LOGIN": {
     "USERNAME": "Username",

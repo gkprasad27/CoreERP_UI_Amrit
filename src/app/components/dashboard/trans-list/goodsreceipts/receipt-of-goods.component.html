@@ -129,11 +129,10 @@
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
-                
+
                 <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
                     <ng-multiselect-dropdown placeholder="{{ 'goodsreceipts.receivedBy' | translate }}"
-                        formControlName="receivedBy"  [settings]="dropdownSettings1"
-                        [data]="employeesList">
+                        formControlName="receivedBy" [settings]="dropdownSettings1" [data]="employeesList">
                     </ng-multiselect-dropdown>
                 </div>
                 <mat-form-field *ngIf="routeEdit">
@@ -302,20 +301,46 @@
 
     <mat-card-content class="d-flex justify-content-end py-1">
 
-        <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
-            {{ 'COMMON.SAVE' | translate }}
-        </button>
-        <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
-            {{ 'COMMON.BACK' | translate }}
-        </button>
-        <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
-            (click)="reset();">
-            {{ 'COMMON.RESET' | translate }}
-        </button>
-        <!-- <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
+        <div class="d-flex">
+            <div class="px-1"> <span class="px-1"> <b>{{ 'COMMON.igst' | translate }} </b></span> :
+                <b class="text-danger">{{ formData.value.igst }} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'COMMON.cgst' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.cgst}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'COMMON.sgst' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.sgst}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'COMMON.amount' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.amount}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'COMMON.totalTax' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.totalTax}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'COMMON.totalAmount' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.totalAmount}} </b>
+            </div>
+        </div>
+
+        <div>
+
+
+            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
+                {{ 'COMMON.SAVE' | translate }}
+            </button>
+            <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+                {{ 'COMMON.BACK' | translate }}
+            </button>
+            <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
+                (click)="reset();">
+                {{ 'COMMON.RESET' | translate }}
+            </button>
+            <!-- <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
             (click)="return();">
             {{ 'COMMON.RETURN' | translate }}
         </button> -->
+
+        </div>
 
     </mat-card-content>
 
