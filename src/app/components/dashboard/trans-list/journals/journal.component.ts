@@ -143,24 +143,24 @@ export class JournalComponent implements OnInit {
         // segment: {
         //   value: null, type: 'dropdown', list: this.segmentList, id: 'id', text: 'name', displayMul: false, width: 100
         // },
-        bttypes: {
-          value: null, type: 'dropdown', list: this.btList, id: 'code', text: 'description', displayMul: false, width: 150
-        },
+        // bttypes: {
+        //   value: null, type: 'dropdown', list: this.btList, id: 'code', text: 'description', displayMul: false, width: 150
+        // },
         // costCenter: {
         //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
         // },
-        // narration: {
-        //   value: null, type: 'text', width: 100, maxLength: 50
-        // },
+        narration: {
+          value: null, type: 'text', width: 100, maxLength: 50
+        },
         // workBreakStructureElement: {
         //   value: null, type: 'dropdown', list: this.wbsList, id: 'id', text: 'text', displayMul: false, width: 100
         // },
         // netWork: {
         //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
         // },
-        orderNo: {
-          value: null, type: 'dropdown', list: this.ordertypeList, id: 'orderType', text: 'description', displayMul: false, width: 100
-        },
+        // orderNo: {
+        //   value: null, type: 'dropdown', list: this.ordertypeList, id: 'orderType', text: 'description', displayMul: false, width: 100
+        // },
         // fundCenter: {
         //   value: null, type: 'dropdown', list: this.fcList, id: 'code', text: 'description', displayMul: false, width: 100
         // },
