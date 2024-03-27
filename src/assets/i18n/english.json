@@ -2015,6 +2015,7 @@
     "profitCenter": "Profit Center",
     "quotationNumber": "Quotation Number",
     "quotationDate": "Quotation Date",
+    "saleorderNo":"Saleorder No",
     "status": "Status",
     "supplier": "Customer Name",
     "supplierName": "Customer Name",
