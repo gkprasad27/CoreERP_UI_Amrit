@@ -636,7 +636,7 @@ export class InspectioncheckComponent implements OnInit {
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Material Req created Successfully..', Static.Close, SnackBar.success);
-            this.router.navigate(['/dashboard/transaction/inspectioncheck'])
+            // this.router.navigate(['/dashboard/transaction/inspectioncheck'])
           }
           // this.reset();
           this.spinner.hide();

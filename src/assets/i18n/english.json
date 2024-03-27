@@ -981,7 +981,6 @@
     "id": "ID",
     "title": "Invoice / Memo",
     "company": "Company",
-    "branch": "Branch",
     "voucherNumber": "Voucher Number",
     "voucherClass": "Voucher Class",
     "voucherType": "Voucher Type",

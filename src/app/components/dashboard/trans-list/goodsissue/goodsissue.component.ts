@@ -461,7 +461,7 @@ export class GoodsissueComponent implements OnInit {
   }
   getreqList() {
     let obj = JSON.parse(localStorage.getItem("user"));
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderData, obj.companyCode);
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getProdSaleOrderList, obj.companyCode);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
         response => {

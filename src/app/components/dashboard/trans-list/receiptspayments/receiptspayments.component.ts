@@ -130,27 +130,27 @@ export class ReceiptspaymentsComponent implements OnInit {
         },
 
         partyInvoiceNo: {
-          value: null, type: 'number', width: 150, disabled: true
+          value: null, type: 'none', width: 150, disabled: true
         },
         partyInvoiceDate: {
           // value: null, type: 'dropdown', list: this.date, id: 'date', text: 'date', displayMul: true, width: 100
-          value: new Date(), type: 'datepicker', width: 100, disabled: true
+          value: new Date(), type: 'noneDate', width: 100, disabled: true
         },
         dueDate: {
-          value: null, type: 'datepicker', width: 100, disabled: true
+          value: null, type: 'noneDate', width: 100, disabled: true
         },
         totalAmount: {
           //value: null, type: 'dropdown', list: this.amount, id: 'amount', text: 'amount', displayMul: true, width: 100
-          value: 0, type: 'number', width: 75, disabled: true
+          value: 0, type: 'none', width: 75, disabled: true
         },
         memoAmount: {
-          value: 0, type: 'number', width: 75, disabled: true
+          value: 0, type: 'none', width: 75, disabled: true
         },
         clearedAmount: {
-          value: 0, type: 'number', width: 75, disabled: true
+          value: 0, type: 'none', width: 75, disabled: true
         },
         balanceDue: {
-          value: 0, type: 'number', width: 75, disabled: true
+          value: 0, type: 'none', width: 75, disabled: true
         },
         notDue: {
           value: 0, type: 'number', width: 75, disabled: true, fieldEnable: true
@@ -165,13 +165,13 @@ export class ReceiptspaymentsComponent implements OnInit {
           value: 0, type: 'number', width: 75, disabled: true, fieldEnable: true
         },
         partyAccount: {
-          value: 0, type: 'text', width: 75, disabled: true
+          value: 0, type: 'none', width: 75, disabled: true
         },
         paymentterms: {
           value: 0, type: 'text', width: 75, disabled: true
         },
         postingDate: {
-          value: 0, type: 'text', width: 75, disabled: true
+          value: 0, type: 'noneDate', width: 100, disabled: true
         },
         discountGl: {
           value: null, type: 'dropdown', list: this.glAccountList, id: 'id', text: 'text', displayMul: true, width: 100, disabled: true, fieldEnable: true
@@ -196,7 +196,7 @@ export class ReceiptspaymentsComponent implements OnInit {
     let data = [];
     let newData = [];
 
-    const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
+    const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
 
     if (!this.commonService.checkNullOrUndefined(this.formData.get('partyAccount').value)) {
       data = this.functionaldeptList.filter(resp => resp.partyAccount == bObj.id);
@@ -211,6 +211,8 @@ export class ReceiptspaymentsComponent implements OnInit {
         newData[index].paymentterms.value = res.paymentterms;
         newData[index].postingDate.value = res.postingDate;
         newData[index].totalAmount.value = res.totalAmount;
+        newData[index].balanceDue.value = res.balanceDue;
+        newData[index].clearedAmount.value = res.clearedAmount;
       })
       this.sendDynTableData = { type: 'add', data: newData };
     }
@@ -225,18 +227,14 @@ export class ReceiptspaymentsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              
-              this.formData.setValue(res.response['paymentreceiptMasters']);
-
+              this.formData.patchValue(res.response['paymentreceiptMasters']);
+              this.accountSelect();
+              this.onbpChange();
               const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
               this.formData.patchValue({ partyAccount: bObj.text });
-
               this.sendDynTableData = { type: 'edit', data: res.response['paymentreceiptDetail'] };
               this.formData.disable();
-              // if (this.routeEdit == '') {
-              //   this.accountSelect();
-              //   this.onbpChange();
-              // }
+
             }
           }
         });
@@ -523,7 +521,6 @@ export class ReceiptspaymentsComponent implements OnInit {
       }
       else {
         data.data[data.index].discount.value = 0;
-        
         this.sendDynTableData = { type: 'add', data: data.data };
         this.tableData = data.data;
       }
@@ -550,7 +547,7 @@ export class ReceiptspaymentsComponent implements OnInit {
     // }
     if (flag) {
       this.spinner.show();
-      
+
       this.sendDynTableData = { type: 'add', data: dublicateRow };
       this.tableData = dublicateRow;
     }
@@ -570,7 +567,7 @@ export class ReceiptspaymentsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              
+
               row.data[row.index].discount.value = res.response['discount']
               this.sendDynTableData = { type: 'add', data: row.data };
               this.tableData = row.data;

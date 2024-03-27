@@ -98,6 +98,10 @@
           <span> {{ element[column].value }} </span>
         </div>
 
+        <div *ngSwitchCase="'noneDate'">
+          <span> {{ element[column].value ? (element[column].value | date) : '' }} </span>
+        </div>
+
         <mat-icon id="{{column}}{{dataSource.filteredData.indexOf(element)}}" *ngSwitchCase="'delete'"
           [hidden]="dataSource.filteredData.indexOf(element) == (dataSource.data.length - 1)"
           class="cursor--pointer mat--icon"
