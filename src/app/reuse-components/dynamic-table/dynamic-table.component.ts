@@ -136,6 +136,7 @@ export class DynamicTableComponent implements OnInit {
   }
 
   formControlValid(col, val, data, indx) {
+    debugger
     if (col == 'checkAll') {
       this.enableControls(val, data);
     }

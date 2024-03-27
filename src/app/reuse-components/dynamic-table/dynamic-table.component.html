@@ -1,11 +1,10 @@
-
 <div class="table">
   <table class="w-100" mat-table [dataSource]="dataSource" matSort #mytableb cellspacing="0" cellpadding="0">
     <ng-container *ngFor="let column of getDisplayedColumns()" [matColumnDef]="column">
 
       <th mat-header-cell *matHeaderCellDef>
         <strong class="d-flex justify-content-center">
-          {{ ( routeParam + '.' +  column) | translate }} </strong>
+          {{ ( routeParam + '.' + column) | translate }} </strong>
       </th>
 
       <td mat-cell *matCellDef="let element;" [ngSwitch]="element[column].type">
@@ -28,15 +27,18 @@
           <textarea matInput hidden></textarea>
         </mat-form-field>
 
-        <div class="form-element text-center" *ngSwitchCase="'text'" [ngStyle]="{'width': element[column].width + 'px'}">
-          <input *ngIf="element[column].maxLength" [ngClass]="setClass(element)" id="{{column}}{{dataSource.filteredData.indexOf(element)}}" 
-            [disabled]="element[column].disabled" [value]="element[column].value" [(ngModel)]="element[column].value"
-            [maxLength]="element[column].maxLength"
+        <div class="form-element text-center" *ngSwitchCase="'text'"
+          [ngStyle]="{'width': element[column].width + 'px'}">
+          <input *ngIf="element[column].maxLength" [ngClass]="setClass(element)"
+            id="{{column}}{{dataSource.filteredData.indexOf(element)}}" [disabled]="element[column].disabled"
+            [value]="element[column].value" [(ngModel)]="element[column].value" [maxLength]="element[column].maxLength"
             (input)="formControlValid(column, element, $event.target.value, dataSource.filteredData.indexOf(element));"
             (keydown.enter)="setFocus(column, dataSource.filteredData.indexOf(element), $event.target.value);" />
 
-          <input *ngIf="!element[column].maxLength" [ngClass]="setClass(element)" id="{{column}}{{dataSource.filteredData.indexOf(element)}}" [ngStyle]="{ 'backgroundClass': setBackgroundClass(element) }" 
-            [disabled]="element[column].disabled" [value]="element[column].value" [(ngModel)]="element[column].value"
+          <input *ngIf="!element[column].maxLength" [ngClass]="setClass(element)"
+            id="{{column}}{{dataSource.filteredData.indexOf(element)}}"
+            [ngStyle]="{ 'backgroundClass': setBackgroundClass(element) }" [disabled]="element[column].disabled"
+            [value]="element[column].value" [(ngModel)]="element[column].value"
             (input)="formControlValid(column, element, $event.target.value, dataSource.filteredData.indexOf(element));"
             (keydown.enter)="setFocus(column, dataSource.filteredData.indexOf(element), $event.target.value);" />
         </div>
@@ -76,21 +78,27 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field class="form-element" *ngSwitchCase="'autocomplete'"
+
+        <div class="form-element mat-mdc-form-field typeahead" *ngSwitchCase="'autocomplete'"
           [ngStyle]="{'width': element[column].width + 'px'}">
-          <app-autocomplete id="{{column}}{{dataSource.filteredData.indexOf(element)}}" [configData]="element[column]"
-            [isDisabled]="element[column].disabled"
-            (emitTypeAheadValue)="setTypeAheadValue($event, column, dataSource.filteredData.indexOf(element)); setFocus(column, dataSource.filteredData.indexOf(element));">
-          </app-autocomplete>
-        </mat-form-field>
+          <input id="{{column}}{{dataSource.filteredData.indexOf(element)}}" [disabled]="element[column].disabled"
+            (typeaheadOnSelect)="formControlValid(column, element, element[column].value, dataSource.filteredData.indexOf(element)); setFocus(column, dataSource.filteredData.indexOf(element), element[column].value);"
+             [typeahead]="element[column].list" [value]="element[column].value" [(ngModel)]="element[column].value"
+            [typeaheadOptionField]='element[column].id' class="form-control typeahead"
+            [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
+            [typeaheadWaitMs]="200">
+          <ng-template #customItemTemplate let-model="item">
+            <span *ngIf="element[column].multiple;else other_content">{{ model[element[column].displayId] }} -- {{ model[element[column].displayText] }}</span>
+              <ng-template #other_content> {{ model[element[column].displayId] }} </ng-template>
+          </ng-template>
+        </div>
 
         <div class="multiselect-dropdown-list" *ngSwitchCase="'multiSelect'"
           [ngStyle]="{'width': element[column].width + 'px'}">
-          <ng-multiselect-dropdown id="{{column}}{{dataSource.filteredData.indexOf(element)}}" 
-          [(ngModel)]="element[column].value" 
-          (onSelect)="formControlValid(column, element, element[column].value, dataSource.filteredData.indexOf(element)); setFocus(column, dataSource.filteredData.indexOf(element), element[column].value);"
-          [settings]="element[column].dropdownSettings"
-            [data]="element[column].list">
+          <ng-multiselect-dropdown id="{{column}}{{dataSource.filteredData.indexOf(element)}}"
+            [(ngModel)]="element[column].value"
+            (onSelect)="formControlValid(column, element, element[column].value, dataSource.filteredData.indexOf(element)); setFocus(column, dataSource.filteredData.indexOf(element), element[column].value);"
+            [settings]="element[column].dropdownSettings" [data]="element[column].list">
           </ng-multiselect-dropdown>
         </div>
 
@@ -116,12 +124,11 @@
 
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" [attr.colspan]="getDisplayedColumns().length">
-        <div  class="d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center">
           <img class="text-bottom" width="500" height="300" src="assets/images/Data_not_found.png">
         </div>
       </td>
     </tr>
-    
+
   </table>
 </div>
-

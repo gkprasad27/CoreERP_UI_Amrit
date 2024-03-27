@@ -531,4 +531,5 @@ export class ApiConfigService {
    getOrdersvsSales = `${this.environment.runtimeConfig.serverUrl}Reports/GetOrdersvsSales`;
 
    getEmpPresent = `${this.environment.runtimeConfig.serverUrl}Reports/GetEmpPresent`;
+   gLsubAccountListbyCatetory = `${this.environment.runtimeConfig.serverUrl}Common/GLsubAccountListbyCatetory`;
 }

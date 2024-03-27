@@ -409,7 +409,13 @@ export class ReceiptOfGoodsComponent implements OnInit {
     const obj = this.purchaseordernoList.find(resp => resp.id == this.formData.value.purchaseOrderNo[0].id);
     this.formData.patchValue({
       customerName: obj.text,
-      supplierCode: obj.supplierCode
+      supplierCode: obj.supplierCode,
+      igst: 0,
+      cgst: 0,
+      sgst: 0,
+      amount: 0,
+      totalTax: 0,
+      totalAmount: 0
     })
   }
 
@@ -689,6 +695,13 @@ export class ReceiptOfGoodsComponent implements OnInit {
                   hsnsac: d.hsnsac ? d.hsnsac : '',
                   description: d.description ? d.description : '',
                   heatNumber: d.heatNumber ? d.heatNumber : '',
+
+                  cgst: d.cgst ? d.cgst : 0,
+                  sgst: d.sgst ? d.sgst : 0,
+                  igst: d.igst ? d.igst : 0,
+                  taxCode: d.taxCode ? d.taxCode : 0,
+                  rate: d.rate ? d.rate : 0,
+
                   type: 'edit',
                   // action: 'editDelete',
                   index: index + 1
@@ -723,6 +736,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   calculate() {
+    debugger
     this.formData.patchValue({
       igst: 0,
       cgst: 0,
@@ -736,7 +750,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
         igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
         cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
         sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-        amount: ((+this.formData.value.amount) + (t.qty * t.rate * t.netWeight)).toFixed(2),
+        amount: ((+this.formData.value.amount) + (t.receivedQty * t.rate * t.netWeight)).toFixed(2),
         totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
       })
     })
@@ -748,12 +762,12 @@ export class ReceiptOfGoodsComponent implements OnInit {
   dataChange() {
     const formObj = this.formData1.value;
     const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == formObj.taxCode);
-    const igst = obj.igst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.igst) / 100 : 0;
-    const cgst = obj.cgst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.cgst) / 100 : 0;
-    const sgst = obj.sgst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.sgst) / 100 : 0;
+    const igst = obj.igst ? ((+formObj.receivedQty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.igst) / 100 : 0;
+    const cgst = obj.cgst ? ((+formObj.receivedQty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.cgst) / 100 : 0;
+    const sgst = obj.sgst ? ((+formObj.receivedQty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.sgst) / 100 : 0;
     this.formData1.patchValue({
-      amount: (+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)),
-      total: (+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) + (igst + sgst + cgst),
+      amount: (+formObj.receivedQty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)),
+      total: (+formObj.receivedQty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) + (igst + sgst + cgst),
       igst: igst,
       cgst: cgst,
       sgst: sgst,

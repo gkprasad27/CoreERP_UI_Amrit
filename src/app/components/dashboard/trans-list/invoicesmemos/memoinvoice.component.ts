@@ -126,13 +126,14 @@ export class MemoinvoiceComponent implements OnInit {
   }
 
   tablePropsFunc() {
+    
     return {
       tableData: {
         id: {
           value: 0, type: 'autoInc', width: 10, disabled: true
         },
         glaccount: {
-          value: null, type: 'dropdown', list: this.glAccountList, id: 'accountNumber', text: 'glaccountName', displayMul: true, width: 200
+          value: null, type: 'autocomplete', list: this.glAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
         },
         accountingIndicator: {
           value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100
@@ -622,6 +623,11 @@ export class MemoinvoiceComponent implements OnInit {
 
   saveInvoiceMemo() {
     this.formData.controls['voucherNumber'].enable();
+    const tableData = this.tableData;
+    tableData.forEach((t: any) => {
+      const obj = this.glAccountList.find((g: any) => g.glaccountName == t.glaccount);
+      t.glaccount = obj.accountNumber
+    })
     const addInvoiceMemo = String.Join('/', this.apiConfigService.addInvoiceMemo);
     const requestObj = { imHdr: this.formData.value, imDtl: this.tableData };
     this.apiService.apiPostRequest(addInvoiceMemo, requestObj).subscribe(

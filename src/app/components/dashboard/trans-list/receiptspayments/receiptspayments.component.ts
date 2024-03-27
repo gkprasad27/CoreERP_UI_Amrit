@@ -63,7 +63,7 @@ export class ReceiptspaymentsComponent implements OnInit {
     }
   }
 
-  onbpChange() {
+  onbpChange(flag = true) {
     this.bpgLists = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('bpcategory').value)) {
       let data = this.bpTypeList.find(res => res.code == this.formData.get('bpcategory').value);
@@ -71,7 +71,9 @@ export class ReceiptspaymentsComponent implements OnInit {
       // this.formData.patchValue({
       //   partyAccount: this.bpgLists.length ? this.bpgLists[0].text : null
       // })
-      this.puchaseinvoiceselect();
+      if (flag) {
+        this.puchaseinvoiceselect();
+      }
     }
   }
 
@@ -196,7 +198,7 @@ export class ReceiptspaymentsComponent implements OnInit {
     let data = [];
     let newData = [];
 
-    const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
+    const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
 
     if (!this.commonService.checkNullOrUndefined(this.formData.get('partyAccount').value)) {
       data = this.functionaldeptList.filter(resp => resp.partyAccount == bObj.id);
@@ -229,7 +231,7 @@ export class ReceiptspaymentsComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['paymentreceiptMasters']);
               this.accountSelect();
-              this.onbpChange();
+              this.onbpChange(false);
               const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
               this.formData.patchValue({ partyAccount: bObj.text });
               this.sendDynTableData = { type: 'edit', data: res.response['paymentreceiptDetail'] };

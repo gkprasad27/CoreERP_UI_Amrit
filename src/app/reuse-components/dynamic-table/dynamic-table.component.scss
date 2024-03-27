@@ -144,3 +144,16 @@ mat-form-field {
     }
   }
 }
+
+.mat-mdc-form-field.typeahead {
+  input {
+     border: none;
+     border-bottom: 1px solid;
+     border-radius: 0px;
+     padding: 0px;
+  }
+  input:focus {
+     box-shadow: none !important;
+     background-color: none !important;
+  }
+}

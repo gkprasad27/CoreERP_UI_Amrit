@@ -613,7 +613,6 @@ export class InspectioncheckComponent implements OnInit {
     if (this.tableData.length == 0) {
       return;
     }
-
     this.savemreq();
   }
 
@@ -632,7 +631,7 @@ export class InspectioncheckComponent implements OnInit {
     this.apiService.apiPostRequest(addJournal, requestObj).subscribe(
       response => {
         const res = response;
-        this.tableData = [];
+       // this.tableData = [];
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Material Req created Successfully..', Static.Close, SnackBar.success);
@@ -673,6 +672,11 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   print() {
+    debugger
+    if (!this.tableData1.some((t: any) => t.checkbox)) {
+      this.alertService.openSnackBar('PLease select one record', Static.Close, SnackBar.error);
+      return;
+    }
     localStorage.setItem('printData', '');
     const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber, this.materialcode, 'Inspection');
     this.apiService.apiGetRequest(getQCReportDetail)
@@ -735,20 +739,23 @@ export class InspectioncheckComponent implements OnInit {
           Instrument: t.instrument,
           [t.tagName]: t.result,
         }
-        if (!arr.length) {
-          arr.push({ detailArray: [tObj], ...obj });
-        } else {
-          const key = Object.keys(arr[arr.length - 1].detailArray[arr[arr.length - 1].detailArray.length - 1]);
-          if (key.filter((f: any) => f.includes('AMT-')).length > 4) {
-            arr.push({ detailArray: [], ...obj });
-          }
-          let dObj = arr[arr.length - 1].detailArray.find((d: any) => d.Parameter == t.parameter);
-          if (dObj) {
-            dObj[t.tagName] = t.result
+        if (this.tableData1.some((ta: any) => ta.checkbox && ta.productionTag == t.tagName)) {
+          if (!arr.length) {
+            arr.push({ detailArray: [tObj], ...obj });
           } else {
-            arr[arr.length - 1].detailArray.push(tObj);
+            const key = Object.keys(arr[arr.length - 1].detailArray[arr[arr.length - 1].detailArray.length - 1]);
+            if (key.filter((f: any) => f.includes('AMT-')).length > 4) {
+              arr.push({ detailArray: [], ...obj });
+            }
+            let dObj = arr[arr.length - 1].detailArray.find((d: any) => d.Parameter == t.parameter);
+            if (dObj) {
+              dObj[t.tagName] = t.result
+            } else {
+              arr[arr.length - 1].detailArray.push(tObj);
+            }
           }
         }
+
       })
     }
 

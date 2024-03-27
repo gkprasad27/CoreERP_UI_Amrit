@@ -105,7 +105,7 @@ export class JournalComponent implements OnInit {
           value: 0, type: 'autoInc', width: 10, disabled: true
         },
         glaccount: {
-          value: null, type: 'dropdown', list: this.glAccountList, id: 'accountNumber', text: 'glaccountName', displayMul: true, width: 200, primary: true
+          value: null, type: 'autocomplete', list: this.glAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
         },
         accountingIndicator: {
           value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100, disabled: false
@@ -560,6 +560,11 @@ export class JournalComponent implements OnInit {
 
   saveJournal() {
     this.formData.controls['voucherNumber'].enable();
+    const tableData = this.tableData;
+    tableData.forEach((t: any) => {
+      const obj = this.glAccountList.find((g: any) => g.glaccountName == t.glaccount);
+      t.glaccount = obj.accountNumber
+    })
     const addJournal = String.Join('/', this.apiConfigService.addJournal);
     const requestObj = { journalHdr: this.formData.value, journalDtl: this.tableData };
     this.apiService.apiPostRequest(addJournal, requestObj).subscribe(

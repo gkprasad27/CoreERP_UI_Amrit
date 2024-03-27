@@ -105,7 +105,7 @@ export class CashbankComponent implements OnInit {
     });
   }
 
-  tablePropsFunc() {
+  tablePropsFunc(subGlAccountList = []) {
     return {
       tableData: {
         id: {
@@ -121,7 +121,10 @@ export class CashbankComponent implements OnInit {
         //   }, width: 200
         // },
         glaccount: {
-          value: null, type: 'dropdown', list: this.glAccountList, id: 'accountNumber', text: 'glaccountName', displayMul: false, width: 200
+          value: null, type: 'autocomplete', list: this.glAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
+        },
+        subGlaccount: {
+          value: null, type: 'autocomplete', list: subGlAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
         },
         amount: {
           value: null, type: 'number', width: 100, maxLength: 15
@@ -495,14 +498,34 @@ export class CashbankComponent implements OnInit {
               }
             }
             this.dynTableProps = this.tablePropsFunc();
-           if (this.routeEdit != '') {
-             this.getCashBankDetail(this.routeEdit);
-           }
+            if (this.routeEdit != '') {
+              this.getCashBankDetail(this.routeEdit);
+            }
           });
     }
   }
 
   emitColumnChanges(data) {
+    debugger
+    if (data.column == "glaccount") {
+      data.column
+      const obj = this.glAccountList.find((g: any) => g.glaccountName == data.data[data.index].glaccount.value);
+      const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);
+      this.apiService.apiGetRequest(voucherNoUrl)
+        .subscribe(
+          response => {
+            this.spinner.hide();
+            const res = response;
+            if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+              if (!this.commonService.checkNullOrUndefined(res.response)) {
+                data.data[data.index].glaccount.list  = res.response['glList'];
+                this.sendDynTableData = { type: 'add', data: data.data };
+              }
+            }
+            data.data[data.index].subGlaccount.list = [{ glaccountName: 'sdasdas', accountNumber: 12444 }]
+            this.sendDynTableData = { type: 'add', data: data.data };
+          });
+    }
     this.tableData = data.data;
     this.calculateAmount(data);
   }
@@ -556,8 +579,13 @@ export class CashbankComponent implements OnInit {
 
   saveCashBank() {
     this.formData.controls['voucherNumber'].enable();
+    const tableData = this.tableData;
+    tableData.forEach((t: any) => {
+      const obj = this.glAccountList.find((g: any) => g.glaccountName == t.glaccount);
+      t.glaccount = obj.accountNumber
+    })
     const addCashBank = String.Join('/', this.apiConfigService.addCashBank);
-    const requestObj = { cashbankHdr: this.formData.value, cashbankDtl: this.tableData };
+    const requestObj = { cashbankHdr: this.formData.value, cashbankDtl: tableData };
     this.apiService.apiPostRequest(addCashBank, requestObj).subscribe(
       response => {
         const res = response;

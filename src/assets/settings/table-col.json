@@ -725,6 +725,7 @@
     "natureofTransaction": "Nature of Transaction",
     "account": "Account",
     "glaccount": "GL Account",
+    "subGlaccount": "Sub GL Account",
     "amount": "Amount",
     "accountingIndicator": "Accounting Indicator",
     "taxCode": "Tax",
