@@ -615,11 +615,11 @@ export class MaterialrequisitionComponents implements OnInit {
     this.apiService.apiPostRequest(addJournal, requestObj).subscribe(
       response => {
         const res = response;
-        this.tableData = [];
+        // this.tableData = [];
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Material Req created Successfully..', Static.Close, SnackBar.success);
-            this.router.navigate(['/dashboard/transaction/materialrequisition'])
+            // this.router.navigate(['/dashboard/transaction/materialrequisition'])
           }
           // this.reset();
           this.spinner.hide();

@@ -47,15 +47,15 @@
                     <mat-label>{{'supplierquotation.profitCenter' | translate }}</mat-label>
                     <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.code">
-                            {{pft.name}}
+                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
+                            {{pft.text}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <div class="mat-mdc-form-field typeahead">
                     <input placeholder="{{ 'supplierquotation.supplier' | translate }}" formControlName="customerCode"
-                        [typeahead]="ptypeList" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
+                        [typeahead]="ptypeList" typeaheadOptionField='text' appFocusOnEnter tabIndex="3" (typeaheadOnSelect)="supplierChange($event)"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"  >
                     <ng-template #customItemTemplate let-model="item">
                         <span>{{model.text}}</span>

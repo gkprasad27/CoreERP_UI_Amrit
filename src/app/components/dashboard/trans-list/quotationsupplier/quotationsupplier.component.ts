@@ -287,8 +287,9 @@ export class QuotationSupplierComponent implements OnInit {
         totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
       })
     })
+    debugger
     this.formData.patchValue({
-      totalAmount: (+this.formData.value.amount) + (+this.formData.value.totalTax).toFixed(2),
+      totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
     })
   }
 
@@ -300,6 +301,12 @@ export class QuotationSupplierComponent implements OnInit {
     } else {
       this.formData1.patchValue(value.item);
     }
+  }
+
+  supplierChange(event: any) {
+    this.formData.patchValue({
+      gstNo: event.item.gstNo
+    })
   }
 
   materialCodeChange() {
@@ -424,7 +431,7 @@ export class QuotationSupplierComponent implements OnInit {
 
 
   getProfitcenterData() {
-    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCenterList);
+    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
     this.apiService.apiGetRequest(getpcUrl)
       .subscribe(
         response => {
@@ -432,6 +439,7 @@ export class QuotationSupplierComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
               this.profitCenterList = res.response['profitCenterList'];
             }
           }
@@ -474,7 +482,7 @@ export class QuotationSupplierComponent implements OnInit {
               //console.log(res.response['qsDetail']);
               // this.sendDynTableData = { type: 'edit', data: res.response['qsDetail'] };
               const pObj = this.ptypeList.find((p: any) => p.id == this.formData.value.customerCode);
-              this.formData.patchValue({ customerCode: pObj ? pObj.text: '' });
+              this.formData.patchValue({ customerCode: pObj ? pObj.text : '' });
 
               res.response['qsDetail'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);

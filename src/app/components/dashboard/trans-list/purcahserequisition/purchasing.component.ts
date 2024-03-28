@@ -226,7 +226,7 @@ export class PurchasingComponent implements OnInit {
   // }
 
   getProfitcenterData() {
-    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCenterList);
+    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
     this.apiService.apiGetRequest(getpcUrl)
       .subscribe(
         response => {
@@ -257,14 +257,16 @@ export class PurchasingComponent implements OnInit {
   //       });
   // }
   getmaterialData() {
-    const getmaterialUrl = String.Join('/', this.apiConfigService.getMaterialList);
-    this.apiService.apiGetRequest(getmaterialUrl)
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getmaterialList = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
+    this.apiService.apiGetRequest(getmaterialList)
       .subscribe(
         response => {
           this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
               this.materialList = res.response['materialList'];
             }
           }
