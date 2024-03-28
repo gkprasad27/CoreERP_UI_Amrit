@@ -2592,5 +2592,31 @@
     "monthYear": "monthYear",
     "totalRejectedQty": "totalRejectedQty",
     "totalSuppliedQty": "totalSuppliedQty"
+  },
+  "VendorPayments": {
+    "voucherNumber": "Voucher Number",
+    "transactiontype": "Transaction Type", 
+    "partyname": "Vendor Name", 
+    "referencenumber": "Invoice Number",
+    "referencedate": "Date",
+    "totalamount": "Invoice Amount",
+    "clearedamount": "Paid Amount",
+    "balanceamount": "Balance Amount",
+    "voucherTypeName": "Voucher Type",
+    "totalpaidamount": "Total Paid",
+  "totalbalanceamount": "Total Invoice Value"
+  },
+  "CustomerPayments": {
+    "voucherNumber": "Voucher Number",
+    "transactiontype": "Transaction Type", 
+    "partyname": "Customer Name", 
+    "referencenumber": "Invoice Number",
+    "referencedate": "Date",
+    "totalamount": "Invoice Amount",
+    "clearedamount": "Paid Amount",
+    "balanceamount": "Balance Amount",
+    "voucherTypeName": "Voucher Type",
+    "totalpaidamount": "Total Paid",
+  "totalbalanceamount": "Total Invoice Value"
   }
 }

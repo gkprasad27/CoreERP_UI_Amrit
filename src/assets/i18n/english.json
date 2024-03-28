@@ -3202,6 +3202,34 @@
       "taxableValue": "Taxable Value",
       "totalInvoiceValue": "Total Invoice Value"
 },
+"VendorPayments": {
+  "title": "Vendor Payments",
+  "voucherNumber": "Voucher Number",
+  "transactiontype": "Transaction Type", 
+  "partyname": "Vendor Name", 
+  "referencenumber": "Invoice Number",
+  "referencedate": "Received Date",
+  "totalamount": "Invoice Amount",
+  "clearedamount": "Paid Amount",
+  "balanceamount": "Balance Amount",
+  "voucherTypeName": "Voucher Type",
+  "totalpaidamount": "Total Paid",
+  "totalbalanceamount": "Total Invoice Value"
+},
+"CustomerPayments": {
+  "title": "Customer Payments",
+  "voucherNumber": "Voucher Number",
+  "transactiontype": "Transaction Type", 
+  "partyname": "Customer Name", 
+  "referencenumber": "Invoice Number",
+  "referencedate": "Received Date",
+  "totalamount": "Invoice Amount",
+  "clearedamount": "Paid Amount",
+  "balanceamount": "Balance Amount",
+  "voucherTypeName": "Voucher Type",
+  "totalpaidamount": "Total Paid",
+  "totalbalanceamount": "Total Invoice Value"
+},
 "purchasegst": {
   "title": "Purchase GST Report",
   "suppliername": "Company Name",
