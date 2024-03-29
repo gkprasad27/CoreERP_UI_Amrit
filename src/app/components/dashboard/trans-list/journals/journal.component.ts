@@ -98,7 +98,7 @@ export class JournalComponent implements OnInit {
     });
   }
 
-  tablePropsFunc() {
+  tablePropsFunc(subGlAccountList = []) {
     return {
       tableData: {
         id: {
@@ -106,6 +106,9 @@ export class JournalComponent implements OnInit {
         },
         glaccount: {
           value: null, type: 'autocomplete', list: this.glAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
+        },
+        subGlaccount: {
+          value: null, type: 'autocomplete', list: subGlAccountList, id: 'glsubName', displayId: 'glsubCode', displayText: 'glsubName', multiple: true, width: 200, primary: true
         },
         accountingIndicator: {
           value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100, disabled: false
@@ -479,6 +482,24 @@ export class JournalComponent implements OnInit {
   }
 
   emitColumnChanges(data) {
+
+    if (data.column == "glaccount") {
+      const obj = this.glAccountList.find((g: any) => g.glaccountName == data.data[data.index].glaccount.value);
+      const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);
+      this.apiService.apiGetRequest(voucherNoUrl)
+        .subscribe(
+          response => {
+            this.spinner.hide();
+            const res = response;
+            if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+              if (!this.commonService.checkNullOrUndefined(res.response)) {
+                data.data[data.index].glaccount.list  = res.response['glsubList'];
+                this.sendDynTableData = { type: 'add', data: data.data };
+              }
+            }
+          });
+    }
+    
     this.tableData = data.data;
     this.dataChange(data);
     this.checkCreditDebit();

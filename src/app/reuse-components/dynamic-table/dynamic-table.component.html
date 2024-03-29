@@ -81,7 +81,7 @@
 
         <div class="form-element mat-mdc-form-field typeahead" *ngSwitchCase="'autocomplete'"
           [ngStyle]="{'width': element[column].width + 'px'}">
-          <input id="{{column}}{{dataSource.filteredData.indexOf(element)}}" [disabled]="element[column].disabled"
+          <input id="{{column}}{{dataSource.filteredData.indexOf(element)}}" autocomplete="off" [disabled]="element[column].disabled"
             (typeaheadOnSelect)="formControlValid(column, element, element[column].value, dataSource.filteredData.indexOf(element)); setFocus(column, dataSource.filteredData.indexOf(element), element[column].value);"
              [typeahead]="element[column].list" [value]="element[column].value" [(ngModel)]="element[column].value"
             [typeaheadOptionField]='element[column].id' class="form-control typeahead"

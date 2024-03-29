@@ -125,7 +125,7 @@ export class MemoinvoiceComponent implements OnInit {
     });
   }
 
-  tablePropsFunc() {
+  tablePropsFunc(subGlAccountList = []) {
     
     return {
       tableData: {
@@ -134,6 +134,9 @@ export class MemoinvoiceComponent implements OnInit {
         },
         glaccount: {
           value: null, type: 'autocomplete', list: this.glAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
+        },
+        subGlaccount: {
+          value: null, type: 'autocomplete', list: subGlAccountList, id: 'glsubName', displayId: 'glsubCode', displayText: 'glsubName', multiple: true, width: 200, primary: true
         },
         accountingIndicator: {
           value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100
@@ -540,6 +543,25 @@ export class MemoinvoiceComponent implements OnInit {
   }
 
   emitColumnChanges(data) {
+    debugger
+    if (data.column == "glaccount") {
+      const obj = this.glAccountList.find((g: any) => g.glaccountName == data.data[data.index].glaccount.value);
+      const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);
+      this.apiService.apiGetRequest(voucherNoUrl)
+        .subscribe(
+          response => {
+            this.spinner.hide();
+            const res = response;
+            if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+              if (!this.commonService.checkNullOrUndefined(res.response)) {
+                data.data[data.index].glaccount.list  = res.response['glsubList'];
+                this.sendDynTableData = { type: 'add', data: data.data };
+              }
+            }
+            data.data[data.index].subGlaccount.list = [{ glaccountName: 'sdasdas', accountNumber: 12444 }]
+            this.sendDynTableData = { type: 'add', data: data.data };
+          });
+    }
     this.tableData = this.commonService.formatTableData(this.tableData);
     this.checkCreditDebit();
     this.tableData = data.data;

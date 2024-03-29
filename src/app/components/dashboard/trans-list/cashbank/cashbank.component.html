@@ -81,8 +81,8 @@
                     <mat-label>{{ 'cashbank.account' | translate }}</mat-label>
                     <mat-select formControlName="account">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let acc of accountList" [value]="acc.id">
-                            {{ acc.id }} - {{acc.text}}
+                        <mat-option *ngFor="let acc of accountList" [value]="acc.accountNumber">
+                            {{ acc.accountNumber }} - {{acc.glaccountName}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -135,7 +135,7 @@
                     <input matInput formControlName="narration"
                         appFocusOnEnter tabIndex="2">
                 </mat-form-field>
-            </div>
+            </div>  
         </form>
 
         <div>

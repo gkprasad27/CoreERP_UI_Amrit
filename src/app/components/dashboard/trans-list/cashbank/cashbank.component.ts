@@ -124,7 +124,7 @@ export class CashbankComponent implements OnInit {
           value: null, type: 'autocomplete', list: this.glAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
         },
         subGlaccount: {
-          value: null, type: 'autocomplete', list: subGlAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
+          value: null, type: 'autocomplete', list: subGlAccountList, id: 'glsubName', displayId: 'glsubCode', displayText: 'glsubName', multiple: true, width: 200, primary: true
         },
         amount: {
           value: null, type: 'number', width: 100, maxLength: 15
@@ -297,6 +297,7 @@ export class CashbankComponent implements OnInit {
   }
 
   accountSelect() {
+    debugger
     this.accountList = [];
     this.vouchersTypeList = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('transactionType').value)) {
@@ -508,7 +509,6 @@ export class CashbankComponent implements OnInit {
   emitColumnChanges(data) {
     debugger
     if (data.column == "glaccount") {
-      data.column
       const obj = this.glAccountList.find((g: any) => g.glaccountName == data.data[data.index].glaccount.value);
       const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);
       this.apiService.apiGetRequest(voucherNoUrl)
@@ -518,12 +518,10 @@ export class CashbankComponent implements OnInit {
             const res = response;
             if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
               if (!this.commonService.checkNullOrUndefined(res.response)) {
-                data.data[data.index].glaccount.list  = res.response['glList'];
+                data.data[data.index].glaccount.list  = res.response['glsubList'];
                 this.sendDynTableData = { type: 'add', data: data.data };
               }
             }
-            data.data[data.index].subGlaccount.list = [{ glaccountName: 'sdasdas', accountNumber: 12444 }]
-            this.sendDynTableData = { type: 'add', data: data.data };
           });
     }
     this.tableData = data.data;
