@@ -32,7 +32,7 @@ export class SalesorderComponent {
 
   dropdownList = [];
   selectedItems = [];
-  dropdownSettings : IDropdownSettings = {
+  dropdownSettings: IDropdownSettings = {
     singleSelection: true,
     idField: 'id',
     textField: 'text',
@@ -147,7 +147,7 @@ export class SalesorderComponent {
       id: 0
     });
   }
-  
+
   saveForm() {
     if (this.formData1.invalid) {
       return;
@@ -175,6 +175,7 @@ export class SalesorderComponent {
     setTimeout(() => {
       this.tableData = data;
       this.calculate();
+      this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
     });
     this.resetForm();
   }
@@ -189,7 +190,7 @@ export class SalesorderComponent {
     const sgst = obj.sgst ? (amount * obj.sgst) / 100 : 0;
     this.formData1.patchValue({
       amount: amount,
-      totalTax:(igst + sgst + cgst),
+      totalTax: (igst + sgst + cgst),
       total: (amount) + (igst + sgst + cgst),
       igst: igst,
       cgst: cgst,
@@ -217,6 +218,33 @@ export class SalesorderComponent {
       totalAmount: 0,
     })
     this.tableData && this.tableData.forEach((t: any) => {
+      debugger
+      if (t.mainComponent == 'N') {
+        const obj = this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y');
+        if (obj && obj.taxCode && !t.changed) {
+          t.qty = obj.qty * t.qty;
+          t.changed = true
+        }
+      }
+      // if (t.taxCode) {
+      //   // const formObj = t.mainComponent == 'N' ? this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y') : t;
+      //   const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == t.taxCode);
+      //   const discountAmount = (((+t.qty * +t.rate) * ((+t.discount) / 100)));
+      //   const amount = (+t.qty * +t.rate) - discountAmount
+      //   const igst = obj.igst ? (amount * obj.igst) / 100 : 0;
+      //   const cgst = obj.cgst ? (amount * obj.cgst) / 100 : 0;
+      //   const sgst = obj.sgst ? (amount * obj.sgst) / 100 : 0;
+      //   // this.formData1.patchValue({
+      //   t.amount = amount;
+      //   t.totalTax = (igst + sgst + cgst);
+      //   t.total = (amount) + (igst + sgst + cgst);
+      //   t.igst = igst;
+      //   t.cgst = cgst;
+      //   t.sgst = sgst;
+      //   //  })
+      // }
+
+
       this.formData.patchValue({
         igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
         cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
@@ -235,6 +263,7 @@ export class SalesorderComponent {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       this.calculate();
+      this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
     } else {
       this.formData1.patchValue(value.item);
     }
@@ -263,9 +292,9 @@ export class SalesorderComponent {
     this.formData.patchValue({
       gstNo: obj ? obj.gstNo : ''
     })
-    if(!event) {
+    if (!event) {
       this.formData.patchValue({
-        customerCode: [{ id: obj.id, text: obj.text}]
+        customerCode: [{ id: obj.id, text: obj.text }]
       })
     }
   }
@@ -326,7 +355,7 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              
+
               this.qnoList = res.response['BOMList'];
             }
           }
@@ -345,15 +374,15 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              
+
               res.response['bomDetail'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 s.materialName = obj.text
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
-                s.action = s.billable == 'N' ? 'delete': 'editDelete'; 
+                s.action = s.billable == 'N' ? 'delete' : 'editDelete';
               })
-              const tableData = [ ...this.finalTableData, ...res.response['bomDetail']];
+              const tableData = [...this.finalTableData, ...res.response['bomDetail']];
               tableData.forEach((t: any, index: number) => t.index = index + 1);
               this.tableData = tableData;
               this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
@@ -375,7 +404,7 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              
+
               this.materialList = res.response['mmasterList'];
               if (this.routeEdit != '') {
                 this.getSaleOrderDetail();
@@ -398,13 +427,14 @@ export class SalesorderComponent {
               this.formData.patchValue(res.response['SaleOrderMasters']);
               res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-                
+
                 s.materialName = obj.text
                 s.stockQty = obj.availQTY
                 s.hsnsac = obj.hsnsac
                 s.action = 'editDelete'; s.index = index + 1;
               })
               this.tableData = res.response['SaleOrderDetails'];
+              this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
             }
           }
         });
@@ -423,10 +453,11 @@ export class SalesorderComponent {
 
   emitColumnChanges(data) {
     this.tableData = data.data;
+    this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
   }
 
   materialCodeChange() {
-    
+
     const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
     this.formData1.patchValue({
       netWeight: obj.netWeight,
@@ -442,10 +473,10 @@ export class SalesorderComponent {
 
   materialCodehChange() {
     const obj = this.materialList.find((m: any) => m.id == this.formData.value.materialCode);
-    if(obj && obj.bom)
-    this.formData.patchValue({
-      bom: obj.bom,
-    })
+    if (obj && obj.bom)
+      this.formData.patchValue({
+        bom: obj.bom,
+      })
     this.getBomDetail();
   }
 

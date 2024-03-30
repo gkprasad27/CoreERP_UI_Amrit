@@ -2265,6 +2265,7 @@
     "subComponent": "Sub Component",
     "billable": "Billable",
     "nonBillable": "Non Billable",
+    "bomKey": "bomKey",
     "NEWORDER": "New Order",
     "salesOrderNumber": "Sales Order Number",
     "taxCode": "Tax Code",
