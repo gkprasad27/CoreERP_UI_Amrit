@@ -55,6 +55,9 @@ export class MaterialTypesComponent implements OnInit {
       { value: 'Packing', viewValue: 'Packing' }
 
     ];
+
+    magroupList: any[] = [];
+
   constructor(private commonService: CommonService,
     private addOrEditService: AddOrEditService,
     private formBuilder: FormBuilder,
@@ -69,7 +72,8 @@ export class MaterialTypesComponent implements OnInit {
       code: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(5)]],
       description: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       class: [null],
-      usage: [null]
+      usage: [null],
+      materialGroup: [null]
       
     });
 
@@ -83,6 +87,22 @@ export class MaterialTypesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getMaterialGroupTableData();
+  }
+
+  getMaterialGroupTableData() {
+    const getMaterialGroupUrl = String.Join('/', this.apiConfigService.getmaterialgroupList);
+    this.apiService.apiGetRequest(getMaterialGroupUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.magroupList = res.response['magroupList'];
+            }
+          }
+          this.spinner.hide();
+        });
   }
   
   get formControls() { return this.modelFormData.controls; }
@@ -100,6 +120,8 @@ export class MaterialTypesComponent implements OnInit {
       this.modelFormData.controls['code'].disable();
     }
   }
+
+  
 
   cancel() {
     this.dialogRef.close();

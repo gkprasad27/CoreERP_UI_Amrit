@@ -226,6 +226,8 @@ export class ReportsComponent {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
     } else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${this.modelFormData.value.customerCode ? this.modelFormData.value.customerCode[0].id : '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode : '-1'}`);
+    } else if (this.routeParam == 'VendorPayments') {
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${this.modelFormData.value.customerCode ? this.modelFormData.value.customerCode[0].id : '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode : '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }

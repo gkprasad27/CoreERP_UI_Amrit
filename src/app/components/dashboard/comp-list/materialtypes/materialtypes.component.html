@@ -46,6 +46,17 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'materialsmaster.materialGroup' | translate }}</mat-label>
+          <mat-select formControlName="materialGroup" appFocusOnEnter tabIndex="4">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let mgroup of magroupList" [value]="mgroup.groupKey">
+              {{mgroup.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
       </div>
       <mat-divider></mat-divider>
     </form>

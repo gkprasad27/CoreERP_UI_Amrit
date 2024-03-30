@@ -146,23 +146,28 @@ export class BillOfMaterialComponent implements OnInit {
       profitcenterName: [''],
       companyName: [null],
       bomtype: ['', Validators.required],
-      saleOrder: ['', Validators.required],
-      // bomnumber: [null, [Validators.required]],
+      // saleOrder: ['', Validators.required],
+      bomnumber: [null, [Validators.required]],
+      description: [null, [Validators.required]],
       profitCenter: ['', Validators.required],
       product: ['', Validators.required],
-      materialCode: [''],
-      materialName: [''],
+      // materialCode: [''],
+      // materialName: [''],
       // saleOrder: [null],
     });
     this.formData1 = this.formBuilder.group({
       materialCode: ['', Validators.required],
       qty: ['', Validators.required],
-      rate: ['', Validators.required],
-      netWeight: [''],
-      amount: [''],
+     // rate: ['', Validators.required],
+      // netWeight: [''],
+      //amount: [''],
       description: [''],
-      availableQty: [''],
+      // availableQty: [''],
       materialName: [''],
+
+      mainComponent: [true],
+      billable: [true],
+
       highlight: false,
       // amount: ['', Validators.required],
       id: [0],
@@ -260,6 +265,8 @@ export class BillOfMaterialComponent implements OnInit {
     this.formData1.patchValue({
       index: 0,
       action: 'editDelete',
+      mainComponent: true,
+      billable: true,
       id: 0
     });
   }
@@ -290,28 +297,32 @@ export class BillOfMaterialComponent implements OnInit {
       return;
     }
     this.formData1.patchValue({
-      amount: (+this.formData1.value.qty) * (+this.formData1.value.rate) * (+this.formData1.value.netWeight),
+      // amount: (+this.formData1.value.qty) * (+this.formData1.value.rate) * (+this.formData1.value.netWeight),
       highlight: true
     })
+
     let data: any = this.tableData;
     this.tableData = null;
     this.tableComponent.defaultValues();
-    const obj = data.find((d: any) => d.materialCode == this.formData1.value.materialCode)
+    const obj = data.find((d: any) => d.materialCode == this.formData1.value.materialCode);
+    let form = this.formData1.value;
+    form.billable = this.formData1.value.billable ? 'Y' : 'N'
+    form.mainComponent = this.formData1.value.mainComponent ? 'Y' : 'N'
     if (this.formData1.value.index == 0 && !obj) {
-      this.formData1.patchValue({
-        index: data ? (data.length + 1) : 1
-      });
-      data = [this.formData1.value, ...data];
+      // this.formData1.patchValue({
+        form.index = data ? (data.length + 1) : 1,
+      // });
+      data = [form, ...data];
     } else {
       // if (this.formData1.value.index == 0) {
       //   data.forEach((res: any) => { if (res.material == this.formData1.value.material) { (res.qty = res.qty + this.formData1.value.qty) } });
       // } else {
-      data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
+      data = data.map((res: any) => res = res.index == form.index ? form : res);
       // }
     }
     setTimeout(() => {
       this.tableData = data;
-      this.calculate();
+   //   this.calculate();
     });
     this.resetForm();
   }
@@ -342,7 +353,7 @@ export class BillOfMaterialComponent implements OnInit {
     const obj = this.mmasterList.find((m: any) => m.id == this.formData1.value.materialCode);
     this.formData1.patchValue({
       netWeight: obj.netWeight,
-      availableQty: obj.availQTY,
+      // availableQty: obj.availQTY,
       description: obj ? obj.text : '',
       materialName: obj ? obj.text : ''
     })
@@ -372,12 +383,12 @@ export class BillOfMaterialComponent implements OnInit {
                 const obj = {
                   materialCode: s.materialCode ? s.materialCode : '',
                   qty: s.qty ? s.qty : '',
-                  rate: s.rate ? s.rate : '',
-                  netWeight: s.netWeight ? s.netWeight : '',
+                  // rate: s.rate ? s.rate : '',
+                  // netWeight: s.netWeight ? s.netWeight : '',
                   id: s.id ? s.id : '',
-                  amount: s.amount ? s.amount : '',
+                  // amount: s.amount ? s.amount : '',
                   materialName: s.materialName ? s.materialName : '',
-                  availableQty: mObj.availQTY ? mObj.availQTY : '',
+                  // availableQty: mObj.availQTY ? mObj.availQTY : '',
                   // amount: s.amount ? s.amount : '',
                   action: 'editDelete',
                   index: index + 1,
@@ -616,6 +627,8 @@ export class BillOfMaterialComponent implements OnInit {
   savebom() {
     // this.formData.controls['bomnumber'].enable();
     // this.formData.controls['material'].enable();
+
+
     const addbom = String.Join('/', this.apiConfigService.addBOM);
     const requestObj = { bomHdr: this.formData.value, bomDtl: this.tableData };
     this.apiService.apiPostRequest(addbom, requestObj).subscribe(

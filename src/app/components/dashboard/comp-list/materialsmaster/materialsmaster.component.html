@@ -156,11 +156,31 @@
               <input matInput formControlName="dragRevNo" appFocusOnEnter tabIndex="16">
             </mat-form-field>
 
+            <div class="mat-mdc-form-field typeahead mx-3" >
+              <input placeholder="{{ 'COMMON.CUSTOMERCODE' | translate }}" formControlName="customerName"
+                [typeahead]="customerList" typeaheadOptionField='text' appFocusOnEnter tabIndex="17"
+                class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
+              <ng-template #customItemTemplate let-model="item">
+                <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+              </ng-template>
+            </div>
+
+            <div class="mat-mdc-form-field typeahead mx-3" >
+              <input placeholder="{{ 'materialsmaster.bomnumber' | translate }}" formControlName="bomName"
+                [typeahead]="qnoList" typeaheadOptionField='text' appFocusOnEnter tabIndex="18"
+                class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1">
+              <ng-template #customItemTemplate1 let-model="item">
+                <span><strong>{{model.bomnumber}}</strong> - {{model.text}}</span>
+              </ng-template>
+            </div>
+
             <div class="mx-2">
               <label> {{ 'materialsmaster.fileUpload' | translate }} </label>
               <app-file-upload [type]="'card'" [oldFileList]="modelFormData.value.fileUpload"
                 (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
             </div>
+
+
 
           </div>
           <mat-divider></mat-divider>
@@ -346,7 +366,8 @@
 
         <mat-card-content class="py-5 p-2 m-0">
 
-            <app-standard-rate-o [materialCode]="formData.item ? materialCode : modelFormData.value.materialCode"></app-standard-rate-o>
+          <app-standard-rate-o [materialCode]="formData.item ? materialCode : modelFormData.value.materialCode">
+          </app-standard-rate-o>
 
         </mat-card-content>
 

@@ -1455,6 +1455,8 @@
     "aboveLevel": "Above Level",
     "uom": "UOM",
     "availableQty": "Available QTY",
+    "mainComponent": "Main Component",
+    "billable": "Billable",
     "amount": "Amount",
     "delete": "Delete",
     "action": "Action"

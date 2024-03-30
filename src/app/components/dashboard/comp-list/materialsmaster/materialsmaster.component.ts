@@ -37,7 +37,7 @@ interface Schedule {
 
 export class MaterialMasterComponent implements OnInit, OnDestroy {
 
-  @ViewChild(StandardRateOComponent) standardRateOComponent:StandardRateOComponent;
+  @ViewChild(StandardRateOComponent) standardRateOComponent: StandardRateOComponent;
 
   modelFormData: FormGroup;
   formData: any;
@@ -98,6 +98,8 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
 
   fileList: any;
   materialCode: any
+  customerList: any[] = [];
+  qnoList: any[] = [];
 
   constructor(private commonService: CommonService,
     private apiService: ApiService,
@@ -147,6 +149,10 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       openingValue: [null],
       closingPrice: [null],
       closingValue: [null],
+
+      customerName: [null],
+      bomName: [null],
+
       goodsServiceDescription: null,
       partDragNo: null,
       dragRevNo: null
@@ -155,7 +161,8 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
-      this.materialCode =  this.formData.item.materialCode
+      this.materialCode = this.formData.item.materialCode
+      debugger
       this.modelFormData.patchValue({
         uom: this.formData.item.uom ? +this.formData.item.uom : null,
         ouom: this.formData.item.ouom ? +this.formData.item.ouom : null,
@@ -176,7 +183,8 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
     this.getdivisionList();
     this.getuomTypeData();
     this.gethsnsacList();
-
+    this.getCustomerList();
+    this.getBOMList();
   }
 
   calculation() {
@@ -367,6 +375,46 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
         });
   }
 
+  getCustomerList() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const costCenUrl = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
+    this.apiService.apiGetRequest(costCenUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              const resp = res.response['bpList'];
+              const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
+              debugger
+              this.customerList = data;
+      this.modelFormData.patchValue({
+        customerName: this.formData.item.customerCode ? this.customerList.find((c: any) => c.id == this.formData.item.customerCode).text : '',
+      })
+            }
+          }
+        });
+  }
+
+  getBOMList() {
+    const companyUrl = String.Join('/', this.apiConfigService.getBOMList);
+    this.apiService.apiGetRequest(companyUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          debugger
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.qnoList = res.response['BOMList'];
+              this.modelFormData.patchValue({
+                bomName: this.formData.item.bom ? this.qnoList.find((c: any) => c.bomnumber == this.formData.item.bom).bomName : ''
+              })
+            }
+          }
+        });
+  }
+
 
   get formControls() { return this.modelFormData.controls; }
 
@@ -380,24 +428,27 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       this.isSubmitted = true;
       return;
     }
+    debugger
     // if(flag) {
-      this.modelFormData.controls['materialCode'].enable();
-      this.formData.item = this.modelFormData.value;
-      this.formData.item.fileUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
-      this.addOrEditService[this.formData.action](this.formData, (res) => {
-        if (this.fileList) {
-          this.uploadFile();
-        } else {
-          this.router.navigate(['/dashboard/master/materialsmaster']);
-        }
-      });
-      if (this.formData.action == 'Edit') {
-        this.modelFormData.controls['materialCode'].disable();
+    this.modelFormData.controls['materialCode'].enable();
+    this.formData.item = this.modelFormData.value;
+    this.formData.item.fileUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
+    this.formData.item.customerCode = this.modelFormData.value.customerName ? this.customerList.find((c: any) => c.text == this.modelFormData.value.customerName).id : '';
+    this.formData.item.bom = this.modelFormData.value.bomName ? this.qnoList.find((c: any) => c.bomName == this.modelFormData.value.bomName).bomnumber : '';
+    this.addOrEditService[this.formData.action](this.formData, (res) => {
+      if (this.fileList) {
+        this.uploadFile();
+      } else {
+        this.router.navigate(['/dashboard/master/materialsmaster']);
       }
+    });
+    if (this.formData.action == 'Edit') {
+      this.modelFormData.controls['materialCode'].disable();
+    }
     // }
   }
 
-  
+
   uploadFile() {
     const addsq = String.Join('/', this.apiConfigService.uploadFile, this.fileList.name.split('.')[0]);
     const formData = new FormData();
