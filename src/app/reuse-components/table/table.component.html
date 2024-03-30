@@ -79,15 +79,21 @@
             <span class="d-flex"
               *ngIf="(column == 'action' || column == 'documentURL' || column == 'invoiceURL' || column == 'checkbox' || column == 'button' ||  column == 'button1') ;else other_content">
               <ng-container *ngIf="column == 'action'">
-                <mat-icon class="cursor--pointer"
-                  *ngIf="element[column] == 'edit' || element[column] == 'editDelete' || element[column] == 'editView' || element[column] == 'editDeleteView'"
-                  (click)="editOrDelete('Edit', element)">edit</mat-icon>
-                <mat-icon class="cursor--pointer"
-                  *ngIf="element[column] == 'delete' || element[column] == 'editDelete' || element[column] == 'editDeleteView'"
-                  (click)="editOrDelete('Delete', element)">delete</mat-icon>
-                <mat-icon class="cursor--pointer"
-                  *ngIf="element[column] == 'view' || element[column] == 'editView' || element[column] == 'editDeleteView'"
-                  (click)="editOrDelete('View', element)">visibility</mat-icon>
+                <div class="mw-23">
+                  <mat-icon class="cursor--pointer"
+                    *ngIf="element[column] == 'edit' || element[column] == 'editDelete' || element[column] == 'editView' || element[column] == 'editDeleteView'"
+                    (click)="editOrDelete('Edit', element)">edit</mat-icon>
+                </div>
+                <div class="mw-23">
+                  <mat-icon class="cursor--pointer"
+                    *ngIf="element[column] == 'delete' || element[column] == 'editDelete' || element[column] == 'editDeleteView'"
+                    (click)="editOrDelete('Delete', element)">delete</mat-icon>
+                </div>
+                <div class="mw-23">
+                  <mat-icon class="cursor--pointer"
+                    *ngIf="element[column] == 'view' || element[column] == 'editView' || element[column] == 'editDeleteView'"
+                    (click)="editOrDelete('View', element)">visibility</mat-icon>
+                </div>
               </ng-container>
               <ng-container *ngIf="column == 'documentURL' || column == 'invoiceURL'">
                 <span class="link--val" (click)="onLink(column, element)"> {{ element[column] }} </span>
