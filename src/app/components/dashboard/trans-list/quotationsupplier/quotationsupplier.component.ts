@@ -287,7 +287,7 @@ export class QuotationSupplierComponent implements OnInit {
         totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
       })
     })
-    debugger
+    
     this.formData.patchValue({
       totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
     })
@@ -439,7 +439,7 @@ export class QuotationSupplierComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+              
               this.profitCenterList = res.response['profitCenterList'];
             }
           }

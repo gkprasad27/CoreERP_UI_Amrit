@@ -672,7 +672,7 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   print() {
-    debugger
+    
     if (!this.tableData1.some((t: any) => t.checkbox)) {
       this.alertService.openSnackBar('PLease select one record', Static.Close, SnackBar.error);
       return;

@@ -266,7 +266,7 @@ export class PurchasingComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+              
               this.materialList = res.response['materialList'];
             }
           }

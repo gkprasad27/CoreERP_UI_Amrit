@@ -162,7 +162,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
       this.materialCode = this.formData.item.materialCode
-      debugger
+    
       this.modelFormData.patchValue({
         uom: this.formData.item.uom ? +this.formData.item.uom : null,
         ouom: this.formData.item.ouom ? +this.formData.item.ouom : null,
@@ -386,7 +386,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const resp = res.response['bpList'];
               const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
-              debugger
+            
               this.customerList = data;
       this.modelFormData.patchValue({
         customerName: this.formData.item.customerCode ? this.customerList.find((c: any) => c.id == this.formData.item.customerCode).text : '',
@@ -403,7 +403,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
         response => {
           this.spinner.hide();
           const res = response;
-          debugger
+        
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.qnoList = res.response['BOMList'];
@@ -428,7 +428,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       this.isSubmitted = true;
       return;
     }
-    debugger
+  
     // if(flag) {
     this.modelFormData.controls['materialCode'].enable();
     this.formData.item = this.modelFormData.value;

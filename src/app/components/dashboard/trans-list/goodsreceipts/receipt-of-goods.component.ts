@@ -234,7 +234,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
     data = (data && data.length) ? data : [];
     let qtyT = this.formData1.value.receivedQty;
     data.forEach((t: any) => {
-      debugger
+      
       if (t.materialCode == this.formData1.value.materialCode[0]['materialCode']) {
         qtyT = qtyT + (this.formData1.value.index == t.index ? ((+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty))  :  ((+t.receivedQty) + (+t.rejectQty))) 
       }
@@ -269,14 +269,14 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   editOrDeleteEvent(value) {
-    debugger
+    
     if (value.action === 'Delete') {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       this.calculate();
       this.resetForm();
     } else {
-      debugger
+      
       let item = { ...value.item };
       if (typeof item.materialCode == 'string') {
         item.materialCode = [{ materialCode: item.materialCode, materialName: item.materialName }]
@@ -365,14 +365,14 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   ponoselect() {
-    debugger
+    
     let data = [];
     this.perChaseOrderList = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('purchaseOrderNo').value) && this.formData.value.purchaseOrderNo[0].id) {
       data = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.value.purchaseOrderNo[0].id);
     }
     if (data.length) {
-      debugger
+      
       data.forEach((d: any, index: number) => {
         const obj = {
           materialCode: d.materialCode ? d.materialCode : '',
@@ -420,7 +420,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   materialCodeChange() {
-    debugger
+    
     const obj = this.materialCodeList.find((p: any) => p.materialCode == this.formData1.value.materialCode[0]['materialCode']);
     let pendingQty = 0;
     this.tableData && this.tableData.forEach((t: any) => {
@@ -668,7 +668,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
               this.perChaseOrderList = [];
 
               if (res.response['grDetail'] && res.response['grDetail'].length) {
-                debugger
+                
                 let str = res.response['grDetail'][0].taxCode;
                 const obj = this.taxCodeList.find((t: any) => t.taxRateCode == str);
                 this.formData1.patchValue({
@@ -736,7 +736,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   calculate() {
-    debugger
+    
     this.formData.patchValue({
       igst: 0,
       cgst: 0,

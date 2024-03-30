@@ -127,6 +127,7 @@ export class SalesorderComponent {
       netWeight: [''],
       mainComponent: [''],
       billable: [''],
+      bomKey: [''],
       deliveryDate: [''],
       stockQty: [0],
       totalTax: [0],
@@ -148,6 +149,7 @@ export class SalesorderComponent {
   }
   
   saveForm() {
+    debugger
     if (this.formData1.invalid) {
       return;
     }
@@ -179,6 +181,7 @@ export class SalesorderComponent {
   }
 
   dataChange() {
+    debugger
     const formObj = this.formData1.value
     const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == formObj.taxCode);
     const discountAmount = (((+formObj.qty * +formObj.rate) * ((+formObj.discount) / 100)));
@@ -186,7 +189,6 @@ export class SalesorderComponent {
     const igst = obj.igst ? (amount * obj.igst) / 100 : 0;
     const cgst = obj.cgst ? (amount * obj.cgst) / 100 : 0;
     const sgst = obj.sgst ? (amount * obj.sgst) / 100 : 0;
-
     this.formData1.patchValue({
       amount: amount,
       totalTax:(igst + sgst + cgst),
@@ -196,7 +198,6 @@ export class SalesorderComponent {
       sgst: sgst,
     })
   }
-
 
   materialChange() {
     const obj = this.materialList.some((m: any) => m.id == this.formData1.value.materialCode);
@@ -327,7 +328,7 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+              
               this.qnoList = res.response['BOMList'];
             }
           }
@@ -336,7 +337,6 @@ export class SalesorderComponent {
   }
 
   getBomDetail() {
-    debugger
     this.tableData = null;
     this.tableComponent.defaultValues();
     const companyUrl = String.Join('/', this.apiConfigService.getBomDetail, this.formData.value.bom);
@@ -347,17 +347,17 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+              
               res.response['bomDetail'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-                debugger
                 s.materialName = obj.text
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
                 s.action = s.billable == 'N' ? 'delete': 'editDelete'; 
-                s.index = index + 1;
               })
-              this.tableData = [ ...this.finalTableData, ...res.response['bomDetail']];
+              const tableData = [ ...this.finalTableData, ...res.response['bomDetail']];
+              tableData.forEach((t: any, index: number) => t.index = index + 1);
+              this.tableData = tableData;
               this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
               this.calculate();
             }
@@ -377,7 +377,7 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+              
               this.materialList = res.response['mmasterList'];
               if (this.routeEdit != '') {
                 this.getSaleOrderDetail();
@@ -400,7 +400,7 @@ export class SalesorderComponent {
               this.formData.patchValue(res.response['SaleOrderMasters']);
               res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-                debugger
+                
                 s.materialName = obj.text
                 s.stockQty = obj.availQTY
                 s.hsnsac = obj.hsnsac
@@ -428,7 +428,7 @@ export class SalesorderComponent {
   }
 
   materialCodeChange() {
-    debugger
+    
     const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
     this.formData1.patchValue({
       netWeight: obj.netWeight,

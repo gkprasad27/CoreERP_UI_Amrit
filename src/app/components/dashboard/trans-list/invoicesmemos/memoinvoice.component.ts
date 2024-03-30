@@ -543,7 +543,7 @@ export class MemoinvoiceComponent implements OnInit {
   }
 
   emitColumnChanges(data) {
-    debugger
+    
     if (data.column == "glaccount") {
       const obj = this.glAccountList.find((g: any) => g.glaccountName == data.data[data.index].glaccount.value);
       const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);

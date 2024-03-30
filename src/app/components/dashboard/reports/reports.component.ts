@@ -183,7 +183,6 @@ export class ReportsComponent {
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            debugger
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const resp = res.response['bpaList'];
               const data = resp.length && resp.filter((t: any) => t.bpTypeName == 'Vendor').map((d: any) => { return { id: d.bpnumber, text: d.name }});
