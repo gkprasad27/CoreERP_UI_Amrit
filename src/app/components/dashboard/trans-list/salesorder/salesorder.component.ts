@@ -49,6 +49,7 @@ export class SalesorderComponent {
   formData1: FormGroup;
   companyList = [];
   tableData: any[] = [];
+  finalTableData: any[] = [];
 
   fileList: any;
 
@@ -57,6 +58,7 @@ export class SalesorderComponent {
   taxCodeList = [];
   materialList = [];
   profitCenterList = [];
+  qnoList = [];
 
   routeEdit = '';
 
@@ -89,9 +91,10 @@ export class SalesorderComponent {
       companyName: [null],
       saleOrderNo: [0],
       materialCode: [''],
+      bom: [''],
       customerCode: ['', Validators.required],
       supplierName: [''],
-      orderDate: [null],
+      // orderDate: [null],
       profitCenter: ['', Validators.required],
       profitcenterName: [''],
       poDate: [null],
@@ -110,7 +113,7 @@ export class SalesorderComponent {
 
 
     this.formData1 = this.formBuilder.group({
-      materialCode: ['', Validators.required],
+      materialCode: [''],
       taxCode: ['', Validators.required],
       qty: ['', Validators.required],
       rate: ['', Validators.required],
@@ -122,6 +125,8 @@ export class SalesorderComponent {
       amount: [''],
       total: [''],
       netWeight: [''],
+      mainComponent: [''],
+      billable: [''],
       deliveryDate: [''],
       stockQty: [0],
       totalTax: [0],
@@ -309,12 +314,62 @@ export class SalesorderComponent {
               this.taxCodeList = data;
             }
           }
+          this.getBOMList();
+        });
+  }
+
+  getBOMList() {
+    const companyUrl = String.Join('/', this.apiConfigService.getBOMList);
+    this.apiService.apiGetRequest(companyUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
+              this.qnoList = res.response['BOMList'];
+            }
+          }
           this.getmaterialData();
         });
   }
 
+  getBomDetail() {
+    debugger
+    this.tableData = null;
+    this.tableComponent.defaultValues();
+    const companyUrl = String.Join('/', this.apiConfigService.getBomDetail, this.formData.value.bom);
+    this.apiService.apiGetRequest(companyUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
+              res.response['bomDetail'].forEach((s: any, index: number) => {
+                const obj = this.materialList.find((m: any) => m.id == s.materialCode);
+                debugger
+                s.materialName = obj.text
+                // s.stockQty = obj.availQTY
+                // s.hsnsac = obj.hsnsac
+                s.action = s.billable == 'N' ? 'delete': 'editDelete'; 
+                s.index = index + 1;
+              })
+              this.tableData = [ ...this.finalTableData, ...res.response['bomDetail']];
+              this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+              this.calculate();
+            }
+          }
+          this.getmaterialData();
+        });
+  }
+
+
   getmaterialData() {
-    const getmaterialUrl = String.Join('/', this.apiConfigService.getMaterialList);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getmaterialUrl = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
     this.apiService.apiGetRequest(getmaterialUrl)
       .subscribe(
         response => {
@@ -322,7 +377,8 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.materialList = res.response['materialList'];
+              debugger
+              this.materialList = res.response['mmasterList'];
               if (this.routeEdit != '') {
                 this.getSaleOrderDetail();
               }
@@ -351,8 +407,6 @@ export class SalesorderComponent {
                 s.action = 'editDelete'; s.index = index + 1;
               })
               this.tableData = res.response['SaleOrderDetails'];
-              this.calculate();
-              this.customerCodeChange();
             }
           }
         });
@@ -386,6 +440,15 @@ export class SalesorderComponent {
       this.alertService.openSnackBar('Net Weight has not provided for selected material..', Static.Close, SnackBar.error);
     }
 
+  }
+
+  materialCodehChange() {
+    const obj = this.materialList.find((m: any) => m.id == this.formData.value.materialCode);
+    if(obj && obj.bom)
+    this.formData.patchValue({
+      bom: obj.bom,
+    })
+    this.getBomDetail();
   }
 
   emitFilesList(event: any) {
@@ -429,7 +492,7 @@ export class SalesorderComponent {
   addSaleOrder() {
     const addsq = String.Join('/', this.apiConfigService.addSaleOrder);
     const obj = this.formData.value;
-    obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
+    // obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
     obj.poDate = obj.poDate ? this.datepipe.transform(obj.poDate, 'MM-dd-yyyy') : '';
     obj.dateofSupply = obj.dateofSupply ? this.datepipe.transform(obj.dateofSupply, 'MM-dd-yyyy') : '';
     obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';

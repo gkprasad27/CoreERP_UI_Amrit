@@ -44,15 +44,15 @@
 
                 <div class="multiselect-dropdown-list">
                     <ng-multiselect-dropdown placeholder="{{ 'saleorder.supplierName' | translate }}"
-                        formControlName="customerCode"   (onSelect)="customerCodeChange($event)"
+                        formControlName="customerCode" (onSelect)="customerCodeChange($event)"
                         [settings]="dropdownSettings" [data]="customerList">
                     </ng-multiselect-dropdown>
                 </div>
 
-                <mat-form-field class="form-element">
+                <!-- <mat-form-field class="form-element">
                     <mat-label [translate]="'saleorder.customerGstin'"></mat-label>
                     <input matInput type="text" readonly formControlName="gstNo" appFocusOnEnter tabIndex="5">
-                </mat-form-field>
+                </mat-form-field> -->
 
 
                 <mat-form-field class="form-element">
@@ -69,13 +69,13 @@
                 </mat-form-field>
 
 
-                <mat-form-field class="form-element">
+                <!-- <mat-form-field class="form-element">
                     <mat-label [translate]="'saleorder.orderDate'"></mat-label>
                     <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="orderDate"
                         appFocusOnEnter tabIndex="6">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'saleorder.dateofSupply'"></mat-label>
@@ -89,6 +89,27 @@
                     <mat-label [translate]="'saleorder.placeOfSupply'"></mat-label>
                     <input matInput type="text" formControlName="placeofSupply" appFocusOnEnter tabIndex="8">
                 </mat-form-field>
+
+
+                <div class="mat-mdc-form-field typeahead">
+                    <input placeholder="{{ 'saleorder.materialCode' | translate }}" formControlName="materialCode"
+                        [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
+                        (typeaheadOnSelect)="materialCodehChange()" >
+                    <ng-template #customItemTemplate let-model="item">
+                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+                    </ng-template>
+                </div>
+
+                <div class="mat-mdc-form-field typeahead">
+                    <input placeholder="{{ 'saleorder.bom' | translate }}" formControlName="bom"
+                    [typeahead]="qnoList" typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="10"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1"
+                        (typeaheadOnSelect)="getBomDetail()" >
+                    <ng-template #customItemTemplate1 let-model="item">
+                        <span><strong>{{model.bomnumber}}</strong> - {{model.bomName}}</span>
+                    </ng-template>
+                </div>
 
                 <div>
                     <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL"
@@ -112,7 +133,7 @@
 
                 <div class="d--flex p-1 mat-form-field-height">
 
-                    <div class="mat-mdc-form-field typeahead">
+                    <!-- <div class="mat-mdc-form-field typeahead">
                         <input placeholder="{{ 'saleorder.materialCode' | translate }}" formControlName="materialCode"
                             [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
                             class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
@@ -120,12 +141,12 @@
                         <ng-template #customItemTemplate let-model="item">
                             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                         </ng-template>
-                    </div>
+                    </div> -->
 
-                    <mat-form-field class="form-element">
+                    <!-- <mat-form-field class="form-element">
                         <mat-label [translate]="'saleorder.stockQty'"></mat-label>
                         <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="10">
-                    </mat-form-field>
+                    </mat-form-field> -->
 
                     <mat-form-field class="form-element">
                         <mat-label>{{ 'saleorder.taxCode' | translate }}</mat-label>

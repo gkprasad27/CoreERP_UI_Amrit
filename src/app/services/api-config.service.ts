@@ -532,4 +532,6 @@ export class ApiConfigService {
 
    getEmpPresent = `${this.environment.runtimeConfig.serverUrl}Reports/GetEmpPresent`;
    gLsubAccountListbyCatetory = `${this.environment.runtimeConfig.serverUrl}Common/GLsubAccountListbyCatetory`;
+
+   getBomDetail = `${this.environment.runtimeConfig.serverUrl}Common/GetBomDetail`;
 }
