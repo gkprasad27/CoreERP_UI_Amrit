@@ -554,12 +554,10 @@ export class MemoinvoiceComponent implements OnInit {
             const res = response;
             if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
               if (!this.commonService.checkNullOrUndefined(res.response)) {
-                data.data[data.index].glaccount.list  = res.response['glsubList'];
+                data.data[data.index].subGlaccount.list  = res.response['glsubList'];
                 this.sendDynTableData = { type: 'add', data: data.data };
               }
             }
-            data.data[data.index].subGlaccount.list = [{ glaccountName: 'sdasdas', accountNumber: 12444 }]
-            this.sendDynTableData = { type: 'add', data: data.data };
           });
     }
     this.tableData = this.commonService.formatTableData(this.tableData);

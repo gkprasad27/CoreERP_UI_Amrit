@@ -493,7 +493,7 @@ export class JournalComponent implements OnInit {
             const res = response;
             if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
               if (!this.commonService.checkNullOrUndefined(res.response)) {
-                data.data[data.index].glaccount.list  = res.response['glsubList'];
+                data.data[data.index].subGlaccount.list  = res.response['glsubList'];
                 this.sendDynTableData = { type: 'add', data: data.data };
               }
             }
