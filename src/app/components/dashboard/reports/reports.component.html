@@ -186,7 +186,7 @@
 
 
                 <mat-slide-toggle class="d-flex m-2" formControlName="status"  *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
-                    {{(modelFormData.get('status').value) ? 'true' : 'false' }}
+                    {{(modelFormData.get('status').value) ? 'Pending' : 'Paid' }}
                 </mat-slide-toggle>
 
 

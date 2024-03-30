@@ -149,7 +149,7 @@ export class SalesorderComponent {
   }
   
   saveForm() {
-    debugger
+    debugger;
     if (this.formData1.invalid) {
       return;
     }
@@ -181,8 +181,8 @@ export class SalesorderComponent {
   }
 
   dataChange() {
-    debugger
-    const formObj = this.formData1.value
+    debugger;
+    const formObj = this.formData1.value;
     const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == formObj.taxCode);
     const discountAmount = (((+formObj.qty * +formObj.rate) * ((+formObj.discount) / 100)));
     const amount = (+formObj.qty * +formObj.rate) - discountAmount
