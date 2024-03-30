@@ -533,9 +533,10 @@ export class JobworkmaterialreceivingComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['jwMasterlist']);
-              // this.formData.patchValue({
-              //   jobWorkNumber: +res.response['jwMasterlist'].jobWorkNumber
-              // })
+              this.formData.patchValue({
+                receivedBy: this.employeesList.find((e: any) => e.id == this.formData.value.receivedBy).text
+                // jobWorkNumber: +res.response['jwMasterlist'].jobWorkNumber
+              })
               // if (this.formData.value.documentURL) {
               //   this.downLoad(this.formData.value.documentURL, 'document');
               // }
@@ -649,6 +650,7 @@ export class JobworkmaterialreceivingComponent {
     formData.receivedDate = this.formData.get('receivedDate').value ? this.datepipe.transform(this.formData.get('receivedDate').value, 'MM-dd-yyyy') : '';
     formData.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     formData.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
+    formData.receivedBy = this.employeesList.find((e: any) => e.text == this.formData.value.receivedBy).id;
     const requestObj = { grHdr: formData, grDtl: arr };
     this.apiService.apiPostRequest(addJWReceipt, requestObj).subscribe(
       response => {

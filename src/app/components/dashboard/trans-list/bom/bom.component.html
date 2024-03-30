@@ -208,12 +208,12 @@
 
           <mat-slide-toggle class="d-flex m-2" formControlName="mainComponent" >
             <!-- {{ (formData1.get('mainComponent').value == 'Y') ? ({{ 'bom.mainComponent' | translate }}) : ({{ 'bom.subComponent' | translate }}) }} -->
-            {{ (formData1.get('mainComponent').value != null) ? 'Main Component' : 'Sub Component' }}
+            {{ (formData1.get('mainComponent').value) ? 'Main Component' : 'Sub Component' }}
           </mat-slide-toggle>
 
           <mat-slide-toggle class="d-flex m-2" formControlName="billable" >
             <!-- {{(formData1.get('billable').value == 'Y') ? ({{ 'bom.billable' | translate }}) : ({{ 'bom.nonBillable' | translate }}) }} -->
-            {{(formData1.get('billable').value != null) ? 'Billable' : 'Non Billable' }}
+            {{(formData1.get('billable').value) ? 'Billable' : 'Non Billable' }}
           </mat-slide-toggle>
 
           <!-- <mat-form-field class="form-element">

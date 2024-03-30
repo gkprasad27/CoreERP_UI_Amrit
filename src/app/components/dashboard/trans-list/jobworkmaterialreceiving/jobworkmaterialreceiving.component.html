@@ -63,7 +63,7 @@
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <mat-label>{{'jobworkmaterialreceiving.receivedBy' | translate }}</mat-label>
                     <mat-select formControlName="receivedBy" appFocusOnEnter tabIndex="9">
                         <mat-option>None</mat-option>
@@ -71,7 +71,17 @@
                             {{emp.id}}-{{emp.text}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
+
+                
+                <div class="mat-mdc-form-field typeahead" >
+                    <input placeholder="{{ 'jobworkmaterialreceiving.receivedBy' | translate }}" formControlName="receivedBy"
+                        [typeahead]="employeesList" typeaheadOptionField='text' appFocusOnEnter tabIndex="9"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
+                    <ng-template #customItemTemplate let-model="item">
+                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+                    </ng-template>
+                </div>
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'jobworkmaterialreceiving.totalAmount'"></mat-label>

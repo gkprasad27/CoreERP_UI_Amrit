@@ -26,6 +26,9 @@ export class ReportsComponent {
   companyList: any[] = [];
   customerList: any[] = [];
   materialList: any[] = [];
+  bpTypeList: any[] = [];
+  bpList: any[] = [];
+  bpgLists: any[] = [];
 
   data: any;
 
@@ -72,6 +75,10 @@ export class ReportsComponent {
         case 'materialinward':
           this.getsuppliercodeList();
           break;
+        case 'VendorPayments':
+        case 'CustomerPayments':
+          this.getPartnerTypeList();
+          break;
       }
       this.reset();
       this.getParameters(params.id);
@@ -96,6 +103,9 @@ export class ReportsComponent {
       customerCode: ['-1'],
       materialCode: ['-1'],
       companyName: [null],
+      bpcategory: [true],
+      partyAccount: [true],
+      status: [true],
       selected: [null, [Validators.required]],
       fromDate: [null],
       toDate: [null],
@@ -173,6 +183,7 @@ export class ReportsComponent {
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            debugger
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const resp = res.response['bpaList'];
               const data = resp.length && resp.filter((t: any) => t.bpTypeName == 'Vendor').map((d: any) => { return { id: d.bpnumber, text: d.name }});
@@ -195,6 +206,45 @@ export class ReportsComponent {
             }
           }
         });
+  }
+
+  getPartnerTypeList() {
+    const costCenUrl = String.Join('/', this.apiConfigService.getPartnerTypeList);
+    this.apiService.apiGetRequest(costCenUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.bpTypeList = res.response['ptypeList'];
+            }
+          }
+          this.getbpList();;
+        });
+  }
+
+  getbpList() {
+    const costCenUrl = String.Join('/', this.apiConfigService.getBPList);
+    this.apiService.apiGetRequest(costCenUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          this.spinner.hide();
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.bpList = res.response['BPList'];
+
+            }
+          }
+        });
+  }
+
+  onbpChange() {
+    this.bpgLists = [];
+    if (!this.commonService.checkNullOrUndefined(this.modelFormData.get('bpcategory').value)) {
+      let data = this.bpTypeList.find(res => res.code == this.modelFormData.get('bpcategory').value);
+      this.bpgLists = this.bpList.filter(res => res.bptype == data.code);
+    }
   }
 
   ngOnInit() {
@@ -225,9 +275,10 @@ export class ReportsComponent {
     if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
     } else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward') {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${this.modelFormData.value.customerCode ? this.modelFormData.value.customerCode[0].id : '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode : '-1'}`);
-    } else if (this.routeParam == 'VendorPayments') {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${this.modelFormData.value.customerCode ? this.modelFormData.value.customerCode[0].id : '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode : '-1'}`);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode : '-1'}`);
+    } else if (this.routeParam == 'VendorPayments' || this.routeParam == 'CustomerPayments') {
+      const obj = this.bpgLists.find((d: any) => d.text == this.modelFormData.value.partyAccount);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.status) ? 'Y' : 'N'}/${this.modelFormData.value.bpcategory ? this.modelFormData.value.bpcategory : '-1'}/${obj ? obj.id : '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }

@@ -134,25 +134,6 @@
                     </mat-error>
                 </mat-form-field>
 
-                <div class="multiselect-dropdown-list mx-3" *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
-                    <ng-multiselect-dropdown  
-                      placeholder="{{ 'COMMON.CUSTOMERCODE' | translate }}" formControlName="customerCode"
-                      [settings]="dropdownSettings" [data]="customerList">
-                    </ng-multiselect-dropdown>
-                </div>
-
-                <div class="mat-mdc-form-field typeahead mx-3" *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
-                    <input placeholder="{{ 'COMMON.MATERIALCODE' | translate }}" formControlName="materialCode"
-                        [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="3"
-                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1">
-                    <ng-template #customItemTemplate1 let-model="item">
-                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
-                    </ng-template>
-                </div>
-
-                
-
-
                 <div class="p-2 range-picker"
                     *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' ">
                     <input type="text" ngxDaterangepickerMd startKey="start"
@@ -166,7 +147,53 @@
                     </div>
                 </div>
 
+                <div class="multiselect-dropdown-list mx-3"
+                    *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
+                    <ng-multiselect-dropdown placeholder="{{ 'COMMON.CUSTOMERCODE' | translate }}"
+                        formControlName="customerCode" [settings]="dropdownSettings" [data]="customerList">
+                    </ng-multiselect-dropdown>
+                </div>
+
+                <div class="mat-mdc-form-field typeahead mx-3"
+                    *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
+                    <input placeholder="{{ 'COMMON.MATERIALCODE' | translate }}" formControlName="materialCode"
+                        [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="3"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1">
+                    <ng-template #customItemTemplate1 let-model="item">
+                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+                    </ng-template>
+                </div>
+
+
+                <mat-form-field class="form-element" *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
+                    <mat-label>{{ 'invoicesmemos.bpcategory' | translate }}</mat-label>
+                    <mat-select formControlName="bpcategory" (selectionChange)="onbpChange()">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let acc of bpTypeList" [value]="acc.code">
+                            {{acc.description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="mat-mdc-form-field typeahead" *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
+                    <input placeholder="{{ 'invoicesmemos.partyAccount' | translate }}" formControlName="partyAccount"
+                        [typeahead]="bpgLists" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"  >
+                    <ng-template #customItemTemplate let-model="item">
+                        <span>{{model.text}}</span>
+                    </ng-template>
+                </div>
+
+
+                <mat-slide-toggle class="d-flex m-2" formControlName="status"  *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
+                    {{(modelFormData.get('status').value) ? 'true' : 'false' }}
+                </mat-slide-toggle>
+
+
+
                 
+
+
 
                 <div class="p-2 my-3 ms-5">
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()">
