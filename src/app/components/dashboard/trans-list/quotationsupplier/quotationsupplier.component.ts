@@ -51,6 +51,8 @@ export class QuotationSupplierComponent implements OnInit {
   ptypeList: any;
   mpatternList = [];
 
+  quotationSupplier: any;
+
   constructor(
     public commonService: CommonService,
     private formBuilder: FormBuilder,
@@ -583,6 +585,56 @@ export class QuotationSupplierComponent implements OnInit {
     this.formData.reset();
     //this.formData.controls['voucherNumber'].disable();
     // this.sendDynTableData = { type: 'reset', data: this.tableData };
+  }
+
+  print(res?: any) {
+
+    let arr = [];
+    const obj = {
+      heading: 'QUOTATION',
+      headingObj: {
+        qDate: '27-Mar-2024',
+        ref: 'AMT/WEIR/2324/311/27.03.2024',
+        to: 'Mr. Harish Sir',
+        name: 'Weir Minerals (India) Private Limited',
+        office: '#471/D-1, 3rd Main, 4th Phase Peenya Industrial Area',
+      },
+      detailArray: [{ sno: 1, itemCode: '495X7C5050B120XX', itemDesc: 'PULLEY', qty: 1, rate: 23243, amount: 2423423 }]
+    }
+
+    // if (res.tagsDetail && res.tagsDetail.length) {
+    //   res.tagsDetail.forEach((t: any, i: number) => {
+    //     const tObj = {
+    //       Parameter: t.parameter,
+    //       [t.tagName]: t.result,
+    //     }
+    //     if (!arr.length) {
+    //       arr.push({ detailArray: [tObj], ...obj });
+    //     } else {
+    //       const key = Object.keys(arr[arr.length - 1].detailArray[arr[arr.length - 1].detailArray.length - 1]);
+    //       if (key.filter((f: any) => f.includes('AMT-')).length > 4) {
+    //         arr.push({ detailArray: [], ...obj });
+    //       }
+    //       let dObj = arr[arr.length - 1].detailArray.find((d: any) => d.Parameter == t.parameter);
+    //       if (dObj) {
+    //         dObj[t.tagName] = t.result
+    //       } else {
+    //         arr[arr.length - 1].detailArray.push(tObj);
+    //       }
+    //     }
+    //   })
+    // }
+
+    this.quotationSupplier = obj;
+
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('quotationSupplierPrintData').innerHTML;
+      w.document.body.innerHTML = html;
+      this.quotationSupplier = null;
+      w.print();
+    }, 1000);
+
   }
 
 }

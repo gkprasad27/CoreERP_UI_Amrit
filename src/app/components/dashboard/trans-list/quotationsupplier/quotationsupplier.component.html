@@ -1,3 +1,173 @@
+<div style="margin: 10px;" *ngIf="quotationSupplier" id="quotationSupplierPrintData">
+
+    <div style="display: flex;">
+        <img src="/assets/images/header.jpg" style="height: 100px;
+        width: 55%;">
+        <div style="padding: 24px;
+        border-top: 1px solid black;
+        -webkit-print-color-adjust: exact;
+        background: rgb(22 106 132) !important;
+        color: white;
+        font-size: 20px;
+        width: 45%;
+        align-items: center;
+        justify-content: space-around;
+        display: flex;
+        height: 50px;
+        flex-direction: column;
+    "> <span style="font-size: 35px;font-weight: 700;font-family: Segoe UI;text-align: center;"> {{
+                quotationSupplier.heading }} </span> </div>
+    </div>
+
+    <div style="display: flex;margin-top: 10px;">
+        <div style="width: 50%;padding-left: 15px;display: flex;">
+            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> BD-F002, DATED : </b></div>
+            <div style="padding-left: 50px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;"> {{
+                quotationSupplier?.headingObj?.qDate ? (quotationSupplier?.headingObj?.qDate | date) : '' }} </div>
+        </div>
+        <div style="width: 50%;padding-left: 15px;display: flex;">
+            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> Ref: </b></div>
+            <div style="padding-left: 50px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;"> {{
+                quotationSupplier?.headingObj?.ref }}</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <div style="width: 100%;padding-left: 15px;display: flex;">
+            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> To: </b></div>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;"> {{
+                quotationSupplier?.headingObj?.to }} </div>
+        </div>
+        <div style="width: 100%;padding-left: 15px;display: flex;">
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;"> {{
+                quotationSupplier?.headingObj?.name }} </div>
+        </div>
+        <div style="width: 100%;padding-left: 15px;display: flex;">
+            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"> Head Office: </div>
+            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;"> {{
+                quotationSupplier?.headingObj?.office }} </div>
+        </div>
+    </div>
+
+    <div style="display: flex;margin-top: 30px;">
+        <div style="width: 100%;padding-left: 15px;display: flex; text-decoration: underline;">
+            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> Quotation for pulleys </b></div>
+        </div>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <div style="width: 100%;padding-left: 15px;display: flex;">
+            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"> Dear Sir, </div>
+            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"> We quote our lowest quotation for the
+                following items. </div>
+        </div>
+    </div>
+
+
+    <div style="padding-left: 15px;margin-top: 10px;">
+
+        <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+            *ngIf="quotationSupplier.detailArray && quotationSupplier.detailArray.length">
+            <table
+                style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+                <thead>
+                    <tr>
+                        <th
+                            style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                            S.No </th>
+                        <th
+                            style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                            Item Code </th>
+                        <th
+                            style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                            Item Description </th>
+                        <th
+                            style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                            Qty </th>
+                        <th
+                            style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                            Rate </th>
+                        <th
+                            style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                            Amount </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+                        *ngFor="let row of quotationSupplier.detailArray; let i = index">
+                        <td
+                            style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                            {{ row.sno }} </td>
+                        <td
+                            style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                            {{ row.itemCode }} </td>
+                        <td
+                            style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                            {{ row.itemDesc }} </td>
+                        <td
+                            style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                            {{ row.qty }} </td>
+                        <td
+                            style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                            {{ row.rate }} </td>
+                        <td
+                            style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                            {{ row.amount }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <div style="margin-top: 10px;">
+        <div style="width: 100%;padding-left: 15px;display: flex;">
+            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> Terms & Conditions : </b></div>
+        </div>
+        <ul>
+            <li> 
+                <div style="width: 100%;padding-left: 15px;display: flex;">
+                    <div style="width: 150px; font-size: 15px;font-family: Segoe UI;"> Material </div>
+                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:  FG-260 </div>
+                </div>
+            </li>
+            <li> 
+                <div style="width: 100%;padding-left: 15px;display: flex;">
+                    <div style="width: 150px; font-size: 15px;font-family: Segoe UI;"> Payment </div>
+                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:  As per Aggrement </div>
+                </div>
+            </li>
+            <li> 
+                <div style="width: 100%;padding-left: 15px;display: flex;">
+                    <div style="width: 150px; font-size: 15px;font-family: Segoe UI;"> Delivery </div>
+                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:  2-3 Weeks from the receipt of PO </div>
+                </div>
+            </li>
+            <li> 
+                <div style="width: 100%;padding-left: 15px;display: flex;">
+                    <div style="width: 150px; font-size: 15px;font-family: Segoe UI;"> Taxes </div>
+                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:   GST 18% Extra </div>
+                </div>
+            </li>
+            <li> 
+                <div style="width: 100%;padding-left: 15px;display: flex;">
+                    <div style="width: 150px; font-size: 15px;font-family: Segoe UI;"> Transport </div>
+                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:   To Pay </div>
+                </div>
+            </li>
+        </ul>
+
+        <div style="width: 100%;padding-left: 15px;display: flex;margin-top: 30px;">
+            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> For AMT Power Transmission </b></div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
 <mat-card>
 
     <mat-card-content>
@@ -55,8 +225,9 @@
 
                 <div class="mat-mdc-form-field typeahead">
                     <input placeholder="{{ 'supplierquotation.supplier' | translate }}" formControlName="customerCode"
-                        [typeahead]="ptypeList" typeaheadOptionField='text' appFocusOnEnter tabIndex="3" (typeaheadOnSelect)="supplierChange($event)"
-                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"  >
+                        [typeahead]="ptypeList" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
+                        (typeaheadOnSelect)="supplierChange($event)" class="form-control typeahead"
+                        [typeaheadItemTemplate]="customItemTemplate">
                     <ng-template #customItemTemplate let-model="item">
                         <span>{{model.text}}</span>
                     </ng-template>
@@ -71,7 +242,7 @@
                 </mat-form-field>
 
 
-               
+
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'supplierquotation.deliveryPeriod'"></mat-label>
@@ -142,8 +313,9 @@
 
 
                     <div class="mat-mdc-form-field typeahead">
-                        <input placeholder="{{ 'supplierquotation.materialCode' | translate }}" formControlName="materialCode"
-                            [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="10" class="form-control typeahead"
+                        <input placeholder="{{ 'supplierquotation.materialCode' | translate }}"
+                            formControlName="materialCode" [typeahead]="materialList" typeaheadOptionField='id'
+                            appFocusOnEnter tabIndex="10" class="form-control typeahead"
                             [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="materialCodeChange()"
                             (change)="materialChange()">
                         <ng-template #customItemTemplate let-model="item">
@@ -174,7 +346,8 @@
 
                     <mat-form-field class="form-element">
                         <mat-label [translate]="'supplierquotation.discount'"></mat-label>
-                        <input matInput type="text" formControlName="discount" appFocusOnEnter tabIndex="14" (keypress)="commonService.numberOnly($event)" maxlength="2">
+                        <input matInput type="text" formControlName="discount" appFocusOnEnter tabIndex="14"
+                            (keypress)="commonService.numberOnly($event)" maxlength="2">
                     </mat-form-field>
 
                     <!-- <mat-form-field class="form-element">
@@ -242,6 +415,10 @@
 
 
         <div>
+            <button [hidden]="routeEdit == ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+                (click)="print()">
+                {{ 'COMMON.PRINT' | translate }}
+            </button>
             <button [hidden]="routeEdit == ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
                 (click)="convertToSaleOrder()">
                 {{ 'supplierquotation.CONVERTTOSALEORDER' | translate }}

@@ -29,6 +29,7 @@ export class ReportsComponent {
   bpTypeList: any[] = [];
   bpList: any[] = [];
   bpgLists: any[] = [];
+  employeesList: any[] = [];
 
   data: any;
 
@@ -79,6 +80,9 @@ export class ReportsComponent {
         case 'CustomerPayments':
           this.getPartnerTypeList();
           break;
+        case 'employeeotreport':
+          this.getEmployeesList();
+          break;
       }
       this.reset();
       this.getParameters(params.id);
@@ -102,6 +106,7 @@ export class ReportsComponent {
       companyCode: [null, [Validators.required]],
       customerCode: ['-1'],
       materialCode: ['-1'],
+      employee: ['-1'],
       companyName: [null],
       bpcategory: [true],
       partyAccount: [true],
@@ -232,7 +237,22 @@ export class ReportsComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.bpList = res.response['BPList'];
+            }
+          }
+        });
+  }
 
+  
+  getEmployeesList() {
+    const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList);
+    this.apiService.apiGetRequest(getEmployeeList)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.employeesList = res.response['emplist'];
             }
           }
         });
@@ -278,6 +298,9 @@ export class ReportsComponent {
     } else if (this.routeParam == 'VendorPayments' || this.routeParam == 'CustomerPayments') {
       const obj = this.bpgLists.find((d: any) => d.text == this.modelFormData.value.partyAccount);
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.status) ? 'Y' : 'N'}/${this.modelFormData.value.bpcategory ? this.modelFormData.value.bpcategory : '-1'}/${obj ? obj.id : '-1'}`);
+    } else if (this.routeParam == 'employeeotreport') {
+      const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id : '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }

@@ -529,6 +529,7 @@ export class SalesorderComponent {
     const arr = this.tableData;
     arr.forEach((a: any) => {
       a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';
+      a.id = this.routeEdit ? a.id : 0
     })
     const requestObj = { qsHdr: this.formData.value, qsDtl: arr };
     this.apiService.apiPostRequest(addsq, requestObj).subscribe(

@@ -31,7 +31,8 @@
     "amount": "Amount",
     "taxCode": "Tax Code",
     "totalTax": "Total Tax",
-    "totalAmount": "Total Amount"
+    "totalAmount": "Total Amount",
+    "employee": "Employee"
   },
   "LOGIN": {
     "USERNAME": "Username",
@@ -3282,5 +3283,8 @@
     "monthYear": "Month && Year",
     "totalRejectedQty": "Total Rejected Qty",
     "totalSuppliedQty": "Total Supplied Qty"
+  },
+  "employeeotreport": {
+    "title": "Employee To Report"
   }
 }
