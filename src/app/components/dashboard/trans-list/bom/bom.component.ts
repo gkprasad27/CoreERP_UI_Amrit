@@ -293,6 +293,7 @@ export class BillOfMaterialComponent implements OnInit {
   // }
 
   saveForm() {
+    debugger
     if (this.formData1.invalid) {
       return;
     }
@@ -304,11 +305,11 @@ export class BillOfMaterialComponent implements OnInit {
     let data: any = this.tableData;
     this.tableData = null;
     this.tableComponent.defaultValues();
-    const obj = data.find((d: any) => d.materialCode == this.formData1.value.materialCode);
+    // const obj = data.find((d: any) => d.materialCode == this.formData1.value.materialCode);
     let form = this.formData1.value;
     form.billable = this.formData1.value.billable ? 'Y' : 'N'
     form.mainComponent = this.formData1.value.mainComponent ? 'Y' : 'N'
-    if (this.formData1.value.index == 0 && !obj) {
+    if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
         form.index = data ? (data.length + 1) : 1,
       // });
@@ -344,7 +345,10 @@ export class BillOfMaterialComponent implements OnInit {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
     } else {
-      this.formData1.patchValue(value.item);
+      const val = { ...value.item };
+      val.billable = val.billable == 'Y' ? true : false,
+      val.mainComponent = val.mainComponent == 'Y' ? true : false,
+      this.formData1.patchValue(val);
     }
   }
 
@@ -352,14 +356,14 @@ export class BillOfMaterialComponent implements OnInit {
   materialCodeChange() {
     const obj = this.mmasterList.find((m: any) => m.id == this.formData1.value.materialCode);
     this.formData1.patchValue({
-      netWeight: obj.netWeight,
+      // netWeight: obj.netWeight,
       // availableQty: obj.availQTY,
       description: obj ? obj.text : '',
       materialName: obj ? obj.text : ''
     })
-    if (!obj.netWeight) {
-      this.alertService.openSnackBar('Net Weight has not provided for selected material..', Static.Close, SnackBar.error);
-    }
+    // if (!obj.netWeight) {
+    //   this.alertService.openSnackBar('Net Weight has not provided for selected material..', Static.Close, SnackBar.error);
+    // }
 
   }
 
@@ -388,6 +392,8 @@ export class BillOfMaterialComponent implements OnInit {
                   id: s.id ? s.id : '',
                   // amount: s.amount ? s.amount : '',
                   materialName: s.materialName ? s.materialName : '',
+                  billable: s.billable ? s.billable : '',
+                  mainComponent: s.mainComponent ? s.mainComponent : '',
                   // availableQty: mObj.availQTY ? mObj.availQTY : '',
                   // amount: s.amount ? s.amount : '',
                   action: 'editDelete',

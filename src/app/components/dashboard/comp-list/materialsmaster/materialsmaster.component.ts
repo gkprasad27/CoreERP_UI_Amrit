@@ -151,7 +151,8 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       closingValue: [null],
 
       customerName: [null],
-      bomName: [null],
+      bom: [null],
+      // bomName: [null],
 
       goodsServiceDescription: null,
       partDragNo: null,
@@ -184,7 +185,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
     this.getuomTypeData();
     this.gethsnsacList();
     this.getCustomerList();
-    this.getBOMList();
+    // this.getBOMList();
   }
 
   calculation() {
@@ -434,7 +435,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
     this.formData.item = this.modelFormData.value;
     this.formData.item.fileUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
     this.formData.item.customerCode = this.modelFormData.value.customerName ? this.customerList.find((c: any) => c.text == this.modelFormData.value.customerName).id : '';
-    this.formData.item.bom = this.modelFormData.value.bomName ? this.qnoList.find((c: any) => c.bomName == this.modelFormData.value.bomName).bomnumber : '';
+    // this.formData.item.bom = this.modelFormData.value.bomName ? this.qnoList.find((c: any) => c.bomName == this.modelFormData.value.bomName).bomnumber : '';
     this.addOrEditService[this.formData.action](this.formData, (res) => {
       if (this.fileList) {
         this.uploadFile();

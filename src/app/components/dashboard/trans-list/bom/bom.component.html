@@ -205,7 +205,6 @@
             <mat-label [translate]="'bom.rate'"></mat-label>
             <input matInput type="number" formControlName="rate" appFocusOnEnter tabIndex="10">
           </mat-form-field> -->
-
           <mat-slide-toggle class="d-flex m-2" formControlName="mainComponent" >
             <!-- {{ (formData1.get('mainComponent').value == 'Y') ? ({{ 'bom.mainComponent' | translate }}) : ({{ 'bom.subComponent' | translate }}) }} -->
             {{ (formData1.get('mainComponent').value) ? 'Main Component' : 'Sub Component' }}
