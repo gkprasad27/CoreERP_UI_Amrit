@@ -2639,7 +2639,8 @@
     "employeeContribution": "Employee Contribution",
     "employerContribution": "Employer Contribution",
     "contributionType": "Contribution Type",
-    "companyName": "Company Name"
+    "companyName": "Company Name",
+    "Amount":"Amount"
   },
   "stockexcess": {
     "title": "Stock Excess",

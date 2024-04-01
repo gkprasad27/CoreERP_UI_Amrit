@@ -2164,14 +2164,14 @@
   },
   "pfmaster": {
     "title": "PF Master",
-    "pftypeName": "PFType Name",
+    "pftypeName": "PF Name",
     "companyCode": "company Code",
     "componentCode": "Component Code",
-    "componentName": "Component Name",
     "employeeContribution": "Employee Contribution",
     "employerContribution": "Employer Contribution",
     "contributionType": "Contribution Type",
-    "companyName": "Company Name"
+    "companyName": "Company Name",
+    "Amount": "Amount"
   },
   "stockexcess": {
     "title": "Stock Excess",

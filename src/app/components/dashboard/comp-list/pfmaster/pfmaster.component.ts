@@ -15,6 +15,11 @@ interface ContributionType {
   viewValue: string;
 }
 
+interface ComponentCode {
+  value: string;
+  viewValue: string;
+}
+
 interface Limit {
   value: string;
   viewValue: string;
@@ -47,6 +52,14 @@ export class PFMasterComponent implements OnInit {
       { value: 'Both', viewValue: 'Both' }
     ];
 
+    componentCode: ComponentCode[] =
+    [
+      { value: 'CTC', viewValue: 'CTC' },
+      { value: 'Basic', viewValue: 'Basic' },
+      { value: 'HRA', viewValue: 'HRA' },
+      { value: 'Standard', viewValue: 'Standard' }
+    ];
+
   constructor(
     private alertService: AlertService,
     private formBuilder: FormBuilder,
@@ -70,7 +83,8 @@ export class PFMasterComponent implements OnInit {
       branchCode: [null],
       active: [null],
       id: ['0'],
-      contributionType: [null]
+      contributionType: [null],
+      amount:[null]
     });
 
 

@@ -20,8 +20,8 @@
         <mat-form-field>
           <mat-label>{{'pfmaster.componentCode' | translate }}</mat-label>
           <mat-select formControlName="componentCode">
-            <mat-option *ngFor="let componentList of componentList" [value]="componentList.componentCode">
-              {{componentList.componentName}}
+            <mat-option *ngFor="let componentCode of componentCode" [value]="componentCode.value">
+              {{componentCode.viewValue}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -64,6 +64,9 @@
               {{comp.text}}
             </mat-option>
           </mat-select>
+          </mat-form-field>
+          <mat-form-field class="form-element" >
+            <input matInput placeholder="{{'pfmaster.Amount' | translate }}" formControlName="amount" appFocusOnEnter tabIndex="6">
           </mat-form-field>
       </div>
       <mat-divider></mat-divider>
