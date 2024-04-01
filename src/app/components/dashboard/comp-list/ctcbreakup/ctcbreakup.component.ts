@@ -22,6 +22,8 @@ export class CTCBreakupComponent implements OnInit {
   ctc: any;
   modelFormData: FormGroup;
   structureList: any;
+  PfList: any;
+  PtList: any;
   filteredOptions: any;
   displayedColumns: string[] = ['componentCode', 'componentName', 'EarnDednAmount', 'duration', 'specificMonth'];
   GetEmployeeListArray: [];
@@ -61,6 +63,8 @@ export class CTCBreakupComponent implements OnInit {
   ngOnInit() {
     this.getStructureList();
     this.getctcComponentsList();
+    this.getPFTypeList();
+    this.getPTSlabList();
     
   }
 
@@ -73,6 +77,36 @@ export class CTCBreakupComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.structureList = res.response['structuresList'];
+            }
+          }
+          this.spinner.hide();
+        });
+  }
+
+  getPFTypeList() {
+    const getPfList = String.Join('/', this.apiConfigService.getPFTypeList);
+    this.apiService.apiGetRequest(getPfList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.PfList = res.response['pfList'];
+            }
+          }
+          this.spinner.hide();
+        });
+  }
+
+  getPTSlabList() {
+    const getPtList = String.Join('/', this.apiConfigService.getPTSlabList);
+    this.apiService.apiGetRequest(getPtList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.PtList = res.response['ptList'];
             }
           }
           this.spinner.hide();

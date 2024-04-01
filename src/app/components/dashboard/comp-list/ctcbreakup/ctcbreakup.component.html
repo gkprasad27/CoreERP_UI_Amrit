@@ -24,10 +24,29 @@
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label>
                     <mat-select formControlName="structureName" placeholder="Structure Name" appFocusOnEnter>
                         <mat-option *ngFor="let List of structureList" [value]="List.text">
+                            {{List.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                 <mat-form-field>
+                    <mat-label>PF Type</mat-label>
+                    <!-- <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label> -->
+                    <mat-select formControlName="structureName" placeholder="Structure Name" appFocusOnEnter>
+                        <mat-option *ngFor="let List of PfList" [value]="List.text">
+                            {{List.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>PT Slab</mat-label>
+                    <!-- <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label> -->
+                    <mat-select formControlName="structureName" placeholder="Structure Name" appFocusOnEnter>
+                        <mat-option *ngFor="let List of PtList" [value]="List.text">
                             {{List.text}}
                         </mat-option>
                     </mat-select>

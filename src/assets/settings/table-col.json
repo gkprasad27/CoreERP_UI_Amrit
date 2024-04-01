@@ -2164,8 +2164,8 @@
   },
   "pfmaster": {
     "title": "PF Master",
-    "pftypeName": "PF Name",
-    "companyCode": "company Code",
+    "pfName": "PF Name",
+    "pfType": "PF Type",
     "componentCode": "Component Code",
     "employeeContribution": "Employee Contribution",
     "employerContribution": "Employer Contribution",

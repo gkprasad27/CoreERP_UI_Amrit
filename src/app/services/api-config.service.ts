@@ -396,6 +396,8 @@ export class ApiConfigService {
    //CTC Breakup
    getCTCList = `${this.environment.runtimeConfig.serverUrl}payroll/CTCBreakup/GetCTCList`;
    getStructureList = `${this.environment.runtimeConfig.serverUrl}Common/GetStructuresList`;
+   getPFTypeList = `${this.environment.runtimeConfig.serverUrl}Common/GetPFList`;
+   getPTSlabList = `${this.environment.runtimeConfig.serverUrl}Common/GetPTList`;
    getctcEmployeeList = `${this.environment.runtimeConfig.serverUrl}CTC/GetEmployeeList`;
    getStructures = `${this.environment.runtimeConfig.serverUrl}CTC/GetStructures`;
    getctcComponentsList = `${this.environment.runtimeConfig.serverUrl}payroll/ComponentMaster/GetComponentsList`;

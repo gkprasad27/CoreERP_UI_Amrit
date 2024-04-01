@@ -15,7 +15,7 @@ interface ContributionType {
   viewValue: string;
 }
 
-interface ComponentCode {
+interface pfType {
   value: string;
   viewValue: string;
 }
@@ -52,7 +52,7 @@ export class PFMasterComponent implements OnInit {
       { value: 'Both', viewValue: 'Both' }
     ];
 
-    componentCode: ComponentCode[] =
+    pfType: pfType[] =
     [
       { value: 'CTC', viewValue: 'CTC' },
       { value: 'Basic', viewValue: 'Basic' },
@@ -73,9 +73,9 @@ export class PFMasterComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.modelFormData = this.formBuilder.group({
-      pftypeName: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
+      pfName: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
       limit: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-      componentCode: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+      pfType: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
       componentName: [null],
       employeeContribution: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
       employerContribution: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
