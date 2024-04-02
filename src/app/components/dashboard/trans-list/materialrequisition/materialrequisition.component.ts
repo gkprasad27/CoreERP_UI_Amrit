@@ -321,6 +321,7 @@ export class MaterialrequisitionComponents implements OnInit {
               // console.log(res.response['mreqDetail']);
               let arr = [];
               res.response['tagsDetail'].forEach((s: any, index: number) => {
+                debugger
                 // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
                   // action: 'editView',
@@ -349,7 +350,7 @@ export class MaterialrequisitionComponents implements OnInit {
                   typeofWork: s.typeofWork ? s.typeofWork : '',
                   workStatus: s.workStatus ? s.workStatus : '',
                   id: s.id ? s.id : '',
-                  action: 'editView',
+                  action: s.status != 'Rejected' ? 'editView' : 'view',
                   index: index + 1,
                   checkbox: false
                 }

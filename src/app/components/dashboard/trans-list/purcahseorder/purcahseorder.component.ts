@@ -180,6 +180,8 @@ export class PurchaseOrderComponent implements OnInit {
       highlight: false,
       amount: [''],
       deliveryDate: [''],
+      status: [''],
+      saleOrderNo: [''],
       total: [''],
       type: ['add'],
       action: 'editDeleteView',
@@ -634,6 +636,7 @@ export class PurchaseOrderComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['pomasters']);
               // this.toggle();
+              debugger
               if (res.response['poDetail'] && res.response['poDetail'].length) {
                 let str = res.response['poDetail'][0].taxCode;
                 // str = str.split('-')[0].substring(1, 3)
@@ -811,6 +814,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   calculate() {
+    debugger
     this.formData.patchValue({
       igst: 0,
       cgst: 0,

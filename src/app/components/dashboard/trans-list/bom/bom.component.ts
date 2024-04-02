@@ -159,7 +159,8 @@ export class BillOfMaterialComponent implements OnInit {
       materialCode: ['', Validators.required],
       qty: ['', Validators.required],
      // rate: ['', Validators.required],
-      // netWeight: [''],
+      netWeight: [''],
+      hsnsac: [''],
       //amount: [''],
       description: [''],
       // availableQty: [''],
@@ -355,8 +356,10 @@ export class BillOfMaterialComponent implements OnInit {
 
   materialCodeChange() {
     const obj = this.mmasterList.find((m: any) => m.id == this.formData1.value.materialCode);
+    debugger
     this.formData1.patchValue({
-      // netWeight: obj.netWeight,
+      netWeight: obj.netWeight,
+      hsnsac: obj.hsnsac,
       // availableQty: obj.availQTY,
       description: obj ? obj.text : '',
       materialName: obj ? obj.text : ''
@@ -383,12 +386,14 @@ export class BillOfMaterialComponent implements OnInit {
               //this.accountSelect();
               let arr = [];
               res.response['bomDetail'].forEach((s: any, index: number) => {
+                debugger
                 const mObj = this.mmasterList.find((m: any) => m.id == s.materialCode);
                 const obj = {
                   materialCode: s.materialCode ? s.materialCode : '',
                   qty: s.qty ? s.qty : '',
                   // rate: s.rate ? s.rate : '',
-                  // netWeight: s.netWeight ? s.netWeight : '',
+                  netWeight: s.netWeight ? s.netWeight : '',
+                  hsnsac: s.hsnsac ? s.hsnsac : '',
                   id: s.id ? s.id : '',
                   // amount: s.amount ? s.amount : '',
                   materialName: s.materialName ? s.materialName : '',

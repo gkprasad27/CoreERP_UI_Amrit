@@ -381,8 +381,8 @@ export class SalesorderComponent {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
 debugger
               res.response['bomDetail'].forEach((s: any, index: number) => {
-                const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-                s.materialName = obj.text
+                // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
+                // s.materialName = obj.text
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
                 s.action = s.billable == 'N' ? 'delete' : 'editDelete';
