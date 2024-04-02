@@ -128,6 +128,7 @@ export class SalesorderComponent {
       mainComponent: [''],
       billable: [''],
       bomKey: [''],
+      bomName: [''],
       deliveryDate: [''],
       stockQty: [0],
       totalTax: [0],
@@ -137,6 +138,7 @@ export class SalesorderComponent {
       action: 'editDelete',
       index: 0
     });
+    this.formData1.disable();
   }
 
   resetForm() {
@@ -146,6 +148,7 @@ export class SalesorderComponent {
       action: 'editDelete',
       id: 0
     });
+    this.formData1.disable();
   }
 
   saveForm() {
@@ -264,8 +267,10 @@ export class SalesorderComponent {
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       this.calculate();
       this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+      this.formData1.disable();
     } else {
       this.formData1.patchValue(value.item);
+      this.formData1.enable();
     }
   }
 
@@ -374,7 +379,7 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-
+debugger
               res.response['bomDetail'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 s.materialName = obj.text

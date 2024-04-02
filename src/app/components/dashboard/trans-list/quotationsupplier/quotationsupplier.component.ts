@@ -52,6 +52,8 @@ export class QuotationSupplierComponent implements OnInit {
   mpatternList = [];
 
   quotationSupplier: any;
+  finalTableData: any[] = [];
+  qnoList = [];
 
   constructor(
     public commonService: CommonService,
@@ -137,6 +139,7 @@ export class QuotationSupplierComponent implements OnInit {
       companyName: [null],
       plant: [null],
       branch: [null],
+      bom: [''],
       profitCenter: [null, [Validators.required]],
       customerCode: ['', Validators.required],
       quotationNumber: [null],
@@ -146,7 +149,7 @@ export class QuotationSupplierComponent implements OnInit {
       creditDays: [null],
       deliveryMethod: [null],
       advance: [null],
-      transportMethod: [null],
+      // transportMethod: [null],
       material: [''],
       gstNo: [null],
       igst: [0],
@@ -158,7 +161,7 @@ export class QuotationSupplierComponent implements OnInit {
     });
 
     this.formData1 = this.formBuilder.group({
-      materialCode: ['', Validators.required],
+      materialCode: [''],
       taxCode: ['', Validators.required],
       qty: ['', Validators.required],
       rate: ['', Validators.required],
@@ -168,6 +171,10 @@ export class QuotationSupplierComponent implements OnInit {
       igst: [''],
       cgst: [''],
       amount: [''],
+      mainComponent: [''],
+      billable: [''],
+      bomKey: [''],
+      bomName: [''],
       total: [''],
       netWeight: [''],
       deliveryDate: [''],
@@ -177,6 +184,7 @@ export class QuotationSupplierComponent implements OnInit {
       action: 'editDelete',
       index: 0
     });
+    this.formData1.disable();
 
   }
 
@@ -187,6 +195,7 @@ export class QuotationSupplierComponent implements OnInit {
       action: 'editDelete',
       id: 0
     });
+    this.formData1.disable();
   }
 
   // companyChange() {
@@ -238,6 +247,7 @@ export class QuotationSupplierComponent implements OnInit {
     setTimeout(() => {
       this.tableData = data;
       this.calculate();
+      this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
     });
     this.resetForm();
   }
@@ -281,6 +291,13 @@ export class QuotationSupplierComponent implements OnInit {
       totalAmount: 0,
     })
     this.tableData && this.tableData.forEach((t: any) => {
+      if (t.mainComponent == 'N') {
+        const obj = this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y');
+        if (obj && obj.taxCode && !t.changed) {
+          t.qty = obj.qty * t.qty;
+          t.changed = true
+        }
+      }
       this.formData.patchValue({
         igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
         cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
@@ -300,8 +317,11 @@ export class QuotationSupplierComponent implements OnInit {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       this.calculate();
+      this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+      this.formData1.disable();
     } else {
       this.formData1.patchValue(value.item);
+      this.formData1.enable();
     }
   }
 
@@ -365,9 +385,59 @@ export class QuotationSupplierComponent implements OnInit {
               this.taxCodeList = data;
             }
           }
+          this.getBOMList();
+        });
+  }
+
+  getBOMList() {
+    const companyUrl = String.Join('/', this.apiConfigService.getBOMList);
+    this.apiService.apiGetRequest(companyUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              debugger
+              this.qnoList = res.response['BOMList'];
+            }
+          }
           this.getCustomerList();
         });
   }
+
+
+  
+  getBomDetail() {
+    this.tableData = null;
+    this.tableComponent.defaultValues();
+    const companyUrl = String.Join('/', this.apiConfigService.getBomDetail, this.formData.value.bom);
+    this.apiService.apiGetRequest(companyUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+
+              res.response['bomDetail'].forEach((s: any, index: number) => {
+                const obj = this.materialList.find((m: any) => m.id == s.materialCode);
+                s.materialName = obj.text
+                // s.stockQty = obj.availQTY
+                // s.hsnsac = obj.hsnsac
+                s.action = s.billable == 'N' ? 'delete' : 'editDelete';
+              })
+              const tableData = [...this.finalTableData, ...res.response['bomDetail']];
+              tableData.forEach((t: any, index: number) => t.index = index + 1);
+              this.tableData = tableData;
+              this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+              this.calculate();
+            }
+          }
+          this.getmaterialData();
+        });
+  }
+
 
   getCustomerList() {
     let obj = JSON.parse(localStorage.getItem("user"));
@@ -495,6 +565,7 @@ export class QuotationSupplierComponent implements OnInit {
               this.tableData = res.response['qsDetail'];
               this.calculate();
               this.formData.disable();
+              this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
             }
           }
         });
@@ -503,6 +574,7 @@ export class QuotationSupplierComponent implements OnInit {
   emitColumnChanges(data) {
     this.tableData = data.data;
     // this.calculateAmount(data);
+    this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
   }
 
 
@@ -521,8 +593,12 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
   savesupplierquotation() {
+    const arr = this.tableData;
+    arr.forEach((a: any) => {
+      a.id = this.routeEdit ? a.id : 0
+    })
     const addsq = String.Join('/', this.apiConfigService.addsupplierqs);
-    const requestObj = { qsHdr: this.formData.value, qsDtl: this.tableData };
+    const requestObj = { qsHdr: this.formData.value, qsDtl: arr };
     this.apiService.apiPostRequest(addsq, requestObj).subscribe(
       response => {
         const res = response;
