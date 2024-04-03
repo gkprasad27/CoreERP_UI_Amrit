@@ -557,10 +557,11 @@ export class QuotationSupplierComponent implements OnInit {
               this.formData.patchValue({ customerCode: pObj ? pObj.text : '' });
 
               res.response['qsDetail'].forEach((s: any, index: number) => {
-                const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-                s.materialName = obj.text
+               // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
+               // s.materialName = obj.text
                 // s.stockQty = obj.closingQty;
-                s.action = 'editDelete'; s.index = index + 1;
+                s.action = 'editDelete'; 
+                s.index = index + 1;
               })
               this.tableData = res.response['qsDetail'];
               this.calculate();
