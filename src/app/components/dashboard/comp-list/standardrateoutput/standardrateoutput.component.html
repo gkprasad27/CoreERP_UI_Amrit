@@ -44,10 +44,10 @@
 
         <div class="mat-mdc-form-field typeahead">
           <input placeholder="{{ 'standardrateoutput.materialCode' | translate }}" formControlName="materialCode"
-            [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
+            [typeahead]="qnoList" typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="9"
             class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
           <ng-template #customItemTemplate let-model="item">
-            <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+            <span><strong>{{model.bomnumber}}</strong> - {{model.bomName}}</span>
           </ng-template>
           <mat-error *ngIf="!formControls.materialCode.valid && formControls.materialCode.status != 'DISABLED'"
             [ngClass]="{ 'ng--invalid': !formControls.materialCode.valid  }">Material Code is required</mat-error>

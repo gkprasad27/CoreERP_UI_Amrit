@@ -20,6 +20,7 @@ export class DispatchdetailsComponent {
   formData: any;
 
   getInvoiceList: any[] = [];
+  getInvoiceListData: any[] = [];
 
   fileList: any;
 
@@ -77,12 +78,35 @@ export class DispatchdetailsComponent {
         });
   }
 
-  getsaleOrderDetail() {
-    const obj = this.getInvoiceList.find((i: any) => i.saleOrderNo == this.modelFormData.value.saleOrder);
+  invoiceNoDetail() {
+    debugger
+    const obj = this.getInvoiceListData.find((i: any) => i.invoiceNo == this.modelFormData.value.invoiceNumber);
     this.modelFormData.patchValue({
       poNumber: obj.poNumber,
-      invoiceNumber: obj.invoiceNo
+      // invoiceNumber: obj.invoiceNo
     })
+  }
+
+
+  getInvoiceListApi() {
+    this.modelFormData.patchValue({
+      poNumber: '',
+      invoiceNumber: ''
+    })
+    const url = String.Join('/', this.apiConfigService.getInvoiceList, this.modelFormData.get('saleOrder').value);
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        res => {
+          if(res) {
+            this.spinner.hide();
+            debugger
+            if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+              if (!this.commonService.checkNullOrUndefined(res.response)) {
+                  this.getInvoiceListData = res.response.InvoiceData;
+              }
+            }
+          }
+        });
   }
 
 

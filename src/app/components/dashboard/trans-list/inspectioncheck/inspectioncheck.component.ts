@@ -109,6 +109,8 @@ export class InspectioncheckComponent implements OnInit {
       inspectionCheckNo: [''],
 
 
+      bomKey: [''],
+      bomName: [''],
       // typeofWork: [''],
       // mechine: [''],
       // startDate: [''],
@@ -294,6 +296,8 @@ export class InspectioncheckComponent implements OnInit {
                   saleOrderNumber: s.saleOrderNumber ? s.saleOrderNumber : 0,
                   materialName: s.materialName ? s.materialName : null,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
+                  bomNumber: s.bomNumber ? s.bomNumber : '',
+
                   // requiredqty: s.qty - s.allocatedQTY
                 }
                 arr.push(obj);
@@ -308,6 +312,7 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   onEditEmit(event: any) {
+    debugger
     this.getQCissueDetail(event.saleOrderNumber, event.materialCode);
     this.getInspectionDetail(event.saleOrderNumber, event.materialCode);
   }
@@ -325,6 +330,7 @@ export class InspectioncheckComponent implements OnInit {
               // console.log(res.response['mreqDetail']);
               let arr = [];
               res.response['tagsDetail'].forEach((s: any, index: number) => {
+                debugger
                 // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
                   // action: 'edit',
@@ -340,7 +346,9 @@ export class InspectioncheckComponent implements OnInit {
                   materialName: s.materialName ? s.materialName : null,
                   allocatedPerson: s.allocatedPerson ? s.allocatedPerson : '',
                   endDate: s.endDate ? s.endDate : '',
-                  // isReject: s.isReject ? s.isReject : '',
+
+                  bomKey: s.bomKey ? s.bomKey : '',
+                  bomName: s.bomName ? s.bomName : '',                    // isReject: s.isReject ? s.isReject : '',
                   materialCode: s.materialCode ? s.materialCode : '',
                   mechine: s.mechine ? s.mechine : '',
                   productionTag: s.productionTag ? s.productionTag : '',

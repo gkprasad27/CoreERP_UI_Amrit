@@ -106,6 +106,10 @@ export class MaterialrequisitionComponents implements OnInit {
       materialCode: [''],
       productionTag: [''],
       saleOrderNumber: [''],
+
+      bomKey: [''],
+      bomName: [''],
+
       highlight: false,
       id: 0,
       action: 'editView',
@@ -287,6 +291,7 @@ export class MaterialrequisitionComponents implements OnInit {
                   materialCode: s.materialCode ? s.materialCode : 0,
                   // availableqty: qty.availQTY ? qty.availQTY : 0,
                   saleOrderNumber: s.saleOrderNumber ? s.saleOrderNumber : 0,
+                  bomNumber: s.bomNumber ? s.bomNumber : '',
                   materialName: s.materialName ? s.materialName : null,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   // requiredqty: s.qty - s.allocatedQTY
@@ -349,6 +354,8 @@ export class MaterialrequisitionComponents implements OnInit {
                   productionTargetDate: s.productionTargetDate ? s.productionTargetDate : '',
                   typeofWork: s.typeofWork ? s.typeofWork : '',
                   workStatus: s.workStatus ? s.workStatus : '',
+                  bomKey: s.bomKey ? s.bomKey : '',
+                  bomName: s.bomName ? s.bomName : '',            
                   id: s.id ? s.id : '',
                   action: s.status != 'Rejected' ? 'editView' : 'view',
                   index: index + 1,

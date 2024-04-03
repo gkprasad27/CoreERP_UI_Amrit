@@ -37,6 +37,7 @@ export class StandardRateComponent implements OnInit {
   instruments = [];
   materialList = [];
   msizeList = [];
+  qnoList = [];
 
   dropdownSettings: IDropdownSettings = {
     singleSelection: true,
@@ -119,6 +120,7 @@ export class StandardRateComponent implements OnInit {
     this.getmaterialData();
     this.getMaterialSizeTableData();
     this.getCommitmentLists();
+    this.getBOMList();
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
       this.getCommitmentList('edit');
@@ -183,6 +185,23 @@ export class StandardRateComponent implements OnInit {
           }
         });
   }
+
+  getBOMList() {
+    const companyUrl = String.Join('/', this.apiConfigService.getBOMList);
+    this.apiService.apiGetRequest(companyUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.qnoList = res.response['BOMList'];
+            }
+          }
+          this.getmaterialData();
+        });
+  }
+
 
   getCommitmentList(flag) {
     this.tableData = [];
