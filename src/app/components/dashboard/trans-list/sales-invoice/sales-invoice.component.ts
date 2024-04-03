@@ -131,6 +131,8 @@ export class SalesInvoiceComponent implements OnInit {
       igstCode: [''],
       cgstCode: [''],
       sgstCode: [''],
+      bomKey: [''],
+      bomName: [''],
       hsnNo: [''],
       grossAmount: [''],
       taxStructureId: [''],
