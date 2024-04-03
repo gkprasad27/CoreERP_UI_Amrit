@@ -280,19 +280,20 @@ export class SalesInvoiceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.tableComponent.defaultValues();
+              debugger
               res.response['icDetail'].forEach((i: any) => {
-                const obj = this.materialCodeList.find((m: any) => m.materialCode == i.materialCode)
+                const obj = this.materialCodeList.find((m: any) => m.bomkey == i.materialCode)
 
                 const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
-                const igst = objT.igst ? (obj.rate * objT.igst) / 100 : 0;
-                const cgst = objT.cgst ? (obj.rate * objT.cgst) / 100 : 0;
-                const sgst = objT.sgst ? (obj.rate * objT.sgst) / 100 : 0;
+                const igst = (objT && objT.igst) ? (obj.rate * objT.igst) / 100 : 0;
+                const cgst = (objT && objT.cgst) ? (obj.rate * objT.cgst) / 100 : 0;
+                const sgst = (objT && objT.sgst) ? (obj.rate * objT.sgst) / 100 : 0;
                 i.igst = igst;
                 i.cgst = cgst;
                 i.sgst = sgst;
-                i.igstCode = objT.igst;
-                i.cgstCode = objT.cgst;
-                i.sgstCode = objT.sgst;
+                i.igstCode = (objT && objT.igst) || 0;
+                i.cgstCode = (objT && objT.cgst) || 0;
+                i.sgstCode = (objT && objT.sgst) || 0;
                 i.grossAmount = obj.rate;
                 i.tagName = i.productionTag;
                 i.saleorder = i.saleOrderNumber;
