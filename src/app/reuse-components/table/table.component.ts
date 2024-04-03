@@ -103,6 +103,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     let data = this.dataSource.data;
     data.forEach((d: any) => d.checkbox = flag.checked);
     this.dataSource = new MatTableDataSource(data);
+    this.tableCheckboxEvent.emit({ flag: flag, item: 'All' });
   }
 
   tableButtonCheck(flag: any, element: any) {

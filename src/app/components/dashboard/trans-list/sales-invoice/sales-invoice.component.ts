@@ -282,7 +282,7 @@ export class SalesInvoiceComponent implements OnInit {
               this.tableComponent.defaultValues();
               debugger
               res.response['icDetail'].forEach((i: any) => {
-                const obj = this.materialCodeList.find((m: any) => m.bomkey == i.materialCode)
+                const obj = this.materialCodeList.find((m: any) => m.bomkey == i.materialCode && m.mainComponent == 'Y');
 
                 const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
                 const igst = (objT && objT.igst) ? (obj.rate * objT.igst) / 100 : 0;
@@ -311,13 +311,14 @@ export class SalesInvoiceComponent implements OnInit {
                 i.checkbox = false
               });
               this.tableData = res.response['icDetail'];
-
+              this.calculate();
             }
           }
         });
   }
 
   tableCheckboxEvent(event: any) {
+    debugger
     this.tableData.forEach((res: any) => res.checkbox = (res.id == event.item.id) ? event.flag.checked : res.checkbox);
     this.calculate();
   }
