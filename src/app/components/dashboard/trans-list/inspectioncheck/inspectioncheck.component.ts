@@ -313,8 +313,8 @@ export class InspectioncheckComponent implements OnInit {
 
   onEditEmit(event: any) {
     debugger
-    this.getQCissueDetail(event.saleOrderNumber, event.materialCode);
-    this.getInspectionDetail(event.saleOrderNumber, event.materialCode);
+    this.getQCissueDetail(event.saleOrderNumber, event.bomNumber);
+    this.getInspectionDetail(event.saleOrderNumber, event.bomNumber);
   }
 
   getQCissueDetail(val, val1) {
@@ -361,8 +361,8 @@ export class InspectioncheckComponent implements OnInit {
                   inspectionCheckNo: s.inspectionCheckNo ? s.inspectionCheckNo : '',
                   id: s.id ? s.id : '',
                   checkbox: false,
-                  button: 'Inspection Check',
-                  button1: 'Balanceing Certificate',
+                  button: (s.status != 'QC Rejected') ? 'Inspection Check': '',
+                  button1: (s.status != 'QC Rejected') ? 'Balanceing Certificate': '',
                   // action: 'edit',
                   // index: index + 1,
                 }

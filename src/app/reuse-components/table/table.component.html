@@ -102,7 +102,7 @@
                 <mat-checkbox [(ngModel)]="element[column]" (change)="tableCheckboxCheck($event, element)">
                 </mat-checkbox>
               </ng-container>
-              <ng-container *ngIf="column == 'button' || column == 'button1'">
+              <ng-container *ngIf="(column == 'button' || column == 'button1') && element[column]">
                 <a class="mx-2" (click)="tableButtonCheck(column, element)">
                   {{ element[column] }}
                 </a>
