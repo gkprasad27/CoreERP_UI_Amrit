@@ -386,14 +386,14 @@ export class SalesInvoiceComponent implements OnInit {
                   productionTag: d.tagName ? d.tagName : '',
                   inspectionCheckNo: d.inspectionCheckNo ? d.inspectionCheckNo : '',
                   status: d.status ? d.status : '',
-                  checkbox:true
+                  checkbox: true
                 }
                 arr.push(obj)
               })
               this.tableData = arr;
               this.materialCodeChange();
-             this.calculate();
-             this.getBusienessPartnerAccounts(res.response.InvoiceMasterList);
+              this.calculate();
+              this.getBusienessPartnerAccounts(res.response.InvoiceMasterList);
               this.formData.disable();
             }
           }
@@ -510,6 +510,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   invoicePrint() {
+    debugger
     const totalObj = {
       qty: 0,
       grossAmount: 0,
@@ -518,16 +519,27 @@ export class SalesInvoiceComponent implements OnInit {
       igst: 0,
       total: 0
     };
+    let list = [];
     this.getInvoiceDeatilData.invoiceDetailsList.forEach((data: any) => {
+
       totalObj.qty = totalObj.qty + data.qty,
-      totalObj.grossAmount = totalObj.grossAmount + data.grossAmount,
-      totalObj.cgst = totalObj.cgst + data.cgst,
-      totalObj.sgst = totalObj.sgst + data.sgst,
-      totalObj.igst = totalObj.igst + data.igst,
-      totalObj.total = totalObj.total + (data.grossAmount + data.cgst + data.sgst + data.igst)
+        totalObj.grossAmount = totalObj.grossAmount + data.grossAmount,
+        totalObj.cgst = totalObj.cgst + data.cgst,
+        totalObj.sgst = totalObj.sgst + data.sgst,
+        totalObj.igst = totalObj.igst + data.igst,
+        totalObj.total = totalObj.total + (data.grossAmount + data.cgst + data.sgst + data.igst)
+
+      const index = list.findIndex((l: any) => l.materialCode == data.materialCode);
+      if (index != -1) {
+        list[index].qty = list[index].qty + 1;
+        list[index].grossAmount = list[index].qty * list[index].rate
+      } else {
+        list.push({ ...data });
+      }
     })
 
-    let list = [...this.getInvoiceDeatilData.invoiceDetailsList];
+
+    // let list = [...this.getInvoiceDeatilData.invoiceDetailsList];
     // list = [...list, ...this.setArray(list.length)];
 
     const obj = {
@@ -551,7 +563,7 @@ export class SalesInvoiceComponent implements OnInit {
         city: this.bpaList?.city || '',
         stateName: this.bpaList?.stateName || '',
         pin: this.bpaList?.shiptoZip || '',
-        gstno:  this.bpaList?.gstno || '',
+        gstno: this.bpaList?.gstno || '',
       },
       pAddress: {
         custName: this.getInvoiceDeatilData?.InvoiceMasterList?.custName || '',
@@ -560,7 +572,7 @@ export class SalesInvoiceComponent implements OnInit {
         city: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoCity || '',
         stateName: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoState || '',
         pin: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoZip || '',
-        gstno:  this.getInvoiceDeatilData?.InvoiceMasterList?.customerGstin || '',
+        gstno: this.getInvoiceDeatilData?.InvoiceMasterList?.customerGstin || '',
       },
       detailArray: list,
       totalObj: totalObj,
@@ -586,6 +598,6 @@ export class SalesInvoiceComponent implements OnInit {
     return newArr;
   }
 
-  
+
 
 }
