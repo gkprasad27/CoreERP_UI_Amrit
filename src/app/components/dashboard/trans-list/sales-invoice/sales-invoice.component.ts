@@ -57,6 +57,8 @@ export class SalesInvoiceComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  bpaList: any;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -242,6 +244,7 @@ export class SalesInvoiceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.materialCodeList = res.response['saleordernoList'];
+              debugger
               this.getBusienessPartnerAccount(res.response.saleOrderMasterList);
               this.ponoselect();
               this.getInspectionCheckDetailbySaleorder();
@@ -390,7 +393,24 @@ export class SalesInvoiceComponent implements OnInit {
               this.tableData = arr;
               this.materialCodeChange();
              this.calculate();
+             this.getBusienessPartnerAccounts(res.response.InvoiceMasterList);
               this.formData.disable();
+            }
+          }
+        });
+  }
+
+  getBusienessPartnerAccounts(data: any) {
+    debugger
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getBusienessPartnerAccount, data.customerName);
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.bpaList = res.response.bpaList;
             }
           }
         });
@@ -525,13 +545,13 @@ export class SalesInvoiceComponent implements OnInit {
         ...this.formData.value
       },
       vAddress: {
-        custName: this.getInvoiceDeatilData?.InvoiceMasterList?.custName || '',
-        address: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress1 || '',
-        address1: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress2 || '',
-        city: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoCity || '',
-        stateName: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoState || '',
-        pin: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoZip || '',
-        gstno:  this.getInvoiceDeatilData?.InvoiceMasterList?.customerGstin || '',
+        custName: this.bpaList?.bpnumber || '',
+        address: this.bpaList?.address || '',
+        address1: this.bpaList?.address1 || '',
+        city: this.bpaList?.city || '',
+        stateName: this.bpaList?.stateName || '',
+        pin: this.bpaList?.shiptoZip || '',
+        gstno:  this.bpaList?.gstno || '',
       },
       pAddress: {
         custName: this.getInvoiceDeatilData?.InvoiceMasterList?.custName || '',
