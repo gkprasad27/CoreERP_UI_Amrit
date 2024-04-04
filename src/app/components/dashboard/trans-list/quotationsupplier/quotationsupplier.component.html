@@ -56,10 +56,10 @@
     </div>
 
     <div style="margin-top: 10px;">
-        <div style="width: 100%;padding-left: 15px;display: flex;">
-            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"> Dear Sir, </div>
-            <div style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"> We quote our lowest quotation for the
-                following items. </div>
+        <div style="width: 100%;padding-left: 15px;">
+            <span style="font-size: 15px;font-family: Segoe UI;"> Dear Sir, </span> <br>
+            <span style="font-size: 15px;font-family: Segoe UI;"> We quote our lowest quotation for the
+                following items. </span>
         </div>
     </div>
 
@@ -100,10 +100,10 @@
                             {{ row.sno }} </td>
                         <td
                             style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                            {{ row.itemCode }} </td>
+                            {{ row.materialCode }} </td>
                         <td
                             style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                            {{ row.itemDesc }} </td>
+                            {{ row.materialName }} </td>
                         <td
                             style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
                             {{ row.qty }} </td>
@@ -129,7 +129,7 @@
             <li> 
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: Segoe UI;"> Material </div>
-                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:  FG-260 </div>
+                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:  {{ quotationSupplier.headingObj.material }}  </div>
                 </div>
             </li>
             <li> 
@@ -141,7 +141,7 @@
             <li> 
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: Segoe UI;"> Delivery </div>
-                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:  2-3 Weeks from the receipt of PO </div>
+                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:  {{ quotationSupplier.headingObj.deliveryPeriod }}</div>
                 </div>
             </li>
             <li> 
@@ -153,7 +153,7 @@
             <li> 
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: Segoe UI;"> Transport </div>
-                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:   To Pay </div>
+                    <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">:   {{ quotationSupplier.headingObj.deliveryMethod }} </div>
                 </div>
             </li>
         </ul>

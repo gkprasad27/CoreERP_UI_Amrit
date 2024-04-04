@@ -306,7 +306,7 @@ export class QuotationSupplierComponent implements OnInit {
         totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
       })
     })
-    
+
     this.formData.patchValue({
       totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
     })
@@ -407,7 +407,7 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
 
-  
+
   getBomDetail() {
     this.tableData = null;
     this.tableComponent.defaultValues();
@@ -511,7 +511,7 @@ export class QuotationSupplierComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              
+
               this.profitCenterList = res.response['profitCenterList'];
             }
           }
@@ -557,16 +557,35 @@ export class QuotationSupplierComponent implements OnInit {
               this.formData.patchValue({ customerCode: pObj ? pObj.text : '' });
 
               res.response['qsDetail'].forEach((s: any, index: number) => {
-               // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-               // s.materialName = obj.text
+                // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
+                // s.materialName = obj.text
                 // s.stockQty = obj.closingQty;
-                s.action = 'editDelete'; 
+                s.action = 'editDelete';
                 s.index = index + 1;
               })
               this.tableData = res.response['qsDetail'];
               this.calculate();
+              debugger
+              this.getBusienessPartnerAccounts(res.response['qsmasters']);
               this.formData.disable();
               this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+            }
+          }
+        });
+  }
+
+  bpaList: any;
+  getBusienessPartnerAccounts(data: any) {
+    debugger
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getBusienessPartnerAccount, data.customerCode);
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.bpaList = res.response.bpaList;
             }
           }
         });
@@ -664,19 +683,30 @@ export class QuotationSupplierComponent implements OnInit {
     // this.sendDynTableData = { type: 'reset', data: this.tableData };
   }
 
-  print(res?: any) {
-
-    let arr = [];
+  print() {
+debugger
+    let list = [];
+    this.tableData.forEach((data: any) => {
+      const index = list.findIndex((l: any) => l.quotationNumber == data.quotationNumber);
+      if (index != -1) {
+        list[index].qty = list[index].qty + 1;
+        list[index].amount = list[index].qty * list[index].rate
+      } else {
+        list.push({ ...data });
+      }
+    })
     const obj = {
       heading: 'QUOTATION',
       headingObj: {
-        qDate: '27-Mar-2024',
+        ...this.formData.value,
+        qDate: new Date(),
         ref: 'AMT/WEIR/2324/311/27.03.2024',
         to: 'Mr. Harish Sir',
-        name: 'Weir Minerals (India) Private Limited',
-        office: '#471/D-1, 3rd Main, 4th Phase Peenya Industrial Area',
+        name: this.formData.value.customerCode,
+        office: this.bpaList.address,
       },
-      detailArray: [{ sno: 1, itemCode: '495X7C5050B120XX', itemDesc: 'PULLEY', qty: 1, rate: 23243, amount: 2423423 }]
+      detailArray: list
+    //  [{ sno: 1, itemCode: '495X7C5050B120XX', itemDesc: 'PULLEY', qty: 1, rate: 23243, amount: 2423423 }]
     }
 
     // if (res.tagsDetail && res.tagsDetail.length) {
