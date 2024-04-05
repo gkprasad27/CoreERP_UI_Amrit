@@ -25,6 +25,7 @@
     "CUSTOMERCODE": "Customer Code",
     "MATERIALCODE": "Material Code",
     "COMPANYCODE": "Company Code",
+    "CALCULATE": "Calculate",
     "sgst": "SGST",
     "cgst": "CGST",
     "igst": "IGST",

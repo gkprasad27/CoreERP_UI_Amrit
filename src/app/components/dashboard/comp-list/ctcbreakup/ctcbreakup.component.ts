@@ -46,10 +46,11 @@ export class CTCBreakupComponent implements OnInit {
   ) {
     this.modelFormData = this.formBuilder.group({
       empCode: [null],
-      effectFrom: [null],
-      structureName: [null],
+      effectFrom: [null, Validators.required],
+      pftype: [null, Validators.required],
+      ptslab: [null, Validators.required],
       id: 0,
-      ctc: [null]
+      ctc: [null, Validators.required]
     });
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
@@ -61,11 +62,11 @@ export class CTCBreakupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getStructureList();
-    this.getctcComponentsList();
+    // this.getStructureList();
+    // this.getctcComponentsList();
     this.getPFTypeList();
     this.getPTSlabList();
-    
+
   }
 
   getStructureList() {
@@ -91,7 +92,7 @@ export class CTCBreakupComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.PfList = res.response['pfList'];
+              this.PfList = res.response['PFTypesList'];
             }
           }
           this.spinner.hide();
@@ -106,62 +107,67 @@ export class CTCBreakupComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.PtList = res.response['ptList'];
+              this.PtList = res.response['PTTypesList'];
             }
           }
           this.spinner.hide();
         });
   }
 
-  getctcDetailList() {
-    const qsDetUrl = String.Join('/', this.apiConfigService.getctcDetailList, this.modelFormData.value.empCode);
-    this.apiService.apiGetRequest(qsDetUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response) && res.response['ctcDetailList'] && res.response['ctcDetailList'].length) {
-              const data = [...this.dataSource.data];
-              data.forEach((d: any) => {
-                const obj = res.response['ctcDetailList'].find((s: any) => s.componentCode == d.componentCode);
-                if (obj) {
-                  d.EarnDednAmount = obj.earnDednAmount
-                }
-              })
-              this.dataSource = new MatTableDataSource(data);
-              this.dataSource.paginator = this.paginator;
-            }
-              // this.tableData = res.response['ctcDetailList'];
-          }
-        });
-       
-  }
-  
-  getStructures() {
-    const getStructuresUrl = String.Join('/', this.apiConfigService.getStructures, this.modelFormData.value.structureName, this.modelFormData.value.ctc);
-    this.apiService.apiGetRequest(getStructuresUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response) && res.response['structureList'] && res.response['structureList'].length) {
-              const data = [...this.dataSource.data];
-              data.forEach((d: any) => {
-                const obj = res.response['structureList'].find((s: any) => s.componentCode == d.componentCode);
-                if (obj) {
-                  d.EarnDednAmount = obj.amount
-                }
-              })
-              this.dataSource = new MatTableDataSource(data);
-              this.dataSource.paginator = this.paginator;
-            }
-          }
-          this.spinner.hide();
-        });
-  }
+  // getctcDetailList() {
+  //   const qsDetUrl = String.Join('/', this.apiConfigService.getctcDetailList, this.modelFormData.value.empCode);
+  //   this.apiService.apiGetRequest(qsDetUrl)
+  //     .subscribe(
+  //       response => {
+  //         this.spinner.hide();
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response) && res.response['ctcDetailList'] && res.response['ctcDetailList'].length) {
+  //             const data = [...this.dataSource.data];
+  //             data.forEach((d: any) => {
+  //               const obj = res.response['ctcDetailList'].find((s: any) => s.componentCode == d.componentCode);
+  //               if (obj) {
+  //                 d.EarnDednAmount = obj.earnDednAmount
+  //               }
+  //             })
+  //             this.dataSource = new MatTableDataSource(data);
+  //             this.dataSource.paginator = this.paginator;
+  //           }
+  //             // this.tableData = res.response['ctcDetailList'];
+  //         }
+  //       });
+
+  // }
+
+  // getStructures() {
+  //   const getStructuresUrl = String.Join('/', this.apiConfigService.getStructures, this.modelFormData.value.structureName, this.modelFormData.value.ctc);
+  //   this.apiService.apiGetRequest(getStructuresUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response) && res.response['structureList'] && res.response['structureList'].length) {
+  //             const data = [...this.dataSource.data];
+  //             data.forEach((d: any) => {
+  //               const obj = res.response['structureList'].find((s: any) => s.componentCode == d.componentCode);
+  //               if (obj) {
+  //                 d.EarnDednAmount = obj.amount
+  //               }
+  //             })
+  //             this.dataSource = new MatTableDataSource(data);
+  //             this.dataSource.paginator = this.paginator;
+  //           }
+  //         }
+  //         this.spinner.hide();
+  //       });
+  // }
 
   getctcComponentsList() {
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.paginator = this.paginator;
+    if (this.modelFormData.invalid) {
+      return;
+    }
     const getctcComponentsListUrl = String.Join('/', this.apiConfigService.getPfComponentsList);
     this.apiService.apiGetRequest(getctcComponentsListUrl)
       .subscribe(
@@ -169,12 +175,36 @@ export class CTCBreakupComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
+
+              const arr = res.response['ComponentTypesList'];
+
+              arr.forEach(element => {
+                if (element.componentName == "Basic") {
+                  element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                }
+                if (element.componentName == "PF") {
+                  const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pftype)
+                  element.EarnDednAmount = (((+this.modelFormData.value.ctc) * obj.employeeContribution) / 100);
+                }
+                if (element.componentName == "PT") {
+                  const obj = this.PtList.find((p: any) => p.ptslab == this.modelFormData.value.ptslab)
+                  element.EarnDednAmount = (12 * obj.ptamt);
+                }
+                if (element.componentName == "ESI") {
+                  if ((((+this.modelFormData.value.ctc) * element.percentage) / 100) / 12 < element.amount) {
+                    element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                  } else {
+                    element.EarnDednAmount = 0;
+                  }
+                }
+              });
+
               this.dataSource = new MatTableDataSource(res.response['ComponentTypesList']);
               this.dataSource.paginator = this.paginator;
-              
-              if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
-                this.getctcDetailList();
-              }
+
+              // if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
+              // this.getctcDetailList();
+              // }
             }
           }
           this.spinner.hide();
@@ -207,12 +237,12 @@ export class CTCBreakupComponent implements OnInit {
     const arr = this.dataSource.data.filter((d: any) => d.EarnDednAmount)
     const obj = {
       item: {
-        structure:{
-          structureName:this.modelFormData.value.structureName,
-          ctc:this.modelFormData.value.ctc,
-          empcode:this.modelFormData.value.empCode,
-          effectfrom:this.modelFormData.value.effectFrom,
-          id:this.modelFormData.value.id,
+        structure: {
+          // structureName: this.modelFormData.value.structureName,
+          ctc: this.modelFormData.value.ctc,
+          empcode: this.modelFormData.value.empCode,
+          effectfrom: this.modelFormData.value.effectFrom,
+          id: this.modelFormData.value.id,
         },
         components: arr
       }

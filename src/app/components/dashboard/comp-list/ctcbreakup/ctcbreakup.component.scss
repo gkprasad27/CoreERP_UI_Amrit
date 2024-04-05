@@ -90,12 +90,14 @@ $color-white: white;
 
   .mat-mdc-form-field.typeahead {
     margin-top: 25px;
+    width: 300px;
     input {
        border: none;
        border-bottom: 1px solid;
        border-radius: 0px;
        padding: 0px;
  padding-bottom: 12px;
+ background: transparent;
     }
     input:focus {
        box-shadow: none !important;
