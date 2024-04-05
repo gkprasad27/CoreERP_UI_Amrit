@@ -3288,6 +3288,25 @@
     "totalSuppliedQty": "Total Supplied Qty"
   },
   "employeeotreport": {
-    "title": "Employee To Report"
-  }
+    "title": "Employee Dialy OT Report",
+    "Attndate" : "Date",
+    "staffid":"Employee ID",
+    "employeename":"Employee Name",
+    "logintime":"Login time",
+    "logouttime":"Logout time",
+    "duration":"Duration",
+    "OT_HHMM":"OT"
+  },
+  "employeeattendance": {
+    "title": "Employee Attendance",
+    "Attndate" : "Date",
+    "EmployeeCode":"Employee ID",
+    "EmployeeName":"Employee Name",
+    "logintime":"Login time",
+    "logouttime":"Logout time",
+    "duration":"Duration",
+    "status":"Status",
+    "LateIn":"Late In",
+    "EarlyOut":"EarlyOut"
+}
 }
