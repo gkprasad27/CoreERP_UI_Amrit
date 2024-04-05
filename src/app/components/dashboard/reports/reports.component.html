@@ -184,7 +184,7 @@
                     </ng-template>
                 </div>
 
-                <div class="mat-mdc-form-field typeahead" *ngIf="routeParam == 'employeeotreport'">
+                <div class="mat-mdc-form-field typeahead" *ngIf="routeParam == 'employeeotreport' || routeParam == 'employeeattendance'">
                     <input placeholder="{{ 'COMMON.employee' | translate }}" formControlName="employee"
                         [typeahead]="employeesList" typeaheadOptionField='text' appFocusOnEnter tabIndex="9"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
