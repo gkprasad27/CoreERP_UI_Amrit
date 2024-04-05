@@ -84,7 +84,7 @@ export class CTCBreakupComponent implements OnInit {
   }
 
   getPFTypeList() {
-    const getPfList = String.Join('/', this.apiConfigService.getPFTypeList);
+    const getPfList = String.Join('/', this.apiConfigService.getpfTypesList);
     this.apiService.apiGetRequest(getPfList)
       .subscribe(
         response => {
@@ -99,7 +99,7 @@ export class CTCBreakupComponent implements OnInit {
   }
 
   getPTSlabList() {
-    const getPtList = String.Join('/', this.apiConfigService.getPTSlabList);
+    const getPtList = String.Join('/', this.apiConfigService.getptTypesList);
     this.apiService.apiGetRequest(getPtList)
       .subscribe(
         response => {
