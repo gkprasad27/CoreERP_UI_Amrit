@@ -72,7 +72,7 @@ export class SalaryProcessComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.modelFormData = this.formBuilder.group({
-      structureName: [null],
+      // structureName: [null],
       // emp_Code: [''],
       sal_Month: [''],
       sal_Year: ['']

@@ -22,6 +22,7 @@ export class CTCBreakupComponent implements OnInit {
   ctc: any;
   modelFormData: FormGroup;
   structureList: any;
+  companyList: any;
   PfList: any;
   PtList: any;
   filteredOptions: any;
@@ -50,7 +51,8 @@ export class CTCBreakupComponent implements OnInit {
       pftype: [null, Validators.required],
       ptslab: [null, Validators.required],
       id: 0,
-      ctc: [null, Validators.required]
+      ctc: [null, Validators.required],
+      companycode: [null],
     });
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
@@ -66,9 +68,23 @@ export class CTCBreakupComponent implements OnInit {
     // this.getctcComponentsList();
     this.getPFTypeList();
     this.getPTSlabList();
+    this.getCompanyData();
 
   }
-
+  getCompanyData() {
+    const getCompanyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+    this.apiService.apiGetRequest(getCompanyUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.companyList = res.response['companiesList'];
+            }
+          }
+          this.spinner.hide();
+        });
+  }
   getStructureList() {
     const getStructureList = String.Join('/', this.apiConfigService.getStructureList);
     this.apiService.apiGetRequest(getStructureList)
@@ -163,6 +179,7 @@ export class CTCBreakupComponent implements OnInit {
   // }
 
   getctcComponentsList() {
+    debugger
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator;
     if (this.modelFormData.invalid) {
@@ -177,26 +194,46 @@ export class CTCBreakupComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
 
               const arr = res.response['ComponentTypesList'];
-
+              
               arr.forEach(element => {
                 if (element.componentName == "Basic") {
                   element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
                 }
                 if (element.componentName == "PF") {
                   const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pftype)
-                  element.EarnDednAmount = (((+this.modelFormData.value.ctc) * obj.employeeContribution) / 100);
+                  if ((+this.modelFormData.value.ctc) / 12 < obj.amount) {
+                    element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * obj.employeeContribution) / 100);
+                  }
+                  else{
+                  // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pftype)
+                  element.EarnDednAmount = (12*((+obj.amount) * obj.employeeContribution) / 100);
+                  }
                 }
                 if (element.componentName == "PT") {
                   const obj = this.PtList.find((p: any) => p.ptslab == this.modelFormData.value.ptslab)
-                  element.EarnDednAmount = (12 * obj.ptamt);
+                  if ((+this.modelFormData.value.ctc) / 12 < obj.ptlowerLimit) {
+                    element.EarnDednAmount =  0;
+                  }
+                  else{
+                    element.EarnDednAmount = (12 * obj.ptamt);
+                  }
+                  
                 }
                 if (element.componentName == "ESI") {
-                  if ((((+this.modelFormData.value.ctc) * element.percentage) / 100) / 12 < element.amount) {
+                  debugger
+                  if ((+this.modelFormData.value.ctc) / 12 < element.amount) {
                     element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * element.percentage) / 100);
                   } else {
                     element.EarnDednAmount = 0;
                   }
                 }
+                // if (element.componentName == "ESI") {
+                //   if ((((+this.modelFormData.value.ctc) * element.percentage) / 100) / 12 < element.amount) {
+                //     element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                //   } else {
+                //     element.EarnDednAmount = 0;
+                //   }
+                // }
               });
 
               this.dataSource = new MatTableDataSource(res.response['ComponentTypesList']);
