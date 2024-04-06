@@ -209,6 +209,16 @@ export class CTCBreakupComponent implements OnInit {
                   element.EarnDednAmount = (12*((+obj.amount) * obj.employeeContribution) / 100);
                   }
                 }
+                if (element.componentName == "Employer PF") {
+                  const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pftype)
+                  if ((+this.modelFormData.value.ctc) / 12 < obj.amount) {
+                    element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * obj.employerContribution) / 100);
+                  }
+                  else{
+                  // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pftype)
+                  element.EarnDednAmount = (12*((+obj.amount) * obj.employerContribution) / 100);
+                  }
+                }
                 if (element.componentName == "PT") {
                   const obj = this.PtList.find((p: any) => p.ptslab == this.modelFormData.value.ptslab)
                   if ((+this.modelFormData.value.ctc) / 12 < obj.ptlowerLimit) {
@@ -280,6 +290,8 @@ export class CTCBreakupComponent implements OnInit {
           empcode: this.modelFormData.value.empCode,
           effectfrom: this.modelFormData.value.effectFrom,
           id: this.modelFormData.value.id,
+          pftype:this.modelFormData.value.pftype,
+          ptslab:this.modelFormData.value.ptslab
         },
         components: arr
       }

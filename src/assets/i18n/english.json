@@ -2558,7 +2558,9 @@
     "empCode": "Emp Code",
     "effectFrom": "Effect From",
     "ctc": "CTC",
-    "structureName": "Structure Name"
+    "structureName": "Structure Name",
+    "ptslab":"PT Slab",
+    "pftype": "PF Name"
   },
   "vehiclerequisition": {
     "title": "VehicleRequest",
