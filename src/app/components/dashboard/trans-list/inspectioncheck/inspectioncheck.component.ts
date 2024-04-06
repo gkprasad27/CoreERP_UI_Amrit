@@ -361,6 +361,7 @@ export class InspectioncheckComponent implements OnInit {
                   inspectionCheckNo: s.inspectionCheckNo ? s.inspectionCheckNo : '',
                   id: s.id ? s.id : '',
                   checkbox: false,
+                  hideCheckbox: s.status == 'QC Rejected',
                   button: (s.status != 'QC Rejected') ? 'Inspection Check': '',
                   button1: (s.status != 'QC Rejected') ? 'Balanceing Certificate': '',
                   // action: 'edit',
@@ -633,7 +634,7 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   savemreq() {
-    const arr = this.tableData1.filter((t: any) => t.checkbox);
+    const arr = this.tableData1.filter((t: any) => t.checkbox && !t.hideCheckbox);
     const addJournal = String.Join('/', this.apiConfigService.addinspectioncheck);
     const requestObj = { icDtl: arr, icHdr: this.formData1.value };
     this.apiService.apiPostRequest(addJournal, requestObj).subscribe(

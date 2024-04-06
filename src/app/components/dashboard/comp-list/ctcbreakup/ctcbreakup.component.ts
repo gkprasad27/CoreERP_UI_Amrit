@@ -54,9 +54,11 @@ export class CTCBreakupComponent implements OnInit {
       ctc: [null, Validators.required],
       companycode: [null],
     });
+    debugger
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
+      this.getctcComponentsList();
     }
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
