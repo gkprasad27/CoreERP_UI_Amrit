@@ -79,7 +79,7 @@ export class DispatchdetailsComponent {
   }
 
   invoiceNoDetail() {
-    debugger
+    
     const obj = this.getInvoiceListData.find((i: any) => i.invoiceNo == this.modelFormData.value.invoiceNumber);
     this.modelFormData.patchValue({
       poNumber: obj.poNumber,
@@ -99,7 +99,7 @@ export class DispatchdetailsComponent {
         res => {
           if(res) {
             this.spinner.hide();
-            debugger
+            
             if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
               if (!this.commonService.checkNullOrUndefined(res.response)) {
                   this.getInvoiceListData = res.response.InvoiceData;

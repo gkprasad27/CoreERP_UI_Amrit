@@ -294,7 +294,7 @@ export class BillOfMaterialComponent implements OnInit {
   // }
 
   saveForm() {
-    debugger
+    
     if (this.formData1.invalid) {
       return;
     }
@@ -356,7 +356,7 @@ export class BillOfMaterialComponent implements OnInit {
 
   materialCodeChange() {
     const obj = this.mmasterList.find((m: any) => m.id == this.formData1.value.materialCode);
-    debugger
+    
     this.formData1.patchValue({
       netWeight: obj.netWeight,
       hsnsac: obj.hsnsac,
@@ -386,7 +386,7 @@ export class BillOfMaterialComponent implements OnInit {
               //this.accountSelect();
               let arr = [];
               res.response['bomDetail'].forEach((s: any, index: number) => {
-                debugger
+                
                 const mObj = this.mmasterList.find((m: any) => m.id == s.materialCode);
                 const obj = {
                   materialCode: s.materialCode ? s.materialCode : '',

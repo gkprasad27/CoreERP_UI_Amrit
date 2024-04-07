@@ -191,7 +191,7 @@ export class ReportsComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const resp = res.response['bpaList'];
-              const data = resp.length && resp.filter((t: any) => t.bpTypeName == 'Vendor').map((d: any) => { return { id: d.bpnumber, text: d.name }});
+              const data = resp.length && resp.filter((t: any) => t.bpTypeName == 'Vendor').map((d: any) => { return { id: d.bpnumber, text: d.name } });
               this.customerList = data;
             }
           }
@@ -243,7 +243,7 @@ export class ReportsComponent {
         });
   }
 
-  
+
   getEmployeesList() {
     const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList);
     this.apiService.apiGetRequest(getEmployeeList)
@@ -319,6 +319,9 @@ export class ReportsComponent {
               tableResp.forEach(obj => {
                 const cols = [];
                 Object.keys(this.environment.tableColumnsData[this.routeParam]).forEach(col => {
+                  if (this.routeParam == 'employeeotreport' && col != 'staffid' && col != 'employeename' && col != 'otHrMin') {
+                    col = col.substring(1);
+                  }
                   let nObj: any;
                   if ((obj[col] instanceof Array)) {
                     let arr = [];

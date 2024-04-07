@@ -221,7 +221,7 @@ export class SalesorderComponent {
       totalAmount: 0,
     })
     this.tableData && this.tableData.forEach((t: any) => {
-      debugger
+      
       if (t.mainComponent == 'N') {
         const obj = this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y');
         if (obj && obj.taxCode && !t.changed) {
@@ -379,7 +379,7 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-debugger
+
               res.response['bomDetail'].forEach((s: any, index: number) => {
                 // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 // s.materialName = obj.text
@@ -430,7 +430,7 @@ debugger
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['SaleOrderMasters']);
-              debugger
+              
               res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
 

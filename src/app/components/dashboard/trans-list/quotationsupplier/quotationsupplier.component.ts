@@ -398,7 +398,7 @@ export class QuotationSupplierComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+              
               this.qnoList = res.response['BOMList'];
             }
           }
@@ -565,7 +565,7 @@ export class QuotationSupplierComponent implements OnInit {
               })
               this.tableData = res.response['qsDetail'];
               this.calculate();
-              debugger
+              
               this.getBusienessPartnerAccounts(res.response['qsmasters']);
               this.formData.disable();
               this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
@@ -576,7 +576,7 @@ export class QuotationSupplierComponent implements OnInit {
 
   bpaList: any;
   getBusienessPartnerAccounts(data: any) {
-    debugger
+    
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getBusienessPartnerAccount, data.customerCode);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
@@ -684,7 +684,7 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
   print() {
-debugger
+
     let list = [];
     this.tableData.forEach((data: any) => {
       const index = list.findIndex((l: any) => l.quotationNumber == data.quotationNumber);

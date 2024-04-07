@@ -312,7 +312,7 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   onEditEmit(event: any) {
-    debugger
+    
     this.getQCissueDetail(event.saleOrderNumber, event.bomNumber);
     this.getInspectionDetail(event.saleOrderNumber, event.bomNumber);
   }
@@ -330,7 +330,7 @@ export class InspectioncheckComponent implements OnInit {
               // console.log(res.response['mreqDetail']);
               let arr = [];
               res.response['tagsDetail'].forEach((s: any, index: number) => {
-                debugger
+                
                 // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
                   // action: 'edit',

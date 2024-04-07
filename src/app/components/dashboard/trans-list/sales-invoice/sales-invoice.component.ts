@@ -244,7 +244,7 @@ export class SalesInvoiceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.materialCodeList = res.response['saleordernoList'];
-              debugger
+              
               this.getBusienessPartnerAccount(res.response.saleOrderMasterList);
               this.ponoselect();
               this.getInspectionCheckDetailbySaleorder();
@@ -285,7 +285,7 @@ export class SalesInvoiceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.tableComponent.defaultValues();
-              debugger
+              
               res.response['icDetail'].forEach((i: any) => {
                 const obj = this.materialCodeList.find((m: any) => m.bomkey == i.materialCode && m.mainComponent == 'Y');
 
@@ -323,7 +323,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   tableCheckboxEvent(event: any) {
-    debugger
+    
     this.tableData.forEach((res: any) => res.checkbox = (res.id == event.item.id) ? event.flag.checked : res.checkbox);
     this.calculate();
   }
@@ -401,7 +401,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getBusienessPartnerAccounts(data: any) {
-    debugger
+    
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getBusienessPartnerAccount, data.customerName);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
@@ -510,7 +510,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   invoicePrint() {
-    debugger
+    
     const totalObj = {
       qty: 0,
       grossAmount: 0,

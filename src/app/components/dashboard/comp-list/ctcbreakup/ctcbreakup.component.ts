@@ -48,17 +48,16 @@ export class CTCBreakupComponent implements OnInit {
     this.modelFormData = this.formBuilder.group({
       empCode: [null],
       effectFrom: [null, Validators.required],
-      pftype: [null, Validators.required],
-      ptslab: [null, Validators.required],
+      pfType: [null, Validators.required],
+      ptSlab: [null, Validators.required],
       id: 0,
       ctc: [null, Validators.required],
-      companycode: [null],
+      companyCode: [null],
     });
-    debugger
+    
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
-      this.getctcComponentsList();
     }
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
@@ -69,7 +68,6 @@ export class CTCBreakupComponent implements OnInit {
     // this.getStructureList();
     // this.getctcComponentsList();
     this.getPFTypeList();
-    this.getPTSlabList();
     this.getCompanyData();
 
   }
@@ -113,6 +111,7 @@ export class CTCBreakupComponent implements OnInit {
               this.PfList = res.response['PFTypesList'];
             }
           }
+          this.getPTSlabList();
           this.spinner.hide();
         });
   }
@@ -127,6 +126,9 @@ export class CTCBreakupComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.PtList = res.response['PTTypesList'];
             }
+          }
+          if (this.routeEdit) {
+            this.getctcComponentsList();
           }
           this.spinner.hide();
         });
@@ -181,7 +183,7 @@ export class CTCBreakupComponent implements OnInit {
   // }
 
   getctcComponentsList() {
-    debugger
+    
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator;
     if (this.modelFormData.invalid) {
@@ -196,45 +198,45 @@ export class CTCBreakupComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
 
               const arr = res.response['ComponentTypesList'];
-              
+
               arr.forEach(element => {
                 if (element.componentName == "Basic") {
                   element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
                 }
                 if (element.componentName == "PF") {
-                  const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pftype)
+                  const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
                   if ((+this.modelFormData.value.ctc) / 12 < obj.amount) {
-                    element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * obj.employeeContribution) / 100);
+                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * obj.employeeContribution) / 100);
                   }
-                  else{
-                  // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pftype)
-                  element.EarnDednAmount = (12*((+obj.amount) * obj.employeeContribution) / 100);
+                  else {
+                    // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
+                    element.EarnDednAmount = (12 * ((+obj.amount) * obj.employeeContribution) / 100);
                   }
                 }
                 if (element.componentName == "Employer PF") {
-                  const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pftype)
+                  const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
                   if ((+this.modelFormData.value.ctc) / 12 < obj.amount) {
-                    element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * obj.employerContribution) / 100);
+                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * obj.employerContribution) / 100);
                   }
-                  else{
-                  // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pftype)
-                  element.EarnDednAmount = (12*((+obj.amount) * obj.employerContribution) / 100);
+                  else {
+                    // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
+                    element.EarnDednAmount = (12 * ((+obj.amount) * obj.employerContribution) / 100);
                   }
                 }
                 if (element.componentName == "PT") {
-                  const obj = this.PtList.find((p: any) => p.ptslab == this.modelFormData.value.ptslab)
+                  const obj = this.PtList.find((p: any) => p.ptslab == this.modelFormData.value.ptSlab)
                   if ((+this.modelFormData.value.ctc) / 12 < obj.ptlowerLimit) {
-                    element.EarnDednAmount =  0;
+                    element.EarnDednAmount = 0;
                   }
-                  else{
+                  else {
                     element.EarnDednAmount = (12 * obj.ptamt);
                   }
-                  
+
                 }
                 if (element.componentName == "ESI") {
-                  debugger
+                  
                   if ((+this.modelFormData.value.ctc) / 12 < element.amount) {
-                    element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
                   } else {
                     element.EarnDednAmount = 0;
                   }
@@ -292,8 +294,8 @@ export class CTCBreakupComponent implements OnInit {
           empcode: this.modelFormData.value.empCode,
           effectfrom: this.modelFormData.value.effectFrom,
           id: this.modelFormData.value.id,
-          pftype:this.modelFormData.value.pftype,
-          ptslab:this.modelFormData.value.ptslab
+          pftype: this.modelFormData.value.pfType,
+          ptslab: this.modelFormData.value.ptSlab
         },
         components: arr
       }
