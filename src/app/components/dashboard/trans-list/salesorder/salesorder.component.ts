@@ -223,7 +223,7 @@ export class SalesorderComponent {
       totalAmount: 0,
     })
     this.tableData && this.tableData.forEach((t: any) => {
-      
+
       if (t.mainComponent == 'N') {
         const obj = this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y');
         if (obj && obj.taxCode && !t.changed) {
@@ -371,6 +371,13 @@ export class SalesorderComponent {
   }
 
   getBomDetail() {
+    if (this.tableData.some((t: any) => t.bomKey == this.formData.value.bom)) {
+      this.formData.patchValue({
+        bom: ''
+      })
+      this.alertService.openSnackBar('Bom already selected...', Static.Close, SnackBar.error);
+      return;
+    }
     this.tableData = null;
     this.tableComponent.defaultValues();
     const companyUrl = String.Join('/', this.apiConfigService.getBomDetail, this.formData.value.bom);
@@ -381,12 +388,13 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-
+              debugger
               res.response['bomDetail'].forEach((s: any, index: number) => {
                 // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 // s.materialName = obj.text
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
+                s.id = 0
                 s.action = s.billable == 'N' ? 'delete' : 'editDelete';
               })
               const tableData = [...this.finalTableData, ...res.response['bomDetail']];
@@ -432,7 +440,7 @@ export class SalesorderComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['SaleOrderMasters']);
-              
+
               res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 s.materialName = obj.text
