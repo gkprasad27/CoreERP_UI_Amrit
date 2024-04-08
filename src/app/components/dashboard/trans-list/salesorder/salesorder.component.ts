@@ -118,6 +118,7 @@ export class SalesorderComponent {
       qty: ['', Validators.required],
       rate: ['', Validators.required],
       discount: [''],
+      saleOrderNo: [0],
       sgst: [''],
       id: [0],
       igst: [''],
@@ -133,6 +134,7 @@ export class SalesorderComponent {
       stockQty: [0],
       totalTax: [0],
       hsnsac: [''],
+      status: [''],
       materialName: [''],
       highlight: false,
       action: 'editDelete',
@@ -394,7 +396,7 @@ export class SalesorderComponent {
               this.calculate();
             }
           }
-          this.getmaterialData();
+          // this.getmaterialData();
         });
   }
 
@@ -433,14 +435,15 @@ export class SalesorderComponent {
               
               res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-
                 s.materialName = obj.text
                 s.stockQty = obj.availQTY
                 s.hsnsac = obj.hsnsac
-                s.action = 'editDelete'; s.index = index + 1;
+                s.action = s.billable == 'N' ? 'delete' : 'editDelete';
+                s.index = index + 1;
               })
               this.tableData = res.response['SaleOrderDetails'];
               this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+              this.customerCodeChange();
             }
           }
         });

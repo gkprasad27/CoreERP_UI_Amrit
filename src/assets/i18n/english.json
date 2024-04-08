@@ -2056,6 +2056,9 @@
     "total": "Total",
     "amount": "Amount",
     "totalTax": "Total Tax",
+    "refNo": "Ref No",
+    "responsiblePerson": "Responsible Person",
+    "quotationfor": "Quotation for",
     "totalAmount": "Total Amount",
     "CONVERTTOSALEORDER": "Convert To Sale Order",
     "action": "Action"

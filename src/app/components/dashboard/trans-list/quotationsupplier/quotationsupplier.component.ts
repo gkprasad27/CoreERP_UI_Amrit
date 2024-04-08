@@ -152,6 +152,9 @@ export class QuotationSupplierComponent implements OnInit {
       // transportMethod: [null],
       material: [''],
       gstNo: [null],
+      refNo: [null],
+      responsiblePerson: [null],
+      quotationfor: [null],
       igst: [0],
       cgst: [0],
       sgst: [0],
@@ -684,8 +687,7 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
   print() {
-
-    let list = [];
+    let list = this.tableData.filter((t: any) => t.billable == 'Y');
     this.tableData.forEach((data: any) => {
       const index = list.findIndex((l: any) => l.quotationNumber == data.quotationNumber);
       if (index != -1) {
@@ -700,8 +702,8 @@ export class QuotationSupplierComponent implements OnInit {
       headingObj: {
         ...this.formData.value,
         qDate: new Date(),
-        ref: 'AMT/WEIR/2324/311/27.03.2024',
-        to: 'Mr. Harish Sir',
+        // ref: 'AMT/WEIR/2324/311/27.03.2024',
+        // to: 'Mr. Harish Sir',
         name: this.formData.value.customerCode,
         office: this.bpaList.address,
       },
