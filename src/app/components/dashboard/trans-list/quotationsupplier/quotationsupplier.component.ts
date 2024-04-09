@@ -560,10 +560,11 @@ export class QuotationSupplierComponent implements OnInit {
               this.formData.patchValue({ customerCode: pObj ? pObj.text : '' });
 
               res.response['qsDetail'].forEach((s: any, index: number) => {
+                debugger
                 // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 // s.materialName = obj.text
                 // s.stockQty = obj.closingQty;
-                s.action = 'editDelete';
+                s.action = s.billable == 'N' ? 'delete' : 'editDelete';
                 s.index = index + 1;
               })
               this.tableData = res.response['qsDetail'];
@@ -687,8 +688,9 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
   print() {
-    let list = this.tableData.filter((t: any) => t.billable == 'Y');
-    this.tableData.forEach((data: any) => {
+    const lists = JSON.parse(JSON.stringify(this.tableData))
+    let list = lists.filter((t: any) => t.billable == 'Y');
+    lists.forEach((data: any) => {
       const index = list.findIndex((l: any) => l.quotationNumber == data.quotationNumber);
       if (index != -1) {
         list[index].qty = list[index].qty + 1;
