@@ -285,7 +285,7 @@ export class QuotationSupplierComponent implements OnInit {
     }
   }
 
-  calculate() {
+  calculate(flag = true) {
     this.formData.patchValue({
       igst: 0,
       cgst: 0,
@@ -295,10 +295,10 @@ export class QuotationSupplierComponent implements OnInit {
       totalAmount: 0,
     })
     this.tableData && this.tableData.forEach((t: any) => {
-      if (t.mainComponent == 'N') {
+      if (t.mainComponent == 'N' && flag) {
         const obj = this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y');
         if (obj && obj.taxCode && !t.changed) {
-          t.qty = obj.qty * t.qty;
+          t.qty = obj.qty * (t.bomQty ? t.bomQty : t.qty)
           t.changed = true
         }
       }
@@ -320,7 +320,7 @@ export class QuotationSupplierComponent implements OnInit {
     if (value.action === 'Delete') {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
-      this.calculate();
+      this.calculate(false);
       this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
       this.formData1.disable();
     } else {
@@ -433,7 +433,7 @@ export class QuotationSupplierComponent implements OnInit {
 
               res.response['bomDetail'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-                s.materialName = obj.text
+                s.materialName = obj ? obj.text: ''
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
                 s.id = 0
@@ -443,7 +443,7 @@ export class QuotationSupplierComponent implements OnInit {
               tableData.forEach((t: any, index: number) => t.index = index + 1);
               this.tableData = tableData;
               this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
-              this.calculate();
+              this.calculate(false);
             }
           }
          // this.getmaterialData();
@@ -576,7 +576,7 @@ export class QuotationSupplierComponent implements OnInit {
                 s.index = index + 1;
               })
               this.tableData = res.response['qsDetail'];
-              this.calculate();
+              this.calculate(false);
               
               this.getBusienessPartnerAccounts(res.response['qsmasters']);
             //  this.formData.disable();
@@ -702,12 +702,13 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
   print() {
+    debugger
     const lists = JSON.parse(JSON.stringify(this.tableData))
     let list = lists.filter((t: any) => t.billable == 'Y');
     lists.forEach((data: any) => {
       const index = list.findIndex((l: any) => l.quotationNumber == data.quotationNumber);
       if (index != -1) {
-        list[index].qty = list[index].qty + 1;
+       // list[index].qty = list[index].qty + 1;
         list[index].amount = list[index].qty * list[index].rate
       } else {
         list.push({ ...data });

@@ -213,7 +213,7 @@ export class SalesorderComponent {
     }
   }
 
-  calculate() {
+  calculate(flag = true) {
     this.formData.patchValue({
       igst: 0,
       cgst: 0,
@@ -224,10 +224,10 @@ export class SalesorderComponent {
     })
     this.tableData && this.tableData.forEach((t: any) => {
 
-      if (t.mainComponent == 'N') {
+      if (t.mainComponent == 'N' && flag) {
         const obj = this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y');
         if (obj && obj.taxCode && !t.changed) {
-          t.qty = obj.qty * t.qty;
+          t.qty = obj.qty * (t.bomqty ? t.bomqty : t.qty);
           t.changed = true
         }
       }
@@ -267,7 +267,7 @@ export class SalesorderComponent {
     if (value.action === 'Delete') {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
-      this.calculate();
+      this.calculate(false);
       this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
       this.formData1.disable();
     } else {
@@ -371,6 +371,7 @@ export class SalesorderComponent {
   }
 
   getBomDetail() {
+    debugger
     if (this.tableData.some((t: any) => t.bomKey == this.formData.value.bom)) {
       this.formData.patchValue({
         bom: ''
@@ -401,7 +402,7 @@ export class SalesorderComponent {
               tableData.forEach((t: any, index: number) => t.index = index + 1);
               this.tableData = tableData;
               this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
-              this.calculate();
+              this.calculate(false);
             }
           }
           // this.getmaterialData();
