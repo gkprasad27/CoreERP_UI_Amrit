@@ -180,6 +180,7 @@ export class QuotationSupplierComponent implements OnInit {
       bomName: [''],
       total: [''],
       netWeight: [''],
+      quotationNumber: [''],
       deliveryDate: [''],
       highlight: false,
       // stockQty: [0],
@@ -412,6 +413,13 @@ export class QuotationSupplierComponent implements OnInit {
 
 
   getBomDetail() {
+    if (this.tableData.some((t: any) => t.bomKey == this.formData.value.bom)) {
+      this.formData.patchValue({
+        bom: ''
+      })
+      this.alertService.openSnackBar('Bom already selected...', Static.Close, SnackBar.error);
+      return;
+    }
     this.tableData = null;
     this.tableComponent.defaultValues();
     const companyUrl = String.Join('/', this.apiConfigService.getBomDetail, this.formData.value.bom);
@@ -428,6 +436,7 @@ export class QuotationSupplierComponent implements OnInit {
                 s.materialName = obj.text
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
+                s.id = 0
                 s.action = s.billable == 'N' ? 'delete' : 'editDelete';
               })
               const tableData = [...this.finalTableData, ...res.response['bomDetail']];
@@ -437,7 +446,7 @@ export class QuotationSupplierComponent implements OnInit {
               this.calculate();
             }
           }
-          this.getmaterialData();
+         // this.getmaterialData();
         });
   }
 
@@ -560,7 +569,6 @@ export class QuotationSupplierComponent implements OnInit {
               this.formData.patchValue({ customerCode: pObj ? pObj.text : '' });
 
               res.response['qsDetail'].forEach((s: any, index: number) => {
-                debugger
                 // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 // s.materialName = obj.text
                 // s.stockQty = obj.closingQty;
@@ -571,7 +579,9 @@ export class QuotationSupplierComponent implements OnInit {
               this.calculate();
               
               this.getBusienessPartnerAccounts(res.response['qsmasters']);
-              this.formData.disable();
+            //  this.formData.disable();
+              // this.formData.get('refNo').enable();
+              // this.formData.get('bom').enable();
               this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
             }
           }
@@ -611,6 +621,7 @@ export class QuotationSupplierComponent implements OnInit {
     if (this.tableData.length == 0 || this.formData.invalid) {
       return;
     }
+   // this.formData.enable();
     const obj = this.ptypeList.find((p: any) => p.text == this.formData.value.customerCode);
     this.formData.patchValue({ customerCode: obj.id });
     this.savesupplierquotation();
@@ -625,6 +636,9 @@ export class QuotationSupplierComponent implements OnInit {
     const requestObj = { qsHdr: this.formData.value, qsDtl: arr };
     this.apiService.apiPostRequest(addsq, requestObj).subscribe(
       response => {
+        // if(this.routeEdit != '') {
+        //   this.formData.disable();
+        // }
         const res = response;
         this.tableData = [];
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
