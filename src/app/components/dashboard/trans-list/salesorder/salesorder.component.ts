@@ -92,6 +92,7 @@ export class SalesorderComponent {
       saleOrderNo: [0],
       materialCode: [''],
       bom: [''],
+      id: 0,
       customerCode: ['', Validators.required],
       supplierName: [''],
       // orderDate: [null],

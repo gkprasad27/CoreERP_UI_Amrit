@@ -273,6 +273,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   getSaleOrderDetail() {
+    debugger
     this.tableComponent.defaultValues();
     let url = '';
     if (this.formData.value.saleOrderType == 'Sale Order') {
@@ -294,6 +295,22 @@ export class PurchaseOrderComponent implements OnInit {
               if (this.formData.value.saleOrderType == 'Sale Order') {
                 obj.data = res.response['SaleOrderMasters'];
                 obj.data1 = res.response['SaleOrderDetails'];
+                if (obj.data1 && obj.data1.length) {
+                  let arr = [];
+                  obj.data1.forEach((d: any) => {
+                    if (arr.length) {
+                      const index = arr.findIndex((a: any) => a.materialCode == d.materialCode);
+                      if (index != -1) {
+                        arr[index].qty = arr[index].qty + d.qty
+                      } else {
+                        arr.push(d);
+                      }
+                    } else {
+                      arr.push(d);
+                    }
+                  })
+                  obj.data1 = arr;
+                }
               } else if (this.formData.value.saleOrderType == 'Master Saleorder') {
                 obj.data = res.response['preqmasters']
                 obj.data1 = res.response['preqDetail']
@@ -636,7 +653,7 @@ export class PurchaseOrderComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['pomasters']);
               // this.toggle();
-              
+
               if (res.response['poDetail'] && res.response['poDetail'].length) {
                 let str = res.response['poDetail'][0].taxCode;
                 // str = str.split('-')[0].substring(1, 3)
@@ -814,7 +831,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   calculate() {
-    
+
     this.formData.patchValue({
       igst: 0,
       cgst: 0,
@@ -1048,7 +1065,7 @@ export class PurchaseOrderComponent implements OnInit {
     // window.open(url, "_blank");
   }
 
-  
+
 
 
 }
