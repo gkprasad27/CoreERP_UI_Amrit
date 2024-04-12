@@ -241,6 +241,14 @@ export class CTCBreakupComponent implements OnInit {
                     element.EarnDednAmount = 0;
                   }
                 }
+                if (element.componentName == "Employer ESI") {
+                  
+                  if ((+this.modelFormData.value.ctc) / 12 < element.amount) {
+                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                  } else {
+                    element.EarnDednAmount = 0;
+                  }
+                }
                 // if (element.componentName == "ESI") {
                 //   if ((((+this.modelFormData.value.ctc) * element.percentage) / 100) / 12 < element.amount) {
                 //     element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * element.percentage) / 100);
