@@ -144,3 +144,15 @@
   .height-50 {
     height: 60px;
   }
+  #uploadfile{
+    width: 175px;
+    height: 40px;
+    color: rgb(65, 194, 245);
+    background-color: white;
+    border-color: rgb(65, 194, 245);
+
+  }
+  #uploadfile:hover{
+    color: white;
+    background: linear-gradient(to right, #174154, #419b96);
+  }

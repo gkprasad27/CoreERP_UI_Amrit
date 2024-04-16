@@ -1,15 +1,22 @@
-<mat-card>
+<link rel="stylesheet" href="./salesorder.component.scss">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <mat-card-content>
+<div >
 
-        <form [formGroup]="formData" class="card p-2 mb-3" autocomplete="off">
+<mat-card class="test">
 
-            <h6>
+    <mat-card-content id="mat"  >
+        
+
+
+        <form  [formGroup]="formData" class="card p-2 mb-3" autocomplete="off">
+
+            <h6 id="background">
                 Sale Order Master
-                <hr>
+                
             </h6>
 
-            <div class="d--flex p-1 mat-form-field-height">
+            <div id="form" class="d-flex p-1 mat-form-field-height" >
 
                 <mat-form-field class="form-element">
                     <mat-label>{{ 'saleorder.company' | translate }}</mat-label>
@@ -31,28 +38,15 @@
                     </mat-select>
                 </mat-form-field>
 
-                <!-- <mat-form-field class="form-element">
-                    <mat-label>{{ 'saleorder.supplierName' | translate }}</mat-label>
-                    <mat-select formControlName="customerCode" appFocusOnEnter tabIndex="3"
-                        (selectionChange)="customerCodeChange()">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let comp of customerList" [value]="comp.id">
-                            {{comp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
+                
 
-                <div class="multiselect-dropdown-list">
+                <div class="multiselect-dropdown-list" id="typeaheads">
                     <ng-multiselect-dropdown placeholder="{{ 'saleorder.supplierName' | translate }}"
                         formControlName="customerCode" (onSelect)="customerCodeChange($event)"
                         [settings]="dropdownSettings" [data]="customerList">
                     </ng-multiselect-dropdown>
                 </div>
 
-                <!-- <mat-form-field class="form-element">
-                    <mat-label [translate]="'saleorder.customerGstin'"></mat-label>
-                    <input matInput type="text" readonly formControlName="gstNo" appFocusOnEnter tabIndex="5">
-                </mat-form-field> -->
 
 
                 <mat-form-field class="form-element">
@@ -69,15 +63,9 @@
                 </mat-form-field>
 
 
-                <!-- <mat-form-field class="form-element">
-                    <mat-label [translate]="'saleorder.orderDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="orderDate"
-                        appFocusOnEnter tabIndex="6">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field> -->
+                
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="form-element" id="supply">
                     <mat-label [translate]="'saleorder.dateofSupply'"></mat-label>
                     <input matInput [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="dateofSupply"
                         appFocusOnEnter tabIndex="7">
@@ -85,13 +73,13 @@
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="form-element" id="supply">
                     <mat-label [translate]="'saleorder.placeOfSupply'"></mat-label>
                     <input matInput type="text" formControlName="placeofSupply" appFocusOnEnter tabIndex="8">
                 </mat-form-field>
 
 
-                <div class="mat-mdc-form-field typeahead">
+                <div class="mat-mdc-form-field typeahead" id="typeaheads">
                     <input placeholder="{{ 'saleorder.materialCode' | translate }}" formControlName="materialCode"
                         [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
@@ -101,7 +89,7 @@
                     </ng-template>
                 </div>
 
-                <div class="mat-mdc-form-field typeahead">
+                <div class="mat-mdc-form-field typeahead" id="typeahead">
                     <input placeholder="{{ 'saleorder.bom' | translate }}" formControlName="bom"
                     [typeahead]="qnoList" typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="10"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1"
@@ -111,27 +99,27 @@
                     </ng-template>
                 </div>
 
-                <div>
-                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL"
-                        (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
+                <div id="data">
+                   <button id="upload"> <app-file-upload [type]="'upload'" [oldFileList]="formData.value.documentURL"
+                        (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload></button>
                 </div>
 
             </div>
 
         </form>
 
-        <div class="p-2 card">
+        <div id="forms" class="p-2 card">
 
-            <h6>
+            <h6 id="background">
                 Sale Order Details
-                <hr>
+                
             </h6>
 
             <form [formGroup]="formData1" autocomplete="off">
 
 
 
-                <div class="d--flex p-1 mat-form-field-height">
+                <div id="form" class="d--flex p-1 mat-form-field-height">
 
                     <!-- <div class="mat-mdc-form-field typeahead">
                         <input placeholder="{{ 'saleorder.materialCode' | translate }}" formControlName="materialCode"
@@ -184,13 +172,13 @@
 
                 </div>
 
-                <div class="d-flex justify-content-end mb-3">
+                <div id="for" class="d-flex justify-content-end mb-3">
 
-                    <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white"
-                        (click)="saveForm()">
+                    <button mat-raised-button type="submit" id="submit" class="button-color-bule mx-1 text-white"
+                        (click)="saveForm()" ><i class="fa-solid fa-file-pen"></i>
                         {{ 'COMMON.UPDATE' | translate }}
                     </button>
-                    <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
+                    <button mat-raised-button id="reset"  class="button-color-red text-white mx-1" (click)="resetForm();" ><i class="fa-solid fa-arrow-rotate-right"></i>
                         {{ 'COMMON.RESET' | translate }}
                     </button>
 
@@ -199,16 +187,20 @@
             </form>
 
             <div>
-                <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
+                
+                <app-table class="table-css"  [tableData]="tableData" [showButtons]="false"
                     (editOrDeleteEvent)="editOrDeleteEvent($event)" (onLinkEmitEvent)="downLoadFile($event)">
                 </app-table>
             </div>
         </div>
 
+        
+
 
     </mat-card-content>
 
-    <mat-card-content class="d-flex justify-content-end py-1">
+    <mat-card-content id="flex" class="d-flex justify-content-end py-1">
+        
 
         <div class="d-flex">
             <div class="px-1"> <span class="px-1"> <b>{{ 'saleorder.igst' | translate }} </b></span> :
@@ -233,14 +225,14 @@
 
         <div>
 
-            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
+            <button mat-raised-button type="submit" id="save" class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
-            <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+            <button mat-raised-button id="save" class="button-color-red text-white mx-3" (click)="back();">
                 {{ 'COMMON.BACK' | translate }}
             </button>
-            <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
-                (click)="reset();">
+            <button [hidden]="routeEdit != ''" mat-raised-button id="save" class="button-color-red text-white mx-3"
+                (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
                 {{ 'COMMON.RESET' | translate }}
             </button>
         </div>
@@ -248,3 +240,4 @@
     </mat-card-content>
 
 </mat-card>
+</div>

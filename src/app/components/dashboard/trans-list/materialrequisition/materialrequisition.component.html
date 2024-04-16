@@ -4,7 +4,7 @@
 
     <h6>
       SaleOrder Details
-      <hr>
+      
     </h6>
 
     <!-- <form [formGroup]="formData" autocomplete="off">
@@ -99,7 +99,7 @@
 
     <h6>
       Production Details
-      <hr>
+      
     </h6>
 
     <form [formGroup]="formData1" autocomplete="off" *ngIf="tableData1 && tableData1.length">
@@ -193,7 +193,7 @@
 
 
       </div>
-      <div class="mb-3 d-flex justify-content-end">
+      <div id="for" class="mb-3 d-flex justify-content-end">
 
         <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
           {{ 'COMMON.UPDATE' | translate }}

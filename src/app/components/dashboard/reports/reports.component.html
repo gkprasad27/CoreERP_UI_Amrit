@@ -16,35 +16,35 @@
           height: 50px;
           flex-direction: column;
       ">
-            <span style="font-size: 15px;font-weight: 400;font-family: Segoe UI;padding: 8px;"> {{ ( routeParam + '.' +
+            <span style="font-size: 15px;font-weight: 400;font-family: sans-serif;padding: 8px;"> {{ ( routeParam + '.' +
                 'title') | translate }} </span>
-            <span style="font-size: 35px;font-weight: 700;font-family: Segoe UI;text-align: center;"> Report </span>
+            <span style="font-size: 35px;font-weight: 700;font-family: sans-serif;text-align: center;"> Report </span>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
         <div
             style="width: 33.33%;border-left: 1px solid black;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-            <b style="width: 115px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"> Company Name </b>
-            <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{
+            <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Company Name </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
                 modelFormData.value.companyName }} </span>
         </div>
         <div *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' "
             style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-            <b style="width: 115px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"> From Date </b>
-            <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{
+            <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> From Date </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
                 modelFormData.value.fromDate }} </span>
         </div>
         <div *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' "
             style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-            <b style="width: 115px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"> To Date </b>
-            <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{
+            <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> To Date </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
                 modelFormData.value.toDate }} </span>
         </div>
         <div *ngIf="!(routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' )"
             style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-            <b style="width: 115px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"> As On Date </b>
-            <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{
+            <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> As On Date </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
                 date | date }} </span>
         </div>
     </div>
@@ -58,7 +58,7 @@
                 <tr>
                     <ng-container *ngFor="let keys of data[0]">
                         <th [attr.rowspan]="getRowSpan(keys)" [attr.colspan]="getColSpan(keys)"
-                            style="font-size: 14px;font-family: Calibri;font-weight: 900;border: 1px solid black; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border: 1px solid black; -webkit-print-color-adjust: exact;">
                             {{ ( routeParam + '.' + keys.label) | translate }} </th>
                     </ng-container>
                 </tr>
@@ -68,7 +68,7 @@
                         <ng-container *ngIf="isArray(keys)">
                             <ng-container *ngFor="let key of keys.val">
                                 <th
-                                    style="font-size: 14px;font-family: Calibri;font-weight: 900;border: 1px solid black; -webkit-print-color-adjust: exact;">
+                                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border: 1px solid black; -webkit-print-color-adjust: exact;">
                                     {{ ( routeParam + '.' + key.label) | translate }} </th>
                             </ng-container>
                         </ng-container>
@@ -82,7 +82,7 @@
                     <ng-container *ngFor="let key of keys">
                         <ng-container *ngIf="isArray(key);else text_content">
                             <td *ngFor="let child of key.val"
-                                style="font-size: 12px;font-family: Calibri;border: 1px solid black;;padding: 10px; -webkit-print-color-adjust: exact;">
+                                style="font-size: 12px;font-family: sans-serif;border: 1px solid black;;padding: 10px; -webkit-print-color-adjust: exact;">
                                 <span *ngIf="child.type == 'Date';else other_content">
                                     {{ child.val ? (child.val | date): '' }}
                                 </span>
@@ -91,7 +91,7 @@
                         </ng-container>
                         <ng-template #text_content>
                             <td
-                                style="font-size: 12px;font-family: Calibri;border: 1px solid black;;padding: 10px; -webkit-print-color-adjust: exact;">
+                                style="font-size: 12px;font-family: sans-serif;border: 1px solid black;;padding: 10px; -webkit-print-color-adjust: exact;">
                                 <span *ngIf="key.type == 'Date';else other_content">
                                     {{ key.val ? (key.val | date): '' }}
                                 </span>

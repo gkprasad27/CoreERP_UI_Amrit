@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div style="margin: 10px;" *ngIf="invoicePrintData" id="invoicePrintData">
     <div style="display: flex;">
         <img src="/assets/images/header.jpg" style="height: 100px;
@@ -15,76 +16,76 @@
         height: 50px;
         flex-direction: column;
     ">
-            <span style="font-size: 25px;font-weight: 700;font-family: Segoe UI;"> INVOICE </span> <br> <span
-                style="font-size: 15px;font-family: Calibri;margin-bottom: 5px;"> ORIGINAL F0R RECEIPENT</span>
+            <span style="font-size: 25px;font-weight: 700;font-family: sans-serif;"> INVOICE </span> <br> <span
+                style="font-size: 15px;font-family: sans-serif;margin-bottom: 5px;"> ORIGINAL F0R RECEIPENT</span>
         </div>
     </div>
 
     <div style="display: flex;">
         <div style="width: 60%;border-right: 1px solid;">
             <div style="width: 100%;padding-left: 15px;display: flex;">
-                <div><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Reverse Charge </b></div>
-                <div style="padding-left: 18px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">
+                <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Reverse Charge </b></div>
+                <div style="padding-left: 18px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                     : {{ invoicePrintData?.headingObj?.reverseCharge }} </div>
             </div>
             <div style="width: 100%;display: flex;">
                 <div style="width: 50%;padding-left: 15px;display: flex;">
-                    <div><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice No</b></div>
+                    <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice No</b></div>
                     <div
-                        style="padding-left: 49px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">
+                        style="padding-left: 49px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                         : {{ invoicePrintData?.headingObj?.invoiceNo }} </div>
                 </div>
                 <div style="width: 50%;padding-left: 15px;display: flex;">
-                    <div><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO No </b></div>
+                    <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO No </b></div>
                     <div
-                        style="padding-left: 15px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">
+                        style="padding-left: 15px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                         : {{ invoicePrintData?.headingObj?.poNo }} </div>
                 </div>
             </div>
             <div style="width: 100%;display: flex;border-right: 1px solid;">
                 <div style="width: 50%;padding-left: 15px;display: flex;">
-                    <div><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice Date</b></div>
+                    <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Date</b></div>
                     <div
-                        style="padding-left: 38px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">
+                        style="padding-left: 38px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                         : {{ invoicePrintData?.headingObj?.invoiceDate ? (invoicePrintData?.headingObj?.invoiceDate |
                         date) : '' }} </div>
                 </div>
                 <div style="width: 50%;padding-left: 15px;display: flex;">
-                    <div><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO Date </b></div>
+                    <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Date </b></div>
                     <div
-                        style="padding-left: 4px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">
+                        style="padding-left: 4px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                         : {{ invoicePrintData?.headingObj?.poDate ? (invoicePrintData?.headingObj?.poDate | date) : ''
                         }} </div>
                 </div>
             </div>
             <div style="width: 100%;padding-left: 15px;display: flex;">
-                <div><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> State </b></div>
-                <div style="padding-left: 83px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">
+                <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> State </b></div>
+                <div style="padding-left: 83px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                     : {{ invoicePrintData?.headingObj?.shiptoState }} </div>
             </div>
         </div>
         <div style="width: 40%;padding-left: 15px;">
             <div style="width: 100%;padding-left: 15px;display: flex;">
-                <div><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Transportation Mode </b></div>
-                <div style="padding-left: 8px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">:
+                <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Transportation Mode </b></div>
+                <div style="padding-left: 8px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
                     {{ invoicePrintData?.headingObj?.transportationMode }}</div>
             </div>
             <div style="width: 100%;display: flex;">
                 <div style="width: 100px;padding-left: 15px;"><b
-                        style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Vehicle Number </b></div>
-                <div style="padding-left: 36px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Vehicle Number </b></div>
+                <div style="padding-left: 36px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                     : {{ invoicePrintData?.headingObj?.vehicleRegNo }} </div>
             </div>
             <div style="width: 100%;display: flex;">
                 <div style="width: 100px;padding-left: 15px;"><b
-                        style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Date of Supply </b></div>
-                <div style="padding-left: 36px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Date of Supply </b></div>
+                <div style="padding-left: 36px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                     : {{ invoicePrintData?.headingObj?.dateOfSupply ? (invoicePrintData?.headingObj?.dateOfSupply |
                     date) : '' }} </div>
             </div>
             <div style="width: 100%;padding-left: 15px;display: flex;">
-                <div><b style="font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Place of Supply </b></div>
-                <div style="padding-left: 44px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">
+                <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Place of Supply </b></div>
+                <div style="padding-left: 44px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                     : {{ invoicePrintData?.headingObj?.shiptoCity }} </div>
             </div>
         </div>
@@ -93,35 +94,35 @@
 
     <div style="border-top: 1px solid black; display: flex;text-align: center;">
         <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Details of Receiver Billed to: </b>
+            <b style="font-size: 12px;font-family: sans-serif;font-weight: 700;"> Details of Receiver Billed to: </b>
         </div>
         <div style="width: 50%;padding-left: 15px;">
-            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Details of Receiver Shipped to: </b>
+            <b style="font-size: 12px;font-family: sans-serif;font-weight: 700;"> Details of Receiver Shipped to: </b>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex; ">
         <div
             style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 700;">{{
+            <div style="font-size: 12px;font-family: sans-serif;font-weight: 700;">{{
                 invoicePrintData?.vAddress?.custName }}</div>
-            <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.vAddress?.address }}, {{
+            <div style="font-size: 12px;font-family: sans-serif;">{{ invoicePrintData?.vAddress?.address }}, {{
                 invoicePrintData?.vAddress?.address1 }}</div>
-            <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.vAddress?.city }}, {{
+            <div style="font-size: 12px;font-family: sans-serif;">{{ invoicePrintData?.vAddress?.city }}, {{
                 invoicePrintData?.vAddress?.stateName }}, {{
                 invoicePrintData?.vAddress?.pin }}</div>
-            <b style="margin-top: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 700;"> GSTIN : {{
+            <b style="margin-top: 10px;font-size: 12px;font-family: sans-serif;font-weight: 700;"> GSTIN : {{
                 invoicePrintData?.vAddress?.gstno }}</b>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 700;">{{
+            <div style="font-size: 12px;font-family: sans-serif;font-weight: 700;">{{
                 invoicePrintData?.pAddress?.custName }}</div>
-            <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.pAddress?.address }}, {{
+            <div style="font-size: 12px;font-family: sans-serif;">{{ invoicePrintData?.pAddress?.address }}, {{
                 invoicePrintData?.pAddress?.address1 }}</div>
-            <div style="font-size: 12px;font-family: Calibri;">{{ invoicePrintData?.pAddress?.city }}, {{
+            <div style="font-size: 12px;font-family: sans-serif;">{{ invoicePrintData?.pAddress?.city }}, {{
                 invoicePrintData?.pAddress?.stateName }}, {{
                 invoicePrintData?.pAddress?.pin }}</div>
-            <b style="margin-top: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 700;"> GSTIN : {{
+            <b style="margin-top: 10px;font-size: 12px;font-family: sans-serif;font-weight: 700;"> GSTIN : {{
                 invoicePrintData?.pAddress?.gstno }}</b>
         </div>
     </div>
@@ -131,51 +132,51 @@
             style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
             <thead>
                 <tr>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> S.No </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> Product/Service </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> HSN ACS </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> UOM </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> Qty </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> Rate </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> Amount </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> Less Discount </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> Taxible Value </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 700;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;font-weight: 700;"
                         colspan="2"> CGST </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 700;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;font-weight: 700;"
                         colspan="2"> SGST </th>
-                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: Segoe UI;font-weight: 700;"
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;font-weight: 700;"
                         colspan="2"> IGST </th>
                     <th style="border-bottom: 1px solid black; -webkit-print-color-adjust: exact;"> Total </th>
                 </tr>
 
                 <tr>
                     <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
                         Rate </th>
                     <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
                         Amount </th>
                     <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
                         Rate </th>
                     <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
                         Amount </th>
                     <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
                         Rate </th>
                     <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: Calibri;font-weight: normal;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
                         Amount </th>
                 </tr>
 
@@ -184,104 +185,104 @@
                 <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
                     *ngFor="let row of invoicePrintData.detailArray; let i = index">
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ i + 1 }} </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.materialCode }}
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.hsnNo }}
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.materialName ? 'NOS' : ''}} </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.qty }}
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         <ng-container *ngIf="row.qty"> {{
                             row.rate}} </ng-container> </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.grossAmount }} </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.discount }} </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.grossAmount }} </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.cgstCode }} </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.cgst }} </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.sgstCode }} </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.sgst }} </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.igstCode }} </td>
                     <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.igst }} </td>
 
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.materialName ? row.grossAmount + row.cgst + row.sgst + row.igst : '' }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
-                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;font-size: 12px;font-family: Segoe UI;font-weight: 700;"
+                    <td style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: end;font-size: 12px;font-family: sans-serif;font-weight: 700;"
                         colspan="2"> Totals </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
                         {{ invoicePrintData.totalObj.qty }} </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
                         {{ invoicePrintData.totalObj.grossAmount }} </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
                         {{ invoicePrintData.totalObj.cgst }} </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
                         {{ invoicePrintData.totalObj.sgst }} </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
                         {{ invoicePrintData.totalObj.igst }} </td>
                     <td
-                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: Calibri;text-align: end;">
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
                         {{ invoicePrintData.totalObj.total }} </td>
 
                 </tr>
@@ -293,11 +294,11 @@
 
     <div style="display: flex; font-size: 15px;border-bottom: 1px solid;">
         <div
-            style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;font-size: 12px;font-family: Segoe UI;font-weight: 700;border-right: 1px solid;">
+            style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;font-size: 12px;font-family: sans-serif;font-weight: 700;border-right: 1px solid;">
             <b> Total amount in words: </b>
             <div> {{ commonService.convertNumberToWords(invoicePrintData.totalObj?.total) }} </div>
         </div>
-        <div style="width: 50%;font-size: 12px;font-family: Calibri;">
+        <div style="width: 50%;font-size: 12px;font-family: sans-serif;">
             <div style="">
                 <div style="display: flex;justify-content: space-between;">
                     <b style="width: 300px;padding-left: 5px;"> Total Amount Before Tax </b>
@@ -323,11 +324,11 @@
     </div>
     <div style="display: flex; font-size: 15px;">
         <div style="width: 50%;padding-left: 15px;padding-top: 3px;padding-bottom: 3px;border-right: 1px solid;">
-            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Bank Details: </b>
-            <div style="font-size: 12px;font-family: Calibri;"> Bank Account Number : </div>
-            <div style="font-size: 12px;font-family: Calibri;"> Bank Branch and IFSC Code : </div>
+            <b style="font-size: 12px;font-family: sans-serif;font-weight: 700;"> Bank Details: </b>
+            <div style="font-size: 12px;font-family: sans-serif;"> Bank Account Number : </div>
+            <div style="font-size: 12px;font-family: sans-serif;"> Bank Branch and IFSC Code : </div>
         </div>
-        <div style="width: 50%;font-size: 12px;font-family: Calibri;">
+        <div style="width: 50%;font-size: 12px;font-family: sans-serif;">
             <div style="">
                 <div style="display: flex;justify-content: space-between;">
                     <b style="width: 300px;padding-left: 5px;"> Add IGST </b>
@@ -350,13 +351,13 @@
 
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 40%;padding-left: 15px;border-right: 1px solid black;">
-            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;"> Terms & Conditions: </b>
+            <b style="font-size: 12px;font-family: sans-serif;font-weight: 700;"> Terms & Conditions: </b>
         </div>
         <div style="width: 20%;padding-left: 15px;border-right: 1px solid black;">
             <b> </b>
         </div>
         <div style="width: 40%;">
-            <b style="font-size: 12px;font-family: Segoe UI;font-weight: 700;padding: 5px 0px 10px 2px;"> GST Payable on
+            <b style="font-size: 12px;font-family: sans-serif;font-weight: 700;padding: 5px 0px 10px 2px;"> GST Payable on
                 reverse charges </b>
         </div>
     </div>
@@ -371,10 +372,10 @@
 
 
         </div>
-        <div style="width: 40%;font-size: 12px;font-family: Calibri;">
+        <div style="width: 40%;font-size: 12px;font-family: sans-serif;">
             <div style="border-bottom: 1px solid black;padding: 5px 0px 10px 2px;">Certified that the particulars given
                 above are true and correct</div>
-            <div style="font-size: 12px;font-family: Segoe UI;font-weight: 700;text-align: center;padding-top: 5px;">For
+            <div style="font-size: 12px;font-family: sans-serif;font-weight: 700;text-align: center;padding-top: 5px;">For
                 AMT Power Transmission</div>
             <div style="text-align: center;padding: 30px 10px 6px 10px">Authorised Signatory</div>
         </div>
@@ -388,32 +389,36 @@
 
         <form [formGroup]="formData" autocomplete="off" *ngIf="formData">
 
-            <h6>
+            <h6 id="background">
                 Material Header
-                <hr>
+                
             </h6>
 
-            <div class="d--flex p-1 mat-form-field-height">
+            <div id="forms" class="d--flex p-1 mat-form-field-height">
 
-                <mat-form-field class="form-element">
-                    <mat-label>{{ 'salesinvoice.company' | translate }}</mat-label>
-                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                            {{comp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <div >
+                    <mat-form-field class="form-element">
+                        <mat-label>{{ 'salesinvoice.company' | translate }}</mat-label>
+                        <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+                                {{comp.text}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
 
-                <mat-form-field>
-                    <mat-label>{{'salesinvoice.profitCenter' | translate }}</mat-label>
-                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
-                            {{pft.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <div>
+                    <mat-form-field>
+                        <mat-label>{{'salesinvoice.profitCenter' | translate }}</mat-label>
+                        <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
+                                {{pft.text}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
 
                 <!-- <mat-form-field class="form-element">
                     <mat-label>{{ 'salesinvoice.manualInvoiceNo' | translate }}</mat-label>
@@ -439,13 +444,15 @@
 
 
 
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'salesinvoice.invoiceDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker" [nonEditable]="picker" formControlName="invoiceDate"
-                        appFocusOnEnter tabIndex="3">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'salesinvoice.invoiceDate'"></mat-label>
+                        <input matInput [matDatepicker]="picker" [nonEditable]="picker" formControlName="invoiceDate"
+                            appFocusOnEnter tabIndex="3">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
 
                 <!-- <mat-form-field class="form-element">
                     <mat-label>{{ 'salesinvoice.customerName' | translate }}</mat-label>
@@ -459,10 +466,12 @@
                 </mat-form-field> -->
 
 
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'salesinvoice.customerName'"></mat-label>
-                    <input matInput type="text" readonly formControlName="customerCode" appFocusOnEnter tabIndex="6">
-                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'salesinvoice.customerName'"></mat-label>
+                        <input matInput type="text" readonly formControlName="customerCode" appFocusOnEnter tabIndex="6">
+                    </mat-form-field>
+                </div>
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'salesinvoice.customerGstin'"></mat-label>
@@ -470,30 +479,52 @@
                 </mat-form-field>
 
 
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'salesinvoice.shiptoAddress1'"></mat-label>
-                    <input matInput formControlName="shiptoAddress1" appFocusOnEnter tabIndex="37">
-                </mat-form-field>
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'salesinvoice.shiptoAddress2'"></mat-label>
-                    <input matInput formControlName="shiptoAddress2" appFocusOnEnter tabIndex="37">
-                </mat-form-field>
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'salesinvoice.shiptoState'"></mat-label>
-                    <input matInput formControlName="shiptoState" appFocusOnEnter tabIndex="37">
-                </mat-form-field>
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'salesinvoice.shiptoCity'"></mat-label>
-                    <input matInput formControlName="shiptoCity" appFocusOnEnter tabIndex="37">
-                </mat-form-field>
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'salesinvoice.shiptoZip'"></mat-label>
-                    <input matInput formControlName="shiptoZip" appFocusOnEnter tabIndex="37">
-                </mat-form-field>
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'salesinvoice.shiptoPhone'"></mat-label>
-                    <input matInput formControlName="shiptoPhone" appFocusOnEnter tabIndex="37">
-                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'salesinvoice.shiptoAddress1'"></mat-label>
+                        <input matInput formControlName="shiptoAddress1" appFocusOnEnter tabIndex="37">
+                    </mat-form-field>
+                </div>
+
+
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'salesinvoice.shiptoAddress2'"></mat-label>
+                        <input matInput formControlName="shiptoAddress2" appFocusOnEnter tabIndex="37">
+                    </mat-form-field>
+                </div>
+
+                
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'salesinvoice.shiptoState'"></mat-label>
+                        <input matInput formControlName="shiptoState" appFocusOnEnter tabIndex="37">
+                    </mat-form-field>
+                </div>
+
+
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'salesinvoice.shiptoCity'"></mat-label>
+                        <input matInput formControlName="shiptoCity" appFocusOnEnter tabIndex="37">
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'salesinvoice.shiptoZip'"></mat-label>
+                        <input matInput formControlName="shiptoZip" appFocusOnEnter tabIndex="37">
+                    </mat-form-field>
+                </div>
+
+
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'salesinvoice.shiptoPhone'"></mat-label>
+                        <input matInput formControlName="shiptoPhone" appFocusOnEnter tabIndex="37">
+                    </mat-form-field>
+                </div>
+
 
 
 
@@ -503,9 +534,9 @@
 
         <div class="p-2 card">
 
-            <h6>
+            <h6 id="background">
                 Material Details
-                <hr>
+                
             </h6>
 
             <!-- <form [formGroup]="formData1" autocomplete="off">
@@ -596,14 +627,14 @@
                 (click)="invoicePrint()">
                 {{ 'salesinvoice.invoicePrint' | translate }}
             </button>
-            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
+            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-file-pen"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
             <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
                 {{ 'COMMON.BACK' | translate }}
             </button>
             <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
-                (click)="reset();">
+                (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
                 {{ 'COMMON.RESET' | translate }}
             </button>
 

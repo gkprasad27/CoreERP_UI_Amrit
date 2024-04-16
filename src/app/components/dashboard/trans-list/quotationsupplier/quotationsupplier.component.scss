@@ -46,7 +46,8 @@
 }
 
 .table tr {
-  height: 40px !important;
+  height: 30px !important;
+  
   cursor: pointer;
 }
 
@@ -67,6 +68,7 @@
     .mat-mdc-form-field {
       margin: 5px;
       flex: 0 0 16%;
+      margin-right:5px;
     }
     .mat-mdc-form-field.typeahead {
        margin-top: 25px;
@@ -88,3 +90,50 @@
       min-height: 4vh !important;
     }
   }
+
+  // #form{
+  //   display:flex;
+  //   justify-content: space-evenly;
+   
+  // }
+
+  #submit{
+    background-color:#477994 !important ;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  
+  #submit:hover{
+    background-color: cadetblue !important;
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+  }
+  #reset{
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    
+  }
+  #reset:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+  }
+
+  
+  
+
+  
+
+ #form{
+  justify-content: space-evenly;
+  display:flex;
+  flex-direction: wrap;
+  
+  height:180px;
+
+ }
+
+ #element{
+  
+  margin-left: 10px;
+ }

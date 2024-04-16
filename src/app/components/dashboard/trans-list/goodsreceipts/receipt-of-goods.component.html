@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <mat-card>
 
     <mat-card-content>
@@ -6,44 +7,36 @@
 
             <h6>
                 Material Header
-                <hr>
+                
             </h6>
 
-            <div class="d--flex p-1 mat-form-field-height">
+            <div id="form" class="d--flex p-1 mat-form-field-height">
 
-                <mat-form-field class="form-element">
-                    <mat-label>{{ 'goodsreceipts.company' | translate }}</mat-label>
-                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                            {{comp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label>{{ 'goodsreceipts.company' | translate }}</mat-label>
+                        <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+                                {{comp.text}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
 
-                <mat-form-field>
-                    <mat-label>{{'goodsreceipts.profitCenter' | translate }}</mat-label>
-                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
-                            {{pft.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <div>
+                    <mat-form-field>
+                        <mat-label>{{'goodsreceipts.profitCenter' | translate }}</mat-label>
+                        <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
+                                {{pft.text}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
 
-                <!-- <mat-form-field class="form-element">
-                    <mat-label>{{ 'goodsreceipts.purchaseOrderNo' | translate }}</mat-label>
-                    <mat-select formControlName="purchaseOrderNo" (selectionChange)="ponoselect()"
-                        *ngIf="routeEdit == ''" appFocusOnEnter tabIndex="3">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let poNo of purchaseordernoList" [value]="poNo.id">
-                            {{poNo.id}}
-                        </mat-option>
-                    </mat-select>
-                    <input *ngIf="routeEdit != ''" matInput type="text" readonly formControlName="purchaseOrderNo"
-                        appFocusOnEnter tabIndex="4">
-                </mat-form-field> -->
-
+               
                 <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
                     <ng-multiselect-dropdown placeholder="{{ 'goodsreceipts.purchaseOrderNo' | translate }}"
                         formControlName="purchaseOrderNo" (onSelect)="ponoselect()" [settings]="dropdownSettings"
@@ -58,77 +51,52 @@
 
 
 
-                <!-- <mat-form-field>
-                    <mat-label>{{'goodsreceipts.plant' | translate }}</mat-label>
-                    <mat-select formControlName="plant" appFocusOnEnter tabIndex="12">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let pnt of plantList" [value]="pnt.plantCode">
-                            {{pnt.plantCode}} - {{pnt.plantname}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
+                
 
+                
 
-                <!-- <mat-form-field class="form-element">
-                    <mat-label>{{ 'goodsreceipts.branch' | translate }}</mat-label>
-                    <mat-select formControlName="branch">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let branch of branchList" [value]="branch.id">
-                            {{branch.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
-
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'goodsreceipts.customerName'"></mat-label>
-                    <input matInput type="text" readonly formControlName="customerName" appFocusOnEnter tabIndex="5">
-                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'goodsreceipts.customerName'"></mat-label>
+                        <input matInput type="text" readonly formControlName="customerName" appFocusOnEnter tabIndex="5">
+                    </mat-form-field>
+                </div>
 
 
 
 
 
 
-                <!-- <mat-form-field>
-                    <mat-label [translate]="'goodsreceipts.supplierCode'"></mat-label>
-                    <mat-select formControlName="supplierCode" appFocusOnEnter tabIndex="2">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let bptype of bpaList" [value]="bptype.bpnumber">
-                            {{bptype.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
+                
 
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'goodsreceipts.supplierReferenceNo'"></mat-label>
-                    <input matInput type="text" formControlName="supplierReferenceNo" appFocusOnEnter tabIndex="6">
-                </mat-form-field>
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'goodsreceipts.supplierReferenceNo'"></mat-label>
+                        <input matInput type="text" formControlName="supplierReferenceNo" appFocusOnEnter tabIndex="6">
+                    </mat-form-field>
+                </div>
 
 
 
-                <!-- <mat-form-field class="form-element">
-                    <mat-label [translate]="'goodsreceipts.rrno'"></mat-label>
-                    <input matInput type="number"  formControlName="rrno" appFocusOnEnter tabIndex="2">
-                </mat-form-field> -->
 
+               <div>
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'goodsreceipts.vehicleNo'"></mat-label>
                     <input matInput type="text" formControlName="vehicleNo" appFocusOnEnter tabIndex="7">
                 </mat-form-field>
-
-                <!-- <mat-form-field class="form-element">
-                    <mat-label [translate]="'goodsreceipts.supplierGinno'"></mat-label>
-                    <input matInput type="number" formControlName="supplierGinno" appFocusOnEnter tabIndex="2">
-                </mat-form-field> -->
+               </div>
 
 
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'goodsreceipts.receivedDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="receivedDate"
-                        appFocusOnEnter tabIndex="8">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
+
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'goodsreceipts.receivedDate'"></mat-label>
+                        <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="receivedDate"
+                            appFocusOnEnter tabIndex="8">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
 
                 <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
                     <ng-multiselect-dropdown placeholder="{{ 'goodsreceipts.receivedBy' | translate }}"
@@ -176,33 +144,32 @@
                 </mat-form-field> -->
 
 
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'goodsreceipts.totalAmount'"></mat-label>
-                    <input matInput type="number" formControlName="totalAmount" appFocusOnEnter tabIndex="10">
-                </mat-form-field>
-
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'goodsreceipts.lotNo'"></mat-label>
-                    <input matInput type="text" formControlName="lotNo" appFocusOnEnter tabIndex="11">
-                </mat-form-field>
-
-                <!-- <div *ngIf="formData.value.documentURL" class="d-flex flex-column mt-3">
-                    <mat-label [translate]="'goodsreceipts.attachedUrl'"></mat-label>
-                    <a [href]="url" download target="_blank"> <b> {{ formData.value.documentURL }} </b> </a>
-                </div> -->
-
-                <div class="mx-2">.
-                    <label> {{ 'goodsreceipts.mtcDocumentUpload' | translate }} </label>
-                    <app-file-upload [type]="'card'" (emitFilesList)="emitFilesList($event)"></app-file-upload>
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'goodsreceipts.totalAmount'"></mat-label>
+                        <input matInput type="number" formControlName="totalAmount" appFocusOnEnter tabIndex="10">
+                    </mat-form-field>
                 </div>
 
-                <!-- <div *ngIf="formData.value.invoiceURL" class="d-flex flex-column mt-3">
-                    <mat-label [translate]="'goodsreceipts.attachedUrl'"></mat-label>
-                    <a [href]="url1" download target="_blank"> <b> {{ formData.value.invoiceURL }} </b> </a>
-                </div> -->
-                <div class="mx-2">
-                    <label> {{ 'goodsreceipts.invoiceUpload' | translate }} </label>
-                    <app-file-upload [type]="'card'" (emitFilesList)="emitFilesList1($event)"></app-file-upload>
+                <div>
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'goodsreceipts.lotNo'"></mat-label>
+                        <input matInput type="text" formControlName="lotNo" appFocusOnEnter tabIndex="11">
+                    </mat-form-field>
+    
+                </div>
+                
+
+                <div id="data" class="mx-2">
+                    <label > {{ 'goodsreceipts.mtcDocumentUpload' | translate }} </label>
+                    <button id="upload" ><app-file-upload [type]="'upload'" (emitFilesList)="emitFilesList($event)"></app-file-upload></button>
+                </div>
+
+                
+                <div id="data1" class="mx-2">
+                    <label id="invoice"> {{ 'goodsreceipts.invoiceUpload' | translate }} </label>
+                    
+                    <button id="upload" ><app-file-upload [type]="'upload'" (emitFilesList)="emitFilesList1($event)"></app-file-upload></button>
                 </div>
 
 
@@ -218,27 +185,18 @@
 
             <h6>
                 Material Details
-                <hr>
+                
             </h6>
 
             <form [formGroup]="formData1" autocomplete="off">
 
 
 
-                <div class="d--flex p-1 mat-form-field-height justify-content-between align-items-end">
+                <div class="d-flex flex-wrap">
 
                     <div>
 
-                        <!-- <mat-form-field class="form-element">
-                            <mat-label>{{ 'goodsreceipts.materialCode' | translate }}</mat-label>
-                            <mat-select formControlName="materialCode" appFocusOnEnter tabIndex="12"
-                                (selectionChange)="materialCodeChange()">
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let material of materialCodeList" [value]="material.materialCode">
-                                    {{material.materialCode}} -- {{material.materialName}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field> -->
+                        
                         <div class="multiselect-dropdown-list m-0" >
                             <ng-multiselect-dropdown placeholder="{{ 'goodsreceipts.materialCode' | translate }}"
                                 formControlName="materialCode" (onSelect)="materialCodeChange()" [settings]="dropdownSettings2"
@@ -279,13 +237,13 @@
                     </div>
 
 
-                    <div class="mb-3">
+                    <div id="for" class="mb-3">
 
-                        <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white"
-                            (click)="saveForm()">
+                        <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
+                            (click)="saveForm()"><i class="fa-solid fa-file-circle-plus"></i>
                             {{ 'COMMON.ADD' | translate }}
                         </button>
-                        <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
+                        <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
                             {{ 'COMMON.RESET' | translate }}
                         </button>
 
@@ -331,14 +289,14 @@
         <div>
 
 
-            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
+            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-file-pen"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
             <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
                 {{ 'COMMON.BACK' | translate }}
             </button>
             <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
-                (click)="reset();">
+                (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
                 {{ 'COMMON.RESET' | translate }}
             </button>
             <!-- <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"

@@ -26,7 +26,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="form-element" >
                     <mat-label>{{ 'saleasset.transactionType' | translate }}</mat-label>
                     <mat-select formControlName="assetTransactionType" (selectionChange)="accountSelect()">
                         <mat-option>None</mat-option>
@@ -80,7 +80,6 @@
                 </mat-form-field>
             </div>
         </form>
-
         <div>
             <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
                 [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
@@ -104,7 +103,7 @@
         <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
             (click)="return();">
             {{ 'COMMON.RETURN' | translate }}
-        </button>
+        </button >
 
     </mat-card-content>
 

@@ -5,6 +5,7 @@
   min-height: 70vh;
 }
 
+
 :host ::ng-deep table {
   font-family: sans-serif;
   & > tbody  {
@@ -86,9 +87,75 @@
 }
 
 
+
 .background-red {
   color: red;
 }
 .background-green {
-  color: green;
+  color: gree
 }
+
+.my-2{
+  
+  padding: 0;
+  margin: 0;
+}
+
+.my-2 #headerForm{ 
+  position: relative;
+  top:0;
+  
+  padding: 0;
+  
+  margin: 0;            width: 100%;  align-content: center; justify-items: center; left: auto; right: auto;
+  
+}
+
+form{
+  margin-top:0;
+
+}
+#header{
+padding-top: 0; margin-top: 0;
+}
+
+// #for{
+//   position:absolute;
+//   right:12px;
+  
+//   width: fit-content;
+//   height: fit-content;
+//   top:12px;
+
+// }
+
+
+// #pag{
+//   font-size: 20px;
+// }
+
+// .mat-paginator-navigation {
+//   padding: 10px;}
+
+// .table{
+//   position: absolute;
+//   top: 0;
+// }
+.buttons{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  row-gap: 20px !important;
+  // flex-direction: row;
+  // width: 10%;
+  // justify-content: space-evenly;
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-top: 0;
+  
+ 
+ 
+}
+
+
+
+

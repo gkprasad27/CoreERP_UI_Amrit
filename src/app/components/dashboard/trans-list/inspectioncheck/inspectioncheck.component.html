@@ -19,74 +19,74 @@
         display: flex;
         height: 50px;
         flex-direction: column;
-    "> <span style="font-size: 25px;font-weight: 700;font-family: Segoe UI;text-align: center;">  {{ data.heading }} </span> </div>
+    "> <span style="font-size: 25px;font-weight: 700;font-family: sans-serif;text-align: center;">  {{ data.heading }} </span> </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
       <div style="width: 40%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-        <b style="width: 115px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"> Customer Name </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.supplierName }} </span>
+        <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Customer Name </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.supplierName }} </span>
       </div>
       <div style="width: 60%;display: flex;padding: 3px 15px;">
-        <b style="width: 130px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"> Item Description </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.description }} </span>
+        <b style="width: 130px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Item Description </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.description }} </span>
       </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
       <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-        <b style="width: 115px;font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice Number </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.invoiceNo }} </span>
+        <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Number </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.invoiceNo }} </span>
       </div>
       <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-        <b style="width: 80px;font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO Number </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.poNumber }} </span>
+        <b style="width: 80px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Number </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.poNumber }} </span>
       </div>
       <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-        <b style="width: 90px;font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Heat Number </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.heatNumber }} </span>
+        <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Heat Number </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.heatNumber }} </span>
       </div>
       <div style="width: 25%; display: flex;padding: 3px 15px;">
-        <b style="width: 90px;font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Report Date </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ date | date }} </span>
+        <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Report Date </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ date | date }} </span>
       </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
-        <b style="width: 115px;font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice Date </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.invoiceDate | date }}</span>
+        <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Date </b>
+        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.invoiceDate | date }}</span>
       </div>
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
-        <b style="width: 90px;font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO Date </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.poDate | date }} </span>
+        <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Date </b>
+        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.poDate | date }} </span>
       </div>
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
-        <b style="width: 90px;font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Part/Drg No </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.drgNo }} </span>
+        <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Part/Drg No </b>
+        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.drgNo }} </span>
       </div>
       <div style="width: 25%;padding: 3px 15px;display: flex;">
-        <b style="width: 115px;font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Drawing Rev. No </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: NA </span>
+        <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Drawing Rev. No </b>
+        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: NA </span>
       </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
-        <b style="width: 115px;font-size: 14px;font-family: Segoe UI;font-weight: 700;"> Invoice Quantity </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.invoiceQty }}</span>
+        <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Quantity </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.invoiceQty }}</span>
       </div>
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
-        <b style="width: 125px;font-size: 14px;font-family: Segoe UI;font-weight: 700;"> PO Quantity </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.matQty }} </span>
+        <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Quantity </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.matQty }} </span>
       </div>
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
-        <b style="width: 125px;font-size: 14px;font-family: Segoe UI;font-weight: 700;">  </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">  </span>
+        <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;">  </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">  </span>
       </div>
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
-        <b style="width: 125px;font-size: 14px;font-family: Segoe UI;font-weight: 700;">  </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">  </span>
+        <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;">  </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">  </span>
       </div>
     </div>
 
@@ -98,32 +98,32 @@
         <thead>
           <tr>
             <th
-              style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
               S.No </th>
             <th
-              style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
               Parameter </th>
             <th
-              style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
               Specification </th>
             <th
-              style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
               Tolerance </th>
             <th
-              style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
               UOM </th>
             <th
-              style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
               Instrument </th>
             <ng-container *ngFor="let row of data.detailArray[0] | keyvalue; let i = index">
               <th
-                style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
+                style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
                 *ngIf="row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument' && row.key != 'Tolerance'">
                 {{ row.key }}
               </th>
             </ng-container>
             <!-- <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Remarks </th> -->
-            <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Remarks
+            <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Remarks
             </th>
           </tr>
         </thead>
@@ -131,31 +131,31 @@
           <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
             *ngFor="let row of data.detailArray; let i = index">
             <td
-              style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
               {{ i + 1 }} </td>
             <td
-              style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
               {{ row.Parameter }}
             </td>
-            <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
               {{ row.Specification
               }} </td>
-            <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
               {{ row.Tolerance
               }} </td>
-            <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
               {{ row.UOM }} </td>
-            <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
               {{ row.Instrument }}
             </td>
             <ng-container *ngFor="let cell of row | keyvalue; let i = index">
               <td
                 *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument' && cell.key != 'Tolerance'"
-                style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
                 {{ cell.value }}
               </td>
             </ng-container>
-            <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{
+            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{
               row.description }} </td>
           </tr>
         </tbody>
@@ -165,15 +165,15 @@
 
     <div style="border-top: 1px solid black;border-bottom: 1px solid black; display: flex;margin-top: 40px;">
       <div style="width: 33.33%;padding: 15px;border-right: 1px solid black;">
-        <b style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"> Prepared By : </b>
+        <b style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Prepared By : </b>
         <span style="padding-left: 80px;"> </span>
       </div>
       <div style="width: 33.33%;padding: 15px;border-right: 1px solid black;">
-        <b style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"> Checked By : </b>
+        <b style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Checked By : </b>
         <span style="padding-left: 80px;"> </span>
       </div>
       <div style="width: 33.33%;padding: 15px">
-        <b style="font-size: 15px;font-family: Segoe UI;font-weight: 700;"> Approved By : </b>
+        <b style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Approved By : </b>
         <span style="padding-left: 80px;"> </span>
       </div>
     </div>
@@ -203,39 +203,39 @@
       display: flex;
       height: 50px;
       flex-direction: column;
-  "> <span style="font-size: 35px;font-weight: 700;font-family: Segoe UI;text-align: center;">  {{ data.heading }} </span> </div>
+  "> <span style="font-size: 35px;font-weight: 700;font-family: sans-serif;text-align: center;">  {{ data.heading }} </span> </div>
     </div>
 
     <div style="display: flex;margin-top: 10px;">
       <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> Customer Name </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.supplierName }} </div>
+        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Customer Name </b></div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.supplierName }} </div>
       </div>
       <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> Date </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.poDate | date }}</div>
-      </div>
-    </div>
-
-    <div style="display: flex;margin-top: 10px;">
-      <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> Description </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.description }} </div>
-      </div>
-      <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> Reference No. </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: NA </div>
+        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Date </b></div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.poDate | date }}</div>
       </div>
     </div>
 
     <div style="display: flex;margin-top: 10px;">
       <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> Part/Drg No. </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.drgNo }} </div>
+        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Description </b></div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.description }} </div>
       </div>
       <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b> AMT Item Code </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">: {{ data?.headingObj?.materialCode }} </div>
+        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Reference No. </b></div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: NA </div>
+      </div>
+    </div>
+
+    <div style="display: flex;margin-top: 10px;">
+      <div style="width: 50%;padding-left: 15px;display: flex;">
+        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Part/Drg No. </b></div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.drgNo }} </div>
+      </div>
+      <div style="width: 50%;padding-left: 15px;display: flex;">
+        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> AMT Item Code </b></div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.materialCode }} </div>
       </div>
     </div>
 
@@ -247,50 +247,50 @@
           <thead>
             <tr>
               <th
-                style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
                 S.No </th>
               <th
-                style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
                 Parameter </th>
-              <!-- <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Specification </th>
-            <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Tolerance </th>
-            <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
-            <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th> -->
+              <!-- <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Specification </th>
+            <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Tolerance </th>
+            <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
+            <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th> -->
               <ng-container *ngFor="let row of data.detailArray[0] | keyvalue; let i = index">
                 <th
-                  style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
+                  style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
                   *ngIf="row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument' && row.key != 'Tolerance'">
                   {{ row.key }}
                 </th>
               </ng-container>
-              <!-- <th style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Remarks </th> -->
+              <!-- <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Remarks </th> -->
             </tr>
           </thead>
           <tbody>
             <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
               *ngFor="let row of data.detailArray; let i = index">
               <td
-                style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
                 {{ i + 1 }} </td>
               <td
-                style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
                 {{ row.Parameter }}
               </td>
-              <!-- <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Specification
+              <!-- <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Specification
               }} </td>
-            <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Tolerance
+            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Tolerance
             }} </td>
-            <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.UOM }} </td>
-            <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Instrument }}
+            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.UOM }} </td>
+            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Instrument }}
             </td> -->
               <ng-container *ngFor="let cell of row | keyvalue; let i = index">
                 <td
                   *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument' && cell.key != 'Tolerance'"
-                  style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                  style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
                   {{ cell.value }}
                 </td>
               </ng-container>
-              <!-- <td style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ row.description }} </td> -->
+              <!-- <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ row.description }} </td> -->
             </tr>
           </tbody>
         </table>
@@ -302,15 +302,15 @@
       </ol>
     </div> -->
 
-      <div style="margin:5px 15px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b>The above values are well within Limits.</b></div>
-      <div style="margin:5px 15px;font-size: 15px;font-family: Segoe UI;font-weight: 700;"><b>Reference Standard : ISO 1940-2003(E)</b></div>
+      <div style="margin:5px 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b>The above values are well within Limits.</b></div>
+      <div style="margin:5px 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b>Reference Standard : ISO 1940-2003(E)</b></div>
 
 
       <div style="display: flex;margin: 15px;justify-content: space-around;">
-        <div style="padding-left: 15px;font-size: 15px;font-family: Segoe UI;font-weight: 700;">
+        <div style="padding-left: 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;">
           <b> Operator </b>
         </div>
-        <div style="padding-left: 15px;font-size: 15px;font-family: Segoe UI;font-weight: 700;">
+        <div style="padding-left: 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;">
           <b> Q.C. Inspector </b>
         </div>
       </div>
@@ -335,7 +335,7 @@
 
     <h6>
       SaleOrder Details
-      <hr>
+      
     </h6>
 
     <!-- <form [formGroup]="formData" autocomplete="off">
@@ -430,7 +430,7 @@
 
     <h6>
       Production Details
-      <hr>
+      
     </h6>
 
     <form [formGroup]="formData1" autocomplete="off" *ngIf="tableData1 && tableData1.length">

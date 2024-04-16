@@ -27,3 +27,40 @@ mat-form-field {
          background-color: none !important;
       }
     }
+
+    #submit{
+      background-color:#477994 !important ;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    
+    
+    #submit:hover{
+      background-color: cadetblue !important;
+      transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+    }
+    #reset{
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      
+    }
+    #reset:hover{
+      transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+    }
+
+    #upload{
+      border-style: none;
+      background-color: transparent;
+    }
+
+    #form{
+      display:flex;
+      justify-content: space-evenly;
+    }
+
+    .mx-2{
+      display:flex;
+      flex-direction: column;
+    }

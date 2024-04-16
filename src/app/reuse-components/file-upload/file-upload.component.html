@@ -1,9 +1,10 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <input type="file" [multiple]="multiple" #myFileInput class="" id="Image{{id}}" (change)="onSelectFilebase($event)"
     hidden>
 
 <div [ngSwitch]="type">
     <div *ngSwitchDefault>
-        <button class="jc-button-small my-2" (click)="myFileInput.click()">Upload</button>
+        <button id="uploadfile" class="jc-button-small my-2" (click)="myFileInput.click()"><i class="fa-solid fa-arrow-up-from-bracket"></i><b> UPLOAD</b></button>
     </div>
     <div *ngSwitchCase="'card'">
         <div *ngIf="fileList.length">

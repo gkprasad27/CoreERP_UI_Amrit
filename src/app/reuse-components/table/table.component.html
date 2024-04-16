@@ -26,12 +26,12 @@
           <mat-icon>print</mat-icon> Print
         </button>
       </div>
-      <div class="btn-group align-items-center" dropdown #dropdown="bs-dropdown" [autoClose]="false">
+      <div id="filt" class="btn-group align-items-center" dropdown #dropdown="bs-dropdown" [autoClose]="false">
 
         <mat-form-field class="filter" [floatLabel]="'never'">
-          <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter" />
+          <input id="filterinput" matInput  type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter" />
         </mat-form-field>
-        <div class="">
+        <div class="" id="filter">
           <button dropdownToggle mat-raised-button class="dropdown-toggle mx-2" (click)="filterData()">
             Columns
           </button>
@@ -48,19 +48,22 @@
                   </mat-checkbox>
                 </mat-option>
               </mat-select>
-              <div class="p-2 d-flex">
+              <div class="p-2 d-flex" id="filter">
                 <button mat-raised-button class="button-color-bule text-white mx-1"
                   (click)="saveChanges(); dropdown.hide();"> Save
                 </button>
                 <button mat-raised-button class="mx-1 button-color-red text-white"
                   (click)="cancleChanges(); dropdown.hide()"> Close </button>
 
+
               </div>
+              
             </div>
           </div>
         </div>
 
       </div>
+      
 
     </div>
 
@@ -80,12 +83,12 @@
               *ngIf="(column == 'action' || column == 'documentURL' || column == 'invoiceURL' || column == 'checkbox' || column == 'button' ||  column == 'button1') ;else other_content">
               <ng-container *ngIf="column == 'action'">
                 <div class="mw-23">
-                  <mat-icon class="cursor--pointer"
+                  <mat-icon id="edit" class="cursor--pointer"
                     *ngIf="element[column] == 'edit' || element[column] == 'editDelete' || element[column] == 'editView' || element[column] == 'editDeleteView'"
                     (click)="editOrDelete('Edit', element)">edit</mat-icon>
                 </div>
                 <div class="mw-23">
-                  <mat-icon class="cursor--pointer"
+                  <mat-icon id="delete" class="cursor--pointer"
                     *ngIf="element[column] == 'delete' || element[column] == 'editDelete' || element[column] == 'editDeleteView'"
                     (click)="editOrDelete('Delete', element)">delete</mat-icon>
                 </div>
@@ -120,29 +123,32 @@
         <tr class="mat-row" *matNoDataRow>
           <td class="mat-cell">
             <div class="d-flex justify-content-center align-items-center">
-              <img class="text-bottom" width="500" height="300" src="assets/images/Data_not_found.png">
+              <img class="text-bottom" width="500" height="300" src="assets/images/no_data.png">
             </div>
           </td>
         </tr>
+        
 
 
       </table>
-    </div>
-    <ng-container>
-      <div class="d-flex justify-content-end">
-        <ng-container *ngIf="routeParam == 'attendance'">
-          <div class="p-3">
-            <b> Total Present </b> : {{ getCount('Present') }}
-          </div>
-          <div class="p-3">
-            <b> Total Absent </b> : {{ getCount('Absent') }}
-          </div>
-        </ng-container>
-        <div>
-          <mat-paginator [pageSizeOptions]="[10 ,25, 50, 100]" showFirstLastButtons></mat-paginator>
-        </div>
       </div>
-    </ng-container>
-  </div>
+         
+        <ng-container  >
+          <div class="d-flex justify-content-end">
+            <ng-container *ngIf="routeParam == 'attendance'">
+              <div class="p-3">
+                <b> Total Present </b> : {{ getCount('Present') }}
+              </div>
+              <div class="p-3">
+                <b> Total Absent </b> : {{ getCount('Absent') }}
+              </div>
+            </ng-container>
+           
+              <mat-paginator  [pageSizeOptions]="[10 ,25, 50, 100]" showFirstLastButtons></mat-paginator>
+          </div>
+          
+        </ng-container>
+    </div>
+  
   <!-- </div> -->
 </mat-card>

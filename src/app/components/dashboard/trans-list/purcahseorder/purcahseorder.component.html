@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div style="margin: 10px;" id="printData" *ngIf="data">
     <div style="display: flex;">
         <img src="/assets/images/header.jpg" style="height: 100px;
@@ -15,60 +16,60 @@
         height: 50px;
         flex-direction: column;
     ">
-            <span style="font-size: 22px;font-weight: 700;font-family: Segoe UI;"> {{ data.heading }} </span>
+            <span style="font-size: 22px;font-weight: 700;font-family: sans-serif;"> {{ data.heading }} </span>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 50%;padding: 3px 15px;display: flex;border-right: 1px solid;">
-            <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> PO Number </b>
-            <span style="padding-left: 60px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">:
+            <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> PO Number </b>
+            <span style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
                 {{ data?.headingObj?.purchaseOrderNumber }} </span>
         </div>
         <div style="width: 50%;padding: 3px 15px;display: flex;">
-            <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> Date </b>
-            <span style="padding-left: 60px;font-size: 12px;font-family: Calibri;align-items: center;display: flex;">:
+            <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> Date </b>
+            <span style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
                 {{ data?.headingObj?.purchaseOrderDate | date }} </span>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 8px;">
-            <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> ADDRESS </b>
-            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{
+            <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> ADDRESS </b>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
                 data?.headingObj?.address.companyName }}</div>
-            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
                 data?.headingObj?.address.address }}, {{ data?.headingObj?.address.address1 }}</div>
-            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">{{
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
                 data?.headingObj?.address.city }}, {{ data?.headingObj?.address.stateName }}, {{
                 data?.headingObj?.address.pin }}</div>
-            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">Phone: {{
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">Phone: {{
                 data?.headingObj?.address.phone }}</div>
-            <div style="font-size: 15px;font-family: Calibri;align-items: center;display: flex;">Email: {{
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">Email: {{
                 data?.headingObj?.address.email }}</div>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;">
-            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+            <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
                 <span style="width: 140px;"> Dispatch Mode </span>
                 <span style="padding-left: 20px;">: {{ data?.headingObj?.dispatchMode }} </span>
             </div>
-            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+            <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
                 <span style="width: 140px;"> Terms of delivery </span>
                 <span style="padding-left: 20px;">: {{ data?.headingObj?.termsOfDelivery }} </span>
             </div>
-            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+            <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
                 <span style="width: 140px;"> Terms of payment </span>
                 <span style="padding-left: 20px;">: {{ data?.headingObj?.termsOfPayment }} </span>
             </div>
-            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+            <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
                 <span style="width: 140px;"> Currency </span>
                 <span style="padding-left: 20px;">: INR </span>
             </div>
-            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+            <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
                 <span style="width: 140px;"> Our enquiry reference </span>
                 <span style="padding-left: 20px;">: NA </span>
             </div>
-            <div style="display: flex;font-size: 15px;font-family: Calibri;align-items: center;display: flex;">
+            <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
                 <span style="width: 140px;"> Material </span>
                 <span style="padding-left: 20px;">: {{ data?.headingObj?.material }} </span>
             </div>
@@ -77,17 +78,17 @@
 
     <div style="border-top: 1px solid black; display: flex;text-align: center;">
         <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> Vendor Name & Address </b>
+            <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> Vendor Name & Address </b>
         </div>
         <div style="width: 50%;padding-left: 15px;">
-            <b style="font-size: 15px;font-family: Calibri;font-weight: 900;"> Deliver to this address </b>
+            <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> Deliver to this address </b>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex; ">
         <div
             style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 15px;font-family: Calibri;font-weight: 900;">{{ data?.headingObj?.vAddress?.name }}
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;">{{ data?.headingObj?.vAddress?.name }}
             </div>
             <div>{{ data?.headingObj?.vAddress?.address }}, {{ data?.headingObj?.vAddress?.address1 }}</div>
             <div>{{ data?.headingObj?.vAddress?.city }}, {{ data?.headingObj?.vAddress?.stateName }}, {{
@@ -95,11 +96,11 @@
             <!-- <div>Phone: {{ data?.headingObj?.vAddress?.phone  }}</div>
             <div>Email: {{ data?.headingObj?.vAddress?.email  }}</div> -->
 
-            <b style="margin-top: 10px;font-size: 15px;font-family: Calibri;font-weight: 900;"> GSTIN : {{
+            <b style="margin-top: 10px;font-size: 15px;font-family: sans-serif;font-weight: 900;"> GSTIN : {{
                 data?.headingObj?.vAddress?.gstno }}</b>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 15px;font-family: Calibri;font-weight: 900;">{{ data?.headingObj?.pAddress?.address
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;">{{ data?.headingObj?.pAddress?.address
                 }} </div>
             <div> {{ data?.headingObj?.pAddress?.address1 }}, {{ data?.headingObj?.pAddress?.city }}, {{
                 data?.headingObj?.pAddress?.stateName }}, {{
@@ -107,7 +108,7 @@
             <div>Phone: {{ data?.headingObj?.pAddress?.phone }}</div>
             <div>Email: {{ data?.headingObj?.pAddress?.email }}</div>
 
-            <b style="margin-top: 10px;font-size: 15px;font-family: Calibri;font-weight: 900;"> GSTIN : {{
+            <b style="margin-top: 10px;font-size: 15px;font-family: sans-serif;font-weight: 900;"> GSTIN : {{
                 data?.headingObj?.pAddress?.gstno }}</b>
         </div>
     </div>
@@ -119,28 +120,28 @@
             <thead>
                 <tr>
                     <th
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         S.No </th>
                     <th
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Product Code </th>
                     <th
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Description </th>
                     <th
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Quantity </th>
                     <th
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Unit Weight </th>
                     <th
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Total Weight </th>
                     <th
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Price/KG </th>
                     <th
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;">
                         Total Amount </th>
                 </tr>
             </thead>
@@ -148,57 +149,57 @@
                 <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
                     *ngFor="let row of data.detailArray; let i = index">
                     <td
-                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         <span *ngIf="row.materialCode"> {{ i + 1 }} </span> </td>
                     <td
-                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.materialCode }}
                     </td>
                     <td
-                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.materialName }}
                     </td>
                     <td
-                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.qty }} </td>
                     <td
-                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.netWeight }}
                     </td>
                     <td
-                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         <ng-container *ngIf="row.qty"> {{ row.qty *
                             row.netWeight}} </ng-container> </td>
                     <td
-                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.rate }} </td>
                     <td
-                        style="font-size: 12px;font-family: Calibri;border-bottom: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.amount }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
-                    <td style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"
+                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"
                         colspan="2"> Grand
                         Totals </td>
                     <td
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
                     </td>
                     <td
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
                     </td>
                     <td
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Weight</td>
                     <td
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         {{
                         data.headingObj1.amount }}</td>
                     <td
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Amount</td>
                     <td
-                        style="font-size: 14px;font-family: Calibri;font-weight: 900;border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">
                         {{
                         data.headingObj1.totalAmount }}</td>
                 </tr>
@@ -209,53 +210,53 @@
 
     <div style="display: flex; font-size: 15px;">
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <b style="font-size: 14px;font-family: Calibri;font-weight: 900;"> Total amount in words: </b>
-            <div style="font-size: 14px;font-family: Calibri;"> {{
+            <b style="font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total amount in words: </b>
+            <div style="font-size: 14px;font-family: sans-serif;"> {{
                 commonService.convertNumberToWords(data.headingObj?.totalAmount) }} </div>
 
         </div>
         <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
             <div style="padding-left: 15px;padding-top: 10px;">
                 <div style="display: flex;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Amount Before
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Amount Before
                         Tax </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.amount
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.amount
                         }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: CGST @ {{
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: CGST @ {{
                         data.headingObj?.cgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.cgst }}
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.cgst }}
                     </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: SGST @ {{
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: SGST @ {{
                         data.headingObj?.sgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.sgst }}
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.sgst }}
                     </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Add: IGST @ {{
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: IGST @ {{
                         data.headingObj?.igst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{ data.headingObj?.igst }}
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.igst }}
                     </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Amount with
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Amount with
                         GST </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> {{
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{
                         data.headingObj?.totalAmount }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: Calibri;font-weight: 900;"> Total Payable
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Payable
                         Reverse Charges </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: Calibri;"> </span>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> </span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: Calibri;margin-bottom: 5px;">
+    <div style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
         The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
         PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
         SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMT POWER TRANSMISSION RESERVES THE RIGHT TO WITH HOLD
@@ -283,13 +284,13 @@
         height: 50px;
         flex-direction: column;
     ">
-            <span style="font-size: 22px;font-weight: 700;font-family: Segoe UI;"> {{ data.heading }} </span>
+            <span style="font-size: 22px;font-weight: 700;font-family: sans-serif;"> {{ data.heading }} </span>
         </div>
     </div>
 
     <div style="margin-bottom: 20px;margin-top: 15px;">
-        <b style="font-size: 16px;font-family: Calibri;font-weight: 900;">WARRANTIES:</b>
-        <div style="font-size: 16px;font-family: Calibri;">
+        <b style="font-size: 16px;font-family: sans-serif;font-weight: 900;">WARRANTIES:</b>
+        <div style="font-size: 16px;font-family: sans-serif;">
             The supplier shall guarantee that the goods are made from best material with first class workmanship and
             will qualify to all quality
             specifications and performance specification with us. The supplier shall guarantee the goods will give
@@ -301,8 +302,8 @@
     </div>
 
     <div style="margin-bottom: 15px;">
-        <b style="font-size: 16px;font-family: Calibri;font-weight: 900;">GENERAL NOTES:</b>
-        <ol style="font-size: 16px;font-family: Calibri;">
+        <b style="font-size: 16px;font-family: sans-serif;font-weight: 900;">GENERAL NOTES:</b>
+        <ol style="font-size: 16px;font-family: sans-serif;">
             <li>The supplier shall thoroughly inspect before dispatch of goods.</li>
             <li>A pre dispatch inspection report is mandatory which will state clearly the invoice Number and our PO
                 details.</li>
@@ -320,8 +321,8 @@
     </div>
 
     <div style="margin-bottom: 80px;">
-        <b style="font-size: 16px;font-family: Calibri;font-weight: 900;">GENERAL TERMS:</b>
-        <ol style="font-size: 16px;font-family: Calibri;">
+        <b style="font-size: 16px;font-family: sans-serif;font-weight: 900;">GENERAL TERMS:</b>
+        <ol style="font-size: 16px;font-family: sans-serif;">
             <li>Please send acceptance of PO within seven days; Non-receipt of acceptance within seven days shall be
                 considered as acceptance of
                 the order.</li>
@@ -338,7 +339,7 @@
     </div>
 
     <div
-        style="font-size: 16px;font-family: Calibri;font-weight: 900;margin-top: 30px;margin-bottom: 20px;display: flex;">
+        style="font-size: 16px;font-family: sans-serif;font-weight: 900;margin-top: 30px;margin-bottom: 20px;display: flex;">
 
         <div style="width: 50%;">
             <b> Prepared By: </b>
@@ -349,7 +350,7 @@
 
     </div>
 
-    <div style="margin-bottom: 15px;font-size: 16px;font-family: Calibri;font-weight: 900;">
+    <div style="margin-bottom: 15px;font-size: 16px;font-family: sans-serif;font-weight: 900;">
 
         <b> Signature/Date..................................................................... </b>
 
@@ -372,7 +373,7 @@
 
             <h6>
                 Purchase Order Master
-                <hr>
+               
             </h6>
 
             <div class="d--flex p-1 mat-form-field-height">
@@ -602,7 +603,7 @@
 
             <h6>
                 Purchase Order Details
-                <hr>
+                
             </h6>
 
             <form [formGroup]="formData1" autocomplete="off">
@@ -652,13 +653,13 @@
                     </div>
 
 
-                    <div class="mb-3">
+                    <div id="for" class="mb-3">
 
-                        <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white"
-                            (click)="saveForm()">
+                        <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
+                            (click)="saveForm()"><i class="fa-solid fa-file-pen"></i>
                             {{ 'COMMON.UPDATE' | translate }}
                         </button>
-                        <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
+                        <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
                             {{ 'COMMON.RESET' | translate }}
                         </button>
 
@@ -706,14 +707,14 @@
             <button class="mx-2" mat-raised-button (click)="print()" class="button-color-bule mx-3 text-white">
                 <mat-icon>print</mat-icon> Print
             </button>
-            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
+            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-file-pen"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
             <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
                 {{ 'COMMON.BACK' | translate }}
             </button>
             <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
-                (click)="reset();">
+                (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
                 {{ 'COMMON.RESET' | translate }}
             </button>
             <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="login.component.scss">
 <mat-card class="boxshadow p-3">
   <mat-card-title class="background--color rounded text-white p-2 d-flex">
     <mat-icon>lock</mat-icon>
@@ -9,7 +10,7 @@
 
       <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.username.valid }">
         <mat-label [translate]="'LOGIN.USERNAME'"></mat-label>
-        <input matInput formControlName="username">
+        <input id="loginput" matInput formControlName="username">
         <mat-error *ngIf="isSubmitted && formControls.username.errors" class="help-block">
           <div *ngIf="formControls.username.errors.required">Username is required </div>
         </mat-error>
@@ -17,7 +18,7 @@
 
       <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.password.valid }">
         <mat-label [translate]="'LOGIN.PASSWORD'"></mat-label>
-        <input matInput type="password" formControlName="password">
+        <input id="loginput" matInput type="password" formControlName="password">
         <mat-error *ngIf="isSubmitted && formControls.password.errors" class="help-block">
           <div *ngIf="formControls.password.errors.required">Password is required</div>
         </mat-error>
@@ -33,7 +34,7 @@
       </mat-form-field>
 
       <div class="form-element">
-        <button mat-raised-button class="background--color text-white mat-raised-button" type="submit">
+        <button id="login" mat-raised-button class="background--color text-white mat-raised-button" type="submit">
 
           {{ 'LOGIN.LOGIN' | translate}}
         </button>

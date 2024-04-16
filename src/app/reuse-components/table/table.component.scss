@@ -90,3 +90,57 @@
 .mw-23 {
   min-width: 23px;
 }
+
+// #page{
+//   background-color: skyblue !important;
+//   position:absolute;
+//   top:0;
+//   width:fit-content;
+// }
+
+#ng{
+  // background-color:  #174154 !important;
+  
+  height: 44px;
+  
+  width: 64%;
+}
+
+#filt{
+  // background-color:  #174154;
+  border-top-right-radius: 0%;
+  border-bottom-right-radius: 0%;
+  height: 44px;
+
+}
+.btn-group align-items-center{
+  background-color: blue !important;
+  width:80%;
+}
+
+ng-container{
+  background-color:  #174154 !important;
+  border-radius: 20%;
+  
+
+}
+#filterinput{
+  color: red !important;
+  background-color: white;
+  height: 33px;
+
+  
+}
+
+// .paginator-container {
+//   width: 10%; /* Increase the width of the paginator container */
+//   display: flex; /* Use flexbox to control alignment */
+//   justify-content: center; /* Center-align paginator horizontally */
+// }
+
+#delete{
+  color: orange;
+}
+#edit{
+  color: orange;
+}

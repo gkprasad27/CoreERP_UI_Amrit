@@ -1,7 +1,7 @@
 <mat-card>
-  <mat-card-content class="my-2">
-    <form [formGroup]="headerForm" autocomplete="off">
-      <div class="d-flex my-3 py-3">
+  <mat-card-content  class="my-2 overscroll-none" >
+    <form id="headerForm" [formGroup]="headerForm" autocomplete="off">
+      <div id="header" class="d-flex my-3 py-1 mt-0 m-40">
         <div class="p-2 range-picker">
           <input type="text" ngxDaterangepickerMd startKey="start" [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}"
             endKey="end" placeholder="Choose date" formControlName="selected" class="form-control" />
@@ -12,20 +12,22 @@
             <input matInput formControlName="searchCriteria" (input)="doFilter($event.target.value)" />
           </mat-form-field>
         </div>
-        <div class="p-2 my-3 ms-5">
+        <div class="buttons">
+        <div id="but" class="p-2 my-3 ms-1">
           <button mat-raised-button class="button-color-bule text-white" (click)="search()">
             {{ "COMMON.SEARCH" | translate }}
           </button>
         </div>
-        <div class="p-2 my-3 ms-5">
+        <div id="but" class="p-2 my-3 ms-1">
           <button mat-raised-button class="button-color-red text-white" (click)="reset()">
             {{ "COMMON.RESET" | translate }}
           </button>
         </div>
-        <div class="ml-auto p-2 my-3 ms-5" [hidden]="!commonService.userPermission?.canAdd">
+        <div id="but" class="ml-auto p-2 my-3 ms-1 f" [hidden]="!commonService.userPermission?.canAdd">
           <button mat-raised-button class="button-color-bule text-white" (click)="newTransOpen()">
             {{ "COMMON.NEW" | translate }}
           </button>
+        </div>
         </div>
       </div>
 
@@ -53,7 +55,7 @@
         <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();" (dblclick)="openEditTrans(row)"></tr>
       </table>
     </div>
-    <mat-paginator [pageSizeOptions]="[15 ,25, 50, 100]" showFirstLastButtons></mat-paginator>
+    <mat-paginator  id="pag" [pageSizeOptions]="[15 ,25, 50, 100]" showFirstLastButtons></mat-paginator>
 
 
   </mat-card-content>

@@ -1,13 +1,28 @@
 @import '../../../reuse.scss';
 
+
+
 .boxshadow {
-  box-shadow: 0 15px 20px $background-shadow
+  box-shadow: 0 15px 20px $background-shadow;
+  background-color: rgb(170, 200, 206);
+  
+}
+.boxshadow:hover{
+  box-shadow: 5px 5px 5px black;
 }
 
 :host {
   display: flex;
   justify-content: center;
   margin: 100px 0px;
+}
+
+// #loginput:hover{
+// background-color: rgb(169, 235, 247);
+// }
+#login:hover{
+  background-color: rgb(4, 38, 39) !important;
+
 }
 
 

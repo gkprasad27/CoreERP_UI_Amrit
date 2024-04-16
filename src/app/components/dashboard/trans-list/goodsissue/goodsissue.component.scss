@@ -1,5 +1,5 @@
 mat-form-field {
-    margin: 5px;
+    margin: 8px;
     flex: 0 0 15.75%;
   }
 
@@ -30,3 +30,81 @@ mat-form-field {
       }
     }
   }
+
+  // form{
+  //   border:2px;
+  //   // background-color: aqua;
+  //   border-color: red !important;
+  // }
+
+  #submit{
+    background-color:#477994 !important ;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  
+  #submit:hover{
+    background-color: cadetblue !important;
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+  }
+  #reset{
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    
+  }
+  #reset:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+  }
+
+ 
+ 
+  #sale{
+    margin-left: 40px;
+  }
+  
+  // mat-card-content{
+  //   background-color: red;
+  //   height: 300px;
+  // }
+
+  // .field{
+  //   background-color: rgb(44, 211, 223);
+  //   height: 250px;
+  //   justify-content: space-evenly;
+  // }
+  
+
+  // mat-select{
+  //   background-color: brown;
+   
+  //   justify-content: space-between;
+
+  // }
+
+  // mat-label{
+  //   background-color: chartreuse;
+  // }
+
+
+  
+
+  #sale{
+    // margin-right: 1em !important;
+    // background-color: brown;
+    // justify-content: space-evenly;
+    // margin-left: 3em !important;
+    margin-left:0;
+   
+  }
+
+  #forms{
+    justify-content: space-evenly;
+    display:flex;
+    flex-direction: wrap;
+    
+    height:180px;
+  
+   }

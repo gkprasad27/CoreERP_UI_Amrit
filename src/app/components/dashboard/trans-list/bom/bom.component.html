@@ -1,15 +1,16 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <mat-card>
 
   <mat-card-content>
 
     <form [formGroup]="formData" class="card p-2 mb-3" autocomplete="off">
 
-      <h3>
+      <h6 id="background">
         Header Section
-        <hr>
-      </h3>
+        
+      </h6>
 
-      <div class="d--flex p-1 mat-form-field-height">
+      <div id="forms" class="d--flex p-1 mat-form-field-height">
 
         <mat-form-field class="form-element">
           <mat-label>{{ 'bom.company' | translate }}</mat-label>
@@ -165,10 +166,10 @@
 
     <div class="p-2 card">
 
-      <h3>
+      <h6 id="background">
         Detail Section
-        <hr>
-      </h3>
+        
+      </h6>
 
       <form [formGroup]="formData1" autocomplete="off">
 
@@ -222,12 +223,12 @@
 
         </div>
 
-        <div class="d-flex justify-content-end mb-3">
+        <div id="for" class="d-flex justify-content-end mb-3">
 
-          <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
+          <button mat-raised-button id="add" type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()"><i class="fa-solid fa-file-circle-plus"></i>
             {{ 'COMMON.ADD' | translate }}
           </button>
-          <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
+          <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
             {{ 'COMMON.RESET' | translate }}
           </button>
 
@@ -257,10 +258,10 @@
     </div>
 
     <div>
-      <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
+      <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-file-pen"></i>
         {{ 'COMMON.SAVE' | translate }}
       </button>
-      <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();">
+      <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
         {{ 'COMMON.RESET' | translate }}
       </button>
       <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">

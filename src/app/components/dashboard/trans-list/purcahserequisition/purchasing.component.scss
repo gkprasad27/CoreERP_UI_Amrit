@@ -27,3 +27,46 @@ mat-form-field {
       min-height: 4vh !important;
     }
   }
+
+  #background{
+    background: linear-gradient(to right, #174154, #5eb47a, #a8c06f);
+    color: whitesmoke;
+    padding: 12px 12px 12px 12px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+
+  }
+
+
+  #reset{
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    
+  }
+  #reset:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+  }
+  #submit{
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  #submit:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+  
+  }
+  #for{
+    position:absolute;
+    right:12px;
+    
+    width: fit-content;
+    height: fit-content;
+    top:12px;
+    
+  }
+
+  #forms{
+    justify-content: space-evenly;
+  }
