@@ -1,4 +1,6 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div style="margin: 10px;" *ngIf="quotationSupplier" id="quotationSupplierPrintData">
 
     <div style="display: flex;">
@@ -23,12 +25,14 @@
     <div style="display: flex;margin-top: 10px;">
         <div style="width: 50%;padding-left: 15px;display: flex;">
             <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> BD-F002, DATED : </b></div>
-            <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
+            <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
+                {{
                 quotationSupplier?.headingObj?.qDate ? (quotationSupplier?.headingObj?.qDate | date) : '' }} </div>
         </div>
         <div style="width: 50%;padding-left: 15px;display: flex;">
             <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Ref: </b></div>
-            <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
+            <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
+                {{
                 quotationSupplier?.headingObj?.refNo }}</div>
         </div>
     </div>
@@ -52,7 +56,8 @@
 
     <div style="display: flex;margin-top: 30px;">
         <div style="width: 100%;padding-left: 15px;display: flex; text-decoration: underline;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Quotation for {{ quotationSupplier?.headingObj?.quotationfor }} </b></div>
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Quotation for {{
+                    quotationSupplier?.headingObj?.quotationfor }} </b></div>
         </div>
     </div>
 
@@ -65,7 +70,7 @@
     </div>
 
 
-    <div id= style="padding-left: 15px;margin-top: 10px;">
+    <div id=style="padding-left: 15px;margin-top: 10px;">
 
         <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
             *ngIf="quotationSupplier.detailArray && quotationSupplier.detailArray.length">
@@ -127,40 +132,46 @@
             <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Terms & Conditions : </b></div>
         </div>
         <ul>
-            <li> 
+            <li>
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Material </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  {{ quotationSupplier.headingObj.material }}  </div>
+                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+                        quotationSupplier.headingObj.material }} </div>
                 </div>
             </li>
-            <li> 
+            <li>
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Payment </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  As per Aggrement </div>
+                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: As per
+                        Aggrement </div>
                 </div>
             </li>
-            <li> 
+            <li>
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Delivery </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  {{ quotationSupplier.headingObj.deliveryPeriod }}</div>
+                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+                        quotationSupplier.headingObj.deliveryPeriod }}</div>
                 </div>
             </li>
-            <li> 
+            <li>
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Taxes </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:   GST Extra </div>
+                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: GST Extra
+                    </div>
                 </div>
             </li>
-            <li> 
+            <li>
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Transport </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:   {{ quotationSupplier.headingObj.deliveryMethod }} </div>
+                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+                        quotationSupplier.headingObj.deliveryMethod }} </div>
                 </div>
             </li>
         </ul>
 
         <div style="width: 100%;padding-left: 15px;display: flex;margin-top: 30px;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> For AMT Power Transmission </b></div>
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> For AMT Power Transmission </b>
+            </div>
         </div>
 
     </div>
@@ -177,39 +188,35 @@
 
             <h6>
                 Requisition Header
-                
+
             </h6>
 
             <div id="form" class="d-flex flex-wrap ">
 
-                <div id="element">
-                    <mat-form-field class="form-element">
-                        <mat-label>{{ 'supplierquotation.company' | translate }}</mat-label>
-                        <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                                {{comp.text}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                
+                <mat-form-field class="form-element">
+                    <mat-label>{{ 'supplierquotation.company' | translate }}</mat-label>
+                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+                            {{comp.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
 
 
-                <div id="element">
-                    <mat-form-field>
-                        <mat-label>{{'supplierquotation.profitCenter' | translate }}</mat-label>
-                        <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
-                                {{pft.text}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
 
-                <div class="mat-mdc-form-field typeahead" id="element">
+
+                <mat-form-field>
+                    <mat-label>{{'supplierquotation.profitCenter' | translate }}</mat-label>
+                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
+                            {{pft.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="mat-mdc-form-field typeahead">
                     <input placeholder="{{ 'supplierquotation.supplier' | translate }}" formControlName="customerCode"
                         [typeahead]="ptypeList" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
                         (typeaheadOnSelect)="supplierChange($event)" class="form-control typeahead"
@@ -219,89 +226,73 @@
                     </ng-template>
                 </div>
 
-                <div id="element">
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'supplierquotation.quotationDate'"></mat-label>
-                        <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="quotationDate"
-                            appFocusOnEnter tabIndex="4">
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                    </mat-form-field>
-                </div>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'supplierquotation.quotationDate'"></mat-label>
+                    <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="quotationDate"
+                        appFocusOnEnter tabIndex="4">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
 
 
 
 
-               <div id="element">
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'supplierquotation.deliveryPeriod'"></mat-label>
                     <input matInput type="text" formControlName="deliveryPeriod" maxlength="50" appFocusOnEnter
                         tabIndex="5">
                 </mat-form-field>
-               </div>
 
-                <div id="element">
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'supplierquotation.creditDays'"></mat-label>
-                        <input matInput type="text" formControlName="creditDays" maxlength="50" appFocusOnEnter
-                            tabIndex="6">
-                    </mat-form-field>
-                </div>
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'supplierquotation.creditDays'"></mat-label>
+                    <input matInput type="text" formControlName="creditDays" maxlength="50" appFocusOnEnter
+                        tabIndex="6">
+                </mat-form-field>
 
 
-                <div id="element"><mat-form-field class="form-element">
+                <mat-form-field class="form-element">
                     <mat-label [translate]="'supplierquotation.deliveryMethod'"></mat-label>
                     <input matInput type="text" formControlName="deliveryMethod" maxlength="50" appFocusOnEnter
                         tabIndex="7">
-                    </mat-form-field>
-                </div>
+                </mat-form-field>
 
 
-                <div id="element">
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'supplierquotation.refNo'"></mat-label>
-                        <input matInput type="text" formControlName="refNo" maxlength="50" appFocusOnEnter
-                            tabIndex="8">
-                    </mat-form-field>
-                </div>
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'supplierquotation.refNo'"></mat-label>
+                    <input matInput type="text" formControlName="refNo" maxlength="50" appFocusOnEnter tabIndex="8">
+                </mat-form-field>
 
 
-                <div id="element">
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'supplierquotation.responsiblePerson'"></mat-label>
-                        <input matInput type="text" formControlName="responsiblePerson" maxlength="50" appFocusOnEnter
-                            tabIndex="9">
-                    </mat-form-field>
-                </div>
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'supplierquotation.responsiblePerson'"></mat-label>
+                    <input matInput type="text" formControlName="responsiblePerson" maxlength="50" appFocusOnEnter
+                        tabIndex="9">
+                </mat-form-field>
 
-               <div id="element">
-                 
+
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'supplierquotation.quotationfor'"></mat-label>
                     <input matInput type="text" formControlName="quotationfor" maxlength="50" appFocusOnEnter
                         tabIndex="10">
                 </mat-form-field>
-               </div>
 
-                
 
-                <div id="element">
-                    <mat-form-field>
-                        <mat-label>{{'supplierquotation.material' | translate }}</mat-label>
-                        <mat-select formControlName="material" appFocusOnEnter tabIndex="11">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let mpattern of mpatternList" [value]="mpattern.description">
-                                {{mpattern.description}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
 
-                <div id="element" class="mat-mdc-form-field typeahead">
-                    <input placeholder="{{ 'saleorder.bom' | translate }}" formControlName="bom"
-                    [typeahead]="qnoList" typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="12"
-                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1"
-                        (typeaheadOnSelect)="getBomDetail()" >
+                <mat-form-field>
+                    <mat-label>{{'supplierquotation.material' | translate }}</mat-label>
+                    <mat-select formControlName="material" appFocusOnEnter tabIndex="11">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let mpattern of mpatternList" [value]="mpattern.description">
+                            {{mpattern.description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="mat-mdc-form-field typeahead">
+                    <input placeholder="{{ 'saleorder.bom' | translate }}" formControlName="bom" [typeahead]="qnoList"
+                        typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="12" class="form-control typeahead"
+                        [typeaheadItemTemplate]="customItemTemplate1" (typeaheadOnSelect)="getBomDetail()">
                     <ng-template #customItemTemplate1 let-model="item">
                         <span><strong>{{model.bomnumber}}</strong> - {{model.bomName}}</span>
                     </ng-template>
@@ -316,7 +307,7 @@
 
             <h6>
                 Saleorder Details
-               
+
             </h6>
 
             <form [formGroup]="formData1" autocomplete="off">
@@ -325,9 +316,9 @@
 
                 <div class="d--flex p-1 mat-form-field-height">
 
-                    
 
-                    
+
+
 
                     <mat-form-field class="form-element">
                         <mat-label>{{ 'supplierquotation.taxCode' | translate }}</mat-label>
@@ -377,7 +368,8 @@
                         (click)="saveForm()"><i class="fa-solid fa-file-pen"></i>
                         {{ 'COMMON.UPDATE' | translate }}
                     </button>
-                    <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
+                    <button mat-raised-button id="reset" class="button-color-red text-white mx-1"
+                        (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
                         {{ 'COMMON.RESET' | translate }}
                     </button>
 
@@ -428,8 +420,8 @@
                 (click)="convertToSaleOrder()">
                 {{ 'supplierquotation.CONVERTTOSALEORDER' | translate }}
             </button>
-            <button  mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-                (click)="save()"><i class="fa-solid fa-file-pen"></i>
+            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i
+                    class="fa-solid fa-file-pen"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
             <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">

@@ -1,6 +1,6 @@
 mat-form-field {
     margin: 8px;
-    flex: 0 0 15.75%;
+    flex: 0 0 14.5%;
   }
 
     ::ng-deep .table-css {
@@ -10,8 +10,8 @@ mat-form-field {
   }
 
   ::ng-deep .multiselect-dropdown-list {
-    width: 16%;
-    margin: 20px;
+    width: 15%;
+    margin: 27px 8px;
     ng-multiselect-dropdown {
       .multiselect-dropdown {
         .dropdown-btn {
@@ -101,7 +101,6 @@ mat-form-field {
   }
 
   #forms{
-    justify-content: space-evenly;
     display:flex;
     flex-direction: wrap;
     
