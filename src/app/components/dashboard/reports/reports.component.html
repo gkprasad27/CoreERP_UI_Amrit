@@ -184,7 +184,7 @@
                     </ng-template>
                 </div>
 
-                <div class="mat-mdc-form-field typeahead" *ngIf="routeParam == 'employeeotreport' || routeParam == 'employeeattendance'">
+                <div class="mat-mdc-form-field typeahead" *ngIf="routeParam == 'employeeotreport' || routeParam == 'employeeattendance' || routeParam == 'AttendanceProcess'">
                     <input placeholder="{{ 'COMMON.employee' | translate }}" formControlName="employee"
                         [typeahead]="employeesList" typeaheadOptionField='text' appFocusOnEnter tabIndex="9"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
@@ -200,8 +200,11 @@
 
 
                 <div class="p-2 my-3 ms-5">
-                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()">
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()" *ngIf="routeParam != 'AttendanceProcess'">
                         {{ "COMMON.PRINT" | translate }}
+                    </button>
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()" *ngIf="routeParam == 'AttendanceProcess'">
+                        {{ "COMMON.SEARCH" | translate }}
                     </button>
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="reset()">
                         {{ "COMMON.RESET" | translate }}
@@ -211,6 +214,9 @@
             </div>
 
         </form>
+
+    
+        <app-table [tableData]="tableData" (editOrDeleteEvent)="editOrDeleteEvent($event)"></app-table>
 
 
     </mat-card-content>

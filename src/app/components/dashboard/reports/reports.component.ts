@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { String } from 'typescript-string-operations';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,6 +11,8 @@ import { ApiConfigService } from '../../../services/api-config.service';
 import { CommonService } from '../../../services/common.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { TableComponent } from 'src/app/reuse-components/table/table.component';
+import { AttendanceProcessComponent } from '../comp-list/attendance-process/attendance-process.component';
 
 @Component({
   selector: 'app-reports',
@@ -18,6 +20,9 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styleUrls: ['./reports.component.scss']
 })
 export class ReportsComponent {
+
+  tableData: any;
+  @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
 
   getComponentData: any;
 
@@ -82,6 +87,7 @@ export class ReportsComponent {
           break;
         case 'employeeotreport':
         case 'employeeattendance':
+        case 'AttendanceProcess':
           this.getEmployeesList();
           break;
       }
@@ -89,6 +95,40 @@ export class ReportsComponent {
       this.getParameters(params.id);
     });
   }
+
+  attendanceProcess() {
+    const costCenUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}`);
+    this.apiService.apiGetRequest(costCenUrl)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.tableData = res.response.AttendanceProcess;
+            }
+          }
+        });
+  }
+
+  editOrDeleteEvent(value) {
+    if (value.action === 'Edit') {
+      const dialogRef = this.dialog.open(AttendanceProcessComponent, {
+        width: '80%',
+        data: value,
+        panelClass: 'custom-dialog-container',
+        disableClose: true
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        debugger
+        if (!this.commonService.checkNullOrUndefined(result)) {
+          this.tableComponent.defaultValues();
+          this.print();
+        }
+      });
+    }
+  }
+
 
   getColSpan(keys: any) {
     return (keys.val instanceof Array) ? Object.keys(keys['val'][0]).length + 1 : '1'
@@ -104,7 +144,7 @@ export class ReportsComponent {
 
   model() {
     this.modelFormData = this.formBuilder.group({
-      companyCode: [null, [Validators.required]],
+      companyCode: [null, []],
       customerCode: ['-1'],
       materialCode: ['-1'],
       employee: ['-1'],
@@ -208,6 +248,9 @@ export class ReportsComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.getComponentData = res.response;
+              if (this.routeParam == 'AttendanceProcess') {
+                this.attendanceProcess()
+              }
             }
           }
         });
@@ -224,7 +267,7 @@ export class ReportsComponent {
               this.bpTypeList = res.response['ptypeList'];
             }
           }
-          this.getbpList();;
+          this.getbpList();
         });
   }
 
@@ -302,6 +345,9 @@ export class ReportsComponent {
     } else if (this.routeParam == 'employeeotreport' || this.routeParam == 'employeeattendance') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id : '-1'}`);
+    } else if (this.routeParam == 'AttendanceProcess') {
+      const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode: '-1'}/${obj ? obj.id : '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }
@@ -310,6 +356,12 @@ export class ReportsComponent {
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (this.routeParam == 'AttendanceProcess') {
+              res.response.AttendanceProcess.forEach((a: any) => {
+                a.action = 'edit';
+              })
+              this.tableData = res.response.AttendanceProcess;
+            } else {
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
               const keys = [];
               const tableResp = res.response[this.getComponentData.listName];
@@ -352,6 +404,7 @@ export class ReportsComponent {
               }, 50);
 
             }
+          }
           }
           this.spinner.hide();
         });

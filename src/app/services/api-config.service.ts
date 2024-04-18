@@ -538,4 +538,6 @@ export class ApiConfigService {
    gLsubAccountListbyCatetory = `${this.environment.runtimeConfig.serverUrl}Common/GLsubAccountListbyCatetory`;
 
    getBomDetail = `${this.environment.runtimeConfig.serverUrl}Common/GetBomDetail`;
+   
+   registerAttendanceProcess = `${this.environment.runtimeConfig.serverUrl}AttendanceProcess/RegisterAttendanceProcess`;
 }

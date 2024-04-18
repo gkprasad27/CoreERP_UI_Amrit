@@ -2678,5 +2678,16 @@
     "status":"Status",
     "LateIn":"Late In",
     "EarlyOut":"EarlyOut"
+},
+"AttendanceProcess": {
+  "title": "Attendance Process",
+  "empCode": "Emp Code",
+  "employeename":"Employee Name",
+  "monthDays": "Month Days",
+  "paydays": "Pay Days",
+  "ot_hrs": "Ot Hrs",
+  "att_Month": "Att Month",
+  "att_Year": "Att Year",
+  "action": "Action"
 }
 }
