@@ -1768,7 +1768,7 @@
     "bomLevel": "Level",
     "totalAmount": "Total Amount",
     "profitCenter": "Profit Center",
-    "description": "Description",
+    "description": "Bom Name",
     "mainComponent": "Main Component",
     "subComponent": "Sub Component",
     "billable": "Billable",
@@ -1912,7 +1912,7 @@
     "wbs": "WBS",
     "availableqty": "Available QTY",
     "allocatedqty": "Allocated QTY",
-    "requiredqty": "Received QTY",
+    "requiredqty": "Required QTY",
     "delete": "Delete",
     "action": "Action"
   },
