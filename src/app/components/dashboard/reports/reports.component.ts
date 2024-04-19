@@ -110,6 +110,22 @@ export class ReportsComponent {
         });
   }
 
+  save() {
+    const addCompanyUrl = String.Join('', this.apiConfigService.registerAttendanceProcess);
+    this.apiService.apiPostRequest(addCompanyUrl, this.tableData)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+            }
+          }
+          this.spinner.hide();
+        });
+
+  }
+
+
   editOrDeleteEvent(value) {
     if (value.action === 'Edit') {
       const dialogRef = this.dialog.open(AttendanceProcessComponent, {
@@ -122,8 +138,19 @@ export class ReportsComponent {
       dialogRef.afterClosed().subscribe(result => {
         debugger
         if (!this.commonService.checkNullOrUndefined(result)) {
-          this.tableComponent.defaultValues();
-          this.print();
+          if (result) {
+            debugger
+            const arr = [...this.tableData];
+            this.tableComponent.defaultValues();
+            arr.forEach(element => {
+              if (element.sno == result.sno) {
+                element.paydays = result.paydays;
+                element.ot_hrs = result.ot_hrs;
+              }
+            });
+            this.tableData = arr;
+          }
+          // this.print();
         }
       });
     }
@@ -248,9 +275,6 @@ export class ReportsComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.getComponentData = res.response;
-              if (this.routeParam == 'AttendanceProcess') {
-                this.attendanceProcess()
-              }
             }
           }
         });
@@ -347,7 +371,7 @@ export class ReportsComponent {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'AttendanceProcess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode: '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }
@@ -362,49 +386,49 @@ export class ReportsComponent {
               })
               this.tableData = res.response.AttendanceProcess;
             } else {
-            if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
-              const keys = [];
-              const tableResp = res.response[this.getComponentData.listName];
-              if (res.response[this.getComponentData.totals] && res.response[this.getComponentData.totals].length) {
-                tableResp.push(res.response[this.getComponentData.totals][0]);
-              }
-              tableResp.forEach(obj => {
-                const cols = [];
-                Object.keys(this.environment.tableColumnsData[this.routeParam]).forEach(col => {
-                  if (this.routeParam == 'employeeotreport' && col != 'staffid' && col != 'employeename' && col != 'otHrMin') {
-                    col = col.substring(1);
-                  }
-                  let nObj: any;
-                  if ((obj[col] instanceof Array)) {
-                    let arr = [];
-                    obj[col].forEach(key => {
-                      Object.keys(this.environment.tableColumnsData[this.routeParam][col]).forEach(col1 => {
-                        arr.push({ val: key[col1], label: col1, type: this.environment.tableColumnsData[this.routeParam][key] });
+              if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
+                const keys = [];
+                const tableResp = res.response[this.getComponentData.listName];
+                if (res.response[this.getComponentData.totals] && res.response[this.getComponentData.totals].length) {
+                  tableResp.push(res.response[this.getComponentData.totals][0]);
+                }
+                tableResp.forEach(obj => {
+                  const cols = [];
+                  Object.keys(this.environment.tableColumnsData[this.routeParam]).forEach(col => {
+                    if (this.routeParam == 'employeeotreport' && col != 'staffid' && col != 'employeename' && col != 'otHrMin') {
+                      col = col.substring(1);
+                    }
+                    let nObj: any;
+                    if ((obj[col] instanceof Array)) {
+                      let arr = [];
+                      obj[col].forEach(key => {
+                        Object.keys(this.environment.tableColumnsData[this.routeParam][col]).forEach(col1 => {
+                          arr.push({ val: key[col1], label: col1, type: this.environment.tableColumnsData[this.routeParam][key] });
+                        })
                       })
-                    })
-                    nObj = { val: arr, label: col, type: this.environment.tableColumnsData[this.routeParam][col] };
-                  } else {
-                    nObj = { val: obj[col], label: col, type: this.environment.tableColumnsData[this.routeParam][col] };
-                  }
-                  cols.push(nObj);
+                      nObj = { val: arr, label: col, type: this.environment.tableColumnsData[this.routeParam][col] };
+                    } else {
+                      nObj = { val: obj[col], label: col, type: this.environment.tableColumnsData[this.routeParam][col] };
+                    }
+                    cols.push(nObj);
+                  })
+                  keys.push(cols);
+                });
+                const obj = this.companyList.find((c: any) => c.id == this.modelFormData.value.companyCode);
+                this.modelFormData.patchValue({
+                  companyName: obj.text
                 })
-                keys.push(cols);
-              });
-              const obj = this.companyList.find((c: any) => c.id == this.modelFormData.value.companyCode);
-              this.modelFormData.patchValue({
-                companyName: obj.text
-              })
-              this.data = keys;
-              setTimeout(() => {
-                var w = window.open();
-                var html = document.getElementById('printData').innerHTML;
-                w.document.body.innerHTML = html;
-                this.data = null;
-                w.print();
-              }, 50);
+                this.data = keys;
+                setTimeout(() => {
+                  var w = window.open();
+                  var html = document.getElementById('printData').innerHTML;
+                  w.document.body.innerHTML = html;
+                  this.data = null;
+                  w.print();
+                }, 50);
 
+              }
             }
-          }
           }
           this.spinner.hide();
         });

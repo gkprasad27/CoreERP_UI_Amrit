@@ -62,18 +62,18 @@ export class AttendanceProcessComponent {
     if (this.modelFormData.invalid) {
       return;
     }
-    const addCompanyUrl = String.Join('', this.apiConfigService.registerAttendanceProcess);
-    this.apiService.apiPostRequest(addCompanyUrl, this.modelFormData.value)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.dialogRef.close();
-            }
-          }
-          this.spinner.hide();
-        });
+    // const addCompanyUrl = String.Join('', this.apiConfigService.registerAttendanceProcess);
+    // this.apiService.apiPostRequest(addCompanyUrl, this.modelFormData.value)
+    //   .subscribe(
+    //     response => {
+    //       const res = response;
+    //       if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //         if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.dialogRef.close(this.modelFormData.value);
+        //     }
+        //   }
+        //   this.spinner.hide();
+        // });
 
   }
 

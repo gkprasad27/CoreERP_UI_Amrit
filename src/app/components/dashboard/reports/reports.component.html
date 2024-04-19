@@ -204,6 +204,9 @@
                         {{ "COMMON.PRINT" | translate }}
                     </button>
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()" *ngIf="routeParam == 'AttendanceProcess'">
+                        {{ "AttendanceProcess.title" | translate }}
+                    </button>
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="attendanceProcess()" *ngIf="routeParam == 'AttendanceProcess'">
                         {{ "COMMON.SEARCH" | translate }}
                     </button>
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="reset()">
@@ -215,6 +218,11 @@
 
         </form>
 
+        <div class="d-flex justify-content-end mb-2">
+            <button mat-raised-button class="button-color-bule text-white mx-2" (click)="save()" *ngIf="routeParam == 'AttendanceProcess'">
+                {{ "COMMON.SAVE" | translate }}
+            </button>
+        </div>
     
         <app-table [tableData]="tableData" (editOrDeleteEvent)="editOrDeleteEvent($event)"></app-table>
 

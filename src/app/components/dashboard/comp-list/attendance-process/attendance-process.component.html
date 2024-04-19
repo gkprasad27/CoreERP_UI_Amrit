@@ -25,23 +25,23 @@
                 </mat-form-field>
 
                 <mat-form-field class="form-element">
-                    <mat-label [translate]="'AttendanceProcess.paydays'"></mat-label>
-                    <input matInput formControlName="paydays" readonly appFocusOnEnter>
-                </mat-form-field>
-
-                <mat-form-field class="form-element">
-                    <mat-label [translate]="'AttendanceProcess.ot_hrs'"></mat-label>
-                    <input matInput formControlName="ot_hrs" readonly appFocusOnEnter>
-                </mat-form-field>
-
-                <mat-form-field class="form-element">
                     <mat-label [translate]="'AttendanceProcess.att_Month'"></mat-label>
-                    <input matInput formControlName="att_Month" appFocusOnEnter tabIndex="1">
+                    <input matInput formControlName="att_Month" readonly appFocusOnEnter tabIndex="1">
                 </mat-form-field>
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'AttendanceProcess.att_Year'"></mat-label>
-                    <input matInput formControlName="att_Year" appFocusOnEnter tabIndex="2">
+                    <input matInput formControlName="att_Year" readonly appFocusOnEnter tabIndex="2">
+                </mat-form-field>
+                
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'AttendanceProcess.paydays'"></mat-label>
+                    <input matInput formControlName="paydays"  appFocusOnEnter>
+                </mat-form-field>
+
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'AttendanceProcess.ot_hrs'"></mat-label>
+                    <input matInput formControlName="ot_hrs"  appFocusOnEnter>
                 </mat-form-field>
 
             </div>
