@@ -1,6 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div style="margin: 10px;" *ngIf="quotationSupplier" id="quotationSupplierPrintData">
 
     <div style="display: flex;">
@@ -25,14 +23,12 @@
     <div style="display: flex;margin-top: 10px;">
         <div style="width: 50%;padding-left: 15px;display: flex;">
             <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> BD-F002, DATED : </b></div>
-            <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
-                {{
+            <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
                 quotationSupplier?.headingObj?.qDate ? (quotationSupplier?.headingObj?.qDate | date) : '' }} </div>
         </div>
         <div style="width: 50%;padding-left: 15px;display: flex;">
             <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Ref: </b></div>
-            <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
-                {{
+            <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
                 quotationSupplier?.headingObj?.refNo }}</div>
         </div>
     </div>
@@ -56,8 +52,7 @@
 
     <div style="display: flex;margin-top: 30px;">
         <div style="width: 100%;padding-left: 15px;display: flex; text-decoration: underline;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Quotation for {{
-                    quotationSupplier?.headingObj?.quotationfor }} </b></div>
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Quotation for {{ quotationSupplier?.headingObj?.quotationfor }} </b></div>
         </div>
     </div>
 
@@ -70,7 +65,7 @@
     </div>
 
 
-    <div id=style="padding-left: 15px;margin-top: 10px;">
+    <div id= style="padding-left: 15px;margin-top: 10px;">
 
         <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
             *ngIf="quotationSupplier.detailArray && quotationSupplier.detailArray.length">
@@ -132,46 +127,40 @@
             <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Terms & Conditions : </b></div>
         </div>
         <ul>
-            <li>
+            <li> 
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Material </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-                        quotationSupplier.headingObj.material }} </div>
+                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  {{ quotationSupplier.headingObj.material }}  </div>
                 </div>
             </li>
-            <li>
+            <li> 
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Payment </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: As per
-                        Aggrement </div>
+                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  As per Aggrement </div>
                 </div>
             </li>
-            <li>
+            <li> 
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Delivery </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-                        quotationSupplier.headingObj.deliveryPeriod }}</div>
+                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  {{ quotationSupplier.headingObj.deliveryPeriod }}</div>
                 </div>
             </li>
-            <li>
+            <li> 
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Taxes </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: GST Extra
-                    </div>
+                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:   GST Extra </div>
                 </div>
             </li>
-            <li>
+            <li> 
                 <div style="width: 100%;padding-left: 15px;display: flex;">
                     <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Transport </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-                        quotationSupplier.headingObj.deliveryMethod }} </div>
+                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:   {{ quotationSupplier.headingObj.deliveryMethod }} </div>
                 </div>
             </li>
         </ul>
 
         <div style="width: 100%;padding-left: 15px;display: flex;margin-top: 30px;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> For AMT Power Transmission </b>
-            </div>
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> For AMT Power Transmission </b></div>
         </div>
 
     </div>
@@ -188,7 +177,7 @@
 
             <h6>
                 Requisition Header
-
+                
             </h6>
 
             <div id="form" class="d-flex flex-wrap ">
@@ -307,7 +296,7 @@
 
             <h6>
                 Saleorder Details
-
+               
             </h6>
 
             <form [formGroup]="formData1" autocomplete="off">
@@ -316,9 +305,9 @@
 
                 <div class="d--flex p-1 mat-form-field-height">
 
+                    
 
-
-
+                    
 
                     <mat-form-field class="form-element">
                         <mat-label>{{ 'supplierquotation.taxCode' | translate }}</mat-label>
@@ -368,8 +357,7 @@
                         (click)="saveForm()"><i class="fa-solid fa-file-pen"></i>
                         {{ 'COMMON.UPDATE' | translate }}
                     </button>
-                    <button mat-raised-button id="reset" class="button-color-red text-white mx-1"
-                        (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
+                    <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
                         {{ 'COMMON.RESET' | translate }}
                     </button>
 
@@ -420,8 +408,8 @@
                 (click)="convertToSaleOrder()">
                 {{ 'supplierquotation.CONVERTTOSALEORDER' | translate }}
             </button>
-            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i
-                    class="fa-solid fa-file-pen"></i>
+            <button  mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+                (click)="save()"><i class="fa-solid fa-file-pen"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
             <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">

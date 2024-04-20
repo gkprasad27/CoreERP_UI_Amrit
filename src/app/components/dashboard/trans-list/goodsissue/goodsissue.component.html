@@ -11,20 +11,23 @@
       </h6>
 
       <!-- <div class="d--flex p-1 mat-form-field-height"> -->
-           <div id="forms" class="d-flex flex-wrap ">
+           <div id="forms" class="d-flex align-content-stretch flex-wrap ">
 
-        <mat-form-field>
+       
+          <mat-form-field>
 
-          <mat-label>{{ 'goodsissue.company' | translate }}</mat-label>
-          <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
-          </mat-select>
+            <mat-label>{{ 'goodsissue.company' | translate }}</mat-label>
+            <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            </mat-select>
+  
+          </mat-form-field>
+        
 
-        </mat-form-field>
-
+       
         <mat-form-field>
           <mat-label>{{'purchaseorder.profitCenter' | translate }}</mat-label>
           <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
@@ -34,10 +37,11 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+       
 
 
         
-        <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
+        <div  class="multiselect-dropdown-list " *ngIf="!routeEdit">
           <ng-multiselect-dropdown placeholder="{{ 'goodsissue.storesPerson' | translate }}"
             formControlName="storesPerson" [settings]="dropdownSettings1" [data]="employeesList">
           </ng-multiselect-dropdown>
@@ -48,70 +52,80 @@
         </mat-form-field>
 
 
-        <mat-form-field>
-          <mat-label>{{'goodsissue.department' | translate }}</mat-label>
-          <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let dept of fdeptList" [value]="dept.code">
-              {{dept.description}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>{{'goodsissue.department' | translate }}</mat-label>
+            <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let dept of fdeptList" [value]="dept.code">
+                {{dept.description}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        
 
        
 
-        <mat-form-field>
-          <mat-label>{{'goodsissue.poType' | translate }}</mat-label>
-          <mat-select formControlName="saleOrder" appFocusOnEnter tabIndex="5" (selectionChange)="toggle()">
-            <mat-option>None</mat-option>
-            <mat-option value="Sale Order"> Sale Order </mat-option>
-            <mat-option value="Master Saleorder"> Master Saleorder </mat-option>
-            <mat-option value="Bill of Material"> Bill of Material </mat-option>
-          </mat-select>
-        </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>{{'goodsissue.poType' | translate }}</mat-label>
+            <mat-select formControlName="saleOrder" appFocusOnEnter tabIndex="5" (selectionChange)="toggle()">
+              <mat-option>None</mat-option>
+              <mat-option value="Sale Order"> Sale Order </mat-option>
+              <mat-option value="Master Saleorder"> Master Saleorder </mat-option>
+              <mat-option value="Bill of Material"> Bill of Material </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+        
 
-
-        <div id="sale" class="multiselect-dropdown-list" *ngIf="!routeEdit">
+        <div  class="multiselect-dropdown-list form-item" *ngIf="!routeEdit" >
           <ng-multiselect-dropdown placeholder="{{ 'goodsissue.saleOrderNumber' | translate }}"
             formControlName="saleOrderNumber" (onSelect)="getGoodsissueDetail()" [settings]="dropdownSettings"
             [data]="mreqList">
           </ng-multiselect-dropdown>
         </div>
-        
         <mat-form-field *ngIf="routeEdit"  >
           <mat-label>{{'goodsissue.saleOrderNumber' | translate }}</mat-label>
           <input matInput type="text" readonly formControlName="saleOrderNumber" appFocusOnEnter tabIndex="4">
         </mat-form-field>
 
         
-        <div id="sale" class="multiselect-dropdown-list" *ngIf="!routeEdit" id="sale" >
+        <div  class="multiselect-dropdown-list form-item" *ngIf="!routeEdit"  >
           <ng-multiselect-dropdown placeholder="{{ 'goodsissue.productionPerson' | translate }}"
             formControlName="productionPerson" [settings]="dropdownSettings1"
             [data]="employeesList">
           </ng-multiselect-dropdown>
         </div>
-
-        <mat-form-field *ngIf="routeEdit" id="sale">
+        <mat-form-field *ngIf="routeEdit" >
           <mat-label>{{'goodsissue.productionPerson' | translate }}</mat-label>
           <input matInput type="text" readonly formControlName="productionPersonName" appFocusOnEnter tabIndex="4">
         </mat-form-field>
 
 
-          <mat-form-field id="sale" class="form-element" >
-            <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
-            <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="productionPlanDate"
-              appFocusOnEnter tabIndex="6">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
+        
+          
+            <mat-form-field  class="form-element element" id="sale" >
+              <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
+              <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="productionPlanDate"
+                appFocusOnEnter tabIndex="6">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          
+        
 
-          <mat-form-field id="sale" class="form-element" >
-            <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
-            <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="productionTargetDate"
-              appFocusOnEnter tabIndex="6">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
+        
+          
+            <mat-form-field  class="form-element element" id="sale" >
+              <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
+              <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="productionTargetDate"
+                appFocusOnEnter tabIndex="6">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          
+        
 
         
       </div>

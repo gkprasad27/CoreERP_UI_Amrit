@@ -66,7 +66,7 @@
 
 
     .mat-mdc-form-field {
-     // margin: 5px;
+      margin: 5px;
       flex: 0 0 16%;
       margin-right:5px;
     }
@@ -122,18 +122,23 @@
   
   
 
-  
 
- #form{
-  justify-content: space-evenly;
-  display:flex;
-  flex-direction: wrap;
-  
-  height:180px;
+#form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
+}
 
- }
+#element {
+  width: calc(16.666% - 10px); 
+  margin-bottom: 20px; 
+}
 
- #element{
-  
-  margin-left: 10px;
- }
+
+@media screen and (max-width: 991px) {
+  #element {
+    width: calc(25% - 10px); 
+  }
+}
+
+

@@ -1,6 +1,8 @@
 mat-form-field {
-    margin: 8px;
+    margin: 17px;
     flex: 0 0 14.5%;
+    justify-content: space-between;
+    
   }
 
     ::ng-deep .table-css {
@@ -58,52 +60,88 @@ mat-form-field {
   #reset:hover{
     transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
   }
-
- 
- 
-  #sale{
-    margin-left: 40px;
-  }
-  
-  // mat-card-content{
-  //   background-color: red;
-  //   height: 300px;
-  // }
-
-  // .field{
-  //   background-color: rgb(44, 211, 223);
-  //   height: 250px;
-  //   justify-content: space-evenly;
-  // }
   
 
-  // mat-select{
-  //   background-color: brown;
-   
-  //   justify-content: space-between;
-
-  // }
-
-  // mat-label{
-  //   background-color: chartreuse;
-  // }
 
 
-  
-
-  #sale{
-    // margin-right: 1em !important;
-    // background-color: brown;
-    // justify-content: space-evenly;
-    // margin-left: 3em !important;
-    margin-left:0;
-   
-  }
-
-  #forms{
-    display:flex;
-    flex-direction: wrap;
+  // #forms{
     
-    height:180px;
+  //   display:flex;
+  //   flex-direction: wrap;
+  //   justify-content: space-evenly;
+  //   align-items: flex-start;
+    
+  //   height:180px;
+  // }
   
-   }
+    
+   
+
+  // #sale{
+    
+  //  min-width: 20px;
+  //  max-width: fit-content;
+   
+  //  padding: 1px;
+   
+  
+  // }
+  // #sales{
+  //   min-width: 20px;
+  //  max-width: fit-content;
+   
+   
+  //  padding: 1px;
+   
+  // }
+
+
+
+
+
+  // .element {
+  //   flex: 1 1 20%; 
+  //   max-width: calc(20% - 20px); 
+  //   margin: 10px; 
+  // }
+  
+  
+  // @media (max-width: 992px) {
+  //   .element {
+  //     flex-basis: 25%; 
+  //     max-width: calc(25% - 20px); 
+  //   }
+  // }
+  
+
+
+  #forms {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  #forms .mat-form-field,
+  #forms .multiselect-dropdown-list,
+  #forms .form-element {
+    flex: 1 0 20%; 
+    margin-right: 20px; 
+    box-sizing: border-box; 
+  }
+  
+  @media (max-width: 768px) {
+    #forms .mat-form-field,
+    #forms .multiselect-dropdown-list,
+    #forms .form-element {
+      flex: 1 0 100%; 
+      margin-right: 0; 
+      margin-bottom: 20px; 
+    }
+  }
+
+
+
+  
+  
+
+
+  
