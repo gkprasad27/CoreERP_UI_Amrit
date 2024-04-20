@@ -3348,13 +3348,13 @@
 },
 "AttendanceProcess": {
   "title": "Attendance Process",
-  "empCode": "Emp Code",
+  "emp_Code": "Emp Code",
   "employeename":"Employee Name",
-  "monthDays": "Month Days",
-  "paydays": "Pay Days",
-  "ot_hrs": "Ot Hrs",
-  "att_Month": "Att Month",
-  "att_Year": "Att Year",
+  "month_Days": "Month Days",
+  "pay_Days": "Pay Days",
+  "oT_Hrs": "Ot Hrs",
+  "month": "Att Month",
+  "year": "Att Year",
   "action": "Action"
 }
 }

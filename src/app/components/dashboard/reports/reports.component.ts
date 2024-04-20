@@ -144,8 +144,7 @@ export class ReportsComponent {
             this.tableComponent.defaultValues();
             arr.forEach(element => {
               if (element.sno == result.sno) {
-                element.paydays = result.paydays;
-                element.ot_hrs = result.ot_hrs;
+                element = result;
               }
             });
             this.tableData = arr;
