@@ -162,14 +162,14 @@
 
                 <div id="data" class="mx-2">
                     <label > {{ 'goodsreceipts.mtcDocumentUpload' | translate }} </label>
-                    <button id="upload" ><app-file-upload [type]="'upload'" (emitFilesList)="emitFilesList($event)"></app-file-upload></button>
+                    <button id="upload" ><app-file-upload [type]="'card'" (uploadFile)="downLoadFile1($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload></button>
                 </div>
 
                 
                 <div id="data1" class="mx-2">
                     <label id="invoice"> {{ 'goodsreceipts.invoiceUpload' | translate }} </label>
                     
-                    <button id="upload" ><app-file-upload [type]="'upload'" (emitFilesList)="emitFilesList1($event)"></app-file-upload></button>
+                    <button id="upload" ><app-file-upload [type]="'card'" (uploadFile)="downLoadFile1($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload></button>
                 </div>
 
 

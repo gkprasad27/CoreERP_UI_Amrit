@@ -461,7 +461,7 @@ export class SalesorderComponent {
 
 
   downLoadFile(event: any) {
-    const url = String.Join('/', this.apiConfigService.getFile, event.item[event.action]);
+    const url = String.Join('/', this.apiConfigService.getFile, event.name);
     this.apiService.apiGetRequest(url)
       .subscribe(
         response => {

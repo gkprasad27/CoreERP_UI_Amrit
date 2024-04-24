@@ -100,7 +100,7 @@
                 </div>
 
                 <div id="data">
-                   <button id="upload"> <app-file-upload [type]="'upload'" [oldFileList]="formData.value.documentURL"
+                   <button id="upload"> <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL"
                         (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload></button>
                 </div>
 
@@ -189,7 +189,7 @@
             <div>
                 
                 <app-table class="table-css"  [tableData]="tableData" [showButtons]="false"
-                    (editOrDeleteEvent)="editOrDeleteEvent($event)" (onLinkEmitEvent)="downLoadFile($event)">
+                    (editOrDeleteEvent)="editOrDeleteEvent($event)" >
                 </app-table>
             </div>
         </div>
