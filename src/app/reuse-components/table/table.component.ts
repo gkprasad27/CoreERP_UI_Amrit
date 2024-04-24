@@ -293,7 +293,6 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   }
 
   editOrDelete(action: string, item: any) {
-    debugger
     this.editOrDeleteEvent.emit({ action: action, item: item });
   }
 

@@ -273,7 +273,6 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   getSaleOrderDetail() {
-    debugger
     this.tableComponent.defaultValues();
     let url = '';
     if (this.formData.value.saleOrderType == 'Sale Order') {

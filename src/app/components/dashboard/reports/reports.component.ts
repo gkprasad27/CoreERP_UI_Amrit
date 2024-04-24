@@ -136,10 +136,8 @@ export class ReportsComponent {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        debugger
         if (!this.commonService.checkNullOrUndefined(result)) {
           if (result) {
-            debugger
             const arr = [...this.tableData];
             this.tableComponent.defaultValues();
             arr.forEach(element => {

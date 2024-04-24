@@ -702,7 +702,6 @@ export class QuotationSupplierComponent implements OnInit {
   }
 
   print() {
-    debugger
     const lists = JSON.parse(JSON.stringify(this.tableData))
     let list = lists.filter((t: any) => t.billable == 'Y');
     lists.forEach((data: any) => {

@@ -372,7 +372,6 @@ export class SalesorderComponent {
   }
 
   getBomDetail() {
-    debugger
     if (this.tableData.some((t: any) => t.bomKey == this.formData.value.bom)) {
       this.formData.patchValue({
         bom: ''
@@ -390,7 +389,6 @@ export class SalesorderComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
               res.response['bomDetail'].forEach((s: any, index: number) => {
                 // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 // s.materialName = obj.text

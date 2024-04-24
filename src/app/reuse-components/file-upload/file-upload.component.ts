@@ -79,7 +79,6 @@ export class FileUploadComponent implements OnInit {
   }
 
   onSelectFilebase(inputValue: any): void {
-    debugger
     let data = [...inputValue.target.files];
     for (let f = 0; f < data.length; f++) {
       if (this.fileExtension.length && !this.fileExtension.includes(this.getFileExtension(data[f].name).toLowerCase())) {
