@@ -287,7 +287,7 @@ export class SalesInvoiceComponent implements OnInit {
               this.tableComponent.defaultValues();
               
               res.response['icDetail'].forEach((i: any) => {
-                const obj = this.materialCodeList.find((m: any) => m.bomkey == i.materialCode && m.mainComponent == 'Y');
+                const obj = this.materialCodeList.find((m: any) => m.bomKey == i.materialCode && m.mainComponent == 'Y');
 
                 const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
                 const igst = (objT && objT.igst) ? (obj.rate * objT.igst) / 100 : 0;

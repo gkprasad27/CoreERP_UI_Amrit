@@ -2748,7 +2748,7 @@
     "stockQty": "Avaliable Stock QTY",
     "NEWORDER": "New Order",
     "salesOrderNumber": "Sales Order Number",
-    "bomkey": "Bom Key",
+    "bomKey": "Bom Key",
     "bomName": "Bom Name",
     "materialCode": "Material Code",
     "qty": "Quantity",
