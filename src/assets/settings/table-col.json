@@ -2686,5 +2686,10 @@
   "month": "Att Month",
   "year": "Att Year",
   "action": "Action"
+},
+"salaryprocess":{
+  "title":"Salary Process",
+  "sal_Month": "Month",
+  "sal_Year": "Year"
 }
 }

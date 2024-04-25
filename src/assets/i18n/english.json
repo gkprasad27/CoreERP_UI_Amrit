@@ -33,7 +33,8 @@
     "taxCode": "Tax Code",
     "totalTax": "Total Tax",
     "totalAmount": "Total Amount",
-    "employee": "Employee"
+    "employee": "Employee",
+    "process": "Process"
   },
   "LOGIN": {
     "USERNAME": "Username",

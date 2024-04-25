@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { TableComponent } from 'src/app/reuse-components/table/table.component';
 import { AttendanceProcessComponent } from '../comp-list/attendance-process/attendance-process.component';
+import { SalaryProcessComponent } from '../comp-list/salaryproces/salaryprocess.component';
 
 @Component({
   selector: 'app-reports',
@@ -88,6 +89,7 @@ export class ReportsComponent {
         case 'employeeotreport':
         case 'employeeattendance':
         case 'AttendanceProcess':
+        case 'salaryprocess':
           this.getEmployeesList();
           break;
       }
@@ -96,22 +98,28 @@ export class ReportsComponent {
     });
   }
 
-  attendanceProcess() {
+  searchProcess() {
     const costCenUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}`);
     this.apiService.apiGetRequest(costCenUrl)
       .subscribe(
         response => {
+          this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.tableData = res.response.AttendanceProcess;
+            if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
+              if (this.routeParam == 'AttendanceProcess') {
+                res.response[this.getComponentData.listName].forEach((a: any) => {
+                  a.action = 'edit';
+                })
+              }
+              this.tableData = res.response[this.getComponentData.listName];
             }
           }
         });
   }
 
   save() {
-    const addCompanyUrl = String.Join('', this.apiConfigService.registerAttendanceProcess);
+    const addCompanyUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.getComponentData.registerUrl);
     this.apiService.apiPostRequest(addCompanyUrl, this.tableData)
       .subscribe(
         response => {
@@ -128,7 +136,18 @@ export class ReportsComponent {
 
   editOrDeleteEvent(value) {
     if (value.action === 'Edit') {
-      const dialogRef = this.dialog.open(AttendanceProcessComponent, {
+      let comp;
+      switch (this.getComponentData.formName) {
+        case 'AttendanceProcess':
+          comp = AttendanceProcessComponent;
+          break;
+        case 'salaryprocess':
+          comp = SalaryProcessComponent;
+          break;
+        default:
+          break;
+      }
+      const dialogRef = this.dialog.open(comp, {
         width: '80%',
         data: value,
         panelClass: 'custom-dialog-container',
@@ -141,7 +160,7 @@ export class ReportsComponent {
             const arr = [...this.tableData];
             this.tableComponent.defaultValues();
             arr.forEach(element => {
-              if (element.sno == result.sno) {
+              if (element[this.getComponentData.primaryKey] == result[this.getComponentData.primaryKey]) {
                 element = result;
               }
             });
@@ -368,7 +387,10 @@ export class ReportsComponent {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'AttendanceProcess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${new Date(this.modelFormData.value.selected).getFullYear()}/${new Date(this.modelFormData.value.selected).getMonth()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+    } else if (this.routeParam == 'salaryprocess') {
+      const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Ledger/SalaryProcess/${new Date(this.modelFormData.value.selected).getFullYear()}/${new Date(this.modelFormData.value.selected).getMonth()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }
@@ -378,10 +400,15 @@ export class ReportsComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (this.routeParam == 'AttendanceProcess') {
-              res.response.AttendanceProcess.forEach((a: any) => {
-                a.action = 'edit';
-              })
-              this.tableData = res.response.AttendanceProcess;
+
+              if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
+                if (this.routeParam == 'AttendanceProcess') {
+                  res.response[this.getComponentData.listName].forEach((a: any) => {
+                    a.action = 'edit';
+                  })
+                }
+                this.tableData = res.response[this.getComponentData.listName];
+              }
             } else {
               if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
                 const keys = [];

@@ -16,7 +16,8 @@
           height: 50px;
           flex-direction: column;
       ">
-            <span style="font-size: 15px;font-weight: 400;font-family: sans-serif;padding: 8px;"> {{ ( routeParam + '.' +
+            <span style="font-size: 15px;font-weight: 400;font-family: sans-serif;padding: 8px;"> {{ ( routeParam + '.'
+                +
                 'title') | translate }} </span>
             <span style="font-size: 35px;font-weight: 700;font-family: sans-serif;text-align: center;"> Report </span>
         </div>
@@ -26,25 +27,29 @@
         <div
             style="width: 33.33%;border-left: 1px solid black;border-right: 1px solid black; display: flex;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Company Name </b>
-            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:
+                {{
                 modelFormData.value.companyName }} </span>
         </div>
         <div *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' "
             style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> From Date </b>
-            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:
+                {{
                 modelFormData.value.fromDate }} </span>
         </div>
         <div *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' "
             style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> To Date </b>
-            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:
+                {{
                 modelFormData.value.toDate }} </span>
         </div>
         <div *ngIf="!(routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' )"
             style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> As On Date </b>
-            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:
+                {{
                 date | date }} </span>
         </div>
     </div>
@@ -135,7 +140,7 @@
                 </mat-form-field>
 
                 <div class="p-2 range-picker"
-                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' ">
+                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' && routeParam != 'salaryprocess'  && routeParam != 'AttendanceProcess'">
                     <input type="text" ngxDaterangepickerMd startKey="start"
                         [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}" endKey="end" placeholder="Choose date"
                         formControlName="selected" class="form-control" />
@@ -146,6 +151,13 @@
                         </div>
                     </div>
                 </div>
+
+                <mat-form-field *ngIf="routeParam == 'AttendanceProcess' || routeParam == 'salaryprocess'">
+                    <input matInput [matDatepicker]="picker" placeholder="Choose date"
+                    formControlName="selected">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
 
                 <div class="multiselect-dropdown-list mx-3"
                     *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'">
@@ -165,7 +177,8 @@
                 </div>
 
 
-                <mat-form-field class="form-element" *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
+                <mat-form-field class="form-element"
+                    *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
                     <mat-label>{{ 'invoicesmemos.bpcategory' | translate }}</mat-label>
                     <mat-select formControlName="bpcategory" (selectionChange)="onbpChange()">
                         <mat-option>None</mat-option>
@@ -175,16 +188,18 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead" *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
+                <div class="mat-mdc-form-field typeahead"
+                    *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
                     <input placeholder="{{ 'invoicesmemos.partyAccount' | translate }}" formControlName="partyAccount"
                         [typeahead]="bpgLists" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
-                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"  >
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
                     <ng-template #customItemTemplate let-model="item">
                         <span>{{model.text}}</span>
                     </ng-template>
                 </div>
 
-                <div class="mat-mdc-form-field typeahead" *ngIf="routeParam == 'employeeotreport' || routeParam == 'employeeattendance' || routeParam == 'AttendanceProcess'">
+                <div class="mat-mdc-form-field typeahead"
+                    *ngIf="routeParam == 'employeeotreport' || routeParam == 'employeeattendance' || routeParam == 'AttendanceProcess' || routeParam == 'salaryprocess'">
                     <input placeholder="{{ 'COMMON.employee' | translate }}" formControlName="employee"
                         [typeahead]="employeesList" typeaheadOptionField='text' appFocusOnEnter tabIndex="9"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
@@ -194,19 +209,23 @@
                 </div>
 
 
-                <mat-slide-toggle class="d-flex m-2" formControlName="status"  *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
+                <mat-slide-toggle class="d-flex m-2" formControlName="status"
+                    *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
                     {{(modelFormData.get('status').value) ? 'Pending' : 'Paid' }}
                 </mat-slide-toggle>
 
 
                 <div class="p-2 my-3 ms-5">
-                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()" *ngIf="routeParam != 'AttendanceProcess'">
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()"
+                        *ngIf="routeParam == 'AttendanceProcess' || routeParam == 'salaryprocess'">
+                        {{ "COMMON.process" | translate }}
+                    </button>
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()"
+                        *ngIf="routeParam != 'AttendanceProcess'">
                         {{ "COMMON.PRINT" | translate }}
                     </button>
-                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()" *ngIf="routeParam == 'AttendanceProcess'">
-                        {{ "AttendanceProcess.title" | translate }}
-                    </button>
-                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="attendanceProcess()" *ngIf="routeParam == 'AttendanceProcess'">
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="searchProcess()"
+                        *ngIf="routeParam == 'AttendanceProcess'">
                         {{ "COMMON.SEARCH" | translate }}
                     </button>
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="reset()">
@@ -219,11 +238,12 @@
         </form>
 
         <div class="d-flex justify-content-end mb-2">
-            <button mat-raised-button class="button-color-bule text-white mx-2" (click)="save()" *ngIf="routeParam == 'AttendanceProcess'">
+            <button mat-raised-button class="button-color-bule text-white mx-2" (click)="save()"
+                *ngIf="routeParam == 'AttendanceProcess'">
                 {{ "COMMON.SAVE" | translate }}
             </button>
         </div>
-    
+
         <app-table [tableData]="tableData" (editOrDeleteEvent)="editOrDeleteEvent($event)"></app-table>
 
 

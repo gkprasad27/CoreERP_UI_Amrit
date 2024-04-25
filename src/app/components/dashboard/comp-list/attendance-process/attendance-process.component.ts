@@ -18,10 +18,6 @@ export class AttendanceProcessComponent {
 
   modelFormData: FormGroup;
   formData: any;
-  csList: any;
-  UomList: any;
-  cnsList: any;
-  cotList: any;
   constructor(
     private commonService: CommonService,
     private addOrEditService: AddOrEditService,
