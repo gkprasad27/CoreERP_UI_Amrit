@@ -244,7 +244,7 @@
             </button>
         </div>
 
-        <app-table [tableData]="tableData" (editOrDeleteEvent)="editOrDeleteEvent($event)"></app-table>
+        <app-table *ngIf="routeParam == 'AttendanceProcess'" [tableData]="tableData" (editOrDeleteEvent)="editOrDeleteEvent($event)"></app-table>
 
 
     </mat-card-content>
