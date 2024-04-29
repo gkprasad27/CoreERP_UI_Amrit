@@ -4,7 +4,7 @@ import { String } from 'typescript-string-operations';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { StatusCodes } from '../../../enums/common/common';
+import { SnackBar, StatusCodes } from '../../../enums/common/common';
 import { AlertService } from '../../../services/alert.service';
 import { RuntimeConfigService } from '../../../services/runtime-config.service';
 import { ApiConfigService } from '../../../services/api-config.service';
@@ -14,6 +14,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { TableComponent } from 'src/app/reuse-components/table/table.component';
 import { AttendanceProcessComponent } from '../comp-list/attendance-process/attendance-process.component';
 import { SalaryProcessComponent } from '../comp-list/salaryproces/salaryprocess.component';
+import { Static } from 'src/app/enums/common/static';
 
 @Component({
   selector: 'app-reports',
@@ -113,6 +114,22 @@ export class ReportsComponent {
                 })
               }
               this.tableData = res.response[this.getComponentData.listName];
+            }
+          }
+        });
+  }
+
+  salarySearch() {
+    const costCenUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `/Ledger/SalaryProcess`);
+    this.apiService.apiGetRequest(costCenUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          debugger
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.alertService.openSnackBar(res.response, Static.Close, SnackBar.error);
             }
           }
         });
@@ -387,10 +404,11 @@ export class ReportsComponent {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'AttendanceProcess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${new Date(this.modelFormData.value.selected).getMonth()}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${new Date(this.modelFormData.value.selected).getMonth()+1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'salaryprocess') {
+      debugger
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth()}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth()+1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }

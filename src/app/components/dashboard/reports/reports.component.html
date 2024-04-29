@@ -217,7 +217,11 @@
 
                 <div class="p-2 my-3 ms-5">
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()"
-                        *ngIf="routeParam == 'AttendanceProcess' || routeParam == 'salaryprocess'">
+                        *ngIf="routeParam == 'AttendanceProcess'">
+                        {{ "COMMON.process" | translate }}
+                    </button>
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="salarySearch()"
+                        *ngIf="routeParam == 'salaryprocess'">
                         {{ "COMMON.process" | translate }}
                     </button>
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()"
