@@ -293,7 +293,7 @@ export class CTCBreakupComponent implements OnInit {
   }
 
   save() {
-    const arr = this.dataSource.data.filter((d: any) => d.EarnDednAmount)
+    const arr = this.dataSource.data.filter((d: any) => d.EarnDednAmount !== undefined && d.EarnDednAmount !== null);
     const obj = {
       item: {
         structure: {
