@@ -120,8 +120,9 @@ export class ReportsComponent {
   }
 
   salarySearch() {
-    const costCenUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `/Ledger/SalaryProcess`);
-    this.apiService.apiGetRequest(costCenUrl)
+    const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
+    const costCenUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Ledger/SalaryProcess/${new Date(this.modelFormData.value.selected).getMonth()+1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+    this.apiService.apiPostRequest(costCenUrl)
       .subscribe(
         response => {
           this.spinner.hide();
@@ -406,7 +407,6 @@ export class ReportsComponent {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${new Date(this.modelFormData.value.selected).getMonth()+1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'salaryprocess') {
-      debugger
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth()+1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else {
