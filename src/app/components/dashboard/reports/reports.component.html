@@ -118,6 +118,112 @@
 
 </div>
 
+<div id="salaryProcess" *ngIf="salaryProcess">
+
+    <div style="display: flex;">
+        <img src="/assets/images/header.jpg" style="height: 60px;
+          width: 100%;">
+    </div>
+
+    <div style="text-align: center;font-size: 15px;font-family: sans-serif;margin-top: 10px;">
+        PAYSLIP FOR THE MONTH OF {{ salaryProcess.month }} {{ salaryProcess.year }}
+    </div>
+
+    <hr>
+
+    <div style="display: flex;">
+        <div style="width: 50%;font-size: 15px;font-family: sans-serif;margin-top: 10px;"> Employee No: {{
+            salaryProcess.empNo }} </div>
+        <div style="width: 50%;font-size: 15px;font-family: sans-serif;margin-top: 10px;"> Name: {{ salaryProcess.name
+            }} </div>
+    </div>
+
+    <hr>
+
+    <div style="display: flex;">
+        <div style="width: 50%;font-size: 15px;font-family: sans-serif;margin-top: 10px;"> Department : {{
+            salaryProcess.department }} </div>
+        <div style="width: 50%;font-size: 15px;font-family: sans-serif;margin-top: 10px;"> Designation: {{
+            salaryProcess.designation }} </div>
+    </div>
+
+    <hr>
+
+    <div style="-webkit-print-color-adjust: exact;">
+        <table
+            style="border-collapse: collapse;width: 100%; font-size: 14px;-webkit-print-color-adjust: exact;">
+            <thead>
+                <!-- <tr>
+                    <ng-container *ngFor="let keys of data[0]">
+                        <th [attr.rowspan]="getRowSpan(keys)" [attr.colspan]="getColSpan(keys)"
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border: 1px solid black; -webkit-print-color-adjust: exact;">
+                            {{ ( routeParam + '.' + keys.label) | translate }} </th>
+                    </ng-container>
+                </tr> -->
+
+                <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
+                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;"> Earnings </th>
+                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;"> Amount </th>
+                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;"> Deductions </th>
+                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;"> Amount </th>
+                </tr>
+
+
+                <!-- <tr>
+                    <ng-container *ngFor="let keys of data[0]">
+                        <ng-container *ngIf="isArray(keys)">
+                            <ng-container *ngFor="let key of keys.val">
+                                <th
+                                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border: 1px solid black; -webkit-print-color-adjust: exact;">
+                                    {{ ( routeParam + '.' + key.label) | translate }} </th>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </tr> -->
+
+
+            </thead>
+            <tbody>
+
+                <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
+                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> Basic </td>
+                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> 3500 </td>
+                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;">  </td>
+                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;">  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
+                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> Over Time Amount  </td>
+                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> 111232.17 </td>
+                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;">  </td>
+                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;">  </td>
+                </tr>
+                <!-- <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;" *ngFor="let keys of data">
+                    <ng-container *ngFor="let key of keys">
+                        <ng-container *ngIf="isArray(key);else text_content">
+                            <td *ngFor="let child of key.val"
+                                style="font-size: 12px;font-family: sans-serif;border: 1px solid black;;padding: 10px; -webkit-print-color-adjust: exact;">
+                                <span *ngIf="child.type == 'Date';else other_content">
+                                    {{ child.val ? (child.val | date): '' }}
+                                </span>
+                                <ng-template #other_content><span> {{ child.val }} </span></ng-template>
+                            </td>
+                        </ng-container>
+                        <ng-template #text_content>
+                            <td
+                                style="font-size: 12px;font-family: sans-serif;border: 1px solid black;;padding: 10px; -webkit-print-color-adjust: exact;">
+                                <span *ngIf="key.type == 'Date';else other_content">
+                                    {{ key.val ? (key.val | date): '' }}
+                                </span>
+                                <ng-template #other_content><span> {{ key.val }} </span></ng-template>
+                            </td>
+                        </ng-template>
+                    </ng-container>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+
+</div>
 
 <mat-card>
     <mat-card-content class="my-2">
@@ -153,8 +259,7 @@
                 </div>
 
                 <mat-form-field *ngIf="routeParam == 'AttendanceProcess' || routeParam == 'salaryprocess'">
-                    <input matInput [matDatepicker]="picker" placeholder="Choose date"
-                    formControlName="selected">
+                    <input matInput [matDatepicker]="picker" placeholder="Choose date" formControlName="selected">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -224,7 +329,7 @@
                         *ngIf="routeParam == 'salaryprocess'">
                         {{ "COMMON.process" | translate }}
                     </button>
-                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()"
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="salaryProcessPrint()"
                         *ngIf="routeParam != 'AttendanceProcess'">
                         {{ "COMMON.PRINT" | translate }}
                     </button>
@@ -248,7 +353,8 @@
             </button>
         </div>
 
-        <app-table *ngIf="routeParam == 'AttendanceProcess'" [tableData]="tableData" (editOrDeleteEvent)="editOrDeleteEvent($event)"></app-table>
+        <app-table *ngIf="routeParam == 'AttendanceProcess'" [tableData]="tableData"
+            (editOrDeleteEvent)="editOrDeleteEvent($event)"></app-table>
 
 
     </mat-card-content>

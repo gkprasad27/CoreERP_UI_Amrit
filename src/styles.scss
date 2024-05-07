@@ -291,13 +291,12 @@ mat-tab-header {
     color: blue;
   }
 
-  *h6{
+  *h6, .header-bg {
     background: linear-gradient(to right, #174154, #5eb47a, #a8c06f);
   color: whitesmoke !important;
   padding: 12px 12px 12px 12px;
   font-weight: bold;
   border: none;
-  cursor: pointer;
   }
 
   *#for{

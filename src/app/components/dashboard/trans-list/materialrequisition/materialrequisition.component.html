@@ -4,7 +4,7 @@
 
     <h6>
       SaleOrder Details
-      
+
     </h6>
 
     <!-- <form [formGroup]="formData" autocomplete="off">
@@ -97,10 +97,22 @@
 
   <mat-card-content>
 
-    <h6>
-      Production Details
-      
-    </h6>
+    <div class="d-flex justify-content-between header-bg align-items-center">
+
+       <h5>  Production Details </h5> 
+
+      <div *ngIf="tableData1 && tableData1.length">
+
+        <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
+          {{ 'COMMON.UPDATE' | translate }}
+        </button>
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
+          {{ 'COMMON.RESET' | translate }}
+        </button>
+
+      </div>
+    </div>
+
 
     <form [formGroup]="formData1" autocomplete="off" *ngIf="tableData1 && tableData1.length">
 
@@ -171,17 +183,17 @@
           <mat-form-field class="form-element">
             <mat-label [translate]="'materialrequisition.productionPlanDate'"></mat-label>
             <input matInput [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"
-                appFocusOnEnter tabIndex="11">
+              appFocusOnEnter tabIndex="11">
             <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
             <mat-datepicker #picker3></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field class="form-element">
-          <mat-label [translate]="'materialrequisition.productionTargetDate'"></mat-label>
-          <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
+          </mat-form-field>
+          <mat-form-field class="form-element">
+            <mat-label [translate]="'materialrequisition.productionTargetDate'"></mat-label>
+            <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
               appFocusOnEnter tabIndex="12">
-          <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-          <mat-datepicker #picker4></mat-datepicker>
-        </mat-form-field>
+            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+            <mat-datepicker #picker4></mat-datepicker>
+          </mat-form-field>
           <div *ngIf="filePath" class="m-3 d-flex flex-column">
             <b> {{ 'inspectioncheck.designDocument' | translate }} </b>
             <span class="underscore" (click)="downLoadFile()"> {{ filePath }} </span>
@@ -191,16 +203,6 @@
 
 
 
-
-      </div>
-      <div id="for" class="mb-3 d-flex justify-content-end">
-
-        <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
-          {{ 'COMMON.UPDATE' | translate }}
-        </button>
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
-          {{ 'COMMON.RESET' | translate }}
-        </button>
 
       </div>
 

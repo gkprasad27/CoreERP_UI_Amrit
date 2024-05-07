@@ -46,6 +46,7 @@ export class ReportsComponent {
 
   date = new Date();
 
+  salaryProcess: any;
 
   dropdownSettings: IDropdownSettings = {
     singleSelection: true,
@@ -121,7 +122,7 @@ export class ReportsComponent {
 
   salarySearch() {
     const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-    const costCenUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Ledger/SalaryProcess/${new Date(this.modelFormData.value.selected).getMonth()+1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+    const costCenUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Ledger/SalaryProcess/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     this.apiService.apiPostRequest(costCenUrl)
       .subscribe(
         response => {
@@ -405,10 +406,10 @@ export class ReportsComponent {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'AttendanceProcess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${new Date(this.modelFormData.value.selected).getMonth()+1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'salaryprocess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth()+1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }
@@ -417,14 +418,19 @@ export class ReportsComponent {
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (this.routeParam == 'AttendanceProcess') {
-
+            if (this.routeParam == 'salaryprocess') {
+              // if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
+              //   res.response[this.getComponentData.listName].forEach((a: any) => {
+              //     a.action = 'edit';
+              //   })
+              //   this.tableData = res.response[this.getComponentData.listName];
+              // }
+             this.salaryProcessPrint();
+            } else if (this.routeParam == 'AttendanceProcess') {
               if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
-                if (this.routeParam == 'AttendanceProcess') {
-                  res.response[this.getComponentData.listName].forEach((a: any) => {
-                    a.action = 'edit';
-                  })
-                }
+                res.response[this.getComponentData.listName].forEach((a: any) => {
+                  a.action = 'edit';
+                })
                 this.tableData = res.response[this.getComponentData.listName];
               }
             } else {
@@ -478,6 +484,23 @@ export class ReportsComponent {
   }
 
 
+  salaryProcessPrint() {
+    this.salaryProcess = {
+      year: 2024,
+      month: 'DECEMBER',
+      empNo: '123',
+      name: 'Munna Kumar',
+      department: 'Production',
+      designation: 'Machine Operator',
+    }
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('salaryProcess').innerHTML;
+      w.document.body.innerHTML = html;
+      this.data = null;
+      w.print();
+    }, 50);
+  }
 
   ngOnDestroy() {
     this.commonService.routeParam = null;
