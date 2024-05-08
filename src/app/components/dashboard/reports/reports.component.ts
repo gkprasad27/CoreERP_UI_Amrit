@@ -46,7 +46,7 @@ export class ReportsComponent {
 
   date = new Date();
 
-  salaryProcess: any;
+  salaryProcessData: any = [];
 
   dropdownSettings: IDropdownSettings = {
     singleSelection: true,
@@ -419,13 +419,10 @@ export class ReportsComponent {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (this.routeParam == 'salaryprocess') {
-              // if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
-              //   res.response[this.getComponentData.listName].forEach((a: any) => {
-              //     a.action = 'edit';
-              //   })
-              //   this.tableData = res.response[this.getComponentData.listName];
-              // }
-             this.salaryProcessPrint();
+              this.salaryProcessData = [];
+              if (!this.commonService.checkNullOrUndefined(res.response)) {
+                this.salaryProcessPrint(res.response);
+              }
             } else if (this.routeParam == 'AttendanceProcess') {
               if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
                 res.response[this.getComponentData.listName].forEach((a: any) => {
@@ -484,15 +481,27 @@ export class ReportsComponent {
   }
 
 
-  salaryProcessPrint() {
-    this.salaryProcess = {
-      year: 2024,
-      month: 'DECEMBER',
-      empNo: '123',
-      name: 'Munna Kumar',
-      department: 'Production',
-      designation: 'Machine Operator',
-    }
+  salaryProcessPrint(data: any) {
+    const arr = [];
+    data.Payslip.forEach((p: any) => {
+      const attendances = data.Attendance.filter((a: any) => a.employeeCode == p.employeeCode);
+      const ots = data.OT.find((o: any) => o.employeename == p.employeeName);
+      attendances.forEach((at: any) => {
+        const day = new Date(at.attndate).getDate();
+          at.dayH = ots[day];
+          at.day = day;
+          at.logintime = new Date(at.logintime).toLocaleTimeString();
+          at.logouttime = new Date(at.logouttime).toLocaleTimeString();
+      })
+      const obj = {
+        ...p,
+        year: new Date(this.modelFormData.value.selected).getFullYear(),
+        month: (new Date(this.modelFormData.value.selected)).toLocaleString('default', { month: 'long' }).toUpperCase(),
+        attendances: attendances
+      }
+      arr.push(obj);
+    })
+    this.salaryProcessData = arr;
     setTimeout(() => {
       var w = window.open();
       var html = document.getElementById('salaryProcess').innerHTML;
