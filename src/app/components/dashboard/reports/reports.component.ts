@@ -67,7 +67,7 @@ export class ReportsComponent {
     private alertService: AlertService,
     private environment: RuntimeConfigService,
     private apiConfigService: ApiConfigService,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
