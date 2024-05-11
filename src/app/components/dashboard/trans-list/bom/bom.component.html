@@ -258,7 +258,7 @@
     </div>
 
     <div>
-      <button mat-raised-button color="primary" [disabled]="formData.invalid || tableData.length"  (click)="save()" ><i class="fa-solid fa-file-pen"></i>
+      <button mat-raised-button color="primary" [disabled]="formData.invalid || !tableData || !(tableData && tableData.length)"  (click)="save()" ><i class="fa-solid fa-file-pen"></i>
         {{ 'COMMON.SAVE' | translate }}
       </button>
       <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
