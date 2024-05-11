@@ -267,7 +267,7 @@ export class PurchasingComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               
-              this.materialList = res.response['materialList'];
+              this.materialList = res.response['mmasterList'];
             }
           }
           // this.dynTableProps = this.tablePropsFunc();
