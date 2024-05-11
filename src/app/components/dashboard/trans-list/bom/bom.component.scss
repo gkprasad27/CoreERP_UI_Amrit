@@ -1,81 +1,88 @@
 mat-form-field {
+  margin: 5px;
+  flex: 0 0 15.75%;
+}
+
+    .mat-mdc-form-field {
     margin: 5px;
-    flex: 0 0 15.75%;
+    flex: 0 0 16%;
+  }
+  .mat-mdc-form-field.typeahead {
+     margin-top: 25px;
+     input {
+        border: none;
+        border-bottom: 1px solid;
+        border-radius: 0px;
+        padding: 0px;
+  padding-bottom: 12px;
+     }
+     input:focus {
+        box-shadow: none !important;
+        background-color: none !important;
+     }
   }
 
-      .mat-mdc-form-field {
-      margin: 5px;
-      flex: 0 0 16%;
-    }
-    .mat-mdc-form-field.typeahead {
-       margin-top: 25px;
-       input {
-          border: none;
-          border-bottom: 1px solid;
-          border-radius: 0px;
-          padding: 0px;
-    padding-bottom: 12px;
-       }
-       input:focus {
-          box-shadow: none !important;
-          background-color: none !important;
-       }
-    }
-
-  ::ng-deep .table-css {
-    .table {
-      min-height: 4vh !important;
-    }
+::ng-deep .table-css {
+  .table {
+    min-height: 4vh !important;
   }
+}
 
-  #background {
-    background: linear-gradient(to right, #174154, #5eb47a, #a8c06f);
-    color: whitesmoke;
-    padding: 12px 12px 12px 12px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-   
-  }
+#background {
+  background: linear-gradient(to right, #174154, #5eb47a, #a8c06f);
+  color: whitesmoke;
+  padding: 12px 12px 12px 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+ 
+}
 
-  #add{
-    background-color:#477994 !important ;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s;
+#add{
+  background-color:#477994 !important ;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
 
-  }
+}
 
-  #reset{
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s;
+#reset{
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
 
-  }
+}
 
-  #add:hover{
-    
-  background-color: cadetblue !important;
-  transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
-
-  }
-
-  #reset:hover{
-    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
-  }
-
-
-  #for{
-    position:absolute;
-    right:12px;
-    
-    width: fit-content;
-    height: fit-content;
-    top:12px;
+#add:hover{
   
+background-color: cadetblue !important;
+transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
 
-  }
+}
 
-  #forms{
-    justify-content: space-evenly;
-  }
+#reset:hover{
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+}
+
+
+#for{
+  position:absolute;
+  right:12px;
+  
+  width: fit-content;
+  height: fit-content;
+  top:12px;
+
+
+}
+
+#forms{
+  display: flex;
+  justify-content:space-between;
+  width: 100%;
+}
+
+.form-element{
+flex: 1;
+margin-right: 10px;
+}

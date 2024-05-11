@@ -150,7 +150,7 @@ export class BillOfMaterialComponent implements OnInit {
       bomnumber: [null, [Validators.required]],
       description: [null, [Validators.required]],
       profitCenter: ['', Validators.required],
-      product: ['', Validators.required],
+      // product: ['', Validators.required],
       // materialCode: [''],
       // materialName: [''],
       // saleOrder: [null],
@@ -303,7 +303,7 @@ export class BillOfMaterialComponent implements OnInit {
       highlight: true
     })
 
-    let data: any = this.tableData;
+    let data: any = this.tableData || [];
     this.tableData = null;
     this.tableComponent.defaultValues();
     // const obj = data.find((d: any) => d.materialCode == this.formData1.value.materialCode);
@@ -629,16 +629,18 @@ export class BillOfMaterialComponent implements OnInit {
   // }
 
   reset() {
-    this.tableData = [];
-    this.formData.reset();
+
+    this.tableData = null;
+    this.tableComponent.defaultValues();    this.formData.reset();
+    this.formData1.reset();
     // this.formData.controls['material'].disable();
     this.sendDynTableData = { type: 'reset', data: this.tableData };
   }
 
-  savebom() {
-    // this.formData.controls['bomnumber'].enable();
-    // this.formData.controls['material'].enable();
 
+  savebom() {
+    //this.formData.controls['bomnumber'].enable();
+    //this.formData.controls['material'].enable();
 
     const addbom = String.Join('/', this.apiConfigService.addBOM);
     const requestObj = { bomHdr: this.formData.value, bomDtl: this.tableData };
