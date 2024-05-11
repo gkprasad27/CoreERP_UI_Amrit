@@ -406,7 +406,7 @@ export class ReportsComponent {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'AttendanceProcess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'salaryprocess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
