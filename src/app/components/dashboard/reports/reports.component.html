@@ -118,19 +118,21 @@
 
 </div>
 
-<div id="salaryProcess" *ngFor="let data of salaryProcessData" >
+<div id="salaryProcess"  >
+
+    <ng-container *ngFor="let data of salaryProcessData">
 
     <div style="display: flex;">
         <img src="/assets/images/header.jpg" style="height: 60px;
           width: 100%;">
     </div>
 
-    <div style="text-align: center;font-size: 15px;font-family: sans-serif;margin-top: 10px;">
+    <div style="text-align: center;font-size: 15px;font-family: sans-serif;margin-top: 10px; padding: 5px;">
         PAYSLIP FOR THE MONTH OF {{ data.month }} {{ data.year }}
     </div>
 
 
-    <div style="display: flex;border-top: 1px solid;">
+    <div style="display: flex;border-top: 1px solid;padding: 5px;">
         <div style="width: 50%;font-size: 15px;font-family: sans-serif;margin-top: 10px;"> Employee No: {{
             data.employeeCode }} </div>
         <div style="width: 50%;font-size: 15px;font-family: sans-serif;margin-top: 10px;"> Name: {{ data.employeeName
@@ -138,7 +140,7 @@
     </div>
 
 
-    <div style="display: flex;border-top: 1px solid;">
+    <div style="display: flex;border-top: 1px solid;padding: 5px;">
         <div style="width: 50%;font-size: 15px;font-family: sans-serif;margin-top: 10px;"> Department : {{
             data.departmentName }} </div>
         <div style="width: 50%;font-size: 15px;font-family: sans-serif;margin-top: 10px;"> Designation: {{
@@ -160,10 +162,10 @@
 
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
                     <th
-                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                         Earnings </th>
                     <th
-                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                         Amount </th>
                 </tr>
 
@@ -185,13 +187,13 @@
             <tbody>
 
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> Basic </td>
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ data.basic }} </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Basic </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.basic }} </td>
                 </tr>
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> Over Time 
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Over Time 
                         Amount ({{ data.oT_Hrs }} Hours) </td>
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> 0
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> 0
                     </td>
                 </tr>
                 <!-- <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
@@ -227,10 +229,10 @@
 
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
                     <th
-                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                         Deductions </th>
                     <th
-                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                         Amount </th>
                 </tr>
 
@@ -252,22 +254,22 @@
             <tbody>
 
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> ESI </td>
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ data.esi }} </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> ESI </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.esi }} </td>
                 </tr>
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;">  PF </td>
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ data.pf }}
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">  PF </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.pf }}
                     </td>
                 </tr>
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;">  PT </td>
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ data.pt }}
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">  PT </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.pt }}
                     </td>
                 </tr>
                 <tr style="-webkit-print-color-adjust: exact;">
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;">  Loss of Pay ({{data.loP_Days}} Days) </td>
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> 0
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">  Loss of Pay ({{data.loP_Days}} Days) </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> 0
                     </td>
                 </tr>
             </tbody>
@@ -281,20 +283,20 @@
             <tbody>
 
                 <tr style="border-top: 1px solid;border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> Total
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Total
                         Earnings </td>
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{data.totalEarnings}}
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{data.totalEarnings}}
                     </td>
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> Total
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Total
                         Deductions </td>
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ data.totalDeductions }} </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.totalDeductions }} </td>
                 </tr>
 
                 
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> Net
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Net
                         Pay(Rounded) </td>
-                    <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ data.takeHome }}
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.takeHome }}
                     </td>
                 </tr>
 
@@ -324,19 +326,19 @@
                     
                     <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                             DAY </th>
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                             IN </th>
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                             OUT </th>
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                             ATT </th>
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                             OT </th>
                     </tr>
     
@@ -345,11 +347,11 @@
     
                     <ng-container  *ngFor="let att of data.attendances; let i = index">
                         <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;" *ngIf="i < 15">
-                            <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ att.day }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ att.logintime }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ att.logouttime }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': 'A' }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ att.dayH }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.day }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logintime }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logouttime }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': 'A' }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.dayH }} </td>
                         </tr>
                     </ng-container>
     
@@ -362,19 +364,19 @@
                     
                     <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                             DAY </th>
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                             IN </th>
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                             OUT </th>
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                             ATT </th>
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;text-align: start; -webkit-print-color-adjust: exact;">
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                             OT </th>
                     </tr>
     
@@ -383,11 +385,11 @@
     
                     <ng-container  *ngFor="let att of data.attendances; let i = index">
                         <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;" *ngIf="i >= 15">
-                            <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ att.day }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ att.logintime }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ att.logouttime }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': 'A' }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> {{ att.dayH }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.day }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logintime }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logouttime }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': 'A' }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.dayH }} </td>
                         </tr>
                     </ng-container>
     
@@ -402,6 +404,7 @@
 
     <div style="font-size: 15px;font-family: sans-serif;text-align: center;">  --- powered by AMT Technology Services Private Limited ---  </div>
 
+    </ng-container>
 
 </div>
 
