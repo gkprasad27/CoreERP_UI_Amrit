@@ -101,6 +101,8 @@ export class ReportsComponent {
   }
 
   searchProcess() {
+    this.tableData = null;
+    this.tableComponent.defaultValues();
     const costCenUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}`);
     this.apiService.apiGetRequest(costCenUrl)
       .subscribe(
@@ -176,12 +178,15 @@ export class ReportsComponent {
       dialogRef.afterClosed().subscribe(result => {
         if (!this.commonService.checkNullOrUndefined(result)) {
           if (result) {
-            const arr = [...this.tableData];
+            let arr = [...this.tableData];
+            this.tableData = null;
             this.tableComponent.defaultValues();
-            arr.forEach(element => {
-              if (element[this.getComponentData.primaryKey] == result[this.getComponentData.primaryKey]) {
+            arr = arr.map(element => {
+              if (element.emp_Code == result.emp_Code) {
                 element = result;
               }
+              element.action = 'edit';
+              return element;
             });
             this.tableData = arr;
           }
@@ -385,7 +390,7 @@ export class ReportsComponent {
     if (!this.commonService.checkNullOrUndefined(this.modelFormData.value.selected) && this.modelFormData.value.selected.start) {
       this.modelFormData.patchValue({
         fromDate: this.commonService.formatDateValue(this.modelFormData.value.selected.start.$d),
-        toDate: this.commonService.formatDateValue(this.modelFormData.value.selected.end.$d)
+        toDate: this.commonService.formatDateValue(this.modelFormData.value.selected.end.$d, 1)
       });
     }
     this.print();
@@ -417,13 +422,16 @@ export class ReportsComponent {
       .subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (this.routeParam == 'salaryprocess') {
               this.salaryProcessData = [];
-              if (!this.commonService.checkNullOrUndefined(res.response)) {
+              if (!this.commonService.checkNullOrUndefined(res.response) && res.response.hasOwnProperty('Payslip')) {
                 this.salaryProcessPrint(res.response);
               }
             } else if (this.routeParam == 'AttendanceProcess') {
+              this.tableData = null;
+              this.tableComponent.defaultValues();
               if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
                 res.response[this.getComponentData.listName].forEach((a: any) => {
                   a.action = 'edit';
@@ -475,7 +483,6 @@ export class ReportsComponent {
               }
             }
           }
-          this.spinner.hide();
         });
 
   }

@@ -2665,19 +2665,18 @@
     "otHrMin":"OTHrMin"
   },
   "employeeattendance": {
-    "title": "Employee Attendance",
-    "Attndate" : "Date",
-    "EmployeeCode":"Employee ID",
-    "EmployeeName":"Employee Name",
+    "employeeCode":"Employee ID",
+    "employeeName":"Employee Name",
     "logintime":"Login time",
     "logouttime":"Logout time",
     "duration":"Duration",
+    "attndate" : "Date",
     "status":"Status",
-    "LateIn":"Late In",
-    "EarlyOut":"EarlyOut"
+    "lateIn":"Late In",
+    "earlyOut":"EarlyOut"
 },
 "AttendanceProcess": {
-  "title": "Attendance Process",
+  "CompCode": "Company Code",
   "emp_Code": "Emp Code",
   "employeename":"Employee Name",
   "month_Days": "Month Days",
