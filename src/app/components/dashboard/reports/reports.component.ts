@@ -495,7 +495,7 @@ export class ReportsComponent {
       const ots = data.OT.find((o: any) => o.employeename == p.employeeName);
       attendances.forEach((at: any) => {
         const day = new Date(at.attndate).getDate();
-          at.dayH = ots[day];
+          at.dayH = ots ? ots[day]: '';
           at.day = day;
           at.logintime = new Date(at.logintime).toLocaleTimeString();
           at.logouttime = new Date(at.logouttime).toLocaleTimeString();
