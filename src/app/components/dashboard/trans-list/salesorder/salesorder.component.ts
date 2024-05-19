@@ -575,6 +575,11 @@ export class SalesorderComponent {
   reset() {
     this.tableData = [];
     this.formData.reset();
+    this.tableComponent.defaultValues();
+    const companyField = document.getElementById('company');
+    if (companyField) {
+      companyField.focus();
+    }
   }
 
 
