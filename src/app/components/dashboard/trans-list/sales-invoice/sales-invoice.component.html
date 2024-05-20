@@ -627,7 +627,7 @@
                 (click)="invoicePrint()">
                 {{ 'salesinvoice.invoicePrint' | translate }}
             </button>
-            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-file-pen"></i>
+            <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" [disabled]="!issavebuttonenabled()" color="primary" (click)="save()"><i class="fa-solid fa-file-pen"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
             <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">

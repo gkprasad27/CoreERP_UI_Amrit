@@ -316,6 +316,10 @@ export class SalesInvoiceComponent implements OnInit {
                 i.checkbox = false
               });
               this.tableData = res.response['icDetail'];
+              if (this.tableData.length > 0) {
+                this.tableData[0].checkbox = true;
+              }
+
               this.calculate();
             }
           }
@@ -506,7 +510,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   reset() {
     this.tableData = [];
-    this.formData.reset();
+    this.tableComponent.defaultValues();   
   }
 
   invoicePrint() {
@@ -596,6 +600,9 @@ export class SalesInvoiceComponent implements OnInit {
       }
     }
     return newArr;
+  }
+  issavebuttonenabled(){
+    return this.tableData.some(item=>item.checkbox)&& this.formData.valid;
   }
 
 
