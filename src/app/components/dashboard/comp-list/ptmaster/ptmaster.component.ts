@@ -47,7 +47,7 @@ export class PTMasterComponent implements OnInit {
     this.formData = { ...data };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
-      this.modelFormData.controls['id'].disable();
+      // this.modelFormData.controls['id'].disable();
     }
 
   }
