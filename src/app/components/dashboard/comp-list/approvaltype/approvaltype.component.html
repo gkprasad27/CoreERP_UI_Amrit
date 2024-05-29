@@ -9,7 +9,7 @@
       <div class="d--flex">
         <mat-form-field>
           <mat-label>{{'approvaltype.title' | translate }}</mat-label>
-          <mat-select formControlName="approvalType1"  >
+          <mat-select formControlName="approval"  >
             <mat-option *ngFor="let aptype of aptypes" [value]="aptype.formId">
               {{aptype.formName}}
             </mat-option>

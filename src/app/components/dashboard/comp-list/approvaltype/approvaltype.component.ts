@@ -15,6 +15,7 @@ import { DatePipe, formatDate } from '@angular/common';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { AddOrEditService } from '../add-or-edit.service';
 
 interface ApprovalType {
   value: string;
@@ -54,12 +55,13 @@ export class ApprovalTypeComponent implements OnInit {
     public dialogRef: MatDialogRef<ApprovalTypeComponent>,
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
+    private addOrEditService: AddOrEditService,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.modelFormData = this.formBuilder.group({
       id: ['0'],
-      approvalType1: [null],
+      approval: [null],
       immediateReporting: [null],
       reportingTo: [null],
       approvedBy: [null],
@@ -162,9 +164,10 @@ export class ApprovalTypeComponent implements OnInit {
       return;
     }
 
-   
     this.formData.item = this.modelFormData.value;
-    this.dialogRef.close(this.formData);
+    this.addOrEditService[this.formData.action](this.formData, (res) => {
+      this.dialogRef.close(this.formData);
+    });
   }
 
   cancel() {
