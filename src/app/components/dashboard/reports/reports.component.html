@@ -233,7 +233,10 @@
                         Deductions </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
-                        Amount </th>
+                        Employee </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
+                            Company </th>
                 </tr>
 
 
@@ -256,10 +259,13 @@
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> ESI </td>
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.esi }} </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.employer_ESI }} </td>
                 </tr>
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">  PF </td>
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.pf }}
+                    </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.employer_PF }}
                     </td>
                 </tr>
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
@@ -267,11 +273,11 @@
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.pt }}
                     </td>
                 </tr>
-                <tr style="-webkit-print-color-adjust: exact;">
+                <!-- <tr style="-webkit-print-color-adjust: exact;">
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">  Loss of Pay ({{data.loP_Days}} Days) </td>
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> 0
                     </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
         </div>
@@ -284,8 +290,8 @@
 
                 <tr style="border-top: 1px solid;border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Total
-                        Earnings </td>
-                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{data.totalEarnings}}
+                        Earnings on Hand</td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{data.takeHome}}
                     </td>
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Total
                         Deductions </td>
@@ -294,9 +300,9 @@
 
                 
                 <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
-                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Net
-                        Pay(Rounded) </td>
-                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.takeHome }}
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Gross
+                        Pay </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.grossPay }}
                     </td>
                 </tr>
 
