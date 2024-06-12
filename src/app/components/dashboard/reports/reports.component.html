@@ -309,7 +309,7 @@
                         Pay </td>
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.grossPay }}
                     </td>
-                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Loss Of Pay </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> Loss Of Pay ({{ data.daysOfAbsent }} Days)</td>
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.lossOfPay }}
                     </td>
                 </tr>
@@ -323,7 +323,7 @@
 
     <div style="display: flex; justify-content: space-between; margin-top: 40px;">
         <div style="font-size: 15px;font-family: sans-serif;"> [ {{ data.employeeName }} ] </div>
-        <div style="font-size: 15px;font-family: sans-serif;"> For AMT Power Transmission </div>
+        <div style="font-size: 15px;font-family: sans-serif;"> {{ data.companyName }} </div>
     </div>
     <hr>
 
@@ -364,7 +364,7 @@
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.day }} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logintime }} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logouttime }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': 'A' }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': att.status == 'Absent' ? 'A' : 'H'}} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.dayH }} </td>
                         </tr>
                     </ng-container>
@@ -402,7 +402,7 @@
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.day }} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logintime }} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logouttime }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': 'A' }} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': att.status == 'Absent' ? 'A' : 'H'}} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.dayH }} </td>
                         </tr>
                     </ng-container>
@@ -416,7 +416,7 @@
 
     <hr>
 
-    <div style="font-size: 15px;font-family: sans-serif;text-align: center;">  --- powered by AMT Technology Services Private Limited ---  </div>
+    <div style="font-size: 15px;font-family: sans-serif;text-align: center;">  --- powered by {{ data.companyName }} ---  </div>
 
     </ng-container>
 
