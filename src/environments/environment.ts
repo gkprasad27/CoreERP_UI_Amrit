@@ -1,4 +1,4 @@
-// This file can be replaced during build by using the `fileReplacements` array.
+9090// This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   //baseUrl: `http://183.82.48.82:89`
   //baseUrl: `http://192.168.2.26:89`
-  baseUrl: `http://103.67.236.159:1111`
+  // baseUrl: `http://103.67.236.159:1111`
+  baseUrl: `http://103.67.236.159:9090`
+
 };
 
 /*

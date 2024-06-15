@@ -497,8 +497,8 @@ export class ReportsComponent {
         const day = new Date(at.attndate).getDate();
           at.dayH = ots ? ots[day]: '';
           at.day = day;
-          at.logintime = new Date(at.logintime).toLocaleTimeString();
-          at.logouttime = new Date(at.logouttime).toLocaleTimeString();
+          at.logintime = at.logintime ? new Date(at.logintime).toLocaleTimeString() : '-';
+          at.logouttime = at.logouttime ? new Date(at.logouttime).toLocaleTimeString(): '-';
       })
       const obj = {
         ...p,
