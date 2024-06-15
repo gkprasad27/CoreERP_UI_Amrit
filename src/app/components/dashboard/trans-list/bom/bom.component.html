@@ -181,7 +181,7 @@
             <input formControlName="materialCode" placeholder="{{ 'bom.materialCode' | translate }}"
               [typeahead]="mmasterListData" typeaheadOptionField='id' appFocusOnEnter tabIndex="6"
               class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
-              (typeaheadOnSelect)="materialCodeChange()" >
+              (typeaheadOnSelect)="materialCodeChange()" (input)="onValueChange()">
             <ng-template #customItemTemplate let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>
             </ng-template>

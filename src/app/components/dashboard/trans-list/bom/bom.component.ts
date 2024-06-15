@@ -135,32 +135,7 @@ export class BillOfMaterialComponent implements OnInit {
     this.getCompanyList();
     this.getSaleOrderList();
 
-    this.formData1.get('materialCode').valueChanges.pipe(
-      debounceTime(500),
-      switchMap((form) => {
-        this.mmasterList = [];
-        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        let obj = JSON.parse(localStorage.getItem("user"));
-        const voucherClassList = String.Join('/', this.apiConfigService.getMaterialList, obj.companyCode, form);
-        return this.http.get(voucherClassList, options)
-        .pipe((tap<any>((response: any) => {
-              this.spinner.hide();
-              const res = response;
-              console.log(res);
-              if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                if (!this.commonService.checkNullOrUndefined(res.response)) {
-                  this.mmasterList = res.response['mmasterList'];
-                  return res.response['mmasterList']
-                }
-              }
-            })
-
-      ))
-          })
-    ).subscribe((result: any) => {
-      debugger
-      this.mmasterListData.emit(result.response['mmasterList']);
-    });
+    
 
     // this.formData.controls['material'].disable();
   }
@@ -172,6 +147,25 @@ export class BillOfMaterialComponent implements OnInit {
   //   })
   // }
 
+  onValueChange() {
+        this.mmasterList = [];
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        let obj = JSON.parse(localStorage.getItem("user"));
+        const voucherClassList = String.Join('/', this.apiConfigService.getMaterialList, obj.companyCode, this.formData1.value.materialCode);
+        this.http.get(voucherClassList, options)
+        .subscribe(((response: any) => {
+              this.spinner.hide();
+              const res = response;
+              console.log(res);
+              if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+                if (!this.commonService.checkNullOrUndefined(res.response)) {
+                  this.mmasterList = res.response['mmasterList'];
+                  this.mmasterListData.emit(res.response['mmasterList']);
+                }
+              }
+            })
+      )  
+    }
 
   formDataGroup() {
     this.formData = this.formBuilder.group({
