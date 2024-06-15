@@ -123,22 +123,26 @@
   
 
 
-#form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; 
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
 }
 
-#element {
-  width: calc(16.666% - 10px); 
-  margin-bottom: 20px; 
+.form-element {
+    flex: 1 1 calc(16.66% - 20px); 
 }
 
+@media (max-width: 992px) {
+    .form-element {
+        flex: 1 1 calc(33.33% - 20px);
+    }
+}
 
-@media screen and (max-width: 991px) {
-  #element {
-    width: calc(25% - 10px); 
-  }
+@media (max-width: 576px) {
+    .form-element {
+        flex: 1 1 calc(50% - 20px); 
+    }
 }
 
 
