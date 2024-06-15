@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { String } from 'typescript-string-operations';
@@ -12,6 +12,8 @@ import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
 import { TableComponent } from 'src/app/reuse-components';
+import { debounceTime, switchMap, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface BomType {
   value: string;
@@ -105,6 +107,9 @@ export class BillOfMaterialComponent implements OnInit {
   employeesList: any;
   batchmasterList: any;
 
+  public mmasterListData: EventEmitter<any[]> = new EventEmitter<any[]>();
+
+
   constructor(private commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -112,7 +117,8 @@ export class BillOfMaterialComponent implements OnInit {
     private alertService: AlertService,
     private spinner: NgxSpinnerService,
     public route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
@@ -128,6 +134,34 @@ export class BillOfMaterialComponent implements OnInit {
     this.formDataGroup();
     this.getCompanyList();
     this.getSaleOrderList();
+
+    this.formData1.get('materialCode').valueChanges.pipe(
+      debounceTime(500),
+      switchMap((form) => {
+        this.mmasterList = [];
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        let obj = JSON.parse(localStorage.getItem("user"));
+        const voucherClassList = String.Join('/', this.apiConfigService.getMaterialList, obj.companyCode, form);
+        return this.http.get(voucherClassList, options)
+        .pipe((tap<any>((response: any) => {
+              this.spinner.hide();
+              const res = response;
+              console.log(res);
+              if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+                if (!this.commonService.checkNullOrUndefined(res.response)) {
+                  this.mmasterList = res.response['mmasterList'];
+                  return res.response['mmasterList']
+                }
+              }
+            })
+
+      ))
+          })
+    ).subscribe((result: any) => {
+      debugger
+      this.mmasterListData.emit(result.response['mmasterList']);
+    });
+
     // this.formData.controls['material'].disable();
   }
 
@@ -158,7 +192,7 @@ export class BillOfMaterialComponent implements OnInit {
     this.formData1 = this.formBuilder.group({
       materialCode: ['', Validators.required],
       qty: ['', Validators.required],
-     // rate: ['', Validators.required],
+      // rate: ['', Validators.required],
       netWeight: [''],
       hsnsac: [''],
       //amount: [''],
@@ -195,7 +229,7 @@ export class BillOfMaterialComponent implements OnInit {
 
   profitCenterChange() {
     this.filterQnoList = this.qnoList.filter((q: any) => q.profitCenter == this.formData.value.profitCenter);
-    
+
   }
 
   saleOrderChange() {
@@ -211,11 +245,11 @@ export class BillOfMaterialComponent implements OnInit {
                 materialCode: res.response.saleordernoList[0].materialCode,
                 materialName: res.response.saleordernoList[0].materialName,
               })
-          
+
             }
           }
         });
-        
+
   }
 
   tablePropsFunc() {
@@ -294,7 +328,7 @@ export class BillOfMaterialComponent implements OnInit {
   // }
 
   saveForm() {
-    
+
     if (this.formData1.invalid) {
       return;
     }
@@ -312,9 +346,9 @@ export class BillOfMaterialComponent implements OnInit {
     form.mainComponent = this.formData1.value.mainComponent ? 'Y' : 'N'
     if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
-        form.index = data ? (data.length + 1) : 1,
-      // });
-      data = [form, ...data];
+      form.index = data ? (data.length + 1) : 1,
+        // });
+        data = [form, ...data];
     } else {
       // if (this.formData1.value.index == 0) {
       //   data.forEach((res: any) => { if (res.material == this.formData1.value.material) { (res.qty = res.qty + this.formData1.value.qty) } });
@@ -324,7 +358,7 @@ export class BillOfMaterialComponent implements OnInit {
     }
     setTimeout(() => {
       this.tableData = data;
-   //   this.calculate();
+      //   this.calculate();
     });
     this.resetForm();
   }
@@ -348,15 +382,15 @@ export class BillOfMaterialComponent implements OnInit {
     } else {
       const val = { ...value.item };
       val.billable = val.billable == 'Y' ? true : false,
-      val.mainComponent = val.mainComponent == 'Y' ? true : false,
-      this.formData1.patchValue(val);
+        val.mainComponent = val.mainComponent == 'Y' ? true : false,
+        this.formData1.patchValue(val);
     }
   }
 
 
   materialCodeChange() {
     const obj = this.mmasterList.find((m: any) => m.id == this.formData1.value.materialCode);
-    
+
     this.formData1.patchValue({
       netWeight: obj.netWeight,
       hsnsac: obj.hsnsac,
@@ -386,8 +420,8 @@ export class BillOfMaterialComponent implements OnInit {
               //this.accountSelect();
               let arr = [];
               res.response['bomDetail'].forEach((s: any, index: number) => {
-                
-                const mObj = this.mmasterList.find((m: any) => m.id == s.materialCode);
+
+                // const mObj = this.mmasterList.find((m: any) => m.id == s.materialCode);
                 const obj = {
                   materialCode: s.materialCode ? s.materialCode : '',
                   qty: s.qty ? s.qty : '',
@@ -438,13 +472,17 @@ export class BillOfMaterialComponent implements OnInit {
     this.apiService.apiGetRequest(getprofircenterData)
       .subscribe(
         response => {
+          this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.profitCenterList = res.response['profitCenterList'];
             }
           }
-          this.getMaterialList();
+          // this.getMaterialList();
+          if (this.routeEdit != '') {
+            this.getbomDetail(this.routeEdit);
+          }
         });
   }
   // getplantData() {
@@ -477,26 +515,27 @@ export class BillOfMaterialComponent implements OnInit {
   //       });
   // }
 
-  getMaterialList() {
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const voucherClassList = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
-    this.apiService.apiGetRequest(voucherClassList)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          console.log(res);
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.mmasterList = res.response['mmasterList'];
-            }
-          }
-          if (this.routeEdit != '') {
-            this.getbomDetail(this.routeEdit);
-          }
-          // this.getEmployeesList();
-        });
-  }
+  // getMaterialList() {
+  // let obj = JSON.parse(localStorage.getItem("user"));
+  // const voucherClassList = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
+  // this.apiService.apiGetRequest(voucherClassList)
+  //   .subscribe(
+  //     response => {
+  //       this.spinner.hide();
+  //       const res = response;
+  //       console.log(res);
+  //       if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //         if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //           this.mmasterList = res.response['mmasterList'];
+  //         }
+  //       }
+  // if (this.routeEdit != '') {
+  //   this.getbomDetail(this.routeEdit);
+  // }
+  // this.getEmployeesList();
+  // });
+  // }
+
 
   // getEmployeesList() {
   //   const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList);
@@ -631,7 +670,8 @@ export class BillOfMaterialComponent implements OnInit {
   reset() {
 
     this.tableData = null;
-    this.tableComponent.defaultValues();    this.formData.reset();
+    this.tableComponent.defaultValues();
+    this.formData.reset();
     this.formData1.reset();
     // this.formData.controls['material'].disable();
     this.sendDynTableData = { type: 'reset', data: this.tableData };
