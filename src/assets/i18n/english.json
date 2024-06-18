@@ -1527,6 +1527,7 @@
     "openingValue": "Opening Value",
     "closingPrice": "Closing Price",
     "closingValue": "Closing Value",
+    "dimentions":"Dimentions",
     "goodsServiceDescription": "Goods Service Description"
   },
   "primarycostelement": {

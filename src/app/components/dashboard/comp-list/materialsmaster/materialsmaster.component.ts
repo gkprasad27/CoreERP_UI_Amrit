@@ -119,6 +119,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       description: [null],
       materialGroup: [null],
       size: [null],
+      dimentions:[null],
       modelPattern: [null],
       uom: [null],
       division: [null],
