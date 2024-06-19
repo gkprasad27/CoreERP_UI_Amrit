@@ -516,6 +516,8 @@ export class ApiConfigService {
    getInspectionCheckDetailbySaleorder = `${this.environment.runtimeConfig.serverUrl}Transactions/GetInspectionCheckDetailbySaleorder`;
    deletePurchaseOrder = `${this.environment.runtimeConfig.serverUrl}Common/DeletePurchaseOrder`;
 
+   deleteBomDetail = `${this.environment.runtimeConfig.serverUrl}Common/DeleteBomDetail`;
+
    savePurchaseOrder = `${this.environment.runtimeConfig.serverUrl}Transactions/SavePurchaseOrder`;
    saveGoodsReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/SaveGoodsReceipt`;
    

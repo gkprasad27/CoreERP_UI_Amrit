@@ -372,14 +372,45 @@ export class BillOfMaterialComponent implements OnInit {
 
   editOrDeleteEvent(value) {
     if (value.action === 'Delete') {
-      this.tableComponent.defaultValues();
-      this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
+      this.deleteBomDetail(value.item);
     } else {
       const val = { ...value.item };
       val.billable = val.billable == 'Y' ? true : false,
         val.mainComponent = val.mainComponent == 'Y' ? true : false,
         this.formData1.patchValue(val);
     }
+  }
+
+
+  deleteBomDetail(item: any) {
+    debugger
+    const obj = {
+      item: {
+        materialCode: item.materialCode
+      },
+      primary: 'materialCode'
+    }
+    this.commonService.deletePopup(obj, (flag: any) => {
+      if (flag) {
+        const jvDetUrl = String.Join('/', this.apiConfigService.deleteBomDetail, item.id);
+        this.apiService.apiDeleteRequest(jvDetUrl)
+          .subscribe(
+            response => {
+              const res = response;
+              if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+                if (!this.commonService.checkNullOrUndefined(res.response)) {
+                  this.tableComponent.defaultValues();
+                  this.tableData = this.tableData.filter((res: any) => res.index != item.index);
+                  this.calculate();
+                  this.resetForm();
+                  this.alertService.openSnackBar('Delected Record...', 'close', SnackBar.success);
+                }
+              }
+              this.spinner.hide();
+            });
+      }
+    })
+
   }
 
 
