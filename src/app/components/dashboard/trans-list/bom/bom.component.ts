@@ -93,8 +93,7 @@ export class BillOfMaterialComponent implements OnInit {
       { value: 'Sale Order BOM', viewValue: 'Sale Order BOM' },
       { value: 'Production BOM', viewValue: 'Production BOM' },
       { value: 'Service BOM', viewValue: 'Service BOM' },
-      { value: 'Maintenance BOM', viewValue: 'Maintenance BOM' },
-      { value: 'Purchasing BOM', viewValue: 'Purchasing BOM' }
+      { value: 'Maintenance BOM', viewValue: 'Maintenance BOM' }
     ];
 
   // LevelType: LevelType[] =

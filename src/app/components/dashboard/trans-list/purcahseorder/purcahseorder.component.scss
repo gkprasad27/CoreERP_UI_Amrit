@@ -61,7 +61,7 @@
 }
 
 #submit{
-  background-color:#477994 !important ;
+  background-color:#477994  ;
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.3s;
@@ -69,7 +69,7 @@
 
 
 #submit:hover{
-  background-color: cadetblue !important;
+  background-color: cadetblue ;
   transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
 }
 #reset{
@@ -91,3 +91,15 @@
 //   top:12px;
 
 // }
+
+
+#forms{
+  display: flex;
+  justify-content:space-between;
+  width: 100%;
+}
+
+.form-element{
+flex: 1;
+margin-right: 10px;
+}

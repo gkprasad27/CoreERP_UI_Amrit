@@ -68,5 +68,18 @@ mat-form-field {
   }
 
   #forms{
-    justify-content: space-evenly;
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
+  }
+  
+  .form-element{
+  flex: 1;
+  margin-right: 10px;
+  }
+  #save:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+  }
+  #back:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
   }

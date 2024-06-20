@@ -175,7 +175,7 @@
                 <div id="for" class="d-flex justify-content-end mb-3">
 
                     <button mat-raised-button type="submit" id="submit" class="button-color-bule mx-1 text-white"
-                        (click)="saveForm()" ><i class="fa-solid fa-file-pen"></i>
+                        (click)="saveForm()" ><i class="fa-solid fa-arrows-rotate"></i>
                         {{ 'COMMON.UPDATE' | translate }}
                     </button>
                     <button mat-raised-button id="reset"  class="button-color-red text-white mx-1" (click)="resetForm();" ><i class="fa-solid fa-arrow-rotate-right"></i>
@@ -231,7 +231,7 @@
             <button mat-raised-button id="save" class="button-color-red text-white mx-3" (click)="back();">
                 {{ 'COMMON.BACK' | translate }}
             </button>
-            <button [hidden]="routeEdit != ''" mat-raised-button id="save" class="button-color-red text-white mx-3"
+            <button [hidden]="routeEdit != ''" mat-raised-button id="reset" class="button-color-red text-white mx-3"
                 (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
                 {{ 'COMMON.RESET' | translate }}
             </button>

@@ -354,7 +354,7 @@
                 <div id="for" class="d-flex justify-content-end mb-3">
 
                     <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
-                        (click)="saveForm()"><i class="fa-solid fa-file-pen"></i>
+                        (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
                         {{ 'COMMON.UPDATE' | translate }}
                     </button>
                     <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
@@ -408,14 +408,14 @@
                 (click)="convertToSaleOrder()">
                 {{ 'supplierquotation.CONVERTTOSALEORDER' | translate }}
             </button>
-            <button  mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-                (click)="save()"><i class="fa-solid fa-file-pen"></i>
+            <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+                (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
-            <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+            <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
                 {{ 'COMMON.BACK' | translate }}
             </button>
-            <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
+            <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
                 (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
                 {{ 'COMMON.RESET' | translate }}
             </button>

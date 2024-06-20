@@ -187,7 +187,7 @@ mat-form-field{
   margin:0%;
 }
 #submit{
-  background-color:#477994 !important ;
+  background-color:#5a4ec9  ;
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.3s;
@@ -195,7 +195,7 @@ mat-form-field{
 
 
 #submit:hover{
-  background-color: cadetblue !important;
+  background-color: rgb(27, 60, 75) ;
   transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
 }
 #reset{

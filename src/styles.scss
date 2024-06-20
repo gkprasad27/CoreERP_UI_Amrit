@@ -15,7 +15,7 @@ body { margin: 0; font-family: sans-serif; }
   // background-size: cover;
   // height: 100vh;
   // background-position: center;
-  background: linear-gradient(to right, #174154, #5eb47a, #419b96);
+  background: linear-gradient(to right,#7ec094, #7ec094, );
   
 }
 
@@ -139,13 +139,20 @@ mat-error {
   background-color: $color-red !important;
   
 }
+.button-color-green{
+  background-color: #3161a3 !important;
+  color:white !important;
+}
 
+.button-color-green:hover{
+  background-color: rgb(16, 78, 114) !important;
+}
 .button-color-bule:hover{
-  background-color: cadetblue !important;
+  background-color: rgb(48, 125, 170) !important;
 }
 
 .button-color-red:hover{
-  background-color: cadetblue !important;
+  background-color: rgb(23, 143, 173) !important;
 }
 
 
@@ -292,11 +299,40 @@ mat-tab-header {
   }
 
   *h6, .header-bg {
-    background: linear-gradient(to right, #174154, #5eb47a, #a8c06f);
-  color: whitesmoke !important;
+    background: linear-gradient(to right,#77bb97, #77bb97) !important;
+  color: rgb(252, 252, 252) !important;
   padding: 12px 12px 12px 12px;
   font-weight: bold;
   border: none;
+  }
+
+  *#submit{
+    background-color: #35635b!important ;
+     border-radius: 5px !important;
+    cursor: pointer !important;
+    transition: transform 0.3s !important;
+  }
+  
+  
+  *#submit:hover{
+    background-color: #48b0cf !important;
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1)!important;
+  }
+
+  *#reset{
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    
+  }
+  *#reset:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+  }
+  *#save:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+  }
+  *#back:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
   }
 
   *#for{

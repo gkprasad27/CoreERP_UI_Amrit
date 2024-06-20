@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <mat-card>
 
     <mat-card-content>
@@ -182,15 +183,15 @@
 
     <mat-card-content class="d-flex justify-content-end py-1">
 
-        <button [hidden]="routeEdit != ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-            (click)="save()">
+        <button id="save" [hidden]="routeEdit != ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+            (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
             {{ 'COMMON.SAVE' | translate }}
         </button>
-        <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
-            (click)="reset();">
+        <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
+            (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
             {{ 'COMMON.RESET' | translate }}
         </button>
-        <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+        <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
             {{ 'COMMON.BACK' | translate }}
         </button>
         <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"

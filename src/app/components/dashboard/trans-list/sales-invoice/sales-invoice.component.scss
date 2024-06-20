@@ -36,26 +36,36 @@ mat-form-field {
     }
   }
 
-  #background {
-    background: linear-gradient(to right, #174154, #5eb47a, #a8c06f);
-    color: whitesmoke;
-    padding: 12px 12px 12px 12px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-   
+  
+
+  #save:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1) !important;
   }
 
-  // #forms>div{
-  //   width:200px;
-  // }
+  #back:hover{
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+  }
 
-
-  #forms{
-    justify-content: space-evenly;
-    display:flex;
-    flex-direction: wrap;
-    
-    height:180px;
+  #form {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 5px; 
+    justify-content:flex-start;
+  }
   
-   }
+  #form > div {
+    width: 100%; 
+  }
+  
+ 
+  @media screen and (max-width: 992px) {
+    #form {
+        grid-template-columns: repeat(4, 1fr); 
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    #form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+  }
