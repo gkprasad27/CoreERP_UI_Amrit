@@ -494,7 +494,8 @@ export class ReceiptOfGoodsComponent implements OnInit {
         });
   }
   getpurchasenoList() {
-    const poUrl = String.Join('/', this.apiConfigService.getpurchasenoList);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const poUrl = String.Join('/', this.apiConfigService.getpurchasenoList, obj.companyCode);
     this.apiService.apiGetRequest(poUrl)
       .subscribe(
         response => {

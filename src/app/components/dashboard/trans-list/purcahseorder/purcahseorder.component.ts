@@ -85,6 +85,17 @@ export class PurchaseOrderComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'description',
+    textField: 'description',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
 
   constructor(
     public commonService: CommonService,
@@ -162,6 +173,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.formData1 = this.formBuilder.group({
       materialCode: [''],
       materialName: [''],
+      material: [''],
       taxCode: ['', [Validators.required]],
       qty: ['', Validators.required],
       rate: ['', Validators.required],
@@ -342,7 +354,7 @@ export class PurchaseOrderComponent implements OnInit {
                 s.total = s.total ? s.total : 0;
               })
               this.tableData = obj['data1'];
-              this.calculate();
+              //this.calculate();
             }
           }
         });
@@ -753,6 +765,8 @@ export class PurchaseOrderComponent implements OnInit {
       });
       data = [this.formData1.value, ...data];
     } else {
+      const obj = this.formData1.value;
+      obj.material = obj.material ? obj.material[0].description : '';
       data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
     }
     setTimeout(() => {
@@ -780,6 +794,9 @@ export class PurchaseOrderComponent implements OnInit {
       });
     } else {
       value.item['type'] = 'edit';
+      this.formData1.patchValue({
+        material: value.item.material ? [{ description: value.item.material  }] : ''
+      })
       this.formData1.patchValue(value.item);
     }
   }
@@ -830,7 +847,6 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   calculate() {
-
     this.formData.patchValue({
       igst: 0,
       cgst: 0,
@@ -840,13 +856,15 @@ export class PurchaseOrderComponent implements OnInit {
       totalAmount: 0,
     })
     this.tableData && this.tableData.forEach((t: any) => {
+      if(t.changed) {
       this.formData.patchValue({
         igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
         cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
         sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-        amount: ((+this.formData.value.amount) + (t.qty * t.rate * t.netWeight)).toFixed(2),
+        amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.netWeight ? t.netWeight: 1))).toFixed(2),
         totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
       })
+    }
     })
     this.formData.patchValue({
       totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
@@ -886,6 +904,9 @@ export class PurchaseOrderComponent implements OnInit {
     obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
     if (typeof obj.saleOrderNo != 'string') {
       obj.saleOrderNo = this.formData.value.saleOrderNo[0].saleOrderNo;
+    }
+    if (typeof obj.material != 'string') {
+      obj.material = this.formData.value.material[0].description;
     }
     const arr = this.tableData.filter((d: any) => d.changed);
 

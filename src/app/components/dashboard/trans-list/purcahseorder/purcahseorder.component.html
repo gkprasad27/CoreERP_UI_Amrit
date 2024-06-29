@@ -562,15 +562,17 @@
                     <input matInput type="number" formControlName="advance" appFocusOnEnter tabIndex="9">
                 </mat-form-field> -->
 
-                <mat-form-field>
+                <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
+                    <ng-multiselect-dropdown 
+                        placeholder="{{ 'purchaseorder.material' | translate }}" formControlName="material"
+                         [settings]="dropdownSettings1" [data]="mpatternList">
+                    </ng-multiselect-dropdown>
+                </div>
+                <mat-form-field *ngIf="routeEdit">
                     <mat-label>{{'purchaseorder.material' | translate }}</mat-label>
-                    <mat-select formControlName="material" appFocusOnEnter tabIndex="10">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let mpattern of mpatternList" [value]="mpattern.description">
-                            {{mpattern.description}}
-                        </mat-option>
-                    </mat-select>
+                    <input matInput type="text" readonly formControlName="material" appFocusOnEnter tabIndex="10">
                 </mat-form-field>
+
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'purchaseorder.dispatchMode'"></mat-label>
@@ -610,7 +612,7 @@
 
 
 
-                <div class="d--flex p-1 mat-form-field-height justify-content-between align-items-end">
+                <div class="d--flex p-1 mat-form-field-height  align-items-end">
 
                     <div>
 
@@ -650,6 +652,15 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
+
+                        
+                        
+                    </div>
+                    <div class="multiselect-dropdown-list" >
+                        <ng-multiselect-dropdown 
+                            placeholder="{{ 'purchaseorder.material' | translate }}" formControlName="material"
+                            [settings]="dropdownSettings1" [data]="mpatternList">
+                        </ng-multiselect-dropdown>
                     </div>
 
 

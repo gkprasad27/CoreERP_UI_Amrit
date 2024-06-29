@@ -1733,6 +1733,7 @@
     "purchaseOrderDate": "Date",
     "materialCode": "Material code",
     "materialName": "Material Name",
+    "material": "Material",
     "availableQTY": "availableQTY",
     "netWeight": "Net Weight",
     "description": "Description",

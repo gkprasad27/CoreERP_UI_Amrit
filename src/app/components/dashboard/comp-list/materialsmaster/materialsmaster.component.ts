@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { StandardRateOComponent } from './standard-rate-o/standard-rate-o.component';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 interface Valuation {
   value: string;
@@ -89,6 +90,17 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       { value: '1.5 % (Schedule V)', viewValue: '1.5 % (Schedule V)' },
       { value: '0.125% (Schedule VI)', viewValue: '0.125% (Schedule VI)' }
     ];
+
+    dropdownSettings: IDropdownSettings = {
+      singleSelection: true,
+      idField: 'description',
+      textField: 'description',
+      enableCheckAll: true,
+      // selectAllText: 'Select All',
+      // unSelectAllText: 'UnSelect All',
+      // itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
 
   plantsList: any;
   PCGroupsList: any;
@@ -430,7 +442,11 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       this.isSubmitted = true;
       return;
     }
-  
+    const obj = this.modelFormData.value;
+    if (typeof obj.material != 'string') {
+      obj.material = this.formData.value.material[0].description;
+    }
+
     // if(flag) {
     this.modelFormData.controls['materialCode'].enable();
     this.formData.item = this.modelFormData.value;

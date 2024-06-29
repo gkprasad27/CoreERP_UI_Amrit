@@ -130,7 +130,6 @@ export class ReportsComponent {
         response => {
           this.spinner.hide();
           const res = response;
-          debugger
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.alertService.openSnackBar(res.response, Static.Close, SnackBar.error);

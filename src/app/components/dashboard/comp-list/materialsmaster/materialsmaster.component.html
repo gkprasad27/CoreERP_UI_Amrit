@@ -76,15 +76,13 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>{{'materialsmaster.modelPattern' | translate }}</mat-label>
-              <mat-select formControlName="modelPattern" appFocusOnEnter tabIndex="8">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let mpattern of mpatternList" [value]="mpattern.code">
-                  {{mpattern.description}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+         
+            <div class="multiselect-dropdown-list" >
+              <ng-multiselect-dropdown 
+                  placeholder="{{ 'purchaseorder.modelPattern' | translate }}" formControlName="modelPattern"
+                  [settings]="dropdownSettings" [data]="mpatternList">
+              </ng-multiselect-dropdown>
+            </div>
 
             <mat-form-field>
               <mat-label>{{'materialsmaster.uom' | translate }}</mat-label>

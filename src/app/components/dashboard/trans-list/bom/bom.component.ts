@@ -383,7 +383,6 @@ export class BillOfMaterialComponent implements OnInit {
 
 
   deleteBomDetail(item: any) {
-    debugger
     const obj = {
       item: {
         materialCode: item.materialCode

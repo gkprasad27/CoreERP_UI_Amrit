@@ -2732,7 +2732,7 @@
     "saleOrderNo": "Sale Order Number",
     "supplierName": "Customer Name",
     "orderDate": "Order Date",
-    "poNumber": "PO Number",
+    "poNumber": "Customer PO",
     "poDate": "Purchase Order Date",
     "dateofSupply": "Date Of Supply",
     "placeOfSupply": "Place Of Supply",
