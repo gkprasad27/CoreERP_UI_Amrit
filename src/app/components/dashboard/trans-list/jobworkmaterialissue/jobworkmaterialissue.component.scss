@@ -146,6 +146,10 @@
 #reset:hover{
   transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
 }
+#print:hover{
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+}
+
 #form{
   display:flex;
   justify-content: space-evenly;

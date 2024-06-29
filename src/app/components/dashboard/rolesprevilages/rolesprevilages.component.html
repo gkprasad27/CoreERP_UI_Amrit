@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <mat-card>
   <mat-card-content class="m-2">
 
@@ -88,18 +89,18 @@
       </table>
     </div>
     <div *ngIf="!dataSource" class="d-flex justify-content-center align-items-center no_data_height">
-      <img class="text-bottom" width="500" height="300" src="assets/images/no_data.png">
+      <img class="text-bottom" width=100% height="300" src="assets/images/No Data Found.png">
     </div>
 
     <mat-paginator [pageSizeOptions]="[8, 10, 20]" showFirstLastButtons></mat-paginator>
 
 
     <div class="form-element p-2 d-flex justify-content-end border">
-      <button mat-raised-button class="button-color-red text-white mx-1" (click)="reset()">
+      <button id="reset" mat-raised-button class="button-color-red text-white mx-1" (click)="reset()"><i class="fa-solid fa-arrow-rotate-right"></i>
 
         {{ 'COMMON.RESET' | translate }}
       </button>
-      <button mat-raised-button class="button-color-bule text-white" (click)="save()">
+      <button id="save" mat-raised-button class="button-color-bule text-white" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
 
         {{ 'COMMON.SAVE' | translate }}
       </button>

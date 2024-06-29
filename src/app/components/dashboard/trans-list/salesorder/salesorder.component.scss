@@ -75,7 +75,7 @@
 
     .mat-mdc-form-field {
       
-      margin: 5px;
+      margin: 15px;
       flex: 0 0 17%;
       padding: 0px;
       
@@ -232,6 +232,18 @@ mat-form-field{
   background-color: transparent;
 }
 
+#profit{
+ padding-top: 20px;
+
+}
+#customer{
+  margin-top:55px;
+}
+
+#bom{
+  padding-top:18px;
+}
+
 // #form{
 //   flex-direction: wrap;
 //   justify-content: space-around;
@@ -271,53 +283,69 @@ mat-form-field{
 //   background-color: #5eb47a;
 // }
 
-#gridd{
-  display: grid;
-  grid-template-rows: auto auto;
+// #gridd{
+//   display: grid;
+//   grid-template-rows: auto auto;
   
   
-}
+// }
 
-.gridmean{
-  grid-template-rows: auto 20% 20% 20% 20%;
-}
+// .gridmean{
+//   grid-template-rows: auto 20% 20% 20% 20%;
+// }
 
-#data{
-  margin-right: 37px;
-}
+// #data{
+//   margin-right: 37px;
+// }
 
-#supply{
-  margin-left: 0px;
-}
+// #supply{
+//   margin-left: 0px;
+// }
 
-#typeahead1{
-  padding-top: 18px !important;
-  padding-bottom:8px !important;
-}
+// #typeahead1{
+//   padding-top: 18px !important;
+//   padding-bottom:8px !important;
+// }
+// #typeaheads{
+//   margin-top: 40px;
+  
+
+// }
+// #form {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: flex-start;
+//   margin-bottom: -10px; 
+// }
+
+// .form-element {
+//   flex: 0 0 calc(50% - 10px); 
+//   margin-bottom: 10px;
+//   box-sizing: border-box;
+//   max-width: calc(50% - 10px); 
+// }
+
+// .form-element:nth-child(n+6) {
+//   margin-top: 10px;
+// }
+
+// @media (min-width: 768px) {
+//   .form-element {
+//       flex: 0 0 calc(20% - 10px);
+//       max-width: calc(20% - 10px); 
+//   }
+
+// }
 
 
-#form {
+#form{
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-bottom: -10px; 
+  flex-direction: row;
 }
 
-.form-element {
-  flex: 0 0 calc(50% - 10px); 
-  margin-bottom: 10px;
-  box-sizing: border-box;
-  max-width: calc(50% - 10px); 
-}
 
-.form-element:nth-child(n+6) {
-  margin-top: 10px;
-}
 
-@media (min-width: 768px) {
-  .form-element {
-      flex: 0 0 calc(20% - 10px);
-      max-width: calc(20% - 10px); 
-  }
 
-}
+
+
