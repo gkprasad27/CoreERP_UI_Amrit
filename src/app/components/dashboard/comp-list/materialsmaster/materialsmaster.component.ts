@@ -91,16 +91,16 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       { value: '0.125% (Schedule VI)', viewValue: '0.125% (Schedule VI)' }
     ];
 
-    dropdownSettings: IDropdownSettings = {
-      singleSelection: true,
-      idField: 'description',
-      textField: 'description',
-      enableCheckAll: true,
-      // selectAllText: 'Select All',
-      // unSelectAllText: 'UnSelect All',
-      // itemsShowLimit: 3,
-      allowSearchFilter: true
-    };
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'description',
+    textField: 'description',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
 
   plantsList: any;
   PCGroupsList: any;
@@ -131,7 +131,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       description: [null],
       materialGroup: [null],
       size: [null],
-      dimentions:[null],
+      dimentions: [null],
       modelPattern: [null],
       uom: [null],
       division: [null],
@@ -176,11 +176,12 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
       this.materialCode = this.formData.item.materialCode
-    
+
       this.modelFormData.patchValue({
         uom: this.formData.item.uom ? +this.formData.item.uom : null,
         ouom: this.formData.item.ouom ? +this.formData.item.ouom : null,
         netWeightUom: this.formData.item.netWeightUom ? +this.formData.item.netWeightUom : null,
+        modelPattern: this.formData.item.modelPattern ? [{ description: this.formData.item.modelPattern }] : null
       })
       this.modelFormData.controls['materialCode'].disable();
     }
@@ -400,11 +401,13 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const resp = res.response['bpList'];
               const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
-            
+
               this.customerList = data;
-      this.modelFormData.patchValue({
-        customerName: this.formData.item.customerCode ? this.customerList.find((c: any) => c.id == this.formData.item.customerCode).text : '',
-      })
+              if (this.formData.item) {
+                this.modelFormData.patchValue({
+                  customerName: this.formData.item.customerCode ? this.customerList.find((c: any) => c.id == this.formData.item.customerCode).text : '',
+                })
+              }
             }
           }
         });
@@ -417,7 +420,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
         response => {
           this.spinner.hide();
           const res = response;
-        
+
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.qnoList = res.response['BOMList'];
@@ -442,14 +445,14 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       this.isSubmitted = true;
       return;
     }
-    const obj = this.modelFormData.value;
-    if (typeof obj.material != 'string') {
-      obj.material = this.formData.value.material[0].description;
-    }
-
+  
     // if(flag) {
     this.modelFormData.controls['materialCode'].enable();
     this.formData.item = this.modelFormData.value;
+    if (this.formData.item.modelPattern && (typeof this.formData.item.modelPattern != 'string')) {
+      this.formData.item.modelPattern = this.formData.item.modelPattern[0].description;
+    }
+
     this.formData.item.fileUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
     this.formData.item.customerCode = this.modelFormData.value.customerName ? this.customerList.find((c: any) => c.text == this.modelFormData.value.customerName).id : '';
     // this.formData.item.bom = this.modelFormData.value.bomName ? this.qnoList.find((c: any) => c.bomName == this.modelFormData.value.bomName).bomnumber : '';
