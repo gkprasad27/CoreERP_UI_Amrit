@@ -194,7 +194,8 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   getEmployeesList() {
-    const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
     this.apiService.apiGetRequest(getEmployeeList)
       .subscribe(
         response => {

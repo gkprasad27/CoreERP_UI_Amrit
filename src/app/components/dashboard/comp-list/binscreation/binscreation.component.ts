@@ -115,7 +115,8 @@ export class BinsCreationComponent implements OnInit {
         });
   }
   getEmployeetData() {
-    const getEmployeeUrl = String.Join('/', this.apiConfigService.getEmployeeList);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getEmployeeUrl = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
     this.apiService.apiGetRequest(getEmployeeUrl)
       .subscribe(
         response => {

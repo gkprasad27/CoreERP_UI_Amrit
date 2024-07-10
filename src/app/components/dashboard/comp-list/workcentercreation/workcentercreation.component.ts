@@ -225,7 +225,8 @@ export class WorkCenterCreationComponent implements OnInit {
   }
 
   getEmployeeList() {
-    const getemployeeUrl = String.Join('/', this.apiConfigService.getEmployeeList);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getemployeeUrl = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
     this.apiService.apiGetRequest(getemployeeUrl)
       .subscribe(
         response => {
