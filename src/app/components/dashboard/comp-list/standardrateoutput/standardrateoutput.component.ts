@@ -70,6 +70,7 @@ export class StandardRateComponent implements OnInit {
       { value: 'Forgings', viewValue: 'Forgings' },
       { value: 'Castings', viewValue: 'Castings' },
       { value: 'Flanges', viewValue: 'Flanges' },
+      { value: 'Crusher Eqipments', viewValue: 'Crusher Eqipments' },
     ];
 
   QCConfigDetailData: any[] = [];

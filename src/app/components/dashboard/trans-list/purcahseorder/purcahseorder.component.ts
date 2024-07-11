@@ -185,7 +185,7 @@ export class PurchaseOrderComponent implements OnInit {
       igst: 0,
       id: 0,
       changed: true,
-      netWeight: 0,
+      netWeight: [''],
       hsnsac: [''],
       soQty: 0,
       poQty: 0,

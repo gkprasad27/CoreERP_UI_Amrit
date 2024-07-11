@@ -653,9 +653,11 @@
                             </mat-select>
                         </mat-form-field>
 
-                        
-                        
-                    </div>
+                        <mat-form-field class="form-element">
+                            <mat-label [translate]="'purchaseorder.netWeight'"></mat-label>
+                            <input matInput type="number" formControlName="netWeight" appFocusOnEnter tabIndex="15">
+                        </mat-form-field>                        
+                    
                     <div class="multiselect-dropdown-list" >
                         <ng-multiselect-dropdown 
                             placeholder="{{ 'purchaseorder.material' | translate }}" formControlName="material"
