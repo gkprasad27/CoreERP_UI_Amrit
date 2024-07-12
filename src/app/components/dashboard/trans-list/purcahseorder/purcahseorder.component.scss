@@ -97,12 +97,21 @@
 
 // }
 
+#material{
+  display: flex;
+  flex-direction: row;
+}
+
+#sale{
+  width: 15%;
+}
+
 #button{
   display: flex;
   flex-direction: row;
 }
 
-#forms{
+#forms{ 
   display: flex;
   justify-content:space-between;
   width: 100%;
