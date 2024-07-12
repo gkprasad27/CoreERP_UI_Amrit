@@ -122,10 +122,14 @@
 
     <ng-container *ngFor="let data of salaryProcessData">
 
-    <div style="display: flex;">
+        <div style="display: flex;">
+            <img *ngIf="data.companyName === 'AMT POWER TRANSMISSION'" src="/assets/images/header.jpg" style="height: 60px; width: 100%;">
+            <img *ngIf="data.companyName !== 'AMT POWER TRANSMISSION'" src="/assets/images/AMRIT.jpg" style="height: 60px; width: 100%;">
+        </div>
+    <!-- <div style="display: flex;">
         <img src="/assets/images/header.jpg" style="height: 60px;
           width: 100%;">
-    </div>
+    </div> -->
 
     <div style="text-align: center;font-size: 15px;font-family: sans-serif;margin-top: 10px; padding: 5px;">
         PAYSLIP FOR THE MONTH OF {{ data.month }} {{ data.year }}
@@ -197,10 +201,14 @@
                         {{data.over_Time}}                        
                     </td>
                 </tr>
-                <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
+                <tr *ngIf="data.companyName === 'AMT POWER TRANSMISSION'" style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> ExtraDay </td>
                     <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.extraDay }} </td>
                 </tr>
+                <!-- <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> ExtraDay </td>
+                    <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ data.extraDay }} </td>
+                </tr> -->
                 <!-- <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
                     <td style="font-size: 12px;font-family: sans-serif; -webkit-print-color-adjust: exact;"> Total
                         Earnings </td>
