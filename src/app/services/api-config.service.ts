@@ -237,6 +237,7 @@ export class ApiConfigService {
    /*******************************Goods Issue ****************************************************** */
    addGoodsissue = `${this.environment.runtimeConfig.serverUrl}Transactions/AddGoodsissue`;
    getGoodsissueDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsissueDetail`;
+   getGoodsissueDetails = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsissueDetails`;
    getGoodsissueMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsissue`;
    returnGoodsissue = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnGoodsissue`;
    getTagsissueDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetTagsissueDetail`;

@@ -269,7 +269,7 @@ export class GoodsissueComponent implements OnInit {
   }
 
   getGIDetail(val) {
-    const jvDetUrl = String.Join('/', this.apiConfigService.getGoodsissueDetail, val);
+    const jvDetUrl = String.Join('/', this.apiConfigService.getGoodsissueDetails, val);
     this.apiService.apiGetRequest(jvDetUrl)
       .subscribe(
         response => {
