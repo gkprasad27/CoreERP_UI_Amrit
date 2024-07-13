@@ -477,7 +477,8 @@ export class GoodsissueComponent implements OnInit {
   }
 
   getPRList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getPRList);
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const companyUrl = String.Join('/', this.apiConfigService.getPRList, obj.companyCode);
     this.apiService.apiGetRequest(companyUrl)
       .subscribe(
         response => {
