@@ -1759,9 +1759,9 @@
     "total": "Total",
     "advance": "Advance",
     "recomendedBy": "Recomended By",
+    "dimentions":"Dimentions",
     "delete": "Delete",
-    "action": "Action",
-    "dimentions":"Dimentions"
+    "action": "Action"
   },
   "goodsreceipts": {
     "checkAll": "Select",
@@ -1791,10 +1791,10 @@
     "approvedBy": "Approved BY",
     "recommendedBy": "Recommended By",
     "delete": "Delete",
-    "action": "Action",
     "materialgrade":"Material Grade",
     "milltcno":"Mill TCNo",
-    "tptcno":"Third Party TC No"
+    "tptcno":"Third Party TC No",
+    "action": "Action"
   },
   "jobworkmaterialreceiving": {
     "checkAll": "Select",

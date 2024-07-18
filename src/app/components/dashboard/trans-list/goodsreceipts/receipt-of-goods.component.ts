@@ -74,8 +74,8 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
   dropdownSettings1: IDropdownSettings = {
     singleSelection: true,
-    idField: 'id',
-    textField: 'text',
+    idField: 'code',
+    textField: 'description',
     enableCheckAll: true,
     // selectAllText: 'Select All',
     // unSelectAllText: 'UnSelect All',
@@ -236,7 +236,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
     data = (data && data.length) ? data : [];
     let qtyT = this.formData1.value.receivedQty;
     data.forEach((t: any) => {
-      
       if (t.materialCode == this.formData1.value.materialCode[0]['materialCode']) {
         qtyT = qtyT + (this.formData1.value.index == t.index ? ((+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty))  :  ((+t.receivedQty) + (+t.rejectQty))) 
       }
@@ -250,7 +249,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
     this.tableData = null;
     this.tableComponent.defaultValues();
     let fObj = this.formData1.value;
-    fObj.materialCode = fObj.materialCode[0].materialCode
+    fObj.materialCode = fObj.materialCode[0].materialCode;
+    fObj.materialgrade = fObj.materialgrade[0].description
+    debugger
     if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
         fObj.index = data ? (data.length + 1) : 1
@@ -282,6 +283,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
       let item = { ...value.item };
       if (typeof item.materialCode == 'string') {
         item.materialCode = [{ materialCode: item.materialCode, materialName: item.materialName }]
+      }
+      debugger
+      if (typeof item.materialgrade == 'string') {
+        item.materialgrade = [{ code: item.materialCode, description: item.materialgrade }]
       }
       this.formData1.patchValue(item);
     }
@@ -432,13 +437,13 @@ export class ReceiptOfGoodsComponent implements OnInit {
       totalTax: 0,
       totalAmount: 0
     })
+    this.getRecepitOfGoodsDetails1(obj.id)
   }
 
   materialCodeChange() {
-    
     const obj = this.materialCodeList.find((p: any) => p.materialCode == this.formData1.value.materialCode[0]['materialCode']);
     let pendingQty = 0;
-    this.tableData && this.tableData.forEach((t: any) => {
+    this.grDetail && this.grDetail.forEach((t: any) => {
       if (t.materialCode == obj.materialCode) {
         pendingQty = pendingQty + t.receivedQty
       }
@@ -676,6 +681,22 @@ export class ReceiptOfGoodsComponent implements OnInit {
         });
   }
 
+  grDetail: any[] = [];
+  getRecepitOfGoodsDetails1(val) {
+    const cashDetUrl = String.Join('/', this.apiConfigService.getgoodsreceiptDetail, val);
+    this.apiService.apiGetRequest(cashDetUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.grDetail = res.response['grDetail'];
+            }
+          }
+        });
+  }
+
   getRecepitOfGoodsDetails(val) {
     const cashDetUrl = String.Join('/', this.apiConfigService.getgoodsreceiptDetail, val);
     this.apiService.apiGetRequest(cashDetUrl)
@@ -740,6 +761,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
                 }
                 this.perChaseOrderList.push(obj)
               })
+              this.grDetail = res.response['grDetail'];
               this.tableData = this.perChaseOrderList;
               this.calculate();
               // const arr = this.podetailsList.filter(resp => !this.perChaseOrderList.some((p: any) => p.materialCode == resp.materialCode));

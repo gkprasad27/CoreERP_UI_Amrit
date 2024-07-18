@@ -205,6 +205,7 @@ export class JobworkmaterialissueComponent {
 
   materialChange() {
     this.materialList = [];
+    this.mmasterListData.emit([]);
         const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         let obj = JSON.parse(localStorage.getItem("user"));
         const voucherClassList = String.Join('/', this.apiConfigService.getMaterialList, obj.companyCode, this.formData1.value.materialCode);

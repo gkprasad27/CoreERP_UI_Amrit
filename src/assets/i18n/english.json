@@ -2200,10 +2200,10 @@
     "approvedBy":"Approved BY",
     "status":"Status",
     "delete": "Delete",
-    "action": "Action",
     "materialgrade":"Material Grade",
     "milltcno":"Mill TCNo",
-    "tptcno":"Third Party TC No"
+    "tptcno":"Third Party TC No",
+    "action": "Action"
   },
   "jobworkmaterialreceiving": {
     "checkAll": "Select",

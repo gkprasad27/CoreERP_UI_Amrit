@@ -192,19 +192,19 @@
                         </mat-form-field> -->
                         <div class="multiselect-dropdown-list" >
                             <ng-multiselect-dropdown 
-                                placeholder="{{ 'goodsreceipts.materialgrade' | translate }}" formControlName="material"
+                                placeholder="{{ 'goodsreceipts.materialgrade' | translate }}" formControlName="materialgrade"
                                 [settings]="dropdownSettings1" [data]="mpatternList" appFocusOnEnter tabIndex="21">
                             </ng-multiselect-dropdown>
                         </div>
 
                         <mat-form-field class="form-element w-10">
                             <mat-label [translate]="'goodsreceipts.milltcno'"></mat-label>
-                            <input matInput type="text" formControlName="Mill TC No" appFocusOnEnter tabIndex="18">
+                            <input matInput type="text" formControlName="milltcno" appFocusOnEnter tabIndex="18">
                         </mat-form-field>
 
                         <mat-form-field class="form-element w-10">
                             <mat-label [translate]="'goodsreceipts.tptcno'"></mat-label>
-                            <input matInput type="text" formControlName="Third Party TC No" appFocusOnEnter tabIndex="18">
+                            <input matInput type="text" formControlName="tptcno" appFocusOnEnter tabIndex="18">
                         </mat-form-field>
 
                     </div>
