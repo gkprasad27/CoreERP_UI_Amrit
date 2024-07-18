@@ -2147,7 +2147,8 @@
     "deliveryDate": "Delivery Date",
     "approvalStatus": "Approval Status",
     "delete": "Delete",
-    "action": "Action"
+    "action": "Action",
+     "dimentions":"Dimentions"
   },
   "goodsreceipts": {
     "checkAll": "Select",

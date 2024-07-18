@@ -1760,7 +1760,8 @@
     "advance": "Advance",
     "recomendedBy": "Recomended By",
     "delete": "Delete",
-    "action": "Action"
+    "action": "Action",
+    "dimentions":"Dimentions"
   },
   "goodsreceipts": {
     "checkAll": "Select",
