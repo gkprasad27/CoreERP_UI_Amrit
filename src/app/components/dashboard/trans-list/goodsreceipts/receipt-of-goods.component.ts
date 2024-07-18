@@ -30,7 +30,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   formData: FormGroup;
   formData1: FormGroup;
   routeEdit = '';
-
+  mpatternList= [];
   tableData = [];
   materialCodeList = [];
   perChaseOrderList = [];
@@ -115,6 +115,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   ngOnInit(): void {
     this.formDataGroup();
     this.getpurchaseOrderTypeData();
+    this.getModelPatternList();
   }
   approveOrReject(event) {
     if (event) {
@@ -162,14 +163,13 @@ export class ReceiptOfGoodsComponent implements OnInit {
       lotNo: ['', Validators.required],
       documentURL: [''],
       invoiceURL: [''],
-
       igst: [0],
       cgst: [0],
       sgst: [0],
       amount: [0],
       totalTax: [0],
       totalAmount: [''],
-
+      materialgrade: ['']
     });
 
 
@@ -189,8 +189,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
       qty: [''],
       hsnsac: [''],
       highlight: false,
-      type: [''],
-
+      type: [''],     
       rate: 0,
       cgst: 0,
       sgst: 0,
@@ -614,7 +613,20 @@ export class ReceiptOfGoodsComponent implements OnInit {
         });
   }
 
-
+  getModelPatternList() {
+    const getmpList = String.Join('/', this.apiConfigService.getModelPatternList);
+    this.apiService.apiGetRequest(getmpList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.mpatternList = res.response['mpatternList'];
+            }
+          }
+          this.spinner.hide();
+        });
+  }
   // getMomentTypeList() {
   //   const MomentTypeList = String.Join('/', this.apiConfigService.getmomenttypeList);
   //   this.apiService.apiGetRequest(MomentTypeList)
@@ -855,6 +867,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
     if (typeof formData.receivedBy != 'string') {
       formData.receivedBy = this.formData.value.receivedBy[0].id;
     }
+    if (typeof formData.materialgrade != 'string') {
+      formData.materialgrade = this.formData.value.materialgrade[0].description;
+    }
+
     formData.receivedDate = this.formData.get('receivedDate').value ? this.datepipe.transform(this.formData.get('receivedDate').value, 'MM-dd-yyyy') : '';
     formData.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     formData.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';

@@ -376,7 +376,7 @@
                         <input placeholder="{{ 'jobworkmaterialissue.materialCode' | translate }}" formControlName="materialCode"
                             [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
                             class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
-                            (typeaheadOnSelect)="materialCodeChange()" (change)="materialChange()">
+                            (typeaheadOnSelect)="materialCodeChange()" (input)="materialChange()">
                         <ng-template #customItemTemplate let-model="item">
                             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                         </ng-template>

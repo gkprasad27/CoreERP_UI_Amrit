@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { String } from 'typescript-string-operations';
@@ -13,7 +13,7 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
 import { TableComponent } from 'src/app/reuse-components';
 import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
@@ -61,6 +61,7 @@ export class JobworkmaterialissueComponent {
   profitCenterList = [];
 
   routeEdit = '';
+  http: any;
 
   constructor(
     public commonService: CommonService,
@@ -140,7 +141,8 @@ export class JobworkmaterialissueComponent {
       index: 0
     });
   }
-
+  public mmasterListData: EventEmitter<any[]> = new EventEmitter<any[]>();
+  
   resetForm() {
     this.formData1.reset();
     this.formData1.patchValue({
@@ -202,13 +204,30 @@ export class JobworkmaterialissueComponent {
 
 
   materialChange() {
-    const obj = this.materialList.some((m: any) => m.id == this.formData1.value.materialCode);
-    if (!obj) {
-      this.alertService.openSnackBar('Please enter valid material code', Static.Close, SnackBar.error);
-      this.formData1.patchValue({
-        materialCode: ''
-      })
-    }
+    this.materialList = [];
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        let obj = JSON.parse(localStorage.getItem("user"));
+        const voucherClassList = String.Join('/', this.apiConfigService.getMaterialList, obj.companyCode, this.formData1.value.materialCode);
+        this.apiService.apiGetRequest(voucherClassList)
+        .subscribe(((response: any) => {
+              this.spinner.hide();
+              const res = response;
+              console.log(res);
+              if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+                if (!this.commonService.checkNullOrUndefined(res.response)) {
+                  this.materialList = res.response['mmasterList'];
+                  this.mmasterListData.emit(res.response['mmasterList']);
+                }
+              }
+            })
+      )  
+    // const obj = this.materialList.some((m: any) => m.id == this.formData1.value.materialCode);
+    // if (!obj) {
+    //   this.alertService.openSnackBar('Please enter valid material code', Static.Close, SnackBar.error);
+    //   this.formData1.patchValue({
+    //     materialCode: ''
+    //   })
+    // }
   }
 
   calculate() {
@@ -361,27 +380,27 @@ export class JobworkmaterialissueComponent {
               this.taxCodeList = data;
             }
           }
-          this.getmaterialData();
+          this.getJobworkDetail();
         });
   }
 
-  getmaterialData() {
-    const getmaterialUrl = String.Join('/', this.apiConfigService.getMaterialList);
-    this.apiService.apiGetRequest(getmaterialUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.materialList = res.response['materialList'];
-              if (this.routeEdit != '') {
-                this.getJobworkDetail();
-              }
-            }
-          }
-        });
-  }
+  // getmaterialData() {
+  //   const getmaterialUrl = String.Join('/', this.apiConfigService.getMaterialList);
+  //   this.apiService.apiGetRequest(getmaterialUrl)
+  //     .subscribe(
+  //       response => {
+  //         this.spinner.hide();
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.materialList = res.response['materialList'];
+  //             if (this.routeEdit != '') {
+  //               this.getJobworkDetail();
+  //             }
+  //           }
+  //         }
+  //       });
+  // }
 
 
   getJobworkDetail() {
