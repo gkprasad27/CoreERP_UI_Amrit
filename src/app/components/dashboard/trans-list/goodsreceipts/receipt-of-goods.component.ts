@@ -74,8 +74,8 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
   dropdownSettings1: IDropdownSettings = {
     singleSelection: true,
-    idField: 'code',
-    textField: 'description',
+    idField: 'id',
+    textField: 'text',
     enableCheckAll: true,
     // selectAllText: 'Select All',
     // unSelectAllText: 'UnSelect All',
