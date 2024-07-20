@@ -1,4 +1,4 @@
 {
-  "serverUrl": "http://103.67.236.159:9090/api/",
+  "serverUrl": "http://localhost:5000/api/",
   "env": ""
 }
