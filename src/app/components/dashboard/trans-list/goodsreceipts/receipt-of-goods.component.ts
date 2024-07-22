@@ -94,6 +94,17 @@ export class ReceiptOfGoodsComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  dropdownSettings3: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'code',
+    textField: 'description',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
   taxCodeList = [];
 
   constructor(
