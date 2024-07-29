@@ -261,6 +261,7 @@ export class JobworkmaterialissueComponent {
       this.formData1.patchValue(value.item);
     }
   }
+ 
 
   deleteRecord(value) {
     const obj = {
@@ -403,40 +404,76 @@ export class JobworkmaterialissueComponent {
   //       });
   // }
 
-
   getJobworkDetail() {
     const qsDetUrl = String.Join('/', this.apiConfigService.getJobworkDetail, this.routeEdit);
-    this.apiService.apiGetRequest(qsDetUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.formData.patchValue(res.response['JobWorkMasters']);
-
-              if (res.response['JobWorkDetails'] && res.response['JobWorkDetails'].length) {
-                let str = res.response['JobWorkDetails'][0].taxCode;
-                // str = str.split('-')[0].substring(1, 3)
-                const obj = this.taxCodeList.find((t: any) => t.taxRateCode == str);
-                this.formData1.patchValue({
-                  taxCode: obj.igst ? obj.igst : obj.sgst
-                })
-              }
-
-              res.response['JobWorkDetails'].forEach((s: any, index: number) => {
-                const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-                s.materialName = obj.text
-                s.stockQty = obj.availQTY
-                s.action = 'editDelete'; s.index = index + 1;
-              })
-              this.tableData = res.response['JobWorkDetails'];
-              this.calculate();
-              this.vendorChange();
-            }
+    this.apiService.apiGetRequest(qsDetUrl).subscribe(response => {
+      this.spinner.hide();
+      const res = response;
+      if (res && res.status === StatusCodes.pass && res.response) {
+        this.formData.patchValue(res.response['JobWorkMasters']);
+  
+        if (res.response['JobWorkDetails'] && res.response['JobWorkDetails'].length) {
+          let taxCode = res.response['JobWorkDetails'][0].taxCode;
+          const taxObj = this.taxCodeList.find((t: any) => t.taxRateCode == taxCode);
+          if (taxObj) {
+            this.formData1.patchValue({
+              taxCode: taxObj.igst ? taxObj.igst : taxObj.sgst
+            });
           }
-        });
+  
+          res.response['JobWorkDetails'].forEach((detail: any, index: number) => {
+            const materialObj = this.materialList.find((m: any) => m.id == detail.materialCode);
+            if (materialObj) {
+              detail.materialName = materialObj.text;
+              detail.stockQty = materialObj.availQTY;
+              detail.materialCode = { materialCode: materialObj.id, materialName: materialObj.text };
+            }
+            detail.action = 'editDelete';
+            detail.index = index + 1;
+          });
+  
+          this.tableData = res.response['JobWorkDetails'];
+          this.calculate();
+          this.vendorChange();
+        }
+      }
+    });
   }
+  
+
+  // getJobworkDetail() {
+  //   const qsDetUrl = String.Join('/', this.apiConfigService.getJobworkDetail, this.routeEdit);
+  //   this.apiService.apiGetRequest(qsDetUrl)
+  //     .subscribe(
+  //       response => {
+  //         this.spinner.hide();
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.formData.patchValue(res.response['JobWorkMasters']);
+
+  //             if (res.response['JobWorkDetails'] && res.response['JobWorkDetails'].length) {
+  //               let str = res.response['JobWorkDetails'][0].taxCode;
+  //               // str = str.split('-')[0].substring(1, 3)
+  //               const obj = this.taxCodeList.find((t: any) => t.taxRateCode == str);
+  //               this.formData1.patchValue({
+  //                 taxCode: obj.igst ? obj.igst : obj.sgst
+  //               })
+  //             }
+
+  //             res.response['JobWorkDetails'].forEach((s: any, index: number) => {
+  //               const obj = this.materialList.find((m: any) => m.id == s.materialCode);
+  //               s.materialName = obj.text
+  //               s.stockQty = obj.availQTY
+  //               s.action = 'editDelete'; s.index = index + 1;
+  //             })
+  //             this.tableData = res.response['JobWorkDetails'];
+  //             this.calculate();
+  //             this.vendorChange();
+  //           }
+  //         }
+  //       });
+  // }
 
 
   downLoadFile(event: any) {
