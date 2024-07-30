@@ -107,7 +107,7 @@ export class JobworkmaterialreceivingComponent {
       totalAmount: [''],
       invoiceNumber: [''],
 
-      id: [0],
+      id: 0,
 
       documentURL: [''],
       invoiceURL: [''],
@@ -144,6 +144,7 @@ export class JobworkmaterialreceivingComponent {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
+      id: 0,
       action: 'editDelete'
     });
   }
@@ -651,7 +652,9 @@ export class JobworkmaterialreceivingComponent {
     formData.receivedDate = this.formData.get('receivedDate').value ? this.datepipe.transform(this.formData.get('receivedDate').value, 'MM-dd-yyyy') : '';
     formData.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     formData.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
-    formData.receivedBy = this.employeesList.find((e: any) => e.text == this.formData.value.receivedBy).id;
+    if(this.formData.value.receivedBy) {
+      formData.receivedBy = this.employeesList.find((e: any) => e.text == this.formData.value.receivedBy).id;
+    }
     const requestObj = { grHdr: formData, grDtl: arr };
     this.apiService.apiPostRequest(addJWReceipt, requestObj).subscribe(
       response => {
