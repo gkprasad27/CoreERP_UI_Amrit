@@ -1799,8 +1799,9 @@
   "jobworkmaterialreceiving": {
     "checkAll": "Select",
     "title": "Job Work Material Receiving",
-    "companyName": "Company Name",
+    "companyName": "Company Name",   
     "profitcenterName": "ProfitCenter Name",
+    "jobWorkNumber":"JobWork Number",
     "purchaseOrderNo": "Purchase Order No",
     "supplierRefno": "Invoice Number",
     "customerName": "supplierName",
@@ -2290,6 +2291,7 @@
     "title": "Job Work Material Issue",
     "companyName": "Company",
     "profitcenterName": "ProfitCenter",
+    "jobWorkNumber":"JobWork Number",
     "saleOrderNo": "Saleorder Number",
     "poNumber": "PO Number",
     "status": "Status",
