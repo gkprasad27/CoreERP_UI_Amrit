@@ -220,6 +220,16 @@ export class JobworkmaterialreceivingComponent {
         });
   }
 
+  downLoadFile1(event: any) {
+    const url = String.Join('/', this.apiConfigService.getFile, event.name);
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          window.open(response.response, '_blank');
+        });
+  }
+
   tablePropsFunc() {
     return {
       tableData: {
