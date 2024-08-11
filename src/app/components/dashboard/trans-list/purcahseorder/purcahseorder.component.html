@@ -1,6 +1,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div style="margin: 10px;" id="printData" *ngIf="data">
     <div style="display: flex;">
+        <!-- Display this image only if the companyName is 'AMT POWER TRANSMISSION' -->
+        <img *ngIf="data?.headingObj?.companyName === 'AMT POWER TRANSMISSION'" 
+             src="/assets/images/header.jpg" 
+             style="height: 100px; width: 65%;">
+    
+        <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
+        <img *ngIf="data?.headingObj?.companyName !== 'AMT POWER TRANSMISSION'" 
+             src="/assets/images/AMRIT.jpg" 
+             style="height: 100px; width: 65%;">
+    
+        <div style="padding: 24px; 
+                    border-top: 1px solid black; 
+                    -webkit-print-color-adjust: exact; 
+                    background: rgb(22, 106, 132) !important; 
+                    color: white; 
+                    font-size: 20px; 
+                    width: 35%; 
+                    align-items: center; 
+                    justify-content: space-around; 
+                    display: flex; 
+                    height: 50px; 
+                    flex-direction: column;">
+            
+    <!-- <div style="display: flex;">
         <img src="/assets/images/header.jpg" style="height: 100px;
         width: 65%;">
         <div style="padding: 24px;
@@ -15,7 +39,7 @@
         display: flex;
         height: 50px;
         flex-direction: column;
-    ">
+    "> -->
             <span style="font-size: 22px;font-weight: 700;font-family: sans-serif;"> {{ data.heading }} </span>
         </div>
     </div>
