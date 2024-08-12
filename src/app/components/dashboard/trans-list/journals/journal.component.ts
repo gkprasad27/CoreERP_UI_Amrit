@@ -553,7 +553,7 @@ export class JournalComponent implements OnInit {
         this.disableSave = (this.debitValue == this.creditValue) ? false : true;
       }
     }
-    this.disableSave = true;
+    // this.disableSave = true;
   }
 
 
