@@ -106,7 +106,11 @@
         </div>
 
         <div>
-            <button id="save" [hidden]="routeEdit != ''" [disabled]="disableSave" mat-raised-button type="submit"
+            <!-- <button id="save" [hidden]="routeEdit != ''" [disabled]="disableSave" mat-raised-button type="submit"
+                class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
+                {{ 'COMMON.SAVE' | translate }}
+            </button> -->
+            <button id="save" [hidden]="routeEdit != ''"  mat-raised-button type="submit"
                 class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>

@@ -5,7 +5,28 @@
 </div>
 <div style="margin: 10px;" id="inspectionPrintData">
     <div style="display: flex;">
-        <img src="/assets/images/header.jpg" style="height: 100px;
+        <img *ngIf="data?.headingObj?.companyName === 'AMT POWER TRANSMISSION'" 
+        src="/assets/images/header.jpg" 
+        style="height: 100px; width: 65%;">
+
+   <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
+   <img *ngIf="data?.headingObj?.companyName !== 'AMT POWER TRANSMISSION'" 
+        src="/assets/images/AMRIT.jpg" 
+        style="height: 100px; width: 65%;">
+
+        <div style="padding: 24px;
+        border-top: 1px solid black;
+        -webkit-print-color-adjust: exact;
+        background: rgb(22 106 132) !important;
+        color: white;
+        font-size: 20px;
+        width: 35%;
+        align-items: center;
+        justify-content: space-around;
+        display: flex;
+        height: 50px;
+    "> {{ data.heading }}
+        <!-- <img src="/assets/images/header.jpg" style="height: 100px;
         width: 65%;">
         <div style="padding: 24px;
         border-top: 1px solid black;
@@ -18,7 +39,8 @@
         justify-content: space-around;
         display: flex;
         height: 50px;
-    "> {{ data.heading }} </div>
+    "> {{ data.heading }} </div> -->
+    </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">

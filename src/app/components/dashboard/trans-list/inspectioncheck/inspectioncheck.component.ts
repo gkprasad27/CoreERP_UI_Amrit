@@ -826,7 +826,7 @@ export class InspectioncheckComponent implements OnInit {
           arr.push({ detailArray: [tObj], ...obj });
         } else {
           const key = Object.keys(arr[arr.length - 1].detailArray[arr[arr.length - 1].detailArray.length - 1]);
-          if (key.filter((f: any) => f.includes('AMT-')).length > 4) {
+          if (key.filter((f: any) => f.startswith('AMT-')).length > 4) {
             arr.push({ detailArray: [], ...obj });
           }
           let dObj = arr[arr.length - 1].detailArray.find((d: any) => d.Parameter == t.parameter);

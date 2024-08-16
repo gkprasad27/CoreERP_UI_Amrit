@@ -50,7 +50,7 @@ export class JournalComponent implements OnInit {
   citemList: any;
   ordertypeList: any;
 
-  disableSave = true;
+  // disableSave = true;
 
   constructor(private commonService: CommonService,
     private formBuilder: FormBuilder,
@@ -550,7 +550,7 @@ export class JournalComponent implements OnInit {
           // this.totalTaxValue = this.totalTaxValue + res.sgstamount.value + res.cgstamount.value + res.ugstamount.value + res.igstamount.value
           this.totalTaxValue = this.totalTaxValue + res.sgstamount.value + res.cgstamount.value  + res.igstamount.value
         });
-        this.disableSave = (this.debitValue == this.creditValue) ? false : true;
+        // this.disableSave = (this.debitValue == this.creditValue) ? false : true;
       }
     }
     // this.disableSave = true;
