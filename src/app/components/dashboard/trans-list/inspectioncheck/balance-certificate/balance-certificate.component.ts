@@ -98,7 +98,8 @@ export class BalanceCertificateComponent {
   }
 
   getSaleOrderDetailbymaterialcode() {
-    const url = String.Join('/', this.apiConfigService.getSaleOrderDetailbymaterialcode, this.data.materialCode, this.data.productionTag, 'Balancing');
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const url = String.Join('/', this.apiConfigService.getSaleOrderDetailbymaterialcode, this.data.materialCode, this.data.productionTag, 'Balancing',this.data.bomKey,obj.companyCode);
     this.apiService.apiGetRequest(url)
       .subscribe(
         response => {

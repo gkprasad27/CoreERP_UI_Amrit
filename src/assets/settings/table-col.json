@@ -1836,6 +1836,7 @@
     "customerName": "CustomerName",
     "profitcenterName": "ProfitCenter",
     "materialCode": "Material code",
+    "bomKey":"BomKey",
     "description": "Description",
     "receivedQty": "Received QTY",
     "rejectedQty": "Rejected QTY",

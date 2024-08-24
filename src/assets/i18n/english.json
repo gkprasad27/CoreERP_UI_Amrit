@@ -2269,6 +2269,7 @@
     "profitcenterName": "Profit Center",
     "customerName": "Customer Name",
     "materialCode": "Material code",
+    "bomKey":"BomKey",
     "description": "Description",
     "receivedQty": "Received QTY",
     "rejectedQty": "Rejected QTY",

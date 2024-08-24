@@ -72,8 +72,9 @@ export class InspectionComponent {
   }
 
   getCommitmentList() {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.tableData = [];
-    const url = String.Join('/', this.apiConfigService.getSaleOrderDetailbymaterialcode, this.data.materialCode, this.data.productionTag, 'Inspection');
+    const url = String.Join('/', this.apiConfigService.getSaleOrderDetailbymaterialcode, this.data.materialCode, this.data.productionTag, 'Inspection',this.data.bomKey,obj.companyCode);
     this.apiService.apiGetRequest(url)
       .subscribe(
         response => {
