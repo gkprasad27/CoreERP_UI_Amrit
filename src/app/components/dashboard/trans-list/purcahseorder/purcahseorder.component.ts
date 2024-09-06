@@ -1011,6 +1011,8 @@ export class PurchaseOrderComponent implements OnInit {
         pin: cObj.pin,
         phone: cObj.phone,
         email: cObj.email,
+        street:cObj.street,
+        gstno: cObj.gstno,
       }
     }
     if (this.bpaList.length) {
@@ -1035,7 +1037,7 @@ export class PurchaseOrderComponent implements OnInit {
         address1: cObj.address2,
         city: cObj.city,
         stateName: cObj.stateName,
-        pin: cObj.pin,
+        pin: cObj.pinCode,
         phone: cObj.phone,
         email: cObj.email,
         gstno: cObj.gstNo,
