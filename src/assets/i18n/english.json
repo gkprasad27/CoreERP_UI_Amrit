@@ -34,7 +34,9 @@
     "totalTax": "Total Tax",
     "totalAmount": "Total Amount",
     "employee": "Employee",
-    "process": "Process"
+    "process": "Process",
+    "otp": "Otp",
+    "submit": "Submit"
   },
   "LOGIN": {
     "USERNAME": "Username",

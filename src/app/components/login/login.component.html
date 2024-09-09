@@ -8,6 +8,8 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form my-3" autocomplete="off">
 
+      <ng-container *ngIf="!showOtp" >
+
       <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.username.valid }">
         <mat-label [translate]="'LOGIN.USERNAME'"></mat-label>
         <input id="loginput" matInput formControlName="username">
@@ -39,6 +41,29 @@
           {{ 'LOGIN.LOGIN' | translate}}
         </button>
       </div>
+
+      </ng-container>
+
+    </form>
+
+    <form [formGroup]="form" (ngSubmit)="onotp()" class="form my-3" autocomplete="off">
+
+      <ng-container *ngIf="showOtp" >
+
+      <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': form.controls.otp.valid }">
+        <mat-label [translate]="'COMMON.otp'"></mat-label>
+        <input id="loginput" matInput formControlName="otp">
+        <mat-error *ngIf="isSubmitted && form.controls.otp.errors" class="help-block">
+          <div *ngIf="form.controls.otp.errors.required"> Otp is required </div>
+          <div *ngIf="form.controls.otp.errors.invalid"> Invalid Otp </div>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-element">
+        <button id="login" mat-raised-button class="background--color text-white mat-raised-button" type="submit"> {{ 'COMMON.submit' | translate}} </button>
+      </div>
+
+      </ng-container>
 
     </form>
 
