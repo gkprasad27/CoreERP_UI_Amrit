@@ -11,7 +11,7 @@ import { AlertService } from '../../services/alert.service';
 import { ApiService } from '../../services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from '../../services/common.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -100,7 +100,11 @@ export class LoginComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.loginUrlData = res.response;
-              this.otpApi();
+              // if (!(requestObj.UserName == 'admin' || requestObj.UserName == 'superadmin' || requestObj.UserName == 'amritadmin')) {
+                this.otpApi();
+              // } else {
+              //   this.setRoute();
+              // }
             }
           } else {
             this.spinner.hide();
@@ -114,6 +118,8 @@ export class LoginComponent implements OnInit {
         response => {
           this.spinner.hide();
           this.showOtp = true;
+        },(err:HttpErrorResponse)=>{
+          this.spinner.hide();
         });
   }
 
