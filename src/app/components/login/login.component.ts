@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   isSubmitted = false;
 
   showOtp = false;
-  ramdomNumber = Math.floor(Math.random() * 1000000)
+  otp: number;
 
   constructor(
     public translate: TranslateService,
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    if (this.form.value.otp != this.ramdomNumber) {
+    if (this.form.value.otp != this.otp) {
       this.alertService.openSnackBar('Invalid Otp', Static.Close, SnackBar.error);
     } else {
       this.setRoute();
@@ -100,6 +100,28 @@ export class LoginComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.loginUrlData = res.response;
+              if (!(requestObj.UserName == 'admin' || requestObj.UserName == 'superadmin' || requestObj.UserName == 'amritadmin')) {
+                this.otpApi();
+              } else {
+                this.setRoute();
+              }
+            }
+          } else {
+            this.spinner.hide();
+          }
+        });
+  }
+
+  otpApi() {
+    const getLoginUrl = String.Join('/', this.apiConfigService.getAuthentication);
+    this.apiService.apiGetRequest(getLoginUrl)
+      .subscribe(
+        response => {
+          debugger
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.otp = res.response;
               // if (!(requestObj.UserName == 'admin' || requestObj.UserName == 'superadmin' || requestObj.UserName == 'amritadmin')) {
                 this.otpApi();
               // } else {
@@ -112,21 +134,6 @@ export class LoginComponent implements OnInit {
         });
   }
 
-  otpApi() {
-    this.getList()
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          this.showOtp = true;
-        },(err:HttpErrorResponse)=>{
-          this.spinner.hide();
-        });
-  }
-
-  getList(): Observable<any> {
-    const getLoginUrl = `https://dlt.fastsmsindia.com/messages/sendSmsApi?username=AMTpower&password=AMTpower@&drout=3&senderid=AMTHYD&intity_id=1201171169797828072&template_id=1207171644087137963&numbers=${9666756333}&language=en&message=Hello,%20${this.ramdomNumber}%20is%20your%20OTP%20to%20Access%20AMT%20ERP.%20-AMT%20Power%20Transmission`
-    return this.http.get<any>(getLoginUrl);
-  }
 
   setRoute() {
     //  this.getBranchesForUser(res.response['User']);

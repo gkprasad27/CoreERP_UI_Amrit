@@ -17,6 +17,8 @@ export class ApiConfigService {
    //getBranchesForUser = 'http://localhost:5000/api/Auth/GetBranchesForUser';
    getComponentInfo = `${this.environment.runtimeConfig.serverUrl}Settings/GetComponentInfo`;
    
+   getAuthentication = `${this.environment.runtimeConfig.serverUrl}Common/GetAuthentication`;
+   
    // Common
    getprimeryList = `${this.environment.runtimeConfig.serverUrl}PrimaryCostElementsCreation/GetPrimaryCostElementsCreationList`;
    getprcList = `${this.environment.runtimeConfig.serverUrl}Common/GetPrimaryCostElementList`;
