@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.loginUrlData = res.response;
-              if (!(requestObj.UserName == 'admin' || requestObj.UserName == 'superadmin' || requestObj.UserName == 'amritadmin')) {
+              if (!(requestObj.UserName == 'admin' || requestObj.UserName == 'superadmin' || requestObj.UserName == 'amritadmin'|| requestObj.UserName =='Emprada')) {
                 this.otpApi();
               } else {
                 this.setRoute();
