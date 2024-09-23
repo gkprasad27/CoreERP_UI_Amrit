@@ -32,6 +32,7 @@ export class AttendanceProcessComponent {
     this.modelFormData = this.formBuilder.group({
       sno: [''],
       id: 0,
+      compCode:[''],
       emp_Code: [''],
       employeename: [''],
       month_Days: [''],

@@ -2687,7 +2687,7 @@
     "earlyOut":"EarlyOut"
 },
 "AttendanceProcess": {
-  "CompCode": "Company Code",
+  "compCode": "Company Code",
   "emp_Code": "Emp Code",
   "employeename":"Employee Name",
   "month_Days": "Month Days",
