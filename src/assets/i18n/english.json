@@ -3189,7 +3189,7 @@
   },
   "pendingpurchaseorders": {
     "title": "Pending Purchase Orders",
-    "poNo": "PO Number",
+    "poNumber": "PO Number",
     "poDate": "PO Date",
     "vendor": "Vendor Name",   
     "materialCode": "Material Code",

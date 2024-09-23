@@ -2537,13 +2537,13 @@
     "remarks": "Remarks"
   },
   "pendingpurchaseorders": {
-    "poNo": "PO Number",
-    "poDate": "PO Date",
+    "poNumber": "PO Number",
+    "poDate": "Date",
     "vendor": "Vendor Name",
     "materialCode": "Material Code",
     "description": "Material Name",
     "poQty": "Qty",
-    "targetDate": "Target Date",
+    "targetDate": "Date",
     "remarks": "Remarks"
   },
   "pendingjobworkreport": {
