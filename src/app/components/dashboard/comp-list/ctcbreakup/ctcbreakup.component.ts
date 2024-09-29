@@ -270,9 +270,42 @@ export class CTCBreakupComponent implements OnInit {
         });
   }
 
-  getctcEmployeeList(value) {
-    if (!this.commonService.checkNullOrUndefined(value) && value != '') {
-      const getctcEmployeeListUrl = String.Join('/', this.apiConfigService.getctcEmployeeList, value);
+  onCompanyChange(companyCode: string) {
+    if (companyCode) {
+      this.getctcEmployeeList(this.modelFormData.value.empCode, this.modelFormData.value.companyCode);  // Fetch employees based on company
+    } else {
+      this.GetEmployeeListArray = [];  // Reset employee list if no company is selected
+    }
+  }
+  
+
+  // getctcEmployeeList(value) {
+  //   if (!this.commonService.checkNullOrUndefined(value) && value != '') {
+  //     const getctcEmployeeListUrl = String.Join('/', this.apiConfigService.getctcEmployeeList, value);
+  //     this.apiService.apiGetRequest(getctcEmployeeListUrl).subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             if (!this.commonService.checkNullOrUndefined(res.response['EmployeeList']) && res.response['EmployeeList'].length) {
+  //               this.GetEmployeeListArray = res.response['EmployeeList'];
+  //             } else {
+  //               this.GetEmployeeListArray = [];
+  //             }
+  //           }
+  //           this.spinner.hide();
+  //         }
+  //       });
+  //   } else {
+  //     this.GetEmployeeListArray = [];
+  //   }
+  // }
+
+  getctcEmployeeList(empCode: string, companyCode: string) {
+    if (!this.commonService.checkNullOrUndefined(empCode) && empCode !== '' &&
+        !this.commonService.checkNullOrUndefined(companyCode) && companyCode !== '') {
+      
+      const getctcEmployeeListUrl = String.Join('/', this.apiConfigService.getctcEmployeeList, empCode, companyCode);
       this.apiService.apiGetRequest(getctcEmployeeListUrl).subscribe(
         response => {
           const res = response;
@@ -303,7 +336,8 @@ export class CTCBreakupComponent implements OnInit {
           effectfrom: this.modelFormData.value.effectFrom,
           id: this.modelFormData.value.id,
           pftype: this.modelFormData.value.pfType,
-          ptslab: this.modelFormData.value.ptSlab
+          ptslab: this.modelFormData.value.ptSlab,
+          companyCode:this.modelFormData.value.companyCode
         },
         components: arr
       }

@@ -6,24 +6,24 @@
     <mat-card-content class="p-2 m-0 overflow-auto">
         <form [formGroup]="modelFormData" autocomplete="off">
             <div class="d--flex mat-form-field-height">
-
-                <div class="mat-mdc-form-field typeahead">
-                    <input placeholder="{{ 'CTCBreakup.empCode' | translate }}" formControlName="empCode"
-                        (input)="getctcEmployeeList($event.target.value)" [typeahead]="GetEmployeeListArray"
-                        typeaheadOptionField='id' appFocusOnEnter tabIndex="1" class="form-control typeahead"
-                        [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200">
-                    <ng-template #customItemTemplate let-model="item">
-                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
-                    </ng-template>
-                </div>
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'pfmaster.companyName'"></mat-label>
-                    <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="2">
+                    <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1" (selectionChange)="onCompanyChange($event.value)">
                       <mat-option *ngFor="let comp of companyList" [value]="comp.id">
                         {{comp.text}}
                       </mat-option>
                     </mat-select>
                     </mat-form-field>
+                <div class="mat-mdc-form-field typeahead">
+                    <input placeholder="{{ 'CTCBreakup.empCode' | translate }}" formControlName="empCode"
+                        (input)="getctcEmployeeList($event.target.value, modelFormData.value.companyCode)" [typeahead]="GetEmployeeListArray"
+                        typeaheadOptionField='id' appFocusOnEnter tabIndex="2" class="form-control typeahead"
+                        [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200">
+                    <ng-template #customItemTemplate let-model="item">
+                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+                    </ng-template>
+                </div>
+                
                 <mat-form-field>
                     <mat-label>Effect From</mat-label>
                     <input matInput [matDatepicker]="picker1" placeholder="{{'CTCBreakup.effectFrom' | translate }}"
