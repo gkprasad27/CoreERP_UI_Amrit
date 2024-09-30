@@ -1573,6 +1573,7 @@
     "movementType": "Movement Type",
     "status": "status",
     "materialCode": "Material Code",
+    "materialName":"Material Name",
     "qty": "Quantity",
     "productionPerson": "Production In Charge",
     "availableqty": "Available QTY",

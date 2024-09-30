@@ -1905,6 +1905,7 @@
     "movementType": "Movement Type",
     "status": "Status",
     "materialCode": "Material Code",
+    "materialName":"Material Name",
     "qty": "Quantity",
     "poType": "Sale Order Type",
     "plant": "Plant",
