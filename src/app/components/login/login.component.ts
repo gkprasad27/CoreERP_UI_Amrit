@@ -118,15 +118,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         response => {
           debugger
+          this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.otp = res.response;
-              // if (!(requestObj.UserName == 'admin' || requestObj.UserName == 'superadmin' || requestObj.UserName == 'amritadmin')) {
-                this.otpApi();
-              // } else {
-              //   this.setRoute();
-              // }
+              this.otp = res.response['purchaseordernoList'];
+              this.showOtp = true;
             }
           } else {
             this.spinner.hide();
