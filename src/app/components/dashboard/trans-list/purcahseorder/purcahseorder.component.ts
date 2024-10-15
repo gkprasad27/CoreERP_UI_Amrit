@@ -870,7 +870,7 @@ export class PurchaseOrderComponent implements OnInit {
         igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
         cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
         sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-        amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.netWeight ? t.netWeight: 1))).toFixed(2),
+        amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.netWeight ? t.netWeight: 1))+(t.fright)+(t.hamaliCharges)).toFixed(2),
         totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
       })
     }
