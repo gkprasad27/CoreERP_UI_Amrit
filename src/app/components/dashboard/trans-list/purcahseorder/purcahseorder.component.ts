@@ -870,14 +870,26 @@ export class PurchaseOrderComponent implements OnInit {
         igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
         cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
         sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-        amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.netWeight ? t.netWeight: 1))+(t.fright)+(t.hamaliCharges)).toFixed(2),
+        amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.netWeight ? t.netWeight: 1))).toFixed(2),
         totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
       })
     }
     })
+    // this.formData.patchValue({
+    //   totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
+    // })
     this.formData.patchValue({
-      totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
-    })
+      totalAmount: (
+        (+this.formData.value.amount || 0) +      // Base amount, default to 0 if undefined
+        (+this.formData.value.totalTax || 0) +    // Total tax, default to 0 if undefined
+        (+this.formData.value.fright || 0) +      // Freight charges, default to 0 if undefined
+        (+this.formData.value.weightBridge || 0) +  // Weightbridge charges, default to 0 if undefined
+        (+this.formData.value.otherCharges || 0) + // Cutting charges, default to 0 if undefined
+        (+this.formData.value.hamaliCharges || 0)    // Hamali charges, default to 0 if undefined
+      ).toFixed(2),  // Round to 2 decimal places
+  });
+  
+  
   }
   // emitColumnChanges(data) {
   //   this.tableData = data.data;
