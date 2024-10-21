@@ -165,6 +165,7 @@ export class PurchaseOrderComponent implements OnInit {
       otherCharges: [0],
       hamaliCharges: [0],
       ammendment: [0],
+      mechineNumber:[null],
       roundOff: [0],
       igst: [0],
       cgst: [0],

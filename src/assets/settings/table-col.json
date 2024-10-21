@@ -1768,7 +1768,8 @@
     "recomendedBy": "Recomended By",
     "dimentions":"Dimentions",
     "delete": "Delete",
-    "action": "Action"
+    "action": "Action",
+    "mechineNumber":"Mechine Number"
   },
   "goodsreceipts": {
     "checkAll": "Select",

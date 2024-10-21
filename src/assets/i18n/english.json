@@ -2157,7 +2157,8 @@
     "approvalStatus": "Approval Status",
     "delete": "Delete",
     "action": "Action",
-     "dimentions":"Dimentions"
+     "dimentions":"Dimentions",
+     "mechineNumber":"Mechine Number"
   },
   "goodsreceipts": {
     "checkAll": "Select",
