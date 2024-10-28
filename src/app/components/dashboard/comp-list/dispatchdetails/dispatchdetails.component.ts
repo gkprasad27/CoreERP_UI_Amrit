@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { StatusCodes } from 'src/app/enums/common/common';
 import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-dispatchdetails',
@@ -31,6 +32,7 @@ export class DispatchdetailsComponent {
     private apiService: ApiService,
     private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
+    private datepipe: DatePipe,
     public dialogRef: MatDialogRef<DispatchdetailsComponent>,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -132,6 +134,7 @@ export class DispatchdetailsComponent {
     }
     // this.modelFormData.controls['languageCode'].enable();
     this.formData.item = this.modelFormData.value;
+    this.formData.item.lrDate = this.modelFormData.get('lrDate').value ? this.datepipe.transform(this.modelFormData.get('lrDate').value, 'dd-MM-yyyy') : '';
     this.formData.item.imageURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     this.addOrEditService[this.formData.action](this.formData, (res) => {
       this.uploadFile();

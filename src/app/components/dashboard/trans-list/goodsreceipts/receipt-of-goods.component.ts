@@ -260,9 +260,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
     this.tableData = null;
     this.tableComponent.defaultValues();
     let fObj = this.formData1.value;
-    fObj.materialCode = fObj.materialCode[0].materialCode;
-    fObj.materialgrade = fObj.materialgrade[0].description
-    debugger
+    if(fObj.materialCode) {
+      fObj.materialCode = fObj.materialCode[0].materialCode;
+      fObj.materialgrade = fObj.materialgrade[0].description
+    }
     if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
         fObj.index = data ? (data.length + 1) : 1

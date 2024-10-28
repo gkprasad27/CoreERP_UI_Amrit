@@ -165,6 +165,7 @@ export class PurchaseOrderComponent implements OnInit {
       otherCharges: [0],
       hamaliCharges: [0],
       ammendment: [0],
+      extaCharges: 0,
       mechineNumber:[null],
       roundOff: [0],
       igst: [0],
@@ -694,7 +695,7 @@ export class PurchaseOrderComponent implements OnInit {
               })
               this.tableData = res.response['poDetail'];
               this.getsaleOrdernoList();
-              this.calculate();
+              // this.calculate();
             }
           }
         });
@@ -759,7 +760,7 @@ export class PurchaseOrderComponent implements OnInit {
         qty: 0,
       });
       this.alertService.openSnackBar(`Qty can't be greater than the sale order qty`, Static.Close, SnackBar.error);
-      return
+      return;
     }
     this.dataChange();
     this.formData1.patchValue({
@@ -847,12 +848,34 @@ export class PurchaseOrderComponent implements OnInit {
     const igst = obj.igst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.igst) / 100 : 0;
     const cgst = obj.cgst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.cgst) / 100 : 0;
     const sgst = obj.sgst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.sgst) / 100 : 0;
+
     this.formData1.patchValue({
       amount: (+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)),
       total: (+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) + (igst + sgst + cgst),
       igst: igst,
       cgst: cgst,
       sgst: sgst,
+    })
+
+    this.calculateTotal(obj);
+  }
+
+  calculateTotal(obj) {
+
+    const igst1 = obj.igst ? ((((+this.formData.value.fright) + 
+    (+this.formData.value.weightBridge) + (+this.formData.value.otherCharges) + 
+    (+this.formData.value.hamaliCharges))) * obj.igst) / 100 : 0;
+
+    const cgst1 = obj.cgst ? ((((+this.formData.value.fright) + 
+    (+this.formData.value.weightBridge) + (+this.formData.value.otherCharges) + 
+    (+this.formData.value.hamaliCharges))) * obj.cgst) / 100 : 0;
+    
+    const sgst1 = obj.sgst ? ((((+this.formData.value.fright) + 
+    (+this.formData.value.weightBridge) + (+this.formData.value.otherCharges) + 
+    (+this.formData.value.hamaliCharges))) * obj.sgst) / 100 : 0;
+    
+    this.formData.patchValue({
+      extaCharges: (igst1 + sgst1 + cgst1),
     })
   }
 
@@ -866,7 +889,7 @@ export class PurchaseOrderComponent implements OnInit {
       totalAmount: 0,
     })
     this.tableData && this.tableData.forEach((t: any) => {
-      if(t.changed) {
+      if(t.changed || this.routeEdit) {
       this.formData.patchValue({
         igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
         cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
@@ -886,7 +909,8 @@ export class PurchaseOrderComponent implements OnInit {
         (+this.formData.value.fright || 0) +      // Freight charges, default to 0 if undefined
         (+this.formData.value.weightBridge || 0) +  // Weightbridge charges, default to 0 if undefined
         (+this.formData.value.otherCharges || 0) + // Cutting charges, default to 0 if undefined
-        (+this.formData.value.hamaliCharges || 0)    // Hamali charges, default to 0 if undefined
+        (+this.formData.value.hamaliCharges || 0) + // Cutting charges, default to 0 if undefined
+        (+this.formData.value.extaCharges || 0)    // Hamali charges, default to 0 if undefined
       ).toFixed(2),  // Round to 2 decimal places
   });
   
@@ -910,10 +934,13 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   save() {
-    if (this.tableData.length == 0 || this.formData.invalid || !(this.tableData.some((t: any) => t.changed))) {
+    if ((this.tableData.length == 0 || this.formData.invalid || (!(this.tableData.some((t: any) => t.changed)))  && !this.routeEdit)) {
       this.formData.markAllAsTouched();
       return;
     }
+    const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == this.tableData[0].taxCode);
+    this.calculateTotal(obj);
+    this.calculate();
     this.savepurcahseorder();
   }
 

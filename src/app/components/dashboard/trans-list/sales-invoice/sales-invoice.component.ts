@@ -561,7 +561,7 @@ export class SalesInvoiceComponent implements OnInit {
         ...this.formData.value
       },
       vAddress: {
-        custName: this.bpaList?.bpnumber || '',
+        custName: this.bpaList?.name || '',
         address: this.bpaList?.address || '',
         address1: this.bpaList?.address1 || '',
         city: this.bpaList?.city || '',

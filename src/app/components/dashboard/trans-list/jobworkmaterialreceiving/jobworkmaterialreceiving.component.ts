@@ -545,10 +545,12 @@ export class JobworkmaterialreceivingComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['jwMasterlist']);
-              this.formData.patchValue({
-                receivedBy: this.employeesList.find((e: any) => e.id == this.formData.value.receivedBy).text
-                // jobWorkNumber: +res.response['jwMasterlist'].jobWorkNumber
-              })
+              if(this.formData.value.receivedBy) {
+                this.formData.patchValue({
+                  receivedBy: this.employeesList.find((e: any) => e.id == this.formData.value.receivedBy).text
+                  // jobWorkNumber: +res.response['jwMasterlist'].jobWorkNumber
+                })
+              }
               // if (this.formData.value.documentURL) {
               //   this.downLoad(this.formData.value.documentURL, 'document');
               // }
@@ -674,7 +676,7 @@ export class JobworkmaterialreceivingComponent {
             if (this.fileList) {
               this.uploadFile();
             } else {
-              this.router.navigateByUrl('dashboard/transaction/goodsreceipts');
+              this.router.navigateByUrl('dashboard/transaction/jobworkmaterialreceiving');
             }
             this.alertService.openSnackBar('Goods Receipt created Successfully..', Static.Close, SnackBar.success);
           }
@@ -710,7 +712,7 @@ export class JobworkmaterialreceivingComponent {
         if (this.fileList1) {
           this.uploadFile1();
         } else {
-          this.router.navigateByUrl('dashboard/transaction/goodsreceipts');
+          this.router.navigateByUrl('dashboard/transaction/jobworkmaterialreceiving');
         }
       });
   }
@@ -732,7 +734,7 @@ export class JobworkmaterialreceivingComponent {
             this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
           }
         }
-        this.router.navigateByUrl('dashboard/transaction/goodsreceipts');
+        this.router.navigateByUrl('dashboard/transaction/jobworkmaterialreceiving');
       });
   }
 
