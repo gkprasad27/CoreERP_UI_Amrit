@@ -10,6 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { StatusCodes } from 'src/app/enums/common/common';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-dispatchdetails',
@@ -24,6 +25,18 @@ export class DispatchdetailsComponent {
   getInvoiceListData: any[] = [];
 
   fileList: any;
+
+
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'saleOrderNo',
+    textField: 'saleOrderNo',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
 
   constructor(private commonService: CommonService,
     private formBuilder: FormBuilder,
@@ -134,7 +147,7 @@ export class DispatchdetailsComponent {
     }
     // this.modelFormData.controls['languageCode'].enable();
     this.formData.item = this.modelFormData.value;
-    this.formData.item.lrDate = this.modelFormData.get('lrDate').value ? this.datepipe.transform(this.modelFormData.get('lrDate').value, 'dd-MM-yyyy') : '';
+    this.formData.item.lrDate = this.modelFormData.get('lrDate').value ? this.datepipe.transform(this.modelFormData.get('lrDate').value, 'yyyy-MM-dd') : '';
     this.formData.item.imageURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     this.addOrEditService[this.formData.action](this.formData, (res) => {
       this.uploadFile();

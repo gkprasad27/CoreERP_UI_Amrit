@@ -938,9 +938,6 @@ export class PurchaseOrderComponent implements OnInit {
       this.formData.markAllAsTouched();
       return;
     }
-    const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == this.tableData[0].taxCode);
-    this.calculateTotal(obj);
-    this.calculate();
     this.savepurcahseorder();
   }
 
@@ -959,6 +956,9 @@ export class PurchaseOrderComponent implements OnInit {
     }
     const arr = this.tableData.filter((d: any) => d.changed);
 
+    const taxCodeobj = this.taxCodeList.find((tax: any) => tax.taxRateCode == arr[0].taxCode);
+    this.calculateTotal(taxCodeobj);
+    this.calculate();
     const requestObj = { poHdr: obj, poDtl: arr };
     this.apiService.apiPostRequest(addprorder, requestObj).subscribe(
       response => {

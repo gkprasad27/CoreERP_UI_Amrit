@@ -1,0 +1,38 @@
+
+
+::ng-deep .multiselect-dropdown-list {
+    width: 20%;
+    margin: 20px;
+    ng-multiselect-dropdown {
+      .multiselect-dropdown {
+        .dropdown-btn {
+          border: none !important;
+          border-bottom: 1px solid #adadad !important;
+          border-radius: 0px !important;
+          .selected-item {
+            border: none !important;
+            background: none !important;
+            color: rgba(0,0,0,.87) !important;
+          }
+          .selected-item:hover {
+            box-shadow: none !important;
+          }
+        }
+      }
+    }
+  }
+
+  .mat-mdc-form-field.typeahead {
+    margin-top: 20px;
+    input {
+       border: none;
+       border-bottom: 1px solid;
+       border-radius: 0px;
+       padding: 0px;
+ padding-bottom: 12px;
+    }
+    input:focus {
+       box-shadow: none !important;
+       background-color: none !important;
+    }
+ }

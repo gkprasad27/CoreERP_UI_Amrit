@@ -682,13 +682,13 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   print() {
-    
     if (!this.tableData1.some((t: any) => t.checkbox)) {
       this.alertService.openSnackBar('PLease select one record', Static.Close, SnackBar.error);
       return;
     }
+    const obj = this.tableData1.find((t: any) => t.checkbox);
     localStorage.setItem('printData', '');
-    const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber, this.materialcode, 'Inspection');
+    const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber, this.materialcode, 'Inspection', obj.bomKey);
     this.apiService.apiGetRequest(getQCReportDetail)
       .subscribe(
         response => {
@@ -704,8 +704,8 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   getInvoiceDeatilListsaleorder(billingRes: any) {
-    const getQCReportDetail = String.Join('/', this.apiConfigService.getInvoiceDeatilListsaleorder, this.formData1.value.saleOrderNumber);
-    this.apiService.apiGetRequest(getQCReportDetail)
+    const getInvoiceDeatilListsaleorder = String.Join('/', this.apiConfigService.getInvoiceDeatilListsaleorder, this.formData1.value.saleOrderNumber);
+    this.apiService.apiGetRequest(getInvoiceDeatilListsaleorder)
       .subscribe(
         response => {
           this.spinner.hide();
@@ -783,7 +783,8 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   balanceingCertificatePrint() {
-    const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber, this.materialcode, 'Balancing');
+    const obj = this.tableData1.find((t: any) => t.checkbox);
+    const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber, this.materialcode, 'Balancing', obj.bomKey);
     this.apiService.apiGetRequest(getQCReportDetail)
       .subscribe(
         response => {

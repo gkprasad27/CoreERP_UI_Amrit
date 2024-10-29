@@ -9,25 +9,20 @@
             <div class="d--flex">
 
 
-                <mat-form-field [ngClass]="{ 'ng--valid': formControls.saleOrder.valid&& formControls.saleOrder.status != 'DISABLED', 
-                'ng--invalid': !formControls.saleOrder.valid && formControls.saleOrder.status != 'DISABLED' }">
-                    <mat-label>{{'dispatchdetails.saleOrder' | translate }}</mat-label>
-                    <mat-select formControlName="saleOrder" appFocusOnEnter tabIndex="1"
-                        (selectionChange)="getInvoiceListApi()">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let invoice of getInvoiceList" [value]="invoice.saleOrderNo">
-                            {{invoice.saleOrderNo}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="formControls.saleOrder.errors" class="help-block">
-                        <div *ngIf="formControls.saleOrder.errors.required">This feild is required</div>
-                    </mat-error>
-                </mat-form-field>
 
-                
+                <div class="mat-mdc-form-field typeahead">
+                    <input placeholder="{{ 'dispatchdetails.saleOrder' | translate }}" formControlName="saleOrder"
+                        [typeahead]="getInvoiceList" typeaheadOptionField='saleOrderNo' appFocusOnEnter tabIndex="1"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
+                    <ng-template #customItemTemplate let-model="item">
+                        <span> {{model.saleOrderNo}}</span>
+                    </ng-template>
+                </div>
+
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'dispatchdetails.invoiceNumber'"></mat-label>
-                    <mat-select formControlName="invoiceNumber" appFocusOnEnter tabIndex="2" (selectionChange)="invoiceNoDetail()">
+                    <mat-select formControlName="invoiceNumber" appFocusOnEnter tabIndex="2"
+                        (selectionChange)="invoiceNoDetail()">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let invoice of getInvoiceListData" [value]="invoice.invoiceNo">
                             {{invoice.invoiceNo}}
@@ -48,8 +43,7 @@
 
                 <mat-form-field>
                     <mat-label [translate]="'dispatchdetails.lrDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker" tabIndex="5"
-                    formControlName="lrDate">
+                    <input matInput [matDatepicker]="picker" tabIndex="5" formControlName="lrDate">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -65,7 +59,8 @@
                 </mat-form-field>
 
                 <div>
-                    <app-file-upload [type]="'card'" [oldFileList]="modelFormData.value.imageURL" (uploadFile)="downLoad()" (emitFilesList)="emitFilesList($event)"></app-file-upload>
+                    <app-file-upload [type]="'card'" [oldFileList]="modelFormData.value.imageURL"
+                        (uploadFile)="downLoad()" (emitFilesList)="emitFilesList($event)"></app-file-upload>
                 </div>
 
             </div>

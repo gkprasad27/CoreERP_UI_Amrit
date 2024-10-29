@@ -615,7 +615,7 @@ export class GoodsissueComponent implements OnInit {
                 s.id = 0;
                 s.index = index + 1;
                 s.qty = s.qty ? s.qty : 0;
-                s.changed = true;
+                s.changed = false;
                 s.availableqty = qty?.availQTY ? qty.availQTY : 0,
                   s.materialCode = s?.materialCode ? s.materialCode : 0;
                 s.allocatedqty = allocatedqty ? allocatedqty.allocatedQTY : 0;
