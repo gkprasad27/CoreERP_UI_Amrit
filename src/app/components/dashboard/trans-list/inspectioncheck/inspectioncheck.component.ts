@@ -688,7 +688,7 @@ export class InspectioncheckComponent implements OnInit {
     }
     const obj = this.tableData1.find((t: any) => t.checkbox);
     localStorage.setItem('printData', '');
-    const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber, this.materialcode, 'Inspection', obj.bomKey);
+    const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber, obj.materialCode, 'Inspection', obj.bomKey);
     this.apiService.apiGetRequest(getQCReportDetail)
       .subscribe(
         response => {
@@ -784,7 +784,7 @@ export class InspectioncheckComponent implements OnInit {
 
   balanceingCertificatePrint() {
     const obj = this.tableData1.find((t: any) => t.checkbox);
-    const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber, this.materialcode, 'Balancing', obj.bomKey);
+    const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber,  obj.materialCode, 'Balancing', obj.bomKey);
     this.apiService.apiGetRequest(getQCReportDetail)
       .subscribe(
         response => {
