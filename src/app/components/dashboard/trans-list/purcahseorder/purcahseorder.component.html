@@ -2,12 +2,12 @@
 <div style="margin: 10px;" id="printData" *ngIf="data">
     <div style="display: flex;">
         <!-- Display this image only if the companyName is 'AMT POWER TRANSMISSION' -->
-        <img *ngIf="data?.headingObj?.companyName === 'AMT POWER TRANSMISSION'" 
+        <img *ngIf="data?.headingObj?.company === '1000'" 
              src="/assets/images/header.jpg" 
              style="height: 100px; width: 65%;">
     
         <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
-        <img *ngIf="data?.headingObj?.companyName !== 'AMT POWER TRANSMISSION'" 
+        <img *ngIf="data?.headingObj?.company !== '1000'" 
              src="/assets/images/AMRIT.jpg" 
              style="height: 100px; width: 65%;">
     

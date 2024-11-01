@@ -5,12 +5,12 @@
 </div>
 <div style="margin: 10px;" id="inspectionPrintData">
     <div style="display: flex;">
-        <img *ngIf="data?.headingObj?.companyName === 'AMT POWER TRANSMISSION'" 
+        <img *ngIf="data?.headingObj?.companyCode === '1000'" 
         src="/assets/images/header.jpg" 
         style="height: 100px; width: 65%;">
 
    <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
-   <img *ngIf="data?.headingObj?.companyName !== 'AMT POWER TRANSMISSION'" 
+   <img *ngIf="data?.headingObj?.companyCode !== '1000'" 
         src="/assets/images/AMRIT.jpg" 
         style="height: 100px; width: 65%;">
 
