@@ -109,7 +109,7 @@ export class InspectionComponent {
 
   save() {
     if (!this.tableData.length) {
-      this.alertService.openSnackBar('Please fill atleast one result', Static.Close, SnackBar.success);
+      this.alertService.openSnackBar('Please update atleast single value before saving', Static.Close, SnackBar.success);
       return;
     }
     this.registerQCResults();
