@@ -559,7 +559,7 @@
         </div>
 
         <app-table *ngIf="routeParam == 'AttendanceProcess'" [tableData]="tableData"
-            (editOrDeleteEvent)="editOrDeleteEvent($event)"></app-table>
+            (editOrDeleteEvent)="editOrDeleteEvent($event)" (tableButtonEvent)="tableButtonEvent($event)"></app-table>
 
 
     </mat-card-content>

@@ -2703,11 +2703,24 @@
   "oT_Hrs": "Ot Hrs",
   "month": "Att Month",
   "year": "Att Year",
-  "action": "Action"
+  "action": "Action",
+  "button": "button"
 },
 "salaryprocess":{
   "title":"Salary Process",
   "sal_Month": "Month",
   "sal_Year": "Year"
+},
+"empAttendance" : {
+  "employeeCode": "EmployeeCode",
+  "employeeName": "EmployeeName",
+  "attndate": "Date",
+  "logintime": "logintime",
+  "logouttime": "logouttime",
+  "duration": "duration",
+  "status": "status",
+  "lateIn": "lateIn",
+  "earlyOut": "earlyOut",
+  "edit": "Edit"
 }
 }

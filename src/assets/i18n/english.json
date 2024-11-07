@@ -3373,6 +3373,19 @@
   "oT_Hrs": "Ot Hrs",
   "month": "Att Month",
   "year": "Att Year",
-  "action": "Action"
+  "action": "Action",
+  "button": "Check Attendance"
+},
+"empAttendance" : {
+  "employeeCode": "Employee Code",
+  "employeeName": "Employee Name",
+  "attndate": "Attndate",
+  "logintime": "Login time",
+  "logouttime": "Logout time",
+  "duration": "Duration",
+  "status": "Status",
+  "lateIn": "Late In",
+  "earlyOut": "Early Out",
+  "edit": "Edit"
 }
 }

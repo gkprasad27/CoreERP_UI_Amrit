@@ -117,7 +117,6 @@ export class LoginComponent implements OnInit {
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {
-          debugger
           this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {

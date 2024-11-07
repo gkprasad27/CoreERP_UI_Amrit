@@ -463,6 +463,8 @@ export class ApiConfigService {
    getInvoiceDeatilListsaleorder = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceDeatilListsaleorder`;
 
    getStockTransferPrintReportData = `${this.environment.runtimeConfig.serverUrl}Reports/StockTransferPrintReport/GetStockTransferPrintReportData`;
+   employeeattendance = `${this.environment.runtimeConfig.serverUrl}Reports/Employeeattendance`;
+   addAttendance = `${this.environment.runtimeConfig.serverUrl}Transactions/AddAttendance`;
 
    //  stock Transfer
    generateStockTranfNo = `${this.environment.runtimeConfig.serverUrl}transaction/StockTransfer/GenerateStockTranfNo`;

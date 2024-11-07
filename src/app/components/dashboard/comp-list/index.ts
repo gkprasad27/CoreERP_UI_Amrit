@@ -147,3 +147,4 @@ export { CAPAdetailsComponent } from './capadetails/capadetails.component';
 export { QcparamconfigurationComponent } from './qcparamconfiguration/qcparamconfiguration.component';
 export { StandardRateOComponent } from './materialsmaster/standard-rate-o/standard-rate-o.component';
 export { AttendanceProcessComponent } from './attendance-process/attendance-process.component';
+export { EmployeeAttendanceComponent } from './employee-attendance/employee-attendance.component';

@@ -97,6 +97,11 @@
                     *ngIf="element[column] == 'view' || element[column] == 'editView' || element[column] == 'editDeleteView'"
                     (click)="editOrDelete('View', element)">visibility</mat-icon>
                 </div>
+                <div class="mw-23">
+                  <mat-icon class="cursor--pointer"
+                    *ngIf="element[column] == 'view' || element[column] == 'editView' || element[column] == 'editDeleteView'"
+                    (click)="editOrDelete('View', element)">visibility</mat-icon>
+                </div>
               </ng-container>
               <ng-container *ngIf="column == 'documentURL' || column == 'invoiceURL'">
                 <span class="link--val" (click)="onLink(column, element)"> {{ element[column] }} </span>

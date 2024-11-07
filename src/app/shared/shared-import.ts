@@ -41,6 +41,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { HighchartsChartModule } from 'highcharts-angular';
 
+import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
+
 @NgModule({
 
   imports: [
@@ -83,7 +85,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatSortModule,
     MatFormFieldModule,
     NgMultiSelectDropDownModule.forRoot(),
-    HighchartsChartModule
+    HighchartsChartModule,
+    NgxMatTimepickerModule
   ],
   exports: [
     BrowserModule,
@@ -125,7 +128,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatSortModule,
     MatFormFieldModule,
     NgMultiSelectDropDownModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    NgxMatTimepickerModule
   ]
 
 })

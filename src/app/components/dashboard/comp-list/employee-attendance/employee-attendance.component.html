@@ -1,0 +1,68 @@
+<div class="position-relative popup-class">
+    <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+        <span> {{'AttendanceProcess.title' | translate }} </span>
+        <mat-icon class="my-2 cursor--pointer" (click)="close()">close</mat-icon>
+    </mat-card-title>
+
+    <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+
+        <div class="form-element p-2 d-flex justify-content-end">
+            <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+                {{ 'COMMON.CANCEL' | translate }}
+            </button>
+            <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+                {{ 'COMMON.SAVE' | translate }}
+            </button>
+        </div>
+
+        <form [formGroup]="modelFormData" autocomplete="off">
+
+            <div class="d--flex">
+
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="{{'empAttendance.attndate' | translate }}"
+                        formControlName="attndate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.attndate.valid && modelFormData.controls.attndate.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.attndate.valid  }"> This feild is
+                        required
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="timepicker">
+                    <input [ngxMatTimepicker]="picker12" format="24"
+                        placeholder="{{'empAttendance.logintime' | translate }}" formControlName="logintime">
+                    <ngx-mat-timepicker #picker12></ngx-mat-timepicker>
+                    <div class="error_text mt-0" *ngIf="(modelFormData.controls.logintime.dirty && modelFormData.controls.logintime.touched && modelFormData.controls.logintime.errors) ||
+                    (submitted && modelFormData.controls.logintime.errors)">
+                        <div class="error_text mt-0" *ngIf="modelFormData.controls.logintime.errors.required">
+                            This feild is required
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timepicker">
+                    <input [ngxMatTimepicker]="picker13" format="24" [min]="modelFormData.value.logintime"
+                        placeholder="{{'empAttendance.logouttime' | translate }}" formControlName="logouttime">
+                    <ngx-mat-timepicker #picker13></ngx-mat-timepicker>
+                    <div class="error_text mt-0" *ngIf="(modelFormData.controls.logouttime.dirty && modelFormData.controls.logouttime.touched && modelFormData.controls.logouttime.errors) ||
+                    (submitted && modelFormData.controls.logouttime.errors)">
+                        <div class="error_text mt-0" *ngIf="modelFormData.controls.logouttime.errors.required">
+                            This feild is required
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <mat-divider></mat-divider>
+        </form>
+
+    </mat-card-content>
+
+    <app-table [tableData]="tableData" [routeParam]="'empAttendance'" (editOrDeleteEvent)="editOrDeleteEvent($event)">
+    </app-table>
+
+
+</div>

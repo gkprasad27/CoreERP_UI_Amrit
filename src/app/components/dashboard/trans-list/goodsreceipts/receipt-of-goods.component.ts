@@ -296,7 +296,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
       if (typeof item.materialCode == 'string') {
         item.materialCode = [{ materialCode: item.materialCode, materialName: item.materialName }]
       }
-      debugger
       if (typeof item.materialgrade == 'string') {
         item.materialgrade = [{ code: item.materialCode, description: item.materialgrade }]
       }

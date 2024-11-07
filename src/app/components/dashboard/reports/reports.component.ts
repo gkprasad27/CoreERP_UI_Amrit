@@ -15,6 +15,7 @@ import { TableComponent } from 'src/app/reuse-components/table/table.component';
 import { AttendanceProcessComponent } from '../comp-list/attendance-process/attendance-process.component';
 import { SalaryProcessComponent } from '../comp-list/salaryproces/salaryprocess.component';
 import { Static } from 'src/app/enums/common/static';
+import { EmployeeAttendanceComponent } from '../comp-list/employee-attendance/employee-attendance.component';
 
 @Component({
   selector: 'app-reports',
@@ -396,6 +397,42 @@ export class ReportsComponent {
     this.print();
   }
 
+  tableButtonEvent(event: any) {
+    if(this.routeParam == 'AttendanceProcess') {
+      const dialogRef = this.dialog.open(EmployeeAttendanceComponent, {
+        width: '80%',
+        height: '80vh',
+        data: { 
+          fromDate: this.modelFormData.value.fromDate,
+          toDate: this.modelFormData.value.toDate,
+          company: event.item.compCode,
+          employeeCode: event.item.emp_Code,
+          employeeName: event.item.employeename,
+        },
+        panelClass: 'custom-dialog-container',
+        disableClose: true
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (!this.commonService.checkNullOrUndefined(result)) {
+          if (result) {
+            let arr = [...this.tableData];
+            this.tableData = null;
+            this.tableComponent.defaultValues();
+            arr = arr.map(element => {
+              if (element.emp_Code == result.emp_Code) {
+                element = result;
+              }
+              element.action = 'edit';
+              return element;
+            });
+            this.tableData = arr;
+          }
+          // this.print();
+        }
+      });
+    }
+  }
 
   print() {
     let getUrl
@@ -435,6 +472,7 @@ export class ReportsComponent {
               if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
                 res.response[this.getComponentData.listName].forEach((a: any) => {
                   a.action = 'edit';
+                  a.button = 'Open';
                 })
                 this.tableData = res.response[this.getComponentData.listName];
               }
