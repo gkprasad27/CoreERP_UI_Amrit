@@ -464,6 +464,7 @@ export class ApiConfigService {
 
    getStockTransferPrintReportData = `${this.environment.runtimeConfig.serverUrl}Reports/StockTransferPrintReport/GetStockTransferPrintReportData`;
    employeeattendance = `${this.environment.runtimeConfig.serverUrl}Reports/Employeeattendance`;
+   eemployeeAttendanceChange = `${this.environment.runtimeConfig.serverUrl}Reports/EemployeeAttendanceChange`;
    addAttendance = `${this.environment.runtimeConfig.serverUrl}Transactions/AddAttendance`;
 
    //  stock Transfer

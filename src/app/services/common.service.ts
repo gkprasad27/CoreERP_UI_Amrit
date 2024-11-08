@@ -181,6 +181,21 @@ export class CommonService {
     return `${[date.getFullYear(), mnth, day].join("/")} ${[hours, minutes, seconds].join(":")}`
   }
 
+  formatDate1(event) {
+    var date = new Date(event),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return `${[date.getFullYear(), mnth, day].join("/")}`
+  }
+
+  formatReportTime(event) {
+    var time = new Date();
+    var date = new Date(event),
+      hours = ("0" + time.getHours()).slice(-2),
+      minutes = ("0" + time.getMinutes()).slice(-2)
+    return `${[hours, minutes].join(":")}`
+  }
+
 
   public toggleSidebar() {
     if (!this.checkNullOrUndefined(this.appDrawer)) {

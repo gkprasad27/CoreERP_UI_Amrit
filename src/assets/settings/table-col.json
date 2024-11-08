@@ -2712,15 +2712,10 @@
   "sal_Year": "Year"
 },
 "empAttendance" : {
-  "employeeCode": "EmployeeCode",
+  "empCode": "EmployeeCode",
   "employeeName": "EmployeeName",
-  "attndate": "Date",
-  "logintime": "logintime",
-  "logouttime": "logouttime",
-  "duration": "duration",
-  "status": "status",
-  "lateIn": "lateIn",
-  "earlyOut": "earlyOut",
-  "edit": "Edit"
+  "dateTimeStamp": "Date",
+  "logDatetime": "logDatetime",
+  "action": "Action"
 }
 }

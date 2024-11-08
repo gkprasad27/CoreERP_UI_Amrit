@@ -3377,15 +3377,14 @@
   "button": "Check Attendance"
 },
 "empAttendance" : {
-  "employeeCode": "Employee Code",
+  "empCode": "Employee Code",
   "employeeName": "Employee Name",
-  "attndate": "Attndate",
-  "logintime": "Login time",
-  "logouttime": "Logout time",
+  "dateTimeStamp": "Attndate",
+  "logDatetime": "Log time",
   "duration": "Duration",
   "status": "Status",
   "lateIn": "Late In",
   "earlyOut": "Early Out",
-  "edit": "Edit"
+  "action": "Edit"
 }
 }

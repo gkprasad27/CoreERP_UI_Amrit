@@ -406,7 +406,7 @@ export class ReportsComponent {
           fromDate: this.modelFormData.value.fromDate,
           toDate: this.modelFormData.value.toDate,
           company: event.item.compCode,
-          employeeCode: event.item.emp_Code,
+          empCode: event.item.emp_Code,
           employeeName: event.item.employeename,
         },
         panelClass: 'custom-dialog-container',
