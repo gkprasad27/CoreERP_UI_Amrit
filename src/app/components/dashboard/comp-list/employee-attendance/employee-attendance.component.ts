@@ -106,12 +106,19 @@ export class EmployeeAttendanceComponent {
     if (this.tableComponent) {
       this.tableComponent.defaultValues();
     }
+    if(this.modelFormData.value.id) {
     arr.forEach((d: any) => {
       if (d.id == this.modelFormData.value.id) {
         d.dateTimeStamp = this.modelFormData.value.dateTimeStamp,
         d.logDatetime = `${this.commonService.formatDate1(this.modelFormData.value.dateTimeStamp)} ${this.modelFormData.value.logDatetime}:00`
       }
     })
+  } else {
+    arr.unshift({
+      dateTimeStamp: this.modelFormData.value.dateTimeStamp,
+      logDatetime: `${this.commonService.formatDate1(this.modelFormData.value.dateTimeStamp)} ${this.modelFormData.value.logDatetime}:00`
+    })
+  }
     this.tableData = arr;
     this.cancel();
   }
