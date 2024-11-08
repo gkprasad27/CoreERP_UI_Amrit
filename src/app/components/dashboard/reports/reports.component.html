@@ -372,7 +372,7 @@
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.day }} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logintime }} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logouttime }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': att.status == 'Absent' ? 'A' : 'H'}} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': att.status == 'Absent' ? 'A' :  att.status == 'Half Day' ? 'A*' : 'H'}} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.dayH }} </td>
                         </tr>
                     </ng-container>
@@ -410,7 +410,7 @@
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.day }} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logintime }} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.logouttime }} </td>
-                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': att.status == 'Absent' ? 'A' : 'H'}} </td>
+                            <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.status == 'Present' ? 'P': att.status == 'Absent' ? 'A' : att.status == 'Half Day' ? 'A*' : 'H'}} </td>
                             <td style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;"> {{ att.dayH }} </td>
                         </tr>
                     </ng-container>
