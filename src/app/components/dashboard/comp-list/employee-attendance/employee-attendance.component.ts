@@ -39,6 +39,9 @@ export class EmployeeAttendanceComponent {
       id: 0,
       dateTimeStamp: ['', Validators.required],
       logDatetime: ['', Validators.required],
+      highlight: false,
+      empCode : '',
+      employeeName: ''
       // logouttime: ['', Validators.required],
       // duration: [''],
       // status: [''],
@@ -49,7 +52,7 @@ export class EmployeeAttendanceComponent {
     if (!this.commonService.checkNullOrUndefined(this.data)) {
       this.modelFormData.patchValue({
         empCode : this.data.empCode,
-        employeeName: this.data.employeename
+        employeeName: this.data.employeeName
       });
     }
 
@@ -69,7 +72,6 @@ export class EmployeeAttendanceComponent {
         res => {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass && res.response.EMPAttendanceReport && res.response.EMPAttendanceReport.length) {
             const arr = res.response.EMPAttendanceReport.map(element => {
-              debugger
               element.id = element.id || 0;
               element.empCode  = element.employeeCode;
               element.dateTimeStamp = element.attndate;
@@ -97,7 +99,6 @@ export class EmployeeAttendanceComponent {
   }
 
   addTOgrid() {
-    debugger
     if (this.modelFormData.invalid) {
       return;
     }
@@ -109,12 +110,18 @@ export class EmployeeAttendanceComponent {
     if(this.modelFormData.value.id) {
     arr.forEach((d: any) => {
       if (d.id == this.modelFormData.value.id) {
+        d.highlight = true;
         d.dateTimeStamp = this.modelFormData.value.dateTimeStamp,
         d.logDatetime = `${this.commonService.formatDate1(this.modelFormData.value.dateTimeStamp)} ${this.modelFormData.value.logDatetime}:00`
       }
     })
   } else {
     arr.unshift({
+      action: 'edit',
+      id: 0,
+      empCode : this.modelFormData.value.empCode,
+      employeeName: this.modelFormData.value.employeeName,
+      highlight: true,
       dateTimeStamp: this.modelFormData.value.dateTimeStamp,
       logDatetime: `${this.commonService.formatDate1(this.modelFormData.value.dateTimeStamp)} ${this.modelFormData.value.logDatetime}:00`
     })
@@ -124,8 +131,9 @@ export class EmployeeAttendanceComponent {
   }
 
   save() {
+    const arr = this.tableData.filter((t: any) => t.highlight);
     const addAttendanceUrl = String.Join('/', this.apiConfigService.addAttendance);
-    this.apiService.apiPostRequest(addAttendanceUrl, { qsDtl: this.tableData })
+    this.apiService.apiPostRequest(addAttendanceUrl, { qsDtl: arr })
       .subscribe(
         response => {
           const res = response;
