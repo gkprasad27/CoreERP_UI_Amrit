@@ -40,6 +40,7 @@ export class AttendanceProcessComponent {
       oT_Hrs: [''],
       month: [''],
       year: [''],
+      lessHrs:[''],
     });
 
 

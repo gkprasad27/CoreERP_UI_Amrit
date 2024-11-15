@@ -3374,7 +3374,8 @@
   "month": "Att Month",
   "year": "Att Year",
   "action": "Action",
-  "button": "Check Attendance"
+  "button": "Check Attendance",
+  "lessHrs":"Less Hrs"
 },
 "empAttendance" : {
   "empCode": "Employee Code",

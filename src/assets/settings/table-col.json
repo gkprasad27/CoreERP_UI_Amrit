@@ -2704,7 +2704,8 @@
   "month": "Att Month",
   "year": "Att Year",
   "action": "Action",
-  "button": "button"
+  "button": "button",
+  "lessHrs":"Less Hrs"
 },
 "salaryprocess":{
   "title":"Salary Process",
