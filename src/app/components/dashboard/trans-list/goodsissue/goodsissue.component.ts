@@ -51,6 +51,17 @@ export class GoodsissueComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  dropdownSettings4: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'materialCode',
+    textField: 'materialName',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
 
   formData: FormGroup;
   formData1: FormGroup;
@@ -129,6 +140,7 @@ export class GoodsissueComponent implements OnInit {
     this.formData1 = this.formBuilder.group({
       allocatedqty: ['', Validators.required],
       materialCode: [''],
+      materialName: [''],
       qty: ['',],
       id: 0,
       changed: true,
@@ -234,13 +246,22 @@ export class GoodsissueComponent implements OnInit {
     let data: any = this.tableData;
     this.tableData = null;
     this.tableComponent.defaultValues();
+    let fObj = JSON.parse(JSON.stringify(this.formData1.value));
+    if(fObj.materialCode) {
+      fObj.materialCode = this.formData1.value.materialCode[0].materialCode;
+      fObj.materialName = this.formData1.value.materialCode[0].materialName
+    }
     if (this.formData1.value.index == 0) {
-      this.formData1.patchValue({
-        index: data ? (data.length + 1) : 1
-      });
-      data = [this.formData1.value, ...data];
+      // this.formData1.patchValue({
+        fObj.index = data ? (data.length + 1) : 1
+      // });
+      data = [fObj, ...data];
     } else {
-      data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
+      if (this.formData1.value.index == 0) {
+        data.push(fObj);
+      } else {
+        data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
+      }
     }
     setTimeout(() => {
       this.tableData = data;
@@ -254,6 +275,11 @@ export class GoodsissueComponent implements OnInit {
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
     } else {
       this.formData1.patchValue(value.item);
+      debugger
+      this.formData1.patchValue({
+        materialCode: [{ materialCode: value.item.materialCode,  materialName: value.item.materialName}],
+        id: 0
+      })
     }
   }
 
@@ -277,7 +303,7 @@ export class GoodsissueComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              
+              debugger
               this.formData.patchValue(res.response['goodsissueasters']);
               // this.formData.patchValue({
               //   saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }] : ''
@@ -295,6 +321,7 @@ export class GoodsissueComponent implements OnInit {
                   qty: s.qty ? s.qty : 0,
                   changed: false,
                   materialCode: s.materialCode ? s.materialCode : 0,
+                  materialName: s.materialName ? s.materialName : 0,
                   availableqty: qty.availQTY ? qty.availQTY : 0,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   allocatedqty1: s.allocatedQTY ? s.allocatedQTY : 0,
@@ -328,11 +355,13 @@ export class GoodsissueComponent implements OnInit {
   }
 
   materialCodeChange() {
-    const obj = this.materialCodeList.find((m: any) => m.materialCode == this.formData1.value.materialCode);
-    const qty = this.mmasterList.find(resp => resp.id == this.formData1.value.materialCode);
+    debugger
+    const obj = this.materialCodeList.find((m: any) => m.materialCode == this.formData1.value.materialCode[0].materialCode);
+    const qty = this.mmasterList.find(resp => resp.id == this.formData1.value.materialCode[0].materialCode);
     if (obj) {
       this.formData1.patchValue(obj);
       this.formData1.patchValue({
+        materialCode: [{ materialCode: obj.materialCode,  materialName: obj.materialName}],
         availableqty: qty.availQTY,
         id: 0
       })

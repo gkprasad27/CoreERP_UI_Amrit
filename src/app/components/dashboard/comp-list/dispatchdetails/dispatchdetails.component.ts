@@ -27,7 +27,7 @@ export class DispatchdetailsComponent {
   fileList: any;
 
 
-  dropdownSettings1: IDropdownSettings = {
+  dropdownSettings: IDropdownSettings = {
     singleSelection: true,
     idField: 'saleOrderNo',
     textField: 'saleOrderNo',
@@ -37,6 +37,8 @@ export class DispatchdetailsComponent {
     // itemsShowLimit: 3,
     allowSearchFilter: true
   };
+
+
 
   constructor(private commonService: CommonService,
     private formBuilder: FormBuilder,
@@ -64,6 +66,10 @@ export class DispatchdetailsComponent {
     this.formData = { ...data };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
+      debugger
+      this.modelFormData.patchValue({
+        saleOrder: [{ saleOrderNo: this.formData.item.saleOrder}],
+      })
       // this.modelFormData.controls['languageCode'].disable();
     }
 
@@ -108,7 +114,7 @@ export class DispatchdetailsComponent {
       poNumber: '',
       invoiceNumber: ''
     })
-    const url = String.Join('/', this.apiConfigService.getInvoiceList, this.modelFormData.get('saleOrder').value);
+    const url = String.Join('/', this.apiConfigService.getInvoiceList, this.modelFormData.value.saleOrder[0].saleOrderNo);
     this.apiService.apiGetRequest(url)
       .subscribe(
         res => {
@@ -149,6 +155,11 @@ export class DispatchdetailsComponent {
     this.formData.item = this.modelFormData.value;
     this.formData.item.lrDate = this.modelFormData.get('lrDate').value ? this.datepipe.transform(this.modelFormData.get('lrDate').value, 'yyyy-MM-dd') : '';
     this.formData.item.imageURL = this.fileList ? this.fileList.name.split('.')[0] : '';
+debugger
+    if (typeof this.formData.item.saleOrder != 'string') {
+      this.formData.item.saleOrder = this.formData.item.saleOrder[0].saleOrderNo;
+    }
+
     this.addOrEditService[this.formData.action](this.formData, (res) => {
       this.uploadFile();
       this.dialogRef.close(this.formData);

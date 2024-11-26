@@ -22,7 +22,7 @@ export class EmployeeAttendanceComponent {
   tableData: any;
 
   submitted = false;
-  
+
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
 
   constructor(
@@ -40,7 +40,7 @@ export class EmployeeAttendanceComponent {
       dateTimeStamp: ['', Validators.required],
       logDatetime: ['', Validators.required],
       highlight: false,
-      empCode : '',
+      empCode: '',
       employeeName: ''
       // logouttime: ['', Validators.required],
       // duration: [''],
@@ -51,7 +51,7 @@ export class EmployeeAttendanceComponent {
 
     if (!this.commonService.checkNullOrUndefined(this.data)) {
       this.modelFormData.patchValue({
-        empCode : this.data.empCode,
+        empCode: this.data.empCode,
         employeeName: this.data.employeeName
       });
     }
@@ -71,15 +71,19 @@ export class EmployeeAttendanceComponent {
       .subscribe(
         res => {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass && res.response.EMPAttendanceReport && res.response.EMPAttendanceReport.length) {
-            const arr = res.response.EMPAttendanceReport.map(element => {
-              element.id = element.id || 0;
-              element.empCode  = element.employeeCode;
-              element.dateTimeStamp = element.attndate;
-              element.deviceAddress = this.data.empCode.charAt(0);
-              element.staffId  = this.data.empCode;
-              element.logDatetime  = `${this.commonService.formatDate1(element.logtime)} ${this.commonService.formatReportTime(element.logtime)}:00`;
-              element.action = 'edit';
-              return element;
+
+            let arr = [];
+            res.response.EMPAttendanceReport.map(element => {
+              if (element.id) {
+                element.id = element.id;
+                element.empCode = element.employeeCode;
+                element.dateTimeStamp = element.attndate;
+                element.deviceAddress = this.data.empCode.charAt(0);
+                element.staffId = this.data.empCode;
+                element.logDatetime = element.logtime ? `${this.commonService.formatDate1(element.logtime)} ${this.commonService.formatReportTime(element.logtime)}:00` : '';
+                element.action = 'edit';
+                arr.push(element);
+              }
             });
             this.tableData = arr;
           }
@@ -99,6 +103,7 @@ export class EmployeeAttendanceComponent {
   }
 
   addTOgrid() {
+    debugger
     if (this.modelFormData.invalid) {
       return;
     }
@@ -107,25 +112,25 @@ export class EmployeeAttendanceComponent {
     if (this.tableComponent) {
       this.tableComponent.defaultValues();
     }
-    if(this.modelFormData.value.id) {
-    arr.forEach((d: any) => {
-      if (d.id == this.modelFormData.value.id) {
-        d.highlight = true;
-        d.dateTimeStamp = this.modelFormData.value.dateTimeStamp,
-        d.logDatetime = `${this.commonService.formatDate1(this.modelFormData.value.dateTimeStamp)} ${this.modelFormData.value.logDatetime}:00`
-      }
-    })
-  } else {
-    arr.unshift({
-      action: 'edit',
-      id: 0,
-      empCode : this.modelFormData.value.empCode,
-      employeeName: this.modelFormData.value.employeeName,
-      highlight: true,
-      dateTimeStamp: this.modelFormData.value.dateTimeStamp,
-      logDatetime: `${this.commonService.formatDate1(this.modelFormData.value.dateTimeStamp)} ${this.modelFormData.value.logDatetime}:00`
-    })
-  }
+    if (this.modelFormData.value.id) {
+      arr.forEach((d: any) => {
+        if (d.id == this.modelFormData.value.id) {
+          d.highlight = true;
+          d.dateTimeStamp = this.modelFormData.value.dateTimeStamp,
+            d.logDatetime = `${this.commonService.formatDate1(this.modelFormData.value.dateTimeStamp)} ${this.modelFormData.value.logDatetime}:00`
+        }
+      })
+    } else {
+      arr.unshift({
+        action: 'edit',
+        id: 0,
+        empCode: this.modelFormData.value.empCode,
+        employeeName: this.modelFormData.value.employeeName,
+        highlight: true,
+        dateTimeStamp: this.modelFormData.value.dateTimeStamp,
+        logDatetime: `${this.commonService.formatDate1(this.modelFormData.value.dateTimeStamp)} ${this.modelFormData.value.logDatetime}:00`
+      })
+    }
     this.tableData = arr;
     this.cancel();
   }

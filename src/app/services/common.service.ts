@@ -189,10 +189,9 @@ export class CommonService {
   }
 
   formatReportTime(event) {
-    var time = new Date();
     var date = new Date(event),
-      hours = ("0" + time.getHours()).slice(-2),
-      minutes = ("0" + time.getMinutes()).slice(-2)
+      hours = ("0" + date.getHours()).slice(-2),
+      minutes = ("0" + date.getMinutes()).slice(-2)
     return `${[hours, minutes].join(":")}`
   }
 
