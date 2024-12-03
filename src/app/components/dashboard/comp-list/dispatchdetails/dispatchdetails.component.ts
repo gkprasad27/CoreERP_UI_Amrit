@@ -68,13 +68,14 @@ export class DispatchdetailsComponent {
       this.modelFormData.patchValue(this.formData.item);
       debugger
       this.modelFormData.patchValue({
-        saleOrder: [{ saleOrderNo: this.formData.item.saleOrder}],
+        saleOrder: [{ saleOrderNo: this.formData.item.saleOrder }],
       })
+      this.getInvoiceListApi(false);
       // this.modelFormData.controls['languageCode'].disable();
     }
 
   }
-  
+
 
   ngOnInit() {
     this.getInvoiceData();
@@ -100,7 +101,7 @@ export class DispatchdetailsComponent {
   }
 
   invoiceNoDetail() {
-    
+
     const obj = this.getInvoiceListData.find((i: any) => i.invoiceNo == this.modelFormData.value.invoiceNumber);
     this.modelFormData.patchValue({
       poNumber: obj.poNumber,
@@ -109,21 +110,23 @@ export class DispatchdetailsComponent {
   }
 
 
-  getInvoiceListApi() {
-    this.modelFormData.patchValue({
-      poNumber: '',
-      invoiceNumber: ''
-    })
+  getInvoiceListApi(flag = true) {
+    if (flag) {
+      this.modelFormData.patchValue({
+        poNumber: '',
+        invoiceNumber: ''
+      })
+    }
     const url = String.Join('/', this.apiConfigService.getInvoiceList, this.modelFormData.value.saleOrder[0].saleOrderNo);
     this.apiService.apiGetRequest(url)
       .subscribe(
         res => {
-          if(res) {
+          if (res) {
             this.spinner.hide();
-            
+
             if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
               if (!this.commonService.checkNullOrUndefined(res.response)) {
-                  this.getInvoiceListData = res.response.InvoiceData;
+                this.getInvoiceListData = res.response.InvoiceData;
               }
             }
           }
@@ -155,7 +158,7 @@ export class DispatchdetailsComponent {
     this.formData.item = this.modelFormData.value;
     this.formData.item.lrDate = this.modelFormData.get('lrDate').value ? this.datepipe.transform(this.modelFormData.get('lrDate').value, 'yyyy-MM-dd') : '';
     this.formData.item.imageURL = this.fileList ? this.fileList.name.split('.')[0] : '';
-debugger
+    debugger
     if (typeof this.formData.item.saleOrder != 'string') {
       this.formData.item.saleOrder = this.formData.item.saleOrder[0].saleOrderNo;
     }

@@ -10,7 +10,7 @@
 
                 <div class="multiselect-dropdown-list mx-3" >
                     <ng-multiselect-dropdown placeholder="{{ 'dispatchdetails.saleOrder' | translate }}"
-                      formControlName="saleOrder" [settings]="dropdownSettings" [data]="getInvoiceList">
+                      formControlName="saleOrder" (onSelect)="getInvoiceListApi()" [settings]="dropdownSettings" [data]="getInvoiceList">
                     </ng-multiselect-dropdown>
                   </div>
 
