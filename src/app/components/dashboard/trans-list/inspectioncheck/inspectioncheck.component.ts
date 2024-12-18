@@ -108,7 +108,7 @@ export class InspectioncheckComponent implements OnInit {
       partDrgNo: [''],
       inspectionCheckNo: [''],
 
-
+      company: [''],
       bomKey: [''],
       bomName: [''],
       // typeofWork: [''],
@@ -347,7 +347,7 @@ export class InspectioncheckComponent implements OnInit {
                   materialName: s.materialName ? s.materialName : null,
                   allocatedPerson: s.allocatedPerson ? s.allocatedPerson : '',
                   endDate: s.endDate ? s.endDate : '',
-
+                  company:s.company?s.company:'',
                   bomKey: s.bomKey ? s.bomKey : '',
                   bomName: s.bomName ? s.bomName : '',                    // isReject: s.isReject ? s.isReject : '',
                   materialCode: s.materialCode ? s.materialCode : '',
