@@ -97,6 +97,7 @@ export class PurchasingComponent implements OnInit {
 
   formDataGroup() {
     this.formData = this.formBuilder.group({
+      id: 0,
       company: [null, [Validators.required]],
       departmentName: [null],
       profitcenterName: [''],
