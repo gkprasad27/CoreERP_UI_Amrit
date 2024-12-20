@@ -40,6 +40,7 @@ export class QcparamconfigurationComponent {
       { value: 'Forgings', viewValue: 'Forgings' },
       { value: 'Castings', viewValue: 'Castings' },
       { value: 'Flanges', viewValue: 'Flanges' },
+      { value: 'Plates', viewValue: 'Plates' },
     ];
   constructor(public commonService: CommonService,
     private addOrEditService: AddOrEditService,

@@ -58,6 +58,7 @@ ProductType: Type[] =
     { value: 'Forgings', viewValue: 'Forgings' },
     { value: 'Castings', viewValue: 'Castings' },
     { value: 'Flanges', viewValue: 'Flanges' },
+    { value: 'Plates', viewValue: 'Plates' },
   ];
 
   QCConfigDetailData: any[] = [];
