@@ -256,6 +256,7 @@ export class SalesInvoiceComponent implements OnInit {
 
 
   getBusienessPartnerAccount(data: any) {
+   
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getBusienessPartnerAccount, data.customerCode);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
@@ -284,11 +285,12 @@ export class SalesInvoiceComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.tableComponent.defaultValues();
-              
+              this.tableComponent.defaultValues();             
               res.response['icDetail'].forEach((i: any) => {
-                const obj = this.materialCodeList.find((m: any) => m.bomKey == i.materialCode && m.mainComponent == 'Y');
-
+                if (this.materialCodeList.find((m: any) => m.mainComponent == 'Y')) {
+                // const obj = this.materialCodeList.find((m: any) => m.bomKey == i.materialCode && m.mainComponent == 'Y');
+                const obj = this.materialCodeList.find((m: any) => m.materialCode == i.materialCode && m.mainComponent == 'Y');
+                if (!this.commonService.checkNullOrUndefined(obj)) {
                 const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
                 const igst = (objT && objT.igst) ? (obj.rate * objT.igst) / 100 : 0;
                 const cgst = (objT && objT.cgst) ? (obj.rate * objT.cgst) / 100 : 0;
@@ -314,15 +316,25 @@ export class SalesInvoiceComponent implements OnInit {
                 i.totalTax = (igst + sgst + cgst);
                 i.totalAmount = (obj.rate) + (igst + sgst + cgst)
                 i.checkbox = false
-              });
-              this.tableData = res.response['icDetail'];
+                const data = res.response['icDetail'];
+                this.tableData = data.filter((t: any) => t.materialCode == obj.materialCode);
               if (this.tableData.length > 0) {
                 this.tableData[0].checkbox = true;
               }
 
               this.calculate();
+                }
+              }
+              });
+              // this.tableData = res.response['icDetail'];
+              // if (this.tableData.length > 0) {
+              //   this.tableData[0].checkbox = true;
+              // }
+
+              // this.calculate();
+           
             }
-          }
+          }          
         });
   }
 

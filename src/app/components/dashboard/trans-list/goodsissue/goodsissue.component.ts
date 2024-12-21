@@ -275,7 +275,7 @@ export class GoodsissueComponent implements OnInit {
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
     } else {
       this.formData1.patchValue(value.item);
-      debugger
+   
       this.formData1.patchValue({
         materialCode: [{ materialCode: value.item.materialCode,  materialName: value.item.materialName}],
         id: 0
@@ -303,7 +303,7 @@ export class GoodsissueComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              debugger
+              
               this.formData.patchValue(res.response['goodsissueasters']);
               // this.formData.patchValue({
               //   saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }] : ''
@@ -355,7 +355,7 @@ export class GoodsissueComponent implements OnInit {
   }
 
   materialCodeChange() {
-    debugger
+   
     const obj = this.materialCodeList.find((m: any) => m.materialCode == this.formData1.value.materialCode[0].materialCode);
     const qty = this.mmasterList.find(resp => resp.id == this.formData1.value.materialCode[0].materialCode);
     if (obj) {
