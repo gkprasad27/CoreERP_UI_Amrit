@@ -106,7 +106,7 @@ export class MaterialrequisitionComponents implements OnInit {
       materialCode: [''],
       productionTag: [''],
       saleOrderNumber: [''],
-
+      company:[''],
       bomKey: [''],
       bomName: [''],
 
@@ -116,7 +116,7 @@ export class MaterialrequisitionComponents implements OnInit {
       index: 0
     });
     // this.formData = this.formBuilder.group({
-    //   company: [null, [Validators.required]],
+       //: [null//],
     //   plant: [null, [Validators.required]],
     //   branch: [null],
     //   project: [null],
@@ -327,7 +327,7 @@ export class MaterialrequisitionComponents implements OnInit {
               // console.log(res.response['mreqDetail']);
               let arr = [];
               res.response['tagsDetail'].forEach((s: any, index: number) => {
-                
+                debugger
                 // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
                   // action: 'editView',
@@ -356,6 +356,7 @@ export class MaterialrequisitionComponents implements OnInit {
                   typeofWork: s.typeofWork ? s.typeofWork : '',
                   workStatus: s.workStatus ? s.workStatus : '',
                   bomKey: s.bomKey ? s.bomKey : '',
+                  company:s.company?s.company:'',
                   bomName: s.bomName ? s.bomName : '',            
                   id: s.id ? s.id : '',
                   action: s.status != 'Rejected' ? 'editView' : 'view',
