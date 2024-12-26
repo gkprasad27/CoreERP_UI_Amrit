@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { String } from 'typescript-string-operations';
@@ -287,9 +287,18 @@ export class SalesInvoiceComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.tableComponent.defaultValues();             
               res.response['icDetail'].forEach((i: any) => {
+                const master = res.response['icmasters'];
+                
+                let obj: any = this.materialCodeList;
                 if (this.materialCodeList.find((m: any) => m.mainComponent == 'Y')) {
-                // const obj = this.materialCodeList.find((m: any) => m.bomKey == i.materialCode && m.mainComponent == 'Y');
-                const obj = this.materialCodeList.find((m: any) => m.materialCode == i.materialCode && m.mainComponent == 'Y');
+                  if(master.company=='1000')
+                  {
+                  obj = this.materialCodeList.find((m: any) => m.bomKey == i.materialCode && m.mainComponent == 'Y');
+                  }
+                else
+                {
+                   obj= this.materialCodeList.find((m: any) => m.materialCode == i.materialCode && m.mainComponent == 'Y');
+                }
                 if (!this.commonService.checkNullOrUndefined(obj)) {
                 const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
                 const igst = (objT && objT.igst) ? (obj.rate * objT.igst) / 100 : 0;
@@ -317,7 +326,14 @@ export class SalesInvoiceComponent implements OnInit {
                 i.totalAmount = (obj.rate) + (igst + sgst + cgst)
                 i.checkbox = false
                 const data = res.response['icDetail'];
+                if(master.company=='2000')
+                {
                 this.tableData = data.filter((t: any) => t.materialCode == obj.materialCode);
+                }
+                else
+                {
+                  this.tableData = data.filter((t: any) => t.bomKey == obj.materialCode);
+                }
               if (this.tableData.length > 0) {
                 this.tableData[0].checkbox = true;
               }
