@@ -332,7 +332,7 @@ export class SalesInvoiceComponent implements OnInit {
                 }
                 else
                 {
-                  this.tableData = data.filter((t: any) => t.bomKey == obj.materialCode);
+                  this.tableData = data;
                 }
               if (this.tableData.length > 0) {
                 this.tableData[0].checkbox = true;
