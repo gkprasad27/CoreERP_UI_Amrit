@@ -66,7 +66,7 @@ export class DispatchdetailsComponent {
     this.formData = { ...data };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
-      debugger
+    
       this.modelFormData.patchValue({
         saleOrder: [{ saleOrderNo: this.formData.item.saleOrder }],
       })
@@ -158,7 +158,7 @@ export class DispatchdetailsComponent {
     this.formData.item = this.modelFormData.value;
     this.formData.item.lrDate = this.modelFormData.get('lrDate').value ? this.datepipe.transform(this.modelFormData.get('lrDate').value, 'yyyy-MM-dd') : '';
     this.formData.item.imageURL = this.fileList ? this.fileList.name.split('.')[0] : '';
-    debugger
+  
     if (typeof this.formData.item.saleOrder != 'string') {
       this.formData.item.saleOrder = this.formData.item.saleOrder[0].saleOrderNo;
     }

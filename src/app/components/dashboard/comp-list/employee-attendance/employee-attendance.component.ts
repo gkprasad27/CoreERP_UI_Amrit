@@ -103,7 +103,7 @@ export class EmployeeAttendanceComponent {
   }
 
   addTOgrid() {
-    debugger
+   
     if (this.modelFormData.invalid) {
       return;
     }
