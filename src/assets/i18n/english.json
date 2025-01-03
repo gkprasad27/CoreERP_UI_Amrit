@@ -1904,6 +1904,7 @@
     "productionPerson": "Production In Charge",
     "movementType": "Movement Type",
     "status": "Status",
+    "bomKey":"BomKey",
     "materialCode": "Material Code",
     "materialName":"Material Name",
     "qty": "Quantity",

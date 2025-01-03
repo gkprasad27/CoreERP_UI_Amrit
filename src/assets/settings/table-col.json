@@ -1572,6 +1572,7 @@
     "saleOrderNumber": "saleOrderNumber",
     "movementType": "Movement Type",
     "status": "status",
+    "bomKey":"BomKey",
     "materialCode": "Material Code",
     "materialName":"Material Name",
     "qty": "Quantity",

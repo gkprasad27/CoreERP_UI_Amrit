@@ -309,13 +309,13 @@ export class MaterialrequisitionComponents implements OnInit {
   }
 
   onEditEmit(event: any) {
-    this.getTagsissueDetail(event.saleOrderNumber, event.materialCode);
+    this.getTagsissueDetail(event.saleOrderNumber, event.materialCode,event.bomNumber);
   }
 
-  getTagsissueDetail(val, val1) {
+  getTagsissueDetail(val, val1,bomNumber) {
     this.filePath = '';
     this.tableComponent.defaultValues();
-    const jvDetUrl = String.Join('/', this.apiConfigService.getTagsissueDetail, val, val1);
+    const jvDetUrl = String.Join('/', this.apiConfigService.getTagsissueDetail, val, val1,bomNumber);
     this.apiService.apiGetRequest(jvDetUrl)
       .subscribe(
         response => {
@@ -327,7 +327,6 @@ export class MaterialrequisitionComponents implements OnInit {
               // console.log(res.response['mreqDetail']);
               let arr = [];
               res.response['tagsDetail'].forEach((s: any, index: number) => {
-                debugger
                 // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
                   // action: 'editView',

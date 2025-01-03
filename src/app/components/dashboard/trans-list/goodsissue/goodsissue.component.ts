@@ -150,6 +150,7 @@ export class GoodsissueComponent implements OnInit {
       requiredqty: [''],
       productionPlanDate: [null],
       productionTargetDate: [null],
+      bomNumber: [''],
       action: 'edit',
       index: 0
     });
@@ -323,6 +324,7 @@ export class GoodsissueComponent implements OnInit {
                   materialCode: s.materialCode ? s.materialCode : 0,
                   materialName: s.materialName ? s.materialName : 0,
                   availableqty: qty.availQTY ? qty.availQTY : 0,
+                  bomNumber:s.bomKey?s.bomKey:0,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   allocatedqty1: s.allocatedQTY ? s.allocatedQTY : 0,
                   requiredqty: s.qty - s.allocatedQTY
@@ -640,6 +642,7 @@ export class GoodsissueComponent implements OnInit {
               obj['data1'].forEach((s: any, index: number) => {
                 const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 const allocatedqty = goodsissueastersDetail.find(resp => resp.materialCode == s.materialCode);
+                const bomNumber =s.bomKey;
                 s.action = 'edit';
                 s.id = 0;
                 s.index = index + 1;
@@ -649,6 +652,7 @@ export class GoodsissueComponent implements OnInit {
                   s.materialCode = s?.materialCode ? s.materialCode : 0;
                 s.allocatedqty = allocatedqty ? allocatedqty.allocatedQTY : 0;
                 s.allocatedqty1 = allocatedqty ? allocatedqty.allocatedQTY : 0;
+                s.bomNumber=s.bomKey?s.bomKey:0;
               })
 
               // this.sendDynTableData = { type: 'add', data: newData };
@@ -687,7 +691,7 @@ export class GoodsissueComponent implements OnInit {
   savegoodsissue() {
     const formData = this.formData.value;
     if (typeof formData.saleOrderNumber != 'string') {
-      formData.saleOrderNumber = this.formData.value.saleOrderNumber[0].saleOrderNo;
+      formData.saleOrderNumber = this.formData.value.saleOrderNumber[0].saleOrderNo;     
     }
     if (typeof formData.storesPerson != 'string') {
       formData.storesPerson = this.formData.value.storesPerson[0].id;
