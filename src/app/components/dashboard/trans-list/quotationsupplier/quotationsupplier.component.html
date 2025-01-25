@@ -2,15 +2,23 @@
 <div style="margin: 10px;" *ngIf="quotationSupplier" id="quotationSupplierPrintData">
 
     <div style="display: flex;">
-        <img src="/assets/images/header.jpg" style="height: 100px;
-        width: 55%;">
+        <img *ngIf="quotationSupplier?.headingObj?.company === '1000'" 
+        src="/assets/images/header.jpg" 
+        style="height: 100px; width: 65%;">
+  
+   <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
+   <img *ngIf="quotationSupplier?.headingObj?.company !== '1000'" 
+        src="/assets/images/AMRIT.jpg" 
+        style="height: 100px; width: 65%;">
+        <!-- <img src="/assets/images/header.jpg" style="height: 100px;
+        width: 65%;"> -->
         <div style="padding: 24px;
         border-top: 1px solid black;
         -webkit-print-color-adjust: exact;
         background: rgb(22 106 132) !important;
         color: white;
         font-size: 20px;
-        width: 45%;
+        width: 35%;
         align-items: center;
         justify-content: space-around;
         display: flex;
@@ -65,7 +73,7 @@
     </div>
 
 
-    <div id= style="padding-left: 15px;margin-top: 10px;">
+    <div style="padding-left: 15px;margin-top: 10px;">
 
         <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
             *ngIf="quotationSupplier.detailArray && quotationSupplier.detailArray.length">
@@ -98,7 +106,7 @@
                         *ngFor="let row of quotationSupplier.detailArray; let i = index">
                         <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                            {{ row.sno }} </td>
+                            {{ i + 1 }}  </td>
                         <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
                             {{ row.materialCode }} </td>
