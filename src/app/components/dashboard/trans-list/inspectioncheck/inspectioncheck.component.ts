@@ -732,7 +732,7 @@ export class InspectioncheckComponent implements OnInit {
         supplierName: res.SaleorderMaster.supplierName,
         poNumber: res.SaleorderMaster.poNumber,
         poDate: res.SaleorderMaster.poDate,
-        description: res.QCData.materialName,
+        description:res.QCData.materialCode +' - ' +  res.QCData.materialName,
         heatNumber: this.icmasters.heatNumber,
         drgNo: this.icmasters.partDrgNo,
         drawingRevNo: this.icmasters.drawingRevNo,
