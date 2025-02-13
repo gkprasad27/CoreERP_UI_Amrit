@@ -2508,6 +2508,7 @@
   "purchaseanalysis": {
     "purchaseOrderDate": "Date",
     "purchaseOrderNumber": "PO Number",
+    "vendorName":"Vendor Name",
     "materialCode": "Material Code",
     "materialName": "Material Name",
     "poQty": "Qty",
@@ -2527,12 +2528,17 @@
   "materialinward": {
     "receivedDate": "ReceivedDate",
     "invoiceNo": "InvoiceNo",
+    "vendorName":"Vendor Name",
     "purchaseOrderNo": "Purchase Order No",
     "materialCode": "Material Code",
     "materialName": "Material Name",
     "receivedQty": "ReceivedQty",
     "netweight": "Netweight",
-    "lotNo": "LotNo"
+    "lotNo": "LotNo",
+    "rate":"Rate",
+    "totalTax":"Total Tax",
+    "amount":"Amount",
+    "total":"Total Amount"
   },
   "pendingsales": {
     "date": "Date",
