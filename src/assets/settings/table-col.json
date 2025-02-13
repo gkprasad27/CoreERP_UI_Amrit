@@ -2527,6 +2527,7 @@
   "materialinward": {
     "receivedDate": "ReceivedDate",
     "invoiceNo": "InvoiceNo",
+    "purchaseOrderNo": "Purchase Order No",
     "materialCode": "Material Code",
     "materialName": "Material Name",
     "receivedQty": "ReceivedQty",
@@ -2546,7 +2547,9 @@
     "remarks": "Remarks"
   },
   "pendingpurchaseorders": {
-    "poNumber": "PO Number",
+    "customerPONumber": "Customer PO Number",
+    "purchaseOrderNo": "Purchase Order No",
+    "saleOrderNo": "Sale Order Number",
     "poDate": "Date",
     "vendor": "Vendor Name",
     "materialCode": "Material Code",
