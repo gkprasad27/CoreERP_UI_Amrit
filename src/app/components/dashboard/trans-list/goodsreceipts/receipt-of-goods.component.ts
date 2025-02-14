@@ -55,8 +55,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
   fileList: any;
   fileList1: any;
-  // url: string;
-  // url1: string;
+  
 
 
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
