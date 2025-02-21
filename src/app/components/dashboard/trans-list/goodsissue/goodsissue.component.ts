@@ -279,7 +279,7 @@ export class GoodsissueComponent implements OnInit {
    
       this.formData1.patchValue({
         materialCode: [{ materialCode: value.item.materialCode,  materialName: value.item.materialName}],
-        id: 0
+        //id: 0-- commented by KP
       })
     }
   }
