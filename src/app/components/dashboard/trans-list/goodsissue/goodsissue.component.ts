@@ -151,6 +151,9 @@ export class GoodsissueComponent implements OnInit {
       productionPlanDate: [null],
       productionTargetDate: [null],
       bomNumber: [''],
+      bomType: [''],
+      status:[''],
+      bomKey:[''],
       action: 'edit',
       index: 0
     });
@@ -159,22 +162,51 @@ export class GoodsissueComponent implements OnInit {
   }
 
   allocatedqtyChange() {
-    if ((this.formData1.value.requiredqty && (this.formData1.value.allocatedqty > this.formData1.value.requiredqty)) ||
-      (this.formData1.value.allocatedqty > this.formData1.value.availableqty) ||
-      ((this.formData1.value.availableqty > this.formData1.value.qty) && this.formData1.value.allocatedqty > this.formData1.value.qty)) {
-      this.qtyErrorMessage();
-    }
-    if (this.formData1.value.allocatedqty1 + this.formData1.value.allocatedqty > this.formData1.value.qty) {
-      this.qtyErrorMessage();
-    }
-  }
+    // this.formData1.patchValue({ bomType: 'Special Bom' });
+    const { requiredqty, allocatedqty, availableqty, qty, allocatedqty1, bomType } = this.formData1.value;
+  
+    const isSpecialBom = this.formData1.value.bomType === 'Special Bom';
 
-  qtyErrorMessage() {
-    this.alertService.openSnackBar("Allocation Quatity cannot be greater than quatity", Static.Close, SnackBar.error);
-    this.formData1.patchValue({
-      allocatedqty: ''
-    })
+     // Skip validation for Special Bom
+  if (isSpecialBom) {
+    console.log('Special Bom detected — skipping validation.');
+    return; // No error for Special Bom — exit the function early
   }
+  
+    const exceedsRequiredQty = requiredqty && allocatedqty > requiredqty;
+    const exceedsAvailableQty = allocatedqty > availableqty;
+    const exceedsTotalQty = allocatedqty1 + allocatedqty > qty;
+    const exceedsQtyLimit = availableqty > qty && allocatedqty > qty;
+  
+    if (exceedsRequiredQty || exceedsAvailableQty || exceedsQtyLimit || exceedsTotalQty) {
+      this.qtyErrorMessage('Allocation Quantity cannot be greater than the allowed quantity.');
+      return; // Exit early if there's an error
+    }
+  }
+  
+  
+  qtyErrorMessage(message: string) {
+    this.alertService.openSnackBar(message, Static.Close, SnackBar.error);
+    this.formData1.patchValue({ allocatedqty: '' });
+  }
+  
+  // allocatedqtyChange() {
+  //   if ((this.formData1.value.requiredqty && (this.formData1.value.allocatedqty > this.formData1.value.requiredqty)) ||
+  //     (this.formData1.value.allocatedqty > this.formData1.value.availableqty) ||
+  //     ((this.formData1.value.availableqty > this.formData1.value.qty) && this.formData1.value.allocatedqty > this.formData1.value.qty)) {
+  //     this.qtyErrorMessage();
+  //   }
+  //   if (this.formData1.value.allocatedqty1 + this.formData1.value.allocatedqty > this.formData1.value.qty) {
+  //     this.qtyErrorMessage();
+  //   }
+  // }
+
+  // qtyErrorMessage() {
+  //   this.alertService.openSnackBar("Allocation Quatity cannot be greater than quatity", Static.Close, SnackBar.error);
+  //   this.formData1.patchValue({
+  //     allocatedqty: ''
+  //   })
+  // }
 
   tablePropsFunc() {
     return {
@@ -251,6 +283,8 @@ export class GoodsissueComponent implements OnInit {
     if(fObj.materialCode) {
       fObj.materialCode = this.formData1.value.materialCode[0].materialCode;
       fObj.materialName = this.formData1.value.materialCode[0].materialName
+      fObj.bomNumber = this.formData1.value.bomNumber
+      fObj.status = this.formData1.value.status
     }
     if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
