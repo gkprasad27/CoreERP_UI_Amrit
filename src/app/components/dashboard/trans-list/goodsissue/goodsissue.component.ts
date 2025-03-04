@@ -165,7 +165,7 @@ export class GoodsissueComponent implements OnInit {
     // this.formData1.patchValue({ bomType: 'Special Bom' });
     const { requiredqty, allocatedqty, availableqty, qty, allocatedqty1, bomType } = this.formData1.value;
   
-    const isSpecialBom = this.formData1.value.bomType === 'Special Bom';
+    const isSpecialBom = this.formData1.value.bomType === 'Special BOM';
 
      // Skip validation for Special Bom
   if (isSpecialBom) {
