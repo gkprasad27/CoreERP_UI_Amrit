@@ -690,7 +690,7 @@ export class PurchaseOrderComponent implements OnInit {
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
                 s.action = 'editDeleteView';
                 s.changed = false;
-                s.poQty = s.qty ? s.qty : 0;
+                s.poQty = s.poQty ? s.poQty : 0;
                 s.index = index + 1;
               })
               this.tableData = res.response['poDetail'];
@@ -752,10 +752,11 @@ export class PurchaseOrderComponent implements OnInit {
     if (this.routeEdit) {
       checkqty = this.formData1.value.soQty
     } else {
-      checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - this.formData1.value.poQty) : this.formData1.value.soQty
+      checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - (this.formData1.value.poQty?0:0+this.formData1.value.qty?0:0)) : this.formData1.value.soQty
     }
-
-    if (this.formData1.value.qty > checkqty) {
+    let ckqty = 0;
+    ckqty=(this.formData1.value.qty+this.formData1.value.poQty)
+    if (ckqty > checkqty) {
       this.formData1.patchValue({
         qty: 0,
       });
