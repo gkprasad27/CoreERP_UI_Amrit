@@ -2769,6 +2769,7 @@
     "bomName": "Bom Name",
     "materialCode": "Material Code",
     "qty": "Quantity",
+    "poQty":"PO QTY",
     "rate": "Rate",
     "discount": "Discount %",
     "total": "Total",

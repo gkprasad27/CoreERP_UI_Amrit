@@ -129,6 +129,7 @@ export class SalesorderComponent {
       netWeight: [''],
       mainComponent: [''],
       billable: [''],
+      poQty:[0],
       bomKey: [''],
       bomName: [''],
       deliveryDate: [''],

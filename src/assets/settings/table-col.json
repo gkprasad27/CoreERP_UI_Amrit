@@ -2286,6 +2286,7 @@
     "salesOrderNumber": "Sales Order Number",
     "taxCode": "Tax Code",
     "qty": "Quantity",
+    "poQty":"PO QTY",
     "rate": "Rate",
     "discount": "Discount",
     "amount": "Amount",
