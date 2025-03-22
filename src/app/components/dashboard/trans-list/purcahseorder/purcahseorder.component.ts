@@ -752,11 +752,10 @@ export class PurchaseOrderComponent implements OnInit {
     if (this.routeEdit) {
       checkqty = this.formData1.value.soQty
     } else {
-      checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - (this.formData1.value.poQty?0:0+this.formData1.value.qty?0:0)) : this.formData1.value.soQty
+      checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - this.formData1.value.poQty) : this.formData1.value.soQty
     }
-    let ckqty = 0;
-    ckqty=(this.formData1.value.qty+this.formData1.value.poQty)
-    if (ckqty > checkqty) {
+
+    if (this.formData1.value.qty > checkqty) {
       this.formData1.patchValue({
         qty: 0,
       });
