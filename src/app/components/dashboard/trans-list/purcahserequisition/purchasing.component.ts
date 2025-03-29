@@ -122,6 +122,7 @@ export class PurchasingComponent implements OnInit {
       approvedBy: null,
       approvedDate: [null],
       status: [null],
+      totalQty : [null],
     });
 
     this.formData1 = this.formBuilder.group({
