@@ -122,7 +122,7 @@ export class PurchasingComponent implements OnInit {
       approvedBy: null,
       approvedDate: [null],
       status: [null],
-      totalQty : [null],
+      totalQty : [0],
     });
 
     this.formData1 = this.formBuilder.group({
@@ -132,6 +132,7 @@ export class PurchasingComponent implements OnInit {
       qty: ['', Validators.required],
       stockQty: [0],
       id: [0],
+      totalQty : [0],
       highlight: false,
       action: 'editDelete',
       index: 0
