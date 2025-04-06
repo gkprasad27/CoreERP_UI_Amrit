@@ -1221,7 +1221,7 @@
     "description": "Description",
     "materialGroupName": "Material Group Name",
     "materialSizeName": "Material Size Name",
-    "modelPatternName": "Model Pattern Name",
+    "modelPattern": "Model/Pattern",
     "uomName": "Uom Name",
     "divisionName": "Division Name",
     "grossWeight": "Gross Weight",
