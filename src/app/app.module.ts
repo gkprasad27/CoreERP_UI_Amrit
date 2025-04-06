@@ -39,7 +39,7 @@ import {
 } from './components/dashboard/comp-list/index';
 
 import {
-  CashbankComponent, JournalComponent, GoodsissueComponent, MemoinvoiceComponent, SourceOfSupplyComponent, InspectioncheckComponent, InspectionPreviewComponent,
+  CashbankComponent, JournalComponent, GoodsissueComponent,GoodsissueApprovalComponent, MemoinvoiceComponent, SourceOfSupplyComponent, InspectioncheckComponent, InspectionPreviewComponent,
   QuotationAnalysisComponent, QuotationSupplierComponent, PurchasingComponent, PurchaseOrderComponent, ReceiptOfGoodsComponent,
   ReceiptspaymentsComponent, BillOfMaterialComponent, MaterialrequisitionComponents, PurchasesaleassetComponent, SaleassetComponent,SampleRequisitionFormComponent,SampleServiceComponent, StockExcessComponent, CreateStockExcessComponent, CreateStockTransferComponent, StocktransferComponent, SalesorderComponent,
   PreviewComponent, SalesInvoiceComponent, PoHistoryComponent, JobworkmaterialissueComponent, JobworkmaterialreceivingComponent
@@ -143,7 +143,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     GoodsIssueNoteNumberSeriesComponent, BinsCreationComponent, PurchaseRequisitionNumberRangeComponent, MaterialNumberRangeComponent, MaterialNumberAsssignmentComponent,
     PurchaseOrderAssignmentComponent, QuotationAssignmentComponent, BusienessTransactionTypeComponent, AssetBegningAccumulatedDepreciationComponent, AssetBegningAcqusitionComponent,
     BusienessPartnerAccountComponent, AssignGLaccounttoSubGroupComponent, MainAssetMasterComponent, SubAssetsComponent,
-    DynamicTableComponent, AutocompleteComponent, CashbankComponent,SampleRequisitionFormComponent, SampleServiceComponent, JournalComponent, MaterialRequisitionNoteAssignmentComponent, GoodsissueComponent, MemoinvoiceComponent, ReceiptspaymentsComponent, MaterialrequisitionComponents, BillOfMaterialComponent, MaxlengthDirective, PurchasesaleassetComponent,
+    DynamicTableComponent, AutocompleteComponent, CashbankComponent,SampleRequisitionFormComponent, SampleServiceComponent, JournalComponent, MaterialRequisitionNoteAssignmentComponent, GoodsissueComponent,GoodsissueApprovalComponent, MemoinvoiceComponent, ReceiptspaymentsComponent, MaterialrequisitionComponents, BillOfMaterialComponent, MaxlengthDirective, PurchasesaleassetComponent,
     SaleassetComponent, RoutingFileComponent, SourceOfSupplyComponent, QuotationSupplierComponent, QuotationAnalysisComponent,
     PurchasingComponent, PurchaseOrderComponent, ReceiptOfGoodsComponent, InspectioncheckComponent, NonEditableDatepicker, PrimaryComponent, PrimaryCostElementComponent,
     //LeaveopeningbalanceComponent,

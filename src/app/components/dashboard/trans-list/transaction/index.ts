@@ -6,6 +6,7 @@ export { PurchasesaleassetComponent } from './purchasesaleasset/purchasesaleasse
 export { SaleassetComponent } from './saleasset/saleasset.component';
 export { BillOfMaterialComponent } from './bom/bom.component';
 export { GoodsissueComponent } from './goodsissue/goodsissue.component';
+export { GoodsissueApprovalComponent} from './goodsissueapproval/goodsissueapproval.component';
 export { MaterialrequisitionComponents } from './materialrequisition/materialrequisition.component';
 export { SourceOfSupplyComponent } from './source-of-supply/source-of-supply.component'
 export { PurchasingComponent } from './purcahserequisition/purchasing.component'

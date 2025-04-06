@@ -9,6 +9,7 @@ import { SaleassetComponent } from './saleasset/saleasset.component';
 import { NotFoundComponent } from '../../not-found/not-found.component';
 import { BillOfMaterialComponent } from './bom/bom.component'
 import { GoodsissueComponent } from './goodsissue/goodsissue.component'
+import { GoodsissueApprovalComponent} from './goodsissueapproval/goodsissueapproval.component'
 import { MaterialrequisitionComponents } from './materialrequisition/materialrequisition.component'
 import { SourceOfSupplyComponent } from './source-of-supply/source-of-supply.component'
 import { PurchasingComponent } from './purcahserequisition/purchasing.component'
@@ -95,6 +96,14 @@ export class TransListService {
       }
       case 'goodsissue': {
         this.dynamicComp.component = GoodsissueComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getGoodsissueMaster;
+        this.dynamicComp.list = 'Goodsissue';
+        this.dynamicComp.editKey = 'saleOrderNumber';
+        return this.dynamicComp;
+        break;
+      }
+      case 'goodsissueapproval': {
+        this.dynamicComp.component = GoodsissueApprovalComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getGoodsissueMaster;
         this.dynamicComp.list = 'Goodsissue';
         this.dynamicComp.editKey = 'saleOrderNumber';
