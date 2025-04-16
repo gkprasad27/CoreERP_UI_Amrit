@@ -104,31 +104,6 @@
         </mat-form-field>
 
 
-
-
-        <!-- <mat-form-field class="form-element element" id="sale">
-          <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
-          <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="productionPlanDate"
-            appFocusOnEnter tabIndex="6">
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
-
-
-
-
-
-        <mat-form-field class="form-element element" id="sale">
-          <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
-          <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="productionTargetDate"
-            appFocusOnEnter tabIndex="6">
-          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-          <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field> -->
-
-
-
-
       </div>
     </form>
 
@@ -143,7 +118,7 @@
 
 
 
-        <div class="d--flex p-1 mat-form-field-height justify-content-between align-items-end">
+        <div class="d--flex p-1 mat-form-field-height justify-content-between align-items-end" contenteditable="false">
 
 
 
@@ -166,32 +141,17 @@
               <input matInput type="number" formControlName="allocatedqty" appFocusOnEnter tabIndex="10"
                 (change)="allocatedqtyChange()">
             </mat-form-field>
-            <!-- <mat-form-field class="form-element">
-              <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
-              <input matInput [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"
-                appFocusOnEnter tabIndex="11">
-              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-              <mat-datepicker #picker3></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="form-element">
-              <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
-              <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
-                appFocusOnEnter tabIndex="12">
-              <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-              <mat-datepicker #picker4></mat-datepicker>
-            </mat-form-field> -->
-
-
+          
           <div id="for" class="mb-3">
 
-            <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
+            <!-- <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
               (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
               {{ 'COMMON.UPDATE' | translate }}
             </button>
             <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i
                 class="fa-solid fa-arrow-rotate-right"></i>
               {{ 'COMMON.RESET' | translate }}
-            </button>
+            </button> -->
 
           </div>
 
@@ -214,7 +174,7 @@
 
     <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i
         class="fa-solid fa-floppy-disk"></i>
-      {{ 'COMMON.SAVE' | translate }}
+      {{ 'COMMON.APPROVE' | translate }}
     </button>
     <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
       (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
@@ -223,9 +183,9 @@
     <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
       {{ 'COMMON.BACK' | translate }}
     </button>
-    <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3" (click)="return();">
+    <!-- <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3" (click)="return();">
       {{ 'COMMON.RETURN' | translate }}
-    </button>
+    </button> -->
 
   </mat-card-content>
 

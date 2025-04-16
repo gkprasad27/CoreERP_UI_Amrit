@@ -736,7 +736,7 @@ export class GoodsissueApprovalComponent implements OnInit {
       formData.productionPersonName = this.formData.value.productionPerson[0].text;
     }
     const arr = this.tableData.filter((d: any) => d.changed);
-    const addJournal = String.Join('/', this.apiConfigService.addGoodsissue);
+    const addJournal = String.Join('/', this.apiConfigService.addGoodsissueApproval);
     const requestObj = { gibHdr: this.formData.value, gibDtl: arr };
     this.apiService.apiPostRequest(addJournal, requestObj).subscribe(
       response => {

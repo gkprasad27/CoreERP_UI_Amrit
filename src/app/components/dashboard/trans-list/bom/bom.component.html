@@ -187,6 +187,16 @@
             </ng-template>
           </div>
 
+          <div class="mat-mdc-form-field typeahead">
+            <input formControlName="materialName" placeholder="{{ 'bom.materialName' | translate }}"
+              [typeahead]="mmasterListData" typeaheadOptionField='id' appFocusOnEnter tabIndex="6"
+              class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
+              (typeaheadOnSelect)="materialCodeChange()" (input)="onValueChange()">
+            <ng-template #customItemTemplate let-model="item">
+              <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+            </ng-template>
+          </div>
+
           <!-- <mat-form-field class="form-element">
             <mat-label [translate]="'bom.availableQty'"></mat-label>
             <input matInput type="number" readonly formControlName="availableQty" appFocusOnEnter tabIndex="7">

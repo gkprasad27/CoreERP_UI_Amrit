@@ -1442,6 +1442,7 @@
     "bomnumber": "Bom Number",
     "description":"Bom Name",
     "materialCode": "Material Code",
+    "materialName": "Material Name",
     "costUnit": "Cost Unit",
     "levelType": "Level Type",
     "bomLevel": "Level",   
@@ -1563,7 +1564,7 @@
   },
   "goodsissue": {
     "checkAll": "Select",
-    "title": "Goods Issue",
+    "title": "Production Planning",
     "companyName": "Company Name",
     "profitcenterName": "Profitcenter Name",
     "customerName": "CustomerName",
@@ -1610,7 +1611,7 @@
     "action": "Action"
   },
   "materialrequisition": {
-    "title": "Production Planning",
+    "title": "Production Scheduling",
     "checkbox": "",
     "companyName": "Company Name",
     "profitcenterName": "ProfitcenterName",

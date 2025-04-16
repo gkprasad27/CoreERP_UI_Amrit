@@ -112,7 +112,7 @@ export class PurchasingComponent implements OnInit {
       projectName: [null],
       requisitionNumber: [null],
       requisitionDate: [null, [Validators.required]],
-      narration: [null],
+      narration: ['', [Validators.required, Validators.maxLength(100)]],
       addWho: [null],
       addDate: [null],
       editWho: null,
@@ -318,7 +318,7 @@ export class PurchasingComponent implements OnInit {
                 s.action = 'editDelete';
                 s.index = index + 1;
                 s.qty = s.qty;
-                s.stockQty = obj.closingQty;
+                s.stockQty = obj.availQTY;
               })
               this.tableData = res.response['preqDetail'];
               // this.sendDynTableData = { type: 'edit', data: res.response['preqDetail'] };
@@ -398,7 +398,7 @@ export class PurchasingComponent implements OnInit {
   materialCodeChange() {
     const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
     this.formData1.patchValue({
-      stockQty: obj.closingQty,
+      stockQty: obj.availQTY,
       materialName: obj.text,
       netWeight: obj.netWeight,
     })

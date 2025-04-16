@@ -122,6 +122,18 @@
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
+                <mat-form-field class="form-element">
+                    <mat-label [translate]="'purcahserequisition.narration'"></mat-label>
+                    <input matInput formControlName="narration" maxlength="100" required>
+                    <mat-hint align="end">{{ formData.get('narration')?.value?.length || 0 }}/100</mat-hint>
+                    <mat-error *ngIf="formData.get('narration')?.hasError('required')">
+                        Narration is required.
+                    </mat-error>
+                    <mat-error *ngIf="formData.get('narration')?.hasError('maxlength')">
+                        Narration cannot exceed 100 characters.
+                    </mat-error>
+                </mat-form-field>
+
             </div>
 
         </form>

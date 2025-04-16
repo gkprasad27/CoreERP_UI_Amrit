@@ -431,6 +431,22 @@ export class BillOfMaterialComponent implements OnInit {
 
   }
 
+  materialNameChange() {
+    const obj = this.mmasterList.find((m: any) => m.id == this.formData1.value.materialName);
+
+    this.formData1.patchValue({
+      netWeight: obj.netWeight,
+      hsnsac: obj.hsnsac,
+      // availableQty: obj.availQTY,
+      description: obj ? obj.text : '',
+      materialName: obj ? obj.text : ''
+    })
+    // if (!obj.netWeight) {
+    //   this.alertService.openSnackBar('Net Weight has not provided for selected material..', Static.Close, SnackBar.error);
+    // }
+
+  }
+
   getbomDetail(val) {
     const bomUrl = String.Join('/', this.apiConfigService.getBOMDetail, val);
     this.apiService.apiGetRequest(bomUrl)

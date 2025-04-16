@@ -245,6 +245,9 @@ export class ApiConfigService {
    getTagsissueDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetTagsissueDetail`;
    getQCissueDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetQCissueDetail`;
 
+   /*******************************Goods Issue Approval ****************************************************** */
+   addGoodsissueApproval = `${this.environment.runtimeConfig.serverUrl}Transactions/AddGoodsIssueApproval`;
+
    /*******************************Material Requisition ****************************************************** */
    addmareq = `${this.environment.runtimeConfig.serverUrl}Transactions/AddMaterialRequisition`;
    getmreqDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetMaterialRequisitionDetail`;
