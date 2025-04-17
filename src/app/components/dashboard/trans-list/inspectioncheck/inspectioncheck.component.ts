@@ -272,7 +272,7 @@ export class InspectioncheckComponent implements OnInit {
 
 
   getGoodsissueDetail(val) {
-    const jvDetUrl = String.Join('/', this.apiConfigService.getGoodsissueDetail, val);
+    const jvDetUrl = String.Join('/', this.apiConfigService.getGoodsissueDetailsApproval, val);
     this.apiService.apiGetRequest(jvDetUrl)
       .subscribe(
         response => {

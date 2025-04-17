@@ -247,6 +247,7 @@ export class ApiConfigService {
 
    /*******************************Goods Issue Approval ****************************************************** */
    addGoodsissueApproval = `${this.environment.runtimeConfig.serverUrl}Transactions/AddGoodsIssueApproval`;
+   getGoodsissueDetailsApproval = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsissueDetailsApproved`;
 
    /*******************************Material Requisition ****************************************************** */
    addmareq = `${this.environment.runtimeConfig.serverUrl}Transactions/AddMaterialRequisition`;
