@@ -308,8 +308,13 @@ export class MaterialrequisitionComponents implements OnInit {
         });
   }
 
+  // onEditEmit(event: any) {
+  //   this.getTagsissueDetail(event.saleOrderNumber, event.materialCode,event.bomNumber);
+  // }
+
   onEditEmit(event: any) {
-    this.getTagsissueDetail(event.saleOrderNumber, event.materialCode,event.bomNumber);
+    const encodedMaterialCode = encodeURIComponent(event.materialCode);
+    this.getTagsissueDetail(event.saleOrderNumber, encodedMaterialCode, event.bomNumber);
   }
 
   getTagsissueDetail(val, val1,bomNumber) {
