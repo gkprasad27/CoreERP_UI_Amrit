@@ -1597,6 +1597,7 @@
     "saleOrderNumber": "saleOrderNumber",
     "movementType": "Movement Type",
     "status": "status",
+    "approvalStatus":"Approval Status",
     "bomKey":"BomKey",
     "materialCode": "Material Code",
     "materialName":"Material Name",
@@ -2408,6 +2409,7 @@
   },
   "POQ": {
     "materialCode": "Material Code",
+    "materialName":"Material Name",
     "qty": "QTY",
     "saleOrderNo": "Sale Order Number",
     "status": "Status"

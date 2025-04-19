@@ -1938,6 +1938,7 @@
     "productionPerson": "Production In Charge",
     "movementType": "Movement Type",
     "status": "Status",
+    "approvalStatus":"Approval Status",
     "bomKey":"BomKey",
     "materialCode": "Material Code",
     "materialName":"Material Name",
@@ -2994,6 +2995,7 @@
   "POQ": {
     "title": "POQ",
     "materialCode": "Material Code",
+    "materialName":"Material Name",
     "qty": "QTY",
     "saleOrderNo": "Sale Order Number",
     "status": "Status"
