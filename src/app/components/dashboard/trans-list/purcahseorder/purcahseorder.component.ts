@@ -462,7 +462,7 @@ export class PurchaseOrderComponent implements OnInit {
   // }
   getSaleOrderList() {
     let obj = JSON.parse(localStorage.getItem("user"));
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderList, obj.companyCode);
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderApprovedList, obj.companyCode);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
         response => {

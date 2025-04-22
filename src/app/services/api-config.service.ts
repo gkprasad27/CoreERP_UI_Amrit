@@ -34,6 +34,7 @@ export class ApiConfigService {
    getJobworkList = `${this.environment.runtimeConfig.serverUrl}Common/GetJobworkList`;
    getquotationnoList = `${this.environment.runtimeConfig.serverUrl}Common/GetQuotationnoList`;
    getSaleOrderList  = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrderList`;
+   getSaleOrderApprovedList  = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrderApprovedList`;
    getSaleOrders  = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrder`;
    getsaleOrdernoListe  = `${this.environment.runtimeConfig.serverUrl}Common/GetsaleOrdernoListe`;
    getsaleOrdernoList  = `${this.environment.runtimeConfig.serverUrl}Common/GetsaleOrdernoList`;
@@ -442,6 +443,7 @@ export class ApiConfigService {
    getStockExcessDetailsList = `${this.environment.runtimeConfig.serverUrl}transactions/StockExcess/GetStockExcessDetailsList`;
 
    // ******************************** sales *********************************
+   getSaleOrderApproveList = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSaleOrderApproveList`;
    getInvoiceList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceList`;
    getCashPartyAccountList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetCashPartyAccountList`;
    getCustomerGstNumList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetCustomerGstNumList`;
@@ -530,6 +532,7 @@ export class ApiConfigService {
 
    savePurchaseOrder = `${this.environment.runtimeConfig.serverUrl}Transactions/SavePurchaseOrder`;
    saveGoodsReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/SaveGoodsReceipt`;
+   saveSaleOrderApproval = `${this.environment.runtimeConfig.serverUrl}Transactions/SaveSaleOrderApproval`;
    
    getInvoiceData = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceData`;
    getInvoiceDetailList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceDetailList`;
