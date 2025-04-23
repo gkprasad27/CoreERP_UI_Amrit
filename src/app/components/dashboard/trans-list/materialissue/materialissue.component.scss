@@ -1,0 +1,156 @@
+@import "../../../../../reuse";
+
+:host ::ng-deep table {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  &>tbody {
+    & tr {
+      border-bottom: 1px solid $color-ddd;
+    }
+
+    & td {
+      font-size: 12px;
+      vertical-align: middle;
+      border: none !important;
+    }
+
+    & th {
+      vertical-align: middle;
+      border: none !important;
+    }
+
+    & tr:nth-child(even) {
+      background-color: $color-f9f9f9
+    }
+
+    & tr:nth-child(odd) {
+      background-color: $color-white
+    }
+
+    & tr:nth-child(even):hover {
+      background-color: $color-f9f9f9
+    }
+
+    & tr:nth-child(odd):hover {
+      background-color: $color-f9f9f9
+    }
+  }
+}
+
+// .mat-header-cell, .mat-cell {
+//   min-width: 150px;
+// }
+
+.table th,
+.table td {
+  vertical-align: middle;
+  border: none !important;
+}
+
+.table th {
+  background-color: $color-blue;
+  color: $color-white;
+}
+
+.table tr {
+  height: 40px !important;
+  cursor: pointer;
+}
+
+.range-picker {
+  width: 200px;
+
+  & input {
+    border: none;
+    border-radius: unset;
+    border-bottom: 1px solid $color-color;
+    padding: 0rem;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
+.mat-mdc-form-field {
+  margin: 5px;
+  flex: 0 0 16%;
+}
+
+.mat-mdc-form-field.typeahead {
+  margin-top: 25px;
+
+  input {
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 0px;
+    padding: 0px;
+    padding-bottom: 12px;
+  }
+
+  input:focus {
+    box-shadow: none !important;
+    background-color: none !important;
+  }
+}
+
+::ng-deep .table-css {
+  .table {
+    min-height: 4vh !important;
+  }
+}
+
+
+
+
+::ng-deep .multiselect-dropdown-list {
+  width: 20%;
+  margin: 20px;
+  ng-multiselect-dropdown {
+    .multiselect-dropdown {
+      .dropdown-btn {
+        border: none !important;
+        border-bottom: 1px solid #adadad !important;
+        border-radius: 0px !important;
+        .selected-item {
+          border: none !important;
+          background: none !important;
+          color: rgba(0,0,0,.87) !important;
+        }
+        .selected-item:hover {
+          box-shadow: none !important;
+        }
+      }
+    }
+  }
+}
+
+#submit{
+  background-color:#477994  ;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+
+#submit:hover{
+  background-color: cadetblue !important;
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+}
+#reset{
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  
+}
+#reset:hover{
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+}
+#print:hover{
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+}
+
+#form{
+  display:flex;
+  justify-content: space-evenly;
+}

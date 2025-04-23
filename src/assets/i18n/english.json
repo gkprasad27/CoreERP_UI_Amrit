@@ -3471,5 +3471,14 @@
   "lateIn": "Late In",
   "earlyOut": "Early Out",
   "action": "Edit"
-}
+},
+"materialissue": {
+    "title": "Material Issue",
+    "materialId": "Material ID",
+    "issuedFrom": "Store incharge",
+    "issuedTo": "Issued To",
+    "issuedDate": "Issued Date",
+    "status": "status",
+    "narration":"Narration"
+  }
 }

@@ -34,3 +34,4 @@ export { PoHistoryComponent } from './purcahseorder/po-history/po-history.compon
 
 export { JobworkmaterialissueComponent } from './jobworkmaterialissue/jobworkmaterialissue.component';
 export { JobworkmaterialreceivingComponent } from './jobworkmaterialreceiving/jobworkmaterialreceiving.component';
+export { MaterialissueComponent } from './materialissue/materialissue.component';

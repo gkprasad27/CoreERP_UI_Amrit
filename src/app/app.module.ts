@@ -42,7 +42,7 @@ import {
   CashbankComponent, JournalComponent, GoodsissueComponent,GoodsissueApprovalComponent, MemoinvoiceComponent, SourceOfSupplyComponent, InspectioncheckComponent, InspectionPreviewComponent,
   QuotationAnalysisComponent, QuotationSupplierComponent, PurchasingComponent, PurchaseOrderComponent, ReceiptOfGoodsComponent,
   ReceiptspaymentsComponent, BillOfMaterialComponent, MaterialrequisitionComponents, PurchasesaleassetComponent, SaleassetComponent,SampleRequisitionFormComponent,SampleServiceComponent, StockExcessComponent, CreateStockExcessComponent, CreateStockTransferComponent, StocktransferComponent, SalesorderComponent,
-  PreviewComponent, SalesInvoiceComponent, PoHistoryComponent, JobworkmaterialissueComponent, JobworkmaterialreceivingComponent
+  PreviewComponent, SalesInvoiceComponent, PoHistoryComponent, JobworkmaterialissueComponent, JobworkmaterialreceivingComponent,MaterialissueComponent
 } from './components/dashboard/trans-list/index';
 
 import { NavbarComponent, TableComponent, DeleteItemComponent, SearchFilterTableComponent, TransTableComponent, DynamicTableComponent, AutocompleteComponent, SaveItemComponent, FileUploadComponent } from './reuse-components/index';
@@ -166,6 +166,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HolidayComponent,
     DispatchdetailsComponent,SalaryProcessComponent, QuorantineComponent, CAPAdetailsComponent, ReportsComponent, QcparamconfigurationComponent, 
     StandardRateOComponent, JobworkmaterialreceivingComponent, JobworkmaterialissueComponent, GraphsComponent, DashboardGraphComponent, AttendanceProcessComponent, EmployeeAttendanceComponent
+    ,MaterialissueComponent
   ],
   imports: [
     AppRoutingModule,

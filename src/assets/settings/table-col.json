@@ -2399,6 +2399,15 @@
     "logouttime": "DateTime",
     "status": "status"
   },
+  "materialissue": {
+    "title": "Material Issue",
+    "materialId": "Material ID",
+    "issuedFrom": "Store incharge",
+    "issuedTo": "Issued To",
+    "issuedDate": "Issued Date",
+    "status": "status",
+    "narration":"Narration"
+  },
   "salesinvoice": {
     "title": "Sales Invoice",
     "RETURNTITLE": "Sales Return",

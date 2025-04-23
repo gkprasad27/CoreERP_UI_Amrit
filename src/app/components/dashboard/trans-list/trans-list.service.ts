@@ -25,6 +25,7 @@ import { StandardRateComponent } from '../comp-list';
 import { SalesInvoiceComponent } from './sales-invoice/sales-invoice.component';
 import { JobworkmaterialreceivingComponent } from './jobworkmaterialreceiving/jobworkmaterialreceiving.component';
 import { JobworkmaterialissueComponent } from './jobworkmaterialissue/jobworkmaterialissue.component';
+import { MaterialissueComponent} from './materialissue/materialissue.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -227,6 +228,13 @@ export class TransListService {
         this.dynamicComp.tableUrl = this.apiConfigService.getJobWork;
         this.dynamicComp.list = 'jobWorkMaster';
         this.dynamicComp.editKey = 'jobWorkNumber';
+        return this.dynamicComp;
+      }
+      case 'materialissue': {
+        this.dynamicComp.component = MaterialissueComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getJobWork;
+        this.dynamicComp.list = 'materialissuelist';
+        this.dynamicComp.editKey = 'id';
         return this.dynamicComp;
       }
       case 'salesinvoice': {
