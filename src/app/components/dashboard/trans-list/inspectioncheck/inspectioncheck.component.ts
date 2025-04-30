@@ -314,13 +314,13 @@ export class InspectioncheckComponent implements OnInit {
 
   onEditEmit(event: any) {
     
-    this.getQCissueDetail(event.saleOrderNumber, event.bomNumber);
+    this.getQCissueDetail(event.saleOrderNumber, event.materialCode, event.bomNumber );
     this.getInspectionDetail(event.saleOrderNumber, event.bomNumber);
   }
 
-  getQCissueDetail(val, val1) {
+  getQCissueDetail(val, val1, val2) {
     this.tableComponent.defaultValues();
-    const jvDetUrl = String.Join('/', this.apiConfigService.getQCissueDetail, val, val1);
+    const jvDetUrl = String.Join('/', this.apiConfigService.getQCissueDetail, val, val1, val2);
     this.apiService.apiGetRequest(jvDetUrl)
       .subscribe(
         response => {
