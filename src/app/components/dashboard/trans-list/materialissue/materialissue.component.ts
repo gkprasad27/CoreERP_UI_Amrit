@@ -155,9 +155,11 @@ export class MaterialissueComponent {
       } else {
         data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
       }
+     
     }
     setTimeout(() => {
       this.tableData = data;
+      console.log("Table Data:", this.tableData);
     });
     this.resetForm();
   }
@@ -254,6 +256,17 @@ export class MaterialissueComponent {
         });
   }
 
+  downLoadFile(event: any) {
+    const url = String.Join('/', this.apiConfigService.getFile, event.item[event.action]);
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          window.open(response.response, '_blank');
+        });
+  }
+
+  
   // getJobworkDetail() {
   //   const qsDetUrl = String.Join('/', this.apiConfigService.getJobworkDetail, this.routeEdit);
   //   this.apiService.apiGetRequest(qsDetUrl).subscribe(response => {
@@ -312,34 +325,31 @@ export class MaterialissueComponent {
 
 
   back() {
-    this.router.navigate(['dashboard/transaction/jobworkmaterialissue'])
+    this.router.navigate(['dashboard/transaction/materialissue'])
   }
 
   save() {
     if (this.tableData.length == 0 || this.formData.invalid) {
       return;
     }
-    this.addJobWork();
+    this.addMaterialIssue();
   }
 
-  addJobWork() {
-    const addsq = String.Join('/', this.apiConfigService.addJobWork);
+  addMaterialIssue() {
+    const addsq = String.Join('/', this.apiConfigService.addMaterialIssue);
     const obj = this.formData.value;
-    obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
-    obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
-    obj.vendor = this.formData.value.vendor[0].id;
+    obj.issuedDate = obj.issuedDate ? this.datepipe.transform(obj.issuedDate, 'MM-dd-yyyy') : '';
+    obj.issuedFrom = this.formData.value.issuedFrom[0].id;
+    obj.issuedTo = this.formData.value.issuedTo[0].id;
     const arr = this.tableData;
-    arr.forEach((a: any) => {
-      a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';
-    })
-    const requestObj = { qsHdr: this.formData.value, qsDtl: arr };
+    const requestObj = { miHdr: this.formData.value, miDtl: arr };
     this.apiService.apiPostRequest(addsq, requestObj).subscribe(
       response => {
         this.spinner.hide();
         const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
+            this.alertService.openSnackBar('Material Issue created Successfully..', Static.Close, SnackBar.success);
             this.back();
           }
         }
@@ -393,7 +403,7 @@ export class MaterialissueComponent {
     let list = [...this.tableData];
     list = [...list, ...this.setArray(list.length)];
     const obj = {
-      heading: 'Job Work Material Issue',
+      heading: 'Material Issue',
       headingObj: formObj,
       detailArray: list,
       headingObj1: { ...this.formData1.value, ...this.formData.value }

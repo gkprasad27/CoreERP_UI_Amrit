@@ -326,14 +326,15 @@ export class SalesInvoiceComponent implements OnInit {
                 i.totalAmount = (obj.rate) + (igst + sgst + cgst)
                 i.checkbox = false
                 const data = res.response['icDetail'];
-                if(master.company=='2000')
-                {
-                this.tableData = data.filter((t: any) => t.materialCode == obj.materialCode);
-                }
-                else
-                {
-                  this.tableData = data;
-                }
+                // if(master.company=='2000')
+                // {
+                // this.tableData = data.filter((t: any) => t.materialCode == obj.materialCode);
+                // }
+                // else
+                // {
+                //   this.tableData = data;
+                // }
+                this.tableData = data;
               if (this.tableData.length > 0) {
                 this.tableData[0].checkbox = true;
               }

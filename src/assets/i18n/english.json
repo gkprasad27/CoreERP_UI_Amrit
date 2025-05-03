@@ -3479,6 +3479,10 @@
     "issuedTo": "Issued To",
     "issuedDate": "Issued Date",
     "status": "status",
-    "narration":"Narration"
+    "narration":"Narration",
+    "materialCode":"Material Code",
+    "qty":"QTY",
+    "stockQty":"Avaliable Stock QTY",
+    "company":"Company"
   }
 }

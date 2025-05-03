@@ -540,6 +540,10 @@ export class ApiConfigService {
    getJobWork = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJobWork`;
    addJobWork = `${this.environment.runtimeConfig.serverUrl}Transactions/AddJobWork`;
    getJobworkDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJobworkDetail`;
+
+   getMaterialIssue = `${this.environment.runtimeConfig.serverUrl}Transactions/GetMaterialIssue`;
+   addMaterialIssue = `${this.environment.runtimeConfig.serverUrl}Transactions/AddMaterialIssue`;
+   // getJobworkDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJobworkDetail`;
    
    getJWReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJWReceipt`;
    addJWReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/AddJWReceipt`;
