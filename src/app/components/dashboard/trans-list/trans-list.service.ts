@@ -234,7 +234,7 @@ export class TransListService {
         this.dynamicComp.component = MaterialissueComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getMaterialIssue;
         this.dynamicComp.list = 'materialissuelist';
-        this.dynamicComp.editKey = 'id';
+        this.dynamicComp.editKey = 'materialIssueId';
         return this.dynamicComp;
       }
       case 'salesinvoice': {

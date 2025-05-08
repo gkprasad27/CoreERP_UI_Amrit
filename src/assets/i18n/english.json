@@ -3474,7 +3474,7 @@
 },
 "materialissue": {
     "title": "Material Issue",
-    "materialId": "Material ID",
+    "materialIssueId": "Material ID",
     "issuedFrom": "Store incharge",
     "issuedTo": "Issued To",
     "issuedDate": "Issued Date",
@@ -3483,6 +3483,8 @@
     "materialCode":"Material Code",
     "qty":"QTY",
     "stockQty":"Avaliable Stock QTY",
-    "company":"Company"
+    "company":"Company",
+    "materialName":"Material Name",
+    "action":"Action"
   }
 }

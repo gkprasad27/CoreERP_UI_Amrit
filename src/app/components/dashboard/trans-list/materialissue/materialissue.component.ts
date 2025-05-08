@@ -94,7 +94,8 @@ export class MaterialissueComponent {
       issuedTo:[null],
       materialCode: [''],
       status:[null],
-      narration:[null]
+      narration:[null],
+      materialIssueId:[0]
     });
 
 
@@ -252,8 +253,26 @@ export class MaterialissueComponent {
               this.spinner.hide();
             }
           }
-          
+          this.getMaterialIssueDetail();
         });
+  }
+
+  EmpChange(event?: any) {
+    const obj = this.employeesList.find((c: any) => c.id == (event ? event.id : this.formData.value.issuedFrom));
+       if (!event) {
+      this.formData.patchValue({
+        issuedFrom: [{ id: obj.id, text: obj.text }]
+      })
+    }
+  }
+
+  EmpChange1(event?: any) {
+    const obj = this.employeesList.find((c: any) => c.id == (event ? event.id : this.formData.value.issuedTo));
+       if (!event) {
+      this.formData.patchValue({
+        issuedTo: [{ id: obj.id, text: obj.text }]
+      })
+    }
   }
 
   downLoadFile(event: any) {
@@ -267,40 +286,34 @@ export class MaterialissueComponent {
   }
 
   
-  // getJobworkDetail() {
-  //   const qsDetUrl = String.Join('/', this.apiConfigService.getJobworkDetail, this.routeEdit);
-  //   this.apiService.apiGetRequest(qsDetUrl).subscribe(response => {
-  //     this.spinner.hide();
-  //     const res = response;
-  //     if (res && res.status === StatusCodes.pass && res.response) {
-  //       this.formData.patchValue(res.response['JobWorkMasters']);
+  getMaterialIssueDetail() {
+    const qsDetUrl = String.Join('/', this.apiConfigService.getMaterialIssueDetail, this.routeEdit);
+    this.apiService.apiGetRequest(qsDetUrl).subscribe(response => {
+      this.spinner.hide();
+      const res = response;
+      if (res && res.status === StatusCodes.pass && res.response) {
+        this.formData.patchValue(res.response['materialIssueMasters']);
   
-  //       if (res.response['JobWorkDetails'] && res.response['JobWorkDetails'].length) {
-  //         let taxCode = res.response['JobWorkDetails'][0].taxCode;
-  //         const taxObj = this.taxCodeList.find((t: any) => t.taxRateCode == taxCode);
-  //         if (taxObj) {
-  //           this.formData1.patchValue({
-  //             taxCode: taxObj.igst ? taxObj.igst : taxObj.sgst
-  //           });
-  //         }
+        if (res.response['materialIssueDetails'] && res.response['materialIssueDetails'].length) {
+           
+          res.response['materialIssueDetails'].forEach((detail: any, index: number) => {
+            const materialObj = this.materialList.find((m: any) => m.id == detail.materialCode);
+            if (materialObj) {
+              detail.materialName = materialObj.text;
+              detail.stockQty = materialObj.availQTY;
+              detail.materialCode = { materialCode: materialObj.id, materialName: materialObj.text };
+            }
+            detail.action = 'editDelete';
+            detail.index = index + 1;
+          });
   
-  //         res.response['JobWorkDetails'].forEach((detail: any, index: number) => {
-  //           const materialObj = this.materialList.find((m: any) => m.id == detail.materialCode);
-  //           if (materialObj) {
-  //             detail.materialName = materialObj.text;
-  //             detail.stockQty = materialObj.availQTY;
-  //             detail.materialCode = { materialCode: materialObj.id, materialName: materialObj.text };
-  //           }
-  //           detail.action = 'editDelete';
-  //           detail.index = index + 1;
-  //         });
-  
-  //         this.tableData = res.response['JobWorkDetails'];
-          
-  //       }
-  //     }
-  //   });
-  // }
+          this.tableData = res.response['materialIssueDetails'];
+          this.EmpChange();
+          this.EmpChange1();
+        }
+      }
+    });
+  }
   
 
  
