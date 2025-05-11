@@ -2369,7 +2369,8 @@
     "balancecertificate": "Balanceing Certificate",
     "action": "Action",
     "button": "Inspection Check",
-    "button1": "Balanceing Certificate"
+    "button1": "Balanceing Certificate",
+    "drgNo":"Part/Drg No"
   },
   "invoiceverification": {
     "title": "Invoice Verification",
@@ -2974,7 +2975,8 @@
     "shiptoZip": "Ship To Zip",
     "shiptoPhone": "Mobile",
     "delete": "Delete",
-    "action": "Action"
+    "action": "Action",
+     "transportCharges":"Transport Charges"
   },
   "Rejections": {
     "title": "Rejections",

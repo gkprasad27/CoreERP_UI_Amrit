@@ -365,6 +365,7 @@ export class InspectioncheckComponent implements OnInit {
                   hideCheckbox: s.status == 'QC Rejected',
                   button: (s.status != 'QC Rejected') ? 'Inspection Check': '',
                   button1: (s.status != 'QC Rejected') ? 'Balanceing Certificate': '',
+                  partDrgNo:s.partDrgNo ? s.partDrgNo:'',
                   // action: 'edit',
                   // index: index + 1,
                 }
@@ -736,6 +737,7 @@ export class InspectioncheckComponent implements OnInit {
         heatNumber: this.icmasters.heatNumber,
         drgNo: this.icmasters.partDrgNo,
         drawingRevNo: this.icmasters.drawingRevNo,
+        completionDate : this.icmasters.completionDate,
         matQty: res.SaleorderMaster.matQty
       },
     }
@@ -810,10 +812,10 @@ export class InspectioncheckComponent implements OnInit {
         poNumber: res.SaleorderMaster.poNumber,
         poDate: res.SaleorderMaster.poDate,
         description: res.QCData.materialName,
-
         heatNumber: this.icmasters.heatNumber,
         drgNo: this.icmasters.partDrgNo,
         materialCode: this.icmasters.materialCode,
+        completionDate: this.icmasters.completionDate
       },
     }
 

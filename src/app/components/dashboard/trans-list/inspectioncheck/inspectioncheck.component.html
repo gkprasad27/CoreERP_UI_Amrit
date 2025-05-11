@@ -56,7 +56,7 @@
       </div>
       <div style="width: 25%; display: flex;padding: 3px 15px;">
         <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Report Date </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ date | date }} </span>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.completionDate | date }} </span>
       </div>
     </div>
 
@@ -491,10 +491,10 @@
             <input matInput formControlName="heatNumber" appFocusOnEnter tabIndex="4">
           </mat-form-field>
 
-          <mat-form-field class="form-element">
+          <!-- <mat-form-field class="form-element">
             <mat-label [translate]="'inspectioncheck.partDrgNo'"></mat-label>
             <input matInput formControlName="partDrgNo" appFocusOnEnter tabIndex="5">
-          </mat-form-field>
+          </mat-form-field> -->
 
           <div *ngIf="icmasters?.filePath" class="mb-2">
             <h6 >  {{ 'inspectioncheck.designDocument'  | translate  }}  </h6>

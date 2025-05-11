@@ -1908,7 +1908,9 @@
     "result": "Result",
     "action": "Action",
     "button": "button",
-    "button1": "button1"
+    "button1": "button1",
+    "drgNo":"Part/Drg No",
+    "partDrgNo": "Part/Drg No"
   },
   "invoiceverification": {
     "title": "Invoice Verification",
@@ -2449,7 +2451,8 @@
     "totalIgst": "Total IGST",
     "grandTotal": "Grand Total",
     "delete": "Delete",
-    "action": "Action"
+    "action": "Action",
+    "transportCharges":"Transport Charges"
   },
   "Rejections": {
     "materialCode": "Material Code",

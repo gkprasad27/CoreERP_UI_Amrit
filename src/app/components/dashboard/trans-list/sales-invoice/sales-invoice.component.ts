@@ -115,7 +115,7 @@ export class SalesInvoiceComponent implements OnInit {
       totalAmount: [0],
       totalTax: [0],
       grandTotal: [0],
-
+      transportCharges:[0],
       id: [0]
     });
 
@@ -137,6 +137,7 @@ export class SalesInvoiceComponent implements OnInit {
       bomName: [''],
       hsnNo: [''],
       grossAmount: [''],
+      transportCharges:[''],
       taxStructureId: [''],
       checkbox: [''],
       hideCheckbox: [''],
@@ -369,6 +370,7 @@ export class SalesInvoiceComponent implements OnInit {
       totalAmount: 0,
       totalTax: 0,
       grandTotal: 0,
+      transportCharges:0
     })
     this.tableData && this.tableData.forEach((t: any) => {
       if (t.checkbox) {
