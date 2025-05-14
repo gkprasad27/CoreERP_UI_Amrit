@@ -536,7 +536,7 @@
                 <div>
                     <mat-form-field class="form-element">
                         <mat-label [translate]="'salesinvoice.transportCharges'"></mat-label>
-                        <input matInput formControlName="transportCharges" appFocusOnEnter tabIndex="39">
+                        <input matInput formControlName="transportCharges" (focusout)="onFocusOutEvent($event)" appFocusOnEnter tabIndex="39">
                     </mat-form-field>
                 </div>
 

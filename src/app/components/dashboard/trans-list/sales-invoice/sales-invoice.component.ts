@@ -254,7 +254,9 @@ export class SalesInvoiceComponent implements OnInit {
         });
   }
 
-
+onFocusOutEvent(event: any) {
+  this.calculate();
+}
 
   getBusienessPartnerAccount(data: any) {
    
@@ -324,7 +326,7 @@ export class SalesInvoiceComponent implements OnInit {
                 i.hideCheckbox = i.status == "Invoice Generated";
                 i.taxStructureId = obj.taxCode;
                 i.totalTax = (igst + sgst + cgst);
-                i.totalAmount = (obj.rate) + (igst + sgst + cgst)
+                i.totalAmount = (obj.rate + obj.transportCharges) + (igst + sgst + cgst)
                 i.checkbox = false
                 const data = res.response['icDetail'];
                 // if(master.company=='2000')
@@ -363,30 +365,103 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   calculate() {
-    this.formData.patchValue({
-      totalIGST: 0,
-      totalCGST: 0,
-      totalSGST: 0,
-      totalAmount: 0,
-      totalTax: 0,
-      grandTotal: 0,
-      transportCharges:0
-    })
-    this.tableData && this.tableData.forEach((t: any) => {
-      if (t.checkbox) {
-        this.formData.patchValue({
-          totalIGST: ((+this.formData.value.totalIGST) + t.igst).toFixed(2),
-          totalCGST: ((+this.formData.value.totalCGST) + t.cgst).toFixed(2),
-          totalSGST: ((+this.formData.value.totalSGST) + t.sgst).toFixed(2),
-          totalAmount: ((+this.formData.value.totalAmount) + (t.grossAmount)).toFixed(2),
-          totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
-        })
+  this.formData.patchValue({
+    totalIGST: 0,
+    totalCGST: 0,
+    totalSGST: 0,
+    totalAmount: 0,
+    totalTax: 0,
+    grandTotal: 0,
+    transpTax: 0,
+  });
+
+  let totalIGST = 0;
+  let totalCGST = 0;
+  let totalSGST = 0;
+  let totalAmount = 0;
+  let totalTax = 0;
+
+  let selectedRow: any = null;
+
+  this.tableData && this.tableData.forEach((t: any) => {
+    if (t.checkbox) {
+      totalIGST += t.igst;
+      totalCGST += t.cgst;
+      totalSGST += t.sgst;
+      totalAmount += t.grossAmount;
+      totalTax += t.igst + t.cgst + t.sgst;
+
+      if (!selectedRow) {
+        selectedRow = t; // Use first selected row to get transport GST codes
       }
-    })
-    this.formData.patchValue({
-      grandTotal: ((+this.formData.value.totalAmount) + (+this.formData.value.totalTax)).toFixed(2),
-    })
+    }
+  });
+
+  // Handle transport charges
+  const transportCharges = +this.formData.value.transportCharges || 0;
+  let transpIGST = 0;
+  let transpCGST = 0;
+  let transpSGST = 0;
+
+  if (selectedRow) {
+    const igstCode = +selectedRow.igstCode || 0;
+    const cgstCode = +selectedRow.cgstCode || 0;
+    const sgstCode = +selectedRow.sgstCode || 0;
+
+    transpIGST = +(transportCharges * (igstCode / 100));
+    transpCGST = +(transportCharges * (cgstCode / 100));
+    transpSGST = +(transportCharges * (sgstCode / 100));
   }
+
+  const transpTax = transpIGST + transpCGST + transpSGST;
+
+  // Update totals with transport charges and taxes
+  totalIGST += transpIGST;
+  totalCGST += transpCGST;
+  totalSGST += transpSGST;
+  totalAmount += transportCharges;
+  totalTax += transpTax;
+
+  const grandTotal = totalAmount + totalTax;
+
+  // Patch updated totals back to form
+  this.formData.patchValue({
+    totalIGST: totalIGST.toFixed(2),
+    totalCGST: totalCGST.toFixed(2),
+    totalSGST: totalSGST.toFixed(2),
+    totalAmount: totalAmount.toFixed(2),
+    totalTax: totalTax.toFixed(2),
+    transpTax: transpTax.toFixed(2),
+    grandTotal: grandTotal.toFixed(2),
+  });
+}
+
+
+  // calculate() {
+  //   this.formData.patchValue({
+  //     totalIGST: 0,
+  //     totalCGST: 0,
+  //     totalSGST: 0,
+  //     totalAmount: 0,
+  //     totalTax: 0,
+  //     grandTotal: 0,
+  //     transpTax:0,
+  //   })
+  //   this.tableData && this.tableData.forEach((t: any) => {
+  //     if (t.checkbox) {
+  //       this.formData.patchValue({
+  //         totalIGST: ((+this.formData.value.totalIGST) + t.igst).toFixed(2),
+  //         totalCGST: ((+this.formData.value.totalCGST) + t.cgst).toFixed(2),
+  //         totalSGST: ((+this.formData.value.totalSGST) + t.sgst).toFixed(2),
+  //         totalAmount: ((+this.formData.value.totalAmount) + (t.grossAmount)).toFixed(2),
+  //         totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
+  //       })
+  //     }
+  //   })
+  //   this.formData.patchValue({
+  //     grandTotal: ((+this.formData.value.totalAmount) + (+this.formData.value.totalTax)).toFixed(2),
+  //   })
+  // }
 
   ponoselect() {
     this.formData1.patchValue({
