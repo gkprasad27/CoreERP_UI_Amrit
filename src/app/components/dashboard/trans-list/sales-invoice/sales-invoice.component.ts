@@ -360,7 +360,7 @@ onFocusOutEvent(event: any) {
 
   tableCheckboxEvent(event: any) {
     
-    this.tableData.forEach((res: any) => res.checkbox = (res.id == event.item.id) ? event.flag.checked : res.checkbox);
+    this.tableData.forEach((res: any) => res.checkbox = (res.id == event.item.invoiceDetailId) ? event.flag.checked : res.checkbox);
     this.calculate();
   }
 
@@ -397,6 +397,14 @@ onFocusOutEvent(event: any) {
     }
   });
 
+   // Helper to get value ignoring case
+  function getCaseInsensitiveValue(obj: any, key: string): number {
+    if (!obj) return 0;
+    const keys = Object.keys(obj);
+    const foundKey = keys.find(k => k.toLowerCase() === key.toLowerCase());
+    return foundKey ? +obj[foundKey] : 0;
+  }
+
   // Handle transport charges
   const transportCharges = +this.formData.value.transportCharges || 0;
   let transpIGST = 0;
@@ -404,9 +412,12 @@ onFocusOutEvent(event: any) {
   let transpSGST = 0;
 
   if (selectedRow) {
-    const igstCode = +selectedRow.igstCode || 0;
-    const cgstCode = +selectedRow.cgstCode || 0;
-    const sgstCode = +selectedRow.sgstCode || 0;
+    const igstCode = getCaseInsensitiveValue(selectedRow, 'igstCode');
+    const cgstCode = getCaseInsensitiveValue(selectedRow, 'cgstCode');
+    const sgstCode = getCaseInsensitiveValue(selectedRow, 'sgstCode');
+    // const igstCode = +selectedRow.igstcode || 0;
+    // const cgstCode = +selectedRow.cgstcode || 0;
+    // const sgstCode = +selectedRow.sgstcode || 0;
 
     transpIGST = +(transportCharges * (igstCode / 100));
     transpCGST = +(transportCharges * (cgstCode / 100));
