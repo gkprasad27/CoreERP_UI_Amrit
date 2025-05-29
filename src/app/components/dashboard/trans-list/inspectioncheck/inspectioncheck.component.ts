@@ -344,8 +344,8 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   onEditEmit(event: any) {
-
-    this.getQCissueDetail(event.saleOrderNumber, event.materialCode, event.bomNumber);
+    const encodedMaterialCode = encodeURIComponent(event.materialCode)
+    this.getQCissueDetail(event.saleOrderNumber, encodedMaterialCode, event.bomNumber);
     this.getInspectionDetail(event.saleOrderNumber, event.bomNumber);
   }
 
