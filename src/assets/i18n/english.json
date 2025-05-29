@@ -36,7 +36,8 @@
     "employee": "Employee",
     "process": "Process",
     "otp": "Otp",
-    "submit": "Submit"
+    "submit": "Submit",
+    "vendorCode":"Vendor Code"
   },
   "LOGIN": {
     "USERNAME": "Username",
@@ -2370,7 +2371,8 @@
     "action": "Action",
     "button": "Inspection Check",
     "button1": "Balanceing Certificate",
-    "drgNo":"Part/Drg No"
+    "drgNo":"Part/Drg No",
+    "materialgrade":"Material Grade"
   },
   "invoiceverification": {
     "title": "Invoice Verification",
@@ -3327,7 +3329,8 @@
       "sgst_18": "SGST-9",
       "igst_18": "IGST-18",      
       "taxableValue": "Taxable Value",
-      "totalInvoiceValue": "Total Invoice Value"
+      "totalInvoiceValue": "Total Invoice Value",
+      "saleOrderNumber":"Sale Order No"
 },
 "VendorPayments": {
   "title": "Vendor Payments",

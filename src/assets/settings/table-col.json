@@ -1773,7 +1773,7 @@
     "description": "Description",
     "qty": "QTY",
     "soQty": "SO QTY",
-    "poQty": "PO QTY",
+    
     "rate": "Rate",
     "discount": "Discount",
     "tax": "Tax",

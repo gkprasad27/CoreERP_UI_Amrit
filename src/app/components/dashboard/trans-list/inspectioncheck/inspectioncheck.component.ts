@@ -15,6 +15,8 @@ import { TableComponent } from 'src/app/reuse-components';
 import { InspectionComponent } from './inspection/inspection.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BalanceCertificateComponent } from './balance-certificate/balance-certificate.component';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 @Component({
   selector: 'app-inspectioncheck',
   templateUrl: './inspectioncheck.component.html',
@@ -63,7 +65,7 @@ export class InspectioncheckComponent implements OnInit {
   locationList: any;
   mmasterList: any;
   costunitList: any;
-
+  mpatternList = [];
   materialcode: any;
 
   inspectionPrint: any;
@@ -90,6 +92,7 @@ export class InspectioncheckComponent implements OnInit {
     this.getGoodsissueDetail(this.routeEdit);
     this.formDataGroup();
     this.getEmployeesList();
+    this.getModelPatternList();
     // this.getCompanyList();
     // this.getfunctionaldeptList();
     /// this.formData.controls['requisitionNumber'].disable();
@@ -144,6 +147,19 @@ export class InspectioncheckComponent implements OnInit {
       inspectionType: this.formData1.value.inspectionTypeValue ? 'Sampling Inspection' : '100% Inspection',
     });
   }
+
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'code',
+    textField: 'description',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
 
   tablePropsFunc() {
     return {
@@ -207,6 +223,21 @@ export class InspectioncheckComponent implements OnInit {
             }
           }
           // this.getCommitmentList();
+        });
+  }
+
+   getModelPatternList() {
+    const getmpList = String.Join('/', this.apiConfigService.getModelPatternList);
+    this.apiService.apiGetRequest(getmpList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.mpatternList = res.response['mpatternList'];
+            }
+          }
+          this.spinner.hide();
         });
   }
 
@@ -313,8 +344,8 @@ export class InspectioncheckComponent implements OnInit {
   }
 
   onEditEmit(event: any) {
-    
-    this.getQCissueDetail(event.saleOrderNumber, event.materialCode, event.bomNumber );
+
+    this.getQCissueDetail(event.saleOrderNumber, event.materialCode, event.bomNumber);
     this.getInspectionDetail(event.saleOrderNumber, event.bomNumber);
   }
 
@@ -331,7 +362,7 @@ export class InspectioncheckComponent implements OnInit {
               // console.log(res.response['mreqDetail']);
               let arr = [];
               res.response['tagsDetail'].forEach((s: any, index: number) => {
-                
+
                 // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
                   // action: 'edit',
@@ -347,7 +378,7 @@ export class InspectioncheckComponent implements OnInit {
                   materialName: s.materialName ? s.materialName : null,
                   allocatedPerson: s.allocatedPerson ? s.allocatedPerson : '',
                   endDate: s.endDate ? s.endDate : '',
-                  company:s.company?s.company:'',
+                  company: s.company ? s.company : '',
                   bomKey: s.bomKey ? s.bomKey : '',
                   bomName: s.bomName ? s.bomName : '',                    // isReject: s.isReject ? s.isReject : '',
                   materialCode: s.materialCode ? s.materialCode : '',
@@ -363,9 +394,9 @@ export class InspectioncheckComponent implements OnInit {
                   id: s.id ? s.id : '',
                   checkbox: false,
                   hideCheckbox: s.status == 'QC Rejected',
-                  button: (s.status != 'QC Rejected') ? 'Inspection Check': '',
-                  button1: (s.status != 'QC Rejected') ? 'Balanceing Certificate': '',
-                  partDrgNo:s.partDrgNo ? s.partDrgNo:'',
+                  button: (s.status != 'QC Rejected') ? 'Inspection Check' : '',
+                  button1: (s.status != 'QC Rejected') ? 'Balanceing Certificate' : '',
+                  partDrgNo: s.partDrgNo ? s.partDrgNo : '',
                   // action: 'edit',
                   // index: index + 1,
                 }
@@ -642,7 +673,7 @@ export class InspectioncheckComponent implements OnInit {
     this.apiService.apiPostRequest(addJournal, requestObj).subscribe(
       response => {
         const res = response;
-       // this.tableData = [];
+        // this.tableData = [];
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Material Req created Successfully..', Static.Close, SnackBar.success);
@@ -733,11 +764,11 @@ export class InspectioncheckComponent implements OnInit {
         supplierName: res.SaleorderMaster.supplierName,
         poNumber: res.SaleorderMaster.poNumber,
         poDate: res.SaleorderMaster.poDate,
-        description:res.QCData.materialCode +' - ' +  res.QCData.materialName,
+        description: res.QCData.materialCode + ' - ' + res.QCData.materialName,
         heatNumber: this.icmasters.heatNumber,
         drgNo: this.icmasters.partDrgNo,
         drawingRevNo: this.icmasters.drawingRevNo,
-        completionDate : this.icmasters.completionDate,
+        completionDate: this.icmasters.completionDate,
         matQty: res.SaleorderMaster.matQty
       },
     }
@@ -786,7 +817,7 @@ export class InspectioncheckComponent implements OnInit {
 
   balanceingCertificatePrint() {
     const obj = this.tableData1.find((t: any) => t.checkbox);
-    const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber,  obj.materialCode, 'Balancing', obj.bomKey);
+    const getQCReportDetail = String.Join('/', this.apiConfigService.getQCReportDetail, this.formData1.value.saleOrderNumber, obj.materialCode, 'Balancing', obj.bomKey);
     this.apiService.apiGetRequest(getQCReportDetail)
       .subscribe(
         response => {

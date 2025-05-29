@@ -5,14 +5,11 @@
     <div style="text-align: end;"> <b> {{ data?.headingObj?.drawingRevNo }}</b> </div>
 
     <div style="display: flex;">
-      <img *ngIf="data?.headingObj?.company==='1000'" 
-     src="/assets/images/header.jpg" 
-     style="height: 100px; width: 65%;">
+      <img *ngIf="data?.headingObj?.company==='1000'" src="/assets/images/header.jpg"
+        style="height: 100px; width: 65%;">
 
-<!-- Display this image if productionTag starts with 'AMRIT-' -->
-<img *ngIf="data?.headingObj?.company!=='1000'" 
-     src="/assets/images/AMRIT.jpg" 
-     style="height: 100px; width: 65%;">
+      <!-- Display this image if productionTag starts with 'AMRIT-' -->
+      <img *ngIf="data?.headingObj?.company!=='1000'" src="/assets/images/AMRIT.jpg" style="height: 100px; width: 65%;">
       <!-- <img src="/assets/images/header.jpg" style="height: 100px;
         width: 65%;"> -->
       <div style="padding: 24px;
@@ -27,74 +24,89 @@
         display: flex;
         height: 50px;
         flex-direction: column;
-    "> <span style="font-size: 25px;font-weight: 700;font-family: sans-serif;text-align: center;">  {{ data.heading }} </span> </div>
+    "> <span style="font-size: 25px;font-weight: 700;font-family: sans-serif;text-align: center;"> {{ data.heading }}
+        </span> </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
       <div style="width: 40%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
         <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Customer Name </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.supplierName }} </span>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.supplierName }} </span>
       </div>
       <div style="width: 60%;display: flex;padding: 3px 15px;">
         <b style="width: 130px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Item Description </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.description }} </span>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.description }} </span>
       </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
       <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
         <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Number </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.invoiceNo }} </span>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.invoiceNo }} </span>
       </div>
       <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
         <b style="width: 80px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Number </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.poNumber }} </span>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.poNumber }} </span>
       </div>
       <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
         <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Heat Number </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.heatNumber }} </span>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.heatNumber }} </span>
       </div>
       <div style="width: 25%; display: flex;padding: 3px 15px;">
         <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Report Date </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.completionDate | date }} </span>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.completionDate | date }} </span>
       </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
         <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Date </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.invoiceDate | date }}</span>
+        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.invoiceDate | date }}</span>
       </div>
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
         <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Date </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.poDate | date }} </span>
+        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.poDate | date }} </span>
       </div>
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
         <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Part/Drg No </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.drgNo }} </span>
+        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.drgNo }} </span>
       </div>
       <div style="width: 25%;padding: 3px 15px;display: flex;">
         <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Drawing Rev. No </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: NA </span>
+        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: NA
+        </span>
       </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
         <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Quantity </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.invoiceQty }}</span>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.invoiceQty }}</span>
       </div>
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
         <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Quantity </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.matQty }} </span>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.matQty }} </span>
       </div>
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
-        <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;">  </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">  </span>
+        <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
+        </span>
       </div>
       <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
-        <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;">  </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">  </span>
+        <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> </b>
+        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
+        </span>
       </div>
     </div>
 
@@ -102,7 +114,8 @@
 
     <div style="min-height: 350px;border-top: 1px solid black;-webkit-print-color-adjust: exact;"
       *ngIf="data.detailArray && data.detailArray.length">
-      <table style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+      <table
+        style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
         <thead>
           <tr>
             <th
@@ -131,7 +144,9 @@
               </th>
             </ng-container>
             <!-- <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Remarks </th> -->
-            <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Remarks
+            <th
+              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+              Remarks
             </th>
           </tr>
         </thead>
@@ -145,15 +160,19 @@
               style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
               {{ row.Parameter }}
             </td>
-            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+            <td
+              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
               {{ row.Specification
               }} </td>
-            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+            <td
+              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
               {{ row.Tolerance
               }} </td>
-            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+            <td
+              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
               {{ row.UOM }} </td>
-            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+            <td
+              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
               {{ row.Instrument }}
             </td>
             <ng-container *ngFor="let cell of row | keyvalue; let i = index">
@@ -163,7 +182,9 @@
                 {{ cell.value }}
               </td>
             </ng-container>
-            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{
+            <td
+              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+              {{
               row.description }} </td>
           </tr>
         </tbody>
@@ -211,39 +232,46 @@
       display: flex;
       height: 50px;
       flex-direction: column;
-  "> <span style="font-size: 35px;font-weight: 700;font-family: sans-serif;text-align: center;">  {{ data.heading }} </span> </div>
+  "> <span style="font-size: 35px;font-weight: 700;font-family: sans-serif;text-align: center;"> {{ data.heading }}
+        </span> </div>
     </div>
 
     <div style="display: flex;margin-top: 10px;">
       <div style="width: 50%;padding-left: 15px;display: flex;">
         <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Customer Name </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.supplierName }} </div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.supplierName }} </div>
       </div>
       <div style="width: 50%;padding-left: 15px;display: flex;">
         <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Date </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.poDate | date }}</div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.poDate | date }}</div>
       </div>
     </div>
 
     <div style="display: flex;margin-top: 10px;">
       <div style="width: 50%;padding-left: 15px;display: flex;">
         <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Description </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.description }} </div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.description }} </div>
       </div>
       <div style="width: 50%;padding-left: 15px;display: flex;">
         <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Reference No. </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: NA </div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: NA
+        </div>
       </div>
     </div>
 
     <div style="display: flex;margin-top: 10px;">
       <div style="width: 50%;padding-left: 15px;display: flex;">
         <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Part/Drg No. </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.drgNo }} </div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.drgNo }} </div>
       </div>
       <div style="width: 50%;padding-left: 15px;display: flex;">
         <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> AMT Item Code </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.materialCode }} </div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.materialCode }} </div>
       </div>
     </div>
 
@@ -251,7 +279,8 @@
 
       <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
         *ngIf="data.detailArray && data.detailArray.length">
-        <table style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+        <table
+          style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
           <thead>
             <tr>
               <th
@@ -310,8 +339,10 @@
       </ol>
     </div> -->
 
-      <div style="margin:5px 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b>The above values are well within Limits.</b></div>
-      <div style="margin:5px 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b>Reference Standard : ISO 1940-2003(E)</b></div>
+      <div style="margin:5px 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b>The above values are
+          well within Limits.</b></div>
+      <div style="margin:5px 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b>Reference Standard : ISO
+          1940-2003(E)</b></div>
 
 
       <div style="display: flex;margin: 15px;justify-content: space-around;">
@@ -343,7 +374,7 @@
 
     <h6>
       SaleOrder Details
-      
+
     </h6>
 
     <!-- <form [formGroup]="formData" autocomplete="off">
@@ -438,7 +469,7 @@
 
     <h6>
       Production Details
-      
+
     </h6>
 
     <form [formGroup]="formData1" autocomplete="off" *ngIf="tableData1 && tableData1.length">
@@ -491,13 +522,19 @@
             <input matInput formControlName="heatNumber" appFocusOnEnter tabIndex="4">
           </mat-form-field>
 
+          <div class="multiselect-dropdown-list">
+            <ng-multiselect-dropdown placeholder="{{ 'inspectioncheck.materialgrade' | translate }}"
+              formControlName="materialgrade" [settings]="dropdownSettings" [data]="mpatternList" appFocusOnEnter
+              tabIndex="51">
+            </ng-multiselect-dropdown>
+          </div>
           <!-- <mat-form-field class="form-element">
             <mat-label [translate]="'inspectioncheck.partDrgNo'"></mat-label>
             <input matInput formControlName="partDrgNo" appFocusOnEnter tabIndex="5">
           </mat-form-field> -->
 
           <div *ngIf="icmasters?.filePath" class="mb-2">
-            <h6 >  {{ 'inspectioncheck.designDocument'  | translate  }}  </h6>
+            <h6> {{ 'inspectioncheck.designDocument' | translate }} </h6>
             <span class="underscore" (click)="downLoadFile()"> {{ icmasters?.filePath }} </span>
           </div>
 

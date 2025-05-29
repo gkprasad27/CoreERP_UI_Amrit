@@ -38,7 +38,7 @@ export class ReportsComponent {
   bpList: any[] = [];
   bpgLists: any[] = [];
   employeesList: any[] = [];
-
+  vendorList: any[] = [];
   data: any;
 
   submitted = false;
@@ -94,6 +94,15 @@ export class ReportsComponent {
         case 'AttendanceProcess':
         case 'salaryprocess':
           this.getEmployeesList();
+          break;
+        case 'salesgst':
+          this.getCustomerList();
+          break;
+        case 'purchaseanalysis':
+          this.getsuppliercodeList();
+          break;
+        case 'purchasegst':
+          this.getsuppliercodeList();
           break;
       }
       this.reset();
@@ -222,6 +231,8 @@ export class ReportsComponent {
       selected: [null, [Validators.required]],
       fromDate: [null],
       toDate: [null],
+      vendorCode: ['-1']
+
     });
     this.setValidator();
   }
@@ -398,11 +409,11 @@ export class ReportsComponent {
   }
 
   tableButtonEvent(event: any) {
-    if(this.routeParam == 'AttendanceProcess') {
+    if (this.routeParam == 'AttendanceProcess') {
       const dialogRef = this.dialog.open(EmployeeAttendanceComponent, {
         width: '80%',
         height: '80vh',
-        data: { 
+        data: {
           fromDate: this.modelFormData.value.fromDate,
           toDate: this.modelFormData.value.toDate,
           company: event.item.compCode,
@@ -436,10 +447,11 @@ export class ReportsComponent {
 
   print() {
     let getUrl
-    if (this.routeParam == 'stockvaluation' || this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
+    if (this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
-    } else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward') {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}/${this.modelFormData.value.materialCode ? this.modelFormData.value.materialCode : '-1'}`);
+    } else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward' || this.routeParam == 'purchaseanalysis') {
+      const encodedMaterialCode = this.modelFormData.value.materialCode ? encodeURIComponent(this.modelFormData.value.materialCode) : '-1';
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}/${encodedMaterialCode}`);
     } else if (this.routeParam == 'VendorPayments' || this.routeParam == 'CustomerPayments') {
       const obj = this.bpgLists.find((d: any) => d.text == this.modelFormData.value.partyAccount);
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.status) ? 'Y' : 'N'}/${this.modelFormData.value.bpcategory ? this.modelFormData.value.bpcategory : '-1'}/${obj ? obj.id : '-1'}`);
@@ -452,6 +464,14 @@ export class ReportsComponent {
     } else if (this.routeParam == 'salaryprocess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+    } else if (this.routeParam == 'salesgst') {
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
+    } else if (this.routeParam == 'purchasegst') {
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
+    } else if (this.routeParam == 'stockvaluation') {
+      // Encode only if materialCode exists, otherwise use '-1'
+      const encodedMaterialCode = this.modelFormData.value.materialCode ? encodeURIComponent(this.modelFormData.value.materialCode) : '-1';
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${encodedMaterialCode}`);
     } else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }
@@ -533,10 +553,10 @@ export class ReportsComponent {
       const ots = data.OT.find((o: any) => o.employeename == p.employeeName);
       attendances.forEach((at: any) => {
         const day = new Date(at.attndate).getDate();
-          at.dayH = ots ? ots[day]: '';
-          at.day = day;
-          at.logintime = at.logintime ? new Date(at.logintime).toLocaleTimeString() : '-';
-          at.logouttime = at.logouttime ? new Date(at.logouttime).toLocaleTimeString(): '-';
+        at.dayH = ots ? ots[day] : '';
+        at.day = day;
+        at.logintime = at.logintime ? new Date(at.logintime).toLocaleTimeString() : '-';
+        at.logouttime = at.logouttime ? new Date(at.logouttime).toLocaleTimeString() : '-';
       })
       const obj = {
         ...p,
