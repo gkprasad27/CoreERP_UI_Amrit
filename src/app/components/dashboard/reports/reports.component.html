@@ -31,14 +31,14 @@
                 {{
                 modelFormData.value.companyName }} </span>
         </div>
-        <div *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingjobworkreport' "
+        <div *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' "
             style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> From Date </b>
             <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:
                 {{
                 modelFormData.value.fromDate }} </span>
         </div>
-        <div *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingjobworkreport' "
+        <div *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' "
             style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> To Date </b>
             <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:
@@ -376,9 +376,11 @@
                 </tbody>
             </table>
         </div>
-
-        <div style="font-size: 15px;font-family: sans-serif;margin-top: 10px;"> {{
-            commonService.convertNumberToWords(data.takeHome) }} </div>
+<div *ngIf="data.takeHome != null" style="font-size: 15px; font-family: sans-serif; margin-top: 10px;">
+    {{ commonService.convertNumberToWords(data.takeHome) }}
+</div>
+        <!-- <div style="font-size: 15px;font-family: sans-serif;margin-top: 10px;"> {{
+            commonService.convertNumberToWords(data.takeHome) }} </div> -->
 
 
         <div style="display: flex; justify-content: space-between; margin-top: 40px;">
@@ -536,7 +538,7 @@
                     </mat-select>
                     <mat-error
                         *ngIf="!modelFormData.controls.companyCode.valid && modelFormData.controls.companyCode.status != 'DISABLED'"
-                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.companyCode.valid  }"> This feild is
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.companyCode.valid  }"> This field is
                         required
                     </mat-error>
                 </mat-form-field>
@@ -549,7 +551,7 @@
                     <div class="error_text mt-0" *ngIf="(modelFormData.controls.selected.dirty && modelFormData.controls.selected.touched && modelFormData.controls.selected.errors) ||
                                                               (submitted && modelFormData.controls.selected.errors)">
                         <div class="error_text mt-0" *ngIf="modelFormData.controls.selected.errors.required">
-                            This feild is required
+                            This field is required
                         </div>
                     </div>
                 </div>
@@ -562,12 +564,12 @@
 
                 <div class="multiselect-dropdown-list mx-3"
                     *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'|| routeParam=='salesgst'|| routeParam=='purchaseanalysis'|| routeParam=='pendingsales'">
-                    <ng-multiselect-dropdown placeholder="{{ 'COMMON.vendorCode' | translate }}"
+                    <ng-multiselect-dropdown placeholder="{{ 'COMMON.CUSTOMERCODE' | translate }}"
                         formControlName="customerCode" [settings]="dropdownSettings" [data]="customerList">
                     </ng-multiselect-dropdown>
                 </div>
                 <div class="multiselect-dropdown-list mx-3"
-                    *ngIf="routeParam=='pendingsales'|| routeParam == 'purchasegst'">
+                    *ngIf="routeParam=='pendingpurchaseorders'|| routeParam == 'purchasegst'|| routeParam=='pendingjobworkreport'">
                     <ng-multiselect-dropdown placeholder="{{ 'COMMON.vendorCode' | translate }}"
                         formControlName="vendorCode" [settings]="dropdownSettings" [data]="customerList">
                     </ng-multiselect-dropdown>

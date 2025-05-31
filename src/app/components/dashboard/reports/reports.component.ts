@@ -104,6 +104,15 @@ export class ReportsComponent {
         case 'purchasegst':
           this.getsuppliercodeList();
           break;
+           case 'pendingsales':
+          this.getCustomerList();
+          break;
+          case 'pendingpurchaseorders':
+          this.getsuppliercodeList();
+          break;
+        case 'pendingjobworkreport':
+          this.getsuppliercodeList();
+          break;
       }
       this.reset();
       this.getParameters(params.id);
@@ -447,8 +456,8 @@ export class ReportsComponent {
 
   print() {
     let getUrl
-    if (this.routeParam == 'pendingpurchaseorders' || this.routeParam == 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}`);
+    if (this.routeParam == 'pendingjobworkreport') {
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
     } else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward' || this.routeParam == 'purchaseanalysis') {
       const encodedMaterialCode = this.modelFormData.value.materialCode ? encodeURIComponent(this.modelFormData.value.materialCode) : '-1';
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}/${encodedMaterialCode}`);
@@ -472,7 +481,12 @@ export class ReportsComponent {
       // Encode only if materialCode exists, otherwise use '-1'
       const encodedMaterialCode = this.modelFormData.value.materialCode ? encodeURIComponent(this.modelFormData.value.materialCode) : '-1';
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${encodedMaterialCode}`);
-    } else {
+    } else if (this.routeParam == 'pendingsales') {
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
+     } else if (this.routeParam == 'pendingpurchaseorders') {
+      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
+    }
+    else {
       getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
     }
     this.apiService.apiGetRequest(getUrl)
