@@ -2582,6 +2582,7 @@
     "invoiceDate": "Date",
     "invoiceNo": "invoiceNo",
     "productcode": "productcode",
+    "customerName":"Customer Name",
     "qty": "qty",
     "rate": "rate",
     "grossAmount": "grossAmount",
@@ -2636,7 +2637,6 @@
     "remarks": "Remarks"
   },
   "pendingpurchaseorders": {
-    "customerPONumber": "Customer PO Number",
     "purchaseOrderNo": "Purchase Order No",
     "saleOrderNo": "Sale Order Number",
     "poDate": "Date",
@@ -2644,6 +2644,7 @@
     "materialCode": "Material Code",
     "description": "Material Name",
     "poQty": "Qty",
+    "price":"Price",
     "targetDate": "Date",
     "remarks": "Remarks"
   },
