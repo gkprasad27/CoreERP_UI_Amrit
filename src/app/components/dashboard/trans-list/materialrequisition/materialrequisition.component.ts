@@ -269,7 +269,7 @@ export class MaterialrequisitionComponents implements OnInit {
 
 
   getGoodsissueDetail(val) {
-    const jvDetUrl = String.Join('/', this.apiConfigService.getGoodsissueDetails, val);
+    const jvDetUrl = String.Join('/', this.apiConfigService.getGoodsissueDetailsApproval, val);
     this.apiService.apiGetRequest(jvDetUrl)
       .subscribe(
         response => {

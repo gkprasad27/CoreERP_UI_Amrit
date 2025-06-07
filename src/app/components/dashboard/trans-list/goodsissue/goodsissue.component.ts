@@ -358,7 +358,7 @@ export class GoodsissueComponent implements OnInit {
                   materialCode: s.materialCode ? s.materialCode : 0,
                   materialName: s.materialName ? s.materialName : 0,
                   availableqty: qty.availQTY ? qty.availQTY : 0,
-                  bomNumber:s.bomKey?s.bomKey:0,
+                  bomNumber:s.bomNumber?s.bomNumber:s.bomKey,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   allocatedqty1: s.allocatedQTY ? s.allocatedQTY : 0,
                   requiredqty: s.qty - s.allocatedQTY
@@ -399,7 +399,8 @@ export class GoodsissueComponent implements OnInit {
       this.formData1.patchValue({
         materialCode: [{ materialCode: obj.materialCode,  materialName: obj.materialName}],
         availableqty: qty.availQTY,
-        id: 0
+        id: 0,
+        bomNumber: obj.bomKey
       })
     } else {
       this.resetForm();
@@ -686,7 +687,7 @@ export class GoodsissueComponent implements OnInit {
                   s.materialCode = s?.materialCode ? s.materialCode : 0;
                 s.allocatedqty = allocatedqty ? allocatedqty.allocatedQTY : 0;
                 s.allocatedqty1 = allocatedqty ? allocatedqty.allocatedQTY : 0;
-                s.bomNumber=s.bomKey?s.bomKey:0;
+                s.bomNumber=s.bomKey?s.bomKey:s.bomNumber;
               })
 
               // this.sendDynTableData = { type: 'add', data: newData };
