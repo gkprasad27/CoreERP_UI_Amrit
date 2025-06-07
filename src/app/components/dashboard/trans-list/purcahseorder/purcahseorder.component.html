@@ -157,9 +157,15 @@
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Description </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            HSN Code </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Quantity </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            UOM </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Unit Weight </th>
@@ -171,7 +177,7 @@
                         Price/KG </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;">
-                        Total Amount </th>
+                         Amount </th>
                 </tr>
             </thead>
             <tbody>
@@ -188,9 +194,17 @@
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.materialName }}
                     </td>
+                     <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.hsnsac }}
+                    </td>
                     <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.qty }} </td>
+                        <td
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                            {{row.uom}}
+                        </td>
                     <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.netWeight }}
@@ -207,7 +221,7 @@
                         {{ row.amount }} </td>
                 </tr>
                 <tr
-                    style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
+                    style="border-top: 1px solid black; text-align: end;font-weight: bold;-webkit-print-color-adjust: exact;">
                     <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"
                         colspan="2"> Grand
                         Totals </td>
@@ -215,22 +229,33 @@
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
                     </td>
                     <td
-                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                         
                     </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                        Weight</td>
+                    
+                    </td>
+                    <td
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                    
+                    </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         {{
-                        data.headingObj1.amount }}</td>
+                        data.headingObj1.totalQty }}
+                        </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                        Amount</td>
+                        {{
+                        data.headingObj1.totalWeight }}</td>
+                    <td
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                        </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">
                         {{
-                        data.headingObj1.totalAmount }}</td>
+                        data.headingObj1.amount }}</td>
                 </tr>
             </tbody>
         </table>

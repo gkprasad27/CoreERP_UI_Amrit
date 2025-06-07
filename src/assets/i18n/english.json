@@ -1680,7 +1680,7 @@
     "type": "QC Type",
     "parameter": "Parameter",
     "spec": "Specification",
-    "minval": "Minimum Value",
+    "minval": "Tolerance",
     "maxval": "Maximum Value",
     "uom": "UOM",
     "description": "Parameter",
@@ -2195,7 +2195,9 @@
     "delete": "Delete",
     "action": "Action",
      "dimentions":"Dimentions",
-     "mechineNumber":"Mechine Number"
+     "mechineNumber":"Mechine Number",
+     "uom":"UOM",
+    "hsnsac":"HSN Code"
   },
   "goodsreceipts": {
     "checkAll": "Select",
@@ -3367,6 +3369,8 @@
   "supplierGSTIN": "GST Number", 
   "poNo": "PO Number",
   "poDate": "PO Date", 
+  "invoiceNo":"Invoice Number",
+  "receivedDate":"Receieved Date",
   "taxableValue": "Taxable Value",
   "cgst_12": "CGST-6",
   "sgst_12": "SGST-6",

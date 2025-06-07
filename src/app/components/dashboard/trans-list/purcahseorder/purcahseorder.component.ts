@@ -1091,11 +1091,17 @@ export class PurchaseOrderComponent implements OnInit {
     }
     let list = [...this.tableData];
     list = [...list, ...this.setArray(list.length)];
+    const totalWeight = list.reduce((sum, row) => {
+      const qty = +row.qty || 0;
+      const netWeight = +row.netWeight || 0;
+      return sum + (qty * netWeight);
+    }, 0);
+    const totalQty = list.reduce((sum,row)=>{return sum + (+row.qty || 0)},0);
     const obj = {
       heading: 'PURCHASE ORDER',
       headingObj: formObj,
       detailArray: list,
-      headingObj1: { ...this.formData1.value, ...this.formData.value }
+      headingObj1: { ...this.formData1.value, ...this.formData.value,totalWeight: totalWeight.toFixed(2),totalQty:totalQty.toFixed(2)}
       //  {
       //   Company: this.formData.value.company,
       //   "Profit Center": this.formData.value.profitCenter,
