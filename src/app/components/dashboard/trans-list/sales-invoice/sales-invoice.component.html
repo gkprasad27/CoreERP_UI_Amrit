@@ -144,6 +144,8 @@
                         rowspan="2"> S.No </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> Product/Service </th>
+                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
+                            rowspan="2"> Product Description </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> HSN ACS </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
@@ -201,6 +203,10 @@
                     </td>
                     <td
                         style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.materialName }}
+                    </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.hsnNo }}
                     </td>
                     <td
@@ -253,6 +259,9 @@
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
+                     <td
+                        style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                    </td>
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
@@ -298,7 +307,7 @@
         </table>
     </div>
 
-    <!-- <div style="min-height: 50px;"></div> -->
+    <div style="min-height: 20px;"></div>
 
     <div style="display: flex; font-size: 15px;border-bottom: 1px solid;">
         <div
