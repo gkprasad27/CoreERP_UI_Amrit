@@ -744,7 +744,9 @@ export class InspectioncheckComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              billingRes = { ...billingRes, ...res.response['invoiceMasterList'] };
+              const invoiceData = res.response['InvoiceMasterList']; // ✔ correct key name
+              billingRes.InvoiceMasterList = invoiceData;
+              // billingRes = { ...billingRes, ...res.response['invoiceMasterList'] };
             }
           }
           this.printData(billingRes);
@@ -757,9 +759,9 @@ export class InspectioncheckComponent implements OnInit {
       heading: 'INSPECTION REPORT',
       headingObj: {
         Amount: res.SaleorderMaster.amount,
-        invoiceDate: res.invoiceDate,
-        invoiceQty: res.SaleorderMaster.InvoiceQty,
-        invoiceNo: res.SaleorderMaster.InvoiceNo,
+        invoiceDate: res.InvoiceMasterList?.invoiceDate,
+        invoiceQty: res.InvoiceMasterList?.invoiceQty,
+        invoiceNo: res.InvoiceMasterList?.invoiceNo,
         'company': res.SaleorderMaster.company,
         supplierName: res.SaleorderMaster.supplierName,
         poNumber: res.SaleorderMaster.poNumber,
