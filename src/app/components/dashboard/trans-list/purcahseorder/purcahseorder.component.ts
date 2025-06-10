@@ -316,22 +316,22 @@ export class PurchaseOrderComponent implements OnInit {
               if (this.formData.value.saleOrderType == 'Sale Order') {
                 obj.data = res.response['SaleOrderMasters'];
                 obj.data1 = res.response['SaleOrderDetails'];
-                if (obj.data1 && obj.data1.length) {
-                  let arr = [];
-                  obj.data1.forEach((d: any) => {
-                    if (arr.length) {
-                      const index = arr.findIndex((a: any) => a.materialCode == d.materialCode);
-                      if (index != -1) {
-                        arr[index].qty = arr[index].qty + d.qty
-                      } else {
-                        arr.push(d);
-                      }
-                    } else {
-                      arr.push(d);
-                    }
-                  })
-                  obj.data1 = arr;
-                }
+                // if (obj.data1 && obj.data1.length) {
+                //   let arr = [];
+                //   obj.data1.forEach((d: any) => {
+                //     if (arr.length) {
+                //       const index = arr.findIndex((a: any) => a.materialCode == d.materialCode);
+                //       if (index != -1) {
+                //         arr[index].qty = arr[index].qty + d.qty
+                //       } else {
+                //         arr.push(d);
+                //       }
+                //     } else {
+                //       arr.push(d);
+                //     }
+                //   })
+                //   obj.data1 = arr;
+                // }
               } else if (this.formData.value.saleOrderType == 'Master Saleorder') {
                 obj.data = res.response['preqmasters']
                 obj.data1 = res.response['preqDetail']
