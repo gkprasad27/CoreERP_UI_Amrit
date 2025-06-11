@@ -110,13 +110,13 @@
                 </div>
 
                 
-                <div    class="mx-2">
+                <div id="data"   class="mx-2">
                     <label > {{ 'jobworkmaterialreceiving.mtcDocumentUpload' | translate }} </label>
                    <button id="upload"> <app-file-upload [type]="'card'"  [oldFileList]="formData.value.documentURL"  (uploadFile)="downLoadFile1($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload></button>
                 </div>
 
-                <div  class="mx-2">
-                    <label > {{ 'jobworkmaterialreceiving.invoiceUpload' | translate }} </label>
+                <div id="data1" class="mx-2">
+                    <label id="invoice"> {{ 'jobworkmaterialreceiving.invoiceUpload' | translate }} </label>
                    <button id="upload"> <app-file-upload [type]="'card'"  [oldFileList]="formData.value.invoiceURL"  (uploadFile)="downLoadFile1($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload></button>
                 </div>
 

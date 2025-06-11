@@ -211,7 +211,7 @@ export class JobworkmaterialreceivingComponent {
 
 
   downLoadFile(event: any) {
-    const url = String.Join('/', this.apiConfigService.getFile, event.item[event.action]);
+    const url = String.Join('/', this.apiConfigService.getFile, event.name);
     this.apiService.apiGetRequest(url)
       .subscribe(
         response => {
@@ -691,6 +691,8 @@ export class JobworkmaterialreceivingComponent {
   emitFilesList1(event: any) {
     this.fileList1 = event[0];
   }
+  
+
 
   uploadFile() {
     const addsq = String.Join('/', this.apiConfigService.uploadFile, this.fileList.name.split('.')[0]);
