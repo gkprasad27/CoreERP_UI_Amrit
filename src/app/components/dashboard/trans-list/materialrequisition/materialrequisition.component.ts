@@ -277,25 +277,16 @@ export class MaterialrequisitionComponents implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              // this.formData.patchValue(res.response['goodsissueasters']);
-              // console.log(res.response['mreqDetail']);
               let arr = [];
               res.response['goodsissueastersDetail'].forEach((s: any, index: number) => {
-                // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
-                  // action: 'editView',
-                  // id: s.id ? s.id : 0,
-                  // index: index + 1,
                   qty: s.qty ? s.qty : 0,
-                  // changed: false,
                   status: s.status ? s.status : '',
                   materialCode: s.materialCode ? s.materialCode : 0,
-                  // availableqty: qty.availQTY ? qty.availQTY : 0,
                   saleOrderNumber: s.saleOrderNumber ? s.saleOrderNumber : 0,
                   bomNumber: s.bomNumber ? s.bomNumber : '',
                   materialName: s.materialName ? s.materialName : null,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
-                  // requiredqty: s.qty - s.allocatedQTY
                 }
                 arr.push(obj);
               })
@@ -328,26 +319,12 @@ export class MaterialrequisitionComponents implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              // this.formData.patchValue(res.response['goodsissueasters']);
-              // console.log(res.response['mreqDetail']);
               let arr = [];
               res.response['tagsDetail'].forEach((s: any, index: number) => {
-                // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
-                  // action: 'editView',
-                  // id: s.id ? s.id : 0,
-                  // index: index + 1,
-                  // qty: s.qty ? s.qty : 0,
-                  // changed: false,
-                  // materialCode: s.materialCode ? s.materialCode : 0,
-                  // availableqty: qty.availQTY ? qty.availQTY : 0,
-                  // saleOrderNumber: s.saleOrderNumber ? s.saleOrderNumber : 0,
-                  // allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
-                  // requiredqty: s.qty - s.allocatedQTY,
                   materialName: s.materialName ? s.materialName : null,
                   allocatedPerson: s.allocatedPerson ? s.allocatedPerson : '',
                   endDate: s.endDate ? s.endDate : '',
-                  // isReject: s.isReject ? s.isReject : '',
                   materialCode: s.materialCode ? s.materialCode : '',
                   mechine: s.mechine ? s.mechine : '',
                   productionTag: s.productionTag ? s.productionTag : '',

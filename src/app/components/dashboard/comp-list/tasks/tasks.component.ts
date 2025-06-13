@@ -160,7 +160,6 @@ export class TasksComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
-          console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.materialList = res.response['materialList'];
@@ -178,7 +177,6 @@ export class TasksComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
-          console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.costCenterList = res.response['costcenterList'];
@@ -256,7 +254,6 @@ export class TasksComponent implements OnInit {
         response => {
           this.spinner.hide();
           const res = response;
-          console.log(res.response['taskMastersDetail']);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.sendRoutingDynTableData = { type: 'edit', data: res.response['taskMastersDetail'] };

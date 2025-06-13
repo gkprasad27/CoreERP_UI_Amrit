@@ -80,7 +80,6 @@ export class ErpUsersComponent implements OnInit {
     this.apiService.apiGetRequest(getRolesListsUrl).subscribe(
       response => {
         const res = response;
-        console.log(res);
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             if (!this.commonService.checkNullOrUndefined(res.response['roleList']) && res.response['roleList'].length) {
@@ -99,7 +98,6 @@ export class ErpUsersComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
-          console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.companyList = res.response['companiesList'];

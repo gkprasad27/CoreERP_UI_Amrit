@@ -563,15 +563,10 @@ export class QuotationSupplierComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['qsmasters']);
-              //console.log(res.response['qsDetail']);
-              // this.sendDynTableData = { type: 'edit', data: res.response['qsDetail'] };
               const pObj = this.ptypeList.find((p: any) => p.id == this.formData.value.customerCode);
               this.formData.patchValue({ customerCode: pObj ? pObj.text : '' });
 
               res.response['qsDetail'].forEach((s: any, index: number) => {
-                // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-                // s.materialName = obj.text
-                // s.stockQty = obj.closingQty;
                 s.action = s.billable == 'N' ? 'delete' : 'editDelete';
                 s.index = index + 1;
               })
@@ -579,9 +574,6 @@ export class QuotationSupplierComponent implements OnInit {
               this.calculate(false);
               
               this.getBusienessPartnerAccounts(res.response['qsmasters']);
-            //  this.formData.disable();
-              // this.formData.get('refNo').enable();
-              // this.formData.get('bom').enable();
               this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
             }
           }

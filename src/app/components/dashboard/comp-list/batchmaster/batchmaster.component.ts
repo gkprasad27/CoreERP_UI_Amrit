@@ -130,7 +130,6 @@ export class BatchMasterComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
-          console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.UomList = res.response['UOMList'];

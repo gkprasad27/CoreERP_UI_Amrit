@@ -66,7 +66,6 @@ export class VehicleApprovalsComponent implements OnInit {
   }
 
   singleChecked(flag, column, row) {
-    console.log(flag, row, column)
     let statusFlag = true;
     if (this.leaveApprovalList.length) {
       for (let l = 0; l < this.leaveApprovalList.length; l++) {
@@ -90,7 +89,6 @@ export class VehicleApprovalsComponent implements OnInit {
     if (this.leaveApprovalList.length == 0 || statusFlag) {
       this.leaveApprovalList.push(row);
     }
-    //console.log(this.leaveApprovalList)
   }
 
   checkAll(flag, checkAll?) {
@@ -125,7 +123,6 @@ export class VehicleApprovalsComponent implements OnInit {
   }
 
   save() {
-    console.log(this.leaveApprovalList);
     const user = JSON.parse(localStorage.getItem('user'));
     const registerInvoiceUrl = String.Join('/', this.apiConfigService.RegisterVehicleApprovalDetails);
     const requestObj = { StockissueHdr: this.leaveRequestForm.value, code: user.userName, StockissueDtl: this.leaveApprovalList };

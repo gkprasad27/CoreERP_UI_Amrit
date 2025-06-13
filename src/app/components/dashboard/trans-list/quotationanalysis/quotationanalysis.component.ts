@@ -139,7 +139,6 @@ export class QuotationAnalysisComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
-          console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.bpaList = res.response['bpaList'];

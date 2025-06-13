@@ -196,8 +196,6 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
           }
         }
       }
-      console.log(this.columnDefinitions);
-      // });
     }
 
 

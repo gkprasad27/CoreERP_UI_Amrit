@@ -144,7 +144,6 @@ export class ProcessComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
-          console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.matypeList = res.response['mmasterList'];

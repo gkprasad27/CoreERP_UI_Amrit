@@ -163,8 +163,6 @@ export class SubAssetsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              console.log(res.response['SubassetMasters']);
-              console.log(res.response['SubassetDetail']);
               this.modelFormData.setValue(res.response['SubassetMasters']);
               this.sendDynTableData = { type: 'editValue', data: res.response['SubassetDetail'] };
             }

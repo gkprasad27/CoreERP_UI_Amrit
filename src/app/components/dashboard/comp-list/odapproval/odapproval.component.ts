@@ -68,7 +68,6 @@ export class odApprovalComponent implements OnInit {
   }
 
   singleChecked(flag, column, row) {
-    console.log(flag, row, column)
     let statusFlag = true;
     if (this.leaveApprovalList.length) {
       for (let l = 0; l < this.leaveApprovalList.length; l++) {
@@ -92,7 +91,6 @@ export class odApprovalComponent implements OnInit {
     if (this.leaveApprovalList.length == 0 || statusFlag) {
       this.leaveApprovalList.push(row);
     }
-    //console.log(this.leaveApprovalList)
   }
 
   checkAll(flag, checkAll?) {
@@ -119,7 +117,6 @@ export class odApprovalComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.dataSource = new MatTableDataSource(res.response['OdApprovalApplDetailsList']);
               this.dataSource.paginator = this.paginator;
-              console.log(this.dataSource);
               this.checkAll(false);
             }
           }
@@ -128,9 +125,6 @@ export class odApprovalComponent implements OnInit {
   }
 
   save() {
-    console.log(this.leaveApprovalList);
-    //this.dataSource = new MatTableDataSource(res.response['StockissuesDeatilList']);
-
     const user = JSON.parse(localStorage.getItem('user'));
     const registerInvoiceUrl = String.Join('/', this.apiConfigService.RegisterOdApprovalDetails);
     const requestObj = { StockissueHdr: this.leaveRequestForm.value, code: user.userName, StockissueDtl: this.leaveApprovalList };

@@ -213,7 +213,6 @@ export class JobworkmaterialissueComponent {
         .subscribe(((response: any) => {
               this.spinner.hide();
               const res = response;
-              console.log(res);
               if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
                 if (!this.commonService.checkNullOrUndefined(res.response)) {
                   this.materialList = res.response['mmasterList'];

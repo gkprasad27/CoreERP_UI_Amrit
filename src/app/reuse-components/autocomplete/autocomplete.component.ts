@@ -91,7 +91,6 @@ export class AutocompleteComponent implements OnInit {
   }
 
   onItemSelect(item) {
-    console.log(item)
     this.emitTypeAheadValue.emit(item);
   }
 

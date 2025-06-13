@@ -44,7 +44,6 @@ export class StructureCreationComponent implements OnInit {
     // @Optional() is used to prevent error if no data is passed
     // @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // console.log(data);
     this.formData = { ...this.addOrEditService.editData };
     // this.structureName = this.formData.item.structureName;
     // this.structureCode = this.formData.item.structureCode;
@@ -72,7 +71,6 @@ export class StructureCreationComponent implements OnInit {
   }
 
   enableCheckBox(column, data, index) {
-    console.log(column, data, index, this.dataSource.data);
     this.dataSource.data[index]['amount'] = null;
     this.dataSource.data[index]['percentage'] = null;
     if (data == '') {

@@ -415,7 +415,6 @@ export class CreateStockTransferComponent implements OnInit {
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             if (!this.commonService.checkNullOrUndefined(res.response['Ltrs'])) {
-              console.log(res.response['Ltrs']);
               value.ltrs = res.response['Ltrs'][0]['id'];
               if (!this.commonService.checkNullOrUndefined(index))
               {

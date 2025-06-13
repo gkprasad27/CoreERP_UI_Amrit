@@ -120,7 +120,6 @@ export class SourceOfSupplyComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
-          console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.materialList = res.response['materialList'];
@@ -165,7 +164,6 @@ export class SourceOfSupplyComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
-          console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.bpaList = res.response['bpaList'];
@@ -206,7 +204,6 @@ export class SourceOfSupplyComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.setValue(res.response['ssmasters']);
-              console.log(res.response['ssDetail']);
               this.sendDynTableData = { type: 'edit', data: res.response['ssDetail'] };
               this.formData.disable();
             }

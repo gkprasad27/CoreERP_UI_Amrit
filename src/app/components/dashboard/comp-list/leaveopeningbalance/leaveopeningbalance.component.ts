@@ -138,7 +138,6 @@ export class LeaveopeningbalanceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.LeaveTypeatList = res.response['leaveTypeList'];
-              console.log(this.LeaveTypeatList);
             }
           }
           this.spinner.hide();

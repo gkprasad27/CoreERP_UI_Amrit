@@ -348,7 +348,7 @@ export class GoodsissueComponent implements OnInit {
               this.formData.disable();
               let arr = [];
               res.response['goodsissueastersDetail'].forEach((s: any, index: number) => {
-                const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
+                const qty = this.mmasterList.find(resp => encodeURIComponent(resp.id) == encodeURIComponent(s.materialCode));
                 let obj = {
                   action: 'edit',
                   id: s.id ? s.id : 0,

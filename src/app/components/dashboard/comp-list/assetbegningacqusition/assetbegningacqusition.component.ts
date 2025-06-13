@@ -163,7 +163,6 @@ export class AssetBegningAcqusitionComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              console.log((res.response['AqsnMasters']));
               this.modelFormData.patchValue(res.response['AqsnMasters']);
               this.sendDynTableData = { type: 'edit', data: res.response['AqsnDetail'] };
             }

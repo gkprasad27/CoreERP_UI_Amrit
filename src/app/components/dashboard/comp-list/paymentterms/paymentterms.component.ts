@@ -122,10 +122,8 @@ export class PaymentTermsComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              console.log(res.response['PaymentTermDetail']);
               this.modelFormData.setValue(res.response['PaymentTermMasters']);
               this.sendDynTableData = { type: 'editValue', data: res.response['PaymentTermDetail'] };
-              //this.modelFormData.disable();
             }
           }
         });

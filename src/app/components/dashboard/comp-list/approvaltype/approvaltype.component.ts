@@ -97,7 +97,6 @@ export class ApprovalTypeComponent implements OnInit {
         response => {
           if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(response.response)) {
-              console.log(response);
               this.aptypes = response.response['ConfigurationList'];
             }
           }
@@ -112,7 +111,6 @@ export class ApprovalTypeComponent implements OnInit {
         response => {
           if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(response.response)) {
-              console.log(response);
               this.branchesList = response.response['BranchesList'];
             }
           }
@@ -127,7 +125,6 @@ export class ApprovalTypeComponent implements OnInit {
         response => {
           if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(response.response)) {
-              console.log(response);
               this.compiniesList = response.response['companiesList'];
             }
           }
@@ -143,7 +140,6 @@ export class ApprovalTypeComponent implements OnInit {
         response => {
           if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(response.response)) {
-              console.log(response);
               this.employeesList = response.response['userList'];
             }
           }

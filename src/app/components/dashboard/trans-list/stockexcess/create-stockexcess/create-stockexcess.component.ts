@@ -266,7 +266,6 @@ export class CreateStockExcessComponent implements OnInit {
     });
     this.dataSource = new MatTableDataSource(this.dataSource.data);
     this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource);
   }
 
   getProductByProductCode(value) {
@@ -369,10 +368,7 @@ getProductByProductName(value) {
   }
 
   save() {
-    // if (!this.tableFormObj) {
-    //   this.dataSource.data.pop();
-    //   console.log(this.dataSource.data);
-    // }
+   
     if (this.routeUrl != '' || this.dataSource.data.length == 0) {
       return;
     }
@@ -388,8 +384,6 @@ getProductByProductName(value) {
       totalAmount = element.amount + totalAmount;
     });
   
-    console.log(this.branchFormData, this.dataSource.data);
-
     this.registerStockexcess(tableData);
   }
 

@@ -204,7 +204,6 @@ export class ReceiptspaymentsComponent implements OnInit {
       data = this.functionaldeptList.filter(resp => resp.partyAccount == bObj.id);
     }
     if (data.length) {
-      console.log(data, this.tablePropsFunc());
       data.forEach((res, index) => {
         newData.push(this.tablePropsFunc().tableData);
         newData[index].dueDate.value = res.dueDate;

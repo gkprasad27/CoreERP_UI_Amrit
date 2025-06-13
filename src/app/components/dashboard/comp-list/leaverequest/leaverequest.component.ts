@@ -234,7 +234,6 @@ export class LeaveRequestComponent implements OnInit {
           const res = response.body;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              console.log(res);
               this.LeaveTypeatList = res.response['leavetypesList'];
             }
           }
@@ -255,7 +254,6 @@ export class LeaveRequestComponent implements OnInit {
           const res = response.body;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              console.log(res);
               this.LeaveTypeatList = res.response['leavetypesList'];
             }
           }

@@ -504,7 +504,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
-          console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.podetailsList = res.response['podetailsList'];
@@ -528,53 +527,8 @@ export class ReceiptOfGoodsComponent implements OnInit {
           this.getProfitcenterData();
         });
   }
-  // getsuppliercodeList() {
-  //   const getsuppliercodeList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList);
-  //   this.apiService.apiGetRequest(getsuppliercodeList)
-  //     .subscribe(
-  //       response => {
-  //         const res = response;
-  //         console.log(res);
-  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //             this.bpaList = res.response['bpaList'];
-  //             this.bpaList = res.response['bpaList'].filter(resp => resp.bpTypeName == 'Vendor')
+  
 
-  //           }
-  //         }
-  //         this.getplantList();
-  //       });
-  // }
-
-  // getplantList() {
-  //   const getplantList = String.Join('/', this.apiConfigService.getplantList);
-  //   this.apiService.apiGetRequest(getplantList)
-  //     .subscribe(
-  //       response => {
-  //         const res = response;
-  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //             this.plantList = res.response['plantList'];
-  //           }
-  //         }
-  //         this.getBranchList();
-  //       });
-  // }
-
-  // getBranchList() {
-  //   const branchUrl = String.Join('/', this.apiConfigService.getBranchList);
-  //   this.apiService.apiGetRequest(branchUrl)
-  //     .subscribe(
-  //       response => {
-  //         const res = response;
-  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //             this.branchList = res.response['branchsList'];
-  //           }
-  //         }
-  //         this.getProfitcenterData();
-  //       });
-  // }
 
   getProfitcenterData() {
     const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);

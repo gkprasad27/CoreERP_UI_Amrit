@@ -162,14 +162,12 @@ export class GoodsissueApprovalComponent implements OnInit {
   }
 
   allocatedqtyChange() {
-    // this.formData1.patchValue({ bomType: 'Special Bom' });
     const { requiredqty, allocatedqty, availableqty, qty, allocatedqty1, bomType } = this.formData1.value;
   
     const isSpecialBom = this.formData1.value.bomType === 'Special BOM';
 
      // Skip validation for Special Bom
   if (isSpecialBom) {
-    console.log('Special Bom detected — skipping validation.');
     return; // No error for Special Bom — exit the function early
   }
   
@@ -340,11 +338,6 @@ export class GoodsissueApprovalComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               
               this.formData.patchValue(res.response['goodsissueasters']);
-              // this.formData.patchValue({
-              //   saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }] : ''
-              // })
-              console.log(res.response['goodsissueastersDetail']);
-              // this.sendDynTableData = { type: 'edit', data: res.response['goodsissueastersDetail'] };
               this.formData.disable();
               let arr = [];
               res.response['goodsissueastersDetail'].forEach((s: any, index: number) => {

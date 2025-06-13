@@ -167,46 +167,7 @@ export class VehicleRequisitionsComponent implements OnInit {
     }
   }
 
-  //getTableDataonempcodechangevent() {
-
-  //  this.spinner.show();
-  //  const getCompanyUrl = String.Join('/', this.apiConfigService.getLeaveTypeatList, this.modelFormData.get('empCode').value);
-  //  this.apiService.apiGetRequest(getCompanyUrl)
-  //    .subscribe(
-  //      response => {
-  //        const res = response.body;
-  //        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //          if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //            console.log(res);
-  //            this.LeaveTypeatList = res.response['leavetypesList'];
-  //          }
-  //        }
-  //        this.spinner.hide();
-  //      }, error => {
-
-  //      });
-  //}
-
-  //getTableData() {
-  //  const user = JSON.parse(localStorage.getItem('user'));
-  //  let username = user.userName;
-  //  this.spinner.show();
-  //  const getCompanyUrl = String.Join('/', this.apiConfigService.getLeaveTypeatList, username);
-  //  this.apiService.apiGetRequest(getCompanyUrl)
-  //    .subscribe(
-  //      response => {
-  //        const res = response.body;
-  //        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //          if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //            console.log(res);
-  //            //this.LeaveTypeatList = res.response['leavetypesList'];
-  //          }
-  //        }
-  //        this.spinner.hide();
-  //      }, error => {
-
-  //      });
-  //}
+  
 
 
   getProductByProductCode(value) {

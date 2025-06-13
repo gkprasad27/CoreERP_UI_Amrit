@@ -104,7 +104,6 @@ export class AdvanceComponent implements OnInit {
           const res = response.body;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              console.log(res);
               this.advanceList = res.response['advancesList'];
             }
           }

@@ -311,8 +311,6 @@ export class InspectioncheckComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              // this.formData.patchValue(res.response['goodsissueasters']);
-              // console.log(res.response['mreqDetail']);
               let arr = [];
               res.response['goodsissueastersDetail'].forEach((s: any, index: number) => {
                 // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
@@ -359,7 +357,6 @@ export class InspectioncheckComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              // console.log(res.response['mreqDetail']);
               let arr = [];
               res.response['tagsDetail'].forEach((s: any, index: number) => {
 
@@ -446,7 +443,6 @@ export class InspectioncheckComponent implements OnInit {
 
   tableCheckboxEvent(event: any) {
     this.tableData1.forEach((res: any) => res.checkbox = (res.id == event.item.id) ? event.flag.checked : res.checkbox);
-    console.log(this.tableData1);
   }
 
 

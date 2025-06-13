@@ -193,10 +193,7 @@ export class MainAssetMasterComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              console.log(res.response['MainassetMasters']);
-              console.log(res.response['MainassetDetail']);
               this.modelFormData.setValue(res.response['MainassetMasters']);
-              //this.addOrEditService.sendDynTableData(res.response['MainassetDetail']);
               this.sendDynTableData = { type: 'editValue', data: res.response['MainassetDetail'] };
             }
           }
@@ -305,7 +302,6 @@ export class MainAssetMasterComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
-          //console.log(res);
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.dpList = res.response['dpList'];

@@ -243,22 +243,7 @@ export class PurchasingComponent implements OnInit {
           this.getmaterialData()
         });
   }
-  // getPurchaseGroupData() {
-  //   const getpcUrl = String.Join('/', this.apiConfigService.getPurchaseGroupList);
-  //   this.apiService.apiGetRequest(getpcUrl)
-  //     .subscribe(
-  //       response => {
-  //         const res = response;
-  //         console.log(res);
-  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //             this.pcgroupList = res.response['PCGroupsList'];
-  //           }
-  //         }
-
-  //         this.getmaterialData()
-  //       });
-  // }
+  
   getmaterialData() {
     let obj = JSON.parse(localStorage.getItem("user"));
     const getmaterialList = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
@@ -273,7 +258,6 @@ export class PurchasingComponent implements OnInit {
               this.materialList = res.response['mmasterList'];
             }
           }
-          // this.dynTableProps = this.tablePropsFunc();
           if (this.routeEdit != '') {
             this.getPurchasingDetails(this.routeEdit);
           }
