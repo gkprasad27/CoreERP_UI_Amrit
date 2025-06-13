@@ -344,7 +344,7 @@ export class InspectioncheckComponent implements OnInit {
   onEditEmit(event: any) {
     const encodedMaterialCode = encodeURIComponent(event.materialCode)
     this.getQCissueDetail(event.saleOrderNumber, encodedMaterialCode, event.bomNumber);
-    this.getInspectionDetail(event.saleOrderNumber, event.bomNumber);
+    this.getInspectionDetail(event.saleOrderNumber, event.bomNumber,encodedMaterialCode);
   }
 
   getQCissueDetail(val, val1, val2) {
@@ -414,10 +414,10 @@ export class InspectioncheckComponent implements OnInit {
         });
   }
 
-  getInspectionDetail(val, val1) {
+  getInspectionDetail(val, val1,val2) {
     this.tableComponent.defaultValues();
     this.icmasters = null;
-    const jvDetUrl = String.Join('/', this.apiConfigService.getInspectionDetail, val1, val);
+    const jvDetUrl = String.Join('/', this.apiConfigService.getInspectionDetail, val1, val,val2);
     this.apiService.apiGetRequest(jvDetUrl)
       .subscribe(
         response => {
