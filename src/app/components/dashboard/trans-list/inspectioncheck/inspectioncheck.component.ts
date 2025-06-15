@@ -751,6 +751,7 @@ export class InspectioncheckComponent implements OnInit {
 
   printData(res) {
     let arr = [];
+    const selectedRow = this.tableData1.find((ta: any) => ta.checkbox);
     const obj = {
       heading: 'INSPECTION REPORT',
       headingObj: {
@@ -764,8 +765,10 @@ export class InspectioncheckComponent implements OnInit {
         poDate: res.SaleorderMaster.poDate,
         description: res.QCData.materialCode + ' - ' + res.QCData.materialName,
         heatNumber: this.icmasters.heatNumber,
-        drgNo: this.icmasters.partDrgNo,
-        drawingRevNo: this.icmasters.drawingRevNo,
+        drgNo: selectedRow?.partDrgNo || '',
+        drawingRevNo: selectedRow?.drawingRevNo || '',
+        // drgNo: this.icmasters.partDrgNo,
+        // drawingRevNo: this.icmasters.drawingRevNo,
         completionDate: this.icmasters.completionDate,
         matQty: res.SaleorderMaster.matQty
       },
