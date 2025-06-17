@@ -766,9 +766,8 @@ export class InspectioncheckComponent implements OnInit {
         description: res.QCData.materialCode + ' - ' + res.QCData.materialName,
         heatNumber: this.icmasters.heatNumber,
         drgNo: selectedRow?.partDrgNo || '',
-        drawingRevNo: selectedRow?.drawingRevNo || '',
         // drgNo: this.icmasters.partDrgNo,
-        // drawingRevNo: this.icmasters.drawingRevNo,
+        drawingRevNo: this.icmasters.drawingRevNo,
         completionDate: this.icmasters.completionDate,
         matQty: res.SaleorderMaster.matQty
       },
