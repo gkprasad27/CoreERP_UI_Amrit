@@ -1650,6 +1650,7 @@
     "price": "Price",
     "value": "Value",
     "status": "Status",
+    "drawingNo":"Drawing No",
     "delete": "Delete",
     "button": true,
     "action": "Action"

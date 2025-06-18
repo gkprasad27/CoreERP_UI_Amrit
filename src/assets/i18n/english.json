@@ -1971,6 +1971,7 @@
     "requisitionDate": "Requisition Date",
     "bomorderNumber": "BOM Order Number",
     "status": "Status",
+    "drawingNo":"Drawing No",
     "materialCode": "Material Code",
     "materialName": "Material Name",
     "description": "Description",

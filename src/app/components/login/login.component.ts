@@ -100,8 +100,9 @@ export class LoginComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.loginUrlData = res.response;
+              const companyCode = res.response.User.companyCode;
               if (!(requestObj.UserName == 'admin' || requestObj.UserName == 'superadmin' || requestObj.UserName == 'amritadmin'|| requestObj.UserName =='Emprada')) {
-                this.otpApi();
+                this.otpApi(companyCode);
               } else {
                 this.setRoute();
               }
@@ -112,8 +113,9 @@ export class LoginComponent implements OnInit {
         });
   }
 
-  otpApi() {
-    const getLoginUrl = String.Join('/', this.apiConfigService.getAuthentication);
+  otpApi(companyCode: string) {
+    // const getLoginUrl = String.Join('/', this.apiConfigService.getAuthentication);
+    const getLoginUrl = `${this.apiConfigService.getAuthentication}?company=${companyCode}`;
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {

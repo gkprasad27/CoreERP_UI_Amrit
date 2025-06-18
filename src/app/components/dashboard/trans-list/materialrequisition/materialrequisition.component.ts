@@ -287,6 +287,7 @@ export class MaterialrequisitionComponents implements OnInit {
                   bomNumber: s.bomNumber ? s.bomNumber : '',
                   materialName: s.materialName ? s.materialName : null,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
+                  drawingNo: s.drawingNo ? s.drawingNo : null,
                 }
                 arr.push(obj);
               })
