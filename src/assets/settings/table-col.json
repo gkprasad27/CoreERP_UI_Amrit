@@ -2617,6 +2617,7 @@
     "purchaseOrderNo": "Purchase Order No",
     "materialCode": "Material Code",
     "materialName": "Material Name",
+    "poQty":"PO QTY",
     "receivedQty": "ReceivedQty",
     "netweight": "Netweight",
     "lotNo": "LotNo",
