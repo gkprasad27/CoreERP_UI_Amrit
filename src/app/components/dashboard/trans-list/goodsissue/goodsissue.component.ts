@@ -113,6 +113,7 @@ export class GoodsissueComponent implements OnInit {
   ngOnInit() {
     this.formDataGroup();
     this.getCompanyList();
+    this.getreqList();
   }
 
   formDataGroup() {
@@ -319,15 +320,15 @@ export class GoodsissueComponent implements OnInit {
   }
 
 
-  toggle() {
-    if (this.formData.value.saleOrder == 'Sale Order') {
-      this.getreqList();
-    } else if (this.formData.value.saleOrder == 'Master Saleorder') {
-      this.getPRList();
-    } else if (this.formData.value.saleOrder == 'Bill of Material') {
-      this.getBOMList();
-    }
-  }
+  // toggle() {
+  //   if (this.formData.value.saleOrder == 'Sale Order') {
+  //     this.getreqList();
+  //   } else if (this.formData.value.saleOrder == 'Master Saleorder') {
+  //     this.getPRList();
+  //   } else if (this.formData.value.saleOrder == 'Bill of Material') {
+  //     this.getBOMList();
+  //   }
+  // }
 
   getGIDetail(val) {
     const jvDetUrl = String.Join('/', this.apiConfigService.getGoodsissueDetails, val);
@@ -367,7 +368,6 @@ export class GoodsissueComponent implements OnInit {
               })
               this.tableData = arr;
               this.getsaleOrdernoList(val);
-              this.toggle();
             }
           }
         });
