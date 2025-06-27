@@ -642,14 +642,15 @@ export class GoodsissueComponent implements OnInit {
 
   getSaleOrderDetail(goodsissueastersDetail: any = []) {
     this.tableComponent.defaultValues();
-    let url = '';
-    if (this.formData.value.saleOrder == 'Sale Order') {
-      url = this.apiConfigService.getSaleOrderDetail;
-    } else if (this.formData.value.saleOrder == 'Master Saleorder') {
-      url = this.apiConfigService.getPurchaseRequisitionDetail;
-    } else if (this.formData.value.saleOrder == 'Bill of Material') {
-      url = this.apiConfigService.getBOMDetail;
-    }
+    let url = this.apiConfigService.getSaleOrderDetail;
+    // if (this.formData.value.saleOrder == 'Sale Order') {
+      // url = this.apiConfigService.getSaleOrderDetail;
+    // } 
+    // else if (this.formData.value.saleOrder == 'Master Saleorder') {
+    //   url = this.apiConfigService.getPurchaseRequisitionDetail;
+    // } else if (this.formData.value.saleOrder == 'Bill of Material') {
+    //   url = this.apiConfigService.getBOMDetail;
+    // }
     const qsDetUrl = String.Join('/', url, this.formData.value.saleOrderNumber[0].saleOrderNo);
     this.apiService.apiGetRequest(qsDetUrl)
       .subscribe(
@@ -660,16 +661,16 @@ export class GoodsissueComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
 
               let obj = { data: {}, data1: [] }
-              if (this.formData.value.saleOrder == 'Sale Order') {
+              // if (this.formData.value.saleOrder == 'Sale Order') {
                 obj.data = res.response['SaleOrderMasters'];
                 obj.data1 = res.response['SaleOrderDetails'];
-              } else if (this.formData.value.saleOrder == 'Master Saleorder') {
-                obj.data = res.response['preqmasters']
-                obj.data1 = res.response['preqDetail']
-              } else if (this.formData.value.saleOrder == 'Bill of Material') {
-                obj.data = res.response['bomMasters']
-                obj.data1 = res.response['bomDetail']
-              }
+              // } else if (this.formData.value.saleOrder == 'Master Saleorder') {
+              //   obj.data = res.response['preqmasters']
+              //   obj.data1 = res.response['preqDetail']
+              // } else if (this.formData.value.saleOrder == 'Bill of Material') {
+              //   obj.data = res.response['bomMasters']
+              //   obj.data1 = res.response['bomDetail']
+              // }
               // this.formData.patchValue(obj['data']);
               // this.formData.patchValue({
               //   saleOrderNumber: obj['data'].saleOrderNumber ? +obj['data'].saleOrderNumber : ''
