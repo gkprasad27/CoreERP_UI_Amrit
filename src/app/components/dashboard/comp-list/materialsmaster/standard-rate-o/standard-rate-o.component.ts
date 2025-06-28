@@ -1,17 +1,29 @@
 import { Component, Inject, Optional, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonService } from '../../../../../services/common.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { SnackBar, StatusCodes } from '../../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../../services/api-config.service';
 import { ApiService } from '../../../../../services/api.service';
 import { String } from 'typescript-string-operations';
 import { AddOrEditService } from '../../add-or-edit.service';
-import { TableComponent } from 'src/app/reuse-components';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from 'src/app/services/alert.service';
-import { Static } from 'src/app/enums/common/static';
+import { AlertService } from '../../../../../services/alert.service';
+import { Static } from '../../../../../enums/common/static';
+import { DynamicTableComponent } from '../../../../../reuse-components/dynamic-table/dynamic-table.component';
+import { TableComponent } from '../../../../../reuse-components/table/table.component';
+import { MatButtonModule } from '@angular/material/button';
 
 interface Type {
   value: string;
@@ -20,6 +32,7 @@ interface Type {
 
 @Component({
   selector: 'app-standard-rate-o',
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './standard-rate-o.component.html',
   styleUrls: ['./standard-rate-o.component.scss']
 })

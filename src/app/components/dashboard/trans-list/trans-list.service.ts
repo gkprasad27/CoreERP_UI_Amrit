@@ -21,11 +21,11 @@ import { InspectioncheckComponent } from './inspectioncheck/inspectioncheck.comp
 import { SampleRequisitionFormComponent } from './samplerequisitionform/samplerequisitionform.component'
 import { SampleServiceComponent } from './sampleservice/sampleservice.component';
 import { SalesorderComponent } from './salesorder/salesorder.component';
-import { StandardRateComponent } from '../comp-list';
 import { SalesInvoiceComponent } from './sales-invoice/sales-invoice.component';
 import { JobworkmaterialreceivingComponent } from './jobworkmaterialreceiving/jobworkmaterialreceiving.component';
 import { JobworkmaterialissueComponent } from './jobworkmaterialissue/jobworkmaterialissue.component';
 import { MaterialissueComponent} from './materialissue/materialissue.component';
+import { StandardRateComponent } from '../comp-list/standardrateoutput/standardrateoutput.component';
 @Injectable({
   providedIn: 'root'
 })

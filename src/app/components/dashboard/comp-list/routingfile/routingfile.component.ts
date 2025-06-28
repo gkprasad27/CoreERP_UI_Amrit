@@ -3,15 +3,31 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 import { String } from 'typescript-string-operations';
 import { ApiService } from '../../../../services/api.service';
 import { CommonService } from '../../../../services/common.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AddOrEditService } from '../add-or-edit.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../../../services/alert.service';
 import { StatusCodes, SnackBar } from '../../../../enums/common/common';
 import { Static } from '../../../../enums/common/static';
+import { NonEditableDatepicker } from '../../../../directives/format-datepicker';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+
 @Component({
   selector: 'app-routingfile',
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, DynamicTableComponent, NonEditableDatepicker, TypeaheadModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './routingfile.component.html',
   styleUrls: ['./routingfile.component.scss']
 })

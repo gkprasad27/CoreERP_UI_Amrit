@@ -1,19 +1,33 @@
 import { Component, Inject, Optional, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { String } from 'typescript-string-operations';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TableComponent } from 'src/app/reuse-components';
-import { CommonService } from 'src/app/services/common.service';
-import { ApiConfigService } from 'src/app/services/api-config.service';
-import { ApiService } from 'src/app/services/api.service';
-import { AlertService } from 'src/app/services/alert.service';
-import { SnackBar, StatusCodes } from 'src/app/enums/common/common';
-import { Static } from 'src/app/enums/common/static';
+import { CommonService } from '../../../../../services/common.service';
+import { ApiConfigService } from '../../../../../services/api-config.service';
+import { ApiService } from '../../../../../services/api.service';
+import { AlertService } from '../../../../../services/alert.service';
+import { SnackBar, StatusCodes } from '../../../../../enums/common/common';
+import { Static } from '../../../../../enums/common/static';
+
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { TableComponent } from '../../../../../reuse-components/table/table.component';
+import { NonEditableDatepicker } from '../../../../../directives/format-datepicker';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-material-requisition-view',
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TableComponent, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './material-requisition-view.component.html',
   styleUrls: ['./material-requisition-view.component.scss']
 })

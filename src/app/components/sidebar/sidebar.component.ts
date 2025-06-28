@@ -2,9 +2,13 @@ import { Component, HostBinding, Input, OnInit, Output, EventEmitter } from '@an
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from '../../services/common.service';
 import { String } from 'typescript-string-operations';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-sidebar',
+  imports: [ CommonModule, MatIconModule, MatListModule ],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })

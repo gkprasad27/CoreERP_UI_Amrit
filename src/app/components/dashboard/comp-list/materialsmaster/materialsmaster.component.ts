@@ -2,7 +2,19 @@ import { Component, OnInit, OnDestroy, Optional, Inject, ViewChild } from '@angu
 import { String } from 'typescript-string-operations';
 import { ApiService } from '../../../../services/api.service';
 import { CommonService } from '../../../../services/common.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { StatusCodes } from '../../../../enums/common/common';
@@ -11,7 +23,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { StandardRateOComponent } from './standard-rate-o/standard-rate-o.component';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { FileUploadComponent } from '../../../../reuse-components/file-upload/file-upload.component';
 
 interface Valuation {
   value: string;
@@ -32,6 +45,7 @@ interface Schedule {
 }
 @Component({
   selector: 'app-materialsmaster',
+  imports: [ CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, TranslatePipe, FileUploadComponent, StandardRateOComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './materialsmaster.component.html',
   styleUrls: ['./materialsmaster.component.scss']
 })

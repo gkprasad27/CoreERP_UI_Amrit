@@ -9,16 +9,22 @@ import { AlertService } from '../../../services/alert.service';
 import { RuntimeConfigService } from '../../../services/runtime-config.service';
 import { ApiConfigService } from '../../../services/api-config.service';
 import { CommonService } from '../../../services/common.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { TableComponent } from 'src/app/reuse-components/table/table.component';
 import { AttendanceProcessComponent } from '../comp-list/attendance-process/attendance-process.component';
 import { SalaryProcessComponent } from '../comp-list/salaryproces/salaryprocess.component';
-import { Static } from 'src/app/enums/common/static';
 import { EmployeeAttendanceComponent } from '../comp-list/employee-attendance/employee-attendance.component';
+import { TableComponent } from '../../../reuse-components/table/table.component';
+import { Static } from '../../../enums/common/static';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-reports',
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, MatSelectModule, MatCardModule],
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss']
 })
@@ -66,7 +72,7 @@ export class ReportsComponent {
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
-    private environment: RuntimeConfigService,
+    private runtimeConfigService: RuntimeConfigService,
     private apiConfigService: ApiConfigService,
     public commonService: CommonService,
     private formBuilder: FormBuilder,
@@ -104,10 +110,10 @@ export class ReportsComponent {
         case 'purchasegst':
           this.getsuppliercodeList();
           break;
-           case 'pendingsales':
+        case 'pendingsales':
           this.getCustomerList();
           break;
-          case 'pendingpurchaseorders':
+        case 'pendingpurchaseorders':
           this.getsuppliercodeList();
           break;
         case 'pendingjobworkreport':
@@ -122,7 +128,7 @@ export class ReportsComponent {
   searchProcess() {
     this.tableData = null;
     this.tableComponent.defaultValues();
-    const costCenUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}`);
+    const costCenUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}`);
     this.apiService.apiGetRequest(costCenUrl)
       .subscribe(
         response => {
@@ -143,7 +149,7 @@ export class ReportsComponent {
 
   salarySearch() {
     const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-    const costCenUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Ledger/SalaryProcess/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+    const costCenUrl = String.Join('', environment.baseUrl, `Ledger/SalaryProcess/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     this.apiService.apiPostRequest(costCenUrl)
       .subscribe(
         response => {
@@ -158,7 +164,7 @@ export class ReportsComponent {
   }
 
   save() {
-    const addCompanyUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.getComponentData.registerUrl);
+    const addCompanyUrl = String.Join('', environment.baseUrl, this.getComponentData.registerUrl);
     this.apiService.apiPostRequest(addCompanyUrl, this.tableData)
       .subscribe(
         response => {
@@ -237,9 +243,9 @@ export class ReportsComponent {
       bpcategory: [true],
       partyAccount: [true],
       status: [true],
-      selected: [null, [Validators.required]],
-      fromDate: [null],
-      toDate: [null],
+      selected: [null],
+      fromDate: [null, [Validators.required]],
+      toDate: [null, [Validators.required]],
       vendorCode: ['-1']
 
     });
@@ -249,12 +255,25 @@ export class ReportsComponent {
 
   setValidator() {
 
-    if (this.routeParam == 'stockvaluation' || this.routeParam != 'pendingpurchaseorders' || this.routeParam != 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
-      this.modelFormData.controls['selected'].removeValidators(Validators.required);
-      this.modelFormData.controls['selected'].updateValueAndValidity();
-    } else {
+    if (this.routeParam == 'salaryprocess') {
       this.modelFormData.controls['selected'].addValidators(Validators.required);
       this.modelFormData.controls['selected'].updateValueAndValidity();
+      this.modelFormData.controls['fromDate'].removeValidators(Validators.required);
+      this.modelFormData.controls['fromDate'].updateValueAndValidity();
+      this.modelFormData.controls['toDate'].removeValidators(Validators.required);
+      this.modelFormData.controls['toDate'].updateValueAndValidity();
+    } else {
+      if (this.routeParam == 'stockvaluation' || this.routeParam != 'pendingpurchaseorders' || this.routeParam != 'pendingsales' || this.routeParam == 'pendingjobworkreport') {
+        this.modelFormData.controls['fromDate'].removeValidators(Validators.required);
+        this.modelFormData.controls['fromDate'].updateValueAndValidity();
+        this.modelFormData.controls['toDate'].removeValidators(Validators.required);
+        this.modelFormData.controls['toDate'].updateValueAndValidity();
+      } else {
+        this.modelFormData.controls['fromDate'].addValidators(Validators.required);
+        this.modelFormData.controls['fromDate'].updateValueAndValidity();
+        this.modelFormData.controls['toDate'].addValidators(Validators.required);
+        this.modelFormData.controls['toDate'].updateValueAndValidity();
+      }
     }
   }
 
@@ -408,12 +427,6 @@ export class ReportsComponent {
       this.submitted = true;
       return;
     }
-    if (!this.commonService.checkNullOrUndefined(this.modelFormData.value.selected) && this.modelFormData.value.selected.start) {
-      this.modelFormData.patchValue({
-        fromDate: this.commonService.formatDateValue(this.modelFormData.value.selected.start.$d),
-        toDate: this.commonService.formatDateValue(this.modelFormData.value.selected.end.$d, 1)
-      });
-    }
     this.print();
   }
 
@@ -455,39 +468,45 @@ export class ReportsComponent {
   }
 
   print() {
-    let getUrl
+    let fromDate = '';
+    let toDate = '';
+    if (!this.commonService.checkNullOrUndefined(this.modelFormData.value.fromDate)) {
+      fromDate = this.commonService.formatDateValue(this.modelFormData.value.fromDate),
+        toDate = this.commonService.formatDateValue(this.modelFormData.value.toDate)
+    }
+    let getUrl;
     if (this.routeParam == 'pendingjobworkreport') {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
     } else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward' || this.routeParam == 'purchaseanalysis') {
       const encodedMaterialCode = this.modelFormData.value.materialCode ? encodeURIComponent(this.modelFormData.value.materialCode) : '-1';
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}/${encodedMaterialCode}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}/${encodedMaterialCode}`);
     } else if (this.routeParam == 'VendorPayments' || this.routeParam == 'CustomerPayments') {
       const obj = this.bpgLists.find((d: any) => d.text == this.modelFormData.value.partyAccount);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.status) ? 'Y' : 'N'}/${this.modelFormData.value.bpcategory ? this.modelFormData.value.bpcategory : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.status) ? 'Y' : 'N'}/${this.modelFormData.value.bpcategory ? this.modelFormData.value.bpcategory : '-1'}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'employeeotreport' || this.routeParam == 'employeeattendance') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'AttendanceProcess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetAttendanceProcess/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `Reports/GetAttendanceProcess/${fromDate}/${toDate}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'salaryprocess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'salesgst') {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
     } else if (this.routeParam == 'purchasegst') {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
     } else if (this.routeParam == 'stockvaluation') {
       // Encode only if materialCode exists, otherwise use '-1'
       const encodedMaterialCode = this.modelFormData.value.materialCode ? encodeURIComponent(this.modelFormData.value.materialCode) : '-1';
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${encodedMaterialCode}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${encodedMaterialCode}`);
     } else if (this.routeParam == 'pendingsales') {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
-     } else if (this.routeParam == 'pendingpurchaseorders') {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
+    } else if (this.routeParam == 'pendingpurchaseorders') {
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
     }
     else {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}`);
     }
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
@@ -519,7 +538,7 @@ export class ReportsComponent {
                 }
                 tableResp.forEach(obj => {
                   const cols = [];
-                  Object.keys(this.environment.tableColumnsData[this.routeParam]).forEach(col => {
+                  Object.keys(this.runtimeConfigService.tableColumnsData[this.routeParam]).forEach(col => {
                     if (this.routeParam == 'employeeotreport' && col != 'staffid' && col != 'employeename' && col != 'otHrMin') {
                       col = col.substring(1);
                     }
@@ -527,13 +546,13 @@ export class ReportsComponent {
                     if ((obj[col] instanceof Array)) {
                       let arr = [];
                       obj[col].forEach(key => {
-                        Object.keys(this.environment.tableColumnsData[this.routeParam][col]).forEach(col1 => {
-                          arr.push({ val: key[col1], label: col1, type: this.environment.tableColumnsData[this.routeParam][key] });
+                        Object.keys(this.runtimeConfigService.tableColumnsData[this.routeParam][col]).forEach(col1 => {
+                          arr.push({ val: key[col1], label: col1, type: this.runtimeConfigService.tableColumnsData[this.routeParam][key] });
                         })
                       })
-                      nObj = { val: arr, label: col, type: this.environment.tableColumnsData[this.routeParam][col] };
+                      nObj = { val: arr, label: col, type: this.runtimeConfigService.tableColumnsData[this.routeParam][col] };
                     } else {
-                      nObj = { val: obj[col], label: col, type: this.environment.tableColumnsData[this.routeParam][col] };
+                      nObj = { val: obj[col], label: col, type: this.runtimeConfigService.tableColumnsData[this.routeParam][col] };
                     }
                     cols.push(nObj);
                   })

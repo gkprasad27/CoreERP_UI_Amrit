@@ -8,8 +8,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from '../reuse-components/delete-item/delete-item.component';
 
-declare var require: any
-const FileSaver = require('file-saver');
+// declare var require: any
+// const FileSaver = require('file-saver');
 
 declare global {
   interface Navigator {

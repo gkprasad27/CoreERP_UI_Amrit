@@ -8,18 +8,31 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { AlertService } from '../../../../services/alert.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-;
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonService } from '../../../../services/common.service';
 import { StatusCodes } from '../../../../enums/common/common';
 import { DatePipe, formatDate } from '@angular/common';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-permissionrequest',
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './permissionrequest.component.html',
   styleUrls: ['./permissionrequest.component.scss']
 })

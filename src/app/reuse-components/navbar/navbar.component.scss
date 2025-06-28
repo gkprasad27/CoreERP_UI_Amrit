@@ -1,9 +1,9 @@
-@import "../../../reuse";
+@use "../../../reuse" as reuse;
 
 mat-toolbar {
   min-height: 50px;
   height: 50px;
-  background-color: $color-orange;
+  background-color: reuse.$color-orange;
 }
 #user{
   background-color: #17b978;

@@ -19,13 +19,19 @@
                 </mat-form-field>
 
 
-                <div class="p-2 range-picker" *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' ">
-                    <input type="text" ngxDaterangepickerMd startKey="start"
-                        [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}" endKey="end" placeholder="Choose date"
-                        formControlName="selected" class="form-control" />
-                    <div class="error_text mt-0" *ngIf="(modelFormData.controls.selected.dirty && modelFormData.controls.selected.touched && modelFormData.controls.selected.errors) ||
-                                                              (submitted && modelFormData.controls.selected.errors)">
-                        <div class="error_text mt-0" *ngIf="modelFormData.controls.selected.errors.required">
+                <div class="p-2" *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' ">
+                    <mat-form-field>
+                        <mat-label>Choose date</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate placeholder="Start date" formControlName="fromDate">
+                            <input matEndDate placeholder="End date" formControlName="toDate">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                    <div class="error_text mt-0" *ngIf="(modelFormData.controls.fromDate.dirty && modelFormData.controls.fromDate.touched && modelFormData.controls.fromDate.errors) ||
+                                                              (submitted && modelFormData.controls.fromDate.errors)">
+                        <div class="error_text mt-0" *ngIf="modelFormData.controls.fromDate.errors.required">
                             This feild is required
                         </div>
                     </div>

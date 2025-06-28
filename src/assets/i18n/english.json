@@ -1680,7 +1680,7 @@
     "type": "QC Type",
     "parameter": "Parameter",
     "spec": "Specification",
-    "minval": "Tolerance",
+    "minval": "Minimum Value",
     "maxval": "Maximum Value",
     "uom": "UOM",
     "description": "Parameter",
@@ -1971,7 +1971,6 @@
     "requisitionDate": "Requisition Date",
     "bomorderNumber": "BOM Order Number",
     "status": "Status",
-    "drawingNo":"Drawing No",
     "materialCode": "Material Code",
     "materialName": "Material Name",
     "description": "Description",
@@ -2196,9 +2195,7 @@
     "delete": "Delete",
     "action": "Action",
      "dimentions":"Dimentions",
-     "mechineNumber":"Mechine Number",
-     "uom":"UOM",
-    "hsnsac":"HSN Code"
+     "mechineNumber":"Mechine Number"
   },
   "goodsreceipts": {
     "checkAll": "Select",
@@ -3225,7 +3222,6 @@
     "invoiceDate": "Invoice Date",
     "invoiceNo": "Invoice No",
     "productcode": "Product Code",
-    "customerName":"Customer Name",
     "qty": "Qty",
     "rate": "Rate",
     "grossAmount": "Gross Amount",
@@ -3263,7 +3259,6 @@
     "purchaseOrderNo": "Purchase Order No",
     "materialCode": "Material Code",
     "materialName": "Material Name",
-    "poQty":"PO QTY",
     "receivedQty": "Received Qty",
     "netweight": "Net Weight",
     "lotNo": "Lot No",
@@ -3288,6 +3283,7 @@
   },
   "pendingpurchaseorders": {
     "title": "Pending Purchase Orders",
+    "customerPONumber": "Customer PO Number",
     "purchaseOrderNo": "Purchase Order No",
     "saleOrderNo": "Sale Order Number",
     "poDate": "PO Date",
@@ -3295,7 +3291,6 @@
     "materialCode": "Material Code",
     "description": "Material Name",
     "poQty": "Qty",
-    "price":"Price",
     "targetDate": "Target Date",
     "remarks":"Remarks"
   },
@@ -3371,8 +3366,6 @@
   "supplierGSTIN": "GST Number", 
   "poNo": "PO Number",
   "poDate": "PO Date", 
-  "invoiceNo":"Invoice Number",
-  "receivedDate":"Receieved Date",
   "taxableValue": "Taxable Value",
   "cgst_12": "CGST-6",
   "sgst_12": "SGST-6",

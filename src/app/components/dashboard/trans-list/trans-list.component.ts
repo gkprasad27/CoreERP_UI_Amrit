@@ -11,8 +11,22 @@ import { StatusCodes } from '../../../enums/common/common';
 import { TransListService } from './trans-list.service';
 import { CommonService } from '../../../services/common.service';
 
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-trans-list',
+  imports: [ CommonModule, ReactiveFormsModule, TransTableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './trans-list.component.html',
   styleUrls: ['./trans-list.component.scss']
 })
@@ -30,7 +44,6 @@ export class TransListComponent implements OnInit, OnDestroy {
     // public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
-    private environment: RuntimeConfigService,
     private apiConfigService: ApiConfigService,
     private transListService: TransListService,
     private commonService: CommonService,

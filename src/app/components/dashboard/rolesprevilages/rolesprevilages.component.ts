@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
+import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ApiConfigService } from '../../../services/api-config.service';
 import { ApiService } from '../../../services/api.service';
@@ -11,9 +11,15 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { String } from 'typescript-string-operations';
 import { CommonService } from '../../../services/common.service';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-rolesprevilages',
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, 
+    MatPaginator, MatTableModule, MatCardModule, MatSelectModule ],
   templateUrl: './rolesprevilages.component.html',
   styleUrls: ['./rolesprevilages.component.scss']
 })

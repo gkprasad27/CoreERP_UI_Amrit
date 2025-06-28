@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonService } from '../../services/common.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { String } from 'typescript-string-operations';
@@ -9,9 +9,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AlertService } from '../../services/alert.service';
 import { Static } from '../../enums/common/static';
 import { SnackBar, StatusCodes } from '../../enums/common/common';
+import { CommonModule } from '@angular/common';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-navbar',
+  imports: [CommonModule, RouterModule, TranslatePipe, MatToolbarModule, MatButtonModule, MatIconModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
