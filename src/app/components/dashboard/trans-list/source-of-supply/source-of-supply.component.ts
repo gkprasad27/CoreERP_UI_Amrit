@@ -33,9 +33,14 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class SourceOfSupplyComponent implements OnInit {
 
+  @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
+
   // form control
   formData: FormGroup;
-  sendDynTableData: any;
+  formData1: FormGroup;
+
+
+  tableData: any[] = [];
 
   // header props
 
@@ -43,11 +48,11 @@ export class SourceOfSupplyComponent implements OnInit {
   costunitList = [];
   supplyCodeList = [];
   employeesList = [];
-
+  msizeList = [];
 
   // details props
-  tableData = [];
-  dynTableProps: any;
+  // tableData = [];
+  // dynTableProps: any;
   routeEdit = '';
   stateList: any;
   bpaList: any;
@@ -60,7 +65,8 @@ export class SourceOfSupplyComponent implements OnInit {
     private alertService: AlertService,
     private spinner: NgxSpinnerService,
     public route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private datepipe: DatePipe
   ) {
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
@@ -69,175 +75,147 @@ export class SourceOfSupplyComponent implements OnInit {
 
   ngOnInit() {
     this.formDataGroup();
-    this.getmaterialData();
+    this.allApis();
   }
 
-
-  tablePropsFunc() {
-    return {
-      tableData: {
-        materialCode: {
-          value: null, type: 'dropdown', list: this.materialList, id: 'id', text: 'text', displayMul: true, width: 100
-        },
-        description: {
-          value: null, type: 'text', width: 100, maxLength: 50
-        },
-        priceperUnit: {
-          value: null, type: 'text', width: 100, maxLength: 50
-        },
-        unit: {
-          value: null, type: 'dropdown', list: this.costunitList, id: 'id', text: 'text', displayMul: true, width: 100
-        },
-        lastSupplyPrice: {
-          value: null, type: 'text', width: 100, maxLength: 50
-        },
-        lastSupplyOn: {
-          value: new Date(), type: 'datepicker', width: 100, disabled: true
-        },
-        ponumber: {
-          value: null, type: 'text', width: 100, maxLength: 50
-        },
-        podate: {
-          value: new Date(), type: 'datepicker', width: 100, disabled: true
-        },
-        delete: {
-          type: 'delete', width: 10
-        }
-      },
-
-      formControl: {
-        ponumber: [null, [Validators.required]],
-      }
-    };
-  }
 
   formDataGroup() {
     this.formData = this.formBuilder.group({
       supplierCode: [null, [Validators.required]],
       supplierName: [null],
-      phone: [null],
-      mobile: [null],
-      email: [null],
-      place: [null],
-      state: [null],
-      transportMethod: [null],
+      phone: [{ value: '', disabled: true }],
+      mobile: [{ value: '', disabled: true }],
+      email: [{ value: '', disabled: true }],
+      place: [{ value: '', disabled: true }],
+      state: [{ value: '', disabled: true }],
+      transportMethod: [{ value: '', disabled: true }],
       deliveryTime: [null],
-      contactPerson: [null],
+      contactPerson: [{ value: '', disabled: true }],
       narration: [null],
+    });
+
+    this.formData1 = this.formBuilder.group({
+      materialCode: [''],
+      description: [''],
+      priceperUnit: [''],
+      unit: [''],
+      lastSupplyPrice: [''],
+      lastSupplyOn: [''],
+      ponumber: [''],
+      podate: [''],
+      deliveryDays: [''],
+      paymentDueDays: [''],
+      id: [0],
+      highlight: false,
+      action: 'editDelete',
+      index: 0
     });
   }
 
-
-  getmaterialData() {
-    const getmaterialUrl = String.Join('/', this.apiConfigService.getMaterialList);
-    this.apiService.apiGetRequest(getmaterialUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.materialList = res.response['materialList'];
-            }
-          }
-          this.getcostunitsData();
-        });
-  }
-
-  getcostunitsData() {
-    const getsecondelementUrl = String.Join('/', this.apiConfigService.getcostingunitsList);
-    this.apiService.apiGetRequest(getsecondelementUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.costunitList = res.response['costunitList'];
-            }
-          }
-          this.getstateList();
-        });
-  }
-  getstateList() {
-    const getstateList = String.Join('/', this.apiConfigService.getstatesList);
-    this.apiService.apiGetRequest(getstateList)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.stateList = res.response['StatesList'];
-            }
-          }
-          this.getsuppliercodeList();
-        });
-  }
-  getsuppliercodeList() {
+  // apis
+  allApis() {
     let obj = JSON.parse(localStorage.getItem("user"));
     const getsuppliercodeList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList, obj.companyCode);
-    this.apiService.apiGetRequest(getsuppliercodeList)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.bpaList = res.response['bpaList'];
-              this.bpaList = res.response['bpaList'].filter(resp => resp.bpTypeName == 'Domestic vendors')
+    const getmaterialUrl = String.Join('/', this.apiConfigService.getMaterialList);
+    const getmsizeList = String.Join('/', this.apiConfigService.getmsizeList);
 
-            }
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getsuppliercodeList),
+        this.apiService.apiGetRequest(getmaterialUrl),
+        this.apiService.apiGetRequest(getmsizeList)
+      ]).subscribe(([supplierRes, materialRes, getmsizeRes]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(supplierRes) && supplierRes.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(supplierRes.response)) {
+            this.bpaList = supplierRes.response['bpaList'].filter(resp => resp.bpTypeName == 'Vendor');
           }
-          this.getplantList();
-        });
-  }
-  getplantList() {
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
-    this.apiService.apiGetRequest(getEmployeeList)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.employeesList = res.response['emplist'];
-            }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(materialRes) && materialRes.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(materialRes.response)) {
+            this.materialList = materialRes.response['materialList'];
           }
-          this.dynTableProps = this.tablePropsFunc();
-          if (this.routeEdit != '') {
-            this.getSourceOfSupplyDetails(this.routeEdit);
+        }
+
+        if (!this.commonService.checkNullOrUndefined(getmsizeRes) && getmsizeRes.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(getmsizeRes.response)) {
+            this.msizeList = getmsizeRes.response['msizeList'];
           }
-        });
+        }
+
+      });
+    });
   }
 
-  getSourceOfSupplyDetails(val) {
-    const cashDetUrl = String.Join('/', this.apiConfigService.getsupplierDetail, val);
-    this.apiService.apiGetRequest(cashDetUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.formData.setValue(res.response['ssmasters']);
-              this.sendDynTableData = { type: 'edit', data: res.response['ssDetail'] };
-              this.formData.disable();
-            }
-          }
-        });
+  supplierCodeChange() {
+    const selectedSupplier = this.bpaList.find(
+      (supplier: any) => supplier.bpnumber === this.formData.value.supplierCode
+    );
+    if (selectedSupplier) {
+      this.formData.patchValue(selectedSupplier);
+      this.formData.patchValue({
+        supplierName: selectedSupplier.name || null
+      });
+    }
   }
 
-
-  emitColumnChanges(data) {
-    this.tableData = data.data;
+  materialCodehChange() {
+    // const obj = this.materialList.find((m: any) => m.id == this.formData.value.materialCode);
+    // if (obj && obj.bom)
+    //   this.formData.patchValue({
+    //     bom: obj.bom,
+    //   })
   }
 
-
-  back() {
-    this.router.navigate(['dashboard/transaction/sourceofsupply'])
+  saveForm() {
+    if (this.formData1.invalid) {
+      return;
+    }
+    this.formData1.patchValue({
+      highlight: true
+    });
+    let data: any = this.tableData;
+    this.tableData = null;
+    this.tableComponent.defaultValues();
+    const obj = data.find((d: any) => d.materialCode == this.formData1.value.materialCode)
+    if (this.formData1.value.index == 0 && !obj) {
+      this.formData1.patchValue({
+        index: data ? (data.length + 1) : 1
+      });
+      data = [this.formData1.value, ...data];
+    } else {
+      data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
+    }
+    setTimeout(() => {
+      this.tableData = data;
+    });
+    this.resetForm();
   }
+
+  resetForm() {
+    this.formData1.reset();
+    this.formData1.patchValue({
+      index: 0,
+      action: 'editDelete',
+      id: 0
+    });
+  }
+
+  editOrDeleteEvent(value) {
+    if (value.action === 'Delete') {
+      this.tableComponent.defaultValues();
+      this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
+    } else {
+      this.formData1.patchValue(value.item);
+    }
+  }
+
 
   save() {
-    this.tableData = this.commonService.formatTableData(this.tableData);
-    if (this.tableData.length == 0 && this.formData.invalid) {
+    if (this.tableData.length == 0 || this.formData.invalid) {
       return;
     }
     this.saveSourcesupply();
@@ -245,7 +223,14 @@ export class SourceOfSupplyComponent implements OnInit {
 
   saveSourcesupply() {
     const addssapply = String.Join('/', this.apiConfigService.addsupplierreq);
-    const requestObj = { ssHdr: this.formData.value, ssDtl: this.tableData };
+    const allValues = this.formData.getRawValue();
+    const arr = this.tableData;
+    arr.forEach((a: any) => {
+      a.podate = a.podate ? this.datepipe.transform(a.podate, 'MM-dd-yyyy') : '';
+      a.lastSupplyOn = a.lastSupplyOn ? this.datepipe.transform(a.lastSupplyOn, 'MM-dd-yyyy') : '';
+      a.id = this.routeEdit ? a.id : 0
+    })
+    const requestObj = { qsHdr: allValues, qsDtl: arr };
     this.apiService.apiPostRequest(addssapply, requestObj).subscribe(
       response => {
         const res = response;
@@ -258,6 +243,12 @@ export class SourceOfSupplyComponent implements OnInit {
           this.spinner.hide();
         }
       });
+  }
+
+  reset() {
+    this.tableData = [];
+    this.formData.reset();
+    this.tableComponent.defaultValues();
   }
 
   return() {
@@ -273,10 +264,10 @@ export class SourceOfSupplyComponent implements OnInit {
       });
   }
 
-  reset() {
-    this.tableData = [];
-    this.formData.reset();
-    this.sendDynTableData = { type: 'reset', data: this.tableData };
+  back() {
+    this.router.navigate(['dashboard/transaction/sourceofsupply'])
   }
+
+
 
 }

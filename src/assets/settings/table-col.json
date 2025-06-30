@@ -1690,8 +1690,11 @@
     "lastSupplyPrice": "Last Supply Price",
     "lastSupplyOn": "LastSupply On",
     "ponumber": "PO Number",
+    "deliveryDays": "Delivery Days",
+    "paymentDueDays": "Payment Due Days",
     "podate": "PO Date",
-    "delete": "Delete"
+    "delete": "Delete",
+    "action": "Action"
   },
   "supplierquotation": {
     "title": "Quotations",
