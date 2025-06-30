@@ -1,8 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-save-item',
+  imports: [ CommonModule, TranslatePipe, MatDividerModule ],
   templateUrl: './save-item.component.html',
   styleUrls: ['./save-item.component.scss']
 })

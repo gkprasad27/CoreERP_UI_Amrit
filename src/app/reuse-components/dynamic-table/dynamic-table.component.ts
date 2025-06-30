@@ -1,14 +1,21 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input, OnDestroy, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AddOrEditService } from '../../components/dashboard/comp-list/add-or-edit.service';
 import { RuntimeConfigService } from '../../services/runtime-config.service';
 import { CommonService } from '../../services/common.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MatInputModule } from '@angular/material/input';
+
 @Component({
   selector: 'app-dynamic-table',
+  imports: [ CommonModule, TranslatePipe, BsDropdownModule,
+      MatTableModule, MatInputModule],
   templateUrl: './dynamic-table.component.html',
   styleUrls: ['./dynamic-table.component.scss']
 })

@@ -1,9 +1,7 @@
-@import '../../../reuse.scss';
-
-
+@use "../../../_reuse" as reuse;
 
 .boxshadow {
-  box-shadow: 0 15px 20px $background-shadow;
+  box-shadow: 0 15px 20px reuse.$background-shadow;
   background-color: rgb(170, 200, 206);
   
 }

@@ -1,6 +1,0 @@
-{
-    "serverUrl": "http://fdcvm10171/",
-    "env":"PROD",
-    "errorMsg":"7320011: Site configuration is missing in RMX",
-	"invalidUser" :"Different user already loggedin."
-}

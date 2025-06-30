@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { SnackBar } from 'src/app/enums/common/common';
-import { Static } from 'src/app/enums/common/static';
-import { AlertService } from 'src/app/services/alert.service';
-import { CommonService } from 'src/app/services/common.service';
-import { FileuploadPreviewComponent } from './fileupload-preview/fileupload-preview.component';
+import { SnackBar } from '../../enums/common/common';
+import { Static } from '../../enums/common/static';
+import { AlertService } from '../../services/alert.service';
+import { CommonService } from '../../services/common.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-file-upload',
+  imports: [ CommonModule ],
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })

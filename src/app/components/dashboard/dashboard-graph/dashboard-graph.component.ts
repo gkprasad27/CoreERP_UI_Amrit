@@ -1,18 +1,25 @@
 import { Component } from '@angular/core';
 
 import * as Highcharts from 'highcharts';
-import { ApiConfigService } from 'src/app/services/api-config.service';
+import { ApiConfigService } from '../../../services/api-config.service';
 
 import { RuntimeConfigService } from '../../../services/runtime-config.service';
 import { String } from 'typescript-string-operations';
-import { ApiService } from 'src/app/services/api.service';
-import { CommonService } from 'src/app/services/common.service';
-import { StatusCodes } from 'src/app/enums/common/common';
+import { ApiService } from '../../../services/api.service';
+import { CommonService } from '../../../services/common.service';
+import { StatusCodes } from '../../../enums/common/common';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+import { HighchartsChartComponent } from 'highcharts-angular';
+import { CommonModule } from '@angular/common';
+import { TableComponent } from '../../../reuse-components/table/table.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-dashboard-graph',
+  imports: [CommonModule, HighchartsChartComponent, TableComponent, MatCardModule, MatButtonModule],
   templateUrl: './dashboard-graph.component.html',
   styleUrls: ['./dashboard-graph.component.scss']
 })
@@ -38,7 +45,7 @@ export class DashboardGraphComponent {
     this.RuntimeConfigService.tableDataLoaded.subscribe((t: any) => {
       if (t) {
         this.getEmpPresent();
-    this.getcompaniesList();
+        this.getcompaniesList();
       }
     })
   }
@@ -57,6 +64,9 @@ export class DashboardGraphComponent {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.tableData1 = res.response['EmpPresent'];
               this.chartOptions1 = {
+                accessibility: {
+                    enabled: false
+                },
                 title: {
                   text: 'Employess'
                 },
@@ -126,6 +136,9 @@ export class DashboardGraphComponent {
                   }
                 }
                 this.chartOptions = {
+                  accessibility: {
+                    enabled: false
+                  },
                   title: {
                     text: data.reportTitle
                   },

@@ -28,7 +28,6 @@ export class PrimaryComponent implements OnInit {
     // public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
-    private environment: RuntimeConfigService,
     private primaryService: PrimaryService,
     private commonService: CommonService,
     private componentFactoryResolver: ComponentFactoryResolver,

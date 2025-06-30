@@ -4,9 +4,16 @@
   <mat-card-content  class="my-2 overscroll-none" >
     <form id="headerForm" [formGroup]="headerForm" autocomplete="off">
       <div id="header" class="d-flex my-3 py-1 mt-0 m-40">
-        <div class="p-2 range-picker">
-          <input type="text" ngxDaterangepickerMd startKey="start" [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}"
-            endKey="end" placeholder="Choose date" formControlName="selected" class="form-control" />
+        <div class="p-2">
+          <mat-form-field>
+            <mat-label>Choose date</mat-label>
+            <mat-date-range-input [rangePicker]="picker" >
+              <input matStartDate placeholder="Start date" formControlName="FromDate">
+              <input matEndDate placeholder="End date" formControlName="ToDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
         </div>
         <div>
           <mat-form-field>

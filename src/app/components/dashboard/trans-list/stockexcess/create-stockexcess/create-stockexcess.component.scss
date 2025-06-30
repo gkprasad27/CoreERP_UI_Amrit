@@ -1,5 +1,5 @@
 
-@import "../../../../../../reuse";
+@use "../../../../../../reuse" as reuse;
 
 ::ng-deep typeahead-container {
   max-height: 300px !important;
@@ -14,13 +14,13 @@
   }
   & > tbody  {
     & tr {
-      border-bottom: 1px solid $color-ddd;
+      border-bottom: 1px solid reuse.$color-ddd;
     }
     & td {
       font-size: 12px;
       vertical-align: middle;
             // border: none !important;
-      border: 1px solid $color-gray;
+      border: 1px solid reuse.$color-gray;
       text-align: center;
     }
     & th {
@@ -28,16 +28,16 @@
       // border: none !important;
     }
     & tr:nth-child(even) {
-    background-color: $color-f9f9f9
+    background-color: reuse.$color-f9f9f9
     }
     & tr:nth-child(odd) {
-      background-color: $color-white
+      background-color: reuse.$color-white
       }
       & tr:nth-child(even):hover {
-        background-color: $color-f9f9f9
+        background-color: reuse.$color-f9f9f9
         }
         & tr:nth-child(odd):hover {
-          background-color: $color-f9f9f9
+          background-color: reuse.$color-f9f9f9
           }
   }
 }
@@ -52,8 +52,8 @@
 }
 
 .table th {
-  background-color: $color-blue;
-  color: $color-white;
+  background-color: reuse.$color-blue;
+  color: reuse.$color-white;
 }
 
 .table tr {

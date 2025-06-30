@@ -3,7 +3,7 @@ import {
   ChangeDetectorRef, Output, EventEmitter, AfterViewInit, OnDestroy, HostListener
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { CommonService } from '../../services/common.service';
@@ -13,11 +13,20 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
 import { User } from '../../models/common/user';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { RuntimeConfigService } from '../../services/runtime-config.service';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-table',
+  imports: [ CommonModule, TranslatePipe, BsDropdownModule,
+    MatCardModule, MatPaginatorModule, MatTableModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })

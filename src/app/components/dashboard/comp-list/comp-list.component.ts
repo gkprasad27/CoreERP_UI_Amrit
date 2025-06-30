@@ -15,9 +15,12 @@ import { RuntimeConfigService } from '../../../services/runtime-config.service';
 import { ApiConfigService } from '../../../services/api-config.service';
 import { AddOrEditService } from './add-or-edit.service';
 import { CommonService } from '../../../services/common.service';
+import { CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-comp-list',
+  imports: [ CommonModule, TableComponent ],
   templateUrl: './comp-list.component.html',
   styleUrls: ['./comp-list.component.scss']
 })
@@ -36,7 +39,6 @@ export class CompListComponent implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
     private compListService: CompListService,
-    private environment: RuntimeConfigService,
     private apiConfigService: ApiConfigService,
     private addOrEditService: AddOrEditService,
     private commonService: CommonService,
@@ -74,9 +76,9 @@ export class CompListComponent implements OnInit, OnDestroy {
     if(this.tableUrl.url == "MaterialMaster/GetMaterialMasterList" || this.tableUrl.url == "BusienessPartnerAccount/GetBusienessPartnerAccountList" 
     || this.tableUrl.url == "Employee/GetEmployeeList" || this.tableUrl.url == "Common/GetPOQList" || this.tableUrl.url == "Common/GetRejectionList") {
       let obj = JSON.parse(localStorage.getItem("user"));
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.tableUrl.url,  `/${obj.companyCode}`);
+      getUrl = String.Join('', environment.baseUrl, this.tableUrl.url,  `/${obj.companyCode}`);
     } else {
-      getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.tableUrl.url);
+      getUrl = String.Join('', environment.baseUrl, this.tableUrl.url);
     }
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
@@ -136,7 +138,7 @@ export class CompListComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       if (!this.commonService.checkNullOrUndefined(result)) {
         this.spinner.show();
-        const deleteUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.tableUrl.deleteUrl);
+        const deleteUrl = String.Join('', environment.baseUrl, this.tableUrl.deleteUrl);
         const deleteParamUrl = String.Join('/', deleteUrl, result.item[this.tableUrl.primaryKey]);
         this.apiService.apiDeleteRequest(deleteParamUrl, result.item)
           .subscribe(

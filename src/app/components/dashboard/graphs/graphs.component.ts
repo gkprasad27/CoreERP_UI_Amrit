@@ -9,15 +9,24 @@ import { AlertService } from '../../../services/alert.service';
 import { RuntimeConfigService } from '../../../services/runtime-config.service';
 import { ApiConfigService } from '../../../services/api-config.service';
 import { CommonService } from '../../../services/common.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import * as Highcharts from 'highcharts';
 import { Options } from "highcharts";
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { TableComponent } from '../../../reuse-components/table/table.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { environment } from '../../../../environments/environment';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @Component({
   selector: 'app-graphs',
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TableComponent, MatCardModule, MatSelectModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule ],
   templateUrl: './graphs.component.html',
   styleUrls: ['./graphs.component.scss']
 })
@@ -46,8 +55,8 @@ export class GraphsComponent {
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
-    private environment: RuntimeConfigService,
     private apiConfigService: ApiConfigService,
+    private runtimeConfigService: RuntimeConfigService,
     private translate: TranslateService,
     private commonService: CommonService,
     private formBuilder: FormBuilder,
@@ -68,17 +77,18 @@ export class GraphsComponent {
   model() {
     this.modelFormData = this.formBuilder.group({
       companyCode: [null, [Validators.required]],
-      selected: [null, [Validators.required]],
-      fromDate: [null],
-      toDate: [null],
+      fromDate: [null, [Validators.required]],
+      toDate: [null, [Validators.required]],
     });
     this.setValidator();
   }
 
 
   setValidator() {
-    this.modelFormData.controls['selected'].addValidators(Validators.required);
-    this.modelFormData.controls['selected'].updateValueAndValidity();
+    this.modelFormData.controls['fromDate'].addValidators(Validators.required);
+    this.modelFormData.controls['fromDate'].addValidators(Validators.required);
+    this.modelFormData.controls['toDate'].updateValueAndValidity();
+    this.modelFormData.controls['toDate'].updateValueAndValidity();
   }
 
   getcompaniesList() {
@@ -125,19 +135,19 @@ export class GraphsComponent {
       this.submitted = true;
       return;
     }
-    if (!this.commonService.checkNullOrUndefined(this.modelFormData.value.selected) && this.modelFormData.value.selected.start) {
-      this.modelFormData.patchValue({
-        fromDate: this.commonService.formatDateValue(this.modelFormData.value.selected.start.$d),
-        toDate: this.commonService.formatDateValue(this.modelFormData.value.selected.end.$d)
-      });
-    }
     this.tableData = null;
     this.print();
   }
 
 
   print() {
-    let getUrl = String.Join('', this.environment.runtimeConfig.serverUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromDate}/${this.modelFormData.value.toDate}/${this.modelFormData.value.companyCode}`);
+    let fromDate = '';
+    let toDate = '';
+    if (!this.commonService.checkNullOrUndefined(this.modelFormData.value.fromDate)) {
+        fromDate = this.commonService.formatDateValue(this.modelFormData.value.fromDate),
+        toDate = this.commonService.formatDateValue(this.modelFormData.value.toDate)
+    }
+    let getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}`);
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
         response => {
@@ -150,7 +160,7 @@ export class GraphsComponent {
 
                 const categories = this.tableData.map((d: any) => d.monthYear);
                 let series = [];
-                for (const key in this.environment.tableColumnsData[this.routeParam]) {
+                for (const key in this.runtimeConfigService.tableColumnsData[this.routeParam]) {
                   // tslint:disable-next-line: prefer-for-of
                   if (key != 'monthYear') {
                     series.push({ name: data[key], data: this.tableData.map((d: any) => d[key]), type: this.getChartName() })

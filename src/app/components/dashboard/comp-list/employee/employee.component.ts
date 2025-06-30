@@ -3,19 +3,32 @@ import { String } from 'typescript-string-operations';
 import { ApiService } from '../../../../services/api.service';
 
 import { AlertService } from '../../../../services/alert.service';
-
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { SnackBar, StatusCodes } from '../../../../enums/common/common';
-import { CommonService } from 'src/app/services/common.service';
+import { CommonService } from '../../../../services/common.service';
 import { AddOrEditService } from '../add-or-edit.service';
-import { Static } from 'src/app/enums/common/static';
+import { Static } from '../../../../enums/common/static';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { NonEditableDatepicker } from '../../../../directives/format-datepicker';
 
 @Component({
   selector: 'app-employee',
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss']
 })

@@ -1,11 +1,11 @@
-@import "../../../../../reuse";
+@use "../../../../../reuse" as reuse;
 
 :host ::ng-deep table {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   &>tbody {
     & tr {
-      border-bottom: 1px solid $color-ddd;
+      border-bottom: 1px solid reuse.$color-ddd;
     }
 
     & td {
@@ -20,19 +20,19 @@
     }
 
     & tr:nth-child(even) {
-      background-color: $color-f9f9f9
+      background-color: reuse.$color-f9f9f9
     }
 
     & tr:nth-child(odd) {
-      background-color: $color-white
+      background-color: reuse.$color-white
     }
 
     & tr:nth-child(even):hover {
-      background-color: $color-f9f9f9
+      background-color: reuse.$color-f9f9f9
     }
 
     & tr:nth-child(odd):hover {
-      background-color: $color-f9f9f9
+      background-color: reuse.$color-f9f9f9
     }
   }
 }
@@ -48,8 +48,8 @@
 }
 
 .table th {
-  background-color: $color-blue;
-  color: $color-white;
+  background-color: reuse.$color-blue;
+  color: reuse.$color-white;
 }
 
 .table tr {
@@ -63,7 +63,7 @@
   & input {
     border: none;
     border-radius: unset;
-    border-bottom: 1px solid $color-color;
+    border-bottom: 1px solid reuse.$color-color;
     padding: 0rem;
     font-size: 0.9rem;
   }

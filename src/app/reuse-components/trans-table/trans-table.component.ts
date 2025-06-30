@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, ViewChild, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatTableDataSource, MatTable, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { RuntimeConfigService } from '../../services/runtime-config.service';
 import { String } from 'typescript-string-operations';
 import { AddOrEditService } from '../../components/dashboard/comp-list/add-or-edit.service';
@@ -16,15 +16,24 @@ import { TransListService } from '../../components/dashboard/trans-list/trans-li
 import { AlertService } from '../../services/alert.service';
 import { Static } from '../../enums/common/static';
 import { CommonService } from '../../services/common.service';
-import * as moment from 'moment';
+import { CommonModule } from '@angular/common';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-trans-table',
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe,
+    MatCardModule, MatPaginatorModule, MatTableModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule
+  ],
   templateUrl: './trans-table.component.html',
   styleUrls: ['./trans-table.component.scss']
 })
 export class TransTableComponent implements OnInit {
-  selectedDate = { start: moment().add(0, 'day'), end: moment().add(0, 'day') };
 
   // route
   routeParam: any;
@@ -71,7 +80,6 @@ export class TransTableComponent implements OnInit {
     private alertService: AlertService
   ) {
     this.headerForm = this.formBuilder.group({
-      selected: [null],
       FromDate: [null],
       ToDate: [null],
       searchCriteria: [null],
@@ -88,12 +96,6 @@ export class TransTableComponent implements OnInit {
   }
 
   search() {
-    if (!this.commonService.checkNullOrUndefined(this.headerForm.value.selected)) {
-      this.headerForm.patchValue({
-        FromDate: this.commonService.formatDate(this.headerForm.value.selected.start.$d),
-        ToDate: this.commonService.formatDate(this.headerForm.value.selected.end.$d)
-      });
-    }
     this.getTableList();
   }
 
@@ -108,8 +110,13 @@ export class TransTableComponent implements OnInit {
     this.headerForm.patchValue({
       companyCode: obj.companyCode
     })
+    const newObj = this.headerForm.value;
+    if (!this.commonService.checkNullOrUndefined(this.headerForm.value.FromDate)) {
+      newObj.FromDate = this.commonService.formatDate(this.headerForm.value.FromDate);
+      newObj.ToDate = this.commonService.formatDate(this.headerForm.value.ToDate);
+    }
     const getInvoiceListUrl = String.Join('/', this.transListService.getDynComponents(this.routeParam).tableUrl);
-    this.apiService.apiPostRequest(getInvoiceListUrl, this.headerForm.value).subscribe(
+    this.apiService.apiPostRequest(getInvoiceListUrl, newObj).subscribe(
       response => {
         this.spinner.hide();
         const res = response;
@@ -179,11 +186,11 @@ export class TransTableComponent implements OnInit {
         }
       }
 
-      if(this.routeParam == 'GoodsReceiptApproval' || this.routeParam == 'PurchaseorderApproval' || this.routeParam=='saleorderapproval') {
-        this.columnDefinitions.unshift({ def: "checkbox", hide : true, label : ""})
+      if (this.routeParam == 'GoodsReceiptApproval' || this.routeParam == 'PurchaseorderApproval' || this.routeParam == 'saleorderapproval') {
+        this.columnDefinitions.unshift({ def: "checkbox", hide: true, label: "" })
       }
 
-      
+
 
     }
 
@@ -209,7 +216,7 @@ export class TransTableComponent implements OnInit {
 
   setClass(element: any) {
     if (this.routeParam == 'goodsreceipts') {
-        return element.status == "Material Received" ? 'background-green' : '';
+      return element.status == "Material Received" ? 'background-green' : '';
     }
     if (this.routeParam == 'saleorder') {
       if (new Date(element.dateofSupply) < new Date() && element.status != "Completed") {
@@ -252,8 +259,8 @@ export class TransTableComponent implements OnInit {
     if (this.routeParam === 'GoodsReceiptApproval') {
       registerInvoiceUrl = String.Join('/', this.apiConfigService.saveGoodsReceipt);
     }
-    const requestObj = this.tableData.filter((f: any) => f.checked).map((t: any) => { return { ...t, approvalStatus: flag, approvedBy: user.userName, addWho: user.userName, editWho: user.userName }});
-    this.apiService.apiPostRequest(registerInvoiceUrl, {dtl:requestObj}).subscribe(
+    const requestObj = this.tableData.filter((f: any) => f.checked).map((t: any) => { return { ...t, approvalStatus: flag, approvedBy: user.userName, addWho: user.userName, editWho: user.userName } });
+    this.apiService.apiPostRequest(registerInvoiceUrl, { dtl: requestObj }).subscribe(
       response => {
         if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(response.response)) {

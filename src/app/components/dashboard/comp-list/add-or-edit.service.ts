@@ -7,6 +7,7 @@ import { StatusCodes, SnackBar } from '../../../enums/common/common';
 import { AlertService } from '../../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +20,13 @@ export class AddOrEditService {
 
   constructor(
     private commonService: CommonService,
-    private environment: RuntimeConfigService,
     private apiService: ApiService,
     private alertService: AlertService,
     private spinner: NgxSpinnerService
   ) { }
 
   Add(result, callBack) {
-    const addCompanyUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.tableParameters.registerUrl);
+    const addCompanyUrl = String.Join('', environment.baseUrl, this.tableParameters.registerUrl);
     this.apiService.apiPostRequest(addCompanyUrl, result.item)
       .subscribe(
         response => {
@@ -42,7 +42,7 @@ export class AddOrEditService {
   }
 
   Edit(result, callBack) {
-    const updateCompanyUrl = String.Join('', this.environment.runtimeConfig.serverUrl, this.tableParameters.updateUrl);
+    const updateCompanyUrl = String.Join('', environment.baseUrl, this.tableParameters.updateUrl);
     this.apiService.apiUpdateRequest(updateCompanyUrl, result.item)
       .subscribe(
         response => {

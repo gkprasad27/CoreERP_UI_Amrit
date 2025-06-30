@@ -1,13 +1,13 @@
-@import "_reuse.scss";
+@use "_reuse" as reuse;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: sans-serif; }
 
 /* Importing Bootstrap SCSS file. */
-@import "./node_modules/bootstrap/scss/bootstrap";
+// @use "./node_modules/bootstrap/scss/bootstrap";
 
 /* Importing Datepicker SCSS file. */
-@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+// @use "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
 
 #main{
@@ -37,7 +37,7 @@ body { margin: 0; font-family: sans-serif; }
 }
 
 .background--color {
-  background-color: $color-orange !important;
+  background-color: reuse.$color-orange !important;
 }
 
 .mat-option.mat-active {
@@ -75,10 +75,10 @@ button:focus {
 
 .ng--valid {
   & .mat-mdc-floating-label {
-    color: $color-green !important;
+    color: reuse.$color-green !important;
   }
   & .mdc-line-ripple::after {
-    border-bottom-color: $color-green !important;
+    border-bottom-color: reuse.$color-green !important;
   }
 }
 
@@ -90,7 +90,7 @@ button:focus {
   content: none !important;
 }
 mat-error {
-  color: $color-error !important;
+  color: reuse.$color-error !important;
 }
 
 
@@ -99,19 +99,19 @@ mat-error {
 }
 
 .style-success {
-  background: $color-green;
+  background: reuse.$color-green;
 }
 
 .style-error {
-  background: $color-red;
+  background: reuse.$color-red;
 }
 
 .style-warning {
-  background: $color-yellow;
+  background: reuse.$color-yellow;
 }
 
 .style-normal {
-  background: $color-gray;
+  background: reuse.$color-gray;
 }
 
 .background-header-boarder {
@@ -132,11 +132,11 @@ mat-error {
 }
 
 .button-color-bule {
-  background-color: $color-orange !important;
+  background-color: reuse.$color-orange !important;
 }
 
 .button-color-red {
-  background-color: $color-red !important;
+  background-color: reuse.$color-red !important;
   
 }
 .button-color-green{
@@ -174,8 +174,8 @@ mat-form-field {
       height: 40px !important;
       cursor: pointer;
       & th {
-        background-color: $color-orange;
-        color: $color-white;
+        background-color: reuse.$color-orange;
+        color: reuse.$color-white;
         vertical-align: middle;
         border: none !important;
       }
@@ -189,7 +189,7 @@ mat-form-field {
       background-color: #f9f9f9;
     }
     & tr:nth-child(odd) {
-      background-color: $color-white;
+      background-color: reuse.$color-white;
     }
     & tr:nth-child(even):hover {
       background-color: #f9f6f6;
@@ -229,8 +229,8 @@ mat-option  {
 .boader--color {
   padding: .30rem 1.25rem;
   margin-bottom: 0;
-  background-color: $color-orange;
-  color: $color-white;
+  background-color: reuse.$color-orange;
+  color: reuse.$color-white;
 }
 
 .custom-dialog-container {

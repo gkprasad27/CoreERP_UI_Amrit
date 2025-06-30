@@ -1,9 +1,0 @@
-<input type="text" matInput [formControl]="objectControl" [matAutocomplete]="autoObject" />
-<mat-autocomplete #autoObject="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onItemSelect($event.option.value)">
-    <mat-option *ngFor="let option of filteredObjectOptions$ | async" [value]="option[dataConfig.id]">
-        <span *ngIf="option.displayMul;else content">
-            {{ option[dataConfig.id] }} - {{ option[dataConfig.text] }}
-        </span>
-        <ng-template #content> {{ option[dataConfig.text] }} </ng-template>
-    </mat-option>
-</mat-autocomplete>

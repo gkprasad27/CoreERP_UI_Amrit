@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RuntimeConfigService } from './runtime-config.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
    providedIn: 'root'
@@ -7,556 +7,556 @@ import { RuntimeConfigService } from './runtime-config.service';
 
 export class ApiConfigService {
 
-   constructor(private environment: RuntimeConfigService) { }
+   constructor() { }
 
    // login Url
-   loginUrl = `${this.environment.runtimeConfig.serverUrl}Auth/login`;
+   loginUrl = `${environment.baseUrl}Auth/login`;
   //loginUrl = 'http://localhost:5000/api/Auth/login';
-   logoutUrl = `${this.environment.runtimeConfig.serverUrl}Auth/logout`;
-   getBranchesForUser = `${this.environment.runtimeConfig.serverUrl}Auth/GetBranchesForUser`;
+   logoutUrl = `${environment.baseUrl}Auth/logout`;
+   getBranchesForUser = `${environment.baseUrl}Auth/GetBranchesForUser`;
    //getBranchesForUser = 'http://localhost:5000/api/Auth/GetBranchesForUser';
-   getComponentInfo = `${this.environment.runtimeConfig.serverUrl}Settings/GetComponentInfo`;
+   getComponentInfo = `${environment.baseUrl}Settings/GetComponentInfo`;
    
-   getAuthentication = `${this.environment.runtimeConfig.serverUrl}Common/GetAuthentication`;
+   getAuthentication = `${environment.baseUrl}Common/GetAuthentication`;
    
    // Common
-   getprimeryList = `${this.environment.runtimeConfig.serverUrl}PrimaryCostElementsCreation/GetPrimaryCostElementsCreationList`;
-   getprcList = `${this.environment.runtimeConfig.serverUrl}Common/GetPrimaryCostElementList`;
-   getMaterialListforcostunits = `${this.environment.runtimeConfig.serverUrl}Common/GetMaterialListForCostunits`;
-   gethsnsacList = `${this.environment.runtimeConfig.serverUrl}Common/GetHSNSACList`;
-   getGoodsreceiptDataList = `${this.environment.runtimeConfig.serverUrl}Common/GetGoodsReceiptList`;
-   getinspectioncheckList = `${this.environment.runtimeConfig.serverUrl}Common/GetInspectiondetailsList`;
-   getinspectionnoList = `${this.environment.runtimeConfig.serverUrl}Common/GetInspectionnoList`;
-   getBusienessPartnersAccList = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBusienessPartnerAccountList`;
-   gettinglotNumbers = `${this.environment.runtimeConfig.serverUrl}GoodsReceipt/GetLotNumber`;
-   getpodetailsList = `${this.environment.runtimeConfig.serverUrl}Common/GetPOdetailsList`;
-   getpurchasenoList = `${this.environment.runtimeConfig.serverUrl}Common/GetPurchaseOrdernoList`;
-   getJobworkList = `${this.environment.runtimeConfig.serverUrl}Common/GetJobworkList`;
-   getquotationnoList = `${this.environment.runtimeConfig.serverUrl}Common/GetQuotationnoList`;
-   getSaleOrderList  = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrderList`;
-   getSaleOrderApprovedList  = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrderApprovedList`;
-   getSaleOrders  = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrder`;
-   getsaleOrdernoListe  = `${this.environment.runtimeConfig.serverUrl}Common/GetsaleOrdernoListe`;
-   getsaleOrdernoList  = `${this.environment.runtimeConfig.serverUrl}Common/GetsaleOrdernoList`;
-   getSaleOrderData   = `${this.environment.runtimeConfig.serverUrl}Common/GetSaleOrderData`;
-   getProdSaleOrderList   = `${this.environment.runtimeConfig.serverUrl}Common/GetProdSaleOrderList`;
-   getCommitmentList = `${this.environment.runtimeConfig.serverUrl}QCParamConfig/GetCommitmentItemList`;
-   getCommitmentLists = `${this.environment.runtimeConfig.serverUrl}CommitmentItem/GetCommitmentItemList`;
-   getfundcenterList = `${this.environment.runtimeConfig.serverUrl}FundCenter/GetFundCenterList`;
-   getWCList = `${this.environment.runtimeConfig.serverUrl}Common/GetWorkcenterList`;
-   getFormulaList = `${this.environment.runtimeConfig.serverUrl}Formulas/GetFormulasList`;
-   getreqdetailsList = `${this.environment.runtimeConfig.serverUrl}Common/GetMaterialreqDetailsList`;
-   getreqList = `${this.environment.runtimeConfig.serverUrl}Common/GetMaterialreqList`;
-   getmomenttypeList = `${this.environment.runtimeConfig.serverUrl}Movementtype/GetMovementtypeList`;
-   getordernolist = `${this.environment.runtimeConfig.serverUrl}OrderType/GetOrderTypeList`;
-   getwbselement = `${this.environment.runtimeConfig.serverUrl}Common/GetWbsList`;
-   getbatchList = `${this.environment.runtimeConfig.serverUrl}BatchMaster/GetBatchMasterList`;
-   getCostUnitListList = `${this.environment.runtimeConfig.serverUrl}CreationOfCostUnits/GetCreationOfCostUnitsList`;
-   getcostnumberseriesList = `${this.environment.runtimeConfig.serverUrl}Common/GetCostingNumberSeriesList`;
-   getcostofobjectList = `${this.environment.runtimeConfig.serverUrl}Common/GetCostingObjectTypeList`;
-   getsecondelementList = `${this.environment.runtimeConfig.serverUrl}Common/GetCostingSecondaryList`;
-   getdepartmentList = `${this.environment.runtimeConfig.serverUrl}Common/GetDepartmentList`;
-   getttingobjectNumbers = `${this.environment.runtimeConfig.serverUrl}CreationOfCostUnits/GetObjectNumber`;
-   getMaterialtypeList = `${this.environment.runtimeConfig.serverUrl}MaterialTypes/GetMaterialTypesList`;
-   getttingmaterialNumbers = `${this.environment.runtimeConfig.serverUrl}MaterialMaster/GetMaterialNumber`;
-   getuomList = `${this.environment.runtimeConfig.serverUrl}Common/GetUOMList`;
-   getmaterialdata = `${this.environment.runtimeConfig.serverUrl}Common/GetMaterialMasterList`;
-   getModelPatternList = `${this.environment.runtimeConfig.serverUrl}ModelPattern/GetModelPatternList`;
-   getmsizeList = `${this.environment.runtimeConfig.serverUrl}MaterialSize/GetMaterialSizeList`;
-   getmaterialgroupList = `${this.environment.runtimeConfig.serverUrl}MaterialGroups/GetMaterialGroupsList`;
-   getMaterialList = `${this.environment.runtimeConfig.serverUrl}Common/GetMaterialList`;
-   getStList = `${this.environment.runtimeConfig.serverUrl}StorageLocation/GetStorageLocation`;
-   getpurchaseOrderTypeList = `${this.environment.runtimeConfig.serverUrl}Purchaseordertype/GetPurchaseordertypeList`;
-   getPurchaseorderNumberList = `${this.environment.runtimeConfig.serverUrl}PurchaseOrderNumberRange/GetPurchaseOrderNumberRangeList`;
-   getQuotationNumberRangeList = `${this.environment.runtimeConfig.serverUrl}QuotationNumberRange/GetQuotationNumberRangeList`;
-   getnumberRangeList = `${this.environment.runtimeConfig.serverUrl}RequisitionNumberRange/GetRequisitionNumberRangeList`;
-   getPurchasingtypeList = `${this.environment.runtimeConfig.serverUrl}Purchasingtype/GetPurchaseTypeList`;
-   getPurchaseGroupList = `${this.environment.runtimeConfig.serverUrl}Purchasinggroups/GetPurchasinggroupsList`;
-   getlanguageList = `${this.environment.runtimeConfig.serverUrl}Common/GetLanguageList`;
-   getRegionsList = `${this.environment.runtimeConfig.serverUrl}Common/GetRegionList`;
-   getCountrysList = `${this.environment.runtimeConfig.serverUrl}Common/GetCountrysList`;
-   getcurrencyList = `${this.environment.runtimeConfig.serverUrl}Common/GetCurrencyList`;
-   getstatesList = `${this.environment.runtimeConfig.serverUrl}Common/GetStatesList`;
-   getCompanyList = `${this.environment.runtimeConfig.serverUrl}Common/GetCompanyList`;
-   getcostingunitsList = `${this.environment.runtimeConfig.serverUrl}Common/GetCostUnitList`;
-   getEmployeeList = `${this.environment.runtimeConfig.serverUrl}Common/GetEmployeeList`;
-   getPlantsList = `${this.environment.runtimeConfig.serverUrl}Common/GetPlantsList`;
-   getlocationsList = `${this.environment.runtimeConfig.serverUrl}Common/GetLocationsList`;
-   getBranchList = `${this.environment.runtimeConfig.serverUrl}Common/GetBranchList`;
-   getVoucherTypesList = `${this.environment.runtimeConfig.serverUrl}Common/GetVoucherTypesList`;
-   getvochersseriesList = `${this.environment.runtimeConfig.serverUrl}Common/GetVouchersSeriesList`;
-   getTaxTransactionsList = `${this.environment.runtimeConfig.serverUrl}Common/GetTaxTransactionsList`;
-   gettaxrateList = `${this.environment.runtimeConfig.serverUrl}Common/GetTaxRateList`;
-   getTDSRateList = `${this.environment.runtimeConfig.serverUrl}Common/GetTDSRateList`;
-   getBusienessPartnersGroupsList = `${this.environment.runtimeConfig.serverUrl}Common/GetBusienessPartnersGroupsList`;
-   getAssetsClassList = `${this.environment.runtimeConfig.serverUrl}Common/GetAssetsClassList`;
-   getAssetsBlockList = `${this.environment.runtimeConfig.serverUrl}Common/GetAssetsBlockList`;
-   getAccountsKeyList = `${this.environment.runtimeConfig.serverUrl}Common/GetAccountsKeyList`;
-   getBankMastersList = `${this.environment.runtimeConfig.serverUrl}Common/GetBankMastersList`;
-   getPaymentsTermsList = `${this.environment.runtimeConfig.serverUrl}Common/GetPaymentsTermsList`;
-   getGLAccountListbyCatetory = `${this.environment.runtimeConfig.serverUrl}Common/GLAccountListbyCatetory`;
-   getGLAccountsList = `${this.environment.runtimeConfig.serverUrl}Common/GetGLAccountsList`;
-   getProfitCentersList = `${this.environment.runtimeConfig.serverUrl}Common/GetProfitCentersList`;
-   getProfitCenters = `${this.environment.runtimeConfig.serverUrl}ProfitCenter/GetProfitCenters`;
-   getCostCentersList = `${this.environment.runtimeConfig.serverUrl}Common/GetCostCentersList`;
-   getCostCenters = `${this.environment.runtimeConfig.serverUrl}CostCenter/GetCostCenters`;
-   getTaxRatesList = `${this.environment.runtimeConfig.serverUrl}TaxRates/GetTaxRatesList`;
-   getBPList = `${this.environment.runtimeConfig.serverUrl}Common/GetBPList`;
-   getCustomerList = `${this.environment.runtimeConfig.serverUrl}Common/GetCustomerList`;
-   getpurchaseinvoiceList = `${this.environment.runtimeConfig.serverUrl}Common/GetPurchaseInvoiceList`;
-   getAssetMasterList = `${this.environment.runtimeConfig.serverUrl}Common/GetMainAssetMasterList`;
-   getSubAssetMasterList = `${this.environment.runtimeConfig.serverUrl}Common/GetSubAssetMasterList`;
-   getFieldsConfig = `${this.environment.runtimeConfig.serverUrl}Common/GetFieldsConfig`;
-   getUserPermissions = `${this.environment.runtimeConfig.serverUrl}Common/GetUserPermissions`;
-   getLotSeriesUrlList = `${this.environment.runtimeConfig.serverUrl}LotSeries/GetLotSeriesList`;
-   getGRNSeriesList = `${this.environment.runtimeConfig.serverUrl}GoodsReceiptNoteNumberSeries/GetGoodsReceiptNoteNumberSeriesList`;
-   getMRNSeriesList = `${this.environment.runtimeConfig.serverUrl}MaterialRequisitionNoteNumberSeries/GetMaterialRequisitionNoteNumberSeriesList`;
-   getMaterialSeriesList = `${this.environment.runtimeConfig.serverUrl}MaterialNumberRangeSeries/GetMaterialNumberRangeSeriesList`;
-   getGINSeriesList = `${this.environment.runtimeConfig.serverUrl}GoodsIssueNoteNumberSeries/GetGoodsIssueNoteNumberSeriesList`;
-   getHsnSacList = `${this.environment.runtimeConfig.serverUrl}HsnSac/GetHsnSacList`;
-   getLeaveTypeatListforlob = `${this.environment.runtimeConfig.serverUrl}Common/GetLeaveTypeList`;
+   getprimeryList = `${environment.baseUrl}PrimaryCostElementsCreation/GetPrimaryCostElementsCreationList`;
+   getprcList = `${environment.baseUrl}Common/GetPrimaryCostElementList`;
+   getMaterialListforcostunits = `${environment.baseUrl}Common/GetMaterialListForCostunits`;
+   gethsnsacList = `${environment.baseUrl}Common/GetHSNSACList`;
+   getGoodsreceiptDataList = `${environment.baseUrl}Common/GetGoodsReceiptList`;
+   getinspectioncheckList = `${environment.baseUrl}Common/GetInspectiondetailsList`;
+   getinspectionnoList = `${environment.baseUrl}Common/GetInspectionnoList`;
+   getBusienessPartnersAccList = `${environment.baseUrl}BusienessPartnerAccount/GetBusienessPartnerAccountList`;
+   gettinglotNumbers = `${environment.baseUrl}GoodsReceipt/GetLotNumber`;
+   getpodetailsList = `${environment.baseUrl}Common/GetPOdetailsList`;
+   getpurchasenoList = `${environment.baseUrl}Common/GetPurchaseOrdernoList`;
+   getJobworkList = `${environment.baseUrl}Common/GetJobworkList`;
+   getquotationnoList = `${environment.baseUrl}Common/GetQuotationnoList`;
+   getSaleOrderList  = `${environment.baseUrl}Common/GetSaleOrderList`;
+   getSaleOrderApprovedList  = `${environment.baseUrl}Common/GetSaleOrderApprovedList`;
+   getSaleOrders  = `${environment.baseUrl}Common/GetSaleOrder`;
+   getsaleOrdernoListe  = `${environment.baseUrl}Common/GetsaleOrdernoListe`;
+   getsaleOrdernoList  = `${environment.baseUrl}Common/GetsaleOrdernoList`;
+   getSaleOrderData   = `${environment.baseUrl}Common/GetSaleOrderData`;
+   getProdSaleOrderList   = `${environment.baseUrl}Common/GetProdSaleOrderList`;
+   getCommitmentList = `${environment.baseUrl}QCParamConfig/GetCommitmentItemList`;
+   getCommitmentLists = `${environment.baseUrl}CommitmentItem/GetCommitmentItemList`;
+   getfundcenterList = `${environment.baseUrl}FundCenter/GetFundCenterList`;
+   getWCList = `${environment.baseUrl}Common/GetWorkcenterList`;
+   getFormulaList = `${environment.baseUrl}Formulas/GetFormulasList`;
+   getreqdetailsList = `${environment.baseUrl}Common/GetMaterialreqDetailsList`;
+   getreqList = `${environment.baseUrl}Common/GetMaterialreqList`;
+   getmomenttypeList = `${environment.baseUrl}Movementtype/GetMovementtypeList`;
+   getordernolist = `${environment.baseUrl}OrderType/GetOrderTypeList`;
+   getwbselement = `${environment.baseUrl}Common/GetWbsList`;
+   getbatchList = `${environment.baseUrl}BatchMaster/GetBatchMasterList`;
+   getCostUnitListList = `${environment.baseUrl}CreationOfCostUnits/GetCreationOfCostUnitsList`;
+   getcostnumberseriesList = `${environment.baseUrl}Common/GetCostingNumberSeriesList`;
+   getcostofobjectList = `${environment.baseUrl}Common/GetCostingObjectTypeList`;
+   getsecondelementList = `${environment.baseUrl}Common/GetCostingSecondaryList`;
+   getdepartmentList = `${environment.baseUrl}Common/GetDepartmentList`;
+   getttingobjectNumbers = `${environment.baseUrl}CreationOfCostUnits/GetObjectNumber`;
+   getMaterialtypeList = `${environment.baseUrl}MaterialTypes/GetMaterialTypesList`;
+   getttingmaterialNumbers = `${environment.baseUrl}MaterialMaster/GetMaterialNumber`;
+   getuomList = `${environment.baseUrl}Common/GetUOMList`;
+   getmaterialdata = `${environment.baseUrl}Common/GetMaterialMasterList`;
+   getModelPatternList = `${environment.baseUrl}ModelPattern/GetModelPatternList`;
+   getmsizeList = `${environment.baseUrl}MaterialSize/GetMaterialSizeList`;
+   getmaterialgroupList = `${environment.baseUrl}MaterialGroups/GetMaterialGroupsList`;
+   getMaterialList = `${environment.baseUrl}Common/GetMaterialList`;
+   getStList = `${environment.baseUrl}StorageLocation/GetStorageLocation`;
+   getpurchaseOrderTypeList = `${environment.baseUrl}Purchaseordertype/GetPurchaseordertypeList`;
+   getPurchaseorderNumberList = `${environment.baseUrl}PurchaseOrderNumberRange/GetPurchaseOrderNumberRangeList`;
+   getQuotationNumberRangeList = `${environment.baseUrl}QuotationNumberRange/GetQuotationNumberRangeList`;
+   getnumberRangeList = `${environment.baseUrl}RequisitionNumberRange/GetRequisitionNumberRangeList`;
+   getPurchasingtypeList = `${environment.baseUrl}Purchasingtype/GetPurchaseTypeList`;
+   getPurchaseGroupList = `${environment.baseUrl}Purchasinggroups/GetPurchasinggroupsList`;
+   getlanguageList = `${environment.baseUrl}Common/GetLanguageList`;
+   getRegionsList = `${environment.baseUrl}Common/GetRegionList`;
+   getCountrysList = `${environment.baseUrl}Common/GetCountrysList`;
+   getcurrencyList = `${environment.baseUrl}Common/GetCurrencyList`;
+   getstatesList = `${environment.baseUrl}Common/GetStatesList`;
+   getCompanyList = `${environment.baseUrl}Common/GetCompanyList`;
+   getcostingunitsList = `${environment.baseUrl}Common/GetCostUnitList`;
+   getEmployeeList = `${environment.baseUrl}Common/GetEmployeeList`;
+   getPlantsList = `${environment.baseUrl}Common/GetPlantsList`;
+   getlocationsList = `${environment.baseUrl}Common/GetLocationsList`;
+   getBranchList = `${environment.baseUrl}Common/GetBranchList`;
+   getVoucherTypesList = `${environment.baseUrl}Common/GetVoucherTypesList`;
+   getvochersseriesList = `${environment.baseUrl}Common/GetVouchersSeriesList`;
+   getTaxTransactionsList = `${environment.baseUrl}Common/GetTaxTransactionsList`;
+   gettaxrateList = `${environment.baseUrl}Common/GetTaxRateList`;
+   getTDSRateList = `${environment.baseUrl}Common/GetTDSRateList`;
+   getBusienessPartnersGroupsList = `${environment.baseUrl}Common/GetBusienessPartnersGroupsList`;
+   getAssetsClassList = `${environment.baseUrl}Common/GetAssetsClassList`;
+   getAssetsBlockList = `${environment.baseUrl}Common/GetAssetsBlockList`;
+   getAccountsKeyList = `${environment.baseUrl}Common/GetAccountsKeyList`;
+   getBankMastersList = `${environment.baseUrl}Common/GetBankMastersList`;
+   getPaymentsTermsList = `${environment.baseUrl}Common/GetPaymentsTermsList`;
+   getGLAccountListbyCatetory = `${environment.baseUrl}Common/GLAccountListbyCatetory`;
+   getGLAccountsList = `${environment.baseUrl}Common/GetGLAccountsList`;
+   getProfitCentersList = `${environment.baseUrl}Common/GetProfitCentersList`;
+   getProfitCenters = `${environment.baseUrl}ProfitCenter/GetProfitCenters`;
+   getCostCentersList = `${environment.baseUrl}Common/GetCostCentersList`;
+   getCostCenters = `${environment.baseUrl}CostCenter/GetCostCenters`;
+   getTaxRatesList = `${environment.baseUrl}TaxRates/GetTaxRatesList`;
+   getBPList = `${environment.baseUrl}Common/GetBPList`;
+   getCustomerList = `${environment.baseUrl}Common/GetCustomerList`;
+   getpurchaseinvoiceList = `${environment.baseUrl}Common/GetPurchaseInvoiceList`;
+   getAssetMasterList = `${environment.baseUrl}Common/GetMainAssetMasterList`;
+   getSubAssetMasterList = `${environment.baseUrl}Common/GetSubAssetMasterList`;
+   getFieldsConfig = `${environment.baseUrl}Common/GetFieldsConfig`;
+   getUserPermissions = `${environment.baseUrl}Common/GetUserPermissions`;
+   getLotSeriesUrlList = `${environment.baseUrl}LotSeries/GetLotSeriesList`;
+   getGRNSeriesList = `${environment.baseUrl}GoodsReceiptNoteNumberSeries/GetGoodsReceiptNoteNumberSeriesList`;
+   getMRNSeriesList = `${environment.baseUrl}MaterialRequisitionNoteNumberSeries/GetMaterialRequisitionNoteNumberSeriesList`;
+   getMaterialSeriesList = `${environment.baseUrl}MaterialNumberRangeSeries/GetMaterialNumberRangeSeriesList`;
+   getGINSeriesList = `${environment.baseUrl}GoodsIssueNoteNumberSeries/GetGoodsIssueNoteNumberSeriesList`;
+   getHsnSacList = `${environment.baseUrl}HsnSac/GetHsnSacList`;
+   getLeaveTypeatListforlob = `${environment.baseUrl}Common/GetLeaveTypeList`;
    //************************ IMG General  ****************************************/
-   getCurrencyList = `${this.environment.runtimeConfig.serverUrl}Currency/GetCurrencyList`;
-   getLanguageList = `${this.environment.runtimeConfig.serverUrl}Language/GetLanguageList`;
-   getCompanysList = `${this.environment.runtimeConfig.serverUrl}Company/GetCompanysList`;
-   getSegmentList = `${this.environment.runtimeConfig.serverUrl}Segment/GetSegmentList`;
-   getProfitCenterList = `${this.environment.runtimeConfig.serverUrl}ProfitCenter/GetProfitCenterList`;
-   getBranchesList = `${this.environment.runtimeConfig.serverUrl}Branches/GetBranchesList`;
-   getDivisionsList = `${this.environment.runtimeConfig.serverUrl}Division/GetDivisionsList`;
-   getfunctionaldeptList = `${this.environment.runtimeConfig.serverUrl}FunctionalDepartment/GetFunctionalDepartment`;
-   GetCostCenterList = `${this.environment.runtimeConfig.serverUrl}CostCenter/GetCostCenterList`;
-   getplantList = `${this.environment.runtimeConfig.serverUrl}Plant/GetPlant`;
-   getlocationList = `${this.environment.runtimeConfig.serverUrl}Location/GetLocationList`;
-   registerdepreciationcodeList = `${this.environment.runtimeConfig.serverUrl}Depreciationcode/RegisterDepreciationcode`;
-   getdepreciationcodeDetail = `${this.environment.runtimeConfig.serverUrl}Depreciationcode/GetDepreciationcodeDetail`;
-   registerpaymenttermsList = `${this.environment.runtimeConfig.serverUrl}PaymentTerms/RegisterPaymentTerms`;
-   getpaymenttermDetail = `${this.environment.runtimeConfig.serverUrl}PaymentTerms/GetPaymentTermsDetail`;
+   getCurrencyList = `${environment.baseUrl}Currency/GetCurrencyList`;
+   getLanguageList = `${environment.baseUrl}Language/GetLanguageList`;
+   getCompanysList = `${environment.baseUrl}Company/GetCompanysList`;
+   getSegmentList = `${environment.baseUrl}Segment/GetSegmentList`;
+   getProfitCenterList = `${environment.baseUrl}ProfitCenter/GetProfitCenterList`;
+   getBranchesList = `${environment.baseUrl}Branches/GetBranchesList`;
+   getDivisionsList = `${environment.baseUrl}Division/GetDivisionsList`;
+   getfunctionaldeptList = `${environment.baseUrl}FunctionalDepartment/GetFunctionalDepartment`;
+   GetCostCenterList = `${environment.baseUrl}CostCenter/GetCostCenterList`;
+   getplantList = `${environment.baseUrl}Plant/GetPlant`;
+   getlocationList = `${environment.baseUrl}Location/GetLocationList`;
+   registerdepreciationcodeList = `${environment.baseUrl}Depreciationcode/RegisterDepreciationcode`;
+   getdepreciationcodeDetail = `${environment.baseUrl}Depreciationcode/GetDepreciationcodeDetail`;
+   registerpaymenttermsList = `${environment.baseUrl}PaymentTerms/RegisterPaymentTerms`;
+   getpaymenttermDetail = `${environment.baseUrl}PaymentTerms/GetPaymentTermsDetail`;
    //mainasset
-   registermainAssetsList = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/RegisterMainAssetMaster`;
-   getMainAssetsDetail = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GetMainAssetsDetail`;
+   registermainAssetsList = `${environment.baseUrl}MainAssetMaster/RegisterMainAssetMaster`;
+   getMainAssetsDetail = `${environment.baseUrl}MainAssetMaster/GetMainAssetsDetail`;
    //subasset
-   registerSubAssetsList = `${this.environment.runtimeConfig.serverUrl}SubAssets/RegisterSubAssetsdatas`;
-   getSubAssetsDetail = `${this.environment.runtimeConfig.serverUrl}SubAssets/GetSubAssetsDetail`;
-   //updateSubAssetsList= `${this.environment.runtimeConfig.serverUrl}SubAssets/UpdateSubAssetsList`;
-   deleteSubAssetsList = `${this.environment.runtimeConfig.serverUrl}SubAssets/DeleteSubAssetsList`;
+   registerSubAssetsList = `${environment.baseUrl}SubAssets/RegisterSubAssetsdatas`;
+   getSubAssetsDetail = `${environment.baseUrl}SubAssets/GetSubAssetsDetail`;
+   //updateSubAssetsList= `${environment.baseUrl}SubAssets/UpdateSubAssetsList`;
+   deleteSubAssetsList = `${environment.baseUrl}SubAssets/DeleteSubAssetsList`;
    ///************************ Accounting ************************** */
-   getLedgerList = `${this.environment.runtimeConfig.serverUrl}Ledger/GetLedgerList`;
-   getvocherclassList = `${this.environment.runtimeConfig.serverUrl}VoucherClass/GetVoucherClassList`;
-   getDepreciationAreasList = `${this.environment.runtimeConfig.serverUrl}DepreciationAreas/GetDepreciationAreasList`;
-   getAssetClassList = `${this.environment.runtimeConfig.serverUrl}AssetClass/GetAssetClassList`;
-   getTaxTypesList = `${this.environment.runtimeConfig.serverUrl}TaxTypes/GetTaxTypesList`;
-   subgrouplist = `${this.environment.runtimeConfig.serverUrl}AssignGLaccounttoSubGroup/GetGLUnderSubGroupList`;
-   getTaxTransactionList = `${this.environment.runtimeConfig.serverUrl}TaxTransaction/GetTaxTransactionList`;
-   getTDStypeList = `${this.environment.runtimeConfig.serverUrl}TDStype/GetTDStypeList`;
-   getIncomeTypeList = `${this.environment.runtimeConfig.serverUrl}IncomeType/GetIncomeTypeList`;
-   getGLAccountList = `${this.environment.runtimeConfig.serverUrl}GLAccount/GetGLAccountList`;
-   getaccountNumber = `${this.environment.runtimeConfig.serverUrl}GLAccount/GetaccountNumberList`;
-   getDepreciationcodeList = `${this.environment.runtimeConfig.serverUrl}Depreciationcode/GetDepreciationcodeList`;
-   getAccountNamelist = `${this.environment.runtimeConfig.serverUrl}GLAccUnderSubGroup/GetAccountNamelist`;
-   getGLUnderGroupList = `${this.environment.runtimeConfig.serverUrl}GLAccUnderSubGroup/GetAccountGrouplist`;
-   getglAccgrpList = `${this.environment.runtimeConfig.serverUrl}GLAccUnderSubGroup/GetGLAccountGrouplist`;
-   getAccountSubGrouplist = `${this.environment.runtimeConfig.serverUrl}GLAccUnderSubGroup/GetAccountSubGrouplist`;
-   getNumberRangeList = `${this.environment.runtimeConfig.serverUrl}NumberRange/GetNumberRangeList`;
-   getPartnerTypeList = `${this.environment.runtimeConfig.serverUrl}PartnerType/GetPartnerTypeList`;
-   getChartOfAccountList = `${this.environment.runtimeConfig.serverUrl}ChartOfAccount/GetChartOfAccountList`;
-   getAccountKeyList = `${this.environment.runtimeConfig.serverUrl}AccountKey/GetAccountKeyList`;
-   getSubAssetsList = `${this.environment.runtimeConfig.serverUrl}SubAssets/GetSubAssetsList`;
-   GetListsforMainAsset = `${this.environment.runtimeConfig.serverUrl}SubAssets/GetMainAsset`;
-   getStructurekeyList = `${this.environment.runtimeConfig.serverUrl}AssignGLaccounttoSubGroup/GetStructurekeyList`;
-   getbpNumbers = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBPtNumberList`;
-   getttingbpNumbers = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBPtNumber`;
-   getttingbpNames = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBPtName`;
-   getBusienessPartnerAccount = `${this.environment.runtimeConfig.serverUrl}BusienessPartnerAccount/GetBusienessPartnerAccount`;
+   getLedgerList = `${environment.baseUrl}Ledger/GetLedgerList`;
+   getvocherclassList = `${environment.baseUrl}VoucherClass/GetVoucherClassList`;
+   getDepreciationAreasList = `${environment.baseUrl}DepreciationAreas/GetDepreciationAreasList`;
+   getAssetClassList = `${environment.baseUrl}AssetClass/GetAssetClassList`;
+   getTaxTypesList = `${environment.baseUrl}TaxTypes/GetTaxTypesList`;
+   subgrouplist = `${environment.baseUrl}AssignGLaccounttoSubGroup/GetGLUnderSubGroupList`;
+   getTaxTransactionList = `${environment.baseUrl}TaxTransaction/GetTaxTransactionList`;
+   getTDStypeList = `${environment.baseUrl}TDStype/GetTDStypeList`;
+   getIncomeTypeList = `${environment.baseUrl}IncomeType/GetIncomeTypeList`;
+   getGLAccountList = `${environment.baseUrl}GLAccount/GetGLAccountList`;
+   getaccountNumber = `${environment.baseUrl}GLAccount/GetaccountNumberList`;
+   getDepreciationcodeList = `${environment.baseUrl}Depreciationcode/GetDepreciationcodeList`;
+   getAccountNamelist = `${environment.baseUrl}GLAccUnderSubGroup/GetAccountNamelist`;
+   getGLUnderGroupList = `${environment.baseUrl}GLAccUnderSubGroup/GetAccountGrouplist`;
+   getglAccgrpList = `${environment.baseUrl}GLAccUnderSubGroup/GetGLAccountGrouplist`;
+   getAccountSubGrouplist = `${environment.baseUrl}GLAccUnderSubGroup/GetAccountSubGrouplist`;
+   getNumberRangeList = `${environment.baseUrl}NumberRange/GetNumberRangeList`;
+   getPartnerTypeList = `${environment.baseUrl}PartnerType/GetPartnerTypeList`;
+   getChartOfAccountList = `${environment.baseUrl}ChartOfAccount/GetChartOfAccountList`;
+   getAccountKeyList = `${environment.baseUrl}AccountKey/GetAccountKeyList`;
+   getSubAssetsList = `${environment.baseUrl}SubAssets/GetSubAssetsList`;
+   GetListsforMainAsset = `${environment.baseUrl}SubAssets/GetMainAsset`;
+   getStructurekeyList = `${environment.baseUrl}AssignGLaccounttoSubGroup/GetStructurekeyList`;
+   getbpNumbers = `${environment.baseUrl}BusienessPartnerAccount/GetBPtNumberList`;
+   getttingbpNumbers = `${environment.baseUrl}BusienessPartnerAccount/GetBPtNumber`;
+   getttingbpNames = `${environment.baseUrl}BusienessPartnerAccount/GetBPtName`;
+   getBusienessPartnerAccount = `${environment.baseUrl}BusienessPartnerAccount/GetBusienessPartnerAccount`;
 
-   getMainAssetMasterList = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GetMainAssetMasterList`;
-   getAssetnumber = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GetAssetNumber`;
-   getasetnos = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GettingAssetNumber`;
-   getttinasNames = `${this.environment.runtimeConfig.serverUrl}MainAssetMaster/GettingAssetName`;
-   getBusienessTransactionTypeList = `${this.environment.runtimeConfig.serverUrl}BusienessTransactionType/GetBusienessTransactionTypeList`;
+   getMainAssetMasterList = `${environment.baseUrl}MainAssetMaster/GetMainAssetMasterList`;
+   getAssetnumber = `${environment.baseUrl}MainAssetMaster/GetAssetNumber`;
+   getasetnos = `${environment.baseUrl}MainAssetMaster/GettingAssetNumber`;
+   getttinasNames = `${environment.baseUrl}MainAssetMaster/GettingAssetName`;
+   getBusienessTransactionTypeList = `${environment.baseUrl}BusienessTransactionType/GetBusienessTransactionTypeList`;
    //AssetBegningAcqusition
-   registeraqsnList = `${this.environment.runtimeConfig.serverUrl}AssetBegningAcqusition/RegisterAssetBegningAcqusition`;
-   updateAssetBegningAcqusition = `${this.environment.runtimeConfig.serverUrl}AssetBegningAcqusition/UpdateAssetBegningAcqusition`;
-   getAqsnDetail = `${this.environment.runtimeConfig.serverUrl}AssetBegningAcqusition/GetAssetBegningAcqusitionDetail`;
-   getAcquisitionDetailsList = `${this.environment.runtimeConfig.serverUrl}AssetBegningAcqusition/GetAssetBegningAcqusitionDetailsList`;
-   getacquisitionlist = `${this.environment.runtimeConfig.serverUrl}AssetBegningAcqusition/GetAssetBegningAcqusitionList`;
+   registeraqsnList = `${environment.baseUrl}AssetBegningAcqusition/RegisterAssetBegningAcqusition`;
+   updateAssetBegningAcqusition = `${environment.baseUrl}AssetBegningAcqusition/UpdateAssetBegningAcqusition`;
+   getAqsnDetail = `${environment.baseUrl}AssetBegningAcqusition/GetAssetBegningAcqusitionDetail`;
+   getAcquisitionDetailsList = `${environment.baseUrl}AssetBegningAcqusition/GetAssetBegningAcqusitionDetailsList`;
+   getacquisitionlist = `${environment.baseUrl}AssetBegningAcqusition/GetAssetBegningAcqusitionList`;
 
    /**************************** Settings ********************************************************* */
-    getRoles = `${this.environment.runtimeConfig.serverUrl}Auth/getRoles`;
+    getRoles = `${environment.baseUrl}Auth/getRoles`;
    //getRoles = 'http://localhost:5000/api/Auth/getRoles';
-   getParentMenus = `${this.environment.runtimeConfig.serverUrl}Auth/getParentMenu`;
+   getParentMenus = `${environment.baseUrl}Auth/getParentMenu`;
    //getParentMenus = 'http://localhost:5000/api/Auth/getParentMenu';
-    getMenuList = `${this.environment.runtimeConfig.serverUrl}Auth/getMenuList`;
+    getMenuList = `${environment.baseUrl}Auth/getMenuList`;
    //getMenuList = 'http://localhost:5000/api/Auth/getMenuList';
-   giveAccess = `${this.environment.runtimeConfig.serverUrl}Auth/GiveAccess`;
+   giveAccess = `${environment.baseUrl}Auth/GiveAccess`;
    //giveAccess = 'http://localhost:5000/api/Auth/GiveAccess';
-   getMenuUrl = `${this.environment.runtimeConfig.serverUrl}Auth/getMenu`;
+   getMenuUrl = `${environment.baseUrl}Auth/getMenu`;
    //getMenuUrl = 'http://localhost:5000/api/Auth/getMenu';
-    getrolelist = `${this.environment.runtimeConfig.serverUrl}UserCreation/GetRoleList`;
-    getUserCreation = `${this.environment.runtimeConfig.serverUrl}UserCreation/GetUserCreation`;
+    getrolelist = `${environment.baseUrl}UserCreation/GetRoleList`;
+    getUserCreation = `${environment.baseUrl}UserCreation/GetUserCreation`;
    //getrolelist = 'http://localhost:5000/api/UserCreation/GetRoleList';
 
 
 
 
    /******************************* Cash Bank ****************************************************** */
-   addCashBank = `${this.environment.runtimeConfig.serverUrl}Transactions/AddCashBank`;
-   getCashBankDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetCashBankDetail`;
-   getCashBankMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetCashBankMaster`;
-   getVoucherNumber = `${this.environment.runtimeConfig.serverUrl}Transactions/GetVoucherNumber`;
-   returnCashBank = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnCashBank`;
-   getDiscount = `${this.environment.runtimeConfig.serverUrl}Transactions/GetDiscount`;
+   addCashBank = `${environment.baseUrl}Transactions/AddCashBank`;
+   getCashBankDetail = `${environment.baseUrl}Transactions/GetCashBankDetail`;
+   getCashBankMaster = `${environment.baseUrl}Transactions/GetCashBankMaster`;
+   getVoucherNumber = `${environment.baseUrl}Transactions/GetVoucherNumber`;
+   returnCashBank = `${environment.baseUrl}Transactions/ReturnCashBank`;
+   getDiscount = `${environment.baseUrl}Transactions/GetDiscount`;
 
    /******************************* Journal ****************************************************** */
-   addJournal = `${this.environment.runtimeConfig.serverUrl}Transactions/AddJournal`;
-   getJVDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJVDetail`;
-   getJVMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJVMaster`;
+   addJournal = `${environment.baseUrl}Transactions/AddJournal`;
+   getJVDetail = `${environment.baseUrl}Transactions/GetJVDetail`;
+   getJVMaster = `${environment.baseUrl}Transactions/GetJVMaster`;
 
    /******************************* Invoice & Memo ****************************************************** */
-   addInvoiceMemo = `${this.environment.runtimeConfig.serverUrl}Transactions/AddInvoiceMemo`;
-   getIMDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetIMDetail`;
-   getIMMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetIMMaster`;
+   addInvoiceMemo = `${environment.baseUrl}Transactions/AddInvoiceMemo`;
+   getIMDetail = `${environment.baseUrl}Transactions/GetIMDetail`;
+   getIMMaster = `${environment.baseUrl}Transactions/GetIMMaster`;
 
    /******************************* Asset Purchase & Sale ****************************************************** */
-   addPSIMAsset = `${this.environment.runtimeConfig.serverUrl}Transactions/AddPSIMAsset`;
-   getPSIMAssetDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPSIMAssetDetail`;
-   getPSIMAssetMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPSIMAssetMaster`;
+   addPSIMAsset = `${environment.baseUrl}Transactions/AddPSIMAsset`;
+   getPSIMAssetDetail = `${environment.baseUrl}Transactions/GetPSIMAssetDetail`;
+   getPSIMAssetMaster = `${environment.baseUrl}Transactions/GetPSIMAssetMaster`;
    /******************************* Asset Transfer ****************************************************** */
-   getAssettransferDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetAssetTransferDetail`;
-   addAssettransfer = `${this.environment.runtimeConfig.serverUrl}Transactions/AddAssetTransfer`;
-   getAssettransferMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetAssetTransferMaster`;
+   getAssettransferDetail = `${environment.baseUrl}Transactions/GetAssetTransferDetail`;
+   addAssettransfer = `${environment.baseUrl}Transactions/AddAssetTransfer`;
+   getAssettransferMaster = `${environment.baseUrl}Transactions/GetAssetTransferMaster`;
 
    /******************************* Payment Receipts ****************************************************** */
-   getPaymentsReceiptsDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPaymentsReceiptsDetail`;
-   addPaymentsReceipts = `${this.environment.runtimeConfig.serverUrl}Transactions/AddPaymentsReceipts`;
-   getPaymentsreceiptsMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPaymentsReceiptsMaster`;
+   getPaymentsReceiptsDetail = `${environment.baseUrl}Transactions/GetPaymentsReceiptsDetail`;
+   addPaymentsReceipts = `${environment.baseUrl}Transactions/AddPaymentsReceipts`;
+   getPaymentsreceiptsMaster = `${environment.baseUrl}Transactions/GetPaymentsReceiptsMaster`;
 
    /*******************************BOM ****************************************************** */
-   addBOM = `${this.environment.runtimeConfig.serverUrl}BillOfMaterial/AddBOM`;
-   getBOMDetail = `${this.environment.runtimeConfig.serverUrl}BillOfMaterial/GetBomDetail`;
-   getBOMMaster = `${this.environment.runtimeConfig.serverUrl}BillOfMaterial/GetBOMMasters`;
-   getBOMNumber = `${this.environment.runtimeConfig.serverUrl}BillOfMaterial/GetVoucherNumber`;
-   returnBOM = `${this.environment.runtimeConfig.serverUrl}BillOfMaterial/ReturnCashBank`;
+   addBOM = `${environment.baseUrl}BillOfMaterial/AddBOM`;
+   getBOMDetail = `${environment.baseUrl}BillOfMaterial/GetBomDetail`;
+   getBOMMaster = `${environment.baseUrl}BillOfMaterial/GetBOMMasters`;
+   getBOMNumber = `${environment.baseUrl}BillOfMaterial/GetVoucherNumber`;
+   returnBOM = `${environment.baseUrl}BillOfMaterial/ReturnCashBank`;
 
    /*******************************Goods Issue ****************************************************** */
-   addGoodsissue = `${this.environment.runtimeConfig.serverUrl}Transactions/AddGoodsissue`;
-   getGoodsissueDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsissueDetail`;
-   getGoodsissueDetails = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsissueDetails`;
-   getGoodsissueMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsissue`;
-   returnGoodsissue = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnGoodsissue`;
-   getTagsissueDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetTagsissueDetail`;
-   getQCissueDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetQCissueDetail`;
+   addGoodsissue = `${environment.baseUrl}Transactions/AddGoodsissue`;
+   getGoodsissueDetail = `${environment.baseUrl}Transactions/GetGoodsissueDetail`;
+   getGoodsissueDetails = `${environment.baseUrl}Transactions/GetGoodsissueDetails`;
+   getGoodsissueMaster = `${environment.baseUrl}Transactions/GetGoodsissue`;
+   returnGoodsissue = `${environment.baseUrl}Transactions/ReturnGoodsissue`;
+   getTagsissueDetail = `${environment.baseUrl}Transactions/GetTagsissueDetail`;
+   getQCissueDetail = `${environment.baseUrl}Transactions/GetQCissueDetail`;
 
    /*******************************Goods Issue Approval ****************************************************** */
-   addGoodsissueApproval = `${this.environment.runtimeConfig.serverUrl}Transactions/AddGoodsIssueApproval`;
-   getGoodsissueDetailsApproval = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsissueDetailsApproved`;
+   addGoodsissueApproval = `${environment.baseUrl}Transactions/AddGoodsIssueApproval`;
+   getGoodsissueDetailsApproval = `${environment.baseUrl}Transactions/GetGoodsissueDetailsApproved`;
 
    /*******************************Material Requisition ****************************************************** */
-   addmareq = `${this.environment.runtimeConfig.serverUrl}Transactions/AddMaterialRequisition`;
-   getmreqDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetMaterialRequisitionDetail`;
-   getmreqMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetMaterialRequisition`;
-   getProductionissue = `${this.environment.runtimeConfig.serverUrl}Transactions/GetProductionissue`;
-   returnmreq = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnMaterialRequisition`;
-   getQCConfigDetail = `${this.environment.runtimeConfig.serverUrl}StandardRate/GetQCConfigDetail`;
-   getStandardRateList = `${this.environment.runtimeConfig.serverUrl}StandardRate/GetStandardRateList`;
-   registerQCResults = `${this.environment.runtimeConfig.serverUrl}StandardRate/RegisterQCResults`;
-   getSaleOrderDetailbymaterialcode = `${this.environment.runtimeConfig.serverUrl}StandardRate/GetSaleOrderDetailbymaterialcode`;
+   addmareq = `${environment.baseUrl}Transactions/AddMaterialRequisition`;
+   getmreqDetail = `${environment.baseUrl}Transactions/GetMaterialRequisitionDetail`;
+   getmreqMaster = `${environment.baseUrl}Transactions/GetMaterialRequisition`;
+   getProductionissue = `${environment.baseUrl}Transactions/GetProductionissue`;
+   returnmreq = `${environment.baseUrl}Transactions/ReturnMaterialRequisition`;
+   getQCConfigDetail = `${environment.baseUrl}StandardRate/GetQCConfigDetail`;
+   getStandardRateList = `${environment.baseUrl}StandardRate/GetStandardRateList`;
+   registerQCResults = `${environment.baseUrl}StandardRate/RegisterQCResults`;
+   getSaleOrderDetailbymaterialcode = `${environment.baseUrl}StandardRate/GetSaleOrderDetailbymaterialcode`;
 
    /******************************* Work Center Creation ****************************************************** */
-   //getPaymentsReceiptsDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPaymentsReceiptsDetail`;
-   addWCr = `${this.environment.runtimeConfig.serverUrl}WorkCenterCreation/RegisterWorkCenterCreation`;
-   //getPaymentsreceiptsMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPaymentsReceiptsMaster`;
+   //getPaymentsReceiptsDetail = `${environment.baseUrl}Transactions/GetPaymentsReceiptsDetail`;
+   addWCr = `${environment.baseUrl}WorkCenterCreation/RegisterWorkCenterCreation`;
+   //getPaymentsreceiptsMaster = `${environment.baseUrl}Transactions/GetPaymentsReceiptsMaster`;
 
    /******************************* Routing****************************************************** */
-   getroutingfileDetail = `${this.environment.runtimeConfig.serverUrl}RoutingFile/GetRoutingFileDetail`;
-   addrouting = `${this.environment.runtimeConfig.serverUrl}RoutingFile/RegisterRoutingFile`;
-   //getPaymentsreceiptsMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPaymentsReceiptsMaster`;
+   getroutingfileDetail = `${environment.baseUrl}RoutingFile/GetRoutingFileDetail`;
+   addrouting = `${environment.baseUrl}RoutingFile/RegisterRoutingFile`;
+   //getPaymentsreceiptsMaster = `${environment.baseUrl}Transactions/GetPaymentsReceiptsMaster`;
    /******************************* Task****************************************************** */
-   getaskDetail = `${this.environment.runtimeConfig.serverUrl}Tasks/GetTaskDetail`;
-   addtask = `${this.environment.runtimeConfig.serverUrl}Tasks/RegisterTasks`;
-   updateTasks = `${this.environment.runtimeConfig.serverUrl}Tasks/UpdateTasks`;
+   getaskDetail = `${environment.baseUrl}Tasks/GetTaskDetail`;
+   addtask = `${environment.baseUrl}Tasks/RegisterTasks`;
+   updateTasks = `${environment.baseUrl}Tasks/UpdateTasks`;
    /*******************************Purchase Requisition ****************************************************** */
-   addpurchasereq = `${this.environment.runtimeConfig.serverUrl}Transactions/AddPurchaseRequisition`;
-   getpurchasereqDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseRequisitionDetail`;
-   getpurchasereqMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseRequisition`;
-   returnpurchasereq = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnPurchaseRequisition`;
+   addpurchasereq = `${environment.baseUrl}Transactions/AddPurchaseRequisition`;
+   getpurchasereqDetail = `${environment.baseUrl}Transactions/GetPurchaseRequisitionDetail`;
+   getpurchasereqMaster = `${environment.baseUrl}Transactions/GetPurchaseRequisition`;
+   returnpurchasereq = `${environment.baseUrl}Transactions/ReturnPurchaseRequisition`;
 
    /*******************************Supplier Requisition ****************************************************** */
-   addsupplierreq = `${this.environment.runtimeConfig.serverUrl}Transactions/AddSourceSupply`;
-   getsupplierDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSourceSupplyDetail`;
-   getsupplierreqMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSourceSupply`;
-   returnsupplierreq = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnSourceSupply`;
+   addsupplierreq = `${environment.baseUrl}Transactions/AddSourceSupply`;
+   getsupplierDetail = `${environment.baseUrl}Transactions/GetSourceSupplyDetail`;
+   getsupplierreqMaster = `${environment.baseUrl}Transactions/GetSourceSupply`;
+   returnsupplierreq = `${environment.baseUrl}Transactions/ReturnSourceSupply`;
    /*******************************Supplier Quotation ****************************************************** */
-   addsupplierqs = `${this.environment.runtimeConfig.serverUrl}Transactions/AddQuotationSupplier`;
-   getsupplierqsDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetQuotationSupplierDetail`;
-   getsupplierqsMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetQuotationSupplier`;
-   returnsupplierqs = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnQuotationSupplier`;
+   addsupplierqs = `${environment.baseUrl}Transactions/AddQuotationSupplier`;
+   getsupplierqsDetail = `${environment.baseUrl}Transactions/GetQuotationSupplierDetail`;
+   getsupplierqsMaster = `${environment.baseUrl}Transactions/GetQuotationSupplier`;
+   returnsupplierqs = `${environment.baseUrl}Transactions/ReturnQuotationSupplier`;
 
    /*******************************Supplier Quotation ****************************************************** */
-   addquotationanalysis = `${this.environment.runtimeConfig.serverUrl}Transactions/AddQuotationAnalysis`;
-   getquotationanalysisDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetQuotationAnalysisDetail`;
-   getquotationanalysisMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetQuotationAnalysis`;
-   returnquotationanalysis = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnQuotationAnalysis`;
+   addquotationanalysis = `${environment.baseUrl}Transactions/AddQuotationAnalysis`;
+   getquotationanalysisDetail = `${environment.baseUrl}Transactions/GetQuotationAnalysisDetail`;
+   getquotationanalysisMaster = `${environment.baseUrl}Transactions/GetQuotationAnalysis`;
+   returnquotationanalysis = `${environment.baseUrl}Transactions/ReturnQuotationAnalysis`;
    /*******************************Purchase Order ****************************************************** */
-   saveimage = `${this.environment.runtimeConfig.serverUrl}Transactions/UploadFile`;
-   addpurchaseorder = `${this.environment.runtimeConfig.serverUrl}Transactions/AddPurchaseOrder`;
-   getpurchaseorderDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseOrderDetail`;
-   getpurchaseorderMaster = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseOrder`;
-   returnpurchaseorder = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnPurchaseOrder`;
-   getPurchaseOrderApproveList = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseOrderApproveList`;
+   saveimage = `${environment.baseUrl}Transactions/UploadFile`;
+   addpurchaseorder = `${environment.baseUrl}Transactions/AddPurchaseOrder`;
+   getpurchaseorderDetail = `${environment.baseUrl}Transactions/GetPurchaseOrderDetail`;
+   getpurchaseorderMaster = `${environment.baseUrl}Transactions/GetPurchaseOrder`;
+   returnpurchaseorder = `${environment.baseUrl}Transactions/ReturnPurchaseOrder`;
+   getPurchaseOrderApproveList = `${environment.baseUrl}Transactions/GetPurchaseOrderApproveList`;
    
    /*******************************Goods Receipt ****************************************************** */
-   addgoodsreceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/AddGoodsReceipt`;
-   getgoodsreceiptDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsReceiptDetail`;
-   getgoodsreceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsReceipt`;
-   returngoodsreceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnGoodsReceipt`;
-   getGoodsReceiptApproval = `${this.environment.runtimeConfig.serverUrl}Transactions/GetGoodsReceiptApproval`;
+   addgoodsreceipt = `${environment.baseUrl}Transactions/AddGoodsReceipt`;
+   getgoodsreceiptDetail = `${environment.baseUrl}Transactions/GetGoodsReceiptDetail`;
+   getgoodsreceipt = `${environment.baseUrl}Transactions/GetGoodsReceipt`;
+   returngoodsreceipt = `${environment.baseUrl}Transactions/ReturnGoodsReceipt`;
+   getGoodsReceiptApproval = `${environment.baseUrl}Transactions/GetGoodsReceiptApproval`;
 
    /*******************************Inspection Check ****************************************************** */
-   addinspectioncheck = `${this.environment.runtimeConfig.serverUrl}Transactions/AddInpectionCheck`;
-   getinspectioncheckDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetInspectionCheckDetail`;
-   getinspectioncheck = `${this.environment.runtimeConfig.serverUrl}Transactions/GetInspectionCheck`;
-   returninspectioncheck = `${this.environment.runtimeConfig.serverUrl}Transactions/ReturnInpectionCheck`;
+   addinspectioncheck = `${environment.baseUrl}Transactions/AddInpectionCheck`;
+   getinspectioncheckDetail = `${environment.baseUrl}Transactions/GetInspectionCheckDetail`;
+   getinspectioncheck = `${environment.baseUrl}Transactions/GetInspectionCheck`;
+   returninspectioncheck = `${environment.baseUrl}Transactions/ReturnInpectionCheck`;
    /*******************************Invoice Verification  ****************************************************** */
-   addinvoice = `${this.environment.runtimeConfig.serverUrl}Transactions/AddInvoiceverificationDetail`;
-   getinvoiceDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetInvoiceverificationDetail`;
-   getQCReportDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetQCReportDetail`;
-   getPurchaseOrderData = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseOrderData`;
+   addinvoice = `${environment.baseUrl}Transactions/AddInvoiceverificationDetail`;
+   getinvoiceDetail = `${environment.baseUrl}Transactions/GetInvoiceverificationDetail`;
+   getQCReportDetail = `${environment.baseUrl}Transactions/GetQCReportDetail`;
+   getPurchaseOrderData = `${environment.baseUrl}Transactions/GetPurchaseOrderData`;
 
    /*******************************PrimeryCost****************************************************** */
-   addpccost = `${this.environment.runtimeConfig.serverUrl}PrimaryCostElementsCreation/UpdatePcost`;
+   addpccost = `${environment.baseUrl}PrimaryCostElementsCreation/UpdatePcost`;
    
-   registerEmployee = `${this.environment.runtimeConfig.serverUrl}Employee/RegisterEmployee`;
-   updateEmployee = `${this.environment.runtimeConfig.serverUrl}Employee/UpdateEmployee`;
+   registerEmployee = `${environment.baseUrl}Employee/RegisterEmployee`;
+   updateEmployee = `${environment.baseUrl}Employee/UpdateEmployee`;
 
-   getDesignationsList = `${this.environment.runtimeConfig.serverUrl}Designation/GetDesignationsList`;
+   getDesignationsList = `${environment.baseUrl}Designation/GetDesignationsList`;
 
    //LeaveTypes
 
-   getLeaveTypeatLists = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveType/GetLeaveTypeList`;
-   registerLeaveTypes = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveType/RegisterLeaveType`;
-   updateLeaveTypes = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveType/UpdateLeaveType`;
-   deleteLeaveTypes = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveType/DeleteLeaveType`;
+   getLeaveTypeatLists = `${environment.baseUrl}Selfservice/LeaveType/GetLeaveTypeList`;
+   registerLeaveTypes = `${environment.baseUrl}Selfservice/LeaveType/RegisterLeaveType`;
+   updateLeaveTypes = `${environment.baseUrl}Selfservice/LeaveType/UpdateLeaveType`;
+   deleteLeaveTypes = `${environment.baseUrl}Selfservice/LeaveType/DeleteLeaveType`;
 
    //LeaveRequest
 
-   getnoofdayscount = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveRequest/Getnoofdayscount`;
-   getEmpCode = `${this.environment.runtimeConfig.serverUrl}Common/GetEmployeeCode`;
-   getEmpName = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveRequest/GetEmpName`;
-   updateLeaveRequests = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveRequest/UpdateLeaveapplying`;
-   getLeaveTypeatList = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveRequest/GetLeavetpesList`;
-   getLeaveRequestList = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveRequest/GetLeaveApplDetailsList`;
-   //getLeaveRequestList = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveRequest/GetLeaveApplDetailsList`;
-   registerLeaveRequests = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveRequest/RegisterLeaveapplying`;
+   getnoofdayscount = `${environment.baseUrl}Selfservice/LeaveRequest/Getnoofdayscount`;
+   getEmpCode = `${environment.baseUrl}Common/GetEmployeeCode`;
+   getEmpName = `${environment.baseUrl}Selfservice/LeaveRequest/GetEmpName`;
+   updateLeaveRequests = `${environment.baseUrl}Selfservice/LeaveRequest/UpdateLeaveapplying`;
+   getLeaveTypeatList = `${environment.baseUrl}Selfservice/LeaveRequest/GetLeavetpesList`;
+   getLeaveRequestList = `${environment.baseUrl}Selfservice/LeaveRequest/GetLeaveApplDetailsList`;
+   //getLeaveRequestList = `${environment.baseUrl}Selfservice/LeaveRequest/GetLeaveApplDetailsList`;
+   registerLeaveRequests = `${environment.baseUrl}Selfservice/LeaveRequest/RegisterLeaveapplying`;
 
 
    //Applyod
-   applyodRequestList = `${this.environment.runtimeConfig.serverUrl}Selfservice/Applyod/GetApplyodDetailsList`;
-   registerodRequest = `${this.environment.runtimeConfig.serverUrl}Selfservice/Applyod/RegisterApplyOddataDetails`;
-   updateapplyodRequest = `${this.environment.runtimeConfig.serverUrl}Selfservice/Applyod/UpdateApplyod`;
+   applyodRequestList = `${environment.baseUrl}Selfservice/Applyod/GetApplyodDetailsList`;
+   registerodRequest = `${environment.baseUrl}Selfservice/Applyod/RegisterApplyOddataDetails`;
+   updateapplyodRequest = `${environment.baseUrl}Selfservice/Applyod/UpdateApplyod`;
 
    //Advance
-   applyadvanceRequestList = `${this.environment.runtimeConfig.serverUrl}Selfservice/Advance/GetApplyAdvanceDetailsList`;
-   registeradvanceRequest = `${this.environment.runtimeConfig.serverUrl}Selfservice/Advance/RegisterApplyAdvancedataDetails`;
-   updateapplyadvanceRequest = `${this.environment.runtimeConfig.serverUrl}Selfservice/Advance/UpdateAdvancedataDetails`;
-   getAdvancetypeList = `${this.environment.runtimeConfig.serverUrl}Selfservice/Advance/GetAdvancedataDetailslist`;
+   applyadvanceRequestList = `${environment.baseUrl}Selfservice/Advance/GetApplyAdvanceDetailsList`;
+   registeradvanceRequest = `${environment.baseUrl}Selfservice/Advance/RegisterApplyAdvancedataDetails`;
+   updateapplyadvanceRequest = `${environment.baseUrl}Selfservice/Advance/UpdateAdvancedataDetails`;
+   getAdvancetypeList = `${environment.baseUrl}Selfservice/Advance/GetAdvancedataDetailslist`;
 
    //PermissionRequest
-   permissionRequestList = `${this.environment.runtimeConfig.serverUrl}Selfservice/PermissionRequest/GetPermissionApplDetailsList`;
-   registerpermissionRequest = `${this.environment.runtimeConfig.serverUrl}Selfservice/PermissionRequest/RegisterPermissionapplying`;
-   updatepermissionRequest = `${this.environment.runtimeConfig.serverUrl}Selfservice/PermissionRequest/UpdatePermissionapplying`;
+   permissionRequestList = `${environment.baseUrl}Selfservice/PermissionRequest/GetPermissionApplDetailsList`;
+   registerpermissionRequest = `${environment.baseUrl}Selfservice/PermissionRequest/RegisterPermissionapplying`;
+   updatepermissionRequest = `${environment.baseUrl}Selfservice/PermissionRequest/UpdatePermissionapplying`;
 
    //PT Master
-   getPTList = `${this.environment.runtimeConfig.serverUrl}payroll/PTMaster/GetPTList`;
-   registerPT = `${this.environment.runtimeConfig.serverUrl}payroll/PTMaster/RegisterPT`;
-   updatePT = `${this.environment.runtimeConfig.serverUrl}payroll/PTMaster/UpdatePT`;
-   deletePT = `${this.environment.runtimeConfig.serverUrl}payroll/PTMaster/DeletePT`;
+   getPTList = `${environment.baseUrl}payroll/PTMaster/GetPTList`;
+   registerPT = `${environment.baseUrl}payroll/PTMaster/RegisterPT`;
+   updatePT = `${environment.baseUrl}payroll/PTMaster/UpdatePT`;
+   deletePT = `${environment.baseUrl}payroll/PTMaster/DeletePT`;
 
    // Component Master
-   getComponentsList = `${this.environment.runtimeConfig.serverUrl}payroll/ComponentMaster/GetComponentsList`;
-   registerComponent = `${this.environment.runtimeConfig.serverUrl}payroll/ComponentMaster/RegisterComponent`;
-   getConfigurationList = `${this.environment.runtimeConfig.serverUrl}Common/GetConfigurationList`;
-   updateComponent = `${this.environment.runtimeConfig.serverUrl}payroll/ComponentMaster/UpdateComponent`;
-   deleteComponent = `${this.environment.runtimeConfig.serverUrl}payroll/ComponentMaster/DeleteComponent`;
+   getComponentsList = `${environment.baseUrl}payroll/ComponentMaster/GetComponentsList`;
+   registerComponent = `${environment.baseUrl}payroll/ComponentMaster/RegisterComponent`;
+   getConfigurationList = `${environment.baseUrl}Common/GetConfigurationList`;
+   updateComponent = `${environment.baseUrl}payroll/ComponentMaster/UpdateComponent`;
+   deleteComponent = `${environment.baseUrl}payroll/ComponentMaster/DeleteComponent`;
 
     // Structure Creation
-    getStructuresList = `${this.environment.runtimeConfig.serverUrl}payroll/StructureCreation/GetStructuresList`;
-    registerStructure = `${this.environment.runtimeConfig.serverUrl}payroll/StructureCreation/RegisterStructure`;
-    updateStructure = `${this.environment.runtimeConfig.serverUrl}payroll/StructureCreation/UpdateStructure`;
-    deleteStructure = `${this.environment.runtimeConfig.serverUrl}payroll/StructureCreation/DeleteStructure`;
-    getStructureComponentsList = `${this.environment.runtimeConfig.serverUrl}payroll/StructureCreation/GetComponentsList`;
-    getPFList = `${this.environment.runtimeConfig.serverUrl}payroll/StructureCreation/GetPFList`;
+    getStructuresList = `${environment.baseUrl}payroll/StructureCreation/GetStructuresList`;
+    registerStructure = `${environment.baseUrl}payroll/StructureCreation/RegisterStructure`;
+    updateStructure = `${environment.baseUrl}payroll/StructureCreation/UpdateStructure`;
+    deleteStructure = `${environment.baseUrl}payroll/StructureCreation/DeleteStructure`;
+    getStructureComponentsList = `${environment.baseUrl}payroll/StructureCreation/GetComponentsList`;
+    getPFList = `${environment.baseUrl}payroll/StructureCreation/GetPFList`;
 
    //PF Master
-   getPfComponentsList = `${this.environment.runtimeConfig.serverUrl}Component/GetcomponentTypesList`;
-   getPfList = `${this.environment.runtimeConfig.serverUrl}payroll/PFMaster/GetPFList`;
-   registerPF = `${this.environment.runtimeConfig.serverUrl}payroll/PFMaster/RegisterPF`;
-   updatePF = `${this.environment.runtimeConfig.serverUrl}payroll/PFMaster/UpdatePF`;
-   deletePF = `${this.environment.runtimeConfig.serverUrl}payroll/PFMaster/DeletePF`;
+   getPfComponentsList = `${environment.baseUrl}Component/GetcomponentTypesList`;
+   getPfList = `${environment.baseUrl}payroll/PFMaster/GetPFList`;
+   registerPF = `${environment.baseUrl}payroll/PFMaster/RegisterPF`;
+   updatePF = `${environment.baseUrl}payroll/PFMaster/UpdatePF`;
+   deletePF = `${environment.baseUrl}payroll/PFMaster/DeletePF`;
 
    //approvaltype
-   getempList = `${this.environment.runtimeConfig.serverUrl}Selfservice/ApprovalType/GetEmployeesList`;
-   getapprovaltypeList = `${this.environment.runtimeConfig.serverUrl}Selfservice/ApprovalType/GetApprovalTypesList`;
-   registerapprovaltype = `${this.environment.runtimeConfig.serverUrl}Selfservice/ApprovalType/RegisterApprovalType`;
-   updateapprovaltype = `${this.environment.runtimeConfig.serverUrl}Selfservice/ApprovalType/UpdateApprovalType`;
-   deleteapprovaltype = `${this.environment.runtimeConfig.serverUrl}Selfservice/ApprovalType/DeleteApprovalType`;
+   getempList = `${environment.baseUrl}Selfservice/ApprovalType/GetEmployeesList`;
+   getapprovaltypeList = `${environment.baseUrl}Selfservice/ApprovalType/GetApprovalTypesList`;
+   registerapprovaltype = `${environment.baseUrl}Selfservice/ApprovalType/RegisterApprovalType`;
+   updateapprovaltype = `${environment.baseUrl}Selfservice/ApprovalType/UpdateApprovalType`;
+   deleteapprovaltype = `${environment.baseUrl}Selfservice/ApprovalType/DeleteApprovalType`;
 
 
    //CTC Breakup
-   getCTCList = `${this.environment.runtimeConfig.serverUrl}payroll/CTCBreakup/GetCTCList`;
-   getStructureList = `${this.environment.runtimeConfig.serverUrl}Common/GetStructuresList`;
-   getPFTypeList = `${this.environment.runtimeConfig.serverUrl}Common/GetPFList`;
-   getpfTypesList = `${this.environment.runtimeConfig.serverUrl}PFMaster/GetpfTypesList`;
-   getPTSlabList = `${this.environment.runtimeConfig.serverUrl}Common/GetPTList`;
-   getptTypesList = `${this.environment.runtimeConfig.serverUrl}PTMaster/GetptTypesList`;
-   getctcEmployeeList = `${this.environment.runtimeConfig.serverUrl}CTC/GetEmployeeList`;
-   getStructures = `${this.environment.runtimeConfig.serverUrl}CTC/GetStructures`;
-   getctcComponentsList = `${this.environment.runtimeConfig.serverUrl}payroll/ComponentMaster/GetComponentsList`;
-   getctcDetailList = `${this.environment.runtimeConfig.serverUrl}CTC/GetctcDetailList`;
+   getCTCList = `${environment.baseUrl}payroll/CTCBreakup/GetCTCList`;
+   getStructureList = `${environment.baseUrl}Common/GetStructuresList`;
+   getPFTypeList = `${environment.baseUrl}Common/GetPFList`;
+   getpfTypesList = `${environment.baseUrl}PFMaster/GetpfTypesList`;
+   getPTSlabList = `${environment.baseUrl}Common/GetPTList`;
+   getptTypesList = `${environment.baseUrl}PTMaster/GetptTypesList`;
+   getctcEmployeeList = `${environment.baseUrl}CTC/GetEmployeeList`;
+   getStructures = `${environment.baseUrl}CTC/GetStructures`;
+   getctcComponentsList = `${environment.baseUrl}payroll/ComponentMaster/GetComponentsList`;
+   getctcDetailList = `${environment.baseUrl}CTC/GetctcDetailList`;
    
    //Leaveopeningbalance
 
-   getLeaveTypeatListforlop = `${this.environment.runtimeConfig.serverUrl}masters/LeaveBalances/GetLeavetpeList`;
-   getLeaveopeningbalanceList = `${this.environment.runtimeConfig.serverUrl}masters/LeaveBalances/GetLeaveBalancesList`;
-   registerLeaveopeningbalance = `${this.environment.runtimeConfig.serverUrl}masters/LeaveBalances/RegisterLeaveBalancesList`;
-   updateLeaveopeningbalance = `${this.environment.runtimeConfig.serverUrl}masters/LeaveBalances/UpdateLeaveBalancesList`;
-   deleteLeaveopeningbalance = `${this.environment.runtimeConfig.serverUrl}masters/LeaveBalances/DeleteLeaveBalancesList`;
+   getLeaveTypeatListforlop = `${environment.baseUrl}masters/LeaveBalances/GetLeavetpeList`;
+   getLeaveopeningbalanceList = `${environment.baseUrl}masters/LeaveBalances/GetLeaveBalancesList`;
+   registerLeaveopeningbalance = `${environment.baseUrl}masters/LeaveBalances/RegisterLeaveBalancesList`;
+   updateLeaveopeningbalance = `${environment.baseUrl}masters/LeaveBalances/UpdateLeaveBalancesList`;
+   deleteLeaveopeningbalance = `${environment.baseUrl}masters/LeaveBalances/DeleteLeaveBalancesList`;
 
-   getCashAccBranchesList = `${this.environment.runtimeConfig.serverUrl}gl/AsignmentCashAccBranch/GetBranchesList`;
-   getCompaniesList = `${this.environment.runtimeConfig.serverUrl}gl/VoucherType/GetCompaniesList`;
+   getCashAccBranchesList = `${environment.baseUrl}gl/AsignmentCashAccBranch/GetBranchesList`;
+   getCompaniesList = `${environment.baseUrl}gl/VoucherType/GetCompaniesList`;
 
    // opening balance
-   getOpeningBalanceList = `${this.environment.runtimeConfig.serverUrl}/masters/OpeningBalance/GetOpeningBalanceList`;
-   getObBranchesList = `${this.environment.runtimeConfig.serverUrl}/masters/OpeningBalance/GetBranchesList`;
-   getObVoucherNo = `${this.environment.runtimeConfig.serverUrl}/masters/OpeningBalance/GetVoucherNo`;
-   getPaymentType = `${this.environment.runtimeConfig.serverUrl}/masters/OpeningBalance/GetPaymentType`;
-   registerOpeningBalance = `${this.environment.runtimeConfig.serverUrl}/masters/OpeningBalance/RegisterOpeningBalance`;
+   getOpeningBalanceList = `${environment.baseUrl}/masters/OpeningBalance/GetOpeningBalanceList`;
+   getObBranchesList = `${environment.baseUrl}/masters/OpeningBalance/GetBranchesList`;
+   getObVoucherNo = `${environment.baseUrl}/masters/OpeningBalance/GetVoucherNo`;
+   getPaymentType = `${environment.baseUrl}/masters/OpeningBalance/GetPaymentType`;
+   registerOpeningBalance = `${environment.baseUrl}/masters/OpeningBalance/RegisterOpeningBalance`;
 
-   getBPAccountLedgerList = `${this.environment.runtimeConfig.serverUrl}transactions/BankPayment/GetAccountLedgerList`;
+   getBPAccountLedgerList = `${environment.baseUrl}transactions/BankPayment/GetAccountLedgerList`;
 
    // Stock Excess
-   getStockexcessList = `${this.environment.runtimeConfig.serverUrl}transactions/StockExcess/GetStockexcessList`;
-   getStockExcessBranchesList = `${this.environment.runtimeConfig.serverUrl}transactions/StockExcess/GetBranchesList`;
-   getstockexcessNo = `${this.environment.runtimeConfig.serverUrl}transactions/StockExcess/GetstockexcessNo`;
-   getStockExcessCostCentersList = `${this.environment.runtimeConfig.serverUrl}transactions/StockExcess/GetCostCentersList`;
-   getProductListsforStockexcessList = `${this.environment.runtimeConfig.serverUrl}transactions/StockExcess/GetProductLists`;
-   registerStockexcess = `${this.environment.runtimeConfig.serverUrl}transactions/StockExcess/RegisterStockexcess`;
-   getStockExcessDetailsList = `${this.environment.runtimeConfig.serverUrl}transactions/StockExcess/GetStockExcessDetailsList`;
+   getStockexcessList = `${environment.baseUrl}transactions/StockExcess/GetStockexcessList`;
+   getStockExcessBranchesList = `${environment.baseUrl}transactions/StockExcess/GetBranchesList`;
+   getstockexcessNo = `${environment.baseUrl}transactions/StockExcess/GetstockexcessNo`;
+   getStockExcessCostCentersList = `${environment.baseUrl}transactions/StockExcess/GetCostCentersList`;
+   getProductListsforStockexcessList = `${environment.baseUrl}transactions/StockExcess/GetProductLists`;
+   registerStockexcess = `${environment.baseUrl}transactions/StockExcess/RegisterStockexcess`;
+   getStockExcessDetailsList = `${environment.baseUrl}transactions/StockExcess/GetStockExcessDetailsList`;
 
    // ******************************** sales *********************************
-   getSaleOrderApproveList = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSaleOrderApproveList`;
-   getInvoiceList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceList`;
-   getCashPartyAccountList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetCashPartyAccountList`;
-   getCustomerGstNumList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetCustomerGstNumList`;
-   getBillingBranchesList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetBranchesList`;
-   getCashPartyAccount = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetCashPartyAccount`;
-   getmemberNames = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetmemberNames`;
-   getAccountBalance = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetAccountBalance`;
-   generateBillNo = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GenerateBillNo`;
-   getProductByProductCode = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetProductByProductCode`;
-   getProductByProductName = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetProductByProductName`;
-   getBillingDetailsRcd = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetBillingDetailsRcd`;
-   registerInvoice = `${this.environment.runtimeConfig.serverUrl}sales/Billing/RegisterInvoice`;
-   getStateList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GeStateList`;
-   getSelectedState = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GeSelectedState`;
-   getVechiels = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetVechiels`;
-   getInvoiceDeatilList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceDeatilList`;
-   getPupms = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetPupms`;
-   generateSalesReturnInvNo = `${this.environment.runtimeConfig.serverUrl}transaction/SalesReturn/GenerateSalesReturnInvNo`;
-   registerInvoiceReturn = `${this.environment.runtimeConfig.serverUrl}transaction/SalesReturn/RegisterInvoiceReturn`;
-   getInvoiceReturnDetail = `${this.environment.runtimeConfig.serverUrl}transaction/SalesReturn/GetInvoiceReturnDetail`;
-   getInvoiceGetInvoiceReturnList = `${this.environment.runtimeConfig.serverUrl}transaction/SalesReturn/GetInvoiceReturnList`;
-   getmemberNamesByCode = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetmemberNamesByCode`;
-   getInvoiceDeatilListsaleorder = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceDeatilListsaleorder`;
+   getSaleOrderApproveList = `${environment.baseUrl}Transactions/GetSaleOrderApproveList`;
+   getInvoiceList = `${environment.baseUrl}sales/Billing/GetInvoiceList`;
+   getCashPartyAccountList = `${environment.baseUrl}sales/Billing/GetCashPartyAccountList`;
+   getCustomerGstNumList = `${environment.baseUrl}sales/Billing/GetCustomerGstNumList`;
+   getBillingBranchesList = `${environment.baseUrl}sales/Billing/GetBranchesList`;
+   getCashPartyAccount = `${environment.baseUrl}sales/Billing/GetCashPartyAccount`;
+   getmemberNames = `${environment.baseUrl}sales/Billing/GetmemberNames`;
+   getAccountBalance = `${environment.baseUrl}sales/Billing/GetAccountBalance`;
+   generateBillNo = `${environment.baseUrl}sales/Billing/GenerateBillNo`;
+   getProductByProductCode = `${environment.baseUrl}sales/Billing/GetProductByProductCode`;
+   getProductByProductName = `${environment.baseUrl}sales/Billing/GetProductByProductName`;
+   getBillingDetailsRcd = `${environment.baseUrl}sales/Billing/GetBillingDetailsRcd`;
+   registerInvoice = `${environment.baseUrl}sales/Billing/RegisterInvoice`;
+   getStateList = `${environment.baseUrl}sales/Billing/GeStateList`;
+   getSelectedState = `${environment.baseUrl}sales/Billing/GeSelectedState`;
+   getVechiels = `${environment.baseUrl}sales/Billing/GetVechiels`;
+   getInvoiceDeatilList = `${environment.baseUrl}sales/Billing/GetInvoiceDeatilList`;
+   getPupms = `${environment.baseUrl}sales/Billing/GetPupms`;
+   generateSalesReturnInvNo = `${environment.baseUrl}transaction/SalesReturn/GenerateSalesReturnInvNo`;
+   registerInvoiceReturn = `${environment.baseUrl}transaction/SalesReturn/RegisterInvoiceReturn`;
+   getInvoiceReturnDetail = `${environment.baseUrl}transaction/SalesReturn/GetInvoiceReturnDetail`;
+   getInvoiceGetInvoiceReturnList = `${environment.baseUrl}transaction/SalesReturn/GetInvoiceReturnList`;
+   getmemberNamesByCode = `${environment.baseUrl}sales/Billing/GetmemberNamesByCode`;
+   getInvoiceDeatilListsaleorder = `${environment.baseUrl}sales/Billing/GetInvoiceDeatilListsaleorder`;
 
-   getStockTransferPrintReportData = `${this.environment.runtimeConfig.serverUrl}Reports/StockTransferPrintReport/GetStockTransferPrintReportData`;
-   employeeattendance = `${this.environment.runtimeConfig.serverUrl}Reports/Employeeattendance`;
-   eemployeeAttendanceChange = `${this.environment.runtimeConfig.serverUrl}Reports/EemployeeAttendanceChange`;
-   addAttendance = `${this.environment.runtimeConfig.serverUrl}Transactions/AddAttendance`;
+   getStockTransferPrintReportData = `${environment.baseUrl}Reports/StockTransferPrintReport/GetStockTransferPrintReportData`;
+   employeeattendance = `${environment.baseUrl}Reports/Employeeattendance`;
+   eemployeeAttendanceChange = `${environment.baseUrl}Reports/EemployeeAttendanceChange`;
+   addAttendance = `${environment.baseUrl}Transactions/AddAttendance`;
 
    //  stock Transfer
-   generateStockTranfNo = `${this.environment.runtimeConfig.serverUrl}transaction/StockTransfer/GenerateStockTranfNo`;
-   geProductsByName = `${this.environment.runtimeConfig.serverUrl}transaction/StockTransfer/GeProductsByName`;
-   geProductsByCode = `${this.environment.runtimeConfig.serverUrl}transaction/StockTransfer/GeProductsByCode`;
-   getStockTransferDetailsSection = `${this.environment.runtimeConfig.serverUrl}transaction/StockTransfer/GetStockTransferDetailsSection`;
-   getLtrs = `${this.environment.runtimeConfig.serverUrl}transaction/StockTransfer/GetLtrs`;
-   registerStockTransfer = `${this.environment.runtimeConfig.serverUrl}transaction/StockTransfer/RegisterStockTransfer`;
-   getStockTransferList = `${this.environment.runtimeConfig.serverUrl}transaction/StockTransfer/GetStockTransferList`;
-   getStockTransferDetilsaRecords = `${this.environment.runtimeConfig.serverUrl}transaction/StockTransfer/GetStockTransferDetilsaRecords`;
+   generateStockTranfNo = `${environment.baseUrl}transaction/StockTransfer/GenerateStockTranfNo`;
+   geProductsByName = `${environment.baseUrl}transaction/StockTransfer/GeProductsByName`;
+   geProductsByCode = `${environment.baseUrl}transaction/StockTransfer/GeProductsByCode`;
+   getStockTransferDetailsSection = `${environment.baseUrl}transaction/StockTransfer/GetStockTransferDetailsSection`;
+   getLtrs = `${environment.baseUrl}transaction/StockTransfer/GetLtrs`;
+   registerStockTransfer = `${environment.baseUrl}transaction/StockTransfer/RegisterStockTransfer`;
+   getStockTransferList = `${environment.baseUrl}transaction/StockTransfer/GetStockTransferList`;
+   getStockTransferDetilsaRecords = `${environment.baseUrl}transaction/StockTransfer/GetStockTransferDetilsaRecords`;
 
    //AdvanceApproval
-   getAdvanceApplDetailsList = `${this.environment.runtimeConfig.serverUrl}Selfservice/AdvanceApproval/GetAdvanceApprovalApplDetailsList`;
-   RegisterAdvanceApprovalDetails = `${this.environment.runtimeConfig.serverUrl}Selfservice/AdvanceApproval/RegisterAdvanceApprovalDetails`;
+   getAdvanceApplDetailsList = `${environment.baseUrl}Selfservice/AdvanceApproval/GetAdvanceApprovalApplDetailsList`;
+   RegisterAdvanceApprovalDetails = `${environment.baseUrl}Selfservice/AdvanceApproval/RegisterAdvanceApprovalDetails`;
 
    //VehicleApproval
-   getVehicleApplDetailsList = `${this.environment.runtimeConfig.serverUrl}Selfservice/VehicleApproval/GetVehicleApprovalApplDetailsList`;
-   RegisterVehicleApprovalDetails = `${this.environment.runtimeConfig.serverUrl}Selfservice/VehicleApproval/RegisterVehicleApprovalDetails`;
+   getVehicleApplDetailsList = `${environment.baseUrl}Selfservice/VehicleApproval/GetVehicleApprovalApplDetailsList`;
+   RegisterVehicleApprovalDetails = `${environment.baseUrl}Selfservice/VehicleApproval/RegisterVehicleApprovalDetails`;
 
    //OdApproval
-   getOdApplDetailsList = `${this.environment.runtimeConfig.serverUrl}Selfservice/OdApproval/GetOdApprovalApplDetailsList`;
-   RegisterOdApprovalDetails = `${this.environment.runtimeConfig.serverUrl}Selfservice/OdApproval/GetOdApprovalApplDetailsList`;
+   getOdApplDetailsList = `${environment.baseUrl}Selfservice/OdApproval/GetOdApprovalApplDetailsList`;
+   RegisterOdApprovalDetails = `${environment.baseUrl}Selfservice/OdApproval/GetOdApprovalApplDetailsList`;
 
    //Permission RequestApproval
-   getPermissionrqstApplDetailsList = `${this.environment.runtimeConfig.serverUrl}Selfservice/PermissionApproval/GetPermissionApprovalApplDetailsList`;
-   RegisterPermissionrqstApprovalDetails = `${this.environment.runtimeConfig.serverUrl}Selfservice/PermissionApproval/RegisterPermissionApprovalDetails`;
+   getPermissionrqstApplDetailsList = `${environment.baseUrl}Selfservice/PermissionApproval/GetPermissionApprovalApplDetailsList`;
+   RegisterPermissionrqstApprovalDetails = `${environment.baseUrl}Selfservice/PermissionApproval/RegisterPermissionApprovalDetails`;
 
    // Leave Approval
-   getLeaveApplDetailsList = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveApproval/GetLeaveApplDetailsList`;
-   RegisterLeaveApprovalDetails = `${this.environment.runtimeConfig.serverUrl}Selfservice/LeaveApproval/RegisterLeaveApprovalDetails`;
+   getLeaveApplDetailsList = `${environment.baseUrl}Selfservice/LeaveApproval/GetLeaveApplDetailsList`;
+   RegisterLeaveApprovalDetails = `${environment.baseUrl}Selfservice/LeaveApproval/RegisterLeaveApprovalDetails`;
   
-   getSaleOrder = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSaleOrder`;
-   getSaleOrderDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSaleOrderDetail`;
-   getPurchaseRequisitionDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseRequisitionDetail`;
-   addSaleOrder = `${this.environment.runtimeConfig.serverUrl}Transactions/AddSaleOrder`;
-   getSaleOrderDetailPO = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSaleOrderDetailPO`;
+   getSaleOrder = `${environment.baseUrl}Transactions/GetSaleOrder`;
+   getSaleOrderDetail = `${environment.baseUrl}Transactions/GetSaleOrderDetail`;
+   getPurchaseRequisitionDetail = `${environment.baseUrl}Transactions/GetPurchaseRequisitionDetail`;
+   addSaleOrder = `${environment.baseUrl}Transactions/AddSaleOrder`;
+   getSaleOrderDetailPO = `${environment.baseUrl}Transactions/GetSaleOrderDetailPO`;
 
-   getSaleOrderNumber = `${this.environment.runtimeConfig.serverUrl}Transactions/GetSaleOrderNumber`;
-   getPurchaseOrderNumber = `${this.environment.runtimeConfig.serverUrl}Transactions/GetPurchaseOrderNumber`;
-   uploadFile = `${this.environment.runtimeConfig.serverUrl}Transactions/UploadFile`;
-   getFile = `${this.environment.runtimeConfig.serverUrl}Transactions/GetFile`;
+   getSaleOrderNumber = `${environment.baseUrl}Transactions/GetSaleOrderNumber`;
+   getPurchaseOrderNumber = `${environment.baseUrl}Transactions/GetPurchaseOrderNumber`;
+   uploadFile = `${environment.baseUrl}Transactions/UploadFile`;
+   getFile = `${environment.baseUrl}Transactions/GetFile`;
 
-   addProductionissue = `${this.environment.runtimeConfig.serverUrl}Transactions/AddProductionissue`;
+   addProductionissue = `${environment.baseUrl}Transactions/AddProductionissue`;
 
-   getProductionStatus = `${this.environment.runtimeConfig.serverUrl}Transactions/GetProductionStatus`;
+   getProductionStatus = `${environment.baseUrl}Transactions/GetProductionStatus`;
 
-   getPRList = `${this.environment.runtimeConfig.serverUrl}Common/GetPRList`;
-   getBOMList = `${this.environment.runtimeConfig.serverUrl}Common/GetBOMList`;
-   getFormList = `${this.environment.runtimeConfig.serverUrl}Common/GetFormList`;
+   getPRList = `${environment.baseUrl}Common/GetPRList`;
+   getBOMList = `${environment.baseUrl}Common/GetBOMList`;
+   getFormList = `${environment.baseUrl}Common/GetFormList`;
 
-   registerStandardRate = `${this.environment.runtimeConfig.serverUrl}StandardRate/RegisterStandardRate`;
+   registerStandardRate = `${environment.baseUrl}StandardRate/RegisterStandardRate`;
    
-   getInspectionDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetInspectionDetail`;
-   getInspectionCheckDetailbySaleorder = `${this.environment.runtimeConfig.serverUrl}Transactions/GetInspectionCheckDetailbySaleorder`;
-   deletePurchaseOrder = `${this.environment.runtimeConfig.serverUrl}Common/DeletePurchaseOrder`;
+   getInspectionDetail = `${environment.baseUrl}Transactions/GetInspectionDetail`;
+   getInspectionCheckDetailbySaleorder = `${environment.baseUrl}Transactions/GetInspectionCheckDetailbySaleorder`;
+   deletePurchaseOrder = `${environment.baseUrl}Common/DeletePurchaseOrder`;
 
-   deleteBomDetail = `${this.environment.runtimeConfig.serverUrl}Common/DeleteBomDetail`;
+   deleteBomDetail = `${environment.baseUrl}Common/DeleteBomDetail`;
 
-   savePurchaseOrder = `${this.environment.runtimeConfig.serverUrl}Transactions/SavePurchaseOrder`;
-   saveGoodsReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/SaveGoodsReceipt`;
-   saveSaleOrderApproval = `${this.environment.runtimeConfig.serverUrl}Transactions/SaveSaleOrderApproval`;
+   savePurchaseOrder = `${environment.baseUrl}Transactions/SavePurchaseOrder`;
+   saveGoodsReceipt = `${environment.baseUrl}Transactions/SaveGoodsReceipt`;
+   saveSaleOrderApproval = `${environment.baseUrl}Transactions/SaveSaleOrderApproval`;
    
-   getInvoiceData = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceData`;
-   getInvoiceDetailList = `${this.environment.runtimeConfig.serverUrl}sales/Billing/GetInvoiceDetailList`;
+   getInvoiceData = `${environment.baseUrl}sales/Billing/GetInvoiceData`;
+   getInvoiceDetailList = `${environment.baseUrl}sales/Billing/GetInvoiceDetailList`;
    
-   getJobWork = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJobWork`;
-   addJobWork = `${this.environment.runtimeConfig.serverUrl}Transactions/AddJobWork`;
-   getJobworkDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJobworkDetail`;
+   getJobWork = `${environment.baseUrl}Transactions/GetJobWork`;
+   addJobWork = `${environment.baseUrl}Transactions/AddJobWork`;
+   getJobworkDetail = `${environment.baseUrl}Transactions/GetJobworkDetail`;
 
-   getMaterialIssue = `${this.environment.runtimeConfig.serverUrl}Transactions/GetMaterialIssue`;
-   addMaterialIssue = `${this.environment.runtimeConfig.serverUrl}Transactions/AddMaterialIssue`;
-   getMaterialIssueDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetMaterialIssueDetail`;
+   getMaterialIssue = `${environment.baseUrl}Transactions/GetMaterialIssue`;
+   addMaterialIssue = `${environment.baseUrl}Transactions/AddMaterialIssue`;
+   getMaterialIssueDetail = `${environment.baseUrl}Transactions/GetMaterialIssueDetail`;
    
-   getJWReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJWReceipt`;
-   addJWReceipt = `${this.environment.runtimeConfig.serverUrl}Transactions/AddJWReceipt`;
-   getJWReceiptDetail = `${this.environment.runtimeConfig.serverUrl}Transactions/GetJWReceiptDetail`;
-   getJobWorkDetails = `${this.environment.runtimeConfig.serverUrl}Common/GetJobWorkDetails`;
-   updateProductionStatus = `${this.environment.runtimeConfig.serverUrl}Transactions/UpdateProductionStatus`;
+   getJWReceipt = `${environment.baseUrl}Transactions/GetJWReceipt`;
+   addJWReceipt = `${environment.baseUrl}Transactions/AddJWReceipt`;
+   getJWReceiptDetail = `${environment.baseUrl}Transactions/GetJWReceiptDetail`;
+   getJobWorkDetails = `${environment.baseUrl}Common/GetJobWorkDetails`;
+   updateProductionStatus = `${environment.baseUrl}Transactions/UpdateProductionStatus`;
 
-   getOrdersvsSales = `${this.environment.runtimeConfig.serverUrl}Reports/GetOrdersvsSales`;
+   getOrdersvsSales = `${environment.baseUrl}Reports/GetOrdersvsSales`;
 
-   getEmpPresent = `${this.environment.runtimeConfig.serverUrl}Reports/GetEmpPresent`;
-   gLsubAccountListbyCatetory = `${this.environment.runtimeConfig.serverUrl}Common/GLsubAccountListbyCatetory`;
+   getEmpPresent = `${environment.baseUrl}Reports/GetEmpPresent`;
+   gLsubAccountListbyCatetory = `${environment.baseUrl}Common/GLsubAccountListbyCatetory`;
 
-   getBomDetail = `${this.environment.runtimeConfig.serverUrl}Common/GetBomDetail`;
+   getBomDetail = `${environment.baseUrl}Common/GetBomDetail`;
    
-   registerAttendanceProcess = `${this.environment.runtimeConfig.serverUrl}AttendanceProcess/RegisterAttendanceProcess`;
+   registerAttendanceProcess = `${environment.baseUrl}AttendanceProcess/RegisterAttendanceProcess`;
 }

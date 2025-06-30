@@ -4,10 +4,17 @@ import { ApiService } from '../../services/api.service';
 import { CommonService } from '../../services/common.service';
 import { ApiConfigService } from '../../services/api-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard',
+  imports: [CommonModule, RouterOutlet, SidebarComponent,
+    MatCardModule, MatSidenavModule, MatListModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
@@ -55,10 +62,10 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   btnSample(): void {
     this.router.navigateByUrl('dashboard/transaction/samplerequisitionform');
- }
+  }
 
- btnService(): void{
-  this.router.navigateByUrl('dashboard/transaction/sampleservice');
- }
- 
+  btnService(): void {
+    this.router.navigateByUrl('dashboard/transaction/sampleservice');
+  }
+
 }
