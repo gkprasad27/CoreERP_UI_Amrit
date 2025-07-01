@@ -2038,6 +2038,7 @@
   "sourceofsupply": {
     "title": "Source of Supply",
     "supplierCode": "Supplier Code",
+    "supplierName":"Supplier Name",
     "phone": "Phone",
     "mobile": "Mobile",
     "email": "Email",

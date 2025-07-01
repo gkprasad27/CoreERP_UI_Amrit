@@ -1,8 +1,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div style="margin: 10px;" id="printData" *ngIf="data">
     <div style="display: flex;">
-        <img src="/assets/images/header.jpg" style="height: 100px;
-        width: 65%;">
+        <img *ngIf="data?.headingObj?.company === '1000'" 
+             src="/assets/images/header.jpg" 
+             style="height: 100px; width: 65%;">
+    
+        <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
+        <img *ngIf="data?.headingObj?.company !== '1000'" 
+             src="/assets/images/AMRIT.jpg" 
+             style="height: 100px; width: 65%;">
         <div style="padding: 24px;
         border-top: 1px solid black;
         -webkit-print-color-adjust: exact;
@@ -106,7 +112,7 @@
             <thead>
                 <tr>
                     <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Product Code </th>
+                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Material Code </th>
                     <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Description </th>
                     <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Quantity </th>
                     <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Unit Weight </th>
@@ -187,21 +193,31 @@
         </div>
     </div>
 
-    <div style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
+     <div *ngIf="data?.headingObj?.company === '1000'" style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
         The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
         PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
         SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMT POWER TRANSMISSION RESERVES THE RIGHT TO WITH HOLD
         ANY PAYMENT UNTIL SUCH TIME THAT A VALID TAX INVOICE IS PROVIDE
     </div>
+    <div *ngIf="data?.headingObj?.company !== '1000'" style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
+        The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
+        PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
+        SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMRIT STONE CRUSHER EQUIPMENTS RESERVES THE RIGHT TO WITH HOLD
+        ANY PAYMENT UNTIL SUCH TIME THAT A VALID TAX INVOICE IS PROVIDE
+    </div>
 
-    <div style="text-align: center;">
-        <img src="/assets/images/footer.jpg" style="height: 100px;
+   <div style="text-align: center;">
+        <img *ngIf="data?.headingObj?.company === '1000'" src="/assets/images/footer.jpg" style="height: 100px;
         width: 20%;">
     </div>
 
     <div style="display: flex;">
-        <img src="/assets/images/header.jpg" style="height: 100px;
-        width: 65%;">
+         <img *ngIf="data?.headingObj?.company === '1000'" 
+             src="/assets/images/header.jpg" 
+             style="height: 100px; width: 65%;">
+        <img *ngIf="data?.headingObj?.company !== '1000'" 
+             src="/assets/images/AMRIT.jpg" 
+             style="height: 100px; width: 65%;">
         <div style="padding: 24px;
         border-top: 1px solid black;
         -webkit-print-color-adjust: exact;
@@ -273,8 +289,12 @@
         <div style="width: 50%;">
             <b> Prepared By: </b>
         </div>
-        <div style="width: 50%;">
+        <div *ngIf="data?.headingObj?.company === '1000'" style="width: 50%;">
             <b> For AMT Power Transmission </b>
+        </div>
+
+        <div *ngIf="data?.headingObj?.company !== '1000'" style="width: 50%;">
+            <b> For AMRIT Stone Crusher Equipments </b>
         </div>
 
     </div>
@@ -285,8 +305,8 @@
 
     </div>
 
-    <div style="text-align: center;">
-        <img src="/assets/images/footer.jpg" style="height: 100px;
+      <div style="text-align: center;">
+        <img *ngIf="data?.headingObj?.company === '1000'" src="/assets/images/footer.jpg" style="height: 100px;
         width: 20%;">
     </div>
 

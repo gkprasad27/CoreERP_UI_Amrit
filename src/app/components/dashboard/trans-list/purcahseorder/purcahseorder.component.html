@@ -138,7 +138,7 @@
                         S.No </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                        Product Code </th>
+                        Material Code </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Description </th>
@@ -280,6 +280,12 @@
                     <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.igst }}
                     </span>
                 </div>
+                 <div style="display: flex;border-top: 1px solid black;">
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Extra Charges
+                         </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;font-weight: 900;"> <b>
+                       {{ (data.headingObj?.fright || 0) + (data.headingObj?.hamaliCharges || 0) + (data.headingObj?.weightBridge || 0) }} </b></span>
+                </div>
                 <div style="display: flex;border-top: 1px solid black;">
                     <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Amount with
                         GST </b>
@@ -295,10 +301,16 @@
         </div>
     </div>
 
-    <div style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
+    <div *ngIf="data?.headingObj?.company === '1000'" style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
         The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
         PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
         SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMT POWER TRANSMISSION RESERVES THE RIGHT TO WITH HOLD
+        ANY PAYMENT UNTIL SUCH TIME THAT A VALID TAX INVOICE IS PROVIDE
+    </div>
+    <div *ngIf="data?.headingObj?.company !== '1000'" style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
+        The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
+        PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
+        SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMRIT STONE CRUSHER EQUIPMENTS RESERVES THE RIGHT TO WITH HOLD
         ANY PAYMENT UNTIL SUCH TIME THAT A VALID TAX INVOICE IS PROVIDE
     </div>
 

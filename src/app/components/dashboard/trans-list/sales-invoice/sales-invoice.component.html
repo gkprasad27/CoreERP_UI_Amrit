@@ -143,9 +143,9 @@
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> S.No </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
-                        rowspan="2"> Product/Service </th>
+                        rowspan="2"> Material Code </th>
                      <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
-                            rowspan="2"> Product Description </th>
+                            rowspan="2"> Material Description </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> HSN ACS </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
@@ -392,8 +392,10 @@
         <div style="width: 40%;font-size: 12px;font-family: sans-serif;">
             <div style="border-bottom: 1px solid black;padding: 5px 0px 10px 2px;">Certified that the particulars given
                 above are true and correct</div>
-            <div style="font-size: 12px;font-family: sans-serif;font-weight: 700;text-align: center;padding-top: 5px;">For
+            <div *ngIf="data?.headingObj?.company === '1000'" style="font-size: 12px;font-family: sans-serif;font-weight: 700;text-align: center;padding-top: 5px;">For
                 AMT Power Transmission</div>
+            <div *ngIf="data?.headingObj?.company !== '1000'" style="font-size: 12px;font-family: sans-serif;font-weight: 700;text-align: center;padding-top: 5px;">For
+                AMRIT STONE CRUSHER EQUIPMENTS</div>
             <div style="text-align: center;padding: 30px 10px 6px 10px">Authorised Signatory</div>
         </div>
     </div>
