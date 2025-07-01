@@ -1833,6 +1833,7 @@
     "materialgrade":"Material Grade",
     "milltcno":"Mill TCNo",
     "tptcno":"Third Party TC No",
+    "documentURL":"Document URL",
     "action": "Action"
   },
   "jobworkmaterialreceiving": {

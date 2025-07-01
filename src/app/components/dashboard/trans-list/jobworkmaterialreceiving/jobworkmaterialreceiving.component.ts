@@ -26,10 +26,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { FileUploadComponent } from '../../../../reuse-components/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-jobworkmaterialreceiving',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, FileUploadComponent, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './jobworkmaterialreceiving.component.html',
   styleUrls: ['./jobworkmaterialreceiving.component.scss']
 })

@@ -27,10 +27,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { FileUploadComponent } from '../../../../reuse-components/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-receipt-of-goods',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, FileUploadComponent, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './receipt-of-goods.component.html',
   styleUrls: ['./receipt-of-goods.component.scss'],
   providers: [
@@ -69,7 +70,8 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
   fileList: any;
   fileList1: any;
-  
+  fileList2: any;
+
 
 
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
@@ -219,7 +221,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
       sgst: 0,
       igst: 0,
       taxCode: 0,
-
+      documentURL: [''],
       action: 'editDelete',
       index: 0
     });
@@ -269,14 +271,16 @@ export class ReceiptOfGoodsComponent implements OnInit {
       this.alertService.openSnackBar("You can't recevie more Quantity", Static.Close, SnackBar.error);
       return;
     }
+    debugger
     this.dataChange();
     this.tableData = null;
     this.tableComponent.defaultValues();
     let fObj = this.formData1.value;
     if(fObj.materialCode) {
       fObj.materialCode = fObj.materialCode[0].materialCode;
-      fObj.materialgrade = fObj.materialgrade[0].description
+      fObj.materialgrade = fObj?.materialgrade[0]?.description
     }
+    fObj.documentURL = this.fileList2 ? this.fileList2.name.split('.')[0] : '';
     if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
         fObj.index = data ? (data.length + 1) : 1
@@ -327,15 +331,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
         });
   }
 
-  downLoadFile1(event: any) {
-    const url = String.Join('/', this.apiConfigService.getFile, event.name);
-    this.apiService.apiGetRequest(url)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          window.open(response.response, '_blank');
-        });
-  }
 
   tablePropsFunc() {
     return {
@@ -897,6 +892,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
   emitFilesList1(event: any) {
     this.fileList1 = event[0];
+  }
+  emitFilesList2(event: any) {
+    this.fileList2 = event[0];
   }
 
   uploadFile() {

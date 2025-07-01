@@ -148,28 +148,57 @@ export class SourceOfSupplyComponent implements OnInit {
           }
         }
 
+        if (this.routeEdit != '') {
+            this.getSourceOfSupplyDetails(this.routeEdit);
+        }
+
       });
     });
   }
 
+  getSourceOfSupplyDetails(val) {
+    this.tableData = null;
+    this.tableComponent.defaultValues();
+    const cashDetUrl = String.Join('/', this.apiConfigService.getsupplierDetail, val);
+    this.apiService.apiGetRequest(cashDetUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.formData.patchValue(res.response['ssmasters']);
+              res.response['ssDetail'].forEach((s: any, index: number) => {
+                s.id = 0
+                s.action = 'editDelete';
+              })
+              const tableData = [...res.response['ssDetail']];
+              tableData.forEach((t: any, index: number) => t.index = index + 1);
+              this.tableData = tableData;
+            }
+          }
+        });
+  }
+
   supplierCodeChange() {
+    debugger
     const selectedSupplier = this.bpaList.find(
-      (supplier: any) => supplier.bpnumber === this.formData.value.supplierCode
+      (supplier: any) => supplier.name === this.formData.value.supplierName
     );
     if (selectedSupplier) {
       this.formData.patchValue(selectedSupplier);
       this.formData.patchValue({
-        supplierName: selectedSupplier.name || null
+        supplierCode: selectedSupplier.bpnumber || null
       });
     }
   }
 
   materialCodehChange() {
-    // const obj = this.materialList.find((m: any) => m.id == this.formData.value.materialCode);
-    // if (obj && obj.bom)
-    //   this.formData.patchValue({
-    //     bom: obj.bom,
-    //   })
+    const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
+    if (obj)
+      this.formData1.patchValue({
+        description: obj.text,
+      })
   }
 
   saveForm() {
