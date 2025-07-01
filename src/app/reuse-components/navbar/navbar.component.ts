@@ -12,13 +12,13 @@ import { SnackBar, StatusCodes } from '../../enums/common/common';
 import { CommonModule } from '@angular/common';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, RouterModule, TranslatePipe, MatToolbarModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, RouterModule, TranslatePipe, TranslateModule, MatToolbarModule, MatButtonModule, MatIconModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })

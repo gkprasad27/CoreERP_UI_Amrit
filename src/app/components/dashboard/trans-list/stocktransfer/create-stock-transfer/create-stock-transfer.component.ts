@@ -24,7 +24,7 @@ declare let jsPDF;
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -37,7 +37,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-create-stock-transfer',
-  imports: [ CommonModule, FormsModule, ReactiveFormsModule, RouterModule, TranslatePipe, MatTableModule, MatSlideToggleModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, FormsModule, ReactiveFormsModule, RouterModule, TranslatePipe, TranslateModule, MatTableModule, MatSlideToggleModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './create-stock-transfer.component.html',
   styleUrls: ['./create-stock-transfer.component.scss'],
   providers: [

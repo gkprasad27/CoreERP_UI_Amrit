@@ -24,7 +24,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
     TranslateService,
-    TranslatePipe,
+    TranslatePipe, TranslateModule,
     TranslateDirective
 } from "@ngx-translate/core";
 
@@ -32,7 +32,7 @@ import {
   selector: 'app-login',
   imports: [CommonModule, ReactiveFormsModule,
     MatCardModule, MatIconModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatButtonModule,
-    TranslatePipe, TranslateDirective
+    TranslatePipe, TranslateModule, TranslateDirective
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']

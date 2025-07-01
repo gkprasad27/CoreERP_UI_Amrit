@@ -13,7 +13,7 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
 import { User } from '../../models/common/user';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RuntimeConfigService } from '../../services/runtime-config.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -25,7 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-table',
-  imports: [ CommonModule, TranslatePipe, BsDropdownModule,
+  imports: [ CommonModule, TranslatePipe, TranslateModule, BsDropdownModule,
     MatCardModule, MatPaginatorModule, MatTableModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']

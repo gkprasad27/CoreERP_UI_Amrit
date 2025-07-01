@@ -12,13 +12,13 @@ import { String } from 'typescript-string-operations';
 import { CommonService } from '../../../services/common.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-rolesprevilages',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, 
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, 
     MatPaginator, MatTableModule, MatCardModule, MatSelectModule ],
   templateUrl: './rolesprevilages.component.html',
   styleUrls: ['./rolesprevilages.component.scss']

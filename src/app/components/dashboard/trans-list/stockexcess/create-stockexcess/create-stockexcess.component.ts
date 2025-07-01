@@ -18,7 +18,7 @@ import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../../directives/form
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -31,7 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-create-stockexcess',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, RouterModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, RouterModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './create-stockexcess.component.html',
   styleUrls: ['./create-stockexcess.component.scss'],
   providers: [

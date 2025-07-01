@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 import * as Highcharts from 'highcharts';
 import { Options } from "highcharts";
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from '../../../reuse-components/table/table.component';
 import { MatCardModule } from '@angular/material/card';
@@ -26,7 +26,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-graphs',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TableComponent, MatCardModule, MatSelectModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatCardModule, MatSelectModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule ],
   templateUrl: './graphs.component.html',
   styleUrls: ['./graphs.component.scss']
 })

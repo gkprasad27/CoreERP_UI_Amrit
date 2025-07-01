@@ -13,7 +13,7 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
 import { CommonModule } from '@angular/common';
 import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatCardModule } from '@angular/material/card';
 
 interface Usage {

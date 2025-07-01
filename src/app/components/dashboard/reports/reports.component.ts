@@ -17,14 +17,14 @@ import { EmployeeAttendanceComponent } from '../comp-list/employee-attendance/em
 import { TableComponent } from '../../../reuse-components/table/table.component';
 import { Static } from '../../../enums/common/static';
 import { CommonModule } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-reports',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, MatSelectModule, MatCardModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatSelectModule, MatCardModule],
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss']
 })

@@ -4,7 +4,7 @@ import { MatTableDataSource, MatTable, MatTableModule } from '@angular/material/
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RuntimeConfigService } from '../../services/runtime-config.service';
 import { String } from 'typescript-string-operations';
 import { AddOrEditService } from '../../components/dashboard/comp-list/add-or-edit.service';
@@ -27,7 +27,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-trans-table',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe,
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule,
     MatCardModule, MatPaginatorModule, MatTableModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule
   ],
   templateUrl: './trans-table.component.html',
