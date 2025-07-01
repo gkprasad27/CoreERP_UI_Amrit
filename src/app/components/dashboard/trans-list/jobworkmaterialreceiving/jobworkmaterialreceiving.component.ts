@@ -32,7 +32,12 @@ import { FileUploadComponent } from '../../../../reuse-components/file-upload/fi
   selector: 'app-jobworkmaterialreceiving',
   imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, FileUploadComponent, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './jobworkmaterialreceiving.component.html',
-  styleUrls: ['./jobworkmaterialreceiving.component.scss']
+  styleUrls: ['./jobworkmaterialreceiving.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    DatePipe
+  ]
 })
 export class JobworkmaterialreceivingComponent {
 

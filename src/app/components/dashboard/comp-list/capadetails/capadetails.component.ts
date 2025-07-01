@@ -28,7 +28,8 @@ import { DatePipe } from '@angular/common';
   selector: 'app-capadetails',
   imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './capadetails.component.html',
-  styleUrls: ['./capadetails.component.scss']
+  styleUrls: ['./capadetails.component.scss'],
+  providers: [ DatePipe ]
 })
 export class CAPAdetailsComponent {
 

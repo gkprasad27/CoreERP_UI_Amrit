@@ -29,7 +29,8 @@ import { DatePipe } from '@angular/common';
   selector: 'app-designation',
   imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './designation.component.html',
-  styleUrls: ['./designation.component.scss']
+  styleUrls: ['./designation.component.scss'],
+  providers: [ DatePipe ]
 })
 export class DesignationComponent implements OnInit {
 

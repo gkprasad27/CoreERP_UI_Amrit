@@ -30,7 +30,8 @@ import { NonEditableDatepicker } from '../../../../directives/format-datepicker'
   selector: 'app-employee',
   imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss']
+  styleUrls: ['./employee.component.scss'],
+  providers: [ DatePipe ]
 })
 export class EmployeeComponent implements OnInit {
 

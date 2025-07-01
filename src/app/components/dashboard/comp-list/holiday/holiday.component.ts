@@ -29,7 +29,8 @@ import { DatePipe } from '@angular/common';
   selector: 'app-holiday',
   imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './holiday.component.html',
-  styleUrls: ['./holiday.component.scss']
+  styleUrls: ['./holiday.component.scss'],
+  providers: [ DatePipe ]
 })
 export class HolidayComponent implements OnInit {
 

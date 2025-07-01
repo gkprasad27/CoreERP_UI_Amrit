@@ -37,7 +37,8 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./salesorder.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    DatePipe
   ]
 })
 export class SalesorderComponent {

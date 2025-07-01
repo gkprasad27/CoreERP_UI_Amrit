@@ -29,7 +29,8 @@ import { FileUploadComponent } from '../../../../reuse-components/file-upload/fi
   selector: 'app-dispatchdetails',
   imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, FileUploadComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './dispatchdetails.component.html',
-  styleUrls: ['./dispatchdetails.component.scss']
+  styleUrls: ['./dispatchdetails.component.scss'],
+  providers: [ DatePipe ]
 })
 export class DispatchdetailsComponent {
   modelFormData: FormGroup;
