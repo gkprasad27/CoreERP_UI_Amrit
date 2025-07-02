@@ -534,7 +534,7 @@
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let comp of companyList" [value]="comp.id">
                             {{comp.text}}
-                        </mat-option>
+                        </mat-option>customerCode
                     </mat-select>
                     <mat-error
                         *ngIf="!modelFormData.controls.companyCode.valid && modelFormData.controls.companyCode.status != 'DISABLED'"

@@ -10,7 +10,7 @@ import { RuntimeConfigService } from '../../../services/runtime-config.service';
 import { ApiConfigService } from '../../../services/api-config.service';
 import { CommonService } from '../../../services/common.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AttendanceProcessComponent } from '../comp-list/attendance-process/attendance-process.component';
 import { SalaryProcessComponent } from '../comp-list/salaryproces/salaryprocess.component';
 import { EmployeeAttendanceComponent } from '../comp-list/employee-attendance/employee-attendance.component';
@@ -21,12 +21,22 @@ import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { environment } from '../../../../environments/environment';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { APP_DATE_FORMATS, AppDateAdapter } from '../../../directives/format-datepicker';
 
 @Component({
   selector: 'app-reports',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatSelectModule, MatCardModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatSelectModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, NgMultiSelectDropDownModule],
   templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.scss']
+  styleUrls: ['./reports.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+  ]
 })
 export class ReportsComponent {
 
