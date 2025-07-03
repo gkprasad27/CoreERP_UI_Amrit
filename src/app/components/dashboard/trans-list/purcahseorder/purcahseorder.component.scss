@@ -124,3 +124,13 @@
   margin-left:0;
 
 }
+
+
+::ng-deep .cdk-overlay-pane.full-width-centered-dialog {
+  display: flex;
+  justify-content: center;
+}
+
+::ng-deep .cdk-global-overlay-wrapper {
+  justify-content: center !important;
+}

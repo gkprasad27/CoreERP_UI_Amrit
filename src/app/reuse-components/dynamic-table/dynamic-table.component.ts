@@ -11,11 +11,12 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MatInputModule } from '@angular/material/input';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @Component({
   selector: 'app-dynamic-table',
   imports: [ CommonModule, TranslatePipe, TranslateModule, BsDropdownModule,
-      MatTableModule, MatInputModule],
+      MatTableModule, MatInputModule, TypeaheadModule],
   templateUrl: './dynamic-table.component.html',
   styleUrls: ['./dynamic-table.component.scss']
 })

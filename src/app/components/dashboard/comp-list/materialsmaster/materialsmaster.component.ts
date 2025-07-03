@@ -25,6 +25,7 @@ import { HttpClient } from '@angular/common/http';
 import { StandardRateOComponent } from './standard-rate-o/standard-rate-o.component';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FileUploadComponent } from '../../../../reuse-components/file-upload/file-upload.component';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 interface Valuation {
   value: string;
@@ -45,7 +46,7 @@ interface Schedule {
 }
 @Component({
   selector: 'app-materialsmaster',
-  imports: [ CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, TranslatePipe, TranslateModule, FileUploadComponent, StandardRateOComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, TypeaheadModule, TranslatePipe, TranslateModule, FileUploadComponent, StandardRateOComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './materialsmaster.component.html',
   styleUrls: ['./materialsmaster.component.scss']
 })

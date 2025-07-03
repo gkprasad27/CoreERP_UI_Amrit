@@ -24,6 +24,7 @@ import { Static } from '../../../../../enums/common/static';
 import { DynamicTableComponent } from '../../../../../reuse-components/dynamic-table/dynamic-table.component';
 import { TableComponent } from '../../../../../reuse-components/table/table.component';
 import { MatButtonModule } from '@angular/material/button';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 interface Type {
   value: string;
@@ -32,7 +33,7 @@ interface Type {
 
 @Component({
   selector: 'app-standard-rate-o',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './standard-rate-o.component.html',
   styleUrls: ['./standard-rate-o.component.scss']
 })

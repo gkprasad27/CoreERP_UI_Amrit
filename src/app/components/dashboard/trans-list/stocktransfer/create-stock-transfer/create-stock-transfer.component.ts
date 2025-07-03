@@ -35,9 +35,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 @Component({
   selector: 'app-create-stock-transfer',
-  imports: [ CommonModule, FormsModule, ReactiveFormsModule, RouterModule, TranslatePipe, TranslateModule, MatTableModule, MatSlideToggleModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, FormsModule, ReactiveFormsModule, RouterModule, TypeaheadModule, TranslatePipe, TranslateModule, MatTableModule, MatSlideToggleModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './create-stock-transfer.component.html',
   styleUrls: ['./create-stock-transfer.component.scss'],
   providers: [

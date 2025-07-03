@@ -28,10 +28,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @Component({
   selector: 'app-purcahseorder',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, TypeaheadModule, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './purcahseorder.component.html',
   styleUrls: ['./purcahseorder.component.scss'],
   providers: [
@@ -815,7 +816,8 @@ export class PurchaseOrderComponent implements OnInit {
       this.dialog.open(PoHistoryComponent, {
         width: '100%',
         height: '700px',
-        data: value
+        data: value,
+        panelClass: 'full-width-centered-dialog'
       });
     } else {
       value.item['type'] = 'edit';
