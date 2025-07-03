@@ -25,10 +25,11 @@ import { Static } from '../../../../enums/common/static';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { NonEditableDatepicker } from '../../../../directives/format-datepicker';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-employee',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule ],
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
   providers: [ DatePipe ]

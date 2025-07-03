@@ -12,11 +12,14 @@ import { MatTableModule } from '@angular/material/table';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MatInputModule } from '@angular/material/input';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-dynamic-table',
   imports: [ CommonModule, TranslatePipe, TranslateModule, BsDropdownModule,
-      MatTableModule, MatInputModule, TypeaheadModule],
+      MatTableModule, MatInputModule, TypeaheadModule, MatSlideToggleModule, NgMultiSelectDropDownModule, MatCheckboxModule],
   templateUrl: './dynamic-table.component.html',
   styleUrls: ['./dynamic-table.component.scss']
 })

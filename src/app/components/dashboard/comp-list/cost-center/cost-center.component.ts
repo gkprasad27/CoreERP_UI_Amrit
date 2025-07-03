@@ -21,6 +21,7 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 import { StatusCodes } from '../../../../enums/common/common';
 import { AddOrEditService } from '../add-or-edit.service';
 import { NonEditableDatepicker } from '../../../../directives/format-datepicker';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 interface Function {
   value: string;
@@ -37,7 +38,7 @@ interface CostType {
 
 @Component({
   selector: 'app-cost-center',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule ],
   templateUrl: './cost-center.component.html',
   styleUrls: ['./cost-center.component.scss']
 })

@@ -22,6 +22,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { StatusCodes, SnackBar } from '../../../../enums/common/common';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -29,7 +30,7 @@ import { StatusCodes, SnackBar } from '../../../../enums/common/common';
 
 @Component({
   selector: 'app-workcentercreation',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, DynamicTableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, DynamicTableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule ],
   templateUrl: './workcentercreation.component.html',
   styleUrls: ['./workcentercreation.component.scss']
 })

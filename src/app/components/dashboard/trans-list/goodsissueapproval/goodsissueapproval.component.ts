@@ -10,7 +10,7 @@ import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
@@ -27,7 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-goodsissueapproval',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, NgMultiSelectDropDownModule ],
   templateUrl: './goodsissueapproval.component.html',
   styleUrls: ['./goodsissueapproval.component.scss'],
   providers: [

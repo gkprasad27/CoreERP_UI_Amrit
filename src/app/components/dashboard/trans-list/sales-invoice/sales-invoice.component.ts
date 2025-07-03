@@ -12,7 +12,7 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
 import { TableComponent } from '../../../../reuse-components/table/table.component';
 import { DatePipe } from '@angular/common';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -29,7 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-sales-invoice',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './sales-invoice.component.html',
   styleUrls: ['./sales-invoice.component.scss'],
   providers: [

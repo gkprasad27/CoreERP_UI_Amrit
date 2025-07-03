@@ -24,10 +24,12 @@ import { ApiService } from '../../../../services/api.service';
 import { AlertService } from '../../../../services/alert.service';
 import { Static } from '../../../../enums/common/static';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-odapproval',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, MatPaginatorModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, MatPaginatorModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule, MatCheckboxModule ],
   templateUrl: './odapproval.component.html',
   styleUrls: ['./odapproval.component.scss']
 
