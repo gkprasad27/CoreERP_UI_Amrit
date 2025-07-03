@@ -136,7 +136,9 @@ export class EmployeeAttendanceComponent {
       })
     } else {
       arr.unshift({
-        action: 'edit',
+        action: [
+  { id: 'Edit', type: 'edit' }
+],
         id: 0,
         empCode: this.modelFormData.value.empCode,
         employeeName: this.modelFormData.value.employeeName,

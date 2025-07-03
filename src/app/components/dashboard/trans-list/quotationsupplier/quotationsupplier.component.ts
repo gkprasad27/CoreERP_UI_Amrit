@@ -199,7 +199,10 @@ export class QuotationSupplierComponent implements OnInit {
       highlight: false,
       // stockQty: [0],
       materialName: [''],
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       index: 0
     });
     this.formData1.disable();
@@ -210,7 +213,10 @@ export class QuotationSupplierComponent implements OnInit {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       id: 0
     });
     this.formData1.disable();

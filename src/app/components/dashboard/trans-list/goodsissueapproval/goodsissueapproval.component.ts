@@ -167,7 +167,9 @@ export class GoodsissueApprovalComponent implements OnInit {
       bomType: [''],
       status:[''],
       bomKey:[''],
-      action: 'edit',
+      action: [
+  { id: 'Edit', type: 'edit' }
+],
       index: 0
     });
 
@@ -254,7 +256,9 @@ export class GoodsissueApprovalComponent implements OnInit {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'edit'
+      action: [
+  { id: 'Edit', type: 'edit' }
+]
     });
   }
 
@@ -356,7 +360,9 @@ export class GoodsissueApprovalComponent implements OnInit {
               res.response['goodsissueastersDetail'].forEach((s: any, index: number) => {
                 const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
-                  action: 'edit',
+                  action: [
+  { id: 'Edit', type: 'edit' }
+],
                   id: s.id ? s.id : 0,
                   index: index + 1,
                   qty: s.qty ? s.qty : 0,

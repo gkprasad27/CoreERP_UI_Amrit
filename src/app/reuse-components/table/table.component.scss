@@ -89,6 +89,9 @@
 
 .mw-23 {
   min-width: 23px;
+  mat-icon {
+      color: orange;
+  }
 }
 
 // #page{
@@ -137,10 +140,3 @@ ng-container{
 //   display: flex; /* Use flexbox to control alignment */
 //   justify-content: center; /* Center-align paginator horizontally */
 // }
-
-#delete{
-  color: orange;
-}
-#edit{
-  color: orange;
-}

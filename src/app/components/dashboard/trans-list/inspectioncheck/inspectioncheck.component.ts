@@ -301,7 +301,9 @@ export class InspectioncheckComponent implements OnInit {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'edit'
+      action: [
+  { id: 'Edit', type: 'edit' }
+]
     });
   }
 
@@ -329,7 +331,9 @@ export class InspectioncheckComponent implements OnInit {
               res.response['goodsissueastersDetail'].forEach((s: any, index: number) => {
                 // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
-                  // action: 'edit',
+                  // action: [
+//   { id: 'Edit', type: 'edit' }
+// ],
                   id: s.id ? s.id : 0,
                   // index: index + 1,
                   qty: s.qty ? s.qty : 0,
@@ -376,7 +380,9 @@ export class InspectioncheckComponent implements OnInit {
 
                 // const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 let obj = {
-                  // action: 'edit',
+                  // action: [
+//   { id: 'Edit', type: 'edit' }
+// ],
                   // id: s.id ? s.id : 0,
                   // index: index + 1,
                   // qty: s.qty ? s.qty : 0,
@@ -408,7 +414,9 @@ export class InspectioncheckComponent implements OnInit {
                   button: (s.status != 'QC Rejected') ? 'Inspection Check' : '',
                   button1: (s.status != 'QC Rejected') ? 'Balanceing Certificate' : '',
                   partDrgNo: s.partDrgNo ? s.partDrgNo : '',
-                  // action: 'edit',
+                  // action: [
+//   { id: 'Edit', type: 'edit' }
+// ],
                   // index: index + 1,
                 }
                 arr.push(obj);

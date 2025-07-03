@@ -152,7 +152,10 @@ export class JobworkmaterialissueComponent {
       totalTax: [0],
       materialName: [''],
       highlight: false,
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       index: 0
     });
   }
@@ -162,7 +165,10 @@ export class JobworkmaterialissueComponent {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       id: 0
     });
   }

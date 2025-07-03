@@ -192,7 +192,6 @@ export class PurchaseOrderComponent implements OnInit {
       saleOrderNo: [null, [Validators.required]],
     });
     this.formData.controls.gstno.disable();
-
     this.formData1 = this.formBuilder.group({
       materialCode: [''],
       materialName: [''],
@@ -221,7 +220,12 @@ export class PurchaseOrderComponent implements OnInit {
       saleOrderNo: [''],
       total: [''],
       type: ['add'],
-      action: 'editDeleteView',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' },
+  { id: 'View', type: 'view' },
+  { id: 'View1', type: 'view' }
+],
       index: 0
     });
 
@@ -359,7 +363,12 @@ export class PurchaseOrderComponent implements OnInit {
               //   saleOrderNo: obj['data'].saleOrderNo ? +obj['data'].saleOrderNo : ''
               // })
               obj['data1'].forEach((s: any, index: number) => {
-                s.action = 'editDeleteView';
+                s.action = [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' },
+  { id: 'View', type: 'view' },
+  { id: 'View1', type: 'view' }
+]
                 s.id = 0;
                 s.index = index + 1;
                 // s.qty = s.qty ? s.qty : 0;
@@ -703,7 +712,12 @@ export class PurchaseOrderComponent implements OnInit {
               //this.formData.disable();
               res.response['poDetail'].forEach((s: any, index: number) => {
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
-                s.action = 'editDeleteView';
+                s.action = [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' },
+  { id: 'View', type: 'view' },
+  { id: 'View1', type: 'view' }
+];
                 s.changed = false;
                 s.poQty = s.poQty ? s.poQty : 0;
                 s.index = index + 1;
@@ -737,7 +751,12 @@ export class PurchaseOrderComponent implements OnInit {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDeleteView',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' },
+  { id: 'View', type: 'view' },
+  { id: 'View1', type: 'view' }
+],
       type: 'add'
     });
   }
@@ -819,6 +838,13 @@ export class PurchaseOrderComponent implements OnInit {
         data: value,
         panelClass: 'full-width-centered-dialog'
       });
+    } else if (value.action === 'View1') {
+      // this.dialog.open(PoHistoryComponent, {
+      //   width: '100%',
+      //   height: '700px',
+      //   data: value,
+      //   panelClass: 'full-width-centered-dialog'
+      // });
     } else {
       value.item['type'] = 'edit';
       this.formData1.patchValue({

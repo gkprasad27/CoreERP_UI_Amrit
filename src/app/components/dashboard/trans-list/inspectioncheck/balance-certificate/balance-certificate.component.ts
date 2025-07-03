@@ -97,7 +97,9 @@ export class BalanceCertificateComponent {
                 const obj = list.find((l: any) => s.description == l.parameter);
                 arr.push({
                   parameter: s.description,
-                  // action: 'edit',
+                  // action: [
+//   { id: 'Edit', type: 'edit' }
+// ],
                   result: obj ? obj.spec : s.result,
                   // index: index + 1
                   id: s.id ? s.id : 0,

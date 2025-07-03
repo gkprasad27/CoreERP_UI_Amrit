@@ -160,7 +160,10 @@ export class SalesInvoiceComponent implements OnInit {
       qty: [''],
       highlight: false,
       type: [''],
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       index: 0
     });
   }
@@ -600,7 +603,10 @@ onFocusOutEvent(event: any) {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDelete'
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
     });
   }
 

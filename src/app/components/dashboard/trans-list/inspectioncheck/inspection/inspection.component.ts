@@ -106,7 +106,9 @@ export class InspectionComponent {
                   id: s.id ? s.id : 0,
                   maxValue: s.maxValue,
                   instrument: s.instrument,
-                  action: 'edit',
+                  action: [
+  { id: 'Edit', type: 'edit' }
+],
                   result: s.result,
                   index: index + 1
                 })

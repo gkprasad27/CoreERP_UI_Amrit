@@ -155,7 +155,10 @@ export class SalesorderComponent {
       status: [''],
       materialName: [''],
       highlight: false,
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       index: 0
     });
     this.formData1.disable();
@@ -165,7 +168,10 @@ export class SalesorderComponent {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       id: 0
     });
     this.formData1.disable();

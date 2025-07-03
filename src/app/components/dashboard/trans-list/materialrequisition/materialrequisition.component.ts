@@ -125,7 +125,10 @@ export class MaterialrequisitionComponents implements OnInit {
 
       highlight: false,
       id: 0,
-      action: 'editView',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'View', type: 'view' }
+],
       index: 0
     });
     // this.formData = this.formBuilder.group({
@@ -264,7 +267,10 @@ export class MaterialrequisitionComponents implements OnInit {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editView'
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'View', type: 'view' }
+],
     });
   }
 
@@ -354,7 +360,12 @@ export class MaterialrequisitionComponents implements OnInit {
                   company:s.company?s.company:'',
                   bomName: s.bomName ? s.bomName : '',            
                   id: s.id ? s.id : '',
-                  action: s.status != 'Rejected' ? 'editView' : 'view',
+                  action: s.status != 'Rejected' ? [
+  { id: 'Edit', type: 'edit' },
+  { id: 'View', type: 'view' }
+] : [
+  { id: 'View', type: 'view' }
+],
                   index: index + 1,
                   checkbox: false
                 }

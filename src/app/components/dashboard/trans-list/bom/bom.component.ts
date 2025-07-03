@@ -217,7 +217,10 @@ export class BillOfMaterialComponent implements OnInit {
       highlight: false,
       // amount: ['', Validators.required],
       id: [0],
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       index: 0
     });
     // this.checkTransType();
@@ -310,7 +313,10 @@ export class BillOfMaterialComponent implements OnInit {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       mainComponent: true,
       billable: true,
       id: 0
@@ -492,7 +498,10 @@ export class BillOfMaterialComponent implements OnInit {
                   mainComponent: s.mainComponent ? s.mainComponent : '',
                   // availableQty: mObj.availQTY ? mObj.availQTY : '',
                   // amount: s.amount ? s.amount : '',
-                  action: 'editDelete',
+                  action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
                   index: index + 1,
                 }
                 arr.push(obj);

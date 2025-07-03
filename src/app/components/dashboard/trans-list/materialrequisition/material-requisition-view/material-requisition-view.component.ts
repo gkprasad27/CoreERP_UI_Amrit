@@ -70,7 +70,9 @@ export class MaterialRequisitionViewComponent {
       productionPlanDate: [null],
       productionTargetDate: [null],
       highlight: false,
-      action: 'edit',
+      action: [
+  { id: 'Edit', type: 'edit' }
+],
       index: 0
     });
   }
@@ -116,7 +118,9 @@ export class MaterialRequisitionViewComponent {
     this.formData.reset();
     this.formData.patchValue({
       index: 0,
-      action: 'edit'
+      action: [
+  { id: 'Edit', type: 'edit' }
+]
     });
   };
 

@@ -109,7 +109,10 @@ export class SourceOfSupplyComponent implements OnInit {
       paymentDueDays: [''],
       id: [0],
       highlight: false,
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       index: 0
     });
   }
@@ -181,7 +184,6 @@ export class SourceOfSupplyComponent implements OnInit {
   }
 
   supplierCodeChange() {
-    debugger
     const selectedSupplier = this.bpaList.find(
       (supplier: any) => supplier.name === this.formData.value.supplierName
     );
@@ -230,7 +232,10 @@ export class SourceOfSupplyComponent implements OnInit {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       id: 0
     });
   }

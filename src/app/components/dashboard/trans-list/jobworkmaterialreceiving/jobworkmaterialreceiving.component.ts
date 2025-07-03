@@ -154,7 +154,10 @@ export class JobworkmaterialreceivingComponent {
       id: [0],
       highlight: false,
       type: [''],
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       index: 0
     });
   }
@@ -165,7 +168,10 @@ export class JobworkmaterialreceivingComponent {
     this.formData1.patchValue({
       index: 0,
       id: 0,
-      action: 'editDelete'
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
     });
   }
 
@@ -551,7 +557,10 @@ export class JobworkmaterialreceivingComponent {
                   description: d.description ? d.description : '',
                   heatNumber: d.heatNumber ? d.heatNumber : '',
                   type: 'edit',
-                  // action: 'editDelete',
+                  // action: [
+//   { id: 'Edit', type: 'edit' },
+//   { id: 'Delete', type: 'delete' }
+// ],
                   index: index + 1
                 }
                 this.perChaseOrderList.push(obj)

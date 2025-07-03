@@ -222,7 +222,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
       igst: 0,
       taxCode: 0,
       documentURL: [''],
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       index: 0
     });
   }
@@ -232,7 +235,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDelete'
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+]
     });
   }
 
@@ -271,7 +277,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
       this.alertService.openSnackBar("You can't recevie more Quantity", Static.Close, SnackBar.error);
       return;
     }
-    debugger
     this.dataChange();
     this.tableData = null;
     this.tableComponent.defaultValues();
@@ -729,7 +734,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
                   rate: d.rate ? d.rate : 0,
 
                   type: 'edit',
-                  // action: 'editDelete',
+                  // action: [
+//   { id: 'Edit', type: 'edit' },
+//   { id: 'Delete', type: 'delete' }
+// ],
                   index: index + 1
                 }
                 this.perChaseOrderList.push(obj)

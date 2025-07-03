@@ -110,7 +110,10 @@ ProductType: Type[] =
       highlight: false,
       changed: true,
       id: [0],
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       index: 0
     });
 
@@ -230,7 +233,13 @@ ProductType: Type[] =
                   changed: false,
                   id: this.isEdit ? s.id : 0,
                   instrument: s.instrument,
-                  action: this.routeEdit ? 'edit' : 'editDelete',
+                  action: this.routeEdit ? 
+                        [
+                          { id: 'Edit', type: 'edit' }
+                        ] : [
+                          { id: 'Edit', type: 'edit' },
+                          { id: 'Delete', type: 'delete' }
+                        ],
                   index: index + 1
                 })
               })
@@ -291,7 +300,10 @@ ProductType: Type[] =
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
-      action: 'editDelete',
+      action: [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
       id: 0
     });
   }
