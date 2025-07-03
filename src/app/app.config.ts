@@ -13,6 +13,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideHighcharts } from 'highcharts-angular';
 
 import { HttpClient } from '@angular/common/http';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -24,7 +25,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
 
     provideHighcharts(),
-
+    provideNativeDateAdapter(),
     provideHttpClient(),
     importProvidersFrom(
       BrowserAnimationsModule,

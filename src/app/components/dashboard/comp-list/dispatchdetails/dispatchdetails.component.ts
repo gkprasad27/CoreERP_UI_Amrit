@@ -50,7 +50,8 @@ export class DispatchdetailsComponent {
     // selectAllText: 'Select All',
     // unSelectAllText: 'UnSelect All',
     // itemsShowLimit: 3,
-    allowSearchFilter: true
+    allowSearchFilter: true,
+    defaultOpen: false
   };
 
 
