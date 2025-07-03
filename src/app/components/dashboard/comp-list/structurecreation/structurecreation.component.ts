@@ -24,10 +24,11 @@ import { AddOrEditService } from '../add-or-edit.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-structurecreation',
-  imports: [ CommonModule, FormsModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatPaginatorModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, FormsModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatPaginatorModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule ],
   templateUrl: './structurecreation.component.html',
   styleUrls: ['./structurecreation.component.scss']
 })

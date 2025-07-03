@@ -29,10 +29,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-create-stockexcess',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TranslateModule, RouterModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TranslateModule, RouterModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule ],
   templateUrl: './create-stockexcess.component.html',
   styleUrls: ['./create-stockexcess.component.scss'],
   providers: [

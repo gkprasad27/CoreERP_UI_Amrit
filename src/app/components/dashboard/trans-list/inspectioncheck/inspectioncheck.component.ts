@@ -14,7 +14,7 @@ import { TableComponent } from '../../../../reuse-components/table/table.compone
 import { InspectionComponent } from './inspection/inspection.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BalanceCertificateComponent } from './balance-certificate/balance-certificate.component';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -28,10 +28,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-inspectioncheck',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule, NgMultiSelectDropDownModule ],
   templateUrl: './inspectioncheck.component.html',
   styleUrls: ['./inspectioncheck.component.scss'],
   providers: [

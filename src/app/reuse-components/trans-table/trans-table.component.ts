@@ -24,11 +24,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
 
 @Component({
   selector: 'app-trans-table',
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule,
-    MatCardModule, MatPaginatorModule, MatTableModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule
+    MatCardModule, MatPaginatorModule, MatTableModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatCheckboxModule
   ],
   templateUrl: './trans-table.component.html',
   styleUrls: ['./trans-table.component.scss']

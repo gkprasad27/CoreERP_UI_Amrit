@@ -19,9 +19,10 @@ import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { StatusCodes, SnackBar } from '../../../../enums/common/common';
 import { ApiService } from '../../../../services/api.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({
   selector: 'app-assetnumberrange',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule ],
   templateUrl: './assetnumberrange.component.html',
   styleUrls: ['./assetnumberrange.component.scss']
 })

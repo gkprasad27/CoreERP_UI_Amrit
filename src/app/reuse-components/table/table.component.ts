@@ -22,11 +22,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-table',
   imports: [ CommonModule, TranslatePipe, TranslateModule, BsDropdownModule,
-    MatCardModule, MatPaginatorModule, MatTableModule, MatInputModule, MatButtonModule, MatIconModule],
+    MatCardModule, MatPaginatorModule, MatTableModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })

@@ -22,10 +22,11 @@ import { AddOrEditService } from '../add-or-edit.service';
 import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { StatusCodes, SnackBar } from '../../../../enums/common/common';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-materialnumberrange',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule ],
   templateUrl: './materialnumberrange.component.html',
   styleUrls: ['./materialnumberrange.component.scss']
 })

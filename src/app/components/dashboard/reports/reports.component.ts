@@ -28,10 +28,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { APP_DATE_FORMATS, AppDateAdapter } from '../../../directives/format-datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-reports',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TranslateModule, MatSelectModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, NgMultiSelectDropDownModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TranslateModule, MatSelectModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, NgMultiSelectDropDownModule, MatSlideToggleModule],
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
   providers: [

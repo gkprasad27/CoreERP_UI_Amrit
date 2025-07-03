@@ -22,6 +22,7 @@ import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { AddOrEditService } from '../add-or-edit.service';
 import { AlertService } from '../../../../services/alert.service';
 import { Static } from '../../../../enums/common/static';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 interface account {
   value: string;
@@ -38,7 +39,7 @@ interface CostElementCategory {
 
 @Component({
   selector: 'app-glaccount',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule ],
   templateUrl: './glaccount.component.html',
   styleUrls: ['./glaccount.component.scss']
 })

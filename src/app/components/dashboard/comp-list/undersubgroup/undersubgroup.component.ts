@@ -20,10 +20,11 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 import { String } from 'typescript-string-operations';
 import { ApiService } from '../../../../services/api.service';
 import { AddOrEditService } from '../add-or-edit.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-undersubgroup',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule ],
   templateUrl: './undersubgroup.component.html',
   styleUrls: ['./undersubgroup.component.scss']
 })
