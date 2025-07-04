@@ -559,4 +559,7 @@ export class ApiConfigService {
    getBomDetail = `${environment.baseUrl}Common/GetBomDetail`;
    
    registerAttendanceProcess = `${environment.baseUrl}AttendanceProcess/RegisterAttendanceProcess`;
+
+   getSourceSupplyDetailByMaterial = `${environment.baseUrl}Transactions/GetSourceSupplyDetailByMaterial`;
+
 }

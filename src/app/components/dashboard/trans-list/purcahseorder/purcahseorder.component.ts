@@ -29,10 +29,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { VendorMaterialListComponent } from './vendor-material-list/vendor-material-list.component';
 
 @Component({
   selector: 'app-purcahseorder',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, TypeaheadModule, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, TypeaheadModule, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './purcahseorder.component.html',
   styleUrls: ['./purcahseorder.component.scss'],
   providers: [
@@ -86,7 +87,7 @@ export class PurchaseOrderComponent implements OnInit {
   taxCodeList = [];
   mpatternList = [];
   materialCodeList = [];
-
+  ssmastersList = [];
   data: any;
 
   dropdownSettings: IDropdownSettings = {
@@ -181,7 +182,7 @@ export class PurchaseOrderComponent implements OnInit {
       hamaliCharges: [0],
       ammendment: [0],
       extaCharges: 0,
-      mechineNumber:[null],
+      mechineNumber: [null],
       roundOff: [0],
       igst: [0],
       cgst: [0],
@@ -209,7 +210,7 @@ export class PurchaseOrderComponent implements OnInit {
       diemntions: [''],
       changed: true,
       netWeight: [''],
-      dimentions:[''],
+      dimentions: [''],
       hsnsac: [''],
       soQty: 0,
       poQty: 0,
@@ -221,11 +222,11 @@ export class PurchaseOrderComponent implements OnInit {
       total: [''],
       type: ['add'],
       action: [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' },
-  { id: 'View', type: 'view' },
-  { id: 'View1', type: 'view' }
-],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' },
+        { id: 'View', type: 'view' },
+        { id: 'View1', type: 'view' }
+      ],
       index: 0
     });
 
@@ -307,6 +308,22 @@ export class PurchaseOrderComponent implements OnInit {
       supplierCode: obj.bpnumber,
       gstno: obj.gstno
     })
+    this.getsupplierDetail(obj)
+  }
+
+  getsupplierDetail(obj) {
+    const getmpList = String.Join('/', this.apiConfigService.getsupplierDetail, obj.bpnumber);
+    this.apiService.apiGetRequest(getmpList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.ssmastersList = res.response['ssDetail'];
+            }
+          }
+          this.spinner.hide();
+        });
   }
 
   quotationNumberChange() {
@@ -364,11 +381,11 @@ export class PurchaseOrderComponent implements OnInit {
               // })
               obj['data1'].forEach((s: any, index: number) => {
                 s.action = [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' },
-  { id: 'View', type: 'view' },
-  { id: 'View1', type: 'view' }
-]
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' },
+                  { id: 'View', type: 'view' },
+                  { id: 'View1', type: 'view' }
+                ]
                 s.id = 0;
                 s.index = index + 1;
                 // s.qty = s.qty ? s.qty : 0;
@@ -713,11 +730,11 @@ export class PurchaseOrderComponent implements OnInit {
               res.response['poDetail'].forEach((s: any, index: number) => {
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
                 s.action = [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' },
-  { id: 'View', type: 'view' },
-  { id: 'View1', type: 'view' }
-];
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' },
+                  { id: 'View', type: 'view' },
+                  { id: 'View1', type: 'view' }
+                ];
                 s.changed = false;
                 s.poQty = s.poQty ? s.poQty : 0;
                 s.index = index + 1;
@@ -752,11 +769,11 @@ export class PurchaseOrderComponent implements OnInit {
     this.formData1.patchValue({
       index: 0,
       action: [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' },
-  { id: 'View', type: 'view' },
-  { id: 'View1', type: 'view' }
-],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' },
+        { id: 'View', type: 'view' },
+        { id: 'View1', type: 'view' }
+      ],
       type: 'add'
     });
   }
@@ -839,16 +856,31 @@ export class PurchaseOrderComponent implements OnInit {
         panelClass: 'full-width-centered-dialog'
       });
     } else if (value.action === 'View1') {
-      // this.dialog.open(PoHistoryComponent, {
-      //   width: '100%',
-      //   height: '700px',
-      //   data: value,
-      //   panelClass: 'full-width-centered-dialog'
-      // });
+      const dialogRef = this.dialog.open(VendorMaterialListComponent, {
+        width: '100%',
+        height: '700px',
+        data: value,
+        panelClass: 'full-width-centered-dialog'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (!this.commonService.checkNullOrUndefined(result)) {
+          this.tableData.forEach((t: any) => {
+            if (t.materialCode == result.item.materialCode) {
+              t.rate = result.item.lastSupplyPrice;
+            }
+          })
+        }
+      });
     } else {
       value.item['type'] = 'edit';
+      if(this.ssmastersList && this.ssmastersList.length) {
+        const ssObj = this.ssmastersList.find((s: any) => s.materialCode == value.item.materialCode);
+        if(ssObj) {
+          value.item['rate'] = ssObj.lastSupplyPrice;
+        }
+      }
       this.formData1.patchValue({
-        material: value.item.material ? [{ description: value.item.material  }] : ''
+        material: value.item.material ? [{ description: value.item.material }] : '',
       })
       this.formData1.patchValue(value.item);
     }
@@ -904,18 +936,18 @@ export class PurchaseOrderComponent implements OnInit {
 
   calculateTotal(obj) {
 
-    const igst1 = obj.igst ? ((((+this.formData.value.fright) + 
-    (+this.formData.value.weightBridge) + (+this.formData.value.otherCharges) + 
-    (+this.formData.value.hamaliCharges))) * obj.igst) / 100 : 0;
+    const igst1 = obj.igst ? ((((+this.formData.value.fright) +
+      (+this.formData.value.weightBridge) + (+this.formData.value.otherCharges) +
+      (+this.formData.value.hamaliCharges))) * obj.igst) / 100 : 0;
 
-    const cgst1 = obj.cgst ? ((((+this.formData.value.fright) + 
-    (+this.formData.value.weightBridge) + (+this.formData.value.otherCharges) + 
-    (+this.formData.value.hamaliCharges))) * obj.cgst) / 100 : 0;
-    
-    const sgst1 = obj.sgst ? ((((+this.formData.value.fright) + 
-    (+this.formData.value.weightBridge) + (+this.formData.value.otherCharges) + 
-    (+this.formData.value.hamaliCharges))) * obj.sgst) / 100 : 0;
-    
+    const cgst1 = obj.cgst ? ((((+this.formData.value.fright) +
+      (+this.formData.value.weightBridge) + (+this.formData.value.otherCharges) +
+      (+this.formData.value.hamaliCharges))) * obj.cgst) / 100 : 0;
+
+    const sgst1 = obj.sgst ? ((((+this.formData.value.fright) +
+      (+this.formData.value.weightBridge) + (+this.formData.value.otherCharges) +
+      (+this.formData.value.hamaliCharges))) * obj.sgst) / 100 : 0;
+
     this.formData.patchValue({
       extaCharges: (igst1 + sgst1 + cgst1),
     })
@@ -931,15 +963,15 @@ export class PurchaseOrderComponent implements OnInit {
       totalAmount: 0,
     })
     this.tableData && this.tableData.forEach((t: any) => {
-      if(t.changed || this.routeEdit) {
-      this.formData.patchValue({
-        igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
-        cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
-        sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-        amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.netWeight ? t.netWeight: 1))).toFixed(2),
-        totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
-      })
-    }
+      if (t.changed || this.routeEdit) {
+        this.formData.patchValue({
+          igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
+          cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
+          sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
+          amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.netWeight ? t.netWeight : 1))).toFixed(2),
+          totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
+        })
+      }
     })
     // this.formData.patchValue({
     //   totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
@@ -954,9 +986,9 @@ export class PurchaseOrderComponent implements OnInit {
         (+this.formData.value.hamaliCharges || 0) + // Cutting charges, default to 0 if undefined
         (+this.formData.value.extaCharges || 0)    // Hamali charges, default to 0 if undefined
       ).toFixed(2),  // Round to 2 decimal places
-  });
-  
-  
+    });
+
+
   }
   // emitColumnChanges(data) {
   //   this.tableData = data.data;
@@ -976,7 +1008,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   save() {
-    if ((this.tableData.length == 0 || this.formData.invalid || (!(this.tableData.some((t: any) => t.changed)))  && !this.routeEdit)) {
+    if ((this.tableData.length == 0 || this.formData.invalid || (!(this.tableData.some((t: any) => t.changed))) && !this.routeEdit)) {
       this.formData.markAllAsTouched();
       return;
     }
@@ -1099,7 +1131,7 @@ export class PurchaseOrderComponent implements OnInit {
         pin: cObj.pin,
         phone: cObj.phone,
         email: cObj.email,
-        street:cObj.street,
+        street: cObj.street,
         gstno: cObj.gstno,
       }
     }
@@ -1138,12 +1170,12 @@ export class PurchaseOrderComponent implements OnInit {
       const netWeight = +row.netWeight || 0;
       return sum + (qty * netWeight);
     }, 0);
-    const totalQty = list.reduce((sum,row)=>{return sum + (+row.qty || 0)},0);
+    const totalQty = list.reduce((sum, row) => { return sum + (+row.qty || 0) }, 0);
     const obj = {
       heading: 'PURCHASE ORDER',
       headingObj: formObj,
       detailArray: list,
-      headingObj1: { ...this.formData1.value, ...this.formData.value,totalWeight: totalWeight.toFixed(2),totalQty:totalQty.toFixed(2)}
+      headingObj1: { ...this.formData1.value, ...this.formData.value, totalWeight: totalWeight.toFixed(2), totalQty: totalQty.toFixed(2) }
       //  {
       //   Company: this.formData.value.company,
       //   "Profit Center": this.formData.value.profitCenter,

@@ -2159,6 +2159,7 @@
     "description": "Description",
     "qty": "QTY",
     "purchaseOrderHistory": "Purchase Order History",
+    "vendorMaterialList": "Vendor Material List",
     "soQty": "SO QTY",
     "poQty": "PO QTY",
     "saleOrder": "Sale Order Number",
@@ -3502,5 +3503,20 @@
     "company":"Company",
     "materialName":"Material Name",
     "action":"Action"
+  },
+  "vendorMaterialList": {
+    "id": "ID",
+    "supplierCode": "Supplier Code",
+    "materialCode": "Material Code",
+    "description": "Description",
+    "priceperUnit": "Price Per Unit",
+    "unit": "Unit",
+    "lastSupplyPrice": "Last Supply Price",
+    "lastSupplyOn": "Last Supply On",
+    "ponumber": "PO Number",
+    "podate": "PO Date",
+    "narration": "Narration",
+    "deliveryDays": "Delivery Days",
+    "paymentDueDays": "Payment Due Days"
   }
 }
