@@ -1914,7 +1914,8 @@
     "button": "button",
     "button1": "button1",
     "drgNo": "Part/Drg No",
-    "partDrgNo": "Part/Drg No"
+    "partDrgNo": "Part/Drg No",
+    "documentURL":"MTC Document"
   },
   "invoiceverification": {
     "title": "Invoice Verification",
