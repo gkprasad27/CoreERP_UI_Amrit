@@ -458,7 +458,7 @@
     <div>
       <!-- <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
         [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table> -->
-      <app-table class="table-css" [tableData]="tableData" [showButtons]="false" (onEditEmit)="onEditEmit($event)">
+      <app-table class="table-css" [tableData]="tableData" [showButtons]="false" (onEditEmit)="onEditEmit($event)" (onLinkEmitEvent)="downLoadFile1($event)">
       </app-table>
     </div>
 

@@ -1782,6 +1782,7 @@
     "aboveLevel": "Above Level",
     "qty": "Quantity",
     "uom": "UOM",
+    "drawingUpload": "Drawing Upload",
     "delete": "Delete",
     "action": "Action"
   },
@@ -2203,7 +2204,9 @@
      "dimentions":"Dimentions",
      "mechineNumber":"Mechine Number",
      "uom":"UOM",
-    "hsnsac":"HSN Code"
+    "hsnsac":"HSN Code",
+    "createdBy": "Created By",
+    "contactNo": "Contact Number"
   },
   "goodsreceipts": {
     "checkAll": "Select",
@@ -2878,6 +2881,8 @@
     "invoiceURL": "Invoice Attachment",
     "totalAmount": "Total Amount",
     "baseAmount": "Base Amount",
+    "createdBy": "Created By",
+    "contactNo": "Contact Number",
     "amount": "Amount",
     "action": "Action"
   },

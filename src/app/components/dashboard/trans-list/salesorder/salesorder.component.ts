@@ -418,7 +418,12 @@ export class SalesorderComponent {
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
                 s.id = 0
-                s.action = s?.billable == 'N' ? 'delete' : 'editDelete';
+                s.action = s?.billable == 'N' ? [
+  { id: 'Delete', type: 'delete' }
+] : [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+];
               })
               const tableData = [...this.finalTableData, ...res.response['bomDetail']];
               tableData.forEach((t: any, index: number) => t.index = index + 1);
@@ -469,7 +474,12 @@ export class SalesorderComponent {
                 s.materialName = obj?.text ? obj?.text : ''
                 s.stockQty = obj?.availQTY ? obj?.availQTY : ''
                 s.hsnsac = obj?.hsnsac ? obj?.hsnsac : ''
-                s.action = s?.billable == 'N' ? 'delete' : 'editDelete';
+                s.action = s?.billable == 'N' ? [
+  { id: 'Delete', type: 'delete' }
+] : [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+];
                 s.index = index + 1;
               })
               this.tableData = res.response['SaleOrderDetails'];

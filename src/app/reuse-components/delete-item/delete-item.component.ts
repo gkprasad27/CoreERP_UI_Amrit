@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject, Optional } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-delete-item',
-  imports: [ CommonModule, TranslatePipe, TranslateModule, MatDividerModule ],
+  imports: [ CommonModule, TranslatePipe, TranslateModule, MatDividerModule, MatButtonModule ],
   templateUrl: './delete-item.component.html',
   styleUrls: ['./delete-item.component.scss']
 })

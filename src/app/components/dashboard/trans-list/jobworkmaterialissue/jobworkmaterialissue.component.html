@@ -375,6 +375,28 @@
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
+                <mat-form-field class="form-element">
+                        <mat-label [translate]="'jobworkmaterialissue.createdBy'" ></mat-label>
+                        <input matInput type="text" formControlName="createdBy" appFocusOnEnter tabIndex="7">
+                    </mat-form-field>
+                       <mat-form-field class="form-element">
+                        <mat-label [translate]="'jobworkmaterialissue.contactNo'" ></mat-label>
+                        <input matInput type="text" formControlName="contactNo" appFocusOnEnter tabIndex="8">
+                    </mat-form-field>
+
+                    
+                <div id="data" class="mx-2">
+                    <label > {{ 'jobworkmaterialissue.documentURL' | translate }} </label>
+                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL" (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
+                </div>
+
+                
+                <div id="data1" class="mx-2">
+                    <label id="invoice"> {{ 'jobworkmaterialissue.invoiceURL' | translate }} </label>
+                    
+                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.invoiceURL" (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload>
+                </div>
+
             </div>
 
         </form>

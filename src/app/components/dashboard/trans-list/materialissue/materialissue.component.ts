@@ -323,7 +323,10 @@ export class MaterialissueComponent {
               detail.stockQty = materialObj.availQTY;
               detail.materialCode = { materialCode: materialObj.id, materialName: materialObj.text };
             }
-            detail.action = 'editDelete';
+            detail.action = [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+];
             detail.index = index + 1;
           });
   

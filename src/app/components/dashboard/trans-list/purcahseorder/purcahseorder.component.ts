@@ -191,6 +191,8 @@ export class PurchaseOrderComponent implements OnInit {
       totalTax: [0],
       totalAmount: [0],
       saleOrderNo: [null, [Validators.required]],
+      createdBy: [''],
+      contactNo: ['']
     });
     this.formData.controls.gstno.disable();
     this.formData1 = this.formBuilder.group({

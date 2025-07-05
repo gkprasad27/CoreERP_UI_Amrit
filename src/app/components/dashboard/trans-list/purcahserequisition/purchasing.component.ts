@@ -316,7 +316,10 @@ export class PurchasingComponent implements OnInit {
               res.response['preqDetail'].forEach((s: any, index: number) => {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 s.materialName = obj.text
-                s.action = 'editDelete';
+                s.action = [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+];
                 s.index = index + 1;
                 s.qty = s.qty;
                 s.stockQty = obj.availQTY;

@@ -345,7 +345,7 @@ export class InspectioncheckComponent implements OnInit {
                   materialName: s.materialName ? s.materialName : null,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   bomNumber: s.bomNumber ? s.bomNumber : '',
-
+                  documentURL: s.documentURL ? s.documentURL : '',
                   // requiredqty: s.qty - s.allocatedQTY
                 }
                 arr.push(obj);
@@ -358,6 +358,18 @@ export class InspectioncheckComponent implements OnInit {
           }
         });
   }
+
+
+  downLoadFile1(event: any) {
+    const url = String.Join('/', this.apiConfigService.getFile, event.item[event.action]);
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          window.open(response.response, '_blank');
+        });
+  }
+
 
   onEditEmit(event: any) {
     const encodedMaterialCode = encodeURIComponent(event.materialCode)

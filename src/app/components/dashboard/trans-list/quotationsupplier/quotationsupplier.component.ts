@@ -457,7 +457,12 @@ export class QuotationSupplierComponent implements OnInit {
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
                 s.id = 0
-                s.action = s.billable == 'N' ? 'delete' : 'editDelete';
+                s.action = s.billable == 'N' ? [
+  { id: 'Delete', type: 'delete' }
+] : [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+];
               })
               const tableData = [...this.finalTableData, ...res.response['bomDetail']];
               tableData.forEach((t: any, index: number) => t.index = index + 1);
@@ -587,7 +592,12 @@ export class QuotationSupplierComponent implements OnInit {
               this.formData.patchValue({ customerCode: pObj ? pObj.text : '' });
 
               res.response['qsDetail'].forEach((s: any, index: number) => {
-                s.action = s.billable == 'N' ? 'delete' : 'editDelete';
+                s.action = s.billable == 'N' ? [
+  { id: 'Delete', type: 'delete' }
+] : [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+];
                 s.index = index + 1;
               })
               this.tableData = res.response['qsDetail'];

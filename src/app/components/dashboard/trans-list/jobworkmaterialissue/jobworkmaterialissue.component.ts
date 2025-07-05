@@ -28,10 +28,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatButtonModule } from '@angular/material/button';
+import { FileUploadComponent } from '../../../../reuse-components/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-jobworkmaterialissue',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, TypeaheadModule, NonEditableDatepicker, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, TypeaheadModule, NonEditableDatepicker, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, FileUploadComponent ],
   templateUrl: './jobworkmaterialissue.component.html',
   styleUrls: ['./jobworkmaterialissue.component.scss'],
   providers: [
@@ -77,6 +78,10 @@ export class JobworkmaterialissueComponent {
 
   routeEdit = '';
   http: any;
+
+
+  fileList: any;
+  fileList1: any;
 
   constructor(
     public commonService: CommonService,
@@ -131,6 +136,11 @@ export class JobworkmaterialissueComponent {
       amount: [0],
       totalTax: [0],
       totalAmount: [0],
+      createdBy: [''],
+      contactNo: [''],
+
+      documentURL: [''],
+      invoiceURL: [''],
     });
 
 
@@ -171,6 +181,13 @@ export class JobworkmaterialissueComponent {
 ],
       id: 0
     });
+  }
+
+  emitFilesList(event: any) {
+    this.fileList = event[0];
+  }
+  emitFilesList1(event: any) {
+    this.fileList1 = event[0];
   }
 
   saveForm() {
@@ -448,7 +465,10 @@ export class JobworkmaterialissueComponent {
               detail.stockQty = materialObj.availQTY;
               detail.materialCode = { materialCode: materialObj.id, materialName: materialObj.text };
             }
-            detail.action = 'editDelete';
+            detail.action = [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+],
             detail.index = index + 1;
           });
   
@@ -485,7 +505,11 @@ export class JobworkmaterialissueComponent {
   //               const obj = this.materialList.find((m: any) => m.id == s.materialCode);
   //               s.materialName = obj.text
   //               s.stockQty = obj.availQTY
-  //               s.action = 'editDelete'; s.index = index + 1;
+  //               s.action = [
+//   { id: 'Edit', type: 'edit' },
+//   { id: 'Delete', type: 'delete' }
+// ],
+  //                s.index = index + 1;
   //             })
   //             this.tableData = res.response['JobWorkDetails'];
   //             this.calculate();
@@ -497,7 +521,7 @@ export class JobworkmaterialissueComponent {
 
 
   downLoadFile(event: any) {
-    const url = String.Join('/', this.apiConfigService.getFile, event.item[event.action]);
+    const url = String.Join('/', this.apiConfigService.getFile, event.name);
     this.apiService.apiGetRequest(url)
       .subscribe(
         response => {
@@ -543,6 +567,8 @@ export class JobworkmaterialissueComponent {
     obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
     obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
     obj.vendor = this.formData.value.vendor[0].id;
+    obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
+    obj.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
     const arr = this.tableData;
     arr.forEach((a: any) => {
       a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';
@@ -554,13 +580,59 @@ export class JobworkmaterialissueComponent {
         const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
+            if (this.fileList) {
+              this.uploadFile();
+            } else {
+              this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
+              this.back();
+            }
+          }
+        }
+      });
+  }
+
+  uploadFile() {
+    const addsq = String.Join('/', this.apiConfigService.uploadFile, this.fileList.name.split('.')[0]);
+    const formData = new FormData();
+    formData.append("file", this.fileList);
+
+    return this.httpClient.post<any>(addsq, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).subscribe(
+      (response: any) => {
+        this.spinner.hide();
+        const res = response;
+        if (this.fileList1) {
+          this.uploadFile1();
+        } else {
+            this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
+            this.back();
+        }
+      });
+  }
+
+  uploadFile1() {
+    const addsq = String.Join('/', this.apiConfigService.uploadFile, this.fileList1.name.split('.')[0]);
+    const formData = new FormData();
+    formData.append("file", this.fileList1);
+
+    return this.httpClient.post<any>(addsq, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).subscribe(
+      (response: any) => {
+        this.spinner.hide();
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
             this.back();
           }
         }
       });
   }
-
+  
   print() {
     let formObj = this.formData.value;
     if (this.companyList.length) {

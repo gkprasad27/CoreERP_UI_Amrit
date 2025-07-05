@@ -99,15 +99,17 @@
                 
 
                 <div id="data" class="mx-2">
-                    <label > {{ 'goodsreceipts.mtcDocumentUpload' | translate }} </label>
+                    <label > {{ 'goodsreceipts.mtcDocumentUpload' | translate }} <span class="red">*</span> </label>
                     <button id="upload" ><app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL" (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload></button>
+                    <div class="red" *ngIf="showErrorMessage && !fileList"> This field is required </div>
                 </div>
 
                 
                 <div id="data1" class="mx-2">
-                    <label id="invoice"> {{ 'goodsreceipts.invoiceUpload' | translate }} </label>
+                    <label id="invoice"> {{ 'goodsreceipts.invoiceUpload' | translate }} <span class="red">*</span> </label>
                     
                     <button id="upload" ><app-file-upload [type]="'card'" [oldFileList]="formData.value.invoiceURL" (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload></button>
+                    <div class="red" *ngIf="showErrorMessage && !fileList1"> This field is required </div>
                 </div>
 
 

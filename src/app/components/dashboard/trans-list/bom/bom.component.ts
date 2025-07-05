@@ -28,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FileUploadComponent } from '../../../../reuse-components/file-upload/file-upload.component';
 
 interface BomType {
   value: string;
@@ -48,7 +49,7 @@ interface Type {
 
 @Component({
   selector: 'app-bom',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule, FileUploadComponent ],
   templateUrl: './bom.component.html',
   styleUrls: ['./bom.component.scss'],
   providers: [
@@ -123,7 +124,7 @@ export class BillOfMaterialComponent implements OnInit {
   costunitList: any;
   employeesList: any;
   batchmasterList: any;
-
+  fileList: any;
   public mmasterListData: EventEmitter<any[]> = new EventEmitter<any[]>();
 
 
@@ -213,14 +214,15 @@ export class BillOfMaterialComponent implements OnInit {
 
       mainComponent: [true],
       billable: [true],
+      drawingUpload: [''],
 
       highlight: false,
       // amount: ['', Validators.required],
       id: [0],
       action: [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ],
       index: 0
     });
     // this.checkTransType();
@@ -239,6 +241,21 @@ export class BillOfMaterialComponent implements OnInit {
             }
           }
         });
+  }
+
+
+  downLoadFile(event: any) {
+    const url = String.Join('/', this.apiConfigService.getFile, event.name);
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          window.open(response.response, '_blank');
+        });
+  }
+
+   emitFilesList(event: any) {
+    this.fileList = event[0];
   }
 
   profitCenterChange() {
@@ -360,7 +377,8 @@ export class BillOfMaterialComponent implements OnInit {
     // const obj = data.find((d: any) => d.materialCode == this.formData1.value.materialCode);
     let form = this.formData1.value;
     form.billable = this.formData1.value.billable ? 'Y' : 'N'
-    form.mainComponent = this.formData1.value.mainComponent ? 'Y' : 'N'
+    form.mainComponent = this.formData1.value.mainComponent ? 'Y' : 'N';
+    form.drawingUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
     if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
       form.index = data ? (data.length + 1) : 1,
@@ -496,12 +514,13 @@ export class BillOfMaterialComponent implements OnInit {
                   materialName: s.materialName ? s.materialName : '',
                   billable: s.billable ? s.billable : '',
                   mainComponent: s.mainComponent ? s.mainComponent : '',
+                  drawingUpload: s.drawingUpload ? s.drawingUpload : '',
                   // availableQty: mObj.availQTY ? mObj.availQTY : '',
                   // amount: s.amount ? s.amount : '',
                   action: [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-],
+                    { id: 'Edit', type: 'edit' },
+                    { id: 'Delete', type: 'delete' }
+                  ],
                   index: index + 1,
                 }
                 arr.push(obj);

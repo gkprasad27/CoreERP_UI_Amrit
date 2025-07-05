@@ -173,7 +173,10 @@ export class SourceOfSupplyComponent implements OnInit {
               this.formData.patchValue(res.response['ssmasters']);
               res.response['ssDetail'].forEach((s: any, index: number) => {
                 s.id = 0
-                s.action = 'editDelete';
+                s.action = [
+  { id: 'Edit', type: 'edit' },
+  { id: 'Delete', type: 'delete' }
+];
               })
               const tableData = [...res.response['ssDetail']];
               tableData.forEach((t: any, index: number) => t.index = index + 1);

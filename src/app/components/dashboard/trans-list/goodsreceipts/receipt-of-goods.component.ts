@@ -72,6 +72,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   fileList1: any;
   fileList2: any;
 
+  showErrorMessage = false;
 
 
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
@@ -850,7 +851,8 @@ export class ReceiptOfGoodsComponent implements OnInit {
   save() {
     this.formData.markAsTouched();
     // this.tableData = this.commonService.formatTableData(this.tableData, 0);
-    if (this.tableData.length == 0 && this.formData.invalid) {
+    if (!this.tableData?.length || this.formData.invalid || !this.fileList || !this.fileList1) {
+      this.showErrorMessage = true;
       return;
     }
     this.savegoodsreceipt();
