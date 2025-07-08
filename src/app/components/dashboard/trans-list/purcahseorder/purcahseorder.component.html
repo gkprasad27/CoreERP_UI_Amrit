@@ -449,7 +449,7 @@
             </h6>
 
             <div class="d--flex p-1 mat-form-field-height">
-
+<!-- 
                 <mat-form-field>
                     <mat-label>{{ 'purchaseorder.company' | translate }}</mat-label>
                     <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
@@ -458,12 +458,12 @@
                             {{comp.companyName}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
 
 
          
 
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <mat-label>{{'purchaseorder.profitCenter' | translate }}</mat-label>
                     <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
@@ -471,7 +471,7 @@
                             {{pft.name}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
 
                
 
@@ -538,7 +538,7 @@
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
 
-                <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
+                <!-- <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
                     <ng-multiselect-dropdown 
                         placeholder="{{ 'purchaseorder.material' | translate }}" formControlName="material"
                          [settings]="dropdownSettings1" [data]="mpatternList" appFocusOnEnter tabIndex="10">
@@ -547,7 +547,7 @@
                 <mat-form-field *ngIf="routeEdit">
                     <mat-label>{{'purchaseorder.material' | translate }}</mat-label>
                     <input matInput type="text" readonly formControlName="material" appFocusOnEnter tabIndex="11">
-                </mat-form-field>
+                </mat-form-field> -->
 
 
                 <mat-form-field class="form-element">
@@ -590,14 +590,19 @@
                         <mat-label [translate]="'purchaseorder.ammendment'" ></mat-label>
                         <input matInput type="text" readonly formControlName="ammendment" appFocusOnEnter tabIndex="19">
                     </mat-form-field>
-                    <mat-form-field class="form-element">
+                    <!-- <mat-form-field class="form-element">
                         <mat-label [translate]="'purchaseorder.mechineNumber'" ></mat-label>
                         <input matInput type="text" formControlName="mechineNumber" appFocusOnEnter tabIndex="20">
-                    </mat-form-field>
-                       <mat-form-field class="form-element">
-                        <mat-label [translate]="'purchaseorder.createdBy'" ></mat-label>
-                        <input matInput type="text" formControlName="createdBy" appFocusOnEnter tabIndex="21">
-                       </mat-form-field>
+                    </mat-form-field> -->
+                    <mat-form-field>
+                        <mat-label>{{'purchaseorder.createdBy' | translate }}</mat-label>
+                        <mat-select formControlName="createdBy" appFocusOnEnter tabIndex="20" (selectionChange)="onEmpChange()">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
+                            {{emp.id}} - {{emp.text}}
+                            </mat-option>
+                        </mat-select>
+                        </mat-form-field>
                        <mat-form-field class="form-element">
                         <mat-label [translate]="'purchaseorder.contactNo'" ></mat-label>
                         <input matInput type="text" formControlName="contactNo" appFocusOnEnter tabIndex="22">

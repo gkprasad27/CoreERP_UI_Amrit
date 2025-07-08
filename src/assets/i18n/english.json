@@ -3020,7 +3020,7 @@
   },
   "PurchaseorderApproval": {
     "checkbox": "",
-    "title": "Purchase Order",
+    "title": "Purchase Order Approval",
     "id": "ID",
     "quotationNumber": "Sale Order Number",
     "company": "Company",

@@ -76,6 +76,7 @@ export class PurchaseOrderComponent implements OnInit {
   citemList: any;
   locList: any;
   employeesList: any;
+  roleList: any;
   qnoList: any;
   ptypeList: any;
   ptermsList: any;
@@ -135,6 +136,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.formDataGroup();
     this.getCompanyList();
     this.getTaxRatesList();
+    this.getEmployeesList();
     this.getModelPatternList();
     // this.getPurchaseGroupData();
     setTimeout(() => {
@@ -148,10 +150,10 @@ export class PurchaseOrderComponent implements OnInit {
 
     this.formData = this.formBuilder.group({
 
-      company: [null, [Validators.required]],
+      // company: [null, [Validators.required]],
       plant: [null],
       branch: [null],
-      profitCenter: [null, [Validators.required]],
+      // profitCenter: [null, [Validators.required]],
       saleOrderType: [null, [Validators.required]],
       purchaseOrderNumber: [null],
       purchaseOrderType: [null, [Validators.required]],
@@ -160,7 +162,7 @@ export class PurchaseOrderComponent implements OnInit {
       supplierName: [null, [Validators.required]],
       gstno: [null],
       profitcenterName: [''],
-      material: [''],
+      // material: [''],
       companyName: [null],
       deliveryDate: [null],
       deliveryPeriod: [null],
@@ -182,7 +184,7 @@ export class PurchaseOrderComponent implements OnInit {
       hamaliCharges: [0],
       ammendment: [0],
       extaCharges: 0,
-      mechineNumber: [null],
+      // mechineNumber: [null],
       roundOff: [0],
       igst: [0],
       cgst: [0],
@@ -201,7 +203,7 @@ export class PurchaseOrderComponent implements OnInit {
       material: [''],
       taxCode: ['', [Validators.required]],
       qty: ['', Validators.required],
-      rate: ['', Validators.required],
+      rate: [{ value:'', disabled: true }],
       discount: [''],
       availableQTY: [''],
       // purchaseOrderNumber: [''],
@@ -278,6 +280,27 @@ export class PurchaseOrderComponent implements OnInit {
             }
           }
         });
+  }
+
+  getEmployeesList() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
+    this.apiService.apiGetRequest(getEmployeeList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.employeesList = res.response['emplist'];
+            }
+          }
+          this.spinner.hide();
+        });
+  }
+
+  onEmpChange() {
+    const obj = this.employeesList.find((e: any) => e.id == this.formData.value.createdBy);
+    this.formData.patchValue({ contactNo: obj.mobileNumber })
   }
 
   getModelPatternList() {
@@ -635,16 +658,15 @@ export class PurchaseOrderComponent implements OnInit {
         });
   }
   getRolesList() {
-    const getEmployeeList = String.Join('/', this.apiConfigService.getrolelist);
-    this.apiService.apiGetRequest(getEmployeeList)
+    const getrolelist = String.Join('/', this.apiConfigService.getrolelist);
+    this.apiService.apiGetRequest(getrolelist)
       .subscribe(
         response => {
           this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.employeesList = res.response['roleList'];
-              this.employeesList = res.response['roleList'].filter(resp => resp.roleId == this.loginUser.role)
+              this.roleList = res.response['roleList'].filter(resp => resp.roleId == this.loginUser.role)
             }
           }
           if (this.routeEdit != '') {
@@ -827,11 +849,11 @@ export class PurchaseOrderComponent implements OnInit {
       this.formData1.patchValue({
         index: data ? (data.length + 1) : 1
       });
-      data = [this.formData1.value, ...data];
+      data = [this.formData1.getRawValue(), ...data];
     } else {
-      const obj = this.formData1.value;
+      const obj = this.formData1.getRawValue();
       obj.material = obj.material ? obj.material[0].description : '';
-      data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
+      data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.getRawValue() : res);
     }
     setTimeout(() => {
       this.tableData = data;
@@ -919,7 +941,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   dataChange() {
-    const formObj = this.formData1.value;
+    const formObj = this.formData1.getRawValue();
     const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == formObj.taxCode);
     const igst = obj.igst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.igst) / 100 : 0;
     const cgst = obj.cgst ? ((+formObj.qty * +formObj.rate * +(formObj.netWeight ? formObj.netWeight : 1)) * obj.cgst) / 100 : 0;
@@ -1177,7 +1199,7 @@ export class PurchaseOrderComponent implements OnInit {
       heading: 'PURCHASE ORDER',
       headingObj: formObj,
       detailArray: list,
-      headingObj1: { ...this.formData1.value, ...this.formData.value, totalWeight: totalWeight.toFixed(2), totalQty: totalQty.toFixed(2) }
+      headingObj1: { ...this.formData1.getRawValue(), ...this.formData.value, totalWeight: totalWeight.toFixed(2), totalQty: totalQty.toFixed(2) }
       //  {
       //   Company: this.formData.value.company,
       //   "Profit Center": this.formData.value.profitCenter,

@@ -159,7 +159,7 @@
 
             <div>
 
-                <app-table class="table-css" [tableData]="tableData" (editOrDeleteEvent)="editOrDeleteEvent($event)">
+                <app-table class="table-css" [tableData]="tableData" (editOrDeleteEvent)="editOrDeleteEvent($event)" [showButtons]="false">
                 </app-table>
             </div>
 
@@ -169,7 +169,7 @@
 
     <mat-card-content class="d-flex justify-content-end py-1">
 
-        <button id="save" [hidden]="routeEdit != ''" mat-raised-button type="submit"
+        <button id="save"  mat-raised-button type="submit"
             class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
             {{ 'COMMON.SAVE' | translate }}
         </button>
@@ -180,10 +180,10 @@
             (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
             {{ 'COMMON.RESET' | translate }}
         </button>
-        <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
+        <!-- <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
             (click)="return();">
             {{ 'COMMON.RETURN' | translate }}
-        </button>
+        </button> -->
 
     </mat-card-content>
 

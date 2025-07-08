@@ -147,6 +147,7 @@ export class SourceOfSupplyComponent implements OnInit {
 
         if (!this.commonService.checkNullOrUndefined(getmsizeRes) && getmsizeRes.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(getmsizeRes.response)) {
+            getmsizeRes.response['msizeList'] = getmsizeRes.response['msizeList'].map((m: any) => { m.unitId = +m.unitId; return m; });
             this.msizeList = getmsizeRes.response['msizeList'];
           }
         }
@@ -272,14 +273,13 @@ export class SourceOfSupplyComponent implements OnInit {
     const requestObj = { qsHdr: allValues, qsDtl: arr };
     this.apiService.apiPostRequest(addssapply, requestObj).subscribe(
       response => {
+        this.spinner.hide();
         const res = response;
-        this.tableData = [];
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Source Supply created Successfully..', Static.Close, SnackBar.success);
           }
-          this.reset();
-          this.spinner.hide();
+          this.back();
         }
       });
   }
