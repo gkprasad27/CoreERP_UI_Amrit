@@ -150,7 +150,7 @@ export class PurchaseOrderComponent implements OnInit {
 
     this.formData = this.formBuilder.group({
 
-      // company: [null, [Validators.required]],
+      company: [user.companyCode],
       plant: [null],
       branch: [null],
       // profitCenter: [null, [Validators.required]],
@@ -225,12 +225,12 @@ export class PurchaseOrderComponent implements OnInit {
       saleOrderNo: [''],
       total: [''],
       type: ['add'],
-      action: [
+      action: [[
         { id: 'Edit', type: 'edit' },
         { id: 'Delete', type: 'delete' },
         { id: 'View', type: 'view' },
         { id: 'View1', type: 'view' }
-      ],
+      ]],
       index: 0
     });
 
@@ -849,11 +849,13 @@ export class PurchaseOrderComponent implements OnInit {
       this.formData1.patchValue({
         index: data ? (data.length + 1) : 1
       });
-      data = [this.formData1.getRawValue(), ...data];
+      const obj = this.formData1.getRawValue();
+      obj.material = obj.material ? obj.material[0].description : '';
+      data = [obj, ...data];
     } else {
       const obj = this.formData1.getRawValue();
       obj.material = obj.material ? obj.material[0].description : '';
-      data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.getRawValue() : res);
+      data = data.map((res: any) => res = res.index == this.formData1.value.index ? obj : res);
     }
     setTimeout(() => {
       this.tableData = data;

@@ -32,7 +32,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-reports',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TranslateModule, MatSelectModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, NgMultiSelectDropDownModule, MatSlideToggleModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TableComponent, TranslateModule, MatSelectModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, NgMultiSelectDropDownModule, MatSlideToggleModule],
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
   providers: [
@@ -150,7 +150,9 @@ export class ReportsComponent {
             if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
               if (this.routeParam == 'AttendanceProcess') {
                 res.response[this.getComponentData.listName].forEach((a: any) => {
-                  a.action = 'edit';
+                  a.action = [
+  { id: 'Edit', type: 'edit' }
+];
                 })
               }
               this.tableData = res.response[this.getComponentData.listName];
@@ -221,7 +223,9 @@ export class ReportsComponent {
               if (element.emp_Code == result.emp_Code) {
                 element = result;
               }
-              element.action = 'edit';
+              element.action = [
+  { id: 'Edit', type: 'edit' }
+];
               return element;
             });
             this.tableData = arr;
@@ -468,7 +472,9 @@ export class ReportsComponent {
               if (element.emp_Code == result.emp_Code) {
                 element = result;
               }
-              element.action = 'edit';
+              element.action = [
+  { id: 'Edit', type: 'edit' }
+];
               return element;
             });
             this.tableData = arr;
@@ -536,7 +542,9 @@ export class ReportsComponent {
               this.tableComponent.defaultValues();
               if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
                 res.response[this.getComponentData.listName].forEach((a: any) => {
-                  a.action = 'edit';
+                  a.action = [
+  { id: 'Edit', type: 'edit' }
+];
                   a.button = 'Open';
                 })
                 this.tableData = res.response[this.getComponentData.listName];

@@ -223,10 +223,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
       igst: 0,
       taxCode: 0,
       documentURL: [''],
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' },
   { id: 'Delete', type: 'delete' }
-],
+]],
       index: 0
     });
   }

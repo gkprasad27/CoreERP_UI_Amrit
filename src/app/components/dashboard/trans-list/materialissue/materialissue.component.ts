@@ -122,10 +122,10 @@ export class MaterialissueComponent {
       stockQty: [0],
       materialName: [''],
       highlight: false,
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' },
   { id: 'Delete', type: 'delete' }
-],
+]],
       index: 0
     });
   }

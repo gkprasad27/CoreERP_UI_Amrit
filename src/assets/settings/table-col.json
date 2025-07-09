@@ -2365,6 +2365,7 @@
     "total": "Total",
     "stockQty": "Avaliable Stock QTY",
     "deliveryDate": "Date",
+    "checkbox": "checkbox",
     "delete": "Delete",
     "action": "Action"
   },
@@ -2519,6 +2520,7 @@
     "totalTax": "Total Tax",
     "totalAmount": "Total Amount",
     "total": "Total",
+    "checkbox": "checkbox",
     "delete": "Delete",
     "action": "Action"
   },
@@ -2552,7 +2554,8 @@
     "action": "Action",
     "materialgrade": "Material Grade",
     "milltcno": "Mill TCNo",
-    "tptcno": "Third Party TC No"
+    "tptcno": "Third Party TC No",
+    "checkbox": "checkbox"
   },
   "dispatchdetails": {
     "saleOrder": "Sale Order Number",

@@ -160,10 +160,10 @@ export class SalesInvoiceComponent implements OnInit {
       qty: [''],
       highlight: false,
       type: [''],
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' },
   { id: 'Delete', type: 'delete' }
-],
+]],
       index: 0
     });
   }
