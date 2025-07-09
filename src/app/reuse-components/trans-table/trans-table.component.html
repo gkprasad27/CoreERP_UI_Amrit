@@ -50,11 +50,14 @@
       <table class="w-100" mat-table [dataSource]="dataSource" matSort #mytable>
         <ng-container *ngFor="let column of getDisplayedColumns()" [matColumnDef]="column">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            <strong> {{ ( routeParam + '.' + column) | translate }} </strong>
+            <ng-container *ngIf="(column == 'checkbox' && (routeParam == 'GoodsReceiptApproval' || routeParam == 'PurchaseorderApproval' || routeParam== 'saleorderapproval'));else header_content">
+              <mat-checkbox [checked]="checkedAll" [(ngModal)]="checkedAll" (change)="checkboxCheckAll($event)"> </mat-checkbox>
+            </ng-container>
+            <ng-template #header_content><strong> {{ ( routeParam + '.' + column) | translate }} </strong></ng-template>
           </th>
           <td mat-cell *matCellDef="let element;" [ngClass]="setClass(element)">
             <ng-container *ngIf="(column == 'checkbox');else other_content">
-              <mat-checkbox (change)="checkboxCheck($event, element)"> </mat-checkbox>
+              <mat-checkbox [checked]="element[column]" [(ngModal)]="element[column]" (change)="checkboxCheck($event, element)"> </mat-checkbox>
             </ng-container>
             <ng-template #other_content>{{ element[column] }}</ng-template>
 

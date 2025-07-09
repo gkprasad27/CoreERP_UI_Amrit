@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatTableDataSource, MatTable, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -17,7 +17,6 @@ import { AlertService } from '../../services/alert.service';
 import { Static } from '../../enums/common/static';
 import { CommonService } from '../../services/common.service';
 import { CommonModule } from '@angular/common';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,7 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-trans-table',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslatePipe, TranslateModule,
     MatCardModule, MatPaginatorModule, MatTableModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatCheckboxModule
   ],
   templateUrl: './trans-table.component.html',
@@ -52,6 +51,7 @@ export class TransTableComponent implements OnInit {
   keys = [];
   tableData: any;
 
+  checkedAll = false;
 
   defaultValues() {
     this.dataSource = new MatTableDataSource();
@@ -245,6 +245,13 @@ export class TransTableComponent implements OnInit {
 
   checkboxCheck(flag: any, element: any) {
     element.checked = flag.checked;
+    this.checkedAll = this.dataSource.data.every((f: any) => f.checked);
+  }
+
+  checkboxCheckAll(flag: any) {
+    this.tableData.forEach((f: any) => f.checked = flag.checked);
+    this.dataSource.data.forEach((f: any) => f.checkbox = flag.checked);
+    this.dataSource = new MatTableDataSource(this.tableData);
   }
 
   buttonClick(flag: string) {
