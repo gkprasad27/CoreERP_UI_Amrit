@@ -32,7 +32,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-reports',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TranslateModule, MatSelectModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, NgMultiSelectDropDownModule, MatSlideToggleModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TableComponent, TranslateModule, MatSelectModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, NgMultiSelectDropDownModule, MatSlideToggleModule],
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
   providers: [
