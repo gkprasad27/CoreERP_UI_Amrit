@@ -219,10 +219,10 @@ export class BillOfMaterialComponent implements OnInit {
       highlight: false,
       // amount: ['', Validators.required],
       id: [0],
-      action: [
+      action: [[
         { id: 'Edit', type: 'edit' },
         { id: 'Delete', type: 'delete' }
-      ],
+      ]],
       index: 0
     });
     // this.checkTransType();

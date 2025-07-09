@@ -155,10 +155,10 @@ export class SalesorderComponent {
       status: [''],
       materialName: [''],
       highlight: false,
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' },
   { id: 'Delete', type: 'delete' }
-],
+]],
       index: 0
     });
     this.formData1.disable();

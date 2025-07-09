@@ -109,10 +109,10 @@ export class SourceOfSupplyComponent implements OnInit {
       paymentDueDays: [''],
       id: [0],
       highlight: false,
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' },
   { id: 'Delete', type: 'delete' }
-],
+]],
       index: 0
     });
   }

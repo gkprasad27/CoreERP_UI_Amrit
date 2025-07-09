@@ -110,10 +110,10 @@ ProductType: Type[] =
       highlight: false,
       changed: true,
       id: [0],
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' },
   { id: 'Delete', type: 'delete' }
-],
+]],
       index: 0
     });
 

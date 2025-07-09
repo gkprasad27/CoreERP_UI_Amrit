@@ -154,10 +154,10 @@ export class JobworkmaterialreceivingComponent {
       id: [0],
       highlight: false,
       type: [''],
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' },
   { id: 'Delete', type: 'delete' }
-],
+]],
       index: 0
     });
   }

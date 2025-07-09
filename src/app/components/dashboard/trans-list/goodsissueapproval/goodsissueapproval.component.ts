@@ -167,9 +167,9 @@ export class GoodsissueApprovalComponent implements OnInit {
       bomType: [''],
       status:[''],
       bomKey:[''],
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' }
-],
+]],
       index: 0
     });
 
@@ -689,7 +689,9 @@ export class GoodsissueApprovalComponent implements OnInit {
                 const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 const allocatedqty = goodsissueastersDetail.find(resp => resp.materialCode == s.materialCode);
                 const bomNumber =s.bomKey;
-                s.action = 'edit';
+                s.action = [
+  { id: 'Edit', type: 'edit' }
+];
                 s.id = 0;
                 s.index = index + 1;
                 s.qty = s.qty ? s.qty : 0;

@@ -95,7 +95,9 @@ export class MaterialRequisitionViewComponent {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               response.response.tagsDetailStatus.forEach((d: any, index: number) => {
-                d.action = 'edit',
+                d.action = [
+  { id: 'Edit', type: 'edit' }
+],
                   d.index = index + 1
               })
               this.tableData = res.response.tagsDetailStatus;

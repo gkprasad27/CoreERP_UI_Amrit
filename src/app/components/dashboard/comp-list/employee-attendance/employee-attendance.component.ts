@@ -95,7 +95,9 @@ export class EmployeeAttendanceComponent {
                 element.deviceAddress = this.data.empCode.charAt(0);
                 element.staffId = this.data.empCode;
                 element.logDatetime = element.logtime ? `${this.commonService.formatDate1(element.logtime)} ${this.commonService.formatReportTime(element.logtime)}:00` : '';
-                element.action = 'edit';
+                element.action = [
+  { id: 'Edit', type: 'edit' }
+];
                 arr.push(element);
               }
             });

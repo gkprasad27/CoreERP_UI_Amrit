@@ -148,10 +148,10 @@ export class PurchasingComponent implements OnInit {
       id: [0],
       totalQty : [0],
       highlight: false,
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' },
   { id: 'Delete', type: 'delete' }
-],
+]],
       index: 0
     });
   }

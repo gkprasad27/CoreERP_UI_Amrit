@@ -125,10 +125,10 @@ export class MaterialrequisitionComponents implements OnInit {
 
       highlight: false,
       id: 0,
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' },
   { id: 'View', type: 'view' }
-],
+]],
       index: 0
     });
     // this.formData = this.formBuilder.group({

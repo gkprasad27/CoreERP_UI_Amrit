@@ -199,10 +199,10 @@ export class QuotationSupplierComponent implements OnInit {
       highlight: false,
       // stockQty: [0],
       materialName: [''],
-      action: [
+      action: [[
   { id: 'Edit', type: 'edit' },
   { id: 'Delete', type: 'delete' }
-],
+]],
       index: 0
     });
     this.formData1.disable();
