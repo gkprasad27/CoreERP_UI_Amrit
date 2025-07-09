@@ -1051,9 +1051,9 @@ export class PurchaseOrderComponent implements OnInit {
     if (typeof obj.saleOrderNo != 'string') {
       obj.saleOrderNo = this.formData.value.saleOrderNo[0].saleOrderNo;
     }
-    if (typeof obj.material != 'string') {
-      obj.material = this.formData.value.material[0].description;
-    }
+    // if (typeof obj.material != 'string') {
+    //   obj.material = this.formData.value.material[0].description;
+    // }
     const arr = this.tableData.filter((d: any) => d.changed);
 
     const taxCodeobj = this.taxCodeList.find((tax: any) => tax.taxRateCode == arr[0].taxCode);

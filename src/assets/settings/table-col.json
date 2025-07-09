@@ -1688,11 +1688,11 @@
     "priceperUnit": "Price Per Unit",
     "unit": "Unit",
     "lastSupplyPrice": "Last Supply Price",
-    "lastSupplyOn": "LastSupply On",
+    "lastSupplyOn": "Date",
     "ponumber": "PO Number",
     "deliveryDays": "Delivery Days",
     "paymentDueDays": "Payment Due Days",
-    "podate": "PO Date",
+    "podate": "Date",
     "delete": "Delete",
     "action": "Action"
   },
