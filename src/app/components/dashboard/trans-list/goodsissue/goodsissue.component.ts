@@ -67,8 +67,8 @@ export class GoodsissueComponent implements OnInit {
 
   dropdownSettings4: IDropdownSettings = {
     singleSelection: true,
-    idField: 'materialCode',
-    textField: 'materialName',
+    idField: 'materialCodeBomKey',
+    textField: 'materialCodeBomKey',
     enableCheckAll: true,
     // selectAllText: 'Select All',
     // unSelectAllText: 'UnSelect All',
@@ -154,6 +154,7 @@ export class GoodsissueComponent implements OnInit {
 
     this.formData1 = this.formBuilder.group({
       allocatedqty: ['', Validators.required],
+      materialCodeBomKey: [''],
       materialCode: [''],
       materialName: [''],
       qty: ['',],
@@ -300,8 +301,8 @@ export class GoodsissueComponent implements OnInit {
     this.tableComponent.defaultValues();
     let fObj = JSON.parse(JSON.stringify(this.formData1.value));
     if(fObj.materialCode) {
-      fObj.materialCode = this.formData1.value.materialCode[0].materialCode;
-      fObj.materialName = this.formData1.value.materialCode[0].materialName
+      // fObj.materialCode = this.formData1.value.materialCode[0].materialCode;
+      // fObj.materialName = this.formData1.value.materialCode[0].materialName
       fObj.bomNumber = this.formData1.value.bomNumber
       fObj.status = this.formData1.value.status
     }
@@ -331,7 +332,7 @@ export class GoodsissueComponent implements OnInit {
       this.formData1.patchValue(value.item);
    
       this.formData1.patchValue({
-        materialCode: [{ materialCode: value.item.materialCode,  materialName: value.item.materialName}],
+        materialCode: [{ materialCodeBomKey: value.item.materialCode + '-' + value.item.bomKey }],
         //id: 0-- commented by KP
       })
     }
@@ -404,7 +405,14 @@ export class GoodsissueComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const arr = res.response['SaleOrderDetails'];
-              this.materialCodeList = arr.filter((s: any) => !this.tableData.some((t: any) => t.materialCode == s.materialCode && t.bomKey==s.bomKey));
+                // Filter out items already present in tableData (by materialCode and bomKey)
+                this.materialCodeList = arr
+                .filter((s: any) => !this.tableData.some((t: any) => t.materialCode == s.materialCode && t.bomNumber == s.bomKey))
+                // Map to add materialCodeBomKey as a combination of materialCode and bomKey
+                .map((s: any) => ({
+                  ...s,
+                  materialCodeBomKey: `${s.materialCode}-${s.bomKey}`
+                }));
             }
           }
         });
@@ -412,12 +420,13 @@ export class GoodsissueComponent implements OnInit {
 
   materialCodeChange() {
    
-    const obj = this.materialCodeList.find((m: any) => m.materialCode == this.formData1.value.materialCode[0].materialCode);
-    const qty = this.mmasterList.find(resp => resp.id == this.formData1.value.materialCode[0].materialCode);
+    const obj = this.materialCodeList.find((m: any) => m.materialCodeBomKey == this.formData1.value.materialCodeBomKey[0].materialCodeBomKey);
+    const qty = this.mmasterList.find(resp => resp.id == obj.materialCode);
     if (obj) {
       this.formData1.patchValue(obj);
       this.formData1.patchValue({
-        materialCode: [{ materialCode: obj.materialCode,  materialName: obj.materialName}],
+        materialCode: obj.materialCode,  
+        materialName: obj.materialName,
         availableqty: qty.availQTY,
         id: 0,
         bomNumber: obj.bomKey

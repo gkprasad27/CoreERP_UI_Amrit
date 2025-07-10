@@ -1907,6 +1907,7 @@
     "movementType": "Movement Type",
     "status": "Status",
     "bomKey":"BomKey",
+    "bomNumber": "Bom Key",
     "materialCode": "Material Code",
     "materialName":"Material Name",
     "qty": "Quantity",
