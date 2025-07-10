@@ -72,7 +72,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   user: User;
   @Input() routeParam: any;
   tableIndex: any;
-
+  checkedAll = false;
   constructor(
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
@@ -107,6 +107,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   tableCheckboxCheck(flag: any, element: any) {
     this.tableCheckboxEvent.emit({ flag: flag, item: element });
+    this.checkedAll = this.dataSource.data.every((f: any) => f.checked);
   }
 
   checkboxAllCheck(flag: any) {
@@ -164,6 +165,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     if (!this.commonService.checkNullOrUndefined(this.tableData)) {
       if (this.tableData.length) {
         this.dataSource = new MatTableDataSource(this.tableData);
+        this.checkedAll = this.dataSource.data.every((f: any) => f.checkbox);
       } else {
         this.dataSource = new MatTableDataSource();
       }

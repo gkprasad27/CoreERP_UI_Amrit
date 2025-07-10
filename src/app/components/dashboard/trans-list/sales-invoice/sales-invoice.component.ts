@@ -376,8 +376,7 @@ onFocusOutEvent(event: any) {
   }
 
   tableCheckboxEvent(event: any) {
-    
-    this.tableData.forEach((res: any) => res.checkbox = (res.id == event.item.invoiceDetailId) ? event.flag.checked : res.checkbox);
+    this.tableData.forEach((res: any) => res.checkbox = (event.item == 'All' ? event.flag.checked : ((res.invoiceDetailId == event.item.invoiceDetailId) ? event.flag.checked : res.checkbox)));
     this.calculate();
   }
 

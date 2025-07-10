@@ -75,7 +75,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <strong *ngIf="column != 'checkbox'"> {{ ( routeParam + '.' + column) | translate }} </strong>
             <ng-container *ngIf="column == 'checkbox'">
-              <mat-checkbox (change)="checkboxAllCheck($event)" > </mat-checkbox>
+              <mat-checkbox [checked]="checkedAll" [(ngModal)]="checkedAll" (change)="checkboxAllCheck($event)" > </mat-checkbox>
             </ng-container>
           </th>
           <td mat-cell *matCellDef="let element;" (click)="setIndex(element, dataSource.filteredData.indexOf(element))">
@@ -98,7 +98,7 @@
                 <span class="link--val" (click)="onLink(column, element)"> {{ element[column] }} </span>
               </ng-container>
               <ng-container *ngIf="column == 'checkbox' && !element.hideCheckbox">
-                <mat-checkbox [(ngModel)]="element[column]" (change)="tableCheckboxCheck($event, element)">
+                <mat-checkbox [checked]="element[column]" [(ngModel)]="element[column]" (change)="tableCheckboxCheck($event, element)">
                 </mat-checkbox>
               </ng-container>
               <ng-container *ngIf="(column == 'button' || column == 'button1') && element[column]">
