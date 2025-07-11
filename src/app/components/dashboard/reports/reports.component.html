@@ -1,12 +1,12 @@
 <div style="margin: 10px;" id="printData" *ngIf="data && data.length">
 
     <div style="display: flex;">
-        <img *ngIf="data.companyName === 'AMT POWER TRANSMISSION'"
+        <img *ngIf="modelFormData.value.companyName === 'AMT POWER TRANSMISSION'"
              src="/assets/images/header.jpg" 
              style="height: 100px; width: 65%;">
     
         <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
-        <img *ngIf="data.companyName !== 'AMT POWER TRANSMISSION'" 
+        <img *ngIf="modelFormData.value.companyName !== 'AMT POWER TRANSMISSION'" 
              src="/assets/images/AMRIT.jpg" 
              style="height: 100px; width: 65%;">
         <div style="padding: 24px;

@@ -327,8 +327,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
 
-  downLoadFile(event: any) {
-    const url = String.Join('/', this.apiConfigService.getFile, event.name);
+  downLoadFile(event: any, flag = false) {
+    debugger
+    const url = String.Join('/', this.apiConfigService.getFile, flag ? event.item[event.action] : event.name);
     this.apiService.apiGetRequest(url)
       .subscribe(
         response => {
@@ -686,6 +687,12 @@ export class ReceiptOfGoodsComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['grmasters']);
+              if( res.response['grmasters'].documentURL) {
+                this.fileList = { name: res.response['grmasters'].documentURL };
+              }
+              if( res.response['grmasters'].invoiceURL) {
+                this.fileList1 = { name: res.response['grmasters'].invoiceURL };
+              }
               // this.formData.patchValue({
               //   purchaseOrderNo: +res.response['grmasters'].purchaseOrderNo
               // })

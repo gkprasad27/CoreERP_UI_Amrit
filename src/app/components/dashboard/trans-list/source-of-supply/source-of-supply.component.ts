@@ -173,15 +173,14 @@ export class SourceOfSupplyComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['ssmasters']);
               res.response['ssDetail'].forEach((s: any, index: number) => {
-                s.id = 0
+                s.id = s.id ? s.id : 0;
+                s.index = index + 1;
                 s.action = [
   { id: 'Edit', type: 'edit' },
   { id: 'Delete', type: 'delete' }
 ];
               })
-              const tableData = [...res.response['ssDetail']];
-              tableData.forEach((t: any, index: number) => t.index = index + 1);
-              this.tableData = tableData;
+              this.tableData = [...res.response['ssDetail']];
             }
           }
         });
@@ -270,7 +269,7 @@ export class SourceOfSupplyComponent implements OnInit {
       a.lastSupplyOn = a.lastSupplyOn ? this.datepipe.transform(a.lastSupplyOn, 'MM-dd-yyyy') : '';
       a.id = this.routeEdit ? a.id : 0
     })
-    const requestObj = { qsHdr: allValues, qsDtl: arr };
+    const requestObj = { qsHdr: allValues, qsDtl: arr.filter((t: any) => t.highlight) };
     this.apiService.apiPostRequest(addssapply, requestObj).subscribe(
       response => {
         this.spinner.hide();

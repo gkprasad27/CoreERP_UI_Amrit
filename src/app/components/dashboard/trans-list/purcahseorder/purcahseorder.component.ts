@@ -153,7 +153,7 @@ export class PurchaseOrderComponent implements OnInit {
       company: [user.companyCode],
       plant: [null],
       branch: [null],
-      // profitCenter: [null, [Validators.required]],
+      profitCenter: [null, [Validators.required]],
       saleOrderType: [null, [Validators.required]],
       purchaseOrderNumber: [null],
       purchaseOrderType: [null, [Validators.required]],
@@ -223,6 +223,7 @@ export class PurchaseOrderComponent implements OnInit {
       deliveryDate: [''],
       status: [''],
       saleOrderNo: [''],
+      supplierCode: [''],
       total: [''],
       type: ['add'],
       action: [[
@@ -428,6 +429,7 @@ export class PurchaseOrderComponent implements OnInit {
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
                 s.amount = s.amount ? s.amount : 0;
                 s.total = s.total ? s.total : 0;
+                s.supplierCode = s.supplierCode ? s.supplierCode : '';
               })
               this.tableData = obj['data1'];
               //this.calculate();
@@ -761,6 +763,7 @@ export class PurchaseOrderComponent implements OnInit {
                 ];
                 s.changed = false;
                 s.poQty = s.poQty ? s.poQty : 0;
+                s.supplierCode = s.supplierCode ? s.supplierCode : '';
                 s.index = index + 1;
               })
               this.tableData = res.response['poDetail'];
@@ -892,7 +895,8 @@ export class PurchaseOrderComponent implements OnInit {
         if (!this.commonService.checkNullOrUndefined(result)) {
           this.tableData.forEach((t: any) => {
             if (t.materialCode == result.item.materialCode) {
-              t.rate = result.item.lastSupplyPrice;
+              t.rate = result.item.priceperUnit;
+              t.supplierCode = result.item.supplierCode;
             }
           })
         }
@@ -902,12 +906,19 @@ export class PurchaseOrderComponent implements OnInit {
       if(this.ssmastersList && this.ssmastersList.length) {
         const ssObj = this.ssmastersList.find((s: any) => s.materialCode == value.item.materialCode);
         if(ssObj) {
-          value.item['rate'] = ssObj.lastSupplyPrice;
+          value.item['rate'] = ssObj.priceperUnit;
         }
       }
       this.formData1.patchValue({
         material: value.item.material ? [{ description: value.item.material }] : '',
       })
+      if (value.item.supplierCode) {
+        const obj = this.bpaList.find((b: any) => b.bpnumber == value.item.supplierCode);
+        this.formData.patchValue({
+          supplierName: obj.name
+        })
+        this.supplierCodeChange();
+      }
       this.formData1.patchValue(value.item);
     }
   }

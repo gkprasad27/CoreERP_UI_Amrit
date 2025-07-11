@@ -220,7 +220,7 @@
 
             <div>
                 <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
-                    (editOrDeleteEvent)="editOrDeleteEvent($event)" (onLinkEmitEvent)="downLoadFile($event)">
+                    (editOrDeleteEvent)="editOrDeleteEvent($event)" (onLinkEmitEvent)="downLoadFile($event, true)">
                 </app-table>
             </div>
         </div>
