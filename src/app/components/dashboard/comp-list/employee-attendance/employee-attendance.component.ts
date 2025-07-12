@@ -80,7 +80,9 @@ export class EmployeeAttendanceComponent {
 
 
   employeeattendance() {
-    const employeeattendanceUrl = String.Join('/', this.apiConfigService.eemployeeAttendanceChange, this.data.fromDate, this.data.toDate, this.data.company, this.data.empCode);
+   let fromDate = this.commonService.formatDateValue(this.data.fromDate)
+   let toDate = this.commonService.formatDateValue(this.data.toDate)
+    const employeeattendanceUrl = String.Join('/', this.apiConfigService.eemployeeAttendanceChange, fromDate, toDate, this.data.company, this.data.empCode);
     this.apiService.apiGetRequest(employeeattendanceUrl)
       .subscribe(
         res => {
