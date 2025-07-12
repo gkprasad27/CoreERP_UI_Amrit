@@ -196,6 +196,7 @@ export class BillOfMaterialComponent implements OnInit {
       bomnumber: [null, [Validators.required]],
       description: [null, [Validators.required]],
       profitCenter: ['', Validators.required],
+      drawingDocument: [''],
       // product: ['', Validators.required],
       // materialCode: [''],
       // materialName: [''],
@@ -214,7 +215,6 @@ export class BillOfMaterialComponent implements OnInit {
 
       mainComponent: [true],
       billable: [true],
-      drawingUpload: [''],
 
       highlight: false,
       // amount: ['', Validators.required],
@@ -378,7 +378,7 @@ export class BillOfMaterialComponent implements OnInit {
     let form = this.formData1.value;
     form.billable = this.formData1.value.billable ? 'Y' : 'N'
     form.mainComponent = this.formData1.value.mainComponent ? 'Y' : 'N';
-    form.drawingUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
+   // form.drawingUpload = this.fileList ? this.fileList.name.split('.')[0] : '';
     if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
       form.index = data ? (data.length + 1) : 1,
@@ -494,6 +494,9 @@ export class BillOfMaterialComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
+              if( res.response['bomMasters'].drawingDocument) {
+                this.fileList = { name: res.response['bomMasters'].drawingDocument };
+              }
               this.formData.patchValue(res.response['bomMasters']);
               // this.sendDynTableData = { type: 'edit', data: res.response['bomDetail'] };
               this.formData.disable();
@@ -768,7 +771,9 @@ export class BillOfMaterialComponent implements OnInit {
     //this.formData.controls['material'].enable();
 
     const addbom = String.Join('/', this.apiConfigService.addBOM);
-    const requestObj = { bomHdr: this.formData.value, bomDtl: this.tableData };
+    const formData = this.formData.getRawValue();
+    formData.drawingDocument = this.fileList ? this.fileList.name.split('.')[0] : '';
+    const requestObj = { bomHdr: formData, bomDtl: this.tableData };
     this.apiService.apiPostRequest(addbom, requestObj).subscribe(
       response => {
         const res = response;

@@ -827,11 +827,11 @@ export class PurchaseOrderComponent implements OnInit {
     }
 
     let checkqty = 0;
-    if (this.routeEdit) {
-      checkqty = this.formData1.value.soQty
-    } else {
+    // if (this.routeEdit) {
+    //   checkqty = this.formData1.value.soQty
+    // } else {
       checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - this.formData1.value.poQty) : this.formData1.value.soQty
-    }
+    // }
 
     if (this.formData1.value.qty > checkqty) {
       this.formData1.patchValue({

@@ -68,6 +68,11 @@
           <input matInput formControlName="description" appFocusOnEnter tabIndex="5">
         </mat-form-field>
 
+        <div id="data" class="mx-2">
+            <label > {{ 'bom.drawingUpload' | translate }} </label>
+            <app-file-upload [type]="'card'" [oldFileList]="formData.value.drawingDocument" (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
+        </div>
+
         <!-- <mat-form-field class="form-element">
           <mat-label [translate]="'bom.bomnumber'"></mat-label>
           <input matInput formControlName="bomnumber" appFocusOnEnter tabIndex="4">
@@ -226,10 +231,7 @@
             {{(formData1.get('billable').value) ? 'Billable' : 'Non Billable' }}
           </mat-slide-toggle>
 
-          <div id="data" class="mx-2">
-            <label > {{ 'bom.drawingUpload' | translate }} </label>
-            <app-file-upload [type]="'card'" [oldFileList]="formData1.value.drawingUpload" (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
-           </div>
+          
 
           <!-- <mat-form-field class="form-element">
             <mat-label [translate]="'bom.amount'"></mat-label>
