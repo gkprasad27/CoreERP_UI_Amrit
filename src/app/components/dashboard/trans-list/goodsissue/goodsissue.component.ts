@@ -331,10 +331,10 @@ export class GoodsissueComponent implements OnInit {
     } else {
       this.formData1.patchValue(value.item);
    
-      this.formData1.patchValue({
-        materialCode: [{ materialCodeBomKey: value.item.materialCode + '-' + value.item.bomKey }],
+      // this.formData1.patchValue({
+      //   materialCode: [{ materialCodeBomKey: value.item.materialCode + '-' + value.item.bomKey }],
         //id: 0-- commented by KP
-      })
+      // })
     }
   }
 
