@@ -746,6 +746,9 @@ export class PurchaseOrderComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['SaleOrderMasters']);
+              this.formData.patchValue({
+                saleOrderType: res.response['SaleOrderMasters'].saleOrderType
+              })
               res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
                 s.action = [
                   { id: 'Edit', type: 'edit' },

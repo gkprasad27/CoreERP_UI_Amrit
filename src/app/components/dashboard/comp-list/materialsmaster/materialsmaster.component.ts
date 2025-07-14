@@ -167,6 +167,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       qtyvalues: [null],
       transferPrice: [null],
       hsnsac: [null],
+      hsnsacName: [null],
       classification: [null],
       taxable: [null],
       fileUpload: [null],
@@ -200,6 +201,13 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       })
       this.modelFormData.controls['materialCode'].disable();
     }
+  }
+
+  hsnsacChange() {
+    const hsnsac = this.hsnsacList.find((c: any) => c.text == this.modelFormData.value.hsnsacName);
+    this.modelFormData.patchValue({
+      hsnsac: hsnsac.id
+    });
   }
 
   ngOnInit() {
@@ -399,6 +407,10 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.hsnsacList = res.response['HSNSACList'];
+              const hsnsac = this.hsnsacList.find((c: any) => c.id == this.formData.item.hsnsac);
+              this.modelFormData.patchValue({
+                hsnsacName: hsnsac.text
+              });
             }
           }
           this.spinner.hide();
@@ -460,7 +472,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       this.isSubmitted = true;
       return;
     }
-  
+
     // if(flag) {
     this.modelFormData.controls['materialCode'].enable();
     this.formData.item = this.modelFormData.value;

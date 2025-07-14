@@ -129,7 +129,7 @@ export class SalesInvoiceComponent implements OnInit {
       totalAmount: [0],
       totalTax: [0],
       grandTotal: [0],
-      transportCharges:[0],
+      transportCharges: [0],
       id: [0]
     });
 
@@ -151,7 +151,7 @@ export class SalesInvoiceComponent implements OnInit {
       bomName: [''],
       hsnNo: [''],
       grossAmount: [''],
-      transportCharges:[''],
+      transportCharges: [''],
       taxStructureId: [''],
       checkbox: [''],
       hideCheckbox: [''],
@@ -161,9 +161,9 @@ export class SalesInvoiceComponent implements OnInit {
       highlight: false,
       type: [''],
       action: [[
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-]],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]],
       index: 0
     });
   }
@@ -262,7 +262,7 @@ export class SalesInvoiceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.materialCodeList = res.response['saleordernoList'];
-              
+
               this.getBusienessPartnerAccount(res.response.saleOrderMasterList);
               this.ponoselect();
               this.getInspectionCheckDetailbySaleorder();
@@ -271,12 +271,12 @@ export class SalesInvoiceComponent implements OnInit {
         });
   }
 
-onFocusOutEvent(event: any) {
-  this.calculate();
-}
+  onFocusOutEvent(event: any) {
+    this.calculate();
+  }
 
   getBusienessPartnerAccount(data: any) {
-   
+
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getBusienessPartnerAccount, data.customerCode);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
@@ -305,163 +305,160 @@ onFocusOutEvent(event: any) {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.tableComponent.defaultValues();             
-              res.response['icDetail'].forEach((i: any) => {
+              this.tableComponent.defaultValues();
+              res.response['icDetail'].forEach((i: any, index: number) => {
                 const master = res.response['icmasters'];
-                
+
                 let obj: any = this.materialCodeList;
                 if (this.materialCodeList.find((m: any) => m.mainComponent == 'Y')) {
-                  if(master.company=='1000')
-                  {
-                  obj = this.materialCodeList.find((m: any) => m.bomKey == i.materialCode && m.mainComponent == 'Y');
+                  if (master.company == '1000') {
+                    obj = this.materialCodeList.find((m: any) => m.bomKey == i.materialCode && m.mainComponent == 'Y');
                   }
-                else
-                {
-                   obj= this.materialCodeList.find((m: any) => m.materialCode == i.materialCode && m.mainComponent == 'Y');
+                  else {
+                    obj = this.materialCodeList.find((m: any) => m.materialCode == i.materialCode && m.mainComponent == 'Y');
+                  }
+                  if (!this.commonService.checkNullOrUndefined(obj)) {
+                    const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
+                    const igst = (objT && objT.igst) ? (obj.rate * objT.igst) / 100 : 0;
+                    const cgst = (objT && objT.cgst) ? (obj.rate * objT.cgst) / 100 : 0;
+                    const sgst = (objT && objT.sgst) ? (obj.rate * objT.sgst) / 100 : 0;
+                    i.igst = igst;
+                    i.cgst = cgst;
+                    i.sgst = sgst;
+                    i.igstCode = (objT && objT.igst) || 0;
+                    i.cgstCode = (objT && objT.cgst) || 0;
+                    i.sgstCode = (objT && objT.sgst) || 0;
+                    i.grossAmount = obj.rate;
+                    i.tagName = i.productionTag;
+                    i.saleorder = i.saleOrderNumber;
+                    i.materialCode = i.materialCode;
+                    i.materialName = i.materialName;
+                    i.hsnNo = i.hsnNo;
+                    i.inspectionCheckNo = i.inspectionCheckNo;
+                    i.rate = obj.rate;
+                    i.qty = 1;
+                    i.changed = false;
+                    i.hideCheckbox = i.status == "Invoice Generated";
+                    i.taxStructureId = obj.taxCode;
+                    i.totalTax = (igst + sgst + cgst);
+                    i.totalAmount = (obj.rate + obj.transportCharges) + (igst + sgst + cgst)
+                    i.checkbox = 
+                    i.index = index + 1;
+                    // if(master.company=='2000')
+                    // {
+                    // this.tableData = data.filter((t: any) => t.materialCode == obj.materialCode);
+                    // }
+                    // else
+                    // {
+                    //   this.tableData = data;
+                    // }
+                  }
                 }
-                if (!this.commonService.checkNullOrUndefined(obj)) {
-                const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
-                const igst = (objT && objT.igst) ? (obj.rate * objT.igst) / 100 : 0;
-                const cgst = (objT && objT.cgst) ? (obj.rate * objT.cgst) / 100 : 0;
-                const sgst = (objT && objT.sgst) ? (obj.rate * objT.sgst) / 100 : 0;
-                i.igst = igst;
-                i.cgst = cgst;
-                i.sgst = sgst;
-                i.igstCode = (objT && objT.igst) || 0;
-                i.cgstCode = (objT && objT.cgst) || 0;
-                i.sgstCode = (objT && objT.sgst) || 0;
-                i.grossAmount = obj.rate;
-                i.tagName = i.productionTag;
-                i.saleorder = i.saleOrderNumber;
-                i.materialCode = i.materialCode;
-                i.materialName = i.materialName;
-                i.hsnNo = i.hsnNo;
-                i.inspectionCheckNo = i.inspectionCheckNo;
-                i.rate = obj.rate;
-                i.qty = 1;
-                i.changed = false;
-                i.hideCheckbox = i.status == "Invoice Generated";
-                i.taxStructureId = obj.taxCode;
-                i.totalTax = (igst + sgst + cgst);
-                i.totalAmount = (obj.rate + obj.transportCharges) + (igst + sgst + cgst)
-                i.checkbox = false
-                const data = res.response['icDetail'];
-                // if(master.company=='2000')
-                // {
-                // this.tableData = data.filter((t: any) => t.materialCode == obj.materialCode);
-                // }
-                // else
-                // {
-                //   this.tableData = data;
-                // }
-                this.tableData = data;
+              });
+              this.tableData = res.response['icDetail'];
               if (this.tableData.length > 0) {
                 this.tableData[0].checkbox = true;
               }
-
               this.calculate();
-                }
-              }
-              });
               // this.tableData = res.response['icDetail'];
               // if (this.tableData.length > 0) {
               //   this.tableData[0].checkbox = true;
               // }
 
               // this.calculate();
-           
+
             }
-          }          
+          }
         });
   }
 
   tableCheckboxEvent(event: any) {
-    this.tableData.forEach((res: any) => res.checkbox = (event.item == 'All' ? event.flag.checked : ((res.invoiceDetailId == event.item.invoiceDetailId) ? event.flag.checked : res.checkbox)));
+    this.tableData.forEach((res: any) => res.checkbox = (event.item == 'All' ? event.flag.checked : ((res.index == event.item.index) ? event.flag.checked : res.checkbox)));
     this.calculate();
   }
 
   calculate() {
-  this.formData.patchValue({
-    totalIGST: 0,
-    totalCGST: 0,
-    totalSGST: 0,
-    totalAmount: 0,
-    totalTax: 0,
-    grandTotal: 0,
-    transpTax: 0,
-  });
+    this.formData.patchValue({
+      totalIGST: 0,
+      totalCGST: 0,
+      totalSGST: 0,
+      totalAmount: 0,
+      totalTax: 0,
+      grandTotal: 0,
+      transpTax: 0,
+    });
 
-  let totalIGST = 0;
-  let totalCGST = 0;
-  let totalSGST = 0;
-  let totalAmount = 0;
-  let totalTax = 0;
+    let totalIGST = 0;
+    let totalCGST = 0;
+    let totalSGST = 0;
+    let totalAmount = 0;
+    let totalTax = 0;
 
-  let selectedRow: any = null;
+    let selectedRow: any = null;
 
-  this.tableData && this.tableData.forEach((t: any) => {
-    if (t.checkbox) {
-      totalIGST += t.igst;
-      totalCGST += t.cgst;
-      totalSGST += t.sgst;
-      totalAmount += t.grossAmount;
-      totalTax += t.igst + t.cgst + t.sgst;
+    this.tableData && this.tableData.forEach((t: any) => {
+      if (t.checkbox) {
+        totalIGST += t.igst;
+        totalCGST += t.cgst;
+        totalSGST += t.sgst;
+        totalAmount += t.grossAmount;
+        totalTax += t.igst + t.cgst + t.sgst;
 
-      if (!selectedRow) {
-        selectedRow = t; // Use first selected row to get transport GST codes
+        if (!selectedRow) {
+          selectedRow = t; // Use first selected row to get transport GST codes
+        }
       }
+    });
+
+    // Helper to get value ignoring case
+    function getCaseInsensitiveValue(obj: any, key: string): number {
+      if (!obj) return 0;
+      const keys = Object.keys(obj);
+      const foundKey = keys.find(k => k.toLowerCase() === key.toLowerCase());
+      return foundKey ? +obj[foundKey] : 0;
     }
-  });
 
-   // Helper to get value ignoring case
-  function getCaseInsensitiveValue(obj: any, key: string): number {
-    if (!obj) return 0;
-    const keys = Object.keys(obj);
-    const foundKey = keys.find(k => k.toLowerCase() === key.toLowerCase());
-    return foundKey ? +obj[foundKey] : 0;
+    // Handle transport charges
+    const transportCharges = +this.formData.value.transportCharges || 0;
+    let transpIGST = 0;
+    let transpCGST = 0;
+    let transpSGST = 0;
+
+    if (selectedRow) {
+      const igstCode = getCaseInsensitiveValue(selectedRow, 'igstCode');
+      const cgstCode = getCaseInsensitiveValue(selectedRow, 'cgstCode');
+      const sgstCode = getCaseInsensitiveValue(selectedRow, 'sgstCode');
+      // const igstCode = +selectedRow.igstcode || 0;
+      // const cgstCode = +selectedRow.cgstcode || 0;
+      // const sgstCode = +selectedRow.sgstcode || 0;
+
+      transpIGST = +(transportCharges * (igstCode / 100));
+      transpCGST = +(transportCharges * (cgstCode / 100));
+      transpSGST = +(transportCharges * (sgstCode / 100));
+    }
+
+    const transpTax = transpIGST + transpCGST + transpSGST;
+
+    // Update totals with transport charges and taxes
+    totalIGST += transpIGST;
+    totalCGST += transpCGST;
+    totalSGST += transpSGST;
+    totalAmount += transportCharges;
+    totalTax += transpTax;
+
+    const grandTotal = totalAmount + totalTax;
+
+    // Patch updated totals back to form
+    this.formData.patchValue({
+      totalIGST: totalIGST.toFixed(2),
+      totalCGST: totalCGST.toFixed(2),
+      totalSGST: totalSGST.toFixed(2),
+      totalAmount: totalAmount.toFixed(2),
+      totalTax: totalTax.toFixed(2),
+      transpTax: transpTax.toFixed(2),
+      grandTotal: grandTotal.toFixed(2),
+    });
   }
-
-  // Handle transport charges
-  const transportCharges = +this.formData.value.transportCharges || 0;
-  let transpIGST = 0;
-  let transpCGST = 0;
-  let transpSGST = 0;
-
-  if (selectedRow) {
-    const igstCode = getCaseInsensitiveValue(selectedRow, 'igstCode');
-    const cgstCode = getCaseInsensitiveValue(selectedRow, 'cgstCode');
-    const sgstCode = getCaseInsensitiveValue(selectedRow, 'sgstCode');
-    // const igstCode = +selectedRow.igstcode || 0;
-    // const cgstCode = +selectedRow.cgstcode || 0;
-    // const sgstCode = +selectedRow.sgstcode || 0;
-
-    transpIGST = +(transportCharges * (igstCode / 100));
-    transpCGST = +(transportCharges * (cgstCode / 100));
-    transpSGST = +(transportCharges * (sgstCode / 100));
-  }
-
-  const transpTax = transpIGST + transpCGST + transpSGST;
-
-  // Update totals with transport charges and taxes
-  totalIGST += transpIGST;
-  totalCGST += transpCGST;
-  totalSGST += transpSGST;
-  totalAmount += transportCharges;
-  totalTax += transpTax;
-
-  const grandTotal = totalAmount + totalTax;
-
-  // Patch updated totals back to form
-  this.formData.patchValue({
-    totalIGST: totalIGST.toFixed(2),
-    totalCGST: totalCGST.toFixed(2),
-    totalSGST: totalSGST.toFixed(2),
-    totalAmount: totalAmount.toFixed(2),
-    totalTax: totalTax.toFixed(2),
-    transpTax: transpTax.toFixed(2),
-    grandTotal: grandTotal.toFixed(2),
-  });
-}
 
 
   // calculate() {
@@ -523,7 +520,8 @@ onFocusOutEvent(event: any) {
                   productionTag: d.tagName ? d.tagName : '',
                   inspectionCheckNo: d.inspectionCheckNo ? d.inspectionCheckNo : '',
                   status: d.status ? d.status : '',
-                  checkbox: true
+                  checkbox: true,
+                  index: index + 1,
                 }
                 arr.push(obj)
               })
@@ -538,7 +536,7 @@ onFocusOutEvent(event: any) {
   }
 
   getBusienessPartnerAccounts(data: any) {
-    
+
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getBusienessPartnerAccount, data.customerName);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
@@ -603,9 +601,9 @@ onFocusOutEvent(event: any) {
     this.formData1.patchValue({
       index: 0,
       action: [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ],
     });
   }
 
@@ -646,11 +644,11 @@ onFocusOutEvent(event: any) {
 
   reset() {
     this.tableData = [];
-    this.tableComponent.defaultValues();   
+    this.tableComponent.defaultValues();
   }
 
   invoicePrint() {
-    
+
     const totalObj = {
       qty: 0,
       grossAmount: 0,
@@ -737,8 +735,8 @@ onFocusOutEvent(event: any) {
     }
     return newArr;
   }
-  issavebuttonenabled(){
-    return this.tableData.some(item=>item.checkbox)&& this.formData.valid;
+  issavebuttonenabled() {
+    return this.tableData.some(item => item.checkbox) && this.formData.valid;
   }
 
 

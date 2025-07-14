@@ -107,7 +107,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   tableCheckboxCheck(flag: any, element: any) {
     this.tableCheckboxEvent.emit({ flag: flag, item: element });
-    this.checkedAll = this.dataSource.data.every((f: any) => f.checked);
+    this.checkedAll = this.dataSource.data.every((f: any) => f.checkbox);
   }
 
   checkboxAllCheck(flag: any) {
