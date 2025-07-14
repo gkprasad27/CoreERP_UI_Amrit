@@ -2473,7 +2473,8 @@
     "materialName": "Material Name",
     "qty": "QTY",
     "saleOrderNo": "Sale Order Number",
-    "status": "Status"
+    "status": "Status",
+    "link": "link"
   },
   "PurchaseorderApproval": {
     "id": "ID",

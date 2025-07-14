@@ -3016,6 +3016,7 @@
     "materialCode": "Material Code",
     "materialName":"Material Name",
     "qty": "QTY",
+    "link": "PO Created",
     "saleOrderNo": "Sale Order Number",
     "status": "Status"
   },

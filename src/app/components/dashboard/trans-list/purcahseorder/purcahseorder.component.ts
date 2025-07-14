@@ -672,7 +672,11 @@ export class PurchaseOrderComponent implements OnInit {
             }
           }
           if (this.routeEdit != '') {
+            if(this.routeEdit.includes('purchaseOrderNo_')) {
+            this.getSaleOrderDetailPOQ(this.routeEdit);
+            } else {
             this.getPurchaseorderDetails(this.routeEdit);
+            }
           }
           // this.getmaterialData();
         });
@@ -730,6 +734,50 @@ export class PurchaseOrderComponent implements OnInit {
   //         }
   //       });
   // }
+
+  getSaleOrderDetailPOQ(val) {
+    debugger
+    const cashDetUrl = String.Join('/', this.apiConfigService.getSaleOrderDetailPOQ, val.split('_')[1]);
+    this.apiService.apiGetRequest(cashDetUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.formData.patchValue(res.response['SaleOrderMasters']);
+              res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
+                s.action = [
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' },
+                  { id: 'View', type: 'view' },
+                  { id: 'View1', type: 'view' }
+                ]
+                s.id = 0;
+                s.index = index + 1;
+                // s.qty = s.qty ? s.qty : 0;
+                s.poQty = s.poQty ? s.poQty : 0;
+                s.soQty = s.qty ? s.qty : 0;
+                s.qty = 0;
+                s.rate = s.rate ? s.rate : 0;
+                s.discount = s.discount ? s.discount : 0;
+                s.cgst = s.cgst ? s.cgst : 0;
+                s.sgst = s.sgst ? s.sgst : 0;
+                s.changed = false;
+                s.igst = s.igst ? s.igst : 0;
+                s.taxCode = s.taxCode ? s.taxCode : '';
+                s.hsnsac = s.hsnsac ? s.hsnsac : '';
+                s.availableQTY = s.availableQTY ? s.availableQTY : '';
+                s.amount = s.amount ? s.amount : 0;
+                s.total = s.total ? s.total : 0;
+                s.supplierCode = s.supplierCode ? s.supplierCode : '';
+              })
+              this.tableData = res.response['SaleOrderDetails'];
+              this.getsaleOrdernoList();
+            }
+          }
+        });
+  }
 
   getPurchaseorderDetails(val) {
     const cashDetUrl = String.Join('/', this.apiConfigService.getpurchaseorderDetail, val);

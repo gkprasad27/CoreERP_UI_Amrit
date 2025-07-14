@@ -303,7 +303,8 @@ export class ApiConfigService {
    getpurchaseorderMaster = `${environment.baseUrl}Transactions/GetPurchaseOrder`;
    returnpurchaseorder = `${environment.baseUrl}Transactions/ReturnPurchaseOrder`;
    getPurchaseOrderApproveList = `${environment.baseUrl}Transactions/GetPurchaseOrderApproveList`;
-   
+   getSaleOrderDetailPOQ = `${environment.baseUrl}Transactions/GetSaleOrderDetailPOQ`;
+
    /*******************************Goods Receipt ****************************************************** */
    addgoodsreceipt = `${environment.baseUrl}Transactions/AddGoodsReceipt`;
    getgoodsreceiptDetail = `${environment.baseUrl}Transactions/GetGoodsReceiptDetail`;

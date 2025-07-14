@@ -47,6 +47,9 @@ export class AuthGuard implements CanActivate, Resolve<any> {
             if (this.authService.isLoggedIn()) {
               if (state.url.includes('Edit') || state.url.includes('Add') || state.url.includes('New')) {
                 if (!this.addOrEditService.editData && next.url.length > 1) {
+                  if(next.url[2].parameters.value.includes('purchaseOrderNo_')) {
+                    return true;
+                  }
                   const route = String.Join('/', 'dashboard', next.url[0].path, next.url[1].path);
                   this.router.navigate([route]);
                 }

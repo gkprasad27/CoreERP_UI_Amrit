@@ -20,7 +20,7 @@ import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-comp-list',
-  imports: [ CommonModule, TableComponent ],
+  imports: [CommonModule, TableComponent],
   templateUrl: './comp-list.component.html',
   styleUrls: ['./comp-list.component.scss']
 })
@@ -73,10 +73,10 @@ export class CompListComponent implements OnInit, OnDestroy {
 
   getTableData() {
     let getUrl = ''
-    if(this.tableUrl.url == "MaterialMaster/GetMaterialMasterList" || this.tableUrl.url == "BusienessPartnerAccount/GetBusienessPartnerAccountList" 
-    || this.tableUrl.url == "Employee/GetEmployeeList" || this.tableUrl.url == "Common/GetPOQList" || this.tableUrl.url == "Common/GetRejectionList") {
+    if (this.tableUrl.url == "MaterialMaster/GetMaterialMasterList" || this.tableUrl.url == "BusienessPartnerAccount/GetBusienessPartnerAccountList"
+      || this.tableUrl.url == "Employee/GetEmployeeList" || this.tableUrl.url == "Common/GetPOQList" || this.tableUrl.url == "Common/GetRejectionList") {
       let obj = JSON.parse(localStorage.getItem("user"));
-      getUrl = String.Join('', environment.baseUrl, this.tableUrl.url,  `/${obj.companyCode}`);
+      getUrl = String.Join('', environment.baseUrl, this.tableUrl.url, `/${obj.companyCode}`);
     } else {
       getUrl = String.Join('', environment.baseUrl, this.tableUrl.url);
     }
@@ -86,11 +86,25 @@ export class CompListComponent implements OnInit, OnDestroy {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.tableData = res.response[this.tableUrl.listName];
+              const data = res.response[this.tableUrl.listName];
+              if (this.tableUrl.url == "Common/GetPOQList") {
+                data.forEach(element => {
+                  element.link = 'Po Created';
+                });
+              }
+              this.tableData = data;
             }
           }
           this.spinner.hide();
         });
+  }
+
+  onLinkEmitEvent(value) {
+    if (this.tableUrl.url == "Common/GetPOQList") {
+      if (value.action === 'link') {
+        this.router.navigate(['dashboard/transaction', 'purchaseorder', 'Edit', { value: 'purchaseOrderNo_' + value.item.saleOrderNo }]);
+      }
+    }
   }
 
   ngOnInit() {

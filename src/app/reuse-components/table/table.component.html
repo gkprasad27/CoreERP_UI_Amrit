@@ -80,7 +80,7 @@
           </th>
           <td mat-cell *matCellDef="let element;" (click)="setIndex(element, dataSource.filteredData.indexOf(element))">
             <span class="d-flex"
-              *ngIf="(column == 'action' || column == 'documentURL' || column == 'invoiceURL' || column == 'checkbox' || column == 'button' ||  column == 'button1') ;else other_content">
+              *ngIf="(column == 'action' || column == 'documentURL' || column == 'invoiceURL' || column == 'checkbox' || column == 'button' || column == 'link' ||  column == 'button1') ;else other_content">
                 <ng-container *ngIf="column == 'action'">
                   <ng-container *ngFor="let action of element[column]">
                   <div class="mw-23">
@@ -94,7 +94,7 @@
                   </div>
                   </ng-container>
                 </ng-container>
-              <ng-container *ngIf="column == 'documentURL' || column == 'invoiceURL'">
+              <ng-container *ngIf="column == 'documentURL' || column == 'invoiceURL' || column == 'link'">
                 <span class="link--val" (click)="onLink(column, element)"> {{ element[column] }} </span>
               </ng-container>
               <ng-container *ngIf="column == 'checkbox' && !element.hideCheckbox">
