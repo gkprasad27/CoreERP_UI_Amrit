@@ -371,8 +371,8 @@ export class GoodsissueComponent implements OnInit {
                 const qty = this.mmasterList.find(resp => encodeURIComponent(resp.id) == encodeURIComponent(s.materialCode));
                 let obj = {
                   action: [
-  { id: 'Edit', type: 'edit' }
-],
+                    { id: 'Edit', type: 'edit' }
+                  ],
                   id: s.id ? s.id : 0,
                   index: index + 1,
                   qty: s.qty ? s.qty : 0,
@@ -383,6 +383,8 @@ export class GoodsissueComponent implements OnInit {
                   bomNumber:s.bomNumber?s.bomNumber:s.bomKey,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   allocatedqty1: s.allocatedQTY ? s.allocatedQTY : 0,
+                  productionPlanDate: s.productionPlanDate ? s.productionPlanDate : null,
+                  productionTargetDate: s.productionTargetDate ? s.productionTargetDate : null,
                   requiredqty: s.qty - s.allocatedQTY
                 }
                 arr.push(obj);
