@@ -564,6 +564,7 @@ export class ApiConfigService {
    getSourceSupplyDetailByMaterial = `${environment.baseUrl}Transactions/GetSourceSupplyDetailByMaterial`;
 
    // swap order
-   getSwapOrder = `${environment.baseUrl}Transactions/GetSwapOrder`;
+   swapOrder = `${environment.baseUrl}Transactions/swapOrder`;
+   getSwapOrderList = `${environment.baseUrl}Transactions/getSwapOrderList`;
 
 }

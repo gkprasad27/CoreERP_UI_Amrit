@@ -248,7 +248,7 @@ export class TransListService {
       // create a case for swap order
       case 'swaporder': {
         this.dynamicComp.component = SwapOrderComponent;
-        // this.dynamicComp.tableUrl = this.apiConfigService.getSwapOrderList;
+        this.dynamicComp.tableUrl = this.apiConfigService.getSwapOrderList;
         this.dynamicComp.list = 'swapOrderList';
         this.dynamicComp.editKey = 'swapOrderNo';
         return this.dynamicComp;

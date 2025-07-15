@@ -711,8 +711,8 @@ export class GoodsissueComponent implements OnInit {
                 const allocatedqty = goodsissueastersDetail.find(resp => resp.materialCode == s.materialCode);
                 const bomNumber =s.bomKey;
                 s.action = [
-  { id: 'Edit', type: 'edit' }
-];
+                  { id: 'Edit', type: 'edit' }
+                ];
                 s.id = 0;
                 s.index = index + 1;
                 s.qty = s.qty ? s.qty : 0;

@@ -85,7 +85,7 @@ export class SwapOrderComponent {
             }
             this.commonService.deletePopup(obj, (flag: any) => {
                 if (flag) {
-                    this.apiService.apiPostRequest(this.apiConfigService.getSwapOrder, this.formData.value).subscribe(response => {
+                    this.apiService.apiPostRequest(this.apiConfigService.swapOrder, this.formData.value).subscribe(response => {
                         this.spinner.hide();
                         if (response.status === StatusCodes.pass) {
                             this.alertService.openSnackBar('Swap successful', Static.Close, SnackBar.success);
