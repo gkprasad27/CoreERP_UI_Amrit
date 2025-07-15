@@ -26,6 +26,7 @@ import { JobworkmaterialreceivingComponent } from './jobworkmaterialreceiving/jo
 import { JobworkmaterialissueComponent } from './jobworkmaterialissue/jobworkmaterialissue.component';
 import { MaterialissueComponent} from './materialissue/materialissue.component';
 import { StandardRateComponent } from '../comp-list/standardrateoutput/standardrateoutput.component';
+import { SwapOrderComponent } from './swap-order/swap-order.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -242,6 +243,14 @@ export class TransListService {
         this.dynamicComp.tableUrl = this.apiConfigService.getInvoiceList;
         this.dynamicComp.list = 'InvoiceList';
         this.dynamicComp.editKey = 'invoiceNo';
+        return this.dynamicComp;
+      }
+      // create a case for swap order
+      case 'swaporder': {
+        this.dynamicComp.component = SwapOrderComponent;
+        // this.dynamicComp.tableUrl = this.apiConfigService.getSwapOrderList;
+        this.dynamicComp.list = 'swapOrderList';
+        this.dynamicComp.editKey = 'swapOrderNo';
         return this.dynamicComp;
       }
       default:

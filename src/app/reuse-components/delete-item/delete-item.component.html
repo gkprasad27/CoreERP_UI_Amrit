@@ -1,5 +1,7 @@
 <div class="container py-2">
-  <span>Are you sure you want to delete the {{ deleteData.item[deleteData.primary] }} ? </span>
+  <span>
+    {{ deleteData?.description ? deleteData.description : 'Are you sure you want to delete the ' + (deleteData?.item?.[deleteData?.primary] || '') + ' ?' }}
+  </span>
 </div>
 
 <mat-divider></mat-divider>

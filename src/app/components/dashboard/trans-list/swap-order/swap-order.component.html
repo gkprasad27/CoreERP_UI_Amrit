@@ -1,0 +1,53 @@
+<mat-card class="test">
+
+    <mat-card-content id="mat">
+
+        <form [formGroup]="formData" class="card p-2 mb-3" autocomplete="off">
+
+            <h6 id="background">
+                Source Of Supply Master
+            </h6>
+
+            <div id="form" class="d-flex p-1 mat-form-field-height">
+
+                <mat-form-field class="flex-1">
+                    <mat-label>{{ 'swaporder.fromSaleOrder' | translate }}</mat-label>
+                    <mat-select formControlName="fromSaleOrder">
+                        <mat-option *ngFor="let order of saleOrders" [value]="order.saleOrderNo">
+                            {{ order.saleOrderNo }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="flex-1">
+                    <mat-label>{{ 'swaporder.toSaleOrder' | translate }}</mat-label>
+                    <mat-select formControlName="toSaleOrder">
+                        <mat-option *ngFor="let order of saleOrders" [value]="order.saleOrderNo">
+                            {{ order.saleOrderNo }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+        </form>
+
+    </mat-card-content>
+
+    <mat-card-content class="d-flex justify-content-end py-1">
+
+        <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="swap()"><i
+                class="fa-solid fa-floppy-disk"></i>
+            {{ 'swaporder.swap' | translate }}
+        </button>
+        <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+            {{ 'COMMON.BACK' | translate }}
+        </button>
+        <button id="reset" mat-raised-button class="button-color-red text-white mx-3"
+            (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
+            {{ 'COMMON.RESET' | translate }}
+        </button>
+
+    </mat-card-content>
+
+</mat-card>
