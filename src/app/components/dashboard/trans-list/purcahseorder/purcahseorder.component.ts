@@ -736,7 +736,6 @@ export class PurchaseOrderComponent implements OnInit {
   // }
 
   getSaleOrderDetailPOQ(val) {
-    debugger
     const cashDetUrl = String.Join('/', this.apiConfigService.getSaleOrderDetailPOQ, val.split('_')[1]);
     this.apiService.apiGetRequest(cashDetUrl)
       .subscribe(
@@ -747,7 +746,7 @@ export class PurchaseOrderComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['SaleOrderMasters']);
               this.formData.patchValue({
-                saleOrderType: res.response['SaleOrderMasters'].saleOrderType
+                saleOrderType: res.response['SaleOrderMasters'].saleOrderNo.includes('MSO-') ? 'Master Saleorder' : 'Sale Order',
               })
               res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
                 s.action = [

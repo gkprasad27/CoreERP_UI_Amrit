@@ -328,7 +328,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
 
   downLoadFile(event: any, flag = false) {
-    debugger
     const url = String.Join('/', this.apiConfigService.getFile, flag ? event.item[event.action] : event.name);
     this.apiService.apiGetRequest(url)
       .subscribe(
