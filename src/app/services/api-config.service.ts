@@ -565,6 +565,6 @@ export class ApiConfigService {
 
    // swap order
    swapOrder = `${environment.baseUrl}Transactions/swapOrder`;
-   getSwapOrderList = `${environment.baseUrl}Transactions/getSwapOrderList`;
+   getSwapOrderList = `${environment.baseUrl}Transactions/GetSwapOrderList`;
 
 }
