@@ -744,8 +744,9 @@ export class PurchaseOrderComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.formData.patchValue(res.response['SaleOrderMasters']);
               this.formData.patchValue({
+                profitCenter: res.response['SaleOrderMasters'].profitCenter,
+                saleOrderNo: res.response['SaleOrderMasters'].saleOrderNo,
                 saleOrderType: res.response['SaleOrderMasters'].saleOrderNo.includes('MSO-') ? 'Master Saleorder' : 'Sale Order',
               })
               res.response['SaleOrderDetails'].forEach((s: any, index: number) => {

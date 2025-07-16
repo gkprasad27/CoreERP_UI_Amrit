@@ -2839,5 +2839,11 @@
     "narration": "Narration",
     "deliveryDays": "Delivery Days",
     "paymentDueDays": "Payment Due Days"
+  },
+  "swaporder": {
+    "title": "Swap Order",
+    "fromSaleOrder": "From Sale Order",
+    "toSaleOrder": "To Sale Order",
+    "swap": "Swap"
   }
 }
