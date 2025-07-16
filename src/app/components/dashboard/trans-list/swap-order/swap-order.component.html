@@ -4,29 +4,20 @@
 
         <form [formGroup]="formData" class="card p-2 mb-3" autocomplete="off">
 
-            <h6 id="background">
-                Source Of Supply Master
-            </h6>
+            <div id="form" class="row p-1 mat-form-field-height">
 
-            <div id="form" class="d-flex p-1 mat-form-field-height">
+                <div class="mat-mdc-form-field typeahead col-4">
+                    <input placeholder="{{ 'swaporder.fromSaleOrder' | translate }}" formControlName="fromSaleOrder"
+                        [typeahead]="saleOrders" typeaheadOptionField='saleOrderNo' appFocusOnEnter tabIndex="1"
+                        class="form-control typeahead w-100">
+                </div>
 
-                <mat-form-field class="flex-1">
-                    <mat-label>{{ 'swaporder.fromSaleOrder' | translate }}</mat-label>
-                    <mat-select formControlName="fromSaleOrder">
-                        <mat-option *ngFor="let order of saleOrders" [value]="order.saleOrderNo">
-                            {{ order.saleOrderNo }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
 
-                <mat-form-field class="flex-1">
-                    <mat-label>{{ 'swaporder.toSaleOrder' | translate }}</mat-label>
-                    <mat-select formControlName="toSaleOrder">
-                        <mat-option *ngFor="let order of saleOrders" [value]="order.saleOrderNo">
-                            {{ order.saleOrderNo }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <div class="mat-mdc-form-field typeahead col-4">
+                    <input placeholder="{{ 'swaporder.toSaleOrder' | translate }}" formControlName="toSaleOrder"
+                        [typeahead]="saleOrders" typeaheadOptionField='saleOrderNo' appFocusOnEnter tabIndex="2"
+                        class="form-control typeahead w-100">
+                </div>
 
             </div>
 
@@ -43,8 +34,8 @@
         <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
             {{ 'COMMON.BACK' | translate }}
         </button>
-        <button id="reset" mat-raised-button class="button-color-red text-white mx-3"
-            (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
+        <button id="reset" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();"><i
+                class="fa-solid fa-arrow-rotate-right"></i>
             {{ 'COMMON.RESET' | translate }}
         </button>
 

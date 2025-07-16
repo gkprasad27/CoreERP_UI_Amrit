@@ -9,15 +9,15 @@ import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { AlertService } from '../../../../services/alert.service';
 import { Static } from '../../../../enums/common/static';
 import { CommonModule } from '@angular/common';
-import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @Component({
     selector: 'app-swap-order',
-    imports: [CommonModule, MatSelectModule, MatCardModule, ReactiveFormsModule, TranslateModule, MatButtonModule],
+    imports: [CommonModule, TypeaheadModule, MatCardModule, ReactiveFormsModule, TranslateModule, MatButtonModule],
     templateUrl: './swap-order.component.html',
     styleUrls: ['./swap-order.component.scss']
 })

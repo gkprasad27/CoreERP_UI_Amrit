@@ -348,3 +348,19 @@ mat-tab-header {
   typeahead-container {
     height: 50% !important; 
   }
+
+  .mat-mdc-form-field.typeahead {
+    margin-top: 25px;
+    input {
+       border: none;
+       border-bottom: 1px solid;
+       border-radius: 0px;
+       padding: 0px;
+       padding-bottom: 12px;
+       width: 250px;
+    }
+    input:focus {
+       box-shadow: none !important;
+       background-color: none !important;
+    }
+  }
