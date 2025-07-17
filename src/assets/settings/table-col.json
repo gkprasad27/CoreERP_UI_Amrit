@@ -2030,7 +2030,7 @@
     "timeStamp": "Date"
   },
   "Leaverequest": {
-    "title": "LeaveRequest",
+    "title": "Leave Request",
     "empCode": "EmpCode",
     "empName": "EmpName",
     "applDate": "Date",

@@ -125,6 +125,7 @@ export class CompListComponent implements OnInit, OnDestroy {
         value.tableData = this.tableData;
         const dialogRef = this.dialog.open(this.compListService.getDynComponents(this.tableUrl.formName), {
           width: '80%',
+          minHeight: '400px',
           data: value,
           panelClass: 'custom-dialog-container',
           disableClose: true

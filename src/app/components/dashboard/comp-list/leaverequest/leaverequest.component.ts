@@ -28,6 +28,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatButtonModule } from '@angular/material/button';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 interface Session {
   value: string;
@@ -39,13 +40,23 @@ interface Session {
 //}
 @Component({
   selector: 'app-leaverequest',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './leaverequest.component.html',
   styleUrls: ['./leaverequest.component.scss']
 })
 
 export class LeaveRequestComponent implements OnInit {
 
+  dropdownSettings: IDropdownSettings = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'text',
+      enableCheckAll: true,
+      // selectAllText: 'Select All',
+      // unSelectAllText: 'UnSelect All',
+      // itemsShowLimit: 3,
+      allowSearchFilter: true
+  };
 
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -131,14 +142,8 @@ export class LeaveRequestComponent implements OnInit {
   }
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.getItem('user'));
     this.getTableData();
-    this.modelFormData.patchValue
-      ({
-        empCode: user.userName
-      });
-    this.getProductByProductCode(user.userName);
-    this.onSearchChange(null);
+    this.getEmployeeList();
   }
 
 
@@ -173,8 +178,7 @@ export class LeaveRequestComponent implements OnInit {
     if (!this.commonService.checkNullOrUndefined(date1)) {
       const getProductByProductCodeUrl = String.Join('/', this.apiConfigService.getnoofdayscount);
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: date1, date2, session1, session2 }).subscribe(
-        response => {
-          const res = response.body;
+        res => {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               if (!this.commonService.checkNullOrUndefined(res.response['days'])) {
@@ -216,8 +220,7 @@ export class LeaveRequestComponent implements OnInit {
     if (!this.commonService.checkNullOrUndefined(date1)) {
       const getProductByProductCodeUrl = String.Join('/', this.apiConfigService.getnoofdayscount);
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: date1, date2, session1, session2 }).subscribe(
-        response => {
-          const res = response.body;
+        res => {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               if (!this.commonService.checkNullOrUndefined(res.response['days'])) {
@@ -238,13 +241,11 @@ export class LeaveRequestComponent implements OnInit {
 
 
   getTableDataonempcodechangevent() {
-
     this.spinner.show();
-    const getCompanyUrl = String.Join('/', this.apiConfigService.getLeaveTypeatList, this.modelFormData.get('empCode').value);
+    const getCompanyUrl = String.Join('/', this.apiConfigService.getLeaveTypeatList, this.modelFormData.value.empCode[0].id);
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
-        response => {
-          const res = response.body;
+        res => {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.LeaveTypeatList = res.response['leavetypesList'];
@@ -263,8 +264,7 @@ export class LeaveRequestComponent implements OnInit {
     const getCompanyUrl = String.Join('/', this.apiConfigService.getLeaveTypeatList, username);
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
-        response => {
-          const res = response.body;
+        res => {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.LeaveTypeatList = res.response['leavetypesList'];
@@ -277,50 +277,23 @@ export class LeaveRequestComponent implements OnInit {
   }
 
 
-  getProductByProductCode(value) {
-    if (!this.commonService.checkNullOrUndefined(value) && value != '') {
-      const getProductByProductCodeUrl = String.Join('/', this.apiConfigService.getEmpCode);
-      this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
-        response => {
-          const res = response.body;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              if (!this.commonService.checkNullOrUndefined(res.response['Empcodes'])) {
-                this.getProductByProductCodeArray = res.response['Empcodes'];
-                this.spinner.hide();
-              }
-            }
-          }
-
-        });
-    } else {
-      this.getProductByProductCodeArray = [];
-    }
-  }
-
-  onSearchChange(code) {
-    let genarateVoucherNoUrl;
-    if (!this.commonService.checkNullOrUndefined(code)) {
-      genarateVoucherNoUrl = String.Join('/', this.apiConfigService.getEmpName, code.value);
-    } else {
-      genarateVoucherNoUrl = String.Join('/', this.apiConfigService.getEmpName, this.modelFormData.get('empCode').value);
-    }
-    this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
-      response => {
-        const res = response.body;
+  getEmployeeList() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const getEmployeeListUrl = String.Join('/', this.apiConfigService.getEmployeeList, user.companyCode);
+    this.apiService.apiGetRequest(getEmployeeListUrl).subscribe(
+      res => {
+        this.spinner.hide();
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
-            if (!this.commonService.checkNullOrUndefined(res.response['empname'])) {
-              this.EmpName = res.response['empname']
-              this.modelFormData.patchValue
-                ({
-                  empName: res.response['empname']
-                });
-              this.spinner.hide();
+            if (!this.commonService.checkNullOrUndefined(res.response['emplist'])) {
+              this.getProductByProductCodeArray = res.response['emplist'];
+              const empCode = this.getProductByProductCodeArray.find(x => x.id === this.formData.item?.empCode);
+              this.modelFormData.patchValue({
+                empCode: empCode ? [{ id: empCode.id, text: empCode.text }] : null
+              });
             }
           }
         }
-        this.getTableDataonempcodechangevent();
       });
   }
 

@@ -24,11 +24,12 @@ import { CommonService } from '../../../../services/common.service';
 import { StatusCodes } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @Component({
   selector: 'app-leaveopeningbalance',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './leaveopeningbalance.component.html',
   styleUrls: ['./leaveopeningbalance.component.scss']
 })
@@ -42,7 +43,17 @@ export class LeaveopeningbalanceComponent implements OnInit {
   getProductByProductCodeArray = [];
   getProductByProductNameArray: any[];
 
-
+  dropdownSettings: IDropdownSettings = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'text',
+      enableCheckAll: true,
+      // selectAllText: 'Select All',
+      // unSelectAllText: 'UnSelect All',
+      // itemsShowLimit: 3,
+      allowSearchFilter: true
+  };
+  
   constructor(
     private apiService: ApiService,
     private addOrEditService: AddOrEditService,
@@ -54,12 +65,8 @@ export class LeaveopeningbalanceComponent implements OnInit {
     private apiConfigService: ApiConfigService,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
-
-
-    const user = JSON.parse(localStorage.getItem('user'));
-    let username = user.userName;
     this.modelFormData = this.formBuilder.group({
-      empCode: [username],
+      empCode: [null, [Validators.required]],
       // '', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(0), Validators.maxLength(4)]],
       year: [(new Date()).getFullYear()],
       leaveCode: ['', [Validators.required, Validators.minLength(2)]],
@@ -87,52 +94,23 @@ export class LeaveopeningbalanceComponent implements OnInit {
   ngOnInit() {
     this.getTableData();
     this.getCompanyData();
-    this.modelFormData.patchValue
-      ({
-        //empCode: username
-      });
-    //this.getProductByProductCode(username);
+    this.getEmployeeList();
   }
 
-  getProductByProductCode(value) {
-    if (!this.commonService.checkNullOrUndefined(value) && value != '') {
-      const getProductByProductCodeUrl = String.Join('/', this.apiConfigService.getEmpCode);
-      this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: '4' }).subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response.body;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              if (!this.commonService.checkNullOrUndefined(res.response['Empcodes'])) {
-                this.getProductByProductCodeArray = res.response['Empcodes'];
-              }
-            }
-          }
-        });
-    } else {
-      this.getProductByProductCodeArray = [];
-    }
-  }
-
-  onSearchChange(code) {
-    let genarateVoucherNoUrl;
-    if (!this.commonService.checkNullOrUndefined(code)) {
-      genarateVoucherNoUrl = String.Join('/', this.apiConfigService.getEmpName, code.value);
-    } else {
-      genarateVoucherNoUrl = String.Join('/', this.apiConfigService.getEmpName, this.modelFormData.get('empCode').value);
-    }
-    this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
-      response => {
-        const res = response.body;
+  getEmployeeList() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getEmployeeListUrl = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
+    this.apiService.apiGetRequest(getEmployeeListUrl).subscribe(
+      res => {
+        this.spinner.hide();
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
-            if (!this.commonService.checkNullOrUndefined(res.response['empname'])) {
-              //this.EmpName = res.response['empname']
-              this.modelFormData.patchValue
-                ({
-                  empName: res.response['empname']
-                });
-              this.spinner.hide();
+            if (!this.commonService.checkNullOrUndefined(res.response['emplist'])) {
+              this.getProductByProductCodeArray = res.response['emplist'];
+              const empCode = this.getProductByProductCodeArray.find(x => x.id === this.formData.item?.empCode);
+              this.modelFormData.patchValue({
+                empCode: empCode ? [{ id: empCode.id, text: empCode.text }] : null
+              });
             }
           }
         }
@@ -181,6 +159,7 @@ export class LeaveopeningbalanceComponent implements OnInit {
     }
     this.modelFormData.controls['empCode'].enable();
     this.formData.item = this.modelFormData.value;
+    this.formData.item.empCode = this.formData.item.empCode[0].id;
     this.dialogRef.close(this.formData);
     this.addOrEditService[this.formData.action](this.formData, (res) => {
       this.dialogRef.close(this.formData);

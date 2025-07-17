@@ -2520,7 +2520,7 @@
     "compCode": "CompCode"
   },
   "Leaverequest": {
-    "title": "LeaveRequest",
+    "title": "Leave Request",
     "empCode": "EmpCode",
     "empName": "EmpName",
     "sno": "Sno",
