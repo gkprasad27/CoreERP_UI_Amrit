@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ApiConfigService } from '../../../services/api-config.service';
@@ -19,7 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-rolesprevilages',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, 
+  imports: [ CommonModule, FormsModule, ReactiveFormsModule, TranslatePipe, TranslateModule, 
     MatPaginator, MatTableModule, MatCardModule, MatSelectModule, MatCheckboxModule ],
   templateUrl: './rolesprevilages.component.html',
   styleUrls: ['./rolesprevilages.component.scss']
