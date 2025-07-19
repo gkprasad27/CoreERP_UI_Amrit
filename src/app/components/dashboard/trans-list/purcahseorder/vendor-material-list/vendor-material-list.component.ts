@@ -50,7 +50,10 @@ export class VendorMaterialListComponent {
   getVendorMaterialList() {
     this.tableData = [];
     // You may need to update the API endpoint and params as per your backend
-    const url = String.Join('/', this.apiConfigService.getSourceSupplyDetailByMaterial, this.data.item.materialCode);
+    // const url = String.Join('/', this.apiConfigService.getSourceSupplyDetailByMaterial, this.data.item.materialCode);
+    const encodedMaterialCode = encodeURIComponent(this.data.item.materialCode);
+    const url = [this.apiConfigService.getSourceSupplyDetailByMaterial, encodedMaterialCode].join('/');
+
     this.apiService.apiGetRequest(url)
       .subscribe(
         response => {
