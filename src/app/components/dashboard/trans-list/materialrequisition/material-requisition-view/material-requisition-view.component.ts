@@ -41,6 +41,8 @@ export class MaterialRequisitionViewComponent {
 
   tableData = [];
 
+  materialPrintData = [];
+
   constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
@@ -114,6 +116,17 @@ export class MaterialRequisitionViewComponent {
     } else {
       this.formData.patchValue(value.item);
     }
+  }
+
+  print() {
+    this.materialPrintData = this.tableData;
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('materialPrintData').innerHTML;
+      w.document.body.innerHTML = html;
+      this.materialPrintData = [];
+      w.print();
+    }, 1000);
   }
 
   resetForm() {

@@ -1,3 +1,67 @@
+<div style="margin: 10px;" *ngIf="materialPrintData && materialPrintData.length" id="materialPrintData">
+    <div style="display: flex;">
+        <img src="/assets/images/header.jpg" style="height: 100px; width: 65%;">
+        <span style="font-size: 25px;font-weight: 700;font-family: sans-serif;"> Production Scheduling </span>
+    </div>
+
+    <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;">
+        <table
+            style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+            <thead>
+                <tr>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        Sale Order Number </th>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        Material Code </th>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        Material Name </th>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        Production Tag </th>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        Type of Work </th>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        Work Status </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+                    *ngFor="let row of materialPrintData; let i = index">
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.saleOrderNumber }} </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.materialCode }}
+                    </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.materialName }}
+                    </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.productionTag }}
+                    </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.typeofWork }}
+                    </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.workStatus }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
 <div class="position-relative ">
 
     <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
@@ -15,21 +79,21 @@
                 <mat-form-field>
                     <mat-label>{{'materialrequisition.allocatedPerson' | translate }}</mat-label>
                     <mat-select formControlName="allocatedPerson" appFocusOnEnter tabIndex="1">
-                      <mat-option>None</mat-option>
-                      <mat-option *ngFor="let emp of data.employeesList" [value]="emp.text">
-                        {{emp.id}}- {{emp.text}}
-                      </mat-option>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let emp of data.employeesList" [value]="emp.text">
+                            {{emp.id}}- {{emp.text}}
+                        </mat-option>
                     </mat-select>
-                  </mat-form-field>
-                  <mat-form-field>
+                </mat-form-field>
+                <mat-form-field>
                     <mat-label>{{'materialrequisition.mechine' | translate }}</mat-label>
                     <mat-select formControlName="mechine" appFocusOnEnter tabIndex="2">
-                      <mat-option>None</mat-option>
-                      <mat-option *ngFor="let emp of data.mechenaryList" [value]="emp.description">
-                        {{emp.description}}
-                      </mat-option>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let emp of data.mechenaryList" [value]="emp.description">
+                            {{emp.description}}
+                        </mat-option>
                     </mat-select>
-                  </mat-form-field>
+                </mat-form-field>
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'materialrequisition.startDate'"></mat-label>
                     <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="startDate"
@@ -47,34 +111,33 @@
                 <mat-form-field>
                     <mat-label>{{'materialrequisition.workStatus' | translate }}</mat-label>
                     <mat-select formControlName="workStatus" appFocusOnEnter tabIndex="3">
-                      <mat-option>None</mat-option>
-                      <mat-option value="Assigned"> Assigned </mat-option>
-                      <mat-option value="In Progress"> In Progress </mat-option>
-                      <mat-option value="Completed"> Completed </mat-option>
-                      <mat-option value="Rejected"> Rejected </mat-option>
-                      <mat-option value="Assigned to QC"> Assigned to QC </mat-option>
+                        <mat-option>None</mat-option>
+                        <mat-option value="Assigned"> Assigned </mat-option>
+                        <mat-option value="In Progress"> In Progress </mat-option>
+                        <mat-option value="Completed"> Completed </mat-option>
+                        <mat-option value="Rejected"> Rejected </mat-option>
+                        <mat-option value="Assigned to QC"> Assigned to QC </mat-option>
                     </mat-select>
-                  </mat-form-field>
-                  <mat-form-field class="form-element">
+                </mat-form-field>
+                <mat-form-field class="form-element">
                     <mat-label [translate]="'materialrequisition.productionPlanDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"
-                        appFocusOnEnter tabIndex="11">
+                    <input matInput [matDatepicker]="picker3" [nonEditable]="picker3"
+                        formControlName="productionPlanDate" appFocusOnEnter tabIndex="11">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field class="form-element">
-                  <mat-label [translate]="'materialrequisition.productionTargetDate'"></mat-label>
-                  <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
-                      appFocusOnEnter tabIndex="12">
-                  <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-                  <mat-datepicker #picker4></mat-datepicker>
+                    <mat-label [translate]="'materialrequisition.productionTargetDate'"></mat-label>
+                    <input matInput [matDatepicker]="picker4" [nonEditable]="picker4"
+                        formControlName="productionTargetDate" appFocusOnEnter tabIndex="12">
+                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker #picker4></mat-datepicker>
                 </mat-form-field>
             </div>
 
             <div class="mb-3 d-flex justify-content-end">
 
-                <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white"
-                    (click)="saveForm()">
+                <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
                     {{ 'COMMON.ADD' | translate }}
                 </button>
                 <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
@@ -87,7 +150,7 @@
 
         <div>
             <app-table #tableRef class="table-css" [routerParam]="'materialrequisition'" [tableData]="tableData"
-            (editOrDeleteEvent)="editOrDeleteEvent($event)"  [showButtons]="false">
+                (editOrDeleteEvent)="editOrDeleteEvent($event)" [showButtons]="false">
             </app-table>
         </div>
 
@@ -95,6 +158,10 @@
     </mat-card-content>
 
     <div class="form-element p-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1"
+            (click)="print()">
+            {{ 'COMMON.PRINT' | translate }}
+        </button>
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="back()">
             {{ 'COMMON.CANCEL' | translate }}
         </button>
