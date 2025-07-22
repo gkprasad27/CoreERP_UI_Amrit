@@ -250,7 +250,7 @@
 
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.materialName ? row.grossAmount + row.cgst + row.sgst + row.igst : '' }} </td>
+                        {{ row.materialName ? (row.grossAmount + row.cgst + row.sgst + row.igst).toFixed(2) : '' }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
@@ -279,28 +279,28 @@
                     </td>
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
-                        {{ invoicePrintData.totalObj.grossAmount }} </td>
+                        {{ (invoicePrintData.totalObj.grossAmount).toFixed(2) }} </td>
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
-                        {{ invoicePrintData.totalObj.cgst }} </td>
+                        {{ (invoicePrintData.totalObj.cgst).toFixed(2) }} </td>
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
-                        {{ invoicePrintData.totalObj.sgst }} </td>
+                        {{ (invoicePrintData.totalObj.sgst).toFixed(2) }} </td>
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
-                        {{ invoicePrintData.totalObj.igst }} </td>
+                        {{ (invoicePrintData.totalObj.igst).toFixed(2) }} </td>
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;text-align: end;">
-                        {{ invoicePrintData.totalObj.total }} </td>
+                        {{ (invoicePrintData.totalObj.total).toFixed(2) }} </td>
 
                 </tr>
             </tbody>

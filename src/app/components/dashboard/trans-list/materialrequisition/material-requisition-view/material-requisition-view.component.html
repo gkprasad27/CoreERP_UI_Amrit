@@ -26,6 +26,21 @@
                         Type of Work </th>
                     <th
                         style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        Allocated Person </th>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        Start Date </th>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        End Date </th>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        Production Plan Date </th>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+                        Production Target Date </th>
+                    <th
+                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
                         Work Status </th>
                 </tr>
             </thead>
@@ -50,6 +65,26 @@
                     <td
                         style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.typeofWork }}
+                    </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.allocatedPerson }}
+                    </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.startDate }}
+                    </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.endDate }}
+                    </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.productionPlanDate }}
+                    </td>
+                    <td
+                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                        {{ row.productionTargetDate }}
                     </td>
                     <td
                         style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
@@ -158,8 +193,7 @@
     </mat-card-content>
 
     <div class="form-element p-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mx-1"
-            (click)="print()">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="print()">
             {{ 'COMMON.PRINT' | translate }}
         </button>
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="back()">

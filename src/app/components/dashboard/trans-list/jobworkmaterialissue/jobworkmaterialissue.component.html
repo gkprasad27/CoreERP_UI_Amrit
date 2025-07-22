@@ -359,6 +359,13 @@
                     </ng-multiselect-dropdown>
                 </div>
 
+                <div id="sale" class="multiselect-dropdown-list" *ngIf="user?.companyCode !== '1000'">
+                    <ng-multiselect-dropdown 
+                        placeholder="{{ 'jobworkmaterialissue.saleOrderNo' | translate }}" formControlName="saleOrderNo"
+                        (onSelect)="getSaleOrderDetail()" [settings]="dropdownSettings3" [data]="qnoList" appFocusOnEnter tabIndex="4">
+                    </ng-multiselect-dropdown>
+                </div>
+
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'jobworkmaterialissue.vendorGSTN'"></mat-label>
                     <input matInput type="text" readonly formControlName="vendorGSTN" appFocusOnEnter tabIndex="5">

@@ -61,6 +61,18 @@ export class JobworkmaterialissueComponent {
     allowSearchFilter: true
   };
 
+  dropdownSettings3: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'saleOrderNo',
+    textField: 'saleOrderNo',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+  qnoList: any[] = [];
 
   // form control
   formData: FormGroup;
@@ -83,6 +95,8 @@ export class JobworkmaterialissueComponent {
   fileList: any;
   fileList1: any;
 
+  user: any;
+
   constructor(
     public commonService: CommonService,
     private formBuilder: FormBuilder,
@@ -103,11 +117,28 @@ export class JobworkmaterialissueComponent {
   ngOnInit() {
     this.formDataGroup();
     this.getCustomerList();
+    this.getSaleOrderList();
+  }
+
+  getSaleOrderList() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderApprovedList, obj.companyCode);
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.qnoList = res.response['BPList'];
+            }
+          }
+        });
   }
 
 
   formDataGroup() {
-    const user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(localStorage.getItem('user'));
 
     this.formData = this.formBuilder.group({
 
@@ -122,8 +153,8 @@ export class JobworkmaterialissueComponent {
       vendor: ['', Validators.required],
       vendorGSTN: [null],
 
-      addWho: user.userName,
-      editWho: user.userName,
+      addWho: this.user.userName,
+      editWho: this.user.userName,
 
       orderDate: [null],
       deliveryDate: [null],
@@ -138,6 +169,9 @@ export class JobworkmaterialissueComponent {
       totalAmount: [0],
       createdBy: [''],
       contactNo: [''],
+
+      saleOrderType: ['Sale Order'],
+      saleOrderNo: [null, this.user.companyCode !== '1000' ? Validators.required : null],
 
       documentURL: [''],
       invoiceURL: [''],
@@ -238,6 +272,67 @@ export class JobworkmaterialissueComponent {
       cgst: cgst,
       sgst: sgst,
     })
+  }
+
+  getSaleOrderDetail() {
+    this.tableComponent.defaultValues();
+    const url =  this.apiConfigService.getSaleOrderDetailPO;
+    const qsDetUrl = String.Join('/', url, this.formData.value.saleOrderNo[0].saleOrderNo);
+    this.apiService.apiGetRequest(qsDetUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              let obj = { data: {}, data1: [] }
+              if (this.formData.value.saleOrderType == 'Sale Order') {
+                obj.data = res.response['SaleOrderMasters'];
+                obj.data1 = res.response['SaleOrderDetails'];
+                if (obj.data1 && obj.data1.length) {
+                  let arr = [];
+                  obj.data1.forEach((d: any) => {
+                    if (arr.length) {
+                      const index = arr.findIndex((a: any) => a.materialCode == d.materialCode);
+                      if (index != -1) {
+                        arr[index].qty = arr[index].qty + d.qty
+                      } else {
+                        arr.push(d);
+                      }
+                    } else {
+                      arr.push(d);
+                    }
+                  })
+                  obj.data1 = arr;
+                }
+              }
+              obj['data1'].forEach((s: any, index: number) => {
+                s.action = [
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' }
+                ]
+                s.id = 0;
+                s.index = index + 1;
+                s.poQty = s.poQty ? s.poQty : 0;
+                s.soQty = s.qty ? s.qty : 0;
+                s.qty = 0;
+                s.rate = s.rate ? s.rate : 0;
+                s.discount = s.discount ? s.discount : 0;
+                s.cgst = s.cgst ? s.cgst : 0;
+                s.sgst = s.sgst ? s.sgst : 0;
+                s.changed = false;
+                s.igst = s.igst ? s.igst : 0;
+                s.taxCode = s.taxCode ? s.taxCode : '';
+                s.hsnsac = s.hsnsac ? s.hsnsac : '';
+                s.availableQTY = s.availableQTY ? s.availableQTY : '';
+                s.amount = s.amount ? s.amount : 0;
+                s.total = s.total ? s.total : 0;
+                s.supplierCode = s.supplierCode ? s.supplierCode : '';
+              })
+              this.tableData = obj['data1'];
+            }
+          }
+        });
   }
 
 

@@ -29,7 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-sales-invoice',
-  imports: [ CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './sales-invoice.component.html',
   styleUrls: ['./sales-invoice.component.scss'],
   providers: [
@@ -320,7 +320,7 @@ export class SalesInvoiceComponent implements OnInit {
                   }
                   if (!this.commonService.checkNullOrUndefined(obj)) {
                     const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
-                    const discountAmount = obj.discount ? obj.rate * (obj.discount/100) : 0;
+                    const discountAmount = obj.discount ? obj.rate * (obj.discount / 100) : 0;
                     const igst = (objT && objT.igst) ? ((obj.rate - discountAmount) * objT.igst) / 100 : 0;
                     const cgst = (objT && objT.cgst) ? ((obj.rate - discountAmount) * objT.cgst) / 100 : 0;
                     const sgst = (objT && objT.sgst) ? ((obj.rate - discountAmount) * objT.sgst) / 100 : 0;
@@ -346,8 +346,8 @@ export class SalesInvoiceComponent implements OnInit {
                     i.taxStructureId = obj.taxCode;
                     i.totalTax = (igst + sgst + cgst);
                     i.totalAmount = (obj.rate + obj.transportCharges) + (igst + sgst + cgst)
-                    i.checkbox = 
-                    i.index = index + 1;
+                    i.checkbox =
+                      i.index = index + 1;
                     // if(master.company=='2000')
                     // {
                     // this.tableData = data.filter((t: any) => t.materialCode == obj.materialCode);
