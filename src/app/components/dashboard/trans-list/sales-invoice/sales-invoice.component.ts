@@ -128,6 +128,7 @@ export class SalesInvoiceComponent implements OnInit {
       totalSGST: [0],
       totalAmount: [0],
       totalTax: [0],
+      totalDiscount: [0],
       grandTotal: [0],
       transportCharges: [0],
       id: [0]
@@ -319,12 +320,15 @@ export class SalesInvoiceComponent implements OnInit {
                   }
                   if (!this.commonService.checkNullOrUndefined(obj)) {
                     const objT = this.taxCodeList.find((tax: any) => tax.taxRateCode == obj.taxCode);
-                    const igst = (objT && objT.igst) ? (obj.rate * objT.igst) / 100 : 0;
-                    const cgst = (objT && objT.cgst) ? (obj.rate * objT.cgst) / 100 : 0;
-                    const sgst = (objT && objT.sgst) ? (obj.rate * objT.sgst) / 100 : 0;
+                    const discountAmount = obj.discount ? obj.rate * (obj.discount/100) : 0;
+                    const igst = (objT && objT.igst) ? ((obj.rate - discountAmount) * objT.igst) / 100 : 0;
+                    const cgst = (objT && objT.cgst) ? ((obj.rate - discountAmount) * objT.cgst) / 100 : 0;
+                    const sgst = (objT && objT.sgst) ? ((obj.rate - discountAmount) * objT.sgst) / 100 : 0;
                     i.igst = igst;
                     i.cgst = cgst;
                     i.sgst = sgst;
+                    i.discount = obj.discount || '';
+                    i.discountAmount = discountAmount ? Number(discountAmount.toFixed(2)) : 0;
                     i.igstCode = (objT && objT.igst) || 0;
                     i.cgstCode = (objT && objT.cgst) || 0;
                     i.sgstCode = (objT && objT.sgst) || 0;
@@ -384,6 +388,7 @@ export class SalesInvoiceComponent implements OnInit {
       totalSGST: 0,
       totalAmount: 0,
       totalTax: 0,
+      totalDiscount: 0,
       grandTotal: 0,
       transpTax: 0,
     });
@@ -393,6 +398,7 @@ export class SalesInvoiceComponent implements OnInit {
     let totalSGST = 0;
     let totalAmount = 0;
     let totalTax = 0;
+    let totalDiscount = 0;
 
     let selectedRow: any = null;
 
@@ -403,7 +409,7 @@ export class SalesInvoiceComponent implements OnInit {
         totalSGST += t.sgst;
         totalAmount += t.grossAmount;
         totalTax += t.igst + t.cgst + t.sgst;
-
+        totalDiscount += t.discountAmount;
         if (!selectedRow) {
           selectedRow = t; // Use first selected row to get transport GST codes
         }
@@ -446,7 +452,7 @@ export class SalesInvoiceComponent implements OnInit {
     totalAmount += transportCharges;
     totalTax += transpTax;
 
-    const grandTotal = totalAmount + totalTax;
+    const grandTotal = (totalAmount + totalTax) - totalDiscount;
 
     // Patch updated totals back to form
     this.formData.patchValue({
@@ -456,6 +462,7 @@ export class SalesInvoiceComponent implements OnInit {
       totalAmount: totalAmount.toFixed(2),
       totalTax: totalTax.toFixed(2),
       transpTax: transpTax.toFixed(2),
+      totalDiscount: totalDiscount.toFixed(2),
       grandTotal: grandTotal.toFixed(2),
     });
   }

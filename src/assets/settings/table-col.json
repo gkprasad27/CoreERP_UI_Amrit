@@ -2445,6 +2445,7 @@
     "hsnNo": "HsnNo",
     "taxStructureId": "taxStructureId",
     "discount": "Discount",
+    "discountAmount": "Discount Amount",
     "rate": "Rate",
     "grossAmount": "Gross Amount",
     "totalGross": "Total Gross",
