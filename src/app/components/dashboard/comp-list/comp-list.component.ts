@@ -89,7 +89,7 @@ export class CompListComponent implements OnInit, OnDestroy {
               const data = res.response[this.tableUrl.listName];
               if (this.tableUrl.url == "Common/GetPOQList") {
                 data.forEach(element => {
-                  element.link = 'Po Created';
+                  element.link = element.approvalStatus !== 'Pending Approval' ? 'Po Created' : '';
                 });
               }
               this.tableData = data;
