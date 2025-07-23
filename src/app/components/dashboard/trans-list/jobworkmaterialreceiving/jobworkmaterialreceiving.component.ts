@@ -197,17 +197,26 @@ export class JobworkmaterialreceivingComponent {
       type: '',
       highlight: true
     })
+    
     let data: any = this.tableData;
     data = (data && data.length) ? data : [];
-    let qtyT = 0
-    data.forEach((t: any) => {
-      if (t.materialCode == this.formData1.value.materialCode) {
-        qtyT = qtyT + (this.formData1.value.index == t.index ? ((+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty)) : ((+t.receivedQty) + (+t.rejectQty)))
-      }
-    })
+    if(this.formData1.value.index == 0 && data.some((r: any) => r.materialCode == this.formData1.value.materialCode)) {
+      this.alertService.openSnackBar("You already added this material code, please use edit icon to update", Static.Close, SnackBar.error);
+      return;
+    }
+    // let qtyT = 0
+    // data.forEach((t: any) => {
+    //   if (t.materialCode == this.formData1.value.materialCode) {
+    //     qtyT = qtyT + (this.formData1.value.index == t.index ? ((+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty)) : ((+t.receivedQty) + (+t.rejectQty)))
+    //   }
+    // })
     // const remainigQ = this.formData1.value.qty - qtyT;
-    if (this.formData1.value.qty < qtyT) {
-      this.alertService.openSnackBar("You can't recevie more Quantity", Static.Close, SnackBar.error);
+    // if (this.formData1.value.qty < qtyT) {
+    //   this.alertService.openSnackBar("You can't recevie more Quantity", Static.Close, SnackBar.error);
+    //   return;
+    // }
+    if (this.formData1.value.receivedQty > this.formData1.value.pendingQty) {
+      this.alertService.openSnackBar("You can't recevie more than pending Quantity", Static.Close, SnackBar.error);
       return;
     }
     this.tableData = null;
@@ -348,24 +357,46 @@ export class JobworkmaterialreceivingComponent {
             vendor: obj.text,
             vendorGSTN: obj.gstNo
           })
+          this.getJWReceiptDetail1();
 
         })
 
   }
 
+  getJWReceiptDetail1() {
+    const cashDetUrl = String.Join('/', this.apiConfigService.getJWReceiptDetail, this.formData.value.jobWorkNumber);
+    this.apiService.apiGetRequest(cashDetUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(response.response)) {
+               const arr = response.response['jwDetail'];
+               if(arr && arr.length) {
+                this.materialCodeList = this.materialCodeList.map((m: any) => {
+                  const item = arr.find((a: any) => a.materialCode === m.materialCode)
+                  m.receivedQty = item ? item.receivedQty : 0;
+                  return m;
+                })
+              }
+            }
+          }
+        });
+  }
+
   materialCodeChange() {
     const obj = this.materialCodeList.find((p: any) => p.materialCode == this.formData1.value.materialCode);
-    let pendingQty = 0;
-    this.tableData && this.tableData.forEach((t: any) => {
-      if (t.materialCode == this.formData1.value.materialCode) {
-        pendingQty = pendingQty + t.receivedQty
-      }
-    })
+    // let pendingQty = 0;
+    // this.tableData && this.tableData.forEach((t: any) => {
+    //   if (t.materialCode == this.formData1.value.materialCode) {
+    //     pendingQty = pendingQty + t.receivedQty
+    //   }
+    // })
     this.formData1.patchValue({
       qty: obj ? obj.qty : '',
       weight: obj ? obj.weight : '',
       materialName: obj ? obj.materialName : '',
-      pendingQty: obj.qty - pendingQty
+      pendingQty: obj.qty - obj.receivedQty
     })
   }
 
