@@ -3,12 +3,12 @@
     <div style="display: flex;">
         <img *ngIf="modelFormData.value.companyName === 'AMT POWER TRANSMISSION'"
              src="/assets/images/header.jpg" 
-             style="height: 100px; width: 65%;">
-    
+            style="height: 100px; width: 65%;">
+
         <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
         <img *ngIf="modelFormData.value.companyName !== 'AMT POWER TRANSMISSION'" 
              src="/assets/images/AMRIT.jpg" 
-             style="height: 100px; width: 65%;">
+            style="height: 100px; width: 65%;">
         <div style="padding: 24px;
           border-top: 1px solid black;
           -webkit-print-color-adjust: exact;
@@ -382,9 +382,9 @@
                 </tbody>
             </table>
         </div>
-<div *ngIf="data.takeHome != null" style="font-size: 15px; font-family: sans-serif; margin-top: 10px;">
-    {{ commonService.convertNumberToWords(data.takeHome) }}
-</div>
+        <div *ngIf="data.takeHome != null" style="font-size: 15px; font-family: sans-serif; margin-top: 10px;">
+            {{ commonService.convertNumberToWords(data.takeHome) }}
+        </div>
         <!-- <div style="font-size: 15px;font-family: sans-serif;margin-top: 10px;"> {{
             commonService.convertNumberToWords(data.takeHome) }} </div> -->
 
@@ -529,6 +529,91 @@
 
 </div>
 
+
+<div id="consolidatedpays">
+
+    <ng-container *ngIf="consolidatedpaysData && consolidatedpaysData.length">
+
+        <div style="display: flex;">
+            <img src="/assets/images/header.jpg" style="height: 100px; width: 65%;">
+
+            <div style="padding: 24px;
+          border-top: 1px solid black;
+          -webkit-print-color-adjust: exact;
+          background: rgb(22 106 132) !important;
+          color: white;
+          font-size: 20px;
+          width: 35%;
+          text-align: center;
+          justify-content: space-around;
+          display: flex;
+          height: 50px;
+          flex-direction: column;
+      ">
+                <span style="font-size: 15px;font-weight: 400;font-family: sans-serif;padding: 8px;"> {{ ( routeParam +
+                    '.'
+                    +
+                    'title') | translate }} </span>
+            </div>
+        </div>
+
+
+        <table style="border-collapse: collapse;width: 100%; font-size: 14px;-webkit-print-color-adjust: exact;">
+            <thead>
+
+                <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;">
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
+                        S.NO </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
+                        EMPLOYEE NAME </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
+                        BASIC SALARY </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
+                        No.of working days </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
+                        OT </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
+                        MONTH SALARY </th>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                <tr style="border-bottom: 1px solid; -webkit-print-color-adjust: exact;"
+                    *ngFor="let data of consolidatedpaysData; let i = index;">
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
+                        {{ i + 1 }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
+                        {{ data.employeeName }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
+                        {{ data.basic }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
+                        {{ data.working_Days }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
+                        {{ data.ot }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
+                        {{ data.monthSalary }} </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </ng-container>
+
+</div>
+
 <mat-card>
     <mat-card-content class="my-2">
         <form [formGroup]="modelFormData" autocomplete="off">
@@ -550,7 +635,7 @@
                 </mat-form-field>
 
                 <div class="p-2"
-                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' && routeParam != 'salaryprocess'">
+                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' && routeParam != 'salaryprocess' && routeParam != 'consolidatedpayslip'">
                     <mat-form-field>
                         <mat-label>Choose date</mat-label>
                         <mat-date-range-input [rangePicker]="picker">
@@ -568,7 +653,7 @@
                     </div>
                 </div>
 
-                <mat-form-field *ngIf="routeParam == 'salaryprocess'">
+                <mat-form-field *ngIf="routeParam == 'salaryprocess' || routeParam == 'consolidatedpayslip'">
                     <input matInput [matDatepicker]="picker" placeholder="Choose date" formControlName="selected">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -596,7 +681,7 @@
                         <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                     </ng-template>
                 </div>
-                
+
                 <mat-form-field class="form-element"
                     *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
                     <mat-label>{{ 'invoicesmemos.bpcategory' | translate }}</mat-label>

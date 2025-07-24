@@ -54,6 +54,12 @@ export class QcparamconfigurationComponent {
       { value: 'Castings', viewValue: 'Castings' },
       { value: 'Flanges', viewValue: 'Flanges' },
       { value: 'Plates', viewValue: 'Plates' },
+      { value: 'ISA', viewValue: 'ISA' },
+      { value: 'ISMC', viewValue: 'ISMC' },
+      { value: 'ISF', viewValue: 'ISF' },
+      { value: 'ISB', viewValue: 'ISB' },
+      { value: 'RUBBERS', viewValue: 'RUBBERS' },
+      { value: 'SMLS PIPES', viewValue: 'SMLS PIPES' },
     ];
   constructor(public commonService: CommonService,
     private addOrEditService: AddOrEditService,

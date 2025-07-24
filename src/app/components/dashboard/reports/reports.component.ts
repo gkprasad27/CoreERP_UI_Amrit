@@ -16,7 +16,7 @@ import { SalaryProcessComponent } from '../comp-list/salaryproces/salaryprocess.
 import { EmployeeAttendanceComponent } from '../comp-list/employee-attendance/employee-attendance.component';
 import { TableComponent } from '../../../reuse-components/table/table.component';
 import { Static } from '../../../enums/common/static';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
@@ -38,6 +38,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    DatePipe
   ]
 })
 export class ReportsComponent {
@@ -66,6 +67,7 @@ export class ReportsComponent {
   date = new Date();
 
   salaryProcessData: any = [];
+  consolidatedpaysData: any = [];
 
   dropdownSettings: IDropdownSettings = {
     singleSelection: true,
@@ -88,6 +90,7 @@ export class ReportsComponent {
     private apiConfigService: ApiConfigService,
     public commonService: CommonService,
     private formBuilder: FormBuilder,
+    private datepipe: DatePipe,
     private router: Router
   ) {
     this.model();
@@ -522,6 +525,8 @@ export class ReportsComponent {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
     } else if (this.routeParam == 'pendingpurchaseorders') {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
+    } else if (this.routeParam == 'consolidatedpayslip') {
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.datepipe.transform(this.modelFormData.value.selected, 'yyyy-MM-dd')}`);
     }
     else {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}`);
@@ -536,6 +541,11 @@ export class ReportsComponent {
               this.salaryProcessData = [];
               if (!this.commonService.checkNullOrUndefined(res.response) && res.response.hasOwnProperty('Payslip')) {
                 this.salaryProcessPrint(res.response);
+              }
+            } else if (this.routeParam == 'consolidatedpayslip') {
+              this.consolidatedpaysData = [];
+              if (!this.commonService.checkNullOrUndefined(res.response) && res.response.hasOwnProperty('GCP')) {
+                this.consolidatedpayslip(res.response);
               }
             } else if (this.routeParam == 'AttendanceProcess') {
               this.tableData = null;
@@ -598,6 +608,16 @@ export class ReportsComponent {
 
   }
 
+  consolidatedpayslip(data: any) {
+    this.consolidatedpaysData = data.GCP;
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('consolidatedpays').innerHTML;
+      w.document.body.innerHTML = html;
+      this.consolidatedpaysData = [];
+      w.print();
+    }, 50);
+  }
 
   salaryProcessPrint(data: any) {
     const arr = [];

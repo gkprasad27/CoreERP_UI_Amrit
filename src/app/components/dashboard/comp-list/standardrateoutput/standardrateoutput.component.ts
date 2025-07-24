@@ -88,6 +88,12 @@ export class StandardRateComponent implements OnInit {
       { value: 'Plates', viewValue: 'Plates' },
       { value: 'Fastners', viewValue: 'Fastners' },
       { value: 'Brought out', viewValue: 'Brought out' },
+      { value: 'ISA', viewValue: 'ISA' },
+      { value: 'ISMC', viewValue: 'ISMC' },
+      { value: 'ISF', viewValue: 'ISF' },
+      { value: 'ISB', viewValue: 'ISB' },
+      { value: 'RUBBERS', viewValue: 'RUBBERS' },
+      { value: 'SMLS PIPES', viewValue: 'SMLS PIPES' },
     ];
 
   QCConfigDetailData: any[] = [];

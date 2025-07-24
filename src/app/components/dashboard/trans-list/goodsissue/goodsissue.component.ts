@@ -379,7 +379,7 @@ export class GoodsissueComponent implements OnInit {
                   changed: false,
                   materialCode: s.materialCode ? s.materialCode : 0,
                   materialName: s.materialName ? s.materialName : 0,
-                  availableqty: qty.availQTY ? qty.availQTY : 0,
+                  availableqty: qty?.availQTY ? qty?.availQTY : 0,
                   bomNumber:s.bomNumber?s.bomNumber:s.bomKey,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   allocatedqty1: s.allocatedQTY ? s.allocatedQTY : 0,

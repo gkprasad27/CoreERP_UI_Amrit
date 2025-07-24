@@ -3535,5 +3535,8 @@
     "fromSaleOrder": "From Sale Order",
     "toSaleOrder": "To Sale Order",
     "swap": "Swap"
-  } 
+  },
+  "consolidatedpayslip": {
+    "title": "Consolidated Payslip"
+  }
 }
