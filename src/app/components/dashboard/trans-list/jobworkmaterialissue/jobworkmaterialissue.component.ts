@@ -664,7 +664,7 @@ export class JobworkmaterialissueComponent {
     obj.vendor = this.formData.value.vendor[0].id;
     obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     obj.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
-    const arr = this.tableData;
+    const arr = this.tableData.filter((t: any) => t.highlight);
     arr.forEach((a: any) => {
       a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';
     })

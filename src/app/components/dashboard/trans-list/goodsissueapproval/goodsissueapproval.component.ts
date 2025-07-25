@@ -369,7 +369,7 @@ export class GoodsissueApprovalComponent implements OnInit {
                   changed: false,
                   materialCode: s.materialCode ? s.materialCode : 0,
                   materialName: s.materialName ? s.materialName : 0,
-                  availableqty: qty.availQTY ? qty.availQTY : 0,
+                  availableqty: qty?.availQTY ? qty?.availQTY : 0,
                   bomNumber:s.bomKey?s.bomKey:0,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   allocatedqty1: s.allocatedQTY ? s.allocatedQTY : 0,

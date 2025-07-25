@@ -115,7 +115,7 @@ export class SalesorderComponent {
       profitCenter: ['', Validators.required],
       profitcenterName: [''],
       poDate: [null],
-      poNumber: ['', Validators.required],
+      poNumber: [''],
       gstNo: [null],
       dateofSupply: [null],
       placeofSupply: [null],
