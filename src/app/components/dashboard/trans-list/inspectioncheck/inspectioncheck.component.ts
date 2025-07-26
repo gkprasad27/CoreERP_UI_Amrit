@@ -49,6 +49,17 @@ export class InspectioncheckComponent implements OnInit {
   @ViewChild('tableRef', { static: false }) tableComponent: TableComponent;
 
 
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
   routeEdit = '';
   hsnsacList = [];
   debitValue = 0;
@@ -438,6 +449,12 @@ export class InspectioncheckComponent implements OnInit {
                 saleOrderNumber: val,
                 inspectionCheckNo: res.response.tagsData.inspectionCheckNo
               })
+              if (res.response['tagsData'].completedBy) {
+                const obj = this.employeesList.filter((e: any) => e.text == res.response['tagsData'].completedBy);
+                this.formData1.patchValue({
+                  completedBy: obj
+                })
+              }
               this.materialcode = val1;
               this.tableData1 = arr;
 
@@ -699,7 +716,10 @@ export class InspectioncheckComponent implements OnInit {
   savemreq() {
     const arr = this.tableData1.filter((t: any) => t.checkbox && !t.hideCheckbox);
     const addJournal = String.Join('/', this.apiConfigService.addinspectioncheck);
-    const requestObj = { icDtl: arr, icHdr: this.formData1.value };
+    debugger
+    const values = this.formData1.value;
+    values.completedBy = this.formData1.value.completedBy?.length ? this.formData1.value.completedBy[0].text : '';
+    const requestObj = { icDtl: arr, icHdr: values };
     this.apiService.apiPostRequest(addJournal, requestObj).subscribe(
       response => {
         const res = response;

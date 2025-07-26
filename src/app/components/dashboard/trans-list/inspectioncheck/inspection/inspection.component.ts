@@ -107,9 +107,9 @@ export class InspectionComponent {
                   maxValue: s.maxValue,
                   instrument: s.instrument,
                   action: [
-  { id: 'Edit', type: 'edit' }
-],
-                  result: s.result,
+                    { id: 'Edit', type: 'edit' }
+                  ],
+                  result: s?.result || '',
                   index: index + 1
                 })
               })
