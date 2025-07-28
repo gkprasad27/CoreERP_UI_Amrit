@@ -183,23 +183,23 @@ export class JobworkmaterialissueComponent {
       taxCode: ['', Validators.required],
       qty: ['', Validators.required],
       rate: ['', Validators.required],
-      discount: [''],
+      discount: [0],
       sgst: [''],
       id: [0],
       igst: [''],
       cgst: [''],
-      amount: [''],
-      total: [''],
-      weight: [''],
+      amount: [0],
+      total: [0],
+      weight: [0],
       deliveryDate: [''],
       stockQty: [0],
       totalTax: [0],
       materialName: [''],
       highlight: false,
       action: [[
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-]],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]],
       index: 0
     });
   }
@@ -377,7 +377,7 @@ export class JobworkmaterialissueComponent {
         igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
         cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
         sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-        amount: ((+this.formData.value.amount) + (t.qty * t.rate * t.weight)).toFixed(2),
+        amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.weight || 0))).toFixed(2),
         totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
       })
     })
@@ -506,6 +506,7 @@ export class JobworkmaterialissueComponent {
     this.apiService.apiGetRequest(taxCodeUrl)
       .subscribe(
         response => {
+          this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
@@ -514,7 +515,9 @@ export class JobworkmaterialissueComponent {
               this.taxCodeList = data;
             }
           }
-          this.getJobworkDetail();
+          if(this.routeEdit != '') {
+            this.getJobworkDetail();
+          }
         });
   }
 
