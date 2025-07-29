@@ -871,7 +871,8 @@
     "writeOffAmount": "WriteOffAmount",
     "writeoff": "Writeoff",
     "narration": "Narration",
-    "delete": "Delete"
+    "delete": "Delete",
+    "action": "Action"
   },
   "purchasesaleasset": {
     "id": "ID",

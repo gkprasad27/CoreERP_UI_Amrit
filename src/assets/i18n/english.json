@@ -1090,7 +1090,8 @@
     "writeOffGl": "Write Off GL",
     "writeoff": "Write off",
     "narration": "Narration",
-    "delete": "Delete"
+    "delete": "Delete",
+    "action": "Action"
   },
   "purchasesaleasset": {
     "id": "ID",
