@@ -967,6 +967,8 @@
     "referenceNo": "Reference No",
     "referenceDate": "Reference Date",
     "functionalDept": "Functional Dept",
+    "glaccountName": "GL Account",
+    "glsubName": "Sub GL Account",
     "profitCenter": "Profit Center",
     "segment": "Segment",
     "costCenter": "Cost Center",

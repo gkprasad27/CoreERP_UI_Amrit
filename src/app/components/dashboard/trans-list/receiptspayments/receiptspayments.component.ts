@@ -22,13 +22,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
 import { MatButtonModule } from '@angular/material/button';
 import { TableComponent } from '../../../../reuse-components/table/table.component';
 
 @Component({
   selector: 'app-receiptspayments',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, DynamicTableComponent, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, TableComponent],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, TableComponent],
   templateUrl: './receiptspayments.component.html',
   styleUrls: ['./receiptspayments.component.scss'],
   providers: [
@@ -253,7 +252,32 @@ export class ReceiptspaymentsComponent implements OnInit {
               this.onbpChange(false);
               const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
               this.formData.patchValue({ partyAccount: bObj.text });
-              debugger
+
+              res.response['paymentreceiptDetail'].forEach((s: any, index: number) => {
+                s.partyInvoiceNo = s.partyInvoiceNo ? s.partyInvoiceNo : '';
+                s.partyInvoiceDate = s.partyInvoiceDate ? s.partyInvoiceDate : '';
+                s.dueDate = s.dueDate ? s.dueDate : '';
+                s.totalAmount = s.totalAmount ? s.totalAmount : 0;
+                s.memoAmount = s.memoAmount ? s.memoAmount : 0;
+                s.clearedAmount = s.clearedAmount ? s.clearedAmount : 0;
+                s.balanceDue = s.balanceDue ? s.balanceDue : 0;
+                s.notDue = s.notDue ? s.notDue : 0;
+                s.adjustmentAmount = s.adjustmentAmount ? s.adjustmentAmount : 0;
+                s.discount = s.discount ? s.discount : null;
+                s.writeOffAmount = s.writeOffAmount ? s.writeOffAmount : 0;
+                s.partyAccount = s.partyAccount ? s.partyAccount : 0;
+                s.paymentterms = s.paymentterms ? s.paymentterms : 0;
+                s.postingDate = s.postingDate ? s.postingDate : '';
+                s.discountGl = s.discountGl ? s.discountGl : '';
+                s.writeOffGl = s.writeOffGl ? s.writeOffGl : '';
+                s.narration = s.narration ? s.narration : '';
+                s.action = [
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' }
+                ];
+                s.id = s.id ? s.id : 0;
+                s.index = index + 1;
+              })
               this.tableData = res.response['paymentreceiptDetail'];
               // this.sendDynTableData = { type: 'edit', data: res.response['paymentreceiptDetail'] };
               this.formData.disable();
@@ -441,9 +465,9 @@ export class ReceiptspaymentsComponent implements OnInit {
           const res = response;
           // if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           //   if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.formData1.patchValue({
-                discount: res.response['discount'] || 0
-              })
+          this.formData1.patchValue({
+            discount: res.response['discount'] || 0
+          })
           //   }
           // }
         });
@@ -497,10 +521,10 @@ export class ReceiptspaymentsComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Payments Receipts created Successfully..', Static.Close, SnackBar.success);
           }
+          this.spinner.hide();
           // this.reset();
           this.router.navigate(['/dashboard/transaction/receiptspayments'])
 
-          this.spinner.hide();
         }
       });
   }
