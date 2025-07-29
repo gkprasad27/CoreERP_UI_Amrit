@@ -359,9 +359,6 @@ export class JournalComponent implements OnInit {
   taxCodeAmountChange() {
     const code = this.taxCodeList.find(res => res.taxRateCode == this.formData1.value.taxCode);
     if (code) {
-      this.formData1.value.sgstamount = (this.formData1.value.amount * code.sgst) / 100;
-      this.formData1.value.igstamount = (this.formData1.value.amount * code.igst) / 100;
-      this.formData1.value.cgstamount = (this.formData1.value.amount * code.cgst) / 100;
       this.formData1.patchValue({
         sgstamount: (this.formData1.value.amount * code.sgst) / 100,
         igstamount: (this.formData1.value.amount * code.igst) / 100,
@@ -392,14 +389,14 @@ export class JournalComponent implements OnInit {
     if (!this.commonService.checkNullOrUndefined(this.tableData)) {
       if (this.tableData.length) {
         this.tableData.forEach(res => {
-          if (res.accountingIndicator.value == 'Debit') {
-            this.debitValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount.value)) ? (this.debitValue + parseInt(res.amount.value)) : 0;
+          if (res.accountingIndicator == 'Debit') {
+            this.debitValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount)) ? (this.debitValue + parseInt(res.amount)) : 0;
           }
-          if (res.accountingIndicator.value == 'Credit') {
-            this.creditValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount.value)) ? (this.creditValue + parseInt(res.amount.value)) : 0;
+          if (res.accountingIndicator == 'Credit') {
+            this.creditValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount)) ? (this.creditValue + parseInt(res.amount)) : 0;
           }
-          // this.totalTaxValue = this.totalTaxValue + res.sgstamount.value + res.cgstamount.value + res.ugstamount.value + res.igstamount.value
-          this.totalTaxValue = this.totalTaxValue + res.sgstamount.value + res.cgstamount.value + res.igstamount.value
+          // this.totalTaxValue = this.totalTaxValue + res.sgstamount + res.cgstamount + res.ugstamount + res.igstamount
+          this.totalTaxValue = this.totalTaxValue + res.sgstamount + res.cgstamount + res.igstamount
         });
         // this.disableSave = (this.debitValue == this.creditValue) ? false : true;
       }

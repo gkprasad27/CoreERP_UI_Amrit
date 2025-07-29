@@ -985,7 +985,8 @@
     "cgstamount": "CGST",
     "igstamount": "IGST",
     "ugstamount": "UGST",
-    "delete": "Delete"
+    "delete": "Delete",
+    "action": "Action"
   },
   "invoicesmemos": {
     "id": "ID",
