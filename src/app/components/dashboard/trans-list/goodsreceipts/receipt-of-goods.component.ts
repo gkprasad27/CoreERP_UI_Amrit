@@ -31,7 +31,7 @@ import { FileUploadComponent } from '../../../../reuse-components/file-upload/fi
 
 @Component({
   selector: 'app-receipt-of-goods',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, FileUploadComponent, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, FileUploadComponent, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './receipt-of-goods.component.html',
   styleUrls: ['./receipt-of-goods.component.scss'],
   providers: [
@@ -45,7 +45,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   formData: FormGroup;
   formData1: FormGroup;
   routeEdit = '';
-  mpatternList= [];
+  mpatternList = [];
   tableData = [];
   materialCodeList = [];
   perChaseOrderList = [];
@@ -209,14 +209,14 @@ export class ReceiptOfGoodsComponent implements OnInit {
       purchaseOrderNumber: [''],
       description: [''],
       heatNumber: [''],
-      materialgrade:[''],
-      milltcno:[''],
-      tptcno:[''],
+      materialgrade: [''],
+      milltcno: [''],
+      tptcno: [''],
       pendingQty: [''],
       qty: [''],
       hsnsac: [''],
       highlight: false,
-      type: [''],     
+      type: [''],
       rate: 0,
       cgst: 0,
       sgst: 0,
@@ -224,9 +224,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
       taxCode: 0,
       documentURL: [''],
       action: [[
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-]],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]],
       index: 0
     });
   }
@@ -237,9 +237,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
     this.formData1.patchValue({
       index: 0,
       action: [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-]
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]
     });
   }
 
@@ -258,38 +258,54 @@ export class ReceiptOfGoodsComponent implements OnInit {
   // }
 
   saveForm() {
+
     if (this.formData1.invalid) {
       return;
     }
+
+    let data: any = this.tableData;
+    data = (data && data.length) ? data : [];
+    if(this.formData1.value.index == 0 && data.some((r: any) => r.materialCode == this.formData1.value.materialCode[0]['materialCode'])) {
+      this.alertService.openSnackBar("You already added this material code, please use edit icon to update", Static.Close, SnackBar.error);
+      return;
+    }
+    const qtyT = (+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty);
+    if (this.formData1.value.pendingQty < qtyT) {
+      this.alertService.openSnackBar("You can't recevie more Quantity", Static.Close, SnackBar.error);
+      return;
+    }
+
     this.formData1.patchValue({
       type: '',
       highlight: true
     })
-    let data: any = this.tableData;
-    data = (data && data.length) ? data : [];
-    let qtyT = this.formData1.value.receivedQty;
-    data.forEach((t: any) => {
-      if (t.materialCode == this.formData1.value.materialCode[0]['materialCode']) {
-        qtyT = qtyT + (this.formData1.value.index == t.index ? ((+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty))  :  ((+t.receivedQty) + (+t.rejectQty))) 
-      }
-    })
+    // let qtyT = this.formData1.value.receivedQty;
+    // if (data && data.length) {
+    //   data.forEach((t: any) => {
+    //     if (t.materialCode == this.formData1.value.materialCode[0]['materialCode']) {
+    //       qtyT = qtyT + (this.formData1.value.index == t.index ? ((+this.formData1.value.receivedQty) + (+this.formData1.value.rejectQty)) : ((+t.receivedQty) + (+t.rejectQty)))
+    //     }
+    //   })
+    // } else {
+    // }
     // const remainigQ = this.formData1.value.qty - qtyT;
-    if (this.formData1.value.qty < qtyT) {
-      this.alertService.openSnackBar("You can't recevie more Quantity", Static.Close, SnackBar.error);
-      return;
-    }
+    
     this.dataChange();
     this.tableData = null;
     this.tableComponent.defaultValues();
     let fObj = this.formData1.value;
-    if(fObj.materialCode) {
-      fObj.materialCode = fObj.materialCode[0].materialCode;
-      fObj.materialgrade = fObj?.materialgrade[0]?.description
+    if (fObj.materialCode) {
+      fObj.materialCode = Array.isArray(fObj.materialCode) && fObj.materialCode.length > 0 && fObj.materialCode[0].materialCode
+        ? fObj.materialCode[0].materialCode
+        : fObj.materialCode;
+      fObj.materialgrade = Array.isArray(fObj.materialgrade) && fObj.materialgrade.length > 0 && fObj.materialgrade[0].description
+        ? fObj.materialgrade[0].description
+        : fObj.description;
     }
     fObj.documentURL = this.fileList2 ? this.fileList2.name.split('.')[0] : '';
     if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
-        fObj.index = data ? (data.length + 1) : 1
+      fObj.index = data ? (data.length + 1) : 1
       // });
       data = [fObj, ...data];
     } else {
@@ -307,14 +323,14 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   editOrDeleteEvent(value) {
-    
+
     if (value.action === 'Delete') {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       this.calculate();
       this.resetForm();
     } else {
-      
+
       let item = { ...value.item };
       if (typeof item.materialCode == 'string') {
         item.materialCode = [{ materialCode: item.materialCode, materialName: item.materialName }]
@@ -407,14 +423,14 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   ponoselect() {
-    
+
     let data = [];
     this.perChaseOrderList = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('purchaseOrderNo').value) && this.formData.value.purchaseOrderNo[0].id) {
       data = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.value.purchaseOrderNo[0].id);
     }
     if (data.length) {
-      
+
       data.forEach((d: any, index: number) => {
         const obj = {
           materialCode: d.materialCode ? d.materialCode : '',
@@ -426,9 +442,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
           receivedQty: d.receivedQty ? d.receivedQty : '',
           description: d.description ? d.description : '',
           heatNumber: d.heatNumber ? d.heatNumber : '',
-          materialgrade:d.materialgrade ? d.materialgrade : '',
-          milltcno:d.milltcno ? d.milltcno : '',
-          tptcno:d.tptcno ? d.tptcno : '',
+          materialgrade: d.materialgrade ? d.materialgrade : '',
+          milltcno: d.milltcno ? d.milltcno : '',
+          tptcno: d.tptcno ? d.tptcno : '',
           hsnsac: d.hsnsac ? d.hsnsac : '',
           action: '',
           index: index + 1,
@@ -542,7 +558,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
           this.getProfitcenterData();
         });
   }
-  
+
 
 
   getProfitcenterData() {
@@ -686,10 +702,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['grmasters']);
-              if( res.response['grmasters'].documentURL) {
+              if (res.response['grmasters'].documentURL) {
                 this.fileList = { name: res.response['grmasters'].documentURL };
               }
-              if( res.response['grmasters'].invoiceURL) {
+              if (res.response['grmasters'].invoiceURL) {
                 this.fileList1 = { name: res.response['grmasters'].invoiceURL };
               }
               // this.formData.patchValue({
@@ -704,7 +720,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
               this.perChaseOrderList = [];
 
               if (res.response['grDetail'] && res.response['grDetail'].length) {
-                
+
                 let str = res.response['grDetail'][0].taxCode;
                 const obj = this.taxCodeList.find((t: any) => t.taxRateCode == str);
                 this.formData1.patchValue({
@@ -731,9 +747,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
                   hsnsac: d.hsnsac ? d.hsnsac : '',
                   description: d.description ? d.description : '',
                   heatNumber: d.heatNumber ? d.heatNumber : '',
-                  materialgrade:d.materialgrade ? d.materialgrade : '',
-                  milltcno:d.milltcno ? d.milltcno : '',
-                  tptcno:d.tptcno ? d.tptcno : '',
+                  materialgrade: d.materialgrade ? d.materialgrade : '',
+                  milltcno: d.milltcno ? d.milltcno : '',
+                  tptcno: d.tptcno ? d.tptcno : '',
                   cgst: d.cgst ? d.cgst : 0,
                   sgst: d.sgst ? d.sgst : 0,
                   igst: d.igst ? d.igst : 0,
@@ -742,9 +758,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
                   type: 'edit',
                   // action: [
-//   { id: 'Edit', type: 'edit' },
-//   { id: 'Delete', type: 'delete' }
-// ],
+                  //   { id: 'Edit', type: 'edit' },
+                  //   { id: 'Delete', type: 'delete' }
+                  // ],
                   index: index + 1
                 }
                 this.perChaseOrderList.push(obj)
@@ -767,9 +783,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
                   pendingQty = pendingQty + t.receivedQty
                   pendingQty = obj.qty - pendingQty
 
-                if (pendingQty == 0) {
-                  this.materialCodeList = this.materialCodeList.filter((p: any) => p.materialCode != t.materialCode);
-                }
+                  if (pendingQty == 0) {
+                    this.materialCodeList = this.materialCodeList.filter((p: any) => p.materialCode != t.materialCode);
+                  }
                 }
               })
             }
@@ -778,7 +794,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   calculate() {
-    
+
     this.formData.patchValue({
       igst: 0,
       cgst: 0,
@@ -972,7 +988,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   //         }
   //       });
   // }
-  
+
 
 
   return() {
