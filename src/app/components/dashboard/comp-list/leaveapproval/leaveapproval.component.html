@@ -1,10 +1,10 @@
-<mat-card>
-  <div class="table-boarder">
-    <mat-card-title class="table-boarder-color">
-      Leave Approval
-    </mat-card-title>
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'leaveApproval.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
 
-    <mat-card-content class="m-2">
+    <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
       <div>
 
         <div class="table">
@@ -81,7 +81,6 @@
         <mat-paginator [pageSizeOptions]="[8, 10, 20]" showFirstLastButtons></mat-paginator>
 
 
-
         <form [formGroup]="leaveRequestForm" autocomplete="off">
           <div class="d-flex">
             <div class="d-flex align-items-center p-2">
@@ -105,10 +104,5 @@
 
       </div>
 
-
-
     </mat-card-content>
-  </div>
-</mat-card>
-
 <div>

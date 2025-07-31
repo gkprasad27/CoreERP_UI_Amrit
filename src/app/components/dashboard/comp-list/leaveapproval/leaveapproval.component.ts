@@ -25,6 +25,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { Static } from '../../../../enums/common/static';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-leaveapproval',
@@ -49,6 +50,7 @@ export class LeaveApprovalComponent implements OnInit {
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
+        public dialogRef: MatDialogRef<LeaveApprovalComponent>,
     private alertService: AlertService,
     private spinner: NgxSpinnerService, ) {
 
@@ -165,4 +167,7 @@ export class LeaveApprovalComponent implements OnInit {
   }
 
 
+  cancel() {
+    this.dialogRef.close();
+  }
 }

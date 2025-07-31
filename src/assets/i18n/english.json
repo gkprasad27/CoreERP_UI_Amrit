@@ -994,6 +994,7 @@
     "company": "Company",
     "voucherNumber": "Voucher Number",
     "compName": "Company Name",
+    "saleOrderNo": "Sale Order No",
     "voucherName": "Voucer Name",
     "customerName":"Customer Name",
     "voucherClass": "Voucher Class",
@@ -2601,7 +2602,7 @@
   "advance": {
     "title": "Advance",
     "id": "id",
-    "employeeId": "EmployeeId",
+    "employeeId": "Employee Id",
     "advanceType": "AdvanceType",
     "advanceAmount": "AdvanceAmount",
     "applyDate": "ApplyDate",
@@ -3542,5 +3543,8 @@
   },
   "consolidatedpayslip": {
     "title": "Consolidated Payslip"
+  },
+  "leaveApproval": {
+    "title": "Leave Approval"
   }
 }

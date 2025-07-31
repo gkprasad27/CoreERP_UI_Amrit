@@ -791,6 +791,7 @@
     "compName": "Company Name",
     "voucherName": "Voucer Name",
     "customerName": "Customer Name",
+    "saleOrderNo": "Sale Order No",
     "voucherNumber": "Voucher Number",
     "voucherType": "Voucher Type",
     "voucherDate": "Date",

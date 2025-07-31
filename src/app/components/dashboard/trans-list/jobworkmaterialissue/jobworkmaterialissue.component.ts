@@ -32,7 +32,7 @@ import { FileUploadComponent } from '../../../../reuse-components/file-upload/fi
 
 @Component({
   selector: 'app-jobworkmaterialissue',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, TypeaheadModule, NonEditableDatepicker, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, FileUploadComponent ],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, TypeaheadModule, NonEditableDatepicker, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, FileUploadComponent],
   templateUrl: './jobworkmaterialissue.component.html',
   styleUrls: ['./jobworkmaterialissue.component.scss'],
   providers: [
@@ -204,15 +204,15 @@ export class JobworkmaterialissueComponent {
     });
   }
   public mmasterListData: EventEmitter<any[]> = new EventEmitter<any[]>();
-  
+
   resetForm() {
     this.formData1.reset();
     this.formData1.patchValue({
       index: 0,
       action: [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ],
       id: 0
     });
   }
@@ -276,7 +276,7 @@ export class JobworkmaterialissueComponent {
 
   getSaleOrderDetail() {
     this.tableComponent.defaultValues();
-    const url =  this.apiConfigService.getSaleOrderDetailPO;
+    const url = this.apiConfigService.getSaleOrderDetailJO;
     const qsDetUrl = String.Join('/', url, this.formData.value.saleOrderNo[0].saleOrderNo);
     this.apiService.apiGetRequest(qsDetUrl)
       .subscribe(
@@ -339,21 +339,21 @@ export class JobworkmaterialissueComponent {
   materialChange() {
     this.materialList = [];
     this.mmasterListData.emit([]);
-        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        let obj = JSON.parse(localStorage.getItem("user"));
-        const voucherClassList = String.Join('/', this.apiConfigService.getMaterialList, obj.companyCode, this.formData1.value.materialCode);
-        this.apiService.apiGetRequest(voucherClassList)
-        .subscribe(((response: any) => {
-              this.spinner.hide();
-              const res = response;
-              if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                if (!this.commonService.checkNullOrUndefined(res.response)) {
-                  this.materialList = res.response['mmasterList'];
-                  this.mmasterListData.emit(res.response['mmasterList']);
-                }
-              }
-            })
-      )  
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const voucherClassList = String.Join('/', this.apiConfigService.getMaterialList, obj.companyCode, this.formData1.value.materialCode);
+    this.apiService.apiGetRequest(voucherClassList)
+      .subscribe(((response: any) => {
+        this.spinner.hide();
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.materialList = res.response['mmasterList'];
+            this.mmasterListData.emit(res.response['mmasterList']);
+          }
+        }
+      })
+      )
     // const obj = this.materialList.some((m: any) => m.id == this.formData1.value.materialCode);
     // if (!obj) {
     //   this.alertService.openSnackBar('Please enter valid material code', Static.Close, SnackBar.error);
@@ -363,7 +363,7 @@ export class JobworkmaterialissueComponent {
     // }
   }
 
-  calculate() {
+  calculate(flag = false) {
     this.formData.patchValue({
       igst: 0,
       cgst: 0,
@@ -373,13 +373,15 @@ export class JobworkmaterialissueComponent {
       totalAmount: 0,
     })
     this.tableData && this.tableData.forEach((t: any) => {
-      this.formData.patchValue({
-        igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
-        cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
-        sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-        amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.weight || 0))).toFixed(2),
-        totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
-      })
+      if (t.highlight || flag) {
+        this.formData.patchValue({
+          igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
+          cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
+          sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
+          amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.weight || 1))).toFixed(2),
+          totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
+        })
+      }
     })
     this.formData.patchValue({
       totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
@@ -393,7 +395,7 @@ export class JobworkmaterialissueComponent {
       this.formData1.patchValue(value.item);
     }
   }
- 
+
 
   deleteRecord(value) {
     const obj = {
@@ -515,7 +517,7 @@ export class JobworkmaterialissueComponent {
               this.taxCodeList = data;
             }
           }
-          if(this.routeEdit != '') {
+          if (this.routeEdit != '') {
             this.getJobworkDetail();
           }
         });
@@ -546,7 +548,7 @@ export class JobworkmaterialissueComponent {
       const res = response;
       if (res && res.status === StatusCodes.pass && res.response) {
         this.formData.patchValue(res.response['JobWorkMasters']);
-  
+
         if (res.response['JobWorkDetails'] && res.response['JobWorkDetails'].length) {
           let taxCode = res.response['JobWorkDetails'][0].taxCode;
           const taxObj = this.taxCodeList.find((t: any) => t.taxRateCode == taxCode);
@@ -555,7 +557,7 @@ export class JobworkmaterialissueComponent {
               taxCode: taxObj.igst ? taxObj.igst : taxObj.sgst
             });
           }
-  
+
           res.response['JobWorkDetails'].forEach((detail: any, index: number) => {
             const materialObj = this.materialList.find((m: any) => m.id == detail.materialCode);
             if (materialObj) {
@@ -564,20 +566,20 @@ export class JobworkmaterialissueComponent {
               detail.materialCode = { materialCode: materialObj.id, materialName: materialObj.text };
             }
             detail.action = [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-],
-            detail.index = index + 1;
+              { id: 'Edit', type: 'edit' },
+              { id: 'Delete', type: 'delete' }
+            ],
+              detail.index = index + 1;
           });
-  
+
           this.tableData = res.response['JobWorkDetails'];
-          this.calculate();
+          this.calculate(true);
           this.vendorChange();
         }
       }
     });
   }
-  
+
 
   // getJobworkDetail() {
   //   const qsDetUrl = String.Join('/', this.apiConfigService.getJobworkDetail, this.routeEdit);
@@ -604,9 +606,9 @@ export class JobworkmaterialissueComponent {
   //               s.materialName = obj.text
   //               s.stockQty = obj.availQTY
   //               s.action = [
-//   { id: 'Edit', type: 'edit' },
-//   { id: 'Delete', type: 'delete' }
-// ],
+  //   { id: 'Edit', type: 'edit' },
+  //   { id: 'Delete', type: 'delete' }
+  // ],
   //                s.index = index + 1;
   //             })
   //             this.tableData = res.response['JobWorkDetails'];
@@ -704,8 +706,8 @@ export class JobworkmaterialissueComponent {
         if (this.fileList1) {
           this.uploadFile1();
         } else {
-            this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
-            this.back();
+          this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
+          this.back();
         }
       });
   }
@@ -730,7 +732,7 @@ export class JobworkmaterialissueComponent {
         }
       });
   }
-  
+
   print() {
     let formObj = this.formData.value;
     if (this.companyList.length) {

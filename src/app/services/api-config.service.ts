@@ -509,6 +509,7 @@ export class ApiConfigService {
    getPurchaseRequisitionDetail = `${environment.baseUrl}Transactions/GetPurchaseRequisitionDetail`;
    addSaleOrder = `${environment.baseUrl}Transactions/AddSaleOrder`;
    getSaleOrderDetailPO = `${environment.baseUrl}Transactions/GetSaleOrderDetailPO`;
+   getSaleOrderDetailJO = `${environment.baseUrl}Transactions/GetSaleOrderDetailJO`;
 
    getSaleOrderNumber = `${environment.baseUrl}Transactions/GetSaleOrderNumber`;
    getPurchaseOrderNumber = `${environment.baseUrl}Transactions/GetPurchaseOrderNumber`;

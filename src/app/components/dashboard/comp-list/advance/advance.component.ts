@@ -28,11 +28,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatButtonModule } from '@angular/material/button';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @Component({
   selector: 'app-advance',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, NgMultiSelectDropDownModule],
   templateUrl: './advance.component.html',
   styleUrls: ['./advance.component.scss']
 })
@@ -40,24 +41,28 @@ import { MatButtonModule } from '@angular/material/button';
 export class AdvanceComponent implements OnInit {
 
 
-  dataSource: MatTableDataSource<any>;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+  employeesList: any[] = [];
+  advanceList: any[] = [];
 
   modelFormData: FormGroup;
-  isSubmitted = false;
   formData: any;
-  //LeaveTypeatList: any;
-  //companyList: any;
-  //brandList: any;
-  //MaterialGroupsList: any;
-  //SizesList: any;
-  getProductByProductCodeArray = [];
-  getProductByProductNameArray: any[];
-  applDate = new FormControl(new Date());
 
+  isSubmitted = false;
+
+  getProductByProductCodeArray = [];
 
   EmpName: any;
-  advanceList: any;
   //pipe = new DatePipe('en-US');
   //now = Date.now();
 
@@ -92,59 +97,84 @@ export class AdvanceComponent implements OnInit {
     this.formData = { ...data };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
+
+
       //this.modelFormData.controls['empCode'].disable();
     }
 
   }
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.getItem('user'));
+    // const user = JSON.parse(localStorage.getItem('user'));
     //this.getTableData();
-    this.getTableDatas();
-    this.modelFormData.patchValue
-      ({
-        employeeId: user.userName
-      });
-    this.getProductByProductCode(user.userName);
+    // this.modelFormData.patchValue({
+    //   employeeId: user.userName
+    // });
+    this.allApis();
+    // this.getProductByProductCode(user.userName);
   }
 
 
-  getTableDatas() {
-    const getCompanyUrl = String.Join('/', this.apiConfigService.getAdvancetypeList);
-    this.apiService.apiGetRequest(getCompanyUrl)
-      .subscribe(
-        response => {
-          const res = response.body;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.advanceList = res.response['advancesList'];
-            }
-          }
-          this.spinner.hide();
-        });
-  }
+  allApis() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
+    const getAdvancetypeList = String.Join('/', this.apiConfigService.getAdvancetypeList);
 
-  getProductByProductCode(value) {
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getEmployeeList),
+        this.apiService.apiGetRequest(getAdvancetypeList),
 
-    if (!this.commonService.checkNullOrUndefined(value) && value != '') {
-      const getProductByProductCodeUrl = String.Join('/', this.apiConfigService.getEmpCode);
-      this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
-        response => {
-          const res = response.body;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              if (!this.commonService.checkNullOrUndefined(res.response['Empcodes'])) {
-                this.getProductByProductCodeArray = res.response['Empcodes'];
-                this.spinner.hide();
+      ]).subscribe(([emplist, advancesList]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(emplist) && emplist.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(emplist.response)) {
+            this.employeesList = emplist.response['emplist'];
+            debugger
+            if (!this.commonService.checkNullOrUndefined(this.formData.item) && this.formData.item.employeeId) {
+              const selectedEmployee = this.employeesList.find(emp => emp.id === this.formData.item.employeeId);
+              if (selectedEmployee) {
+                this.modelFormData.patchValue({
+                  employeeId: [{ id: selectedEmployee.id, text: selectedEmployee.text }],
+                })
               }
             }
           }
+        }
 
-        });
-    } else {
-      this.getProductByProductCodeArray = [];
-    }
+        if (!this.commonService.checkNullOrUndefined(advancesList) && advancesList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(advancesList.response)) {
+            this.advanceList = advancesList.response['advancesList'];
+          }
+        }
+
+      });
+    });
   }
+
+  // getProductByProductCode(value) {
+
+  //   if (!this.commonService.checkNullOrUndefined(value) && value != '') {
+  //     const getProductByProductCodeUrl = String.Join('/', this.apiConfigService.getEmpCode);
+  //     this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
+  //       response => {
+  //         const res = response.body;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             if (!this.commonService.checkNullOrUndefined(res.response['Empcodes'])) {
+  //               this.getProductByProductCodeArray = res.response['Empcodes'];
+  //               this.spinner.hide();
+  //             }
+  //           }
+  //         }
+
+  //       });
+  //   } else {
+  //     this.getProductByProductCodeArray = [];
+  //   }
+  // }
 
 
   showErrorAlert(caption: string, message: string) {
@@ -158,8 +188,8 @@ export class AdvanceComponent implements OnInit {
     if (this.modelFormData.invalid) {
       return;
     }
-
     this.formData.item = this.modelFormData.value;
+    this.formData.item.employeeId = this.formData.item.employeeId[0].id;
     this.dialogRef.close(this.formData);
   }
 

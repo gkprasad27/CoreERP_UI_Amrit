@@ -23,10 +23,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TableComponent } from '../../../../reuse-components/table/table.component';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-journals',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, TableComponent],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, NgMultiSelectDropDownModule, TranslateModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, TableComponent],
   templateUrl: './journal.component.html',
   styleUrls: ['./journal.component.scss'],
   providers: [
@@ -43,6 +44,28 @@ export class JournalComponent implements OnInit {
   formData1: FormGroup;
 
   sendDynTableData: any;
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'glaccountName',
+    textField: 'glaccountName',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'glsubName',
+    textField: 'glsubName',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
 
   routeEdit = '';
   hsnsacList = [];
@@ -93,12 +116,12 @@ export class JournalComponent implements OnInit {
   formDataGroup() {
     this.formData = this.formBuilder.group({
       company: [null, [Validators.required]],
-      branch: [null, [Validators.required]],
+      branch: [null],
       voucherType: [null, [Validators.required]],
       voucherNumber: [null, [Validators.required]],
       voucherDate: [new Date()],
       postingDate: [new Date()],
-      transactionType: [null, [Validators.required]],
+      transactionType: [null],
       period: [null],
       referenceNo: [null],
       referenceDate: [null],
@@ -275,16 +298,22 @@ export class JournalComponent implements OnInit {
       highlight: true
     });
 
+    let fObj = this.formData1.value;
+    fObj.glaccount = Array.isArray(fObj.glaccount) && fObj.glaccount.length > 0 && fObj.glaccount[0].glaccountName
+      ? fObj.glaccount[0].glaccountName
+      : fObj.glaccount;
+    fObj.subGlaccount = Array.isArray(fObj.subGlaccount) && fObj.subGlaccount.length > 0 && fObj.subGlaccount[0].glsubName
+      ? fObj.subGlaccount[0].glsubName
+      : fObj.subGlaccount;
+
     let data: any = this.tableData;
     this.tableData = null;
     this.tableComponent.defaultValues();
-    if (this.formData1.value.index == 0) {
-      this.formData1.patchValue({
-        index: data ? (data.length + 1) : 1
-      });
-      data = [this.formData1.value, ...data];
+    if (fObj.index == 0) {
+      fObj.index = data ? (data.length + 1) : 1
+      data = [fObj, ...data];
     } else {
-      data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
+      data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
     }
     setTimeout(() => {
       this.tableData = data;
@@ -310,6 +339,10 @@ export class JournalComponent implements OnInit {
       this.deleteRecord(value);
     } else {
       this.formData1.patchValue(value.item);
+      this.formData1.patchValue({
+        glaccount: [{ glaccountName: value.item.glaccount }],
+        subGlaccount: [{ glsubName: value.item.subGlaccount }]
+      })
     }
   }
 
@@ -341,7 +374,7 @@ export class JournalComponent implements OnInit {
   }
 
   getgLsubAccountList() {
-    const obj = this.glAccountList.find((g: any) => g.glaccountName == this.formData1.value.glaccount);
+    const obj = this.glAccountList.find((g: any) => g.glaccountName == this.formData1.value.glaccount[0].glaccountName);
     const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);
     this.apiService.apiGetRequest(voucherNoUrl)
       .subscribe(
@@ -859,9 +892,9 @@ export class JournalComponent implements OnInit {
   }
 
 
-  
 
-  
+
+
 
   return() { }
 

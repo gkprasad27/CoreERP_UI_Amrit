@@ -409,7 +409,7 @@ export class SalesInvoiceComponent implements OnInit {
         totalSGST += t.sgst;
         totalAmount += t.grossAmount;
         totalTax += t.igst + t.cgst + t.sgst;
-        totalDiscount += t.discountAmount;
+        totalDiscount += t?.discountAmount || 0;
         if (!selectedRow) {
           selectedRow = t; // Use first selected row to get transport GST codes
         }
