@@ -231,7 +231,8 @@ export class JournalComponent implements OnInit {
               // res.response['JvDetail'].forEach((d: any) => d.delete = true);
               // this.sendDynTableData = { type: 'edit', data: res.response['JvDetail'] };
 
-              res.response['JvDetail'].forEach((s: any, index: number) => {
+              const arr = [ ...res.response['JvDetail'] ];
+              arr.forEach((s: any, index: number) => {
                 s.glaccount = s.glaccount ? s.glaccount : '';
                 s.subGlaccount = s.subGlaccount ? s.subGlaccount : '';
                 s.accountingIndicator = s.accountingIndicator ? s.accountingIndicator : '';
@@ -250,7 +251,7 @@ export class JournalComponent implements OnInit {
                 s.id = s.id ? s.id : 0;
                 s.index = index + 1;
               })
-              this.tableData = res.response['JvDetail'];
+              this.tableData = arr;
 
               this.formData.disable();
               this.checkCreditDebit();
@@ -477,91 +478,91 @@ export class JournalComponent implements OnInit {
     // this.sendDynTableData = { type: 'reset', data: this.tableData };
   }
 
-  tablePropsFunc(subGlAccountList = []) {
-    return {
-      tableData: {
-        id: {
-          value: 0, type: 'autoInc', width: 10, disabled: true
-        },
-        glaccount: {
-          value: null, type: 'autocomplete', list: this.glAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
-        },
-        subGlaccount: {
-          value: null, type: 'autocomplete', list: subGlAccountList, id: 'glsubName', displayId: 'glsubCode', displayText: 'glsubName', multiple: true, width: 200, primary: true
-        },
-        accountingIndicator: {
-          value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100, disabled: false
-        },
-        amount: {
-          value: null, type: 'number', width: 75, maxLength: 15
-        },
-        taxCode: {
-          value: null, type: 'dropdown', list: this.taxCodeList, id: 'taxRateCode', text: 'description', displayMul: false, width: 100
-        },
-        sgstamount: {
-          value: 0, type: 'number', disabled: true, width: 75
-        },
-        cgstamount: {
-          value: 0, type: 'number', disabled: true, width: 75
-        },
-        igstamount: {
-          value: 0, type: 'number', disabled: true, width: 75
-        },
-        // ugstamount: {
-        //   value: 0, type: 'number', disabled: true, width: 75
-        // },
-        // referenceNo: {
-        //   value: null, type: 'number', maxLength: 50, width: 75
-        // },
-        // referenceDate: {
-        //   value: new Date(), type: 'datepicker', width: 100
-        // },
-        // functionalDept: {
-        //   value: null, type: 'dropdown', list: this.functionaldeptList, id: 'code', text: 'description', displayMul: false, width: 100
-        // },
-        // profitCenter: {
-        //   value: null, type: 'dropdown', list: this.profitCenterList, id: 'id', text: 'text', displayMul: false, width: 100
-        // },
-        // segment: {
-        //   value: null, type: 'dropdown', list: this.segmentList, id: 'id', text: 'name', displayMul: false, width: 100
-        // },
-        // bttypes: {
-        //   value: null, type: 'dropdown', list: this.btList, id: 'code', text: 'description', displayMul: false, width: 150
-        // },
-        // costCenter: {
-        //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
-        // },
-        narration: {
-          value: null, type: 'text', width: 100, maxLength: 50
-        },
-        // workBreakStructureElement: {
-        //   value: null, type: 'dropdown', list: this.wbsList, id: 'id', text: 'text', displayMul: false, width: 100
-        // },
-        // netWork: {
-        //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
-        // },
-        // orderNo: {
-        //   value: null, type: 'dropdown', list: this.ordertypeList, id: 'orderType', text: 'description', displayMul: false, width: 100
-        // },
-        // fundCenter: {
-        //   value: null, type: 'dropdown', list: this.fcList, id: 'code', text: 'description', displayMul: false, width: 100
-        // },
-        // commitment: {
-        //   value: null, type: 'dropdown', list: this.citemList, id: 'code', text: 'description', displayMul: false, width: 100
-        // },
-        hsnsac: {
-          value: null, type: 'dropdown', list: this.hsnsacList, id: 'code', text: 'description', displayMul: false, width: 100
-        },
-        delete: {
-          type: 'delete', width: 10
-        }
-      },
-      formControl: {
-        glaccount: [null, [Validators.required]],
-        amount: [null, [Validators.required]],
-      }
-    }
-  }
+  // tablePropsFunc(subGlAccountList = []) {
+  //   return {
+  //     tableData: {
+  //       id: {
+  //         value: 0, type: 'autoInc', width: 10, disabled: true
+  //       },
+  //       glaccount: {
+  //         value: null, type: 'autocomplete', list: this.glAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
+  //       },
+  //       subGlaccount: {
+  //         value: null, type: 'autocomplete', list: subGlAccountList, id: 'glsubName', displayId: 'glsubCode', displayText: 'glsubName', multiple: true, width: 200, primary: true
+  //       },
+  //       accountingIndicator: {
+  //         value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100, disabled: false
+  //       },
+  //       amount: {
+  //         value: null, type: 'number', width: 75, maxLength: 15
+  //       },
+  //       taxCode: {
+  //         value: null, type: 'dropdown', list: this.taxCodeList, id: 'taxRateCode', text: 'description', displayMul: false, width: 100
+  //       },
+  //       sgstamount: {
+  //         value: 0, type: 'number', disabled: true, width: 75
+  //       },
+  //       cgstamount: {
+  //         value: 0, type: 'number', disabled: true, width: 75
+  //       },
+  //       igstamount: {
+  //         value: 0, type: 'number', disabled: true, width: 75
+  //       },
+  //       // ugstamount: {
+  //       //   value: 0, type: 'number', disabled: true, width: 75
+  //       // },
+  //       // referenceNo: {
+  //       //   value: null, type: 'number', maxLength: 50, width: 75
+  //       // },
+  //       // referenceDate: {
+  //       //   value: new Date(), type: 'datepicker', width: 100
+  //       // },
+  //       // functionalDept: {
+  //       //   value: null, type: 'dropdown', list: this.functionaldeptList, id: 'code', text: 'description', displayMul: false, width: 100
+  //       // },
+  //       // profitCenter: {
+  //       //   value: null, type: 'dropdown', list: this.profitCenterList, id: 'id', text: 'text', displayMul: false, width: 100
+  //       // },
+  //       // segment: {
+  //       //   value: null, type: 'dropdown', list: this.segmentList, id: 'id', text: 'name', displayMul: false, width: 100
+  //       // },
+  //       // bttypes: {
+  //       //   value: null, type: 'dropdown', list: this.btList, id: 'code', text: 'description', displayMul: false, width: 150
+  //       // },
+  //       // costCenter: {
+  //       //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
+  //       // },
+  //       narration: {
+  //         value: null, type: 'text', width: 100, maxLength: 50
+  //       },
+  //       // workBreakStructureElement: {
+  //       //   value: null, type: 'dropdown', list: this.wbsList, id: 'id', text: 'text', displayMul: false, width: 100
+  //       // },
+  //       // netWork: {
+  //       //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
+  //       // },
+  //       // orderNo: {
+  //       //   value: null, type: 'dropdown', list: this.ordertypeList, id: 'orderType', text: 'description', displayMul: false, width: 100
+  //       // },
+  //       // fundCenter: {
+  //       //   value: null, type: 'dropdown', list: this.fcList, id: 'code', text: 'description', displayMul: false, width: 100
+  //       // },
+  //       // commitment: {
+  //       //   value: null, type: 'dropdown', list: this.citemList, id: 'code', text: 'description', displayMul: false, width: 100
+  //       // },
+  //       hsnsac: {
+  //         value: null, type: 'dropdown', list: this.hsnsacList, id: 'code', text: 'description', displayMul: false, width: 100
+  //       },
+  //       delete: {
+  //         type: 'delete', width: 10
+  //       }
+  //     },
+  //     formControl: {
+  //       glaccount: [null, [Validators.required]],
+  //       amount: [null, [Validators.required]],
+  //     }
+  //   }
+  // }
 
 
 
@@ -816,80 +817,80 @@ export class JournalComponent implements OnInit {
 
 
 
-  emitColumnChanges(data) {
+  // emitColumnChanges(data) {
 
-    if (data.column == "glaccount") {
-      const obj = this.glAccountList.find((g: any) => g.glaccountName == data.data[data.index].glaccount.value);
-      const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);
-      this.apiService.apiGetRequest(voucherNoUrl)
-        .subscribe(
-          response => {
-            this.spinner.hide();
-            const res = response;
-            if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-              if (!this.commonService.checkNullOrUndefined(res.response)) {
-                data.data[data.index].subGlaccount.list = res.response['glsubList'];
-                this.sendDynTableData = { type: 'add', data: data.data };
-              }
-            }
-          });
-    }
+  //   if (data.column == "glaccount") {
+  //     const obj = this.glAccountList.find((g: any) => g.glaccountName == data.data[data.index].glaccount.value);
+  //     const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);
+  //     this.apiService.apiGetRequest(voucherNoUrl)
+  //       .subscribe(
+  //         response => {
+  //           this.spinner.hide();
+  //           const res = response;
+  //           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //             if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //               data.data[data.index].subGlaccount.list = res.response['glsubList'];
+  //               this.sendDynTableData = { type: 'add', data: data.data };
+  //             }
+  //           }
+  //         });
+  //   }
 
-    this.tableData = data.data;
-    this.dataChange(data);
-    this.checkCreditDebit();
-  }
+  //   this.tableData = data.data;
+  //   this.dataChange(data);
+  //   this.checkCreditDebit();
+  // }
 
-  dataChange(row) {
-    if (row.column == 'accountingIndicator' || row.column == 'glaccount') {
-      if (row.data.length > 1) {
-        row.data.map((res, index) => {
-          if (index != 0 && !this.commonService.checkNullOrUndefined(row.data[0].accountingIndicator.value)) {
-            res.accountingIndicator.value = (row.data[0].accountingIndicator.value == 'Debit') ? 'Credit' : 'Debit';
-            res.accountingIndicator.disabled = true;
-          } else if (index != 0) {
-            res.accountingIndicator.disabled = true;
-          }
-        })
-      }
-      this.sendDynTableData = { type: 'add', data: row.data };
-      this.tableData = row.data;
-    }
-    if (row.column == 'taxCode' || row.column == 'amount') {
-      const code = row.data[row.index]['taxCode'].list.find(res => res.taxRateCode == row.data[row.index]['taxCode'].value);
-      if (!this.commonService.checkNullOrUndefined(code)) {
-        row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.cgst) / 100;
-        row.data[row.index].igstamount.value = (row.data[row.index].amount.value * code.igst) / 100;
-        row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.sgst) / 100;
-        row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.cgst) / 100;
-        this.sendDynTableData = { type: 'add', data: row.data };
-        this.tableData = row.data;
-      }
-    }
-  }
+  // dataChange(row) {
+  //   if (row.column == 'accountingIndicator' || row.column == 'glaccount') {
+  //     if (row.data.length > 1) {
+  //       row.data.map((res, index) => {
+  //         if (index != 0 && !this.commonService.checkNullOrUndefined(row.data[0].accountingIndicator.value)) {
+  //           res.accountingIndicator.value = (row.data[0].accountingIndicator.value == 'Debit') ? 'Credit' : 'Debit';
+  //           res.accountingIndicator.disabled = true;
+  //         } else if (index != 0) {
+  //           res.accountingIndicator.disabled = true;
+  //         }
+  //       })
+  //     }
+  //     this.sendDynTableData = { type: 'add', data: row.data };
+  //     this.tableData = row.data;
+  //   }
+  //   if (row.column == 'taxCode' || row.column == 'amount') {
+  //     const code = row.data[row.index]['taxCode'].list.find(res => res.taxRateCode == row.data[row.index]['taxCode'].value);
+  //     if (!this.commonService.checkNullOrUndefined(code)) {
+  //       row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.cgst) / 100;
+  //       row.data[row.index].igstamount.value = (row.data[row.index].amount.value * code.igst) / 100;
+  //       row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.sgst) / 100;
+  //       row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.cgst) / 100;
+  //       this.sendDynTableData = { type: 'add', data: row.data };
+  //       this.tableData = row.data;
+  //     }
+  //   }
+  // }
 
 
-  checkCreditDebit1() {
-    this.debitValue = 0;
-    this.creditValue = 0;
-    this.totalTaxValue = 0;
-    if (!this.commonService.checkNullOrUndefined(this.tableData)) {
-      if (this.tableData.length) {
-        this.tableData.forEach(res => {
-          if (res.accountingIndicator.value == 'Debit') {
-            this.debitValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount.value)) ? (this.debitValue + parseInt(res.amount.value)) : 0;
-          }
-          if (res.accountingIndicator.value == 'Credit') {
-            this.creditValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount.value)) ? (this.creditValue + parseInt(res.amount.value)) : 0;
-          }
-          // this.totalTaxValue = this.totalTaxValue + res.sgstamount.value + res.cgstamount.value + res.ugstamount.value + res.igstamount.value
-          this.totalTaxValue = this.totalTaxValue + res.sgstamount.value + res.cgstamount.value + res.igstamount.value
-        });
-        // this.disableSave = (this.debitValue == this.creditValue) ? false : true;
-      }
-    }
-    // this.disableSave = true;
-  }
+  // checkCreditDebit1() {
+  //   this.debitValue = 0;
+  //   this.creditValue = 0;
+  //   this.totalTaxValue = 0;
+  //   if (!this.commonService.checkNullOrUndefined(this.tableData)) {
+  //     if (this.tableData.length) {
+  //       this.tableData.forEach(res => {
+  //         if (res.accountingIndicator.value == 'Debit') {
+  //           this.debitValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount.value)) ? (this.debitValue + parseInt(res.amount.value)) : 0;
+  //         }
+  //         if (res.accountingIndicator.value == 'Credit') {
+  //           this.creditValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount.value)) ? (this.creditValue + parseInt(res.amount.value)) : 0;
+  //         }
+  //         // this.totalTaxValue = this.totalTaxValue + res.sgstamount.value + res.cgstamount.value + res.ugstamount.value + res.igstamount.value
+  //         this.totalTaxValue = this.totalTaxValue + res.sgstamount.value + res.cgstamount.value + res.igstamount.value
+  //       });
+  //       // this.disableSave = (this.debitValue == this.creditValue) ? false : true;
+  //     }
+  //   }
+  //   // this.disableSave = true;
+  // }
 
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { String } from 'typescript-string-operations';
 import { ApiService } from '../../../../services/api.service';
@@ -24,10 +24,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatButtonModule } from '@angular/material/button';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { TableComponent } from '../../../../reuse-components/table/table.component';
 
 @Component({
   selector: 'app-invoicesmemos',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, NonEditableDatepicker,  DynamicTableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, NgMultiSelectDropDownModule, TableComponent, TranslateModule, TypeaheadModule, NonEditableDatepicker, DynamicTableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './memoinvoice.component.html',
   styleUrls: ['./memoinvoice.component.scss'],
   providers: [
@@ -38,14 +40,40 @@ import { MatButtonModule } from '@angular/material/button';
 
 export class MemoinvoiceComponent implements OnInit {
 
+  @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
+
+  formData: FormGroup;
+  formData1: FormGroup;
+
   sendDynTableData: any;
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'glaccountName',
+    textField: 'glaccountName',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'glsubName',
+    textField: 'glsubName',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
 
   debitValue = 0;
   creditValue = 0;
   totalTaxValue = 0;
-  formData: FormGroup;
   routeEdit = '';
-  btList = [];
+  // btList = [];
   tableData = [];
   dynTableProps: any;
   ptermsList = [];
@@ -56,8 +84,8 @@ export class MemoinvoiceComponent implements OnInit {
   vouchersTypeList = [];
   transactionTypeList = ['Invoice', 'Memo']
   natureofTransactionList = ['Sale', 'Purchase'];
-  accountList = [];
   glAccountList = [];
+  subGlAccountList = [];
   indicatorList = [{ id: 'Debit', text: 'Debit' }, { id: 'Credit', text: 'Credit' }];
   profitCenterList = [];
   segmentList = [];
@@ -92,17 +120,9 @@ export class MemoinvoiceComponent implements OnInit {
       this.routeEdit = this.route.snapshot.params.value;
     }
   }
-  onbpChange() {
-    this.bpgLists = [];
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('bpcategory').value)) {
-      let data = this.bpTypeList.find(res => res.code == this.formData.get('bpcategory').value);
-      this.bpgLists = this.bpList.filter(res => res.bptype == data.code);
-    }
-  }
   ngOnInit() {
     this.formDataGroup();
-    this.getCompanyList();
-    this.formData.controls['voucherNumber'].disable();
+    this.allApis();
   }
 
   formDataGroup() {
@@ -138,101 +158,103 @@ export class MemoinvoiceComponent implements OnInit {
       addDate: [null],
       editDate: [null]
     });
+    this.formData.controls['voucherNumber'].disable();
+
+    this.formData1 = this.formBuilder.group({
+      glaccount: [''],
+      subGlaccount: [''],
+      accountingIndicator: [''],
+      amount: [''],
+      taxCode: [''],
+      sgstamount: [0],
+      cgstamount: [0],
+      igstamount: [0],
+      narration: [''],
+      hsnsac: [''],
+
+      id: [0],
+      highlight: false,
+      action: [[
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]],
+      index: 0
+    });
   }
 
-  tablePropsFunc(subGlAccountList = []) {
-    
-    return {
-      tableData: {
-        id: {
-          value: 0, type: 'autoInc', width: 10, disabled: true
-        },
-        glaccount: {
-          value: null, type: 'autocomplete', list: this.glAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
-        },
-        subGlaccount: {
-          value: null, type: 'autocomplete', list: subGlAccountList, id: 'glsubName', displayId: 'glsubCode', displayText: 'glsubName', multiple: true, width: 200, primary: true
-        },
-        accountingIndicator: {
-          value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100
-        },
-        amount: {
-          value: null, type: 'number', width: 100
-        },
-        taxCode: {
-          value: null, type: 'dropdown', list: this.taxCodeList, id: 'taxRateCode', text: 'description', displayMul: false, width: 100
-        },
-        sgstamount: {
-          value: 0, type: 'number', disabled: true, width: 75
-        },
-        cgstamount: {
-          value: 0, type: 'number', disabled: true, width: 75
-        },
-        igstamount: {
-          value: 0, type: 'number', disabled: true, width: 75
-        },
-        // ugstamount: {
-        //   value: 0, type: 'number', disabled: true, width: 75
-        // },
-        // referenceNo: {
-        //   value: null, type: 'number', width: 75
-        // },
-        // referenceDate: {
-        //   value: new Date(), type: 'datepicker', width: 100
-        // },
-        // functionalDept: {
-        //   value: null, type: 'dropdown', list: this.functionaldeptList, id: 'code', text: 'description', displayMul: false, width: 100
-        // },
-        // profitCenter: {
-        //   value: null, type: 'dropdown', list: this.profitCenterList, id: 'id', text: 'text', displayMul: false, width: 100
-        // },
-        // segment: {
-        //   value: null, type: 'dropdown', list: this.segmentList, id: 'id', text: 'name', displayMul: false, width: 100
-        // },
-        // bttypes: {
-        //   value: null, type: 'dropdown', list: this.btList, id: 'code', text: 'description', displayMul: false, width: 150
-        // },
-        // costCenter: {
-        //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
-        // },
-        narration: {
-          value: null, type: 'text', width: 100, maxLength: 50
-        },
-        // workBreakStructureElement: {
-        //   value: null, type: 'dropdown', list: this.wbsList, id: 'id', text: 'text', displayMul: false, width: 100
-        // },
-        // netWork: {
-        //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
-        // },
-        // orderNo: {
-        //   value: null, type: 'dropdown', list: this.ordertypeList, id: 'orderType', text: 'description', displayMul: false, width: 100
-        // },
-        // fundCenter: {
-        //   value: null, type: 'dropdown', list: this.fcList, id: 'code', text: 'description', displayMul: false, width: 100
-        // },
-        // commitment: {
-        //   value: null, type: 'dropdown', list: this.citemList, id: 'code', text: 'description', displayMul: false, width: 100
-        // },
-        hsnsac: {
-          value: null, type: 'dropdown', list: this.hsnsacList, id: 'code', text: 'description', displayMul: false, width: 100
-        },
-        delete: {
-          type: 'delete', width: 10
+  allApis() {
+    const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
+    const getVoucherTypesList = String.Join('/', this.apiConfigService.getVoucherTypesList);
+    const getGLAccountList = String.Join('/', this.apiConfigService.getGLAccountList);
+    const getTaxRatesList = String.Join('/', this.apiConfigService.getTaxRatesList);
+    const getPartnerTypeList = String.Join('/', this.apiConfigService.getPartnerTypeList);
+    const getBPList = String.Join('/', this.apiConfigService.getBPList);
+    const getHsnSacList = String.Join('/', this.apiConfigService.getHsnSacList);
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getCompanyList),
+        this.apiService.apiGetRequest(getVoucherTypesList),
+        this.apiService.apiGetRequest(getGLAccountList),
+        this.apiService.apiGetRequest(getTaxRatesList),
+        this.apiService.apiGetRequest(getPartnerTypeList),
+        this.apiService.apiGetRequest(getBPList),
+        this.apiService.apiGetRequest(getHsnSacList),
+
+      ]).subscribe(([supplierRes, materialRes, glList, taxratesList, ptypeList, bPList, hsnsacList]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(supplierRes) && supplierRes.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(supplierRes.response)) {
+            this.companyList = supplierRes.response['companiesList']
+          }
         }
-      },
-      formControl: {
-        glaccount: [null, [Validators.required]],
-        amount: [null, [Validators.required]],
-        accountingIndicator: [null, [Validators.required]]
-      }
-    }
+
+        if (!this.commonService.checkNullOrUndefined(materialRes) && materialRes.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(materialRes.response)) {
+            this.voucherTypeList = materialRes.response['vouchertypeList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(glList) && glList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(glList.response)) {
+            this.glAccountList = glList.response['glList'].filter(resp => resp.taxCategory != 'Cash' || resp.taxCategory != 'Bank' || resp.taxCategory != 'Control Account');
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(taxratesList) && taxratesList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(taxratesList.response)) {
+            this.taxCodeList = taxratesList.response['TaxratesList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(ptypeList) && ptypeList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(ptypeList.response)) {
+            this.bpTypeList = ptypeList.response['ptypeList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(bPList) && bPList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(bPList.response)) {
+            this.bpList = bPList.response['BPList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(hsnsacList) && hsnsacList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(hsnsacList.response)) {
+            this.hsnsacList = hsnsacList.response['hsnsacList'];
+          }
+        }
+
+        if (this.routeEdit != '') {
+          this.getIMDetail(this.routeEdit);
+        }
+
+      });
+    });
   }
-  accountSelect() {
-    this.vouchersTypeList = [];
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('transactionType').value)) {
-    }
-    this.vouchersTypeList = this.voucherTypeList.filter(resp => resp.voucherNature == this.formData.get('transactionType').value);
-  }
+
   getIMDetail(val) {
     const cashDetUrl = String.Join('/', this.apiConfigService.getIMDetail, val);
     this.apiService.apiGetRequest(cashDetUrl)
@@ -248,28 +270,393 @@ export class MemoinvoiceComponent implements OnInit {
               this.formData.patchValue({
                 partyAccount: bObj.text
               })
-              res.response['ImDetail'].forEach((d: any) => d.delete = true);
-              this.sendDynTableData = { type: 'edit', data: res.response['ImDetail'] };
+
+              const arr = [...res.response['ImDetail']];
+              arr.forEach((s: any, index: number) => {
+                s.glaccount = s.glaccount ? s.glaccount : '';
+                s.subGlaccount = s.subGlaccount ? s.subGlaccount : '';
+                s.accountingIndicator = s.accountingIndicator ? s.accountingIndicator : '';
+                s.amount = s.amount ? s.amount : 0;
+                s.taxCode = s.taxCode ? s.taxCode : '';
+                s.sgstamount = s.sgstamount ? s.sgstamount : 0;
+                s.cgstamount = s.cgstamount ? s.cgstamount : 0;
+                s.igstamount = s.igstamount ? s.igstamount : 0;
+                s.narration = s.narration ? s.narration : '';
+                s.hsnsac = s.hsnsac ? s.hsnsac : '';
+
+                s.action = [
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' }
+                ];
+                s.id = s.id ? s.id : 0;
+                s.index = index + 1;
+              })
+              this.tableData = arr;
+
+              // res.response['ImDetail'].forEach((d: any) => d.delete = true);
+              // this.sendDynTableData = { type: 'edit', data: res.response['ImDetail'] };
               this.formData.disable();
             }
           }
         });
   }
 
-  getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-    this.apiService.apiGetRequest(companyUrl)
+
+  accountSelect() {
+    this.vouchersTypeList = this.voucherTypeList.filter(resp => resp.voucherNature == this.formData.get('transactionType').value);
+  }
+
+  voucherTypeSelect() {
+    const record = this.voucherTypeList.find(res => res.id == this.formData.get('voucherClass').value)
+    this.formData.patchValue({
+      voucherClass: !this.commonService.checkNullOrUndefined(record) ? record.voucherClass : null
+    })
+  }
+
+  voucherNoCalculate() {
+    this.voucherTypeSelect();
+    this.formData.patchValue({
+      voucherNumber: null
+    })
+    if (!this.commonService.checkNullOrUndefined(this.formData.get('voucherType').value)) {
+      const voucherNoUrl = String.Join('/', this.apiConfigService.getVoucherNumber, this.formData.get('voucherType').value);
+      this.apiService.apiGetRequest(voucherNoUrl)
+        .subscribe(
+          response => {
+            this.spinner.hide();
+            const res = response;
+            if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+              if (!this.commonService.checkNullOrUndefined(res.response)) {
+                this.formData.patchValue({
+                  voucherNumber: !this.commonService.checkNullOrUndefined(res.response['VoucherNumber']) ? res.response['VoucherNumber'] : null
+                })
+              }
+            }
+          });
+    }
+  }
+
+  onbpChange() {
+    this.bpgLists = [];
+    if (!this.commonService.checkNullOrUndefined(this.formData.get('bpcategory').value)) {
+      let data = this.bpTypeList.find(res => res.code == this.formData.get('bpcategory').value);
+      this.bpgLists = this.bpList.filter(res => res.bptype == data.code);
+    }
+  }
+
+  saveForm() {
+
+    if (this.formData1.invalid) {
+      return;
+    }
+
+    this.formData1.patchValue({
+      highlight: true
+    });
+
+    let fObj = this.formData1.value;
+    fObj.glaccount = Array.isArray(fObj.glaccount) && fObj.glaccount.length > 0 && fObj.glaccount[0].glaccountName
+      ? fObj.glaccount[0].glaccountName
+      : fObj.glaccount;
+    fObj.subGlaccount = Array.isArray(fObj.subGlaccount) && fObj.subGlaccount.length > 0 && fObj.subGlaccount[0].glsubName
+      ? fObj.subGlaccount[0].glsubName
+      : fObj.subGlaccount;
+
+    let data: any = this.tableData;
+    this.tableData = null;
+    this.tableComponent.defaultValues();
+    if (fObj.index == 0) {
+      fObj.index = data ? (data.length + 1) : 1
+      data = [fObj, ...data];
+    } else {
+      data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
+    }
+    setTimeout(() => {
+      this.tableData = data;
+      this.checkCreditDebit();
+    });
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.formData1.reset();
+    this.formData1.patchValue({
+      index: 0,
+      action: [
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ],
+      id: 0
+    });
+  }
+
+  editOrDeleteEvent(value) {
+    if (value.action === 'Delete') {
+      this.deleteRecord(value);
+    } else {
+      this.formData1.patchValue(value.item);
+      this.formData1.patchValue({
+        glaccount: [{ glaccountName: value.item.glaccount }],
+        subGlaccount: [{ glsubName: value.item.subGlaccount }]
+      })
+    }
+  }
+
+  deleteRecord(value) {
+    // const obj = {
+    //   item: {
+    //     materialCode: value.item.materialCode
+    //   },
+    //   primary: 'materialCode'
+    // }
+    // this.commonService.deletePopup(obj, (flag: any) => {
+    //   if (flag) {
+    //     const jvDetUrl = String.Join('/', this.apiConfigService.deletePurchaseOrder, value.item.id);
+    //     this.apiService.apiDeleteRequest(jvDetUrl)
+    //       .subscribe(
+    //         response => {
+    //           const res = response;
+    //           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //             if (!this.commonService.checkNullOrUndefined(res.response)) {
+    this.tableComponent.defaultValues();
+    this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
+    //               this.alertService.openSnackBar('Delected Record...', 'close', SnackBar.success);
+    //             }
+    //           }
+    //           this.spinner.hide();
+    //         });
+    //   }
+    // })
+  }
+
+  getgLsubAccountList() {
+    const obj = this.glAccountList.find((g: any) => g.glaccountName == this.formData1.value.glaccount[0].glaccountName);
+    const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);
+    this.apiService.apiGetRequest(voucherNoUrl)
       .subscribe(
         response => {
+          this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
+              this.subGlAccountList = res.response['glsubList'];
             }
           }
-          this.getVoucherTypes();
         });
   }
+
+
+  taxCodeAmountChange() {
+    const code = this.taxCodeList.find(res => res.taxRateCode == this.formData1.value.taxCode);
+    if (code) {
+      this.formData1.patchValue({
+        sgstamount: (this.formData1.value.amount * code.sgst) / 100,
+        igstamount: (this.formData1.value.amount * code.igst) / 100,
+        cgstamount: (this.formData1.value.amount * code.cgst) / 100
+      })
+      // this.sendDynTableData = { type: 'add', data: row.data };
+      // this.tableData = row.data;
+    }
+  }
+
+  accountingIndicatorChange() {
+    // if (row.data.length > 1) {
+    //         row.data.map((res, index) => {
+    //           if (index != 0 && !this.commonService.checkNullOrUndefined(row.data[0].accountingIndicator.value)) {
+    //             res.accountingIndicator.value = (row.data[0].accountingIndicator.value == 'Debit') ? 'Credit' : 'Debit';
+    //             res.accountingIndicator.disabled = true;
+    //           } else if (index != 0) {
+    //             res.accountingIndicator.disabled = true;
+    //           }
+    //         })
+    //       }
+  }
+
+  checkCreditDebit() {
+    this.debitValue = 0;
+    this.creditValue = 0;
+    this.totalTaxValue = 0;
+    if (!this.commonService.checkNullOrUndefined(this.tableData)) {
+      if (this.tableData.length) {
+        this.tableData.forEach(res => {
+          if (res.accountingIndicator == 'Debit') {
+            this.debitValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount)) ? (this.debitValue + parseInt(res.amount)) : 0;
+          }
+          if (res.accountingIndicator == 'Credit') {
+            this.creditValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount)) ? (this.creditValue + parseInt(res.amount)) : 0;
+          }
+          // this.totalTaxValue = this.totalTaxValue + res.sgstamount + res.cgstamount + res.ugstamount + res.igstamount
+          this.totalTaxValue = this.totalTaxValue + res.sgstamount + res.cgstamount + res.igstamount
+        });
+        // this.disableSave = (this.debitValue == this.creditValue) ? false : true;
+      }
+    }
+    // this.disableSave = true;
+  }
+
+  back() {
+    this.router.navigate(['dashboard/transaction/invoicesmemos']);
+  }
+
+
+  save() {
+    const arr = this.tableData.filter((t: any) => t.highlight);
+    // this.tableData = this.commonService.formatTableData(this.tableData);
+    if (this.tableData.length == 0 || this.formData.invalid || arr.length == 0) {
+      return;
+    }
+    const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
+    this.formData.patchValue({
+      totalAmount: this.debitValue + this.creditValue + this.totalTaxValue,
+      partyAccount: bObj.id
+    })
+    this.formData.controls['voucherNumber'].enable();
+    arr.forEach((t: any) => {
+      const obj = this.glAccountList.find((g: any) => g.glaccountName == t.glaccount);
+      t.glaccount = obj.accountNumber
+    })
+    const addInvoiceMemo = String.Join('/', this.apiConfigService.addInvoiceMemo);
+    const requestObj = { imHdr: this.formData.value, imDtl: arr };
+    this.apiService.apiPostRequest(addInvoiceMemo, requestObj).subscribe(
+      response => {
+        const res = response;
+        this.tableData = [];
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar('Invoice / Memo created Successfully..', Static.Close, SnackBar.success);
+          }
+          // this.reset();
+          this.spinner.hide();
+          this.router.navigate(['/dashboard/transaction/invoicesmemos'])
+
+        }
+      });
+  }
+
+  reset() {
+    this.tableData = [];
+    this.formData.reset();
+    this.formData.controls['voucherNumber'].disable();
+    // this.sendDynTableData = { type: 'reset', data: this.tableData };
+  }
+
+  return() {
+    const addInvoiceMemo = String.Join('/', this.apiConfigService.returnCashBank, this.routeEdit);
+    this.apiService.apiGetRequest(addInvoiceMemo).subscribe(
+      response => {
+        const res = response;
+        this.tableData = [];
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar(res.response, Static.Close, SnackBar.success);
+          }
+          this.spinner.hide();
+        }
+      });
+  }
+
+  // tablePropsFunc(subGlAccountList = []) {
+
+  //   return {
+  //     tableData: {
+  //       id: {
+  //         value: 0, type: 'autoInc', width: 10, disabled: true
+  //       },
+  //       glaccount: {
+  //         value: null, type: 'autocomplete', list: this.glAccountList, id: 'glaccountName', displayId: 'accountNumber', displayText: 'glaccountName', multiple: true, width: 200, primary: true
+  //       },
+  //       subGlaccount: {
+  //         value: null, type: 'autocomplete', list: subGlAccountList, id: 'glsubName', displayId: 'glsubCode', displayText: 'glsubName', multiple: true, width: 200, primary: true
+  //       },
+  //       accountingIndicator: {
+  //         value: null, type: 'dropdown', list: this.indicatorList, id: 'id', text: 'text', displayMul: false, width: 100
+  //       },
+  //       amount: {
+  //         value: null, type: 'number', width: 100
+  //       },
+  //       taxCode: {
+  //         value: null, type: 'dropdown', list: this.taxCodeList, id: 'taxRateCode', text: 'description', displayMul: false, width: 100
+  //       },
+  //       sgstamount: {
+  //         value: 0, type: 'number', disabled: true, width: 75
+  //       },
+  //       cgstamount: {
+  //         value: 0, type: 'number', disabled: true, width: 75
+  //       },
+  //       igstamount: {
+  //         value: 0, type: 'number', disabled: true, width: 75
+  //       },
+  //       // ugstamount: {
+  //       //   value: 0, type: 'number', disabled: true, width: 75
+  //       // },
+  //       // referenceNo: {
+  //       //   value: null, type: 'number', width: 75
+  //       // },
+  //       // referenceDate: {
+  //       //   value: new Date(), type: 'datepicker', width: 100
+  //       // },
+  //       // functionalDept: {
+  //       //   value: null, type: 'dropdown', list: this.functionaldeptList, id: 'code', text: 'description', displayMul: false, width: 100
+  //       // },
+  //       // profitCenter: {
+  //       //   value: null, type: 'dropdown', list: this.profitCenterList, id: 'id', text: 'text', displayMul: false, width: 100
+  //       // },
+  //       // segment: {
+  //       //   value: null, type: 'dropdown', list: this.segmentList, id: 'id', text: 'name', displayMul: false, width: 100
+  //       // },
+  //       // bttypes: {
+  //       //   value: null, type: 'dropdown', list: this.btList, id: 'code', text: 'description', displayMul: false, width: 150
+  //       // },
+  //       // costCenter: {
+  //       //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
+  //       // },
+  //       narration: {
+  //         value: null, type: 'text', width: 100, maxLength: 50
+  //       },
+  //       // workBreakStructureElement: {
+  //       //   value: null, type: 'dropdown', list: this.wbsList, id: 'id', text: 'text', displayMul: false, width: 100
+  //       // },
+  //       // netWork: {
+  //       //   value: null, type: 'dropdown', list: this.costCenterList, id: 'id', text: 'text', displayMul: false, width: 100
+  //       // },
+  //       // orderNo: {
+  //       //   value: null, type: 'dropdown', list: this.ordertypeList, id: 'orderType', text: 'description', displayMul: false, width: 100
+  //       // },
+  //       // fundCenter: {
+  //       //   value: null, type: 'dropdown', list: this.fcList, id: 'code', text: 'description', displayMul: false, width: 100
+  //       // },
+  //       // commitment: {
+  //       //   value: null, type: 'dropdown', list: this.citemList, id: 'code', text: 'description', displayMul: false, width: 100
+  //       // },
+  //       hsnsac: {
+  //         value: null, type: 'dropdown', list: this.hsnsacList, id: 'code', text: 'description', displayMul: false, width: 100
+  //       },
+  //       delete: {
+  //         type: 'delete', width: 10
+  //       }
+  //     },
+  //     formControl: {
+  //       glaccount: [null, [Validators.required]],
+  //       amount: [null, [Validators.required]],
+  //       accountingIndicator: [null, [Validators.required]]
+  //     }
+  //   }
+  // }
+
+  // getCompanyList() {
+  //   const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+  //   this.apiService.apiGetRequest(companyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companyList = res.response['companiesList'];
+  //           }
+  //         }
+  //         this.getVoucherTypes();
+  //       });
+  // }
 
   // getBranchList() {
   //   const branchUrl = String.Join('/', this.apiConfigService.getBranchList);
@@ -286,53 +673,53 @@ export class MemoinvoiceComponent implements OnInit {
   //       });
   // }
 
-  getVoucherTypes() {
-    const voucherTypes = String.Join('/', this.apiConfigService.getVoucherTypesList);
-    this.apiService.apiGetRequest(voucherTypes)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.voucherTypeList = res.response['vouchertypeList'];
-            }
-          }
-          this.getGLAccountList();
-        });
-  }
+  // getVoucherTypes() {
+  //   const voucherTypes = String.Join('/', this.apiConfigService.getVoucherTypesList);
+  //   this.apiService.apiGetRequest(voucherTypes)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.voucherTypeList = res.response['vouchertypeList'];
+  //           }
+  //         }
+  //         this.getGLAccountList();
+  //       });
+  // }
 
-  getGLAccountList() {
-    const glAccUrl = String.Join('/', this.apiConfigService.getGLAccountList);
-    this.apiService.apiGetRequest(glAccUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.glAccountList = res.response['glList'];
-              this.accountList = res.response['glList'];
-              // this.accountList = res.response['glList'].filter(resp => resp.taxCategory == 'Cash' || resp.taxCategory == 'Bank');
-              // this.glAccountList = res.response['glList'].filter(resp => resp.taxCategory != 'Cash' || resp.taxCategory != 'Bank' || resp.taxCategory != 'Control Account');
-            }
-          }
-          this.getTaxRatesList();
-        });
-  }
+  // getGLAccountList() {
+  //   const glAccUrl = String.Join('/', this.apiConfigService.getGLAccountList);
+  //   this.apiService.apiGetRequest(glAccUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.glAccountList = res.response['glList'];
+  //             // this.accountList = res.response['glList'];
+  //             // this.accountList = res.response['glList'].filter(resp => resp.taxCategory == 'Cash' || resp.taxCategory == 'Bank');
+  //             // this.glAccountList = res.response['glList'].filter(resp => resp.taxCategory != 'Cash' || resp.taxCategory != 'Bank' || resp.taxCategory != 'Control Account');
+  //           }
+  //         }
+  //         this.getTaxRatesList();
+  //       });
+  // }
 
-  getTaxRatesList() {
-    const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);
-    this.apiService.apiGetRequest(taxCodeUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.taxCodeList = res.response['TaxratesList'];
-            }
-          }
-          this.getBusienessTransactionTypeList();
-        });
-  }
+  // getTaxRatesList() {
+  //   const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);
+  //   this.apiService.apiGetRequest(taxCodeUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.taxCodeList = res.response['TaxratesList'];
+  //           }
+  //         }
+  //         this.getBusienessTransactionTypeList();
+  //       });
+  // }
 
   // getProfitCentersList() {
   //   const profCentUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
@@ -348,20 +735,20 @@ export class MemoinvoiceComponent implements OnInit {
   //         this.getBusienessTransactionTypeList();
   //       });
   // }
-  getBusienessTransactionTypeList() {
-    const segUrl = String.Join('/', this.apiConfigService.getBusienessTransactionTypeList);
-    this.apiService.apiGetRequest(segUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.btList = res.response['bpttList'];
-            }
-          }
-          this.getPartnerTypeList();
-        });
-  }
+  // getBusienessTransactionTypeList() {
+  //   const segUrl = String.Join('/', this.apiConfigService.getBusienessTransactionTypeList);
+  //   this.apiService.apiGetRequest(segUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.btList = res.response['bpttList'];
+  //           }
+  //         }
+  //         this.getPartnerTypeList();
+  //       });
+  // }
   // getSegments() {
   //   const segUrl = String.Join('/', this.apiConfigService.getSegmentList);
   //   this.apiService.apiGetRequest(segUrl)
@@ -390,36 +777,36 @@ export class MemoinvoiceComponent implements OnInit {
   //         this.getPartnerTypeList();
   //       });
   // }
-  getPartnerTypeList() {
-    const costCenUrl = String.Join('/', this.apiConfigService.getPartnerTypeList);
-    this.apiService.apiGetRequest(costCenUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.bpTypeList = res.response['ptypeList'];
+  // getPartnerTypeList() {
+  //   const costCenUrl = String.Join('/', this.apiConfigService.getPartnerTypeList);
+  //   this.apiService.apiGetRequest(costCenUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.bpTypeList = res.response['ptypeList'];
 
-            }
-          }
-          this.getbpList();
-        });
-  }
-  getbpList() {
-    const costCenUrl = String.Join('/', this.apiConfigService.getBPList);
-    this.apiService.apiGetRequest(costCenUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.bpList = res.response['BPList'];
+  //           }
+  //         }
+  //         this.getbpList();
+  //       });
+  // }
+  // getbpList() {
+  //   const costCenUrl = String.Join('/', this.apiConfigService.getBPList);
+  //   this.apiService.apiGetRequest(costCenUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.bpList = res.response['BPList'];
 
-            }
-          }
-          this.getHsnSacList();
-        });
-  }
+  //           }
+  //         }
+  //         this.getHsnSacList();
+  //       });
+  // }
   // getPaymenttermsList() {
   //   const getpmList = String.Join('/', this.apiConfigService.getPaymentsTermsList);
   //   this.apiService.apiGetRequest(getpmList)
@@ -435,20 +822,20 @@ export class MemoinvoiceComponent implements OnInit {
   //       });
   // }
 
-  getHsnSacList() {
-    const segUrl = String.Join('/', this.apiConfigService.getHsnSacList);
-    this.apiService.apiGetRequest(segUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.hsnsacList = res.response['hsnsacList'];
-            }
-          }
-          this.getordernoList();
-        });
-  }
+  // getHsnSacList() {
+  //   const segUrl = String.Join('/', this.apiConfigService.getHsnSacList);
+  //   this.apiService.apiGetRequest(segUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.hsnsacList = res.response['hsnsacList'];
+  //           }
+  //         }
+  //         this.getordernoList();
+  //       });
+  // }
 
   // getWbsList() {
   //   const segUrl = String.Join('/', this.apiConfigService.getwbselement);
@@ -492,26 +879,26 @@ export class MemoinvoiceComponent implements OnInit {
   //         this.getordernoList();
   //       });
   // }
-  getordernoList() {
-    const onoUrl = String.Join('/', this.apiConfigService.getordernolist);
-    this.apiService.apiGetRequest(onoUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.ordertypeList = res.response['ordertypeList'];
-            }
-          }
+  // getordernoList() {
+  //   const onoUrl = String.Join('/', this.apiConfigService.getordernolist);
+  //   this.apiService.apiGetRequest(onoUrl)
+  //     .subscribe(
+  //       response => {
+  //         this.spinner.hide();
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.ordertypeList = res.response['ordertypeList'];
+  //           }
+  //         }
 
-          this.dynTableProps = this.tablePropsFunc();
-          if (this.routeEdit != '') {
-            this.getIMDetail(this.routeEdit);
-          }
-          // this.getCostcenters();
-        });
-  }
+  //         this.dynTableProps = this.tablePropsFunc();
+  //         if (this.routeEdit != '') {
+  //           this.getIMDetail(this.routeEdit);
+  //         }
+  //         // this.getCostcenters();
+  //       });
+  // }
   // getCostcenters() {
   //   const costCenUrl = String.Join('/', this.apiConfigService.getCostCentersList);
   //   this.apiService.apiGetRequest(costCenUrl)
@@ -528,156 +915,114 @@ export class MemoinvoiceComponent implements OnInit {
   //       });
   // }
 
-  voucherTypeSelect() {
-    const record = this.voucherTypeList.find(res => res.id == this.formData.get('voucherClass').value)
-    this.formData.patchValue({
-      voucherClass: !this.commonService.checkNullOrUndefined(record) ? record.voucherClass : null
-    })
-  }
 
-  voucherNoCalculate() {
-    this.formData.patchValue({
-      voucherNumber: null
-    })
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('voucherType').value)) {
-      const voucherNoUrl = String.Join('/', this.apiConfigService.getVoucherNumber, this.formData.get('voucherType').value);
-      this.apiService.apiGetRequest(voucherNoUrl)
-        .subscribe(
-          response => {
-            this.spinner.hide();
-            const res = response;
-            if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-              if (!this.commonService.checkNullOrUndefined(res.response)) {
-                this.formData.patchValue({
-                  voucherNumber: !this.commonService.checkNullOrUndefined(res.response['VoucherNumber']) ? res.response['VoucherNumber'] : null
-                })
-              }
-            }
-          });
-    }
-  }
 
-  emitColumnChanges(data) {
+
+
+  // emitColumnChanges(data) {
+
+  //   if (data.column == "glaccount") {
+  //     const obj = this.glAccountList.find((g: any) => g.glaccountName == data.data[data.index].glaccount.value);
+  //     const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);
+  //     this.apiService.apiGetRequest(voucherNoUrl)
+  //       .subscribe(
+  //         response => {
+  //           this.spinner.hide();
+  //           const res = response;
+  //           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //             if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //               data.data[data.index].subGlaccount.list = res.response['glsubList'];
+  //               this.sendDynTableData = { type: 'add', data: data.data };
+  //             }
+  //           }
+  //         });
+  //   }
+  //   this.tableData = this.commonService.formatTableData(this.tableData);
+  //   this.checkCreditDebit();
+  //   this.tableData = data.data;
+  //   this.calculateAmount(data)
+  // }
+
+  // checkCreditDebit() {
+  //   this.debitValue = 0;
+  //   this.creditValue = 0;
+  //   this.totalTaxValue = 0;
+  //   if (!this.commonService.checkNullOrUndefined(this.tableData)) {
+  //     if (this.tableData.length) {
+  //       this.tableData.forEach(res => {
+  //         if (res.accountingIndicator == 'Debit') {
+  //           this.debitValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount)) ? (this.debitValue + parseInt(res.amount)) : 0;
+  //         }
+  //         if (res.accountingIndicator == 'Credit') {
+  //           this.creditValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount)) ? (this.creditValue + parseInt(res.amount)) : 0;
+  //         }
+  //         this.totalTaxValue = this.totalTaxValue + res.sgstamount + res.cgstamount + res.ugstamount + res.igstamount
+  //       });
+  //     }
+  //   }
+  //   this.tableData = [];
+  // }
+
+  // calculateAmount(row) {
+  //   if (row.column == 'taxCode' || row.column == 'amount') {
+  //     const code = row.data[row.index]['taxCode'].list.find(res => res.taxRateCode == row.data[row.index]['taxCode'].value);
+  //     if (!this.commonService.checkNullOrUndefined(code)) {
+  //       row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.cgst) / 100;
+  //       row.data[row.index].igstamount.value = (row.data[row.index].amount.value * code.igst) / 100;
+  //       row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.sgst) / 100;
+  //       row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.cgst) / 100;
+  //       this.sendDynTableData = { type: 'add', data: row.data };
+  //       this.tableData = row.data;
+  //     }
+  //   }
+  // }
+
+
+  // back() {
+  //   this.router.navigate(['dashboard/transaction/invoicesmemos'])
+  // }
+
+  // save() {
+  //   this.tableData = this.commonService.formatTableData(this.tableData);
+  //   if (this.tableData.length == 0) {
+  //     return;
+  //   }
+  //   const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
+
     
-    if (data.column == "glaccount") {
-      const obj = this.glAccountList.find((g: any) => g.glaccountName == data.data[data.index].glaccount.value);
-      const voucherNoUrl = String.Join('/', this.apiConfigService.gLsubAccountListbyCatetory, obj.accountNumber);
-      this.apiService.apiGetRequest(voucherNoUrl)
-        .subscribe(
-          response => {
-            this.spinner.hide();
-            const res = response;
-            if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-              if (!this.commonService.checkNullOrUndefined(res.response)) {
-                data.data[data.index].subGlaccount.list  = res.response['glsubList'];
-                this.sendDynTableData = { type: 'add', data: data.data };
-              }
-            }
-          });
-    }
-    this.tableData = this.commonService.formatTableData(this.tableData);
-    this.checkCreditDebit();
-    this.tableData = data.data;
-    this.calculateAmount(data)
-  }
-
-  checkCreditDebit() {
-    this.debitValue = 0;
-    this.creditValue = 0;
-    this.totalTaxValue = 0;
-    if (!this.commonService.checkNullOrUndefined(this.tableData)) {
-      if (this.tableData.length) {
-        this.tableData.forEach(res => {
-          if (res.accountingIndicator == 'Debit') {
-            this.debitValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount)) ? (this.debitValue + parseInt(res.amount)) : 0;
-          }
-          if (res.accountingIndicator == 'Credit') {
-            this.creditValue = !this.commonService.checkNullOrUndefined(parseInt(res.amount)) ? (this.creditValue + parseInt(res.amount)) : 0;
-          }
-          this.totalTaxValue = this.totalTaxValue + res.sgstamount + res.cgstamount + res.ugstamount + res.igstamount
-        });
-      }
-    }
-    this.tableData = [];
-  }
-
-  calculateAmount(row) {
-    if (row.column == 'taxCode' || row.column == 'amount') {
-      const code = row.data[row.index]['taxCode'].list.find(res => res.taxRateCode == row.data[row.index]['taxCode'].value);
-      if (!this.commonService.checkNullOrUndefined(code)) {
-        row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.cgst) / 100;
-        row.data[row.index].igstamount.value = (row.data[row.index].amount.value * code.igst) / 100;
-        row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.sgst) / 100;
-        row.data[row.index].cgstamount.value = (row.data[row.index].amount.value * code.cgst) / 100;
-        this.sendDynTableData = { type: 'add', data: row.data };
-        this.tableData = row.data;
-      }
-    }
-  }
+  //   this.saveInvoiceMemo();
+  // }
 
 
-  back() {
-    this.router.navigate(['dashboard/transaction/invoicesmemos'])
-  }
+  // reset() {
+  //   this.tableData = [];
+  //   this.formData.reset();
+  //   this.formData.controls['voucherNumber'].disable();
+  //   this.sendDynTableData = { type: 'reset', data: this.tableData };
+  // }
 
-  save() {
-    this.tableData = this.commonService.formatTableData(this.tableData);
-    if (this.tableData.length == 0) {
-      return;
-    }
-    const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
+  // saveInvoiceMemo() {
+  //   this.formData.controls['voucherNumber'].enable();
+  //   const tableData = this.tableData;
+  //   tableData.forEach((t: any) => {
+  //     const obj = this.glAccountList.find((g: any) => g.glaccountName == t.glaccount);
+  //     t.glaccount = obj.accountNumber
+  //   })
+  //   const addInvoiceMemo = String.Join('/', this.apiConfigService.addInvoiceMemo);
+  //   const requestObj = { imHdr: this.formData.value, imDtl: this.tableData };
+  //   this.apiService.apiPostRequest(addInvoiceMemo, requestObj).subscribe(
+  //     response => {
+  //       const res = response;
+  //       this.tableData = [];
+  //       if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //         if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //           this.alertService.openSnackBar('Invoice / Memo created Successfully..', Static.Close, SnackBar.success);
+  //         }
+  //         // this.reset();
+  //         this.router.navigate(['/dashboard/transaction/invoicesmemos'])
 
-    this.formData.patchValue({
-      totalAmount: this.debitValue + this.creditValue + this.totalTaxValue,
-      partyAccount: bObj.id
-    })
-    this.saveInvoiceMemo();
-  }
-
-  return() {
-    const addInvoiceMemo = String.Join('/', this.apiConfigService.returnCashBank, this.routeEdit);
-    this.apiService.apiGetRequest(addInvoiceMemo).subscribe(
-      response => {
-        const res = response;
-        this.tableData = [];
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.alertService.openSnackBar(res.response, Static.Close, SnackBar.success);
-          }
-          this.spinner.hide();
-        }
-      });
-  }
-
-  reset() {
-    this.tableData = [];
-    this.formData.reset();
-    this.formData.controls['voucherNumber'].disable();
-    this.sendDynTableData = { type: 'reset', data: this.tableData };
-  }
-
-  saveInvoiceMemo() {
-    this.formData.controls['voucherNumber'].enable();
-    const tableData = this.tableData;
-    tableData.forEach((t: any) => {
-      const obj = this.glAccountList.find((g: any) => g.glaccountName == t.glaccount);
-      t.glaccount = obj.accountNumber
-    })
-    const addInvoiceMemo = String.Join('/', this.apiConfigService.addInvoiceMemo);
-    const requestObj = { imHdr: this.formData.value, imDtl: this.tableData };
-    this.apiService.apiPostRequest(addInvoiceMemo, requestObj).subscribe(
-      response => {
-        const res = response;
-        this.tableData = [];
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.alertService.openSnackBar('Invoice / Memo created Successfully..', Static.Close, SnackBar.success);
-          }
-          // this.reset();
-          this.router.navigate(['/dashboard/transaction/invoicesmemos'])
-
-          this.spinner.hide();
-        }
-      });
-  }
+  //         this.spinner.hide();
+  //       }
+  //     });
+  // }
 }
