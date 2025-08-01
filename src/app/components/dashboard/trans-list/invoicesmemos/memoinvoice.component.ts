@@ -21,7 +21,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatButtonModule } from '@angular/material/button';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -29,7 +28,7 @@ import { TableComponent } from '../../../../reuse-components/table/table.compone
 
 @Component({
   selector: 'app-invoicesmemos',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, NgMultiSelectDropDownModule, TableComponent, TranslateModule, TypeaheadModule, NonEditableDatepicker, DynamicTableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, NgMultiSelectDropDownModule, TableComponent, TranslateModule, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './memoinvoice.component.html',
   styleUrls: ['./memoinvoice.component.scss'],
   providers: [
@@ -219,7 +218,7 @@ export class MemoinvoiceComponent implements OnInit {
 
         if (!this.commonService.checkNullOrUndefined(glList) && glList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(glList.response)) {
-            this.glAccountList = glList.response['glList'].filter(resp => resp.taxCategory != 'Cash' || resp.taxCategory != 'Bank' || resp.taxCategory != 'Control Account');
+            this.glAccountList = glList.response['glList'];
           }
         }
 
@@ -300,7 +299,6 @@ export class MemoinvoiceComponent implements OnInit {
           }
         });
   }
-
 
   accountSelect() {
     this.vouchersTypeList = this.voucherTypeList.filter(resp => resp.voucherNature == this.formData.get('transactionType').value);

@@ -747,7 +747,8 @@
     "cgstamount": "CGST",
     "igstamount": "IGST",
     "ugstamount": "UGST",
-    "delete": "Delete"
+    "delete": "Delete",
+    "action": "Action"
   },
   "journals": {
     "id": "ID",
@@ -825,7 +826,8 @@
     "cgstamount": "CGST",
     "igstamount": "IGST",
     "ugstamount": "UGST",
-    "delete": "Delete"
+    "delete": "Delete",
+    "action": "Action"
   },
   "receiptspayments": {
     "checkAll": "Select",

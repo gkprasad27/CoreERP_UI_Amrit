@@ -1,9 +1,12 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <mat-card>
 
     <mat-card-content>
 
         <form [formGroup]="formData" autocomplete="off" *ngIf="formData">
+
+             <h6>
+                Cash / Bank Master
+            </h6>
 
             <div class="d--flex p-1 mat-form-field-height">
                 <mat-form-field class="form-element">
@@ -49,7 +52,7 @@
                 <mat-form-field class="form-element">
                     <mat-label>{{ 'cashbank.voucherType' | translate }}</mat-label>
                     <mat-select formControlName="voucherType"
-                        (selectionChange)="voucherTypeSelect(); voucherNoCalculate();">
+                        (selectionChange)="voucherNoCalculate();">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let type of vouchersTypeList" [value]="type.voucherTypeId">
                             {{type.voucherTypeName}}
@@ -139,11 +142,144 @@
             </div>  
         </form>
 
-        <div>
+        <!-- <div>
             <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
                 [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
-            <!-- <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
-                 [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table> -->
+            <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
+                 [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
+        </div> -->
+
+         <div class="p-2 card">
+
+            <h6>
+                Cash / Bank Details
+            </h6>
+
+            <form [formGroup]="formData1" autocomplete="off">
+
+                <div class="d--flex p-1 mat-form-field-height">
+
+                    <div class="multiselect-dropdown-list">
+                        <ng-multiselect-dropdown placeholder="{{ 'journals.glaccountName' | translate }}"
+                            formControlName="glaccount" (onSelect)="getgLsubAccountList();"
+                            [settings]="dropdownSettings" [data]="glAccountList">
+                        </ng-multiselect-dropdown>
+                    </div>
+
+                    <div class="multiselect-dropdown-list">
+                        <ng-multiselect-dropdown placeholder="{{ 'journals.glsubName' | translate }}"
+                            formControlName="subGlaccount" [settings]="dropdownSettings1" [data]="subGlAccountList">
+                        </ng-multiselect-dropdown>
+                    </div>
+
+                    <!-- <mat-form-field class="form-element">
+                        <mat-label>{{ 'journals.glaccountName' | translate }}</mat-label>
+                        <mat-select formControlName="glaccount"
+                            (selectionChange)="getgLsubAccountList(); accountingIndicatorChange();">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let comp of glAccountList" [value]="comp.glaccountName">
+                                {{ comp.accountNumber }} - {{comp.glaccountName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-element">
+                        <mat-label>{{ 'journals.glsubName' | translate }}</mat-label>
+                        <mat-select formControlName="subGlaccount">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let comp of subGlAccountList" [value]="comp.glsubName">
+                                {{ comp.glsubCode }} - {{comp.glsubName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+
+
+                    <mat-form-field class="form-element">
+                        <mat-label>{{ 'journals.accountingIndicator' | translate }}</mat-label>
+                        <mat-select formControlName="accountingIndicator"
+                            (selectionChange)="accountingIndicatorChange();">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let comp of indicatorList" [value]="comp.id">
+                                {{comp.text}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-element">
+                        <mat-label>{{ 'journals.taxCode' | translate }}</mat-label>
+                        <mat-select formControlName="taxCode" (selectionChange)="taxCodeAmountChange();">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let comp of taxCodeList" [value]="comp.taxRateCode">
+                                {{comp.description}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'receiptspayments.amount'"></mat-label>
+                        <input matInput type="number" formControlName="amount" (change)="taxCodeAmountChange();"
+                            appFocusOnEnter tabIndex="7">
+                    </mat-form-field>
+
+
+                    <!-- <mat-form-field class="form-element">
+                        <mat-label [translate]="'receiptspayments.sgstamount'"></mat-label>
+                        <input matInput type="number" formControlName="sgstamount" appFocusOnEnter tabIndex="10">
+                    </mat-form-field>
+
+
+
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'receiptspayments.cgstamount'"></mat-label>
+                        <input matInput type="number" formControlName="cgstamount" appFocusOnEnter tabIndex="10">
+                    </mat-form-field>
+
+
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'receiptspayments.igstamount'"></mat-label>
+                        <input matInput type="number" formControlName="igstamount" appFocusOnEnter tabIndex="10">
+                    </mat-form-field> -->
+
+
+
+                    <mat-form-field class="form-element">
+                        <mat-label>{{ 'journals.hsnsac' | translate }}</mat-label>
+                        <mat-select formControlName="hsnsaccode">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let comp of hsnsacList" [value]="comp.code">
+                                {{comp.description}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="form-element">
+                        <mat-label [translate]="'receiptspayments.narration'"></mat-label>
+                        <input matInput type="text" formControlName="narration" appFocusOnEnter tabIndex="8">
+                    </mat-form-field>
+
+                </div>
+
+                <div id="for" class="d-flex justify-content-end mb-3">
+
+                    <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
+                        (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
+                        {{ 'COMMON.UPDATE' | translate }}
+                    </button>
+                    <button mat-raised-button id="reset" class="button-color-red text-white mx-1"
+                        (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
+                        {{ 'COMMON.RESET' | translate }}
+                    </button>
+
+                </div>
+
+            </form>
+
+            <div>
+                <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
+                    (editOrDeleteEvent)="editOrDeleteEvent($event)">
+                </app-table>
+            </div>
         </div>
 
 
