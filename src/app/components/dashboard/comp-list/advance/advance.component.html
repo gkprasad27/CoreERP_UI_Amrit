@@ -30,8 +30,8 @@
         <mat-form-field>
           <mat-label>{{'advance.advanceType' | translate }}</mat-label>
           <mat-select formControlName="advanceType">
-            <mat-option *ngFor="let comp of advanceList" [value]="comp.id">
-              {{comp.text}}
+            <mat-option *ngFor="let comp of advanceList" [value]="comp.advanceTypeId">
+              {{comp.advanceTypeName}}
             </mat-option>
           </mat-select>
         </mat-form-field>

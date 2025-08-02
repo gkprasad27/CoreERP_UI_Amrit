@@ -29,6 +29,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatButtonModule } from '@angular/material/button';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AddOrEditService } from '../add-or-edit.service';
 
 
 @Component({
@@ -70,6 +71,7 @@ export class AdvanceComponent implements OnInit {
     private apiService: ApiService,
     private alertService: AlertService,
     private formBuilder: FormBuilder,
+    private addOrEditService: AddOrEditService,
     private spinner: NgxSpinnerService,
     public dialogRef: MatDialogRef<AdvanceComponent>,
     private commonService: CommonService,
@@ -132,7 +134,6 @@ export class AdvanceComponent implements OnInit {
         if (!this.commonService.checkNullOrUndefined(emplist) && emplist.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(emplist.response)) {
             this.employeesList = emplist.response['emplist'];
-            debugger
             if (!this.commonService.checkNullOrUndefined(this.formData.item) && this.formData.item.employeeId) {
               const selectedEmployee = this.employeesList.find(emp => emp.id === this.formData.item.employeeId);
               if (selectedEmployee) {
@@ -143,10 +144,9 @@ export class AdvanceComponent implements OnInit {
             }
           }
         }
-
         if (!this.commonService.checkNullOrUndefined(advancesList) && advancesList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(advancesList.response)) {
-            this.advanceList = advancesList.response['advancesList'];
+            this.advanceList = advancesList.response;
           }
         }
 
@@ -190,7 +190,9 @@ export class AdvanceComponent implements OnInit {
     }
     this.formData.item = this.modelFormData.value;
     this.formData.item.employeeId = this.formData.item.employeeId[0].id;
-    this.dialogRef.close(this.formData);
+    this.addOrEditService[this.formData.action](this.formData, (res) => {
+      this.dialogRef.close(this.formData);
+    });
   }
 
   cancel() {

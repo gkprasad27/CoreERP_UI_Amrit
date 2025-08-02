@@ -716,7 +716,6 @@ export class InspectioncheckComponent implements OnInit {
   savemreq() {
     const arr = this.tableData1.filter((t: any) => t.checkbox && !t.hideCheckbox);
     const addJournal = String.Join('/', this.apiConfigService.addinspectioncheck);
-    debugger
     const values = this.formData1.value;
     values.completedBy = this.formData1.value.completedBy?.length ? this.formData1.value.completedBy[0].text : '';
     const requestObj = { icDtl: arr, icHdr: values };
