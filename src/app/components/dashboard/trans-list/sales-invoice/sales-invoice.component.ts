@@ -71,6 +71,17 @@ export class SalesInvoiceComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'text',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
   bpaList: any;
 
 
@@ -92,7 +103,7 @@ export class SalesInvoiceComponent implements OnInit {
   ngOnInit(): void {
     this.formDataGroup();
     this.getSaleOrderList();
-    // this.getCustomerList();
+    this.getCustomerList();
     this.getProfitcenterData();
     this.getTaxRatesList();
     this.getCompanyList();
@@ -116,6 +127,7 @@ export class SalesInvoiceComponent implements OnInit {
       customerName: [''],
       customerGstin: [''],
       // mobile: [''],
+      shiptoCompany: [''],
       shiptoAddress1: [''],
       shiptoAddress2: [''],
       shiptoState: [''],
@@ -276,8 +288,12 @@ export class SalesInvoiceComponent implements OnInit {
     this.calculate();
   }
 
-  getBusienessPartnerAccount(data: any) {
+  getshiptoCompanyList() {
+    const obj = this.customerList.find((c: any) => c.text == this.formData.value.shiptoCompany[0].text);
+    this.getBusienessPartnerAccount({customerCode: obj.id})
+  }
 
+  getBusienessPartnerAccount(data: any) {
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getBusienessPartnerAccount, data.customerCode);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
@@ -287,10 +303,12 @@ export class SalesInvoiceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response.bpaList);
+              const obj = this.customerList.find((c: any) => c.id == res.response.bpaList.bpnumber);
               this.formData.patchValue({
                 customerCode: res.response.bpaList.name,
                 customerName: res.response.bpaList.bpnumber,
                 customerGstin: res.response.bpaList.gstno,
+                shiptoCompany: obj ? [{ 'text': obj.text }] : [],
               })
             }
           }

@@ -1,10 +1,10 @@
-<mat-card>
-  <div class="table-boarder">
-    <mat-card-title class="table-boarder-color">
-      Advance Approval
-    </mat-card-title>
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'advanceApproval.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
 
-    <mat-card-content class="m-2">
+    <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
       <div>
 
         <div class="table">
@@ -103,5 +103,4 @@
 
     </mat-card-content>
   </div>
-</mat-card>
 

@@ -29,6 +29,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatButtonModule } from '@angular/material/button';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AddOrEditService } from '../add-or-edit.service';
 
 interface Session {
   value: string;
@@ -48,14 +49,14 @@ interface Session {
 export class LeaveRequestComponent implements OnInit {
 
   dropdownSettings: IDropdownSettings = {
-      singleSelection: true,
-      idField: 'id',
-      textField: 'text',
-      enableCheckAll: true,
-      // selectAllText: 'Select All',
-      // unSelectAllText: 'UnSelect All',
-      // itemsShowLimit: 3,
-      allowSearchFilter: true
+    singleSelection: true,
+    idField: 'id',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
   };
 
   dataSource: MatTableDataSource<any>;
@@ -64,7 +65,7 @@ export class LeaveRequestComponent implements OnInit {
   modelFormData: FormGroup;
   isSubmitted = false;
   formData: any;
-  LeaveTypeatList: any;
+  leaveTypeatList: any;
   companyList: any;
   brandList: any;
   MaterialGroupsList: any;
@@ -78,7 +79,6 @@ export class LeaveRequestComponent implements OnInit {
       { value: 'FirstHalf', viewValue: 'FirstHalf' },
       { value: 'SecondHalf', viewValue: 'SecondHalf' }
     ];
-  EmpName: any;
   pipe = new DatePipe('en-US');
   now = Date.now();
 
@@ -87,6 +87,7 @@ export class LeaveRequestComponent implements OnInit {
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
+    private addOrEditService: AddOrEditService,
     public dialogRef: MatDialogRef<LeaveRequestComponent>,
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
@@ -137,6 +138,9 @@ export class LeaveRequestComponent implements OnInit {
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
       //this.modelFormData.controls['empCode'].disable();
+      this.modelFormData.patchValue({
+        empCode: this.formData.item.empCode ? [{ id: this.formData.item.empCode, text: this.formData.item.empName }] : null
+      });
     }
 
   }
@@ -182,7 +186,6 @@ export class LeaveRequestComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               if (!this.commonService.checkNullOrUndefined(res.response['days'])) {
-                this.EmpName = res.response['days']
                 this.modelFormData.patchValue
                   ({
                     leaveDays: res.response['days']
@@ -224,7 +227,6 @@ export class LeaveRequestComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               if (!this.commonService.checkNullOrUndefined(res.response['days'])) {
-                this.EmpName = res.response['days']
                 this.modelFormData.patchValue
                   ({
                     leaveDays: res.response['days']
@@ -241,6 +243,10 @@ export class LeaveRequestComponent implements OnInit {
 
 
   getTableDataonempcodechangevent() {
+    const obj = this.getProductByProductCodeArray.find(x => x.id === this.modelFormData.value.empCode[0].id);
+    this.modelFormData.patchValue({
+      empName: obj ? obj.text : null
+    });
     this.spinner.show();
     const getCompanyUrl = String.Join('/', this.apiConfigService.getLeaveTypeatList, this.modelFormData.value.empCode[0].id);
     this.apiService.apiGetRequest(getCompanyUrl)
@@ -248,7 +254,7 @@ export class LeaveRequestComponent implements OnInit {
         res => {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.LeaveTypeatList = res.response['leavetypesList'];
+              this.leaveTypeatList = res.response['leavetypesList'];
             }
           }
           this.spinner.hide();
@@ -267,7 +273,7 @@ export class LeaveRequestComponent implements OnInit {
         res => {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.LeaveTypeatList = res.response['leavetypesList'];
+              this.leaveTypeatList = res.response['leavetypesList'];
             }
           }
           this.spinner.hide();
@@ -287,10 +293,6 @@ export class LeaveRequestComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             if (!this.commonService.checkNullOrUndefined(res.response['emplist'])) {
               this.getProductByProductCodeArray = res.response['emplist'];
-              const empCode = this.getProductByProductCodeArray.find(x => x.id === this.formData.item?.empCode);
-              this.modelFormData.patchValue({
-                empCode: empCode ? [{ id: empCode.id, text: empCode.text }] : null
-              });
             }
           }
         }
@@ -316,7 +318,10 @@ export class LeaveRequestComponent implements OnInit {
       leaveFrom: this.commonService.formatDate(this.modelFormData.get('leaveFrom').value)
     });
     this.formData.item = this.modelFormData.value;
-    this.dialogRef.close(this.formData);
+    this.formData.item.empCode = this.formData.item.empCode[0].id;
+    this.addOrEditService[this.formData.action](this.formData, (res) => {
+      this.dialogRef.close(this.formData);
+    });
   }
 
   cancel() {

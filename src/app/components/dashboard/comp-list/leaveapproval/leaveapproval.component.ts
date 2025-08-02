@@ -5,7 +5,6 @@ import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -18,7 +17,6 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { SnackBar, StatusCodes } from '../../../../enums/common/common';
-//import { StatusCodes, SnackBar } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from '../../../../services/api.service';
 import { AlertService } from '../../../../services/alert.service';
@@ -50,7 +48,7 @@ export class LeaveApprovalComponent implements OnInit {
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
-        public dialogRef: MatDialogRef<LeaveApprovalComponent>,
+    public dialogRef: MatDialogRef<LeaveApprovalComponent>,
     private alertService: AlertService,
     private spinner: NgxSpinnerService, ) {
 
@@ -92,7 +90,6 @@ export class LeaveApprovalComponent implements OnInit {
               this.leaveApprovalList = [];
             }
             else {
-              //delete this.leaveApprovalList[l];
               this.leaveApprovalList.splice(0, l);
             }
           }
@@ -163,7 +160,7 @@ export class LeaveApprovalComponent implements OnInit {
   reset() {
     this.leaveRequestForm.reset();
     this.dataSource = new MatTableDataSource();
-    this.ngOnInit();
+    this.getLeaveApplDetailsList();
   }
 
 

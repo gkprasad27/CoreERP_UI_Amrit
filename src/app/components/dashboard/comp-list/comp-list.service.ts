@@ -133,7 +133,7 @@ import { PFMasterComponent } from './pfmaster/pfmaster.component';
 import { PTMasterComponent } from './ptmaster/ptmaster.component';
 import { ApprovalTypeComponent } from './approvaltype/approvaltype.component';
 import { OpeningBalanceComponent } from './openingBalance/openingBalance.component';
-import { advanceApprovalComponent } from './advanceapproval/advanceapproval.component';
+import { AdvanceApprovalComponent } from './advanceapproval/advanceapproval.component';
 import { VehicleApprovalsComponent } from './vehicleapproval/vehicleapproval.component';
 import { odApprovalComponent } from './odapproval/odapproval.component';
 import { PermissionApprovalsComponent } from './permissionapproval/permissionapproval.component';
@@ -698,7 +698,7 @@ export class CompListService {
         this.dynamicComp.component = OpeningBalanceComponent;
         return this.dynamicComp.component;
       case 'advanceApproval':
-        this.dynamicComp.component = advanceApprovalComponent;
+        this.dynamicComp.component = AdvanceApprovalComponent;
         return this.dynamicComp.component;
       case 'vehicleapproval':
         this.dynamicComp.component = VehicleApprovalsComponent;

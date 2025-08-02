@@ -2990,6 +2990,7 @@
     "totalIgst": "Total IGST",
     "userName": "User Name",
     "totalTcs": "Total TCS",
+    "shiptoCompany": "Ship To Company",
     "shiptoAddress1": "Ship To Address1",
     "shiptoAddress2": "Ship To Address2",
     "shiptoState": "Ship To State",
@@ -3548,5 +3549,8 @@
   },
   "leaveApproval": {
     "title": "Leave Approval"
+  },
+  "advanceApproval": {
+    "title": "Advance Approval"
   }
 }

@@ -265,7 +265,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
     let data: any = this.tableData;
     data = (data && data.length) ? data : [];
-    if(this.formData1.value.index == 0 && data.some((r: any) => r.materialCode == this.formData1.value.materialCode[0]['materialCode'])) {
+    if (this.formData1.value.index == 0 && data.some((r: any) => r.materialCode == this.formData1.value.materialCode[0]['materialCode'])) {
       this.alertService.openSnackBar("You already added this material code, please use edit icon to update", Static.Close, SnackBar.error);
       return;
     }
@@ -289,7 +289,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
     // } else {
     // }
     // const remainigQ = this.formData1.value.qty - qtyT;
-    
+
     this.dataChange();
     this.tableData = null;
     this.tableComponent.defaultValues();
@@ -423,50 +423,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   ponoselect() {
-
-    let data = [];
-    this.perChaseOrderList = [];
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('purchaseOrderNo').value) && this.formData.value.purchaseOrderNo[0].id) {
-      data = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.value.purchaseOrderNo[0].id);
-    }
-    if (data.length) {
-
-      data.forEach((d: any, index: number) => {
-        const obj = {
-          materialCode: d.materialCode ? d.materialCode : '',
-          materialName: d.materialName ? d.materialName : '',
-          netWeight: d.netWeight ? d.netWeight : '',
-          purchaseOrderNumber: d.purchaseOrderNumber ? d.purchaseOrderNumber : '',
-          rejectQty: d.rejectQty ? d.rejectQty : '',
-          qty: d.qty ? d.qty : '',
-          receivedQty: d.receivedQty ? d.receivedQty : '',
-          description: d.description ? d.description : '',
-          heatNumber: d.heatNumber ? d.heatNumber : '',
-          materialgrade: d.materialgrade ? d.materialgrade : '',
-          milltcno: d.milltcno ? d.milltcno : '',
-          tptcno: d.tptcno ? d.tptcno : '',
-          hsnsac: d.hsnsac ? d.hsnsac : '',
-          action: '',
-          index: index + 1,
-
-          cgst: d.cgst ? d.cgst : 0,
-          sgst: d.sgst ? d.sgst : 0,
-          igst: d.igst ? d.igst : 0,
-          taxCode: d.taxCode ? d.taxCode : 0,
-          rate: d.rate ? d.rate : 0,
-        }
-        this.perChaseOrderList.push(obj)
-      })
-      // this.tableData = this.perChaseOrderList;
-      // const unique = [...new Set(this.perChaseOrderList.map(item => item.materialCode))]
-
-      this.materialCodeList = this.perChaseOrderList;
-      this.formData1.patchValue({
-        qty: '',
-        netWeight: '',
-      })
-      this.tableData = null;
-    }
     const obj = this.purchaseordernoList.find(resp => resp.id == this.formData.value.purchaseOrderNo[0].id);
     this.formData.patchValue({
       customerName: obj.text,
@@ -478,22 +434,16 @@ export class ReceiptOfGoodsComponent implements OnInit {
       totalTax: 0,
       totalAmount: 0
     })
-    this.getRecepitOfGoodsDetails1(obj.id)
+    this.getRecepitOfGoodsDetails1(obj.id);
   }
 
   materialCodeChange() {
     const obj = this.materialCodeList.find((p: any) => p.materialCode == this.formData1.value.materialCode[0]['materialCode']);
-    let pendingQty = 0;
-    this.grDetail && this.grDetail.forEach((t: any) => {
-      if (t.materialCode == obj.materialCode) {
-        pendingQty = pendingQty + t.receivedQty
-      }
-    })
     this.formData1.patchValue({
       qty: obj ? obj.qty : '',
       netWeight: obj ? obj.netWeight : '',
       materialName: obj ? obj.materialName : '',
-      pendingQty: obj.qty - pendingQty,
+      pendingQty: obj ? obj.pendingQty : '',
       hsnsac: obj.hsnsac,
       taxCode: obj.taxCode,
       rate: obj.rate,
@@ -687,6 +637,57 @@ export class ReceiptOfGoodsComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.grDetail = res.response['grDetail'];
+
+              this.materialCodeList = [];
+              let data = [];
+              this.perChaseOrderList = [];
+              if (!this.commonService.checkNullOrUndefined(this.formData.get('purchaseOrderNo').value) && this.formData.value.purchaseOrderNo[0].id) {
+                data = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.value.purchaseOrderNo[0].id);
+              }
+              if (data.length) {
+                data.forEach((d: any, index: number) => {
+                  let pendingQty = 0;
+                  this.grDetail && this.grDetail.forEach((t: any) => {
+                    if (t.materialCode == d.materialCode) {
+                      pendingQty = pendingQty + t.receivedQty
+                    }
+                  })
+                  let pendingQty1 = ((+d.qty) - pendingQty);
+                  if (pendingQty1 > 0) {
+                    const obj = {
+                      materialCode: d.materialCode ? d.materialCode : '',
+                      materialName: d.materialName ? d.materialName : '',
+                      netWeight: d.netWeight ? d.netWeight : '',
+                      purchaseOrderNumber: d.purchaseOrderNumber ? d.purchaseOrderNumber : '',
+                      rejectQty: d.rejectQty ? d.rejectQty : '',
+                      qty: d.qty ? d.qty : '',
+                      receivedQty: d.receivedQty ? d.receivedQty : '',
+                      description: d.description ? d.description : '',
+                      heatNumber: d.heatNumber ? d.heatNumber : '',
+                      materialgrade: d.materialgrade ? d.materialgrade : '',
+                      milltcno: d.milltcno ? d.milltcno : '',
+                      tptcno: d.tptcno ? d.tptcno : '',
+                      hsnsac: d.hsnsac ? d.hsnsac : '',
+                      action: '',
+                      index: index + 1,
+                      pendingQty: pendingQty1,
+                      cgst: d.cgst ? d.cgst : 0,
+                      sgst: d.sgst ? d.sgst : 0,
+                      igst: d.igst ? d.igst : 0,
+                      taxCode: d.taxCode ? d.taxCode : 0,
+                      rate: d.rate ? d.rate : 0,
+                    }
+                    this.perChaseOrderList.push(obj)
+                  }
+                })
+                this.materialCodeList = this.perChaseOrderList;
+                this.formData1.patchValue({
+                  qty: '',
+                  netWeight: '',
+                })
+                this.tableData = null;
+              }
+
             }
           }
         });

@@ -16,7 +16,6 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { SnackBar, StatusCodes } from '../../../../enums/common/common';
-//import { StatusCodes, SnackBar } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from '../../../../services/api.service';
 import { AlertService } from '../../../../services/alert.service';
@@ -24,6 +23,7 @@ import { Static } from '../../../../enums/common/static';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-advanceapproval',
@@ -33,7 +33,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 })
 
-export class advanceApprovalComponent implements OnInit {
+export class AdvanceApprovalComponent implements OnInit {
 
   leaveApprovalList: any;
 
@@ -50,6 +50,7 @@ export class advanceApprovalComponent implements OnInit {
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
+    public dialogRef: MatDialogRef<AdvanceApprovalComponent>,
     private alertService: AlertService,
     private spinner: NgxSpinnerService, ) {
 
@@ -92,7 +93,6 @@ export class advanceApprovalComponent implements OnInit {
               this.leaveApprovalList = [];
             }
             else {
-              //delete this.leaveApprovalList[l];
               this.leaveApprovalList.splice(0, l);
             }
           }
@@ -163,8 +163,11 @@ export class advanceApprovalComponent implements OnInit {
   reset() {
     this.leaveRequestForm.reset();
     this.dataSource = new MatTableDataSource();
-    this.ngOnInit();
+    this.getOdApplDetailsList();
   }
 
 
+  cancel() {
+    this.dialogRef.close();
+  }
 }
