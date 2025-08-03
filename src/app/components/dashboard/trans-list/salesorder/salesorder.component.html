@@ -1,22 +1,20 @@
 
 
-<mat-card class="test">
+<mat-card>
 
-    <mat-card-content id="mat"  >
-        
-
-
-        <form  [formGroup]="formData" class="card p-2 mb-3" autocomplete="off">
+    <mat-card-content >
+    
+        <form  [formGroup]="formData" class="p-2 mb-3" autocomplete="off">
 
             <h6 id="background">
                 Sale Order Master
             </h6>
 
-            <div id="form" class="d-flex p-1 mat-form-field-height" >
+            <div class="p-1 row" >
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label>{{ 'saleorder.company' | translate }}</mat-label>
-                    <mat-select id="company" formControlName="company" appFocusOnEnter tabIndex="1">
+                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let comp of companyList" [value]="comp.id">
                             {{comp.text}}
@@ -24,9 +22,9 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field>
+                <mat-form-field class="col-3">
                     <mat-label>{{'saleorder.profitCenter' | translate }}</mat-label>
-                    <mat-select id="profit" formControlName="profitCenter" appFocusOnEnter tabIndex="2">
+                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
                             {{pft.text}}
@@ -34,18 +32,15 @@
                     </mat-select>
                 </mat-form-field>
 
-                
-
-                <div id="customer" class="multiselect-dropdown-list" >
-                    <ng-multiselect-dropdown placeholder="{{ 'saleorder.supplierName' | translate }}"
+                <div class="multiselect-dropdown-list floating-dropdown col-3" [class.filled]="formData.value?.customerCode?.length > 0" >
+                    <label> {{ 'saleorder.supplierName' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" "
                         formControlName="customerCode" (onSelect)="customerCodeChange($event)"
                         [settings]="dropdownSettings" [data]="customerList">
                     </ng-multiselect-dropdown>
                 </div>
 
-
-
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'saleorder.poDate'"></mat-label>
                     <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="poDate"
                         appFocusOnEnter tabIndex="4">
@@ -53,15 +48,12 @@
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'saleorder.poNumber'"></mat-label>
                     <input matInput type="text" formControlName="poNumber" appFocusOnEnter tabIndex="5">
                 </mat-form-field>
 
-
-                
-
-                <mat-form-field class="form-element" >
+                <mat-form-field class="col-3" >
                     <mat-label [translate]="'saleorder.dateofSupply'"></mat-label>
                     <input matInput [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="dateofSupply"
                         appFocusOnEnter tabIndex="7">
@@ -69,7 +61,7 @@
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element" >
+                <mat-form-field class="col-3" >
                     <mat-label [translate]="'saleorder.placeOfSupply'"></mat-label>
                     <input matInput type="text" formControlName="placeofSupply" appFocusOnEnter tabIndex="8">
                 </mat-form-field>
@@ -85,8 +77,9 @@
                     </ng-template>
                 </div> -->
 
-                <div class="mat-mdc-form-field typeahead" id="bom" >
-                    <input placeholder="{{ 'saleorder.bom' | translate }}" formControlName="bom"
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="formData.value?.bom?.length > 0" >
+                    <label> {{ 'saleorder.bom' | translate }} </label>
+                    <input placeholder=" " formControlName="bom"
                     [typeahead]="qnoList" typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="10"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1"
                         (typeaheadOnSelect)="getBomDetail()" >
@@ -95,16 +88,15 @@
                     </ng-template>
                 </div>
 
-                <div id="data">
-                   <button id="upload"> <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL"
-                        (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload></button>
+                <div class="col-3">  <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL"
+                        (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
                 </div>
 
             </div>
 
         </form>
 
-        <div id="forms" class="p-2 card">
+        <div class="p-2 card">
 
             <h6 id="background">
                 Sale Order Details
@@ -115,7 +107,7 @@
 
 
 
-                <div id="form" class="d--flex p-1 mat-form-field-height">
+                <div class="row p-1">
 
                     <!-- <div class="mat-mdc-form-field typeahead">
                         <input placeholder="{{ 'saleorder.materialCode' | translate }}" formControlName="materialCode"
@@ -132,7 +124,7 @@
                         <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="10">
                     </mat-form-field> -->
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label>{{ 'saleorder.taxCode' | translate }}</mat-label>
                         <mat-select formControlName="taxCode" appFocusOnEnter tabIndex="11">
                             <mat-option>None</mat-option>
@@ -142,23 +134,23 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label [translate]="'saleorder.qty'"></mat-label>
                         <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="12">
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label [translate]="'saleorder.rate'"></mat-label>
                         <input matInput type="number" formControlName="rate" appFocusOnEnter tabIndex="13">
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label [translate]="'saleorder.discount'"></mat-label>
                         <input matInput type="number" formControlName="discount" appFocusOnEnter tabIndex="14"
                             (keypress)="commonService.numberOnly($event)" maxlength="2">
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label [translate]="'saleorder.deliveryDate'"></mat-label>
                         <input matInput [matDatepicker]="picker13" [nonEditable]="picker13"
                             formControlName="deliveryDate" appFocusOnEnter tabIndex="15">

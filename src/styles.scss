@@ -1,7 +1,14 @@
 @use "_reuse" as reuse;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
 
 /* Importing Bootstrap SCSS file. */
 // @use "./node_modules/bootstrap/scss/bootstrap";
@@ -10,16 +17,16 @@ body { margin: 0; font-family: sans-serif; }
 // @use "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
 
-#main{
+#main {
   // // background-image: url("./assets/images/download.jpg");
   // background-size: cover;
   // height: 100vh;
   // background-position: center;
-  background: linear-gradient(to right,#7ec094, #7ec094, );
-  
+  background: linear-gradient(to right, #7ec094, #7ec094, );
+
 }
 
-.mat-mdc-focus-indicator:hover{
+.mat-mdc-focus-indicator:hover {
   background-color: aqua;
 }
 
@@ -45,24 +52,25 @@ body { margin: 0; font-family: sans-serif; }
 }
 
 .mat-input-element:disabled {
-  color: rgba(0,0,0,.87);
+  color: rgba(0, 0, 0, .87);
 }
 
 button:focus {
   outline: none !important;
 }
 
- .mat-form-field  {
+.mat-form-field {
   & .mat-select-value {
-  color: orange !important;
+    color: orange !important;
   }
 }
 
 .mdc-button--raised {
   box-shadow: none !important;
   padding: 0 8px !important;
- & .mat-icon {
-  
+
+  & .mat-icon {
+
     font-size: 18px;
     height: 18px !important;
     width: 18px !important;
@@ -77,6 +85,7 @@ button:focus {
   & .mat-mdc-floating-label {
     color: reuse.$color-green !important;
   }
+
   & .mdc-line-ripple::after {
     border-bottom-color: reuse.$color-green !important;
   }
@@ -89,6 +98,7 @@ button:focus {
 .mat-mdc-form-field-error::before {
   content: none !important;
 }
+
 mat-error {
   color: reuse.$color-error !important;
 }
@@ -137,21 +147,23 @@ mat-error {
 
 .button-color-red {
   background-color: reuse.$color-red !important;
-  
-}
-.button-color-green{
-  background-color: #3161a3 !important;
-  color:white !important;
+
 }
 
-.button-color-green:hover{
+.button-color-green {
+  background-color: #3161a3 !important;
+  color: white !important;
+}
+
+.button-color-green:hover {
   background-color: rgb(16, 78, 114) !important;
 }
-.button-color-bule:hover{
+
+.button-color-bule:hover {
   background-color: rgb(48, 125, 170) !important;
 }
 
-.button-color-red:hover{
+.button-color-red:hover {
   background-color: rgb(23, 143, 173) !important;
 }
 
@@ -160,19 +172,16 @@ mat-error {
 
 
 
-mat-form-field {
-  margin: 5px;
-  flex: 0 0 24%;
-}
-
 .table {
   overflow-x: scroll;
   font-family: sans-serif;
-  & > tbody {
+
+  &>tbody {
     & tr {
       border-bottom: 1px solid #ddd;
       height: 40px !important;
       cursor: pointer;
+
       & th {
         background-color: reuse.$color-orange;
         color: reuse.$color-white;
@@ -180,47 +189,54 @@ mat-form-field {
         border: none !important;
       }
     }
+
     & td {
       font-size: 12px;
       vertical-align: middle;
       border: none !important;
     }
+
     & tr:nth-child(even) {
       background-color: #f9f9f9;
     }
+
     & tr:nth-child(odd) {
       background-color: reuse.$color-white;
     }
+
     & tr:nth-child(even):hover {
       background-color: #f9f6f6;
     }
+
     & tr:nth-child(odd):hover {
       background-color: #f9f6f6;
     }
   }
 }
 
-mat-option  {
-  & > mat-pseudo-checkbox {
-   display: none !important;
+mat-option {
+  &>mat-pseudo-checkbox {
+    display: none !important;
   }
 }
 
 .cdk-overlay-pane-select-search.cdk-overlay-pane-select-search-with-offset {
   margin: 50px 0px 0px 30px !important;
- }
+}
 
- .popup-class {
+.popup-class {
   & mat-form-field {
     margin: 5px;
     flex: 0 0 24%;
   }
+
   & mat-card-title {
     min-height: 35px;
     height: 45px;
     z-index: 1000;
-    font-size: 20px;    
+    font-size: 20px;
   }
+
   & mat-card-content {
     max-height: 400px;
   }
@@ -236,8 +252,8 @@ mat-option  {
 .custom-dialog-container {
   & .mat-dialog-container {
     padding: 0px !important;
- }
- 
+  }
+
 }
 
 .typeAhead {
@@ -267,102 +283,189 @@ input[type=number] {
 
 
 mat-form-field {
-   .mat-mdc-text-field-wrapper, .mat-mdc-form-field-focus-overlay {
-      background: none !important;
-      padding: 0px !important;
+
+  .mat-mdc-text-field-wrapper,
+  .mat-mdc-form-field-focus-overlay {
+    background: none !important;
+    padding: 0px !important;
   }
 }
 
 mat-tab-header {
-  border-bottom: 1px solid rgba(0,0,0,.12);
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
 }
 
-.remove-boader-bottom  {
-    .mdc-line-ripple::before {
-        border-bottom: 0px !important;
-    }
+.remove-boader-bottom {
+  .mdc-line-ripple::before {
+    border-bottom: 0px !important;
+  }
 }
 
- .typeahead:disabled {
-    background-color: white !important;
-  }
+.typeahead:disabled {
+  background-color: white !important;
+}
 
-  
 
-  .error_text {
-    color: red;
-  }
 
-  .underscore {
-    text-decoration: underline;
-    color: blue;
-  }
+.error_text {
+  color: red;
+}
 
-  *h6, .header-bg {
-    background: linear-gradient(to right,#77bb97, #77bb97) !important;
+.underscore {
+  text-decoration: underline;
+  color: blue;
+}
+
+*h6,
+.header-bg {
+  background: linear-gradient(to right, #77bb97, #77bb97) !important;
   color: rgb(252, 252, 252) !important;
   padding: 12px 12px 12px 12px;
   font-weight: bold;
   border: none;
+}
+
+
+
+
+
+
+
+
+// verified
+
+.mat-mdc-form-field.typeahead {
+  input {
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 0px;
+    padding: 0px;
+    padding-bottom: 10px;
   }
 
-  *#submit{
-    background-color: #35635b!important ;
-     border-radius: 5px !important;
-    cursor: pointer !important;
-    transition: transform 0.3s !important;
+  input:focus {
+    box-shadow: none !important;
+    background-color: none !important;
   }
-  
-  
-  *#submit:hover{
-    background-color: #48b0cf !important;
-    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1)!important;
-  }
+}
 
-  *#reset{
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s;
-    
-  }
-  *#reset:hover{
-    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
-  }
-  *#save:hover{
-    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
-  }
-  *#back:hover{
-    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
-  }
 
-  *#for{
-    position:absolute;
-    right:12px;
-    
-    width: fit-content;
-    height: fit-content;
-    top:12px;
-  
-  }
 
-  typeahead-container {
-    height: 50% !important; 
-  }
+.floating-dropdown {
+  position: relative !important;
+  margin: 20px 0 !important;
+}
 
-  .mat-mdc-form-field.typeahead {
-    margin-top: 25px;
-    input {
-       border: none;
-       border-bottom: 1px solid;
-       border-radius: 0px;
-       padding: 0px;
-       padding-bottom: 12px;
-       width: 250px;
+.floating-dropdown label {
+  position: absolute;
+  top: -5px;
+  color: gray;
+  background-color: white;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  font-size: 16px;
+}
+
+.floating-dropdown.filled label,
+.floating-dropdown:focus-within label {
+  top: -20px;
+  font-size: 12px;
+  color: rgb(0 0 0 / 60%);
+}
+
+
+#background {
+  background: linear-gradient(to right, #174154, #5eb47a, #a8c06f);
+  color: whitesmoke;
+  padding: 12px 12px 12px 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+
+*#submit {
+  background-color: #35635b !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  transition: transform 0.3s !important;
+}
+
+*#submit:hover {
+  background-color: #48b0cf !important;
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1) !important;
+}
+
+*#reset {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+*#reset:hover {
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+}
+
+*#save:hover {
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+}
+
+*#back:hover {
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1);
+}
+
+*#for {
+  position: absolute;
+  right: 12px;
+  width: fit-content;
+  height: fit-content;
+  top: 12px;
+}
+
+#upload {
+  border-style: none;
+  background-color: transparent;
+}
+
+
+.multiselect-dropdown-list {
+  ng-multiselect-dropdown {
+    .multiselect-dropdown {
+      .dropdown-btn {
+        height: 35px !important;
+        padding: 0px !important;
+        border: none !important;
+        border-bottom: 1px solid #adadad !important;
+        border-radius: 0px !important;
+
+        .selected-item {
+          border: none !important;
+          background: none !important;
+          color: rgba(0, 0, 0, .87) !important;
+          max-width: 300px !important;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .selected-item:hover {
+          box-shadow: none !important;
+        }
+
+        .dropdown-multiselect__caret {
+          transform: none !important;
+        }
+
+        .dropdown-multiselect__caret::before {
+          top: 30% !important;
+          border-color: rgb(0 0 0 / 54%) transparent !important;
+          border-width: 5px 5px 0 5px !important;
+        }
+      }
     }
-    input:focus {
-       box-shadow: none !important;
-       background-color: none !important;
-    }
   }
+}
 
-
+typeahead-container {
+  height: 200px !important;
+}
