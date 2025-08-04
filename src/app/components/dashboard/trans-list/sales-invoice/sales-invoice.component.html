@@ -1,14 +1,14 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div style="margin: 10px;" *ngIf="invoicePrintData" id="invoicePrintData">
     <div style="display: flex;">
-        <img *ngIf="invoicePrintData?.headingObj?.company === '1000'" 
-        src="/assets/images/header.jpg" 
-        style="height: 100px; width: 65%;">
-  
-   <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
-   <img *ngIf="invoicePrintData?.headingObj?.company !== '1000'" 
-        src="/assets/images/AMRIT.jpg" 
-        style="height: 100px; width: 65%;">
+        <img *ngIf="invoicePrintData?.headingObj?.company === '1000'" src="/assets/images/header.jpg"
+            style="height: 100px; width: 65%;">
+
+        <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
+        <img *ngIf="invoicePrintData?.headingObj?.company !== '1000'" src="/assets/images/AMRIT.jpg"
+            style="height: 100px; width: 65%;">
         <!-- <img src="/assets/images/header.jpg" style="height: 100px;
         width: 65%;"> -->
         <div style="padding: 24px;
@@ -33,7 +33,8 @@
         <div style="width: 60%;border-right: 1px solid;">
             <div style="width: 100%;padding-left: 15px;display: flex;">
                 <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Reverse Charge </b></div>
-                <div style="padding-left: 18px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
+                <div
+                    style="padding-left: 18px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                     : {{ invoicePrintData?.headingObj?.reverseCharge }} </div>
             </div>
             <div style="width: 100%;display: flex;">
@@ -68,32 +69,39 @@
             </div>
             <div style="width: 100%;padding-left: 15px;display: flex;">
                 <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> State </b></div>
-                <div style="padding-left: 83px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
+                <div
+                    style="padding-left: 83px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                     : {{ invoicePrintData?.headingObj?.shiptoState }} </div>
             </div>
         </div>
         <div style="width: 40%;padding-left: 15px;">
             <div style="width: 100%;padding-left: 15px;display: flex;">
-                <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Transportation Mode </b></div>
-                <div style="padding-left: 8px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
+                <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Transportation Mode </b>
+                </div>
+                <div
+                    style="padding-left: 8px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
+                    :
                     {{ invoicePrintData?.headingObj?.transportationMode }}</div>
             </div>
             <div style="width: 100%;display: flex;">
                 <div style="width: 100px;padding-left: 15px;"><b
                         style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Vehicle Number </b></div>
-                <div style="padding-left: 36px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
+                <div
+                    style="padding-left: 36px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                     : {{ invoicePrintData?.headingObj?.vehicleRegNo }} </div>
             </div>
             <div style="width: 100%;display: flex;">
                 <div style="width: 100px;padding-left: 15px;"><b
                         style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Date of Supply </b></div>
-                <div style="padding-left: 36px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
+                <div
+                    style="padding-left: 36px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                     : {{ invoicePrintData?.headingObj?.dateOfSupply ? (invoicePrintData?.headingObj?.dateOfSupply |
                     date) : '' }} </div>
             </div>
             <div style="width: 100%;padding-left: 15px;display: flex;">
                 <div><b style="font-size: 14px;font-family: sans-serif;font-weight: 700;"> Place of Supply </b></div>
-                <div style="padding-left: 44px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
+                <div
+                    style="padding-left: 44px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">
                     : {{ invoicePrintData?.headingObj?.shiptoCity }} </div>
             </div>
         </div>
@@ -144,8 +152,8 @@
                         rowspan="2"> S.No </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> Material Code </th>
-                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
-                            rowspan="2"> Material Description </th>
+                    <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
+                        rowspan="2"> Material Description </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
                         rowspan="2"> HSN ACS </th>
                     <th style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;"
@@ -219,7 +227,8 @@
                     <td
                         style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         <ng-container *ngIf="row.qty"> {{
-                            row.rate}} </ng-container> </td>
+                            row.rate}} </ng-container>
+                    </td>
                     <td
                         style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                         {{ row.grossAmount }} </td>
@@ -250,7 +259,8 @@
 
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.materialName ? (row.grossAmount + row.cgst + row.sgst + row.igst).toFixed(2) : '' }} </td>
+                        {{ row.materialName ? (row.grossAmount + row.cgst + row.sgst + row.igst).toFixed(2) : '' }}
+                    </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
@@ -259,7 +269,7 @@
                     <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
-                     <td
+                    <td
                         style="border-bottom: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
                     </td>
                     <td
@@ -374,7 +384,8 @@
             <b> </b>
         </div>
         <div style="width: 40%;">
-            <b style="font-size: 12px;font-family: sans-serif;font-weight: 700;padding: 5px 0px 10px 2px;"> GST Payable on
+            <b style="font-size: 12px;font-family: sans-serif;font-weight: 700;padding: 5px 0px 10px 2px;"> GST Payable
+                on
                 reverse charges </b>
         </div>
     </div>
@@ -392,9 +403,13 @@
         <div style="width: 40%;font-size: 12px;font-family: sans-serif;">
             <div style="border-bottom: 1px solid black;padding: 5px 0px 10px 2px;">Certified that the particulars given
                 above are true and correct</div>
-            <div *ngIf="data?.headingObj?.company === '1000'" style="font-size: 12px;font-family: sans-serif;font-weight: 700;text-align: center;padding-top: 5px;">For
+            <div *ngIf="data?.headingObj?.company === '1000'"
+                style="font-size: 12px;font-family: sans-serif;font-weight: 700;text-align: center;padding-top: 5px;">
+                For
                 AMT Power Transmission</div>
-            <div *ngIf="data?.headingObj?.company !== '1000'" style="font-size: 12px;font-family: sans-serif;font-weight: 700;text-align: center;padding-top: 5px;">For
+            <div *ngIf="data?.headingObj?.company !== '1000'"
+                style="font-size: 12px;font-family: sans-serif;font-weight: 700;text-align: center;padding-top: 5px;">
+                For
                 AMRIT STONE CRUSHER EQUIPMENTS</div>
             <div style="text-align: center;padding: 30px 10px 6px 10px">Authorised Signatory</div>
         </div>
@@ -406,40 +421,35 @@
 
     <mat-card-content>
 
-        <form [formGroup]="formData" autocomplete="off" *ngIf="formData">
+        <form [formGroup]="formData" autocomplete="off">
 
             <h6 id="background">
                 Material Header
-                
             </h6>
 
-            <div id="form" class="d--flex p-1 mat-form-field-height">
+            <div class="p-1 row">
 
-                <div >
-                    <mat-form-field class="form-element">
-                        <mat-label>{{ 'salesinvoice.company' | translate }}</mat-label>
-                        <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                                {{comp.text}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
+                <mat-form-field class="form-element" class="col-3">
+                    <mat-label>{{ 'salesinvoice.company' | translate }}</mat-label>
+                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+                            {{comp.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-                <div>
-                    <mat-form-field>
-                        <mat-label>{{'salesinvoice.profitCenter' | translate }}</mat-label>
-                        <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
-                                {{pft.text}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
+                <mat-form-field class="col-3">
+                    <mat-label>{{'salesinvoice.profitCenter' | translate }}</mat-label>
+                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
+                            {{pft.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-                <!-- <mat-form-field class="form-element">
+                <!-- <mat-form-field class="col-3">
                     <mat-label>{{ 'salesinvoice.manualInvoiceNo' | translate }}</mat-label>
                     <mat-select formControlName="saleOrderNo" (selectionChange)="getsaleOrdernoList()" appFocusOnEnter
                         tabIndex="3">
@@ -450,30 +460,29 @@
                     </mat-select>
                 </mat-form-field> -->
 
-                <div class="multiselect-dropdown-list" *ngIf="!routeEdit">
-                    <ng-multiselect-dropdown placeholder="{{ 'salesinvoice.manualInvoiceNo' | translate }}"
-                        formControlName="saleOrderNo" (onSelect)="getsaleOrdernoList()"
-                        [settings]="dropdownSettings" [data]="getSaleOrderData">
+                <div class="multiselect-dropdown-list floating-dropdown col-3"
+                    [class.filled]="formData.value?.saleOrderNo?.length > 0" *ngIf="!routeEdit">
+                    <label> {{ 'salesinvoice.manualInvoiceNo' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="saleOrderNo"
+                        (onSelect)="getsaleOrdernoList()" [settings]="dropdownSettings" [data]="getSaleOrderData">
                     </ng-multiselect-dropdown>
                 </div>
-                <mat-form-field *ngIf="routeEdit">
+                <mat-form-field *ngIf="routeEdit" class="col-3">
                     <mat-label>{{'salesinvoice.manualInvoiceNo' | translate }}</mat-label>
                     <input matInput type="text" readonly formControlName="saleOrderNo" appFocusOnEnter tabIndex="4">
                 </mat-form-field>
 
 
 
-                <div>
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'salesinvoice.invoiceDate'"></mat-label>
-                        <input matInput [matDatepicker]="picker" [nonEditable]="picker" formControlName="invoiceDate"
-                            appFocusOnEnter tabIndex="3">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                </div>
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'salesinvoice.invoiceDate'"></mat-label>
+                    <input matInput [matDatepicker]="picker" [nonEditable]="picker" formControlName="invoiceDate"
+                        appFocusOnEnter tabIndex="3">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
 
-                <!-- <mat-form-field class="form-element">
+                <!-- <mat-form-field class="col-3">
                     <mat-label>{{ 'salesinvoice.customerName' | translate }}</mat-label>
                     <mat-select formControlName="customerName" (selectionChange)="customerNameSelect()" appFocusOnEnter
                         tabIndex="3">
@@ -485,72 +494,62 @@
                 </mat-form-field> -->
 
 
-                <div>
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'salesinvoice.customerName'"></mat-label>
-                        <input matInput type="text" readonly formControlName="customerCode" appFocusOnEnter tabIndex="6">
-                    </mat-form-field>
-                </div>
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'salesinvoice.customerName'"></mat-label>
+                    <input matInput type="text" readonly formControlName="customerCode" appFocusOnEnter tabIndex="6">
+                </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'salesinvoice.customerGstin'"></mat-label>
                     <input matInput type="text" readonly formControlName="customerGstin" appFocusOnEnter tabIndex="6">
                 </mat-form-field>
 
-                
-                <div class="multiselect-dropdown-list">
-                    <ng-multiselect-dropdown placeholder="{{ 'salesinvoice.shiptoCompany' | translate }}"
-                        formControlName="shiptoCompany" (onSelect)="getshiptoCompanyList()"
-                        [settings]="dropdownSettings1" [data]="customerList">
+
+                <div class="multiselect-dropdown-list floating-dropdown col-3" *ngIf="!routeEdit"
+                    [class.filled]="formData.value?.shiptoCompany?.length > 0">
+                    <label> {{ 'salesinvoice.shiptoCompany' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="shiptoCompany"
+                        (onSelect)="getshiptoCompanyList()" [settings]="dropdownSettings1" [data]="customerList">
                     </ng-multiselect-dropdown>
                 </div>
+                <mat-form-field *ngIf="routeEdit" class="col-3">
+                    <mat-label>{{'salesinvoice.shiptoCompany' | translate }}</mat-label>
+                    <input matInput type="text" readonly formControlName="shiptoCompany" appFocusOnEnter tabIndex="4">
+                </mat-form-field>
 
-                <div>
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'salesinvoice.shiptoAddress2'"></mat-label>
-                        <input matInput formControlName="shiptoAddress2" appFocusOnEnter tabIndex="37">
-                    </mat-form-field>
-                </div>
-
-                
-                <div>
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'salesinvoice.shiptoState'"></mat-label>
-                        <input matInput formControlName="shiptoState" appFocusOnEnter tabIndex="37">
-                    </mat-form-field>
-                </div>
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'salesinvoice.shiptoAddress2'"></mat-label>
+                    <input matInput formControlName="shiptoAddress2" appFocusOnEnter tabIndex="37">
+                </mat-form-field>
 
 
-                <div>
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'salesinvoice.shiptoCity'"></mat-label>
-                        <input matInput formControlName="shiptoCity" appFocusOnEnter tabIndex="37">
-                    </mat-form-field>
-                </div>
-
-                <div>
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'salesinvoice.shiptoZip'"></mat-label>
-                        <input matInput formControlName="shiptoZip" appFocusOnEnter tabIndex="37">
-                    </mat-form-field>
-                </div>
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'salesinvoice.shiptoState'"></mat-label>
+                    <input matInput formControlName="shiptoState" appFocusOnEnter tabIndex="37">
+                </mat-form-field>
 
 
-                <div>
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'salesinvoice.shiptoPhone'"></mat-label>
-                        <input matInput formControlName="shiptoPhone" appFocusOnEnter tabIndex="38">
-                    </mat-form-field>
-                </div>
-                
-                <div>
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'salesinvoice.transportCharges'"></mat-label>
-                        <input matInput formControlName="transportCharges" (focusout)="onFocusOutEvent($event)" appFocusOnEnter tabIndex="39">
-                    </mat-form-field>
-                </div>
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'salesinvoice.shiptoCity'"></mat-label>
+                    <input matInput formControlName="shiptoCity" appFocusOnEnter tabIndex="37">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'salesinvoice.shiptoZip'"></mat-label>
+                    <input matInput formControlName="shiptoZip" appFocusOnEnter tabIndex="37">
+                </mat-form-field>
 
 
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'salesinvoice.shiptoPhone'"></mat-label>
+                    <input matInput formControlName="shiptoPhone" appFocusOnEnter tabIndex="38">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'salesinvoice.transportCharges'"></mat-label>
+                    <input matInput formControlName="transportCharges" (focusout)="onFocusOutEvent($event)"
+                        appFocusOnEnter tabIndex="39">
+                </mat-form-field>
 
             </div>
 
@@ -560,7 +559,6 @@
 
             <h6 id="background">
                 Material Details
-                
             </h6>
 
             <!-- <form [formGroup]="formData1" autocomplete="off">
@@ -654,7 +652,8 @@
                 (click)="invoicePrint()">
                 {{ 'salesinvoice.invoicePrint' | translate }}
             </button>
-            <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"  color="primary" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
+            <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" color="primary"
+                (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
             <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">

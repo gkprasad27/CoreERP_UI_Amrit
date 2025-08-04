@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
-import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
+import { AppDateAdapter, APP_DATE_FORMATS, NonEditableDatepicker } from '../../../../directives/format-datepicker';
 import { TableComponent } from '../../../../reuse-components/table/table.component';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -31,7 +31,7 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @Component({
   selector: 'app-jobworkmaterialreceiving',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, FileUploadComponent, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, NonEditableDatepicker, TranslateModule, TypeaheadModule, FileUploadComponent, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './jobworkmaterialreceiving.component.html',
   styleUrls: ['./jobworkmaterialreceiving.component.scss'],
   providers: [

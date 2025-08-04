@@ -15,10 +15,11 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NonEditableDatepicker } from '../../directives/format-datepicker';
 
 @Component({
   selector: 'app-dynamic-table',
-  imports: [ CommonModule, TranslatePipe, TranslateModule, BsDropdownModule,
+  imports: [ CommonModule, TranslatePipe, TranslateModule, BsDropdownModule, NonEditableDatepicker,
       MatTableModule, MatInputModule, TypeaheadModule, MatSlideToggleModule, NgMultiSelectDropDownModule, MatCheckboxModule],
   templateUrl: './dynamic-table.component.html',
   styleUrls: ['./dynamic-table.component.scss']

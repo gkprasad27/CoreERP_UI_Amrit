@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
-import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
+import { AppDateAdapter, APP_DATE_FORMATS, NonEditableDatepicker } from '../../../../directives/format-datepicker';
 import { TableComponent } from '../../../../reuse-components/table/table.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MaterialRequisitionViewComponent } from './material-requisition-view/material-requisition-view.component';
@@ -28,7 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-materialrequisition',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, NonEditableDatepicker, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './materialrequisition.component.html',
   styleUrls: ['./materialrequisition.component.scss'],
   providers: [

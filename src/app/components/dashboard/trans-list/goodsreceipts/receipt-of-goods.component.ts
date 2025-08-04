@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
-import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
+import { AppDateAdapter, APP_DATE_FORMATS, NonEditableDatepicker } from '../../../../directives/format-datepicker';
 import { TableComponent } from '../../../../reuse-components/table/table.component';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -31,7 +31,7 @@ import { FileUploadComponent } from '../../../../reuse-components/file-upload/fi
 
 @Component({
   selector: 'app-receipt-of-goods',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, FileUploadComponent, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, NonEditableDatepicker, TranslateModule, FileUploadComponent, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './receipt-of-goods.component.html',
   styleUrls: ['./receipt-of-goods.component.scss'],
   providers: [

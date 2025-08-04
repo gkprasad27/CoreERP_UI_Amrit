@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
-import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
+import { AppDateAdapter, APP_DATE_FORMATS, NonEditableDatepicker } from '../../../../directives/format-datepicker';
 import { TableComponent } from '../../../../reuse-components/table/table.component';
 import { DatePipe } from '@angular/common';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -29,7 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-sales-invoice',
-  imports: [CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, ReactiveFormsModule, NonEditableDatepicker, NgMultiSelectDropDownModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './sales-invoice.component.html',
   styleUrls: ['./sales-invoice.component.scss'],
   providers: [
@@ -276,7 +276,7 @@ export class SalesInvoiceComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.materialCodeList = res.response['saleordernoList'];
 
-              this.getBusienessPartnerAccount(res.response.saleOrderMasterList);
+              this.getBusienessPartnerAccount(res.response.saleOrderMasterList, 'saleOrderNo');
               this.ponoselect();
               this.getInspectionCheckDetailbySaleorder();
             }
@@ -290,10 +290,10 @@ export class SalesInvoiceComponent implements OnInit {
 
   getshiptoCompanyList() {
     const obj = this.customerList.find((c: any) => c.text == this.formData.value.shiptoCompany[0].text);
-    this.getBusienessPartnerAccount({customerCode: obj.id})
+    this.getBusienessPartnerAccount({customerCode: obj.id});
   }
 
-  getBusienessPartnerAccount(data: any) {
+  getBusienessPartnerAccount(data: any, flag?: string) {
     const getSaleOrderUrl = String.Join('/', this.apiConfigService.getBusienessPartnerAccount, data.customerCode);
     this.apiService.apiGetRequest(getSaleOrderUrl)
       .subscribe(
@@ -304,12 +304,14 @@ export class SalesInvoiceComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response.bpaList);
               const obj = this.customerList.find((c: any) => c.id == res.response.bpaList.bpnumber);
-              this.formData.patchValue({
-                customerCode: res.response.bpaList.name,
-                customerName: res.response.bpaList.bpnumber,
-                customerGstin: res.response.bpaList.gstno,
-                shiptoCompany: obj ? [{ 'text': obj.text }] : [],
-              })
+              if(flag == 'saleOrderNo') {
+                this.formData.patchValue({
+                  customerCode: res.response.bpaList.name,
+                  customerName: res.response.bpaList.bpnumber,
+                  customerGstin: res.response.bpaList.gstno,
+                  shiptoCompany: obj ? [{ 'text': obj.text }] : [],
+                })
+              }
             }
           }
         });
@@ -325,9 +327,9 @@ export class SalesInvoiceComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.tableComponent.defaultValues();
+              const arr = [];
               res.response['icDetail'].forEach((i: any, index: number) => {
                 const master = res.response['icmasters'];
-
                 let obj: any = this.materialCodeList;
                 if (this.materialCodeList.find((m: any) => m.mainComponent == 'Y')) {
                   if (master.company == '1000') {
@@ -364,8 +366,8 @@ export class SalesInvoiceComponent implements OnInit {
                     i.taxStructureId = obj.taxCode;
                     i.totalTax = (igst + sgst + cgst);
                     i.totalAmount = (obj.rate + obj.transportCharges) + (igst + sgst + cgst)
-                    i.checkbox =
-                      i.index = index + 1;
+                    i.checkbox = false;
+                    i.index = index + 1;
                     // if(master.company=='2000')
                     // {
                     // this.tableData = data.filter((t: any) => t.materialCode == obj.materialCode);
@@ -374,10 +376,12 @@ export class SalesInvoiceComponent implements OnInit {
                     // {
                     //   this.tableData = data;
                     // }
+                    arr.push(i);
                   }
                 }
               });
-              this.tableData = res.response['icDetail'];
+              debugger
+              this.tableData = arr;
               if (this.tableData.length > 0) {
                 this.tableData[0].checkbox = true;
               }
@@ -643,10 +647,14 @@ export class SalesInvoiceComponent implements OnInit {
   savegoodsreceipt() {
     this.formData.enable();
     const arr = this.tableData.filter((d: any) => !d.type && d.checkbox);
+    debugger
     const registerInvoice = String.Join('/', this.apiConfigService.registerInvoice);
     const formData = this.formData.value;
     if (typeof formData.saleOrderNo != 'string') {
       formData.saleOrderNo = this.formData.value.saleOrderNo[0].saleOrderNo;
+    }
+    if (typeof formData.shiptoCompany != 'string') {
+      formData.shiptoCompany = this.formData.value.shiptoCompany[0].text;
     }
     formData.invoiceDate = this.formData.get('invoiceDate').value ? this.datepipe.transform(this.formData.get('invoiceDate').value, 'yyyy-MM-dd') : '';
     const requestObj = { grHdr: formData, grDtl: arr };
