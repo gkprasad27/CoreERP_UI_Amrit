@@ -634,7 +634,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
         response => {
           this.spinner.hide();
           const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res)) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.grDetail = res.response['grDetail'];
 

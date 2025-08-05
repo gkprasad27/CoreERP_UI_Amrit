@@ -1,6 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <div style="margin: 10px;" *ngIf="invoicePrintData" id="invoicePrintData">
     <div style="display: flex;">
         <img *ngIf="invoicePrintData?.headingObj?.company === '1000'" src="/assets/images/header.jpg"
@@ -423,7 +421,7 @@
 
         <form [formGroup]="formData" autocomplete="off">
 
-            <h6 id="background">
+            <h6 >
                 Material Header
             </h6>
 
