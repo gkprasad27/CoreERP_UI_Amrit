@@ -126,6 +126,7 @@ export class SalesInvoiceComponent implements OnInit {
       customerCode: [''],
       customerName: [''],
       customerGstin: [''],
+      gstNo: [''],
       // mobile: [''],
       shiptoCompany: [''],
       shiptoAddress1: [''],
@@ -290,6 +291,9 @@ export class SalesInvoiceComponent implements OnInit {
 
   getshiptoCompanyList() {
     const obj = this.customerList.find((c: any) => c.text == this.formData.value.shiptoCompany[0].text);
+    this.formData.patchValue({
+      gstNo: obj ? obj.gstNo : '',
+    });
     this.getBusienessPartnerAccount({customerCode: obj.id});
   }
 
@@ -737,13 +741,13 @@ export class SalesInvoiceComponent implements OnInit {
         gstno: this.bpaList?.gstno || '',
       },
       pAddress: {
-        custName: this.getInvoiceDeatilData?.InvoiceMasterList?.custName || '',
+        custName: this.formData.value.shiptoCompany || '',
         address: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress1 || '',
         address1: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoAddress2 || '',
         city: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoCity || '',
         stateName: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoState || '',
         pin: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoZip || '',
-        gstno: this.getInvoiceDeatilData?.InvoiceMasterList?.customerGstin || '',
+        gstno: this.formData.value.gstNo || '',
       },
       detailArray: list,
       totalObj: totalObj,
