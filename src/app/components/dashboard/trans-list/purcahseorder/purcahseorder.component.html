@@ -1,16 +1,13 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div style="margin: 10px;" id="printData" *ngIf="data">
     <div style="display: flex;">
         <!-- Display this image only if the companyName is 'AMT POWER TRANSMISSION' -->
-        <img *ngIf="data?.headingObj?.company === '1000'" 
-             src="/assets/images/header.jpg" 
-             style="height: 100px; width: 65%;">
-    
+        <img *ngIf="data?.headingObj?.company === '1000'" src="/assets/images/header.jpg"
+            style="height: 100px; width: 65%;">
+
         <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
-        <img *ngIf="data?.headingObj?.company !== '1000'" 
-             src="/assets/images/AMRIT.jpg" 
-             style="height: 100px; width: 65%;">
-    
+        <img *ngIf="data?.headingObj?.company !== '1000'" src="/assets/images/AMRIT.jpg"
+            style="height: 100px; width: 65%;">
+
         <div style="padding: 24px; 
                     border-top: 1px solid black; 
                     -webkit-print-color-adjust: exact; 
@@ -23,8 +20,8 @@
                     display: flex; 
                     height: 50px; 
                     flex-direction: column;">
-            
-   
+
+
             <span style="font-size: 22px;font-weight: 700;font-family: sans-serif;"> {{ data.heading }} </span>
         </div>
     </div>
@@ -32,12 +29,14 @@
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 50%;padding: 3px 15px;display: flex;border-right: 1px solid;">
             <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> PO Number </b>
-            <span style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
+            <span
+                style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
                 {{ data?.headingObj?.purchaseOrderNumber }} </span>
         </div>
         <div style="width: 50%;padding: 3px 15px;display: flex;">
             <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> Date </b>
-            <span style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
+            <span
+                style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
                 {{ data?.headingObj?.purchaseOrderDate | date }} </span>
         </div>
     </div>
@@ -49,16 +48,17 @@
                 data?.headingObj?.address.companyName }}</div>
             <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
                 data?.headingObj?.address.address }},</div>
-                <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
-                     data?.headingObj?.address.address1 }},</div>
-                     <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
-                        data?.headingObj?.address.street }},</div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
+                data?.headingObj?.address.address1 }},</div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
+                data?.headingObj?.address.street }},</div>
             <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
                 data?.headingObj?.address.city }}, {{ data?.headingObj?.address.stateName }}, {{
                 data?.headingObj?.address.pin }}</div>
             <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">Email: {{
                 data?.headingObj?.address.email }}</div>
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;align-items: center;display: flex;">GST: {{
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;align-items: center;display: flex;">
+                GST: {{
                 data?.headingObj?.address.gstno }}</div>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;">
@@ -109,7 +109,8 @@
     <div style="border-top: 1px solid black; display: flex; ">
         <div
             style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;">{{ data?.headingObj?.vAddress?.name }}
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;">{{ data?.headingObj?.vAddress?.name
+                }}
             </div>
             <div>{{ data?.headingObj?.vAddress?.address }}, {{ data?.headingObj?.vAddress?.address1 }}</div>
             <div>{{ data?.headingObj?.vAddress?.city }}, {{ data?.headingObj?.vAddress?.stateName }}, {{
@@ -121,10 +122,11 @@
                 data?.headingObj?.vAddress?.gstno }}</b>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;">{{ data?.headingObj?.pAddress?.address
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;">{{
+                data?.headingObj?.pAddress?.address
                 }} </div>
             <div> {{ data?.headingObj?.pAddress?.address1 }}</div>
-              <div> {{ data?.headingObj?.pAddress?.city }}, {{
+            <div> {{ data?.headingObj?.pAddress?.city }}, {{
                 data?.headingObj?.pAddress?.stateName }}, {{
                 data?.headingObj?.pAddress?.pin }}</div>
             <div>Phone: {{ data?.headingObj?.pAddress?.phone }}</div>
@@ -150,15 +152,15 @@
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Description </th>
-                        <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                            HSN Code </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        HSN Code </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Quantity </th>
-                        <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                            UOM </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        UOM </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                         Unit Weight </th>
@@ -170,7 +172,7 @@
                         Price </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;">
-                         Amount </th>
+                        Amount </th>
                 </tr>
             </thead>
             <tbody>
@@ -178,7 +180,8 @@
                     *ngFor="let row of data.detailArray; let i = index">
                     <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
-                        <span *ngIf="row.materialCode"> {{ i + 1 }} </span> </td>
+                        <span *ngIf="row.materialCode"> {{ i + 1 }} </span>
+                    </td>
                     <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.materialCode }}
@@ -187,17 +190,17 @@
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.materialName }}
                     </td>
-                     <td
+                    <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.hsnsac }}
                     </td>
                     <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.qty }} </td>
-                        <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
-                            {{row.uom}}
-                        </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{row.uom}}
+                    </td>
                     <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.netWeight }}
@@ -205,7 +208,8 @@
                     <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         <ng-container *ngIf="row.qty"> {{ row.qty *
-                            row.netWeight}} </ng-container> </td>
+                            row.netWeight}} </ng-container>
+                    </td>
                     <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
                         {{ row.rate }} </td>
@@ -223,28 +227,28 @@
                     </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                         
+
                     </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                    {{
+                        {{
                         data.headingObj1.totalQty }}
                     </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                    
+
                     </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                        
-                        </td>
+
+                    </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         {{
                         data.headingObj1.totalWeight }}</td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                        </td>
+                    </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">
                         {{
@@ -265,40 +269,49 @@
         <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
             <div style="padding-left: 15px;padding-top: 10px;">
                 <div style="display: flex;">
-                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Amount Before
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Amount
+                        Before
                         Tax </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.amount
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{
+                        data.headingObj?.amount
                         }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: CGST &#64; {{
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: CGST &#64;
+                        {{
                         data.headingObj?.cgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.cgst }}
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.cgst
+                        }}
                     </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: SGST &#64; {{
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: SGST &#64;
+                        {{
                         data.headingObj?.sgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.sgst }}
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.sgst
+                        }}
                     </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: IGST &#64; {{
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: IGST &#64;
+                        {{
                         data.headingObj?.igst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.igst }}
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.igst
+                        }}
                     </span>
                 </div>
-                 <div style="display: flex;border-top: 1px solid black;">
+                <div style="display: flex;border-top: 1px solid black;">
                     <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Extra Charges
-                         </b>
+                    </b>
                     <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;font-weight: 900;"> <b>
-                       {{ (data.headingObj?.fright || 0) + (data.headingObj?.hamaliCharges || 0) + (data.headingObj?.weightBridge || 0) }} </b></span>
+                            {{ (data.headingObj?.fright || 0) + (data.headingObj?.hamaliCharges || 0) +
+                            (data.headingObj?.weightBridge || 0) }} </b></span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
                     <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Amount with
                         GST </b>
                     <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;font-weight: 900;"> <b>{{
-                        data.headingObj?.totalAmount }} </b></span>
+                            data.headingObj?.totalAmount }} </b></span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
                     <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Payable
@@ -309,16 +322,19 @@
         </div>
     </div>
 
-    <div *ngIf="data?.headingObj?.company === '1000'" style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
+    <div *ngIf="data?.headingObj?.company === '1000'"
+        style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
         The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
         PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
         SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMT POWER TRANSMISSION RESERVES THE RIGHT TO WITH HOLD
         ANY PAYMENT UNTIL SUCH TIME THAT A VALID TAX INVOICE IS PROVIDE
     </div>
-    <div *ngIf="data?.headingObj?.company !== '1000'" style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
+    <div *ngIf="data?.headingObj?.company !== '1000'"
+        style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
         The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
         PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
-        SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMRIT STONE CRUSHER EQUIPMENTS RESERVES THE RIGHT TO WITH HOLD
+        SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMRIT STONE CRUSHER EQUIPMENTS RESERVES THE RIGHT TO WITH
+        HOLD
         ANY PAYMENT UNTIL SUCH TIME THAT A VALID TAX INVOICE IS PROVIDE
     </div>
 
@@ -328,12 +344,10 @@
     </div>
 
     <div style="display: flex;">
-        <img *ngIf="data?.headingObj?.company === '1000'" 
-             src="/assets/images/header.jpg" 
-             style="height: 100px; width: 65%;">
-        <img *ngIf="data?.headingObj?.company !== '1000'" 
-             src="/assets/images/AMRIT.jpg" 
-             style="height: 100px; width: 65%;">
+        <img *ngIf="data?.headingObj?.company === '1000'" src="/assets/images/header.jpg"
+            style="height: 100px; width: 65%;">
+        <img *ngIf="data?.headingObj?.company !== '1000'" src="/assets/images/AMRIT.jpg"
+            style="height: 100px; width: 65%;">
         <div style="padding: 24px;
         border-top: 1px solid black;
         -webkit-print-color-adjust: exact;
@@ -427,14 +441,13 @@
         <img *ngIf="data?.headingObj?.company === '1000'" src="/assets/images/footer.jpg" style="height: 100px;
         width: 20%;">
     </div>
-    
+
 
     <div style="text-align: center;">
-        
+
     </div>
 
 </div>
-
 
 <mat-card>
 
@@ -445,11 +458,10 @@
 
             <h6>
                 Purchase Order Master
-               
             </h6>
 
-            <div class="d--flex p-1 mat-form-field-height">
-<!-- 
+            <div class="p-1 row">
+                <!-- 
                 <mat-form-field>
                     <mat-label>{{ 'purchaseorder.company' | translate }}</mat-label>
                     <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
@@ -461,9 +473,9 @@
                 </mat-form-field> -->
 
 
-         
 
-                <mat-form-field>
+
+                <mat-form-field class="col-3">
                     <mat-label>{{'purchaseorder.profitCenter' | translate }}</mat-label>
                     <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
@@ -473,9 +485,9 @@
                     </mat-select>
                 </mat-form-field>
 
-               
 
-                <mat-form-field>
+
+                <mat-form-field class="col-3">
                     <mat-label>{{'purchaseorder.poType' | translate }}</mat-label>
                     <mat-select formControlName="saleOrderType" appFocusOnEnter tabIndex="3"
                         (selectionChange)="toggle()">
@@ -485,20 +497,22 @@
                         <mat-option value="Bill of Material"> Bill of Material </mat-option>
                     </mat-select>
                 </mat-form-field>
-                
 
-                <div id="sale" class="multiselect-dropdown-list" *ngIf="!routeEdit">
-                    <ng-multiselect-dropdown 
-                        placeholder="{{ 'purchaseorder.quotationNumber' | translate }}" formControlName="saleOrderNo"
-                        (onSelect)="quotationNumberChange()" [settings]="dropdownSettings" [data]="qnoList" appFocusOnEnter tabIndex="4">
+
+                <div class="multiselect-dropdown-list floating-dropdown col-3"
+                    [class.filled]="formData.value?.saleOrderNo?.length > 0" *ngIf="!routeEdit">
+                    <label> {{ 'purchaseorder.quotationNumber' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="saleOrderNo"
+                        (onSelect)="quotationNumberChange()" [settings]="dropdownSettings" [data]="qnoList"
+                        appFocusOnEnter tabIndex="4">
                     </ng-multiselect-dropdown>
                 </div>
-                <mat-form-field *ngIf="routeEdit">
+                <mat-form-field *ngIf="routeEdit" class="col-3">
                     <mat-label>{{'purchaseorder.quotationNumber' | translate }}</mat-label>
                     <input matInput type="text" readonly formControlName="saleOrderNo" appFocusOnEnter tabIndex="5">
                 </mat-form-field>
 
-                <mat-form-field>
+                <mat-form-field class="col-3">
                     <mat-label>{{'purchaseorder.purchaseOrderType' | translate }}</mat-label>
                     <mat-select formControlName="purchaseOrderType" appFocusOnEnter tabIndex="6">
                         <mat-option>None</mat-option>
@@ -508,7 +522,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'purchaseorder.purchaseOrderDate'"></mat-label>
                     <input matInput [matDatepicker]="picker3" [nonEditable]="picker3"
                         formControlName="purchaseOrderDate" appFocusOnEnter tabIndex="7">
@@ -516,21 +530,22 @@
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead" *ngIf="!routeEdit">
-                    <input placeholder="{{ 'purchaseorder.supplierCode' | translate }}" formControlName="supplierName"
-                        [typeahead]="bpaList" typeaheadOptionField='name' appFocusOnEnter tabIndex="8"
-                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
-                        (typeaheadOnSelect)="supplierCodeChange()">
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3" *ngIf="!routeEdit"
+                    [class.filled]="formData.value?.supplierName?.length > 0">
+                    <label> {{ 'purchaseorder.bom' | supplierCode }} </label>
+                    <input placeholder=" " formControlName="supplierName" [typeahead]="bpaList"
+                        typeaheadOptionField='name' appFocusOnEnter tabIndex="8" class="form-control typeahead"
+                        [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="supplierCodeChange()">
                     <ng-template #customItemTemplate let-model="item">
                         <span><strong>{{model.bpnumber}}</strong> - {{model.name}}</span>
                     </ng-template>
                 </div>
-                <mat-form-field *ngIf="routeEdit">
+                <mat-form-field *ngIf="routeEdit" class="col-3">
                     <mat-label>{{'purchaseorder.supplierCode' | translate }}</mat-label>
                     <input matInput type="text" readonly formControlName="supplierName" appFocusOnEnter tabIndex="8">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'purchaseorder.deliveryDate'"></mat-label>
                     <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="deliveryDate"
                         appFocusOnEnter tabIndex="9">
@@ -550,63 +565,65 @@
                 </mat-form-field> -->
 
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'purchaseorder.dispatchMode'"></mat-label>
                     <input matInput type="text" formControlName="dispatchMode" appFocusOnEnter tabIndex="12">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'purchaseorder.termsOfDelivery'"></mat-label>
                     <input matInput type="text" formControlName="termsOfDelivery" appFocusOnEnter tabIndex="13">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'purchaseorder.termsOfPayment'"></mat-label>
                     <input matInput type="text" formControlName="termsOfPayment" appFocusOnEnter tabIndex="14">
-                </mat-form-field>               
+                </mat-form-field>
 
-               
 
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'purchaseorder.fright'"></mat-label>
-                        <input matInput type="text" formControlName="fright" appFocusOnEnter tabIndex="15">
-                    </mat-form-field>
-    
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'purchaseorder.weightBridge'"></mat-label>
-                        <input matInput type="text" formControlName="weightBridge" appFocusOnEnter tabIndex="16">
-                    </mat-form-field>
-    
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'purchaseorder.otherCharges'"></mat-label>
-                        <input matInput type="text" formControlName="otherCharges" appFocusOnEnter tabIndex="17">
-                    </mat-form-field>
-    
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'purchaseorder.hamaliCharges'"></mat-label>
-                        <input matInput type="text" formControlName="hamaliCharges" appFocusOnEnter tabIndex="18">
-                    </mat-form-field>
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'purchaseorder.ammendment'" ></mat-label>
-                        <input matInput type="text" readonly formControlName="ammendment" appFocusOnEnter tabIndex="19">
-                    </mat-form-field>
-                    <!-- <mat-form-field class="form-element">
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'purchaseorder.fright'"></mat-label>
+                    <input matInput type="text" formControlName="fright" appFocusOnEnter tabIndex="15">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'purchaseorder.weightBridge'"></mat-label>
+                    <input matInput type="text" formControlName="weightBridge" appFocusOnEnter tabIndex="16">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'purchaseorder.otherCharges'"></mat-label>
+                    <input matInput type="text" formControlName="otherCharges" appFocusOnEnter tabIndex="17">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'purchaseorder.hamaliCharges'"></mat-label>
+                    <input matInput type="text" formControlName="hamaliCharges" appFocusOnEnter tabIndex="18">
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'purchaseorder.ammendment'"></mat-label>
+                    <input matInput type="text" readonly formControlName="ammendment" appFocusOnEnter tabIndex="19">
+                </mat-form-field>
+                <!-- <mat-form-field class="form-element">
                         <mat-label [translate]="'purchaseorder.mechineNumber'" ></mat-label>
                         <input matInput type="text" formControlName="mechineNumber" appFocusOnEnter tabIndex="20">
                     </mat-form-field> -->
-                    <mat-form-field>
-                        <mat-label>{{'purchaseorder.createdBy' | translate }}</mat-label>
-                        <mat-select formControlName="createdBy" appFocusOnEnter tabIndex="20" (selectionChange)="onEmpChange()">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
+                <mat-form-field class="col-3">
+                    <mat-label>{{'purchaseorder.createdBy' | translate }}</mat-label>
+                    <mat-select formControlName="createdBy" appFocusOnEnter tabIndex="20"
+                        (selectionChange)="onEmpChange()">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
                             {{emp.id}} - {{emp.text}}
-                            </mat-option>
-                        </mat-select>
-                        </mat-form-field>
-                       <mat-form-field class="form-element">
-                        <mat-label [translate]="'purchaseorder.contactNo'" ></mat-label>
-                        <input matInput type="text" formControlName="contactNo" appFocusOnEnter tabIndex="22">
-                    </mat-form-field>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'purchaseorder.contactNo'"></mat-label>
+                    <input matInput type="text" formControlName="contactNo" appFocusOnEnter tabIndex="22">
+                </mat-form-field>
 
             </div>
 
@@ -617,73 +634,69 @@
 
             <h6>
                 Purchase Order Details
-                
             </h6>
 
             <form [formGroup]="formData1" autocomplete="off">
 
+                <div class="row p-1">
+
+                    <mat-form-field class="col-3" *ngIf="routeEdit && formData1.value.type == 'add'">
+                        <mat-label>{{ 'purchaseorder.materialCode' | translate }}</mat-label>
+                        <mat-select formControlName="materialCode" appFocusOnEnter tabIndex="15"
+                            (selectionChange)="materialCodeChange()">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let material of materialCodeList" [value]="material.materialCode">
+                                {{material.materialCode}} -- {{material.materialName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col-3" *ngIf="routeEdit && formData1.value.type == 'edit'">
+                        <mat-label>{{ 'purchaseorder.materialCode' | translate }}</mat-label>
+                        <input matInput type="text" readonly formControlName="materialCode" appFocusOnEnter
+                            tabIndex="16">
+                    </mat-form-field>
 
 
-                <div class="d--flex p-1 mat-form-field-height  align-items-end">
+                    <mat-form-field class="col-3">
+                        <mat-label [translate]="'purchaseorder.qty'"></mat-label>
+                        <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="17">
+                    </mat-form-field>
 
-                    <div id="material">
+                    <mat-form-field class="col-3">
+                        <mat-label [translate]="'purchaseorder.rate'"></mat-label>
+                        <input matInput type="number" formControlName="rate" appFocusOnEnter tabIndex="18">
+                    </mat-form-field>
 
-                        <mat-form-field class="form-element" *ngIf="routeEdit && formData1.value.type == 'add'">
-                            <mat-label>{{ 'purchaseorder.materialCode' | translate }}</mat-label>
-                            <mat-select formControlName="materialCode" appFocusOnEnter tabIndex="15"
-                                (selectionChange)="materialCodeChange()">
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let material of materialCodeList" [value]="material.materialCode">
-                                    {{material.materialCode}} -- {{material.materialName}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field class="form-element" *ngIf="routeEdit && formData1.value.type == 'edit'">
-                            <mat-label>{{ 'purchaseorder.materialCode' | translate }}</mat-label>
-                            <input matInput type="text" readonly formControlName="materialCode" appFocusOnEnter
-                                tabIndex="16">
-                        </mat-form-field>
+                    <mat-form-field class="col-3">
+                        <mat-label>{{ 'purchaseorder.taxCode' | translate }}</mat-label>
+                        <mat-select formControlName="taxCode" appFocusOnEnter tabIndex="19">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let tax of taxCodeList" [value]="tax.taxRateCode">
+                                {{tax.description}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
+                    <mat-form-field class="col-3">
+                        <mat-label [translate]="'purchaseorder.netWeight'"></mat-label>
+                        <input matInput type="number" formControlName="netWeight" appFocusOnEnter tabIndex="20">
+                    </mat-form-field>
 
-                        <mat-form-field class="form-element">
-                            <mat-label [translate]="'purchaseorder.qty'"></mat-label>
-                            <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="17">
-                        </mat-form-field>
+                    <mat-form-field class="col-3">
+                        <mat-label [translate]="'purchaseorder.dimentions'"></mat-label>
+                        <input matInput type="text" formControlName="dimentions" appFocusOnEnter tabIndex="20">
+                    </mat-form-field>
 
-                        <mat-form-field class="form-element">
-                            <mat-label [translate]="'purchaseorder.rate'"></mat-label>
-                            <input matInput type="number" formControlName="rate" appFocusOnEnter tabIndex="18">
-                        </mat-form-field>
-
-                        <mat-form-field class="form-element">
-                            <mat-label>{{ 'purchaseorder.taxCode' | translate }}</mat-label>
-                            <mat-select formControlName="taxCode" appFocusOnEnter tabIndex="19">
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let tax of taxCodeList" [value]="tax.taxRateCode">
-                                    {{tax.description}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field class="form-element">
-                            <mat-label [translate]="'purchaseorder.netWeight'"></mat-label>
-                            <input matInput type="number" formControlName="netWeight" appFocusOnEnter tabIndex="20">
-                        </mat-form-field>  
-
-                        <mat-form-field class="form-element">
-                            <mat-label [translate]="'purchaseorder.dimentions'"></mat-label>
-                            <input matInput type="text" formControlName="dimentions" appFocusOnEnter tabIndex="20">
-                        </mat-form-field>  
-
-                    <div class="multiselect-dropdown-list" >
-                        <ng-multiselect-dropdown 
-                            placeholder="{{ 'purchaseorder.material' | translate }}" formControlName="material"
+                    <div class="multiselect-dropdown-list floating-dropdown col-3"
+                        [class.filled]="formData1.value?.material?.length > 0">
+                        <label> {{ 'purchaseorder.material' | translate }} </label>
+                        <ng-multiselect-dropdown placeholder=" " formControlName="material"
                             [settings]="dropdownSettings1" [data]="mpatternList" appFocusOnEnter tabIndex="21">
                         </ng-multiselect-dropdown>
                     </div>
 
 
-                    <div id="for" class="mb-3">
+                    <div id="for" class="d-flex justify-content-end mb-3">
 
                         <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
                             (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
@@ -697,15 +710,14 @@
 
 
                 </div>
-                </div>
 
             </form>
+        </div>
 
-            <div>
-                <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
-                    (editOrDeleteEvent)="editOrDeleteEvent($event)">
-                </app-table>
-            </div>
+        <div>
+            <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
+                (editOrDeleteEvent)="editOrDeleteEvent($event)">
+            </app-table>
         </div>
 
     </mat-card-content>
@@ -735,10 +747,12 @@
 
         <div id="button">
 
-            <button id="print" class="mx-2" mat-raised-button (click)="print()" class="button-color-bule mx-3 text-white">
+            <button id="print" class="mx-2" mat-raised-button (click)="print()"
+                class="button-color-bule mx-3 text-white">
                 <mat-icon>print</mat-icon> Print
             </button>
-            <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
+            <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+                (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
             <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
