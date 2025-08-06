@@ -46,7 +46,7 @@ export class DesignationComponent implements OnInit {
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<DesignationComponent>,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private addOrEditService: AddOrEditService,
     private datepipe: DatePipe,
     // @Optional() is used to prevent error if no data is passed

@@ -226,7 +226,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'supplierquotation.quotationDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="quotationDate"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="quotationDate"
                         appFocusOnEnter tabIndex="4">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
@@ -351,7 +351,7 @@
 
                     <mat-form-field class="form-element">
                         <mat-label [translate]="'supplierquotation.deliveryDate'"></mat-label>
-                        <input matInput [matDatepicker]="picker13" [nonEditable]="picker13"
+                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker13" [nonEditable]="picker13"
                             formControlName="deliveryDate" appFocusOnEnter tabIndex="15">
                         <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
                         <mat-datepicker #picker13></mat-datepicker>

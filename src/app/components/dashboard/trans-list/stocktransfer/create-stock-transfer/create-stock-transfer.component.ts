@@ -73,7 +73,7 @@ export class CreateStockTransferComponent implements OnInit {
   getLtrsArray: any;
   constructor(
     private formBuilder: FormBuilder,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private alertService: AlertService,

@@ -78,7 +78,7 @@ export class CostCenterComponent implements OnInit {
   fdeptList: any;
   StatesList: any;
 
-  constructor(private commonService: CommonService,
+  constructor(public commonService: CommonService,
     private apiService: ApiService,
     private addOrEditService: AddOrEditService,
     private apiConfigService: ApiConfigService,

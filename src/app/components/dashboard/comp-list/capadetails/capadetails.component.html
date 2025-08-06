@@ -394,7 +394,7 @@
 
                 <mat-form-field>
                     <mat-label [translate]="'CAPAdetails.dateOfDeadline'"></mat-label>
-                    <input matInput [matDatepicker]="picker" placeholder="{{'CAPAdetails.dateOfDeadline' | translate }}"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" placeholder="{{'CAPAdetails.dateOfDeadline' | translate }}"
                         formControlName="deadlineMonitorDate" appFocusOnEnter tabIndex="1">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -410,7 +410,7 @@
 
                 <mat-form-field>
                     <mat-label [translate]="'CAPAdetails.notificationDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker2"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
                         placeholder="{{'CAPAdetails.notificationDate' | translate }}" formControlName="notificationDate"
                         appFocusOnEnter tabIndex="3">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -453,14 +453,14 @@
                 <mat-form-field>
                     <mat-label [translate]="'CAPAdetails.receivedPartsDate'"></mat-label>
                     <input matInput placeholder="{{'CAPAdetails.receivedPartsDate' | translate }}"
-                        [matDatepicker]="picker3" formControlName="receivedPartsDate" appFocusOnEnter tabIndex="7">
+                        [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" formControlName="receivedPartsDate" appFocusOnEnter tabIndex="7">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label [translate]="'CAPAdetails.analysisBugunDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker4"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4"
                         placeholder="{{'CAPAdetails.analysisBugunDate' | translate }}"
                         formControlName="analysisBugunDate" appFocusOnEnter tabIndex="8">
                     <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
@@ -469,7 +469,7 @@
 
                 <mat-form-field>
                     <mat-label [translate]="'CAPAdetails.defectCauseAcknowledgeDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker5"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker5"
                         placeholder="{{'CAPAdetails.defectCauseAcknowledgeDate' | translate }}"
                         formControlName="defectCauseAcknowledgeDate" appFocusOnEnter tabIndex="9">
                     <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
@@ -478,7 +478,7 @@
 
                 <mat-form-field>
                     <mat-label [translate]="'CAPAdetails.shortTermSolDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker6"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker6"
                         placeholder="{{'CAPAdetails.shortTermSolDate' | translate }}" formControlName="shortTermSolDate"
                         appFocusOnEnter tabIndex="10">
                     <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
@@ -487,7 +487,7 @@
 
                 <mat-form-field>
                     <mat-label [translate]="'CAPAdetails.longTermSolDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker7"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker7"
                         placeholder="{{'CAPAdetails.longTermSolDate' | translate }}" formControlName="longTermSolDate"
                         appFocusOnEnter tabIndex="11">
                     <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
@@ -496,7 +496,7 @@
 
                 <mat-form-field>
                     <mat-label [translate]="'CAPAdetails.containmentReqdDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker8"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker8"
                         placeholder="{{'CAPAdetails.containmentReqdDate' | translate }}"
                         formControlName="containmentReqdDate" appFocusOnEnter tabIndex="12">
                     <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
@@ -505,7 +505,7 @@
 
                 <mat-form-field>
                     <mat-label [translate]="'CAPAdetails.solutionInspectedDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker9"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker9"
                         placeholder="{{'CAPAdetails.solutionInspectedDate' | translate }}"
                         formControlName="solutionInspectedDate" appFocusOnEnter tabIndex="13">
                     <mat-datepicker-toggle matSuffix [for]="picker9"></mat-datepicker-toggle>
@@ -545,7 +545,7 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label [translate]="'COMMON.DATE'"></mat-label>
-                                <input matInput [matDatepicker]="picker10" formControlName="defectCasuseDate"
+                                <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker10" formControlName="defectCasuseDate"
                                     appFocusOnEnter tabIndex="17">
                                 <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
                                 <mat-datepicker #picker10></mat-datepicker>
@@ -570,7 +570,7 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label [translate]="'COMMON.DATE'"></mat-label>
-                                <input matInput [matDatepicker]="picker11" formControlName="shortTermSolutionDate"
+                                <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker11" formControlName="shortTermSolutionDate"
                                     appFocusOnEnter tabIndex="20">
                                 <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
                                 <mat-datepicker #picker11></mat-datepicker>
@@ -595,7 +595,7 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label [translate]="'COMMON.DATE'"></mat-label>
-                                <input matInput [matDatepicker]="picker12" formControlName="longTermSolutionDate"
+                                <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker12" formControlName="longTermSolutionDate"
                                     appFocusOnEnter tabIndex="23">
                                 <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
                                 <mat-datepicker #picker12></mat-datepicker>
@@ -624,7 +624,7 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label [translate]="'COMMON.DATE'"></mat-label>
-                                <input matInput [matDatepicker]="picker14"
+                                <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker14"
                                     formControlName="checkSuccessDelrdMaterailDate" appFocusOnEnter tabIndex="29">
                                 <mat-datepicker-toggle matSuffix [for]="picker14"></mat-datepicker-toggle>
                                 <mat-datepicker #picker14></mat-datepicker>
@@ -649,7 +649,7 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label [translate]="'COMMON.DATE'"></mat-label>
-                                <input matInput [matDatepicker]="picker15" formControlName="containmentAccessDate"
+                                <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker15" formControlName="containmentAccessDate"
                                     appFocusOnEnter tabIndex="32">
                                 <mat-datepicker-toggle matSuffix [for]="picker15"></mat-datepicker-toggle>
                                 <mat-datepicker #picker15></mat-datepicker>
@@ -674,7 +674,7 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label [translate]="'COMMON.DATE'"></mat-label>
-                                <input matInput [matDatepicker]="picker16" formControlName="custVerificationDate"
+                                <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker16" formControlName="custVerificationDate"
                                     appFocusOnEnter tabIndex="35">
                                 <mat-datepicker-toggle matSuffix [for]="picker16"></mat-datepicker-toggle>
                                 <mat-datepicker #picker16></mat-datepicker>
@@ -704,7 +704,7 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label [translate]="'COMMON.DATE'"></mat-label>
-                                <input matInput [matDatepicker]="picker13"
+                                <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker13"
                                     formControlName="identificationOfDelvrdMaterialDate" appFocusOnEnter tabIndex="26">
                                 <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
                                 <mat-datepicker #picker13></mat-datepicker>

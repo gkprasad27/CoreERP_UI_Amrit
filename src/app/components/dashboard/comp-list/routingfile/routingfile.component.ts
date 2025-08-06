@@ -68,7 +68,7 @@ export class RoutingFileComponent implements OnInit {
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private alertService: AlertService,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private spinner: NgxSpinnerService,
     public route: ActivatedRoute,
     private router: Router,

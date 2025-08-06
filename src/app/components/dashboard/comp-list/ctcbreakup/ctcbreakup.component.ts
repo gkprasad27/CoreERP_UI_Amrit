@@ -50,7 +50,7 @@ export class CTCBreakupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private spinner: NgxSpinnerService,

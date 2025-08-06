@@ -654,7 +654,7 @@
                 </div>
 
                 <mat-form-field *ngIf="routeParam == 'salaryprocess' || routeParam == 'consolidatedpayslip'">
-                    <input matInput [matDatepicker]="picker" placeholder="Choose date" formControlName="selected">
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" placeholder="Choose date" formControlName="selected">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>

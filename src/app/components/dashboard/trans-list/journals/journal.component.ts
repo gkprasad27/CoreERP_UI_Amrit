@@ -94,7 +94,7 @@ export class JournalComponent implements OnInit {
 
   // disableSave = true;
 
-  constructor(private commonService: CommonService,
+  constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,

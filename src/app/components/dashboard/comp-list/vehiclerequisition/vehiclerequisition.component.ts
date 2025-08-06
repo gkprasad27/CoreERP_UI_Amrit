@@ -66,7 +66,7 @@ export class VehicleRequisitionsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     public dialogRef: MatDialogRef<VehicleRequisitionsComponent>,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private apiConfigService: ApiConfigService,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {

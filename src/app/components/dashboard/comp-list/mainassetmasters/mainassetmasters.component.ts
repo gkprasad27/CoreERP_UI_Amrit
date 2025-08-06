@@ -66,7 +66,7 @@ export class MainAssetMasterComponent implements OnInit {
       { value: 'Required', viewValue: 'Required' }
     ];
   assetNum: any;
-  constructor(private commonService: CommonService,
+  constructor(public commonService: CommonService,
     private apiService: ApiService,
     private addOrEditService: AddOrEditService,
     private apiConfigService: ApiConfigService,

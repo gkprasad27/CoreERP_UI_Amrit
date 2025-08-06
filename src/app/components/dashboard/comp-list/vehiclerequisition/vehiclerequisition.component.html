@@ -23,14 +23,14 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [matDatepicker]="picker1" placeholder="{{'vehiclerequisition.applDate' | translate }}"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'vehiclerequisition.applDate' | translate }}"
                  [formControl]="applDate" tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [matDatepicker]="picker2" placeholder="{{'vehiclerequisition.fromDate' | translate }}"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" placeholder="{{'vehiclerequisition.fromDate' | translate }}"
                   formControlName="fromDate" tabIndex="4">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
@@ -41,7 +41,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [matDatepicker]="picker3" placeholder="{{'vehiclerequisition.todate' | translate }}"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" placeholder="{{'vehiclerequisition.todate' | translate }}"
                  formControlName="todate" tabIndex="6">
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>

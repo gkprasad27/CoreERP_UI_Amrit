@@ -77,7 +77,7 @@ export class PurchasesaleassetComponent implements OnInit {
   citemList: any;
   ordertypeList: any;
 
-  constructor(private commonService: CommonService,
+  constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,

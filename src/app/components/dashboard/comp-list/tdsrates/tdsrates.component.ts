@@ -44,7 +44,7 @@ export class TdsRatesComponent implements OnInit {
       { value: 'Resident', viewValue: 'Resident' },
       { value: 'Non Resident', viewValue: 'Non Resident' }
     ];
-  constructor(private commonService: CommonService,
+  constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
     private addOrEditService: AddOrEditService,
     public dialogRef: MatDialogRef<TdsRatesComponent>,

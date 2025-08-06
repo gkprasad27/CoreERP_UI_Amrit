@@ -39,7 +39,7 @@ export class CAPAdetailsComponent {
 
   constructor(
     private apiConfigService: ApiConfigService,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private apiService: ApiService,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,

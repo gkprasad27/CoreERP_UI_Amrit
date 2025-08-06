@@ -54,7 +54,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'saleasset.voucherDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="voucherDate"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="voucherDate"
                         appFocusOnEnter tabIndex="3">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
@@ -62,7 +62,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'saleasset.postingDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="postingDate"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="postingDate"
                         appFocusOnEnter tabIndex="3">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
@@ -73,7 +73,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'saleasset.transferDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="transferDate"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="transferDate"
                         appFocusOnEnter tabIndex="4">
                     <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                     <mat-datepicker #picker4></mat-datepicker>

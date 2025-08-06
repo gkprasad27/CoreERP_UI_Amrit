@@ -21,7 +21,7 @@
         </div>
        
         <mat-form-field>
-          <input matInput [matDatepicker]="picker1" placeholder="{{'advance.applyDate' | translate }}"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'advance.applyDate' | translate }}"
                  formControlName="applyDate" appFocusOnEnter tabIndex="1">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>

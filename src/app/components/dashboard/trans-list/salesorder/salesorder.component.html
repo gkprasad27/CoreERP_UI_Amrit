@@ -40,7 +40,7 @@
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'saleorder.poDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="poDate"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="poDate"
                         appFocusOnEnter tabIndex="4">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
@@ -53,7 +53,7 @@
 
                 <mat-form-field class="col-3" >
                     <mat-label [translate]="'saleorder.dateofSupply'"></mat-label>
-                    <input matInput [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="dateofSupply"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="dateofSupply"
                         appFocusOnEnter tabIndex="7">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
@@ -147,7 +147,7 @@
 
                     <mat-form-field class="col-3">
                         <mat-label [translate]="'saleorder.deliveryDate'"></mat-label>
-                        <input matInput [matDatepicker]="picker13" [nonEditable]="picker13"
+                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker13" [nonEditable]="picker13"
                             formControlName="deliveryDate" appFocusOnEnter tabIndex="15">
                         <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
                         <mat-datepicker #picker13></mat-datepicker>

@@ -20,7 +20,7 @@
             <div class="d--flex">
 
                 <mat-form-field>
-                    <input matInput [matDatepicker]="picker" placeholder="{{'empAttendance.dateTimeStamp' | translate }}"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" placeholder="{{'empAttendance.dateTimeStamp' | translate }}"
                         formControlName="dateTimeStamp">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>

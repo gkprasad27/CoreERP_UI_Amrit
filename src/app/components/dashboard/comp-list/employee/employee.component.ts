@@ -54,7 +54,7 @@ export class EmployeeComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
     private formBuilder: FormBuilder,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private router: Router,
     private datepipe: DatePipe,
     private addOrEditService: AddOrEditService) {

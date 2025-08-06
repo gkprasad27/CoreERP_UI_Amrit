@@ -41,7 +41,7 @@
 
             <mat-form-field>
               <mat-label [translate]="'assetbegningacqusition.acquisitionDate'"></mat-label>
-              <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" 
+              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4" 
                 formControlName="acquisitionDate" appFocusOnEnter tabIndex="3">
               <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
               <mat-datepicker #picker4></mat-datepicker>

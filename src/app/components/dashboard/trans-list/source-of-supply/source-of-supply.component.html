@@ -111,7 +111,7 @@
 
                     <mat-form-field class="form-element">
                         <mat-label [translate]="'sourceofsupply.lastSupplyOn'"></mat-label>
-                        <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="lastSupplyOn"
+                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="lastSupplyOn"
                             appFocusOnEnter tabIndex="15">
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1></mat-datepicker>
@@ -124,7 +124,7 @@
 
                     <mat-form-field class="form-element">
                         <mat-label [translate]="'sourceofsupply.podate'"></mat-label>
-                        <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="podate"
+                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="podate"
                             appFocusOnEnter tabIndex="17">
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2></mat-datepicker>

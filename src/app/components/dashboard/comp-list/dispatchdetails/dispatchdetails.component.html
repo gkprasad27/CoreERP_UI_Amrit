@@ -38,7 +38,7 @@
 
                 <mat-form-field>
                     <mat-label [translate]="'dispatchdetails.lrDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker" tabIndex="5" formControlName="lrDate">
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" tabIndex="5" formControlName="lrDate">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>

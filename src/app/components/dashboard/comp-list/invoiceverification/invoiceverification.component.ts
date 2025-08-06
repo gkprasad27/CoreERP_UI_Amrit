@@ -68,7 +68,7 @@ export class InvoiceverificationComponent implements OnInit {
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private alertService: AlertService,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private spinner: NgxSpinnerService,
     private router: Router,
     public route: ActivatedRoute,

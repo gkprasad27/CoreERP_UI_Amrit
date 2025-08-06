@@ -40,7 +40,7 @@
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'batchmaster.dob'"></mat-label>
-          <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="dob" appFocusOnEnter tabIndex="4">
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="dob" appFocusOnEnter tabIndex="4">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
@@ -64,7 +64,7 @@
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'batchmaster.createdDate'"></mat-label>
-          <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="createdDate" appFocusOnEnter
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="createdDate" appFocusOnEnter
             tabIndex="7">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
@@ -101,7 +101,7 @@
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'batchmaster.plantStart'"></mat-label>
-          <input matInput [matDatepicker]="plantStart" [nonEditable]="plantStart"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="plantStart" [nonEditable]="plantStart"
             formControlName="plantStart" appFocusOnEnter
             tabIndex="11">
           <mat-datepicker-toggle matSuffix [for]="plantStart"></mat-datepicker-toggle>
@@ -110,7 +110,7 @@
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'batchmaster.plantEndDate'"></mat-label>
-          <input matInput [matDatepicker]="plantEndDate" [nonEditable]="plantEndDate"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="plantEndDate" [nonEditable]="plantEndDate"
             formControlName="plantEndDate" appFocusOnEnter
             tabIndex="12">
           <mat-datepicker-toggle matSuffix [for]="plantEndDate"></mat-datepicker-toggle>
@@ -119,7 +119,7 @@
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'batchmaster.actualStartDate'"></mat-label>
-          <input matInput [matDatepicker]="actualStartDate" [nonEditable]="actualStartDate"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="actualStartDate" [nonEditable]="actualStartDate"
             formControlName="actualStartDate"
             appFocusOnEnter tabIndex="13">
           <mat-datepicker-toggle matSuffix [for]="actualStartDate"></mat-datepicker-toggle>
@@ -134,7 +134,7 @@
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'batchmaster.actualEndDate'"></mat-label>
-          <input matInput [matDatepicker]="actualEndDate" [nonEditable]="actualEndDate" 
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="actualEndDate" [nonEditable]="actualEndDate" 
            formControlName="actualEndDate" appFocusOnEnter
             tabIndex="15">
           <mat-datepicker-toggle matSuffix [for]="actualEndDate"></mat-datepicker-toggle>

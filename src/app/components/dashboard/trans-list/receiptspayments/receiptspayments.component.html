@@ -70,7 +70,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'receiptspayments.voucherDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="voucherDate"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="voucherDate"
                         appFocusOnEnter tabIndex="2">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
@@ -78,7 +78,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'receiptspayments.postingDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="postingDate"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="postingDate"
                         appFocusOnEnter tabIndex="3">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
@@ -101,7 +101,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'receiptspayments.referenceDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker4" [nonEditable]="picker4"  formControlName="referenceDate"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4"  formControlName="referenceDate"
                         appFocusOnEnter tabIndex="5">
                     <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                     <mat-datepicker #picker4></mat-datepicker>
@@ -139,7 +139,7 @@
 
                 <mat-form-field class="form-element">
                     <mat-label [translate]="'receiptspayments.chequeDate'"></mat-label>
-                    <input matInput [matDatepicker]="chequeDatepicker1" [nonEditable]="chequeDatepicker1"  formControlName="chequeDate"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="chequeDatepicker1" [nonEditable]="chequeDatepicker1"  formControlName="chequeDate"
                         appFocusOnEnter tabIndex="8">
                     <mat-datepicker-toggle matSuffix [for]="chequeDatepicker1"></mat-datepicker-toggle>
                     <mat-datepicker #chequeDatepicker1></mat-datepicker>

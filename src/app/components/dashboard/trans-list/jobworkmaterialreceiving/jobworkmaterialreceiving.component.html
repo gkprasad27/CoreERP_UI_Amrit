@@ -69,7 +69,7 @@
                 <div>
                     <mat-form-field class="form-element">
                         <mat-label [translate]="'jobworkmaterialreceiving.receivedDate'"></mat-label>
-                        <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="receivedDate"
+                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="receivedDate"
                             appFocusOnEnter tabIndex="8">
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2></mat-datepicker>

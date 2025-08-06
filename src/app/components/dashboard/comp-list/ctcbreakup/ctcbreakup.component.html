@@ -26,7 +26,7 @@
                 
                 <mat-form-field>
                     <mat-label>Effect From</mat-label>
-                    <input matInput [matDatepicker]="picker1" placeholder="{{'CTCBreakup.effectFrom' | translate }}"
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'CTCBreakup.effectFrom' | translate }}"
                         formControlName="effectFrom" appFocusOnEnter tabIndex="3">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>

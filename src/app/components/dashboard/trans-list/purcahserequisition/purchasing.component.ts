@@ -67,7 +67,7 @@ export class PurchasingComponent implements OnInit {
   costunitList: any;
 
   constructor(
-    private commonService: CommonService,
+    public commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,

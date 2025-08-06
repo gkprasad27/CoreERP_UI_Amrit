@@ -89,7 +89,7 @@ export class LeaveRequestComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private addOrEditService: AddOrEditService,
     public dialogRef: MatDialogRef<LeaveRequestComponent>,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private apiConfigService: ApiConfigService,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {

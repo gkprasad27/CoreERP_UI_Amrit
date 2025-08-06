@@ -332,4 +332,12 @@ export class CommonService {
     return words_string;
   }
 
+  disableFuture = (d: Date|null): boolean => {
+    if (!d) return false;
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    d.setHours(0,0,0,0);
+    return d <= today;
+  };
+
 }

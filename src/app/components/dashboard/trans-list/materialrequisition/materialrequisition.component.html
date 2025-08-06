@@ -74,7 +74,7 @@
 
         <mat-form-field class="form-element">
           <mat-label [translate]="'materialrequisition.requisitionDate'"></mat-label>
-          <input matInput [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="requisitionDate"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="requisitionDate"
             appFocusOnEnter tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
@@ -152,7 +152,7 @@
           <mat-form-field>
             <mat-label>{{'materialrequisition.startDate' | translate }}</mat-label>
 
-            <input matInput [matDatepicker]="picker1" tabIndex="4"
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" tabIndex="4"
               placeholder="{{'materialrequisition.startDate' | translate }}" formControlName="startDate">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
@@ -160,7 +160,7 @@
           <mat-form-field>
             <mat-label>{{'materialrequisition.endDate' | translate }}</mat-label>
 
-            <input matInput [matDatepicker]="picker2" tabIndex="5"
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" tabIndex="5"
               placeholder="{{'materialrequisition.endDate' | translate }}" formControlName="endDate">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
@@ -182,14 +182,14 @@
           </mat-form-field>
           <mat-form-field class="form-element">
             <mat-label [translate]="'materialrequisition.productionPlanDate'"></mat-label>
-            <input matInput [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"
               appFocusOnEnter tabIndex="11">
             <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
             <mat-datepicker #picker3></mat-datepicker>
           </mat-form-field>
           <mat-form-field class="form-element">
             <mat-label [translate]="'materialrequisition.productionTargetDate'"></mat-label>
-            <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
               appFocusOnEnter tabIndex="12">
             <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
             <mat-datepicker #picker4></mat-datepicker>

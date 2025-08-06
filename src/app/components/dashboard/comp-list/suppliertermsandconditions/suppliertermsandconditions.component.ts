@@ -46,7 +46,7 @@ export class SupplierTermsandconditionsComponent implements OnInit {
       { value: 'Ship', viewValue: 'Ship' },
       { value: 'Air', viewValue: 'Air' }
     ];
-  constructor(private commonService: CommonService,
+  constructor(public commonService: CommonService,
     private addOrEditService: AddOrEditService,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<SupplierTermsandconditionsComponent>,

@@ -40,7 +40,7 @@ export class EmployeeAttendanceComponent {
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
 
   constructor(
-    private commonService: CommonService,
+    public commonService: CommonService,
     private addOrEditService: AddOrEditService,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<EmployeeAttendanceComponent>,

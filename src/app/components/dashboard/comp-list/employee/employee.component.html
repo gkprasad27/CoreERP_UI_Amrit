@@ -49,7 +49,7 @@
         </mat-form-field>
         <mat-form-field class="form-element">
           <mat-label [translate]="'employee.dob'"></mat-label>
-          <input matInput [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="dob" appFocusOnEnter
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="dob" appFocusOnEnter
             tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
@@ -97,14 +97,14 @@
         </mat-form-field>
         <mat-form-field class="form-element">
           <mat-label [translate]="'employee.joiningDate'"></mat-label>
-          <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="joiningDate"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="joiningDate"
             appFocusOnEnter tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="form-element">
           <mat-label [translate]="'employee.releavingDate'"></mat-label>
-          <input matInput [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="releavingDate"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="releavingDate"
             appFocusOnEnter tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>

@@ -69,7 +69,7 @@
 
         <mat-form-field class="form-element" *ngSwitchCase="'datepicker'"
           [ngStyle]="{'width': element[column].width + 'px'}">
-          <input id="{{column}}{{dataSource.filteredData.indexOf(element)}}" matInput [matDatepicker]="picker"
+          <input id="{{column}}{{dataSource.filteredData.indexOf(element)}}" matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker"
             [disabled]="element[column].disabled" [(ngModel)]="element[column].value" [nonEditable]="picker"
             (dateChange)="formControlValid(column, element, element[column].value, dataSource.filteredData.indexOf(element)); setFocus(column, dataSource.filteredData.indexOf(element), element[column].value);">
           <mat-datepicker-toggle matSuffix [for]="picker">

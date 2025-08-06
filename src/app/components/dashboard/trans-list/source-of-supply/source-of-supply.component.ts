@@ -60,7 +60,7 @@ export class SourceOfSupplyComponent implements OnInit {
   bpaList: any;
 
   constructor(
-    private commonService: CommonService,
+    public commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,

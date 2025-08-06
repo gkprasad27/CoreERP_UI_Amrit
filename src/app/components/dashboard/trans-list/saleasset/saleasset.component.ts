@@ -77,7 +77,7 @@ export class SaleassetComponent implements OnInit {
   assetbgnaqsnList: any;
   assetbgnaqsndetailsList: any;
 
-  constructor(private commonService: CommonService,
+  constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,

@@ -43,7 +43,7 @@ export class BatchMasterComponent implements OnInit {
   companiesList: any;
   plantList: any;
   empList: any;
-  constructor(private commonService: CommonService,
+  constructor(public commonService: CommonService,
     private addOrEditService: AddOrEditService,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<BatchMasterComponent>,

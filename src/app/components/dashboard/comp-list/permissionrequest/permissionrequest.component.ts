@@ -62,7 +62,7 @@ export class PermissionRequestComponent implements OnInit {
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     public dialogRef: MatDialogRef<PermissionRequestComponent>,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private apiConfigService: ApiConfigService,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {

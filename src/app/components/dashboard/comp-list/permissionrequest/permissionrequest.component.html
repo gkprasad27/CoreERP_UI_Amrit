@@ -15,7 +15,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [matDatepicker]="picker1" placeholder="{{'permissionrequest.permissionDate' | translate }}"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'permissionrequest.permissionDate' | translate }}"
                  [formControl]="permissionDate" tabIndex="2">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
@@ -23,7 +23,7 @@
 
 
         <!-- <mat-form-field>
-          <input matInput [matDatepicker]="picker2" placeholder="{{'permissionrequest.fromDate' | translate }}"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" placeholder="{{'permissionrequest.fromDate' | translate }}"
                (dateChange)="fromdateValueChange()"  formControlName="fromdate"  tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
@@ -34,7 +34,7 @@
         </mat-form-field>
 
         <!-- <mat-form-field>
-          <input matInput [matDatepicker]="picker3" placeholder="{{'permissionrequest.todate' | translate }}"
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" placeholder="{{'permissionrequest.todate' | translate }}"
                  formControlName="todate" tabIndex="5" readonly="readonly">
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>

@@ -110,7 +110,7 @@ export class GoodsissueComponent implements OnInit {
 
   materialCodeList = [];
 
-  constructor(private commonService: CommonService,
+  constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
