@@ -102,14 +102,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.formDataGroup();
-    this.getSaleOrderList();
-    this.getCustomerList();
-    this.getProfitcenterData();
-    this.getTaxRatesList();
-    this.getCompanyList();
-    if (this.routeEdit != '') {
-      this.getInvoiceDeatilList(this.routeEdit);
-    }
+    this.allApis();
   }
 
   formDataGroup() {
@@ -182,82 +175,69 @@ export class SalesInvoiceComponent implements OnInit {
     });
   }
 
-  getTaxRatesList() {
-    const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);
-    this.apiService.apiGetRequest(taxCodeUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              const resp = res.response['TaxratesList'];
-              this.taxCodeList = resp;
-            }
-          }
-        });
-  }
-
-  getSaleOrderList() {
+  allApis() {
     let obj = JSON.parse(localStorage.getItem("user"));
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderData, obj.companyCode);
-    this.apiService.apiGetRequest(getSaleOrderUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.getSaleOrderData = res.response['BPList'];
-            }
+    const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
+    const getSaleOrderData = String.Join('/', this.apiConfigService.getSaleOrderData, obj.companyCode);
+    const getCustomerList = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
+    const getProfitCentersList = String.Join('/', this.apiConfigService.getProfitCentersList);
+    const getTaxRatesList = String.Join('/', this.apiConfigService.getTaxRatesList);
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getCompanyList),
+        this.apiService.apiGetRequest(getSaleOrderData),
+        this.apiService.apiGetRequest(getCustomerList),
+        this.apiService.apiGetRequest(getProfitCentersList),
+        this.apiService.apiGetRequest(getTaxRatesList),
+
+      ]).subscribe(([supplierRes, getSaleOrderRes, customerRes, profitCenterRes, taxRatesRes]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(supplierRes) && supplierRes.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(supplierRes.response)) {
+            this.companyList = supplierRes.response['companiesList']
           }
-        });
+        }
+
+        if (!this.commonService.checkNullOrUndefined(getSaleOrderRes) && getSaleOrderRes.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(getSaleOrderRes.response)) {
+            this.getSaleOrderData = getSaleOrderRes.response['BPList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(customerRes) && customerRes.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(customerRes.response)) {
+            const resp = customerRes.response['bpList'];
+            const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
+            this.customerList = data;
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(profitCenterRes) && profitCenterRes.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(profitCenterRes.response)) {
+            this.profitCenterList = profitCenterRes.response['profitCenterList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(taxRatesRes) && taxRatesRes.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(taxRatesRes.response)) {
+            this.taxCodeList = taxRatesRes.response['TaxratesList'];;
+          }
+        }
+
+        if (this.routeEdit != '') {
+          this.getInvoiceDeatilList(this.routeEdit);
+        }
+
+      });
+    });
   }
 
 
-  getCustomerList() {
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const costCenUrl = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
-    this.apiService.apiGetRequest(costCenUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              const resp = res.response['bpList'];
-              const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
-              this.customerList = data;
-            }
-          }
-        });
-  }
 
-  getProfitcenterData() {
-    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
-    this.apiService.apiGetRequest(getpcUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.profitCenterList = res.response['profitCenterList'];
-            }
-          }
-        });
-  }
 
-  getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-    this.apiService.apiGetRequest(companyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
-            }
-          }
-        });
-  }
 
   customerNameSelect() {
     const obj = this.customerList.find((c: any) => c.id == this.formData.value.customerName);
@@ -289,12 +269,12 @@ export class SalesInvoiceComponent implements OnInit {
     this.calculate();
   }
 
-  getshiptoCompanyList() {
+  getGstNo() {
     const obj = this.customerList.find((c: any) => c.text == this.formData.value.shiptoCompany[0].text);
     this.formData.patchValue({
       gstNo: obj ? obj.gstNo : '',
     });
-    this.getBusienessPartnerAccount({customerCode: obj.id});
+    this.getBusienessPartnerAccount({ customerCode: obj.id });
   }
 
   getBusienessPartnerAccount(data: any, flag?: string) {
@@ -308,7 +288,7 @@ export class SalesInvoiceComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response.bpaList);
               const obj = this.customerList.find((c: any) => c.id == res.response.bpaList.bpnumber);
-              if(flag == 'saleOrderNo') {
+              if (flag == 'saleOrderNo') {
                 this.formData.patchValue({
                   customerCode: res.response.bpaList.name,
                   customerName: res.response.bpaList.bpnumber,
@@ -540,8 +520,10 @@ export class SalesInvoiceComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.getInvoiceDeatilData = res.response;
               this.formData.patchValue(res.response['InvoiceMasterList']);
+              const obj = this.customerList.find((c: any) => c.text == this.formData.value.shiptoCompany);
               this.formData.patchValue({
-                profitCenter: res.response['InvoiceMasterList']['profitcenter']
+                profitCenter: res.response['InvoiceMasterList']['profitcenter'],
+                gstNo: obj ? obj.gstNo : '',
               })
               let arr = [];
               res.response['invoiceDetailsList'].forEach((d: any, index: number) => {
