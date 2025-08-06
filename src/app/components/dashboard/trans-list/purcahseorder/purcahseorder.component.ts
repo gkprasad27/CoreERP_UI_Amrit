@@ -114,6 +114,18 @@ export class PurchaseOrderComponent implements OnInit {
   };
 
 
+  dropdownSettings2: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+
   constructor(
     public commonService: CommonService,
     private formBuilder: FormBuilder,
@@ -300,7 +312,7 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   onEmpChange() {
-    const obj = this.employeesList.find((e: any) => e.id == this.formData.value.createdBy);
+    const obj = this.employeesList.find((e: any) => e.id == this.formData.value.createdBy[0].id);
     this.formData.patchValue({ contactNo: obj.mobileNumber })
   }
 
@@ -792,6 +804,11 @@ export class PurchaseOrderComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['pomasters']);
+              const obj = this.employeesList.find((e: any) => e.id == this.formData.value.createdBy);
+              debugger
+              this.formData.patchValue({
+                createdBy: obj ? [{ id: obj.id, text: obj.name }]: [],
+              });
               // this.toggle();
 
               if (res.response['poDetail'] && res.response['poDetail'].length) {
@@ -1112,6 +1129,9 @@ export class PurchaseOrderComponent implements OnInit {
     obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
     if (typeof obj.saleOrderNo != 'string') {
       obj.saleOrderNo = this.formData.value.saleOrderNo[0].saleOrderNo;
+    }
+    if (typeof obj.createdBy != 'string') {
+      obj.createdBy = this.formData.value.createdBy[0].id;
     }
     // if (typeof obj.material != 'string') {
     //   obj.material = this.formData.value.material[0].description;

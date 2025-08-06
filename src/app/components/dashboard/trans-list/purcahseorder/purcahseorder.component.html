@@ -532,7 +532,7 @@
 
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-3" *ngIf="!routeEdit"
                     [class.filled]="formData.value?.supplierName?.length > 0">
-                    <label> {{ 'purchaseorder.bom' | supplierCode }} </label>
+                    <label> {{ 'purchaseorder.supplierCode' | translate }} </label>
                     <input placeholder=" " formControlName="supplierName" [typeahead]="bpaList"
                         typeaheadOptionField='name' appFocusOnEnter tabIndex="8" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="supplierCodeChange()">
@@ -609,16 +609,14 @@
                         <mat-label [translate]="'purchaseorder.mechineNumber'" ></mat-label>
                         <input matInput type="text" formControlName="mechineNumber" appFocusOnEnter tabIndex="20">
                     </mat-form-field> -->
-                <mat-form-field class="col-3">
-                    <mat-label>{{'purchaseorder.createdBy' | translate }}</mat-label>
-                    <mat-select formControlName="createdBy" appFocusOnEnter tabIndex="20"
-                        (selectionChange)="onEmpChange()">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-                            {{emp.id}} - {{emp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+            
+                <div class="multiselect-dropdown-list floating-dropdown col-3"
+                    [class.filled]="formData.value?.createdBy?.length > 0" >
+                    <label> {{ 'purchaseorder.createdBy' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="createdBy" [settings]="dropdownSettings2"
+                        [data]="employeesList">
+                    </ng-multiselect-dropdown>
+                </div>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'purchaseorder.contactNo'"></mat-label>
