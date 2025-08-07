@@ -1,11 +1,11 @@
 <mat-card>
     <mat-card-content class="my-2">
         <form [formGroup]="modelFormData" autocomplete="off">
-            <div class="d-flex my-3 py-3">
+            <div class="row my-3 py-3">
 
-                <mat-form-field>
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
-                    <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="11" >
+                    <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="11">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let comp of companyList" [value]="comp.id">
                             {{comp.text}}
@@ -19,25 +19,24 @@
                 </mat-form-field>
 
 
-                <div class="p-2" *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' ">
-                    <mat-form-field>
-                        <mat-label>Choose date</mat-label>
-                        <mat-date-range-input [rangePicker]="picker">
-                            <input matStartDate placeholder="Start date" formControlName="fromDate">
-                            <input matEndDate placeholder="End date" formControlName="toDate">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker></mat-date-range-picker>
-                    </mat-form-field>
-                    <div class="error_text mt-0" *ngIf="(modelFormData.controls.fromDate.dirty && modelFormData.controls.fromDate.touched && modelFormData.controls.fromDate.errors) ||
-                                                              (submitted && modelFormData.controls.fromDate.errors)">
-                        <div class="error_text mt-0" *ngIf="modelFormData.controls.fromDate.errors.required">
-                            This feild is required
-                        </div>
-                    </div>
-                </div>
+                <mat-form-field class="col-3"
+                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' ">
+                    <mat-label>Choose date</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" formControlName="fromDate">
+                        <input matEndDate placeholder="End date" formControlName="toDate">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                     <mat-error
+                        *ngIf="(modelFormData.controls.fromDate.dirty && modelFormData.controls.fromDate.touched && modelFormData.controls.fromDate.errors) ||
+                                                              (submitted && modelFormData.controls.fromDate.errors)"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.fromDate.valid  }"> This feild is
+                        required
+                    </mat-error>
+                </mat-form-field>
 
-                <div class="p-2 my-3 ms-5">
+                <div class="col-3 d-flex align-items-center">
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()">
                         {{ "COMMON.PRINT" | translate }}
                     </button>
@@ -55,9 +54,9 @@
 
     <mat-card-content>
 
-        <div  class="row">
+        <div class="row">
             <div class="col-6">
-                <app-table [tableData]="tableData" ></app-table>
+                <app-table [tableData]="tableData"></app-table>
             </div>
             <div class="col-6">
                 <ng-container *ngIf="chartOptions">
@@ -65,7 +64,7 @@
                 </ng-container>
             </div>
         </div>
-        
+
     </mat-card-content>
 
 </mat-card>

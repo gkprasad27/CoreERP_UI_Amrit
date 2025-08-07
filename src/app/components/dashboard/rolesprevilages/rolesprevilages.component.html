@@ -3,9 +3,9 @@
   <mat-card-content class="m-2">
 
     <form [formGroup]="formData" autocomplete="off">
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{ 'rolePrevilages/role.role' | translate }}</mat-label>
           <mat-select formControlName="role" (selectionChange)="onRuleChange($event)" appFocusOnEnter tabIndex="1">
             <mat-option *ngFor="let role of roleArray" [value]="role.id">
@@ -13,7 +13,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{ 'rolePrevilages/role.headerMenu' | translate }}</mat-label>
           <mat-select formControlName="parentMenu" (selectionChange)="selectedParentMenu();" appFocusOnEnter
             tabIndex="2">

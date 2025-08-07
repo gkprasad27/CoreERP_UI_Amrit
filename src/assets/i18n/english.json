@@ -3554,5 +3554,11 @@
   },
   "advanceApproval": {
     "title": "Advance Approval"
+  },
+  "mechinebreakdown": {
+    "title": "Machine Breakdown"
+  },
+  "customercomplaints": {
+    "title": "Customer Complaints"
   }
 }

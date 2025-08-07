@@ -1,13 +1,11 @@
 <div style="margin: 10px;" id="printData" *ngIf="data">
     <div style="display: flex;">
-        <img *ngIf="data?.headingObj?.company === '1000'" 
-             src="/assets/images/header.jpg" 
-             style="height: 100px; width: 65%;">
-    
+        <img *ngIf="data?.headingObj?.company === '1000'" src="/assets/images/header.jpg"
+            style="height: 100px; width: 65%;">
+
         <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
-        <img *ngIf="data?.headingObj?.company !== '1000'" 
-             src="/assets/images/AMRIT.jpg" 
-             style="height: 100px; width: 65%;">
+        <img *ngIf="data?.headingObj?.company !== '1000'" src="/assets/images/AMRIT.jpg"
+            style="height: 100px; width: 65%;">
         <div style="padding: 24px;
         border-top: 1px solid black;
         -webkit-print-color-adjust: exact;
@@ -20,30 +18,40 @@
         display: flex;
         height: 50px;
         flex-direction: column;
-    "> 
-    <span style="font-size: 22px;font-weight: 700;font-family: sans-serif;"> {{ data.heading }} </span>  </div>
+    ">
+            <span style="font-size: 22px;font-weight: 700;font-family: sans-serif;"> {{ data.heading }} </span>
+        </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 50%;padding: 3px 15px;display: flex;border-right: 1px solid;">
             <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> Job Work Master </b>
-            <span style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">: {{ data?.headingObj?.jobWorkNumber }} </span>
+            <span
+                style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
+                {{ data?.headingObj?.jobWorkNumber }} </span>
         </div>
         <div style="width: 50%;padding: 3px 15px;display: flex;">
             <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> Date </b>
-            <span style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">: {{ date | date }} </span>
+            <span
+                style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
+                {{ date | date }} </span>
         </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
         <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 8px;">
             <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> ADDRESS </b>
-            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{ data?.headingObj?.address.companyName }}</div>
-            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{ data?.headingObj?.address.address }}, {{ data?.headingObj?.address.address1 }}</div>
-            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{ data?.headingObj?.address.city }}, {{ data?.headingObj?.address.stateName }}, {{
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
+                data?.headingObj?.address.companyName }}</div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
+                data?.headingObj?.address.address }}, {{ data?.headingObj?.address.address1 }}</div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">{{
+                data?.headingObj?.address.city }}, {{ data?.headingObj?.address.stateName }}, {{
                 data?.headingObj?.address.pin }}</div>
-            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">Phone: {{ data?.headingObj?.address.phone }}</div>
-            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">Email: {{ data?.headingObj?.address.email }}</div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">Phone: {{
+                data?.headingObj?.address.phone }}</div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">Email: {{
+                data?.headingObj?.address.email }}</div>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;">
             <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
@@ -52,7 +60,7 @@
             </div>
             <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
                 <span style="width: 140px;"> Terms of delivery </span>
-                <span style="padding-left: 20px;">:  {{  data?.headingObj?.deliveryDate }} </span>
+                <span style="padding-left: 20px;">: {{ data?.headingObj?.deliveryDate }} </span>
             </div>
             <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
                 <span style="width: 140px;"> Terms of payment </span>
@@ -85,76 +93,137 @@
     <div style="border-top: 1px solid black; display: flex; ">
         <div
             style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;">{{ data?.headingObj?.vAddress?.name }}</div>
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;">{{ data?.headingObj?.vAddress?.name
+                }}</div>
             <div>{{ data?.headingObj?.vAddress?.address }}, {{ data?.headingObj?.vAddress?.address1 }}</div>
             <div>{{ data?.headingObj?.vAddress?.city }}, {{ data?.headingObj?.vAddress?.stateName }}, {{
                 data?.headingObj?.vAddress?.pin }}</div>
             <!-- <div>Phone: {{ data?.headingObj?.vAddress?.phone  }}</div>
             <div>Email: {{ data?.headingObj?.vAddress?.email  }}</div> -->
 
-            <b style="margin-top: 10px;font-size: 15px;font-family: sans-serif;font-weight: 900;"> GSTIN : {{ data?.headingObj?.vAddress?.gstno }}</b>
+            <b style="margin-top: 10px;font-size: 15px;font-family: sans-serif;font-weight: 900;"> GSTIN : {{
+                data?.headingObj?.vAddress?.gstno }}</b>
         </div>
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;">{{ data?.headingObj?.pAddress?.address }} </div>
-            <div> {{ data?.headingObj?.pAddress?.address1 }}, {{ data?.headingObj?.pAddress?.city }}, {{ data?.headingObj?.pAddress?.stateName }}, {{
+            <div style="font-size: 15px;font-family: sans-serif;font-weight: 900;">{{
+                data?.headingObj?.pAddress?.address }} </div>
+            <div> {{ data?.headingObj?.pAddress?.address1 }}, {{ data?.headingObj?.pAddress?.city }}, {{
+                data?.headingObj?.pAddress?.stateName }}, {{
                 data?.headingObj?.pAddress?.pin }}</div>
             <div>Phone: {{ data?.headingObj?.pAddress?.phone }}</div>
             <div>Email: {{ data?.headingObj?.pAddress?.email }}</div>
 
-            <b style="margin-top: 10px;font-size: 15px;font-family: sans-serif;font-weight: 900;"> GSTIN : {{ data?.headingObj?.pAddress?.gstno }}</b>
+            <b style="margin-top: 10px;font-size: 15px;font-family: sans-serif;font-weight: 900;"> GSTIN : {{
+                data?.headingObj?.pAddress?.gstno }}</b>
         </div>
     </div>
 
     <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
         *ngIf="data.detailArray && data.detailArray.length">
-        <table style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+        <table
+            style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
             <thead>
                 <tr>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Material Code </th>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Description </th>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Quantity </th>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> HSNSAC </th>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Unit Weight </th>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Total Weight </th>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Price/KG </th>
-                    <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;"> Total Amount </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        S.No </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Material Code </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Description </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Quantity </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        UOM </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        HSNSAC </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Unit Weight </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Total Weight </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Price/KG </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;">
+                        Total Amount </th>
                 </tr>
             </thead>
             <tbody>
                 <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
                     *ngFor="let row of data.detailArray; let i = index">
-                    <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> <span *ngIf="row.materialCode">  {{ i + 1 }} </span> </td>
-                    <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.materialCode }}
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        <span *ngIf="row.materialCode"> {{ i + 1 }} </span> </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.materialCode }}
                     </td>
-                    <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.materialName }}
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.materialName }}
                     </td>
-                    <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
-                    <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.uom }} </td>
-                    <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.hsnSac }} </td>
-                    <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.weight }}
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.qty }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.uom }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.hsnSac }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.weight }}
                     </td>
-                    <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> <ng-container *ngIf="row.qty"> {{ row.qty *
-                        row.weight}} </ng-container>  </td>
-                    <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
-                    <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        <ng-container *ngIf="row.qty"> {{ row.qty *
+                            row.weight}} </ng-container> </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.rate }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                        {{ row.amount }} </td>
                 </tr>
                 <tr
                     style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
-                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;" colspan="2"> Grand
+                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"
+                        colspan="2"> Grand
                         Totals </td>
-                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                    <td
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                    </td>
+                    <td
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                    </td>
+                    <td
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                    </td>
+                    <td
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                    </td>
+                    <td
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Weight</td>
-                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{
+                    <td
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                        {{
                         data.headingObj1.amount }}</td>
-                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                    <td
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                         Amount</td>
-                    <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">{{
+                    <td
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;text-align: center;-webkit-print-color-adjust: exact;">
+                        {{
                         data.headingObj1.totalAmount }}</td>
                 </tr>
             </tbody>
@@ -165,64 +234,77 @@
     <div style="display: flex; font-size: 15px;">
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
             <b style="font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total amount in words: </b>
-            <div style="font-size: 14px;font-family: sans-serif;"> {{ commonService.convertNumberToWords(data.headingObj?.totalAmount) }} </div>
+            <div style="font-size: 14px;font-family: sans-serif;"> {{
+                commonService.convertNumberToWords(data.headingObj?.totalAmount) }} </div>
 
         </div>
         <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
             <div style="padding-left: 15px;padding-top: 10px;">
                 <div style="display: flex;">
-                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Amount Before Tax </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.amount }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Amount
+                        Before Tax </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{
+                        data.headingObj?.amount }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;" > Add: CGST &#64; {{ data.headingObj?.cgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.cgst }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: CGST &#64;
+                        {{ data.headingObj?.cgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.cgst
+                        }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;" > Add: SGST &#64; {{ data.headingObj?.sgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.sgst }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: SGST &#64;
+                        {{ data.headingObj?.sgst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.sgst
+                        }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;" > Add: IGST &#64; {{ data.headingObj?.igst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.igst }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Add: IGST &#64;
+                        {{ data.headingObj?.igst != '0.00' ? data.headingObj1?.taxCode : '0' }} % </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.igst
+                        }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Amount with GST </b>
-                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{ data.headingObj?.totalAmount }} </span>
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Amount with
+                        GST </b>
+                    <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> {{
+                        data.headingObj?.totalAmount }} </span>
                 </div>
                 <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Payable Reverse Charges </b>
+                    <b style="width: 300px;font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total Payable
+                        Reverse Charges </b>
                     <span style="padding-left: 80px;font-size: 12px;font-family: sans-serif;"> </span>
                 </div>
             </div>
         </div>
     </div>
 
-     <div *ngIf="data?.headingObj?.company === '1000'" style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
+    <div *ngIf="data?.headingObj?.company === '1000'"
+        style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
         The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
         PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
         SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMT POWER TRANSMISSION RESERVES THE RIGHT TO WITH HOLD
         ANY PAYMENT UNTIL SUCH TIME THAT A VALID TAX INVOICE IS PROVIDE
     </div>
-    <div *ngIf="data?.headingObj?.company !== '1000'" style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
+    <div *ngIf="data?.headingObj?.company !== '1000'"
+        style="border-top: 1px solid black;font-size: 15px;font-size: 14px;font-family: sans-serif;margin-bottom: 5px;">
         The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
         PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
-        SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMRIT STONE CRUSHER EQUIPMENTS RESERVES THE RIGHT TO WITH HOLD
+        SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMRIT STONE CRUSHER EQUIPMENTS RESERVES THE RIGHT TO WITH
+        HOLD
         ANY PAYMENT UNTIL SUCH TIME THAT A VALID TAX INVOICE IS PROVIDE
     </div>
 
-   <div style="text-align: center;">
+    <div style="text-align: center;">
         <img *ngIf="data?.headingObj?.company === '1000'" src="/assets/images/footer.jpg" style="height: 100px;
         width: 20%;">
     </div>
 
     <div style="display: flex;">
-         <img *ngIf="data?.headingObj?.company === '1000'" 
-             src="/assets/images/header.jpg" 
-             style="height: 100px; width: 65%;">
-        <img *ngIf="data?.headingObj?.company !== '1000'" 
-             src="/assets/images/AMRIT.jpg" 
-             style="height: 100px; width: 65%;">
+        <img *ngIf="data?.headingObj?.company === '1000'" src="/assets/images/header.jpg"
+            style="height: 100px; width: 65%;">
+        <img *ngIf="data?.headingObj?.company !== '1000'" src="/assets/images/AMRIT.jpg"
+            style="height: 100px; width: 65%;">
         <div style="padding: 24px;
         border-top: 1px solid black;
         -webkit-print-color-adjust: exact;
@@ -235,8 +317,9 @@
         display: flex;
         height: 50px;
         flex-direction: column;
-    "> 
-    <span style="font-size: 22px;font-weight: 700;font-family: sans-serif;"> {{ data.heading }} </span>  </div>
+    ">
+            <span style="font-size: 22px;font-weight: 700;font-family: sans-serif;"> {{ data.heading }} </span>
+        </div>
     </div>
 
     <div style="margin-bottom: 20px;margin-top: 15px;">
@@ -289,7 +372,8 @@
 
     </div>
 
-    <div style="font-size: 16px;font-family: sans-serif;font-weight: 900;margin-top: 30px;margin-bottom: 20px;display: flex;">
+    <div
+        style="font-size: 16px;font-family: sans-serif;font-weight: 900;margin-top: 30px;margin-bottom: 20px;display: flex;">
 
         <div style="width: 50%;">
             <b> Prepared By: </b>
@@ -310,7 +394,7 @@
 
     </div>
 
-      <div style="text-align: center;">
+    <div style="text-align: center;">
         <img *ngIf="data?.headingObj?.company === '1000'" src="/assets/images/footer.jpg" style="height: 100px;
         width: 20%;">
     </div>
@@ -326,12 +410,11 @@
 
             <h6>
                 Job Wrok Master
-                
             </h6>
 
-            <div class="d--flex p-1 mat-form-field-height">
+            <div class="p-1 row">
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label>{{ 'jobworkmaterialissue.company' | translate }}</mat-label>
                     <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
@@ -341,7 +424,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field>
+                <mat-form-field class="col-3">
                     <mat-label>{{'jobworkmaterialissue.profitCenter' | translate }}</mat-label>
                     <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
@@ -351,62 +434,66 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div class="multiselect-dropdown-list">
-                    <ng-multiselect-dropdown placeholder="{{ 'jobworkmaterialissue.vendor' | translate }}"
-                        formControlName="vendor"   (onSelect)="vendorChange($event)"
+                <div class="multiselect-dropdown-list floating-dropdown col-3"
+                    [class.filled]="formData.value?.vendor?.length > 0">
+                    <label> {{ 'jobworkmaterialissue.vendor' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="vendor" (onSelect)="vendorChange($event)"
                         [settings]="dropdownSettings" [data]="customerList">
                     </ng-multiselect-dropdown>
                 </div>
 
-                <div id="sale" class="multiselect-dropdown-list" *ngIf="user?.companyCode !== '1000'">
-                    <ng-multiselect-dropdown 
-                        placeholder="{{ 'jobworkmaterialissue.saleOrderNo' | translate }}" formControlName="saleOrderNo"
-                        (onSelect)="getSaleOrderDetail()" [settings]="dropdownSettings3" [data]="qnoList" appFocusOnEnter tabIndex="4">
+                <div id="sale" class="multiselect-dropdown-list floating-dropdown col-3"
+                    [class.filled]="formData.value?.saleOrderNo?.length > 0" *ngIf="user?.companyCode !== '1000'">
+                    <label> {{ 'jobworkmaterialissue.saleOrderNo' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="saleOrderNo"
+                        (onSelect)="getSaleOrderDetail()" [settings]="dropdownSettings3" [data]="qnoList"
+                        appFocusOnEnter tabIndex="4">
                     </ng-multiselect-dropdown>
                 </div>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'jobworkmaterialissue.vendorGSTN'"></mat-label>
                     <input matInput type="text" readonly formControlName="vendorGSTN" appFocusOnEnter tabIndex="5">
                 </mat-form-field>
 
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'jobworkmaterialissue.orderDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="orderDate"
-                        appFocusOnEnter tabIndex="6">
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
+                        [nonEditable]="picker1" formControlName="orderDate" appFocusOnEnter tabIndex="6">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'jobworkmaterialissue.deliveryDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="deliveryDate"
-                        appFocusOnEnter tabIndex="6">
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3"
+                        [nonEditable]="picker3" formControlName="deliveryDate" appFocusOnEnter tabIndex="6">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
-                        <mat-label [translate]="'jobworkmaterialissue.createdBy'" ></mat-label>
-                        <input matInput type="text" formControlName="createdBy" appFocusOnEnter tabIndex="7">
-                    </mat-form-field>
-                       <mat-form-field class="form-element">
-                        <mat-label [translate]="'jobworkmaterialissue.contactNo'" ></mat-label>
-                        <input matInput type="text" formControlName="contactNo" appFocusOnEnter tabIndex="8">
-                    </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'jobworkmaterialissue.createdBy'"></mat-label>
+                    <input matInput type="text" formControlName="createdBy" appFocusOnEnter tabIndex="7">
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'jobworkmaterialissue.contactNo'"></mat-label>
+                    <input matInput type="text" formControlName="contactNo" appFocusOnEnter tabIndex="8">
+                </mat-form-field>
 
-                    
-                <div id="data" class="mx-2">
-                    <label > {{ 'jobworkmaterialissue.documentURL' | translate }} </label>
-                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL" (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
+
+                <div class="col-3">
+                    <label> {{ 'jobworkmaterialissue.documentURL' | translate }} </label>
+                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL"
+                        (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
                 </div>
 
-                
-                <div id="data1" class="mx-2">
+
+                <div class="col-3">
                     <label id="invoice"> {{ 'jobworkmaterialissue.invoiceURL' | translate }} </label>
-                    
-                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.invoiceURL" (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload>
+                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.invoiceURL"
+                        (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload>
                 </div>
 
             </div>
@@ -417,31 +504,30 @@
 
             <h6>
                 Job Wrok Details
-                
             </h6>
 
             <form [formGroup]="formData1" autocomplete="off">
 
+                <div class="p-1 row">
 
-
-                <div class="d--flex p-1 mat-form-field-height">
-
-                    <div class="mat-mdc-form-field typeahead">
-                        <input placeholder="{{ 'jobworkmaterialissue.materialCode' | translate }}" formControlName="materialCode"
-                            [typeahead]="mmasterListData" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
-                            class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
-                            (typeaheadOnSelect)="materialCodeChange()" (input)="materialChange()">
+                    <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="formData.value?.materialCode?.length > 0">
+                        <mat-label [translate]="'jobworkmaterialissue.materialCode'"></mat-label>
+                        <input placeholder=" "
+                            formControlName="materialCode" [typeahead]="mmasterListData" typeaheadOptionField='id'
+                            appFocusOnEnter tabIndex="9" class="form-control typeahead"
+                            [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="materialCodeChange()"
+                            (input)="materialChange()">
                         <ng-template #customItemTemplate let-model="item">
                             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                         </ng-template>
                     </div>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.stockQty'"></mat-label>
                         <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="10">
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label>{{ 'jobworkmaterialissue.taxCode' | translate }}</mat-label>
                         <mat-select formControlName="taxCode" appFocusOnEnter tabIndex="11">
                             <mat-option>None</mat-option>
@@ -451,22 +537,22 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.qty'"></mat-label>
                         <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="12">
                     </mat-form-field>
-                    
-                    <mat-form-field class="col-3" *ngIf="user?.companyCode !== '1000'" >
+
+                    <mat-form-field class="col-3" *ngIf="user?.companyCode !== '1000'">
                         <mat-label [translate]="'jobworkmaterialissue.netWeight'"></mat-label>
                         <input matInput type="number" formControlName="netWeight" appFocusOnEnter tabIndex="20">
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.rate'"></mat-label>
                         <input matInput type="number" formControlName="rate" appFocusOnEnter tabIndex="13">
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.discount'"></mat-label>
                         <input matInput type="number" formControlName="discount" appFocusOnEnter tabIndex="14"
                             (keypress)="commonService.numberOnly($event)" maxlength="2">
@@ -475,10 +561,10 @@
 
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.deliveryDate'"></mat-label>
-                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker13" [nonEditable]="picker13"
-                            formControlName="deliveryDate" appFocusOnEnter tabIndex="15">
+                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker13"
+                            [nonEditable]="picker13" formControlName="deliveryDate" appFocusOnEnter tabIndex="15">
                         <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
                         <mat-datepicker #picker13></mat-datepicker>
                     </mat-form-field>
@@ -491,7 +577,8 @@
                         (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
                         {{ 'COMMON.UPDATE' | translate }}
                     </button>
-                    <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
+                    <button mat-raised-button id="reset" class="button-color-red text-white mx-1"
+                        (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
                         {{ 'COMMON.RESET' | translate }}
                     </button>
 
@@ -533,10 +620,12 @@
         </div>
 
         <div>
-            <button id="print" class="mx-2" mat-raised-button (click)="print()" class="button-color-bule mx-3 text-white">
+            <button id="print" class="mx-2" mat-raised-button (click)="print()"
+                class="button-color-bule mx-3 text-white">
                 <mat-icon>print</mat-icon> Print
             </button>
-            <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
+            <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+                (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
                 {{ 'COMMON.SAVE' | translate }}
             </button>
             <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">

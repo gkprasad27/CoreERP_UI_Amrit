@@ -1,13 +1,11 @@
 <div style="margin: 10px;" id="printData" *ngIf="data && data.length">
 
     <div style="display: flex;">
-        <img *ngIf="modelFormData.value.companyName === 'AMT POWER TRANSMISSION'"
-             src="/assets/images/header.jpg" 
+        <img *ngIf="modelFormData.value.companyName === 'AMT POWER TRANSMISSION'" src="/assets/images/header.jpg"
             style="height: 100px; width: 65%;">
 
         <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
-        <img *ngIf="modelFormData.value.companyName !== 'AMT POWER TRANSMISSION'" 
-             src="/assets/images/AMRIT.jpg" 
+        <img *ngIf="modelFormData.value.companyName !== 'AMT POWER TRANSMISSION'" src="/assets/images/AMRIT.jpg"
             style="height: 100px; width: 65%;">
         <div style="padding: 24px;
           border-top: 1px solid black;
@@ -617,15 +615,15 @@
 <mat-card>
     <mat-card-content class="my-2">
         <form [formGroup]="modelFormData" autocomplete="off">
-            <div class="d-flex my-3 py-3">
+            <div class="row my-3 py-3">
 
-                <mat-form-field>
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
                     <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let comp of companyList" [value]="comp.id">
                             {{comp.text}}
-                        </mat-option>customerCode
+                        </mat-option>
                     </mat-select>
                     <mat-error
                         *ngIf="!modelFormData.controls.companyCode.valid && modelFormData.controls.companyCode.status != 'DISABLED'"
@@ -634,55 +632,62 @@
                     </mat-error>
                 </mat-form-field>
 
-                <div class="p-2"
-                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' && routeParam != 'salaryprocess' && routeParam != 'consolidatedpayslip'">
-                    <mat-form-field>
-                        <mat-label>Choose date</mat-label>
-                        <mat-date-range-input [rangePicker]="picker">
-                            <input matStartDate placeholder="Start date" formControlName="fromDate">
-                            <input matEndDate placeholder="End date" formControlName="toDate">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker></mat-date-range-picker>
-                    </mat-form-field>
-                    <div class="error_text mt-0" *ngIf="(modelFormData.controls.fromDate.dirty && modelFormData.controls.fromDate.touched && modelFormData.controls.fromDate.errors) ||
-                                                              (submitted && modelFormData.controls.fromDate.errors)">
-                        <div class="error_text mt-0" *ngIf="modelFormData.controls.fromDate.errors.required">
-                            This field is required
-                        </div>
-                    </div>
-                </div>
 
-                <mat-form-field *ngIf="routeParam == 'salaryprocess' || routeParam == 'consolidatedpayslip'">
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" placeholder="Choose date" formControlName="selected">
+                <mat-form-field class="col-3"
+                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' && routeParam != 'salaryprocess' && routeParam != 'consolidatedpayslip'">
+                    <mat-label>Choose date</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" formControlName="fromDate">
+                        <input matEndDate placeholder="End date" formControlName="toDate">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.fromDate.valid && modelFormData.controls.fromDate.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.fromDate.valid  }"> This field is
+                        required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-3"
+                    *ngIf="routeParam == 'salaryprocess' || routeParam == 'consolidatedpayslip'">
+                    <mat-label> Choose date </mat-label>
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker"
+                        placeholder="" formControlName="selected">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
-                <div class="multiselect-dropdown-list mx-3"
+                <div class="multiselect-dropdown-list floating-dropdown col-3"
+                    [class.filled]="modelFormData.value?.customerCode?.length > 0"
                     *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'|| routeParam=='salesgst'|| routeParam=='purchaseanalysis'|| routeParam=='pendingsales'">
-                    <ng-multiselect-dropdown placeholder="{{ 'COMMON.CUSTOMERCODE' | translate }}"
-                        formControlName="customerCode" [settings]="dropdownSettings" [data]="customerList">
+                    <label [translate]="'COMMON.CUSTOMERCODE'"></label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="customerCode"
+                        [settings]="dropdownSettings" [data]="customerList">
                     </ng-multiselect-dropdown>
                 </div>
-                <div class="multiselect-dropdown-list mx-3"
+                <div class="multiselect-dropdown-list floating-dropdown col-3"
+                    [class.filled]="modelFormData.value?.vendorCode?.length > 0"
                     *ngIf="routeParam=='pendingpurchaseorders'|| routeParam == 'purchasegst'|| routeParam=='pendingjobworkreport'">
-                    <ng-multiselect-dropdown placeholder="{{ 'COMMON.vendorCode' | translate }}"
-                        formControlName="vendorCode" [settings]="dropdownSettings" [data]="customerList">
+                    <label [translate]="'COMMON.vendorCode'"></label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="vendorCode" [settings]="dropdownSettings"
+                        [data]="customerList">
                     </ng-multiselect-dropdown>
                 </div>
 
-                <div class="mat-mdc-form-field typeahead mx-3"
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+                    [class.filled]="modelFormData.value?.materialCode?.length > 0"
                     *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'|| routeParam=='purchaseanalysis'|| routeParam=='stockvaluation'">
-                    <input placeholder="{{ 'COMMON.MATERIALCODE' | translate }}" formControlName="materialCode"
-                        [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="3"
-                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1">
+                    <label [translate]="'COMMON.MATERIALCODE'"></label>
+                    <input placeholder=" " formControlName="materialCode" [typeahead]="materialList"
+                        typeaheadOptionField='id' appFocusOnEnter tabIndex="3" class="form-control typeahead"
+                        [typeaheadItemTemplate]="customItemTemplate1">
                     <ng-template #customItemTemplate1 let-model="item">
                         <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                     </ng-template>
                 </div>
 
-                <mat-form-field class="form-element"
+                <mat-form-field class="col-3"
                     *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
                     <mat-label>{{ 'invoicesmemos.bpcategory' | translate }}</mat-label>
                     <mat-select formControlName="bpcategory" (selectionChange)="onbpChange()">
@@ -693,34 +698,38 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead"
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+                    [class.filled]="modelFormData.value?.partyAccount?.length > 0"
                     *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
-                    <input placeholder="{{ 'invoicesmemos.partyAccount' | translate }}" formControlName="partyAccount"
-                        [typeahead]="bpgLists" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
-                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
+                    <label [translate]="'invoicesmemos.partyAccount'"></label>
+                    <input placeholder=" " formControlName="partyAccount" [typeahead]="bpgLists"
+                        typeaheadOptionField='text' appFocusOnEnter tabIndex="3" class="form-control typeahead"
+                        [typeaheadItemTemplate]="customItemTemplate">
                     <ng-template #customItemTemplate let-model="item">
                         <span>{{model.text}}</span>
                     </ng-template>
                 </div>
 
-                <div class="mat-mdc-form-field typeahead"
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+                    [class.filled]="modelFormData.value?.employee?.length > 0"
                     *ngIf="routeParam == 'employeeotreport' || routeParam == 'employeeattendance' || routeParam == 'AttendanceProcess' || routeParam == 'salaryprocess'">
-                    <input placeholder="{{ 'COMMON.employee' | translate }}" formControlName="employee"
-                        [typeahead]="employeesList" typeaheadOptionField='text' appFocusOnEnter tabIndex="9"
-                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
+                    <label [translate]="'COMMON.employee'"></label>
+                    <input placeholder=" " formControlName="employee" [typeahead]="employeesList"
+                        typeaheadOptionField='text' appFocusOnEnter tabIndex="9" class="form-control typeahead"
+                        [typeaheadItemTemplate]="customItemTemplate">
                     <ng-template #customItemTemplate let-model="item">
                         <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                     </ng-template>
                 </div>
 
 
-                <mat-slide-toggle class="d-flex m-2" formControlName="status"
+                <mat-slide-toggle class="col-1 d-flex" formControlName="status"
                     *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
                     {{(modelFormData.get('status').value) ? 'Pending' : 'Paid' }}
                 </mat-slide-toggle>
 
 
-                <div class="p-2 my-3 ms-5">
+                <div class="col-3 d-flex  align-items-center">
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()"
                         *ngIf="routeParam == 'AttendanceProcess'">
                         {{ "COMMON.process" | translate }}

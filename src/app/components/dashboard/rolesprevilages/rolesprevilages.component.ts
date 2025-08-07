@@ -16,10 +16,11 @@ import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-rolesprevilages',
-  imports: [ CommonModule, FormsModule, ReactiveFormsModule, TranslatePipe, TranslateModule, 
+  imports: [ CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, TranslatePipe, TranslateModule, 
     MatPaginator, MatTableModule, MatCardModule, MatSelectModule, MatCheckboxModule ],
   templateUrl: './rolesprevilages.component.html',
   styleUrls: ['./rolesprevilages.component.scss']

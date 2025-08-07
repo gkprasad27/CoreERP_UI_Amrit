@@ -22,11 +22,12 @@ import { environment } from '../../../../environments/environment';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-graphs',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatCardModule, MatSelectModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, MatButtonModule, TranslateModule, TableComponent, MatCardModule, MatSelectModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule ],
   templateUrl: './graphs.component.html',
   styleUrls: ['./graphs.component.scss']
 })

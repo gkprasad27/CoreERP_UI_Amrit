@@ -1,42 +1,43 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <mat-card>
-  <mat-card-content  class="my-2 overscroll-none" >
-    <form id="headerForm" [formGroup]="headerForm" autocomplete="off">
-      <div id="header" class="d-flex my-3 py-1 mt-0 m-40">
-        <div class="p-2">
-          <mat-form-field>
-            <mat-label>Choose date</mat-label>
-            <mat-date-range-input [rangePicker]="picker" >
-              <input matStartDate placeholder="Start date" formControlName="FromDate">
-              <input matEndDate placeholder="End date" formControlName="ToDate">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field>
-            <mat-label [translate]="'COMMON.SEARCH'"></mat-label>
-            <input matInput formControlName="searchCriteria" (input)="doFilter($event.target.value)" />
-          </mat-form-field>
-        </div>
-        <div class="buttons">
-        <div id="but" class="p-2 my-3 ms-1">
-          <button mat-raised-button class="button-color-bule text-white" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i>
-            {{ "COMMON.SEARCH" | translate }}
-          </button>
-        </div>
-        <div id="but" class="p-2 my-3 ms-1">
-          <button mat-raised-button class="button-color-red text-white" (click)="reset()"><i class="fa-solid fa-arrow-rotate-right"></i>
-            {{ "COMMON.RESET" | translate }}
-          </button>
-        </div>
-        <div id="new" class="ml-auto p-2 my-3 ms-1 f" [hidden]="!commonService.userPermission?.canAdd">
-          <button mat-raised-button class="button-color-green text-white1" (click)="newTransOpen()"><i class="fa-solid fa-pen"></i>
-            {{ "COMMON.NEW" | translate }}
-          </button>
-        </div>
+  <mat-card-content>
+    <form [formGroup]="headerForm" autocomplete="off">
+      <div class="row m-2">
+        <mat-form-field class="col-3">
+          <mat-label>Choose date</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date" formControlName="FromDate">
+            <input matEndDate placeholder="End date" formControlName="ToDate">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'COMMON.SEARCH'"></mat-label>
+          <input matInput formControlName="searchCriteria" (input)="doFilter($event.target.value)" />
+        </mat-form-field>
+        <div class="col-3 d-flex align-items-center">
+          <div class="mx-1">
+            <button mat-raised-button class="button-color-bule text-white" (click)="search()"><i
+                class="fa-solid fa-magnifying-glass"></i>
+              {{ "COMMON.SEARCH" | translate }}
+            </button>
+          </div>
+          <div class="mx-1">
+            <button mat-raised-button class="button-color-red text-white" (click)="reset()"><i
+                class="fa-solid fa-arrow-rotate-right"></i>
+              {{ "COMMON.RESET" | translate }}
+            </button>
+          </div>
+          <div class="mx-1" [hidden]="!commonService.userPermission?.canAdd">
+            <button mat-raised-button class="button-color-green text-white1" (click)="newTransOpen()"><i
+                class="fa-solid fa-pen"></i>
+              {{ "COMMON.NEW" | translate }}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -50,14 +51,17 @@
       <table class="w-100" mat-table [dataSource]="dataSource" matSort #mytable>
         <ng-container *ngFor="let column of getDisplayedColumns()" [matColumnDef]="column">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            <ng-container *ngIf="(column == 'checkbox' && (routeParam == 'GoodsReceiptApproval' || routeParam == 'PurchaseorderApproval' || routeParam== 'saleorderapproval'));else header_content">
-              <mat-checkbox [checked]="checkedAll" [(ngModal)]="checkedAll" (change)="checkboxCheckAll($event)"> </mat-checkbox>
+            <ng-container
+              *ngIf="(column == 'checkbox' && (routeParam == 'GoodsReceiptApproval' || routeParam == 'PurchaseorderApproval' || routeParam== 'saleorderapproval'));else header_content">
+              <mat-checkbox [checked]="checkedAll" [(ngModal)]="checkedAll" (change)="checkboxCheckAll($event)">
+              </mat-checkbox>
             </ng-container>
             <ng-template #header_content><strong> {{ ( routeParam + '.' + column) | translate }} </strong></ng-template>
           </th>
           <td mat-cell *matCellDef="let element;" [ngClass]="setClass(element)">
             <ng-container *ngIf="(column == 'checkbox');else other_content">
-              <mat-checkbox [checked]="element[column]" [(ngModal)]="element[column]" (change)="checkboxCheck($event, element)"> </mat-checkbox>
+              <mat-checkbox [checked]="element[column]" [(ngModal)]="element[column]"
+                (change)="checkboxCheck($event, element)"> </mat-checkbox>
             </ng-container>
             <ng-template #other_content>{{ element[column] }}</ng-template>
 
@@ -67,12 +71,13 @@
         <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();" (dblclick)="openEditTrans(row)"></tr>
       </table>
     </div>
-    <mat-paginator  id="pag" [pageSizeOptions]="[15 ,25, 50, 100]" showFirstLastButtons></mat-paginator>
+    <mat-paginator id="pag" [pageSizeOptions]="[15 ,25, 50, 100]" showFirstLastButtons></mat-paginator>
 
 
   </mat-card-content>
 
-  <div class="d-flex justify-content-end" *ngIf="routeParam == 'GoodsReceiptApproval' || routeParam == 'PurchaseorderApproval' || routeParam== 'saleorderapproval'">
+  <div class="d-flex justify-content-end"
+    *ngIf="routeParam == 'GoodsReceiptApproval' || routeParam == 'PurchaseorderApproval' || routeParam== 'saleorderapproval'">
     <button mat-raised-button class="button-color-bule text-white m-1" (click)="buttonClick('Approved')">
       {{ "COMMON.APPROVE" | translate }}
     </button>
