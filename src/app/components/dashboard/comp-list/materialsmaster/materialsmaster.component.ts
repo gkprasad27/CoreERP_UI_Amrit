@@ -46,7 +46,7 @@ interface Schedule {
 }
 @Component({
   selector: 'app-materialsmaster',
-  imports: [ CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, TypeaheadModule, TranslatePipe, TranslateModule, FileUploadComponent, StandardRateOComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, TypeaheadModule, TranslatePipe, TranslateModule, FileUploadComponent, StandardRateOComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './materialsmaster.component.html',
   styleUrls: ['./materialsmaster.component.scss']
 })
@@ -407,10 +407,12 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.hsnsacList = res.response['HSNSACList'];
-              const hsnsac = this.hsnsacList.find((c: any) => c.id == this.formData.item.hsnsac);
-              this.modelFormData.patchValue({
-                hsnsacName: hsnsac.text
-              });
+              if (this.formData.item && this.formData.item.hsnsac) {
+                const hsnsac = this.hsnsacList.find((c: any) => c.id == this.formData.item.hsnsac);
+                this.modelFormData.patchValue({
+                  hsnsacName: hsnsac ? hsnsac.text : ''
+                });
+              }
             }
           }
           this.spinner.hide();

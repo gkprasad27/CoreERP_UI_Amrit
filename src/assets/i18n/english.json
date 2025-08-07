@@ -1492,6 +1492,7 @@
     "plant": "Plant",
     "companyName": "Company Name",
     "plantName": "Plant Name",
+    "dimentions": "Dimensions",
     "materialName": "Material Type Name",
     "materialType": "Material Type",
     "materialCode": "Material Code",
