@@ -11,7 +11,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS, NonEditableDatepicker } from '../../../../directives/format-datepicker';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -32,7 +32,8 @@ import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-d
   styleUrls: ['./journal.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    DatePipe
   ]
 })
 
@@ -101,6 +102,7 @@ export class JournalComponent implements OnInit {
     private alertService: AlertService,
     private spinner: NgxSpinnerService,
     public route: ActivatedRoute,
+    private datepipe: DatePipe,
     private router: Router
   ) {
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
@@ -450,12 +452,18 @@ export class JournalComponent implements OnInit {
     }
 
     this.formData.controls['voucherNumber'].enable();
+    const obj = this.formData.value;
+    obj.voucherDate = obj.voucherDate ? this.datepipe.transform(obj.voucherDate, 'MM-dd-yyyy') : '';
+    obj.postingDate = obj.postingDate ? this.datepipe.transform(obj.postingDate, 'MM-dd-yyyy') : '';
+    obj.referenceDate = obj.referenceDate ? this.datepipe.transform(obj.referenceDate, 'MM-dd-yyyy') : '';
+
+
     arr.forEach((t: any) => {
       const obj = this.glAccountList.find((g: any) => g.glaccountName == t.glaccount);
       t.glaccount = obj.accountNumber
     })
     const addJournal = String.Join('/', this.apiConfigService.addJournal);
-    const requestObj = { journalHdr: this.formData.value, journalDtl: arr };
+    const requestObj = { journalHdr: obj, journalDtl: arr };
     this.apiService.apiPostRequest(addJournal, requestObj).subscribe(
       response => {
         const res = response;

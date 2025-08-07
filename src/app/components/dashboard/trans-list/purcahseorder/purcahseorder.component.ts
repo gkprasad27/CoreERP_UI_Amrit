@@ -805,7 +805,6 @@ export class PurchaseOrderComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['pomasters']);
               const obj = this.employeesList.find((e: any) => e.id == this.formData.value.createdBy);
-              debugger
               this.formData.patchValue({
                 createdBy: obj ? [{ id: obj.id, text: obj.name }]: [],
               });

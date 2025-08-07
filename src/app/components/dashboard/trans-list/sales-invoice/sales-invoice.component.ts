@@ -364,7 +364,6 @@ export class SalesInvoiceComponent implements OnInit {
                   }
                 }
               });
-              debugger
               this.tableData = arr;
               if (this.tableData.length > 0) {
                 this.tableData[0].checkbox = true;
@@ -633,7 +632,6 @@ export class SalesInvoiceComponent implements OnInit {
   savegoodsreceipt() {
     this.formData.enable();
     const arr = this.tableData.filter((d: any) => !d.type && d.checkbox);
-    debugger
     const registerInvoice = String.Join('/', this.apiConfigService.registerInvoice);
     const formData = this.formData.value;
     if (typeof formData.saleOrderNo != 'string') {
@@ -695,6 +693,8 @@ export class SalesInvoiceComponent implements OnInit {
       }
     })
 
+    const company = this.companyList.find((c: any) => c.id == this.formData.value.company);
+
 
     // let list = [...this.getInvoiceDeatilData.invoiceDetailsList];
     // list = [...list, ...this.setArray(list.length)];
@@ -731,6 +731,7 @@ export class SalesInvoiceComponent implements OnInit {
         pin: this.getInvoiceDeatilData?.InvoiceMasterList?.shiptoZip || '',
         gstno: this.formData.value.gstNo || '',
       },
+      companyName: company ? company.text : '',
       detailArray: list,
       totalObj: totalObj,
     };

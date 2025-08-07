@@ -2875,6 +2875,7 @@
     "NEWORDER": "New Order",
     "salesOrderNumber": "Sales Order Number",
     "materialCode": "Material Code",
+    "netWeight": "Net Weight",
     "qty": "Quantity",
     "rate": "Rate",
     "discount": "Discount %",

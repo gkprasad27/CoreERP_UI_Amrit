@@ -189,8 +189,8 @@ export class JobworkmaterialissueComponent {
       igst: [''],
       cgst: [''],
       amount: [0],
+      netWeight:[''],
       total: [0],
-      weight: [0],
       deliveryDate: [''],
       stockQty: [0],
       totalTax: [0],
@@ -259,7 +259,7 @@ export class JobworkmaterialissueComponent {
     const formObj = this.formData1.value
     const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == formObj.taxCode);
     const discountAmount = (((+formObj.qty * +formObj.rate) * ((+formObj.discount) / 100)));
-    const amount = (+formObj.qty * +formObj.rate * (+(formObj.weight ? formObj.weight : 1))) - discountAmount
+    const amount = (+formObj.qty * +formObj.rate * (+(formObj.netWeight ? formObj.netWeight : 1))) - discountAmount
     const igst = obj.igst ? (amount * obj.igst) / 100 : 0;
     const cgst = obj.cgst ? (amount * obj.cgst) / 100 : 0;
     const sgst = obj.sgst ? (amount * obj.sgst) / 100 : 0;
@@ -378,7 +378,7 @@ export class JobworkmaterialissueComponent {
           igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
           cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
           sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-          amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.weight || 1))).toFixed(2),
+          amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.netWeight ? t.netWeight : 1))).toFixed(2),
           totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
         })
       }
@@ -637,7 +637,7 @@ export class JobworkmaterialissueComponent {
   materialCodeChange() {
     const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
     this.formData1.patchValue({
-      weight: obj.netWeight,
+      netWeight: obj.netWeight,
       stockQty: obj.availQTY,
       materialName: obj.text,
 
