@@ -2,14 +2,14 @@
 
     <mat-card-content>
 
-        <form [formGroup]="formData" autocomplete="off" >
+        <form [formGroup]="formData" autocomplete="off">
 
-             <h6>
+            <h6>
                 Cash / Bank Master
             </h6>
 
-            <div class="d--flex p-1 mat-form-field-height">
-                <mat-form-field class="form-element">
+            <div class="row p-1">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'cashbank.company' | translate }}</mat-label>
                     <mat-select formControlName="company">
                         <mat-option>None</mat-option>
@@ -19,7 +19,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <!-- <mat-form-field class="form-element">
+                <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'cashbank.branch' | translate }}</mat-label>
                     <mat-select formControlName="branch">
                         <mat-option>None</mat-option>
@@ -29,7 +29,7 @@
                     </mat-select>
                 </mat-form-field> -->
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'cashbank.transactionType' | translate }}</mat-label>
                     <mat-select formControlName="transactionType" (selectionChange)="accountSelect();">
                         <mat-option>None</mat-option>
@@ -39,7 +39,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'cashbank.natureofTransaction' | translate }}</mat-label>
                     <mat-select formControlName="natureofTransaction">
                         <mat-option>None</mat-option>
@@ -49,10 +49,9 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'cashbank.voucherType' | translate }}</mat-label>
-                    <mat-select formControlName="voucherType"
-                        (selectionChange)="voucherNoCalculate();">
+                    <mat-select formControlName="voucherType" (selectionChange)="voucherNoCalculate();">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let type of vouchersTypeList" [value]="type.voucherTypeId">
                             {{type.voucherTypeName}}
@@ -60,28 +59,28 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'cashbank.voucherNumber'"></mat-label>
-                    <input matInput  formControlName="voucherNumber" appFocusOnEnter tabIndex="2">
+                    <input matInput formControlName="voucherNumber" appFocusOnEnter tabIndex="2">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'cashbank.voucherDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="voucherDate"
-                        appFocusOnEnter tabIndex="3">
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
+                        [nonEditable]="picker1" formControlName="voucherDate" appFocusOnEnter tabIndex="3">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'cashbank.postingDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="postingDate"
-                        appFocusOnEnter tabIndex="3">
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
+                        [nonEditable]="picker2" formControlName="postingDate" appFocusOnEnter tabIndex="3">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'cashbank.account' | translate }}</mat-label>
                     <mat-select formControlName="account">
                         <mat-option>None</mat-option>
@@ -91,7 +90,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'cashbank.accountingIndicator' | translate }}</mat-label>
                     <mat-select formControlName="accountingIndicator">
                         <mat-option>None</mat-option>
@@ -101,20 +100,20 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'cashbank.referenceNo'"></mat-label>
-                    <input matInput formControlName="referenceNo"
-                        appFocusOnEnter tabIndex="2">
+                    <input matInput formControlName="referenceNo" appFocusOnEnter tabIndex="2">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'cashbank.referenceDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" formControlName="referenceDate" appFocusOnEnter tabIndex="4">
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4"
+                        formControlName="referenceDate" appFocusOnEnter tabIndex="4">
                     <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                     <mat-datepicker #picker4></mat-datepicker>
                 </mat-form-field>
 
-                <!-- <mat-form-field class="form-element">
+                <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'cashbank.profitCenter' | translate }}</mat-label>
                     <mat-select formControlName="profitCenter">
                         <mat-option>None</mat-option>
@@ -124,7 +123,7 @@
                     </mat-select>
                 </mat-form-field> -->
 
-                <!-- <mat-form-field class="form-element">
+                <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'cashbank.segment' | translate }}</mat-label>
                     <mat-select formControlName="segment">
                         <mat-option>None</mat-option>
@@ -134,12 +133,11 @@
                     </mat-select>
                 </mat-form-field> -->
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'cashbank.narration'"></mat-label>
-                    <input matInput formControlName="narration"
-                        appFocusOnEnter tabIndex="2">
+                    <input matInput formControlName="narration" appFocusOnEnter tabIndex="2">
                 </mat-form-field>
-            </div>  
+            </div>
         </form>
 
         <!-- <div>
@@ -149,7 +147,7 @@
                  [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
         </div> -->
 
-         <div class="p-2 card">
+        <div class="p-2 card">
 
             <h6>
                 Cash / Bank Details
@@ -157,22 +155,25 @@
 
             <form [formGroup]="formData1" autocomplete="off">
 
-                <div class="d--flex p-1 mat-form-field-height">
+                <div class="row p-1">
 
-                    <div class="multiselect-dropdown-list">
-                        <ng-multiselect-dropdown placeholder="{{ 'journals.glaccountName' | translate }}"
-                            formControlName="glaccount" (onSelect)="getgLsubAccountList();"
-                            [settings]="dropdownSettings" [data]="glAccountList">
+                    <div class="multiselect-dropdown-list floating-dropdown col-2"
+                        [class.filled]="formData1.value?.glaccount?.length > 0">
+                        <label> {{ 'journals.glaccountName' | translate }} </label>
+                        <ng-multiselect-dropdown placeholder=" " formControlName="glaccount"
+                            (onSelect)="getgLsubAccountList();" [settings]="dropdownSettings" [data]="glAccountList">
                         </ng-multiselect-dropdown>
                     </div>
 
-                    <div class="multiselect-dropdown-list">
-                        <ng-multiselect-dropdown placeholder="{{ 'journals.glsubName' | translate }}"
-                            formControlName="subGlaccount" [settings]="dropdownSettings1" [data]="subGlAccountList">
+                    <div class="multiselect-dropdown-list floating-dropdown col-2"
+                        [class.filled]="formData1.value?.subGlaccount?.length > 0">
+                        <label> {{ 'journals.glsubName' | translate }} </label>
+                        <ng-multiselect-dropdown placeholder=" " formControlName="subGlaccount"
+                            [settings]="dropdownSettings1" [data]="subGlAccountList">
                         </ng-multiselect-dropdown>
                     </div>
 
-                    <!-- <mat-form-field class="form-element">
+                    <!-- <mat-form-field class="col-2">
                         <mat-label>{{ 'journals.glaccountName' | translate }}</mat-label>
                         <mat-select formControlName="glaccount"
                             (selectionChange)="getgLsubAccountList(); accountingIndicatorChange();">
@@ -183,7 +184,7 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label>{{ 'journals.glsubName' | translate }}</mat-label>
                         <mat-select formControlName="subGlaccount">
                             <mat-option>None</mat-option>
@@ -194,7 +195,7 @@
                     </mat-form-field> -->
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label>{{ 'journals.accountingIndicator' | translate }}</mat-label>
                         <mat-select formControlName="accountingIndicator"
                             (selectionChange)="accountingIndicatorChange();">
@@ -205,7 +206,7 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label>{{ 'journals.taxCode' | translate }}</mat-label>
                         <mat-select formControlName="taxCode" (selectionChange)="taxCodeAmountChange();">
                             <mat-option>None</mat-option>
@@ -215,34 +216,34 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'receiptspayments.amount'"></mat-label>
                         <input matInput type="number" formControlName="amount" (change)="taxCodeAmountChange();"
                             appFocusOnEnter tabIndex="7">
                     </mat-form-field>
 
 
-                    <!-- <mat-form-field class="form-element">
+                    <!-- <mat-form-field class="col-2">
                         <mat-label [translate]="'receiptspayments.sgstamount'"></mat-label>
                         <input matInput type="number" formControlName="sgstamount" appFocusOnEnter tabIndex="10">
                     </mat-form-field>
 
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'receiptspayments.cgstamount'"></mat-label>
                         <input matInput type="number" formControlName="cgstamount" appFocusOnEnter tabIndex="10">
                     </mat-form-field>
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'receiptspayments.igstamount'"></mat-label>
                         <input matInput type="number" formControlName="igstamount" appFocusOnEnter tabIndex="10">
                     </mat-form-field> -->
 
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label>{{ 'journals.hsnsac' | translate }}</mat-label>
                         <mat-select formControlName="hsnsaccode">
                             <mat-option>None</mat-option>
@@ -253,7 +254,7 @@
                     </mat-form-field>
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'receiptspayments.narration'"></mat-label>
                         <input matInput type="text" formControlName="narration" appFocusOnEnter tabIndex="8">
                     </mat-form-field>
@@ -287,8 +288,8 @@
 
     <mat-card-content class="d-flex justify-content-end py-1">
 
-        <button id="save" [hidden]="routeEdit != ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-            (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
+        <button id="save" [hidden]="routeEdit != ''" mat-raised-button type="submit"
+            class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
             {{ 'COMMON.SAVE' | translate }}
         </button>
         <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">

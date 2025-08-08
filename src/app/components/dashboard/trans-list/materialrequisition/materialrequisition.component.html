@@ -118,11 +118,10 @@
 
 
 
-      <div class="d-flex p-1 mat-form-field-height justify-content-between align-items-end">
+      <div class="row p-1">
 
 
-        <div class="d-flex flex-wrap">
-          <mat-form-field>
+          <mat-form-field class="col-2">
             <mat-label>{{'materialrequisition.typeofWork' | translate }}</mat-label>
             <mat-select formControlName="typeofWork" appFocusOnEnter tabIndex="1">
               <mat-option>None</mat-option>
@@ -131,7 +130,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="col-2">
             <mat-label>{{'materialrequisition.allocatedPerson' | translate }}</mat-label>
             <mat-select formControlName="allocatedPerson" appFocusOnEnter tabIndex="2">
               <mat-option>None</mat-option>
@@ -140,7 +139,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="col-2">
             <mat-label>{{'materialrequisition.mechine' | translate }}</mat-label>
             <mat-select formControlName="mechine" appFocusOnEnter tabIndex="3">
               <mat-option>None</mat-option>
@@ -149,7 +148,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="col-2">
             <mat-label>{{'materialrequisition.startDate' | translate }}</mat-label>
 
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" tabIndex="4"
@@ -157,7 +156,7 @@
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="col-2">
             <mat-label>{{'materialrequisition.endDate' | translate }}</mat-label>
 
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" tabIndex="5"
@@ -165,11 +164,11 @@
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
-          <mat-form-field class="form-element">
+          <mat-form-field  class="col-2">
             <mat-label [translate]="'materialrequisition.remarks'"></mat-label>
             <input matInput formControlName="remarks" appFocusOnEnter tabIndex="4">
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="col-2">
             <mat-label>{{'materialrequisition.workStatus' | translate }}</mat-label>
             <mat-select formControlName="workStatus" appFocusOnEnter tabIndex="3">
               <mat-option>None</mat-option>
@@ -180,26 +179,25 @@
               <mat-option value="Assigned to QC"> Assigned to QC </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field class="form-element">
+          <mat-form-field  class="col-2">
             <mat-label [translate]="'materialrequisition.productionPlanDate'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"
               appFocusOnEnter tabIndex="11">
             <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
             <mat-datepicker #picker3></mat-datepicker>
           </mat-form-field>
-          <mat-form-field class="form-element">
+          <mat-form-field  class="col-2">
             <mat-label [translate]="'materialrequisition.productionTargetDate'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
               appFocusOnEnter tabIndex="12">
             <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
             <mat-datepicker #picker4></mat-datepicker>
           </mat-form-field>
-          <div *ngIf="filePath" class="m-3 d-flex flex-column">
+          <div *ngIf="filePath" class="col-2 d-flex flex-column justify-content-center">
             <b> {{ 'inspectioncheck.designDocument' | translate }} </b>
             <span class="underscore" (click)="downLoadFile()"> {{ filePath }} </span>
           </div>
 
-        </div>
 
 
 

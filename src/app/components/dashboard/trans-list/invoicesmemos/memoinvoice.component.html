@@ -8,9 +8,9 @@
                 Invoice / Memo Master
             </h6>
 
-            <div class="d--flex p-1 mat-form-field-height">
+            <div class="row p-1">
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'invoicesmemos.company' | translate }}</mat-label>
                     <mat-select formControlName="company">
                         <mat-option>None</mat-option>
@@ -20,7 +20,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <!-- <mat-form-field class="form-element">
+                <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'invoicesmemos.branch' | translate }}</mat-label>
                     <mat-select formControlName="branch">
                         <mat-option>None</mat-option>
@@ -30,7 +30,7 @@
                     </mat-select>
                 </mat-form-field> -->
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'invoicesmemos.transactionType' | translate }}</mat-label>
                     <mat-select formControlName="transactionType" (selectionChange)="accountSelect()">
                         <mat-option>None</mat-option>
@@ -40,7 +40,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'invoicesmemos.natureofTransaction' | translate }}</mat-label>
                     <mat-select formControlName="natureofTransaction">
                         <mat-option>None</mat-option>
@@ -50,7 +50,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'invoicesmemos.voucherType' | translate }}</mat-label>
                     <mat-select formControlName="voucherType"
                         (selectionChange)="voucherNoCalculate();">
@@ -61,12 +61,12 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'invoicesmemos.voucherNumber'"></mat-label>
                     <input matInput formControlName="voucherNumber" appFocusOnEnter tabIndex="2">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'invoicesmemos.voucherDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="voucherDate"
                         appFocusOnEnter tabIndex="3">
@@ -74,7 +74,7 @@
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'invoicesmemos.postingDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="postingDate"
                         appFocusOnEnter tabIndex="3">
@@ -82,7 +82,7 @@
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'invoicesmemos.bpcategory' | translate }}</mat-label>
                     <mat-select formControlName="bpcategory" (selectionChange)="onbpChange()">
                         <mat-option>None</mat-option>
@@ -92,7 +92,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <!-- <mat-form-field class="form-element">
+                <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'invoicesmemos.partyAccount' | translate }}</mat-label>
                     <mat-select formControlName="partyAccount">
                         <mat-option>None</mat-option>
@@ -102,8 +102,9 @@
                     </mat-select>
                 </mat-form-field> -->
 
-                <div class="mat-mdc-form-field typeahead">
-                    <input placeholder="{{ 'invoicesmemos.partyAccount' | translate }}" formControlName="partyAccount"
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData.value?.partyAccount?.length > 0" >
+                    <label> {{ 'invoicesmemos.partyAccount' | translate }} </label>
+                    <input placeholder=" " formControlName="partyAccount"
                         [typeahead]="bpgLists" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
                     <ng-template #customItemTemplate let-model="item">
@@ -112,12 +113,12 @@
                 </div>
 
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'invoicesmemos.referenceNumber'"></mat-label>
                     <input matInput formControlName="referenceNumber" appFocusOnEnter tabIndex="2">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'invoicesmemos.referenceDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="referenceDate"
                         appFocusOnEnter tabIndex="4">
@@ -125,12 +126,12 @@
                     <mat-datepicker #picker4></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'invoicesmemos.partyInvoiceNo'"></mat-label>
                     <input matInput formControlName="partyInvoiceNo" appFocusOnEnter tabIndex="2">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'invoicesmemos.partyInvoiceDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="partyInvoiceDatepicker4" [nonEditable]="partyInvoiceDatepicker4"
                         formControlName="partyInvoiceDate" appFocusOnEnter tabIndex="4">
@@ -138,13 +139,13 @@
                     <mat-datepicker #partyInvoiceDatepicker4></mat-datepicker>
                 </mat-form-field>
 
-                <!-- <mat-form-field class="form-element">
+                <!-- <mat-form-field class="col-2">
                     <mat-label [translate]="'invoicesmemos.grnno'"></mat-label>
                     <input matInput  formControlName="grnno"
                         appFocusOnEnter tabIndex="2">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'invoicesmemos.grndate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="gRNDatepicker4" [nonEditable]="gRNDatepicker4"  formControlName="grndate" appFocusOnEnter
                         tabIndex="4">
@@ -152,7 +153,7 @@
                     <mat-datepicker #gRNDatepicker4></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'invoicesmemos.paymentterms' | translate }}</mat-label>
                     <mat-select formControlName="paymentterms">
                         <mat-option>None</mat-option>
@@ -164,7 +165,7 @@
 
 
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'invoicesmemos.narration'"></mat-label>
                     <input matInput formControlName="narration" appFocusOnEnter tabIndex="2">
                 </mat-form-field>
@@ -185,22 +186,24 @@
 
             <form [formGroup]="formData1" autocomplete="off">
 
-                <div class="d--flex p-1 mat-form-field-height">
+                <div class="row p-1">
 
-                    <div class="multiselect-dropdown-list">
-                        <ng-multiselect-dropdown placeholder="{{ 'journals.glaccountName' | translate }}"
+                    <div class="multiselect-dropdown-list  floating-dropdown col-2" [class.filled]="formData.value?.glaccount?.length > 0" >
+                        <label> {{ 'journals.glaccountName' | translate }} </label>
+                        <ng-multiselect-dropdown placeholder=" "
                             formControlName="glaccount" (onSelect)="getgLsubAccountList();"
                             [settings]="dropdownSettings" [data]="glAccountList">
                         </ng-multiselect-dropdown>
                     </div>
 
-                    <div class="multiselect-dropdown-list">
-                        <ng-multiselect-dropdown placeholder="{{ 'journals.glsubName' | translate }}"
+                    <div class="multiselect-dropdown-list  floating-dropdown col-2" [class.filled]="formData.value?.subGlaccount?.length > 0" >
+                        <label> {{ 'journals.glsubName' | translate }} </label>
+                        <ng-multiselect-dropdown placeholder=" "
                             formControlName="subGlaccount" [settings]="dropdownSettings1" [data]="subGlAccountList">
                         </ng-multiselect-dropdown>
                     </div>
 
-                    <!-- <mat-form-field class="form-element">
+                    <!-- <mat-form-field class="col-2">
                         <mat-label>{{ 'journals.glaccountName' | translate }}</mat-label>
                         <mat-select formControlName="glaccount"
                             (selectionChange)="getgLsubAccountList(); accountingIndicatorChange();">
@@ -211,7 +214,7 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label>{{ 'journals.glsubName' | translate }}</mat-label>
                         <mat-select formControlName="subGlaccount">
                             <mat-option>None</mat-option>
@@ -222,7 +225,7 @@
                     </mat-form-field> -->
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label>{{ 'journals.accountingIndicator' | translate }}</mat-label>
                         <mat-select formControlName="accountingIndicator"
                             (selectionChange)="accountingIndicatorChange();">
@@ -233,7 +236,7 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label>{{ 'journals.taxCode' | translate }}</mat-label>
                         <mat-select formControlName="taxCode" (selectionChange)="taxCodeAmountChange();">
                             <mat-option>None</mat-option>
@@ -243,34 +246,34 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'receiptspayments.amount'"></mat-label>
                         <input matInput type="number" formControlName="amount" (change)="taxCodeAmountChange();"
                             appFocusOnEnter tabIndex="7">
                     </mat-form-field>
 
 
-                    <!-- <mat-form-field class="form-element">
+                    <!-- <mat-form-field class="col-2">
                         <mat-label [translate]="'receiptspayments.sgstamount'"></mat-label>
                         <input matInput type="number" formControlName="sgstamount" appFocusOnEnter tabIndex="10">
                     </mat-form-field>
 
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'receiptspayments.cgstamount'"></mat-label>
                         <input matInput type="number" formControlName="cgstamount" appFocusOnEnter tabIndex="10">
                     </mat-form-field>
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'receiptspayments.igstamount'"></mat-label>
                         <input matInput type="number" formControlName="igstamount" appFocusOnEnter tabIndex="10">
                     </mat-form-field> -->
 
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label>{{ 'journals.hsnsac' | translate }}</mat-label>
                         <mat-select formControlName="hsnsac">
                             <mat-option>None</mat-option>
@@ -281,7 +284,7 @@
                     </mat-form-field>
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'receiptspayments.narration'"></mat-label>
                         <input matInput type="text" formControlName="narration" appFocusOnEnter tabIndex="8">
                     </mat-form-field>
