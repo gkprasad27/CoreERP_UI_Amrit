@@ -11,42 +11,42 @@
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'AttendanceProcess.emp_Code'"></mat-label>
-                    <input matInput formControlName="emp_Code" readonly appFocusOnEnter>
+                    <input matInput formControlName="emp_Code" readonly  appFocusOnEnter tabIndex="1">
                 </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'AttendanceProcess.employeename'"></mat-label>
-                    <input matInput formControlName="employeename" readonly appFocusOnEnter>
+                    <input matInput formControlName="employeename" readonly  appFocusOnEnter tabIndex="2">
                 </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'AttendanceProcess.month_Days'"></mat-label>
-                    <input matInput formControlName="month_Days" readonly appFocusOnEnter>
+                    <input matInput formControlName="month_Days" readonly  appFocusOnEnter tabIndex="3">
                 </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'AttendanceProcess.month'"></mat-label>
-                    <input matInput formControlName="month" readonly appFocusOnEnter tabIndex="1">
+                    <input matInput formControlName="month" readonly appFocusOnEnter tabIndex="4">
                 </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'AttendanceProcess.year'"></mat-label>
-                    <input matInput formControlName="year" readonly appFocusOnEnter tabIndex="2">
+                    <input matInput formControlName="year" readonly appFocusOnEnter tabIndex="5">
                 </mat-form-field>
                 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'AttendanceProcess.pay_Days'"></mat-label>
-                    <input matInput formControlName="pay_Days"  appFocusOnEnter>
+                    <input matInput formControlName="pay_Days"   appFocusOnEnter tabIndex="6">
                 </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'AttendanceProcess.oT_Hrs'"></mat-label>
-                    <input matInput formControlName="oT_Hrs"  appFocusOnEnter>
+                    <input matInput formControlName="oT_Hrs"   appFocusOnEnter tabIndex="7">
                 </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'AttendanceProcess.lessHrs'"></mat-label>
-                    <input matInput formControlName="lessHrs"  appFocusOnEnter>
+                    <input matInput formControlName="lessHrs"   appFocusOnEnter tabIndex="8">
                 </mat-form-field>
 
             </div>
@@ -56,11 +56,9 @@
     </mat-card-content>
     <div class="form-element mt-2 d-flex justify-content-end">
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-
             {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-
             {{ 'COMMON.SAVE' | translate }}
         </button>
     </div>

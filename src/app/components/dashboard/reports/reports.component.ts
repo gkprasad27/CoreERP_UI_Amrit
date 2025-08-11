@@ -227,8 +227,8 @@ export class ReportsComponent {
                 element = result;
               }
               element.action = [
-  { id: 'Edit', type: 'edit' }
-];
+                { id: 'Edit', type: 'edit' }
+              ];
               return element;
             });
             this.tableData = arr;
@@ -476,8 +476,8 @@ export class ReportsComponent {
                 element = result;
               }
               element.action = [
-  { id: 'Edit', type: 'edit' }
-];
+                { id: 'Edit', type: 'edit' }
+              ];
               return element;
             });
             this.tableData = arr;
@@ -553,8 +553,8 @@ export class ReportsComponent {
               if (!this.commonService.checkNullOrUndefined(res.response) && res.response[this.getComponentData.listName] && res.response[this.getComponentData.listName].length) {
                 res.response[this.getComponentData.listName].forEach((a: any) => {
                   a.action = [
-  { id: 'Edit', type: 'edit' }
-];
+                    { id: 'Edit', type: 'edit' }
+                  ];
                   a.button = 'Open';
                 })
                 this.tableData = res.response[this.getComponentData.listName];

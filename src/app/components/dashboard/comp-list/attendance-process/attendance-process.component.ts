@@ -54,6 +54,7 @@ export class AttendanceProcessComponent {
       month: [''],
       year: [''],
       lessHrs:[''],
+      button: ['']
     });
 
 

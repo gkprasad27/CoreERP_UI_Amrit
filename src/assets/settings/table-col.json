@@ -2816,9 +2816,9 @@
     "oT_Hrs": "Ot Hrs",
     "month": "Att Month",
     "year": "Att Year",
-    "action": "Action",
     "button": "button",
-    "lessHrs": "Less Hrs"
+    "lessHrs": "Less Hrs",
+    "action": "Action"
   },
   "salaryprocess": {
     "title": "Salary Process",
