@@ -5,9 +5,9 @@
   </mat-card-title>
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
+      <div class="row">
 
-        <!-- <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.taxKey.valid }">
+        <!-- <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.taxKey.valid }">
           <mat-label [translate]="'taxtypes.taxtypes'"></mat-label>
              <input matInput  formControlName="taxKey" maxlength="4" appFocusOnEnter tabIndex="1">
              <mat-error *ngIf="formControls.taxKey.errors" class="help-block">
@@ -15,7 +15,7 @@
              </mat-error>
            </mat-form-field> -->
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.taxKey.valid &&formControls.taxKey.status != 'DISABLED',
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.taxKey.valid &&formControls.taxKey.status != 'DISABLED',
             'ng--invalid': !formControls.taxKey.valid && formControls.taxKey.status != 'DISABLED' }">
           <mat-label [translate]="'taxtypes.taxKey'"></mat-label>
           <input matInput formControlName="taxKey" appFocusOnEnter
@@ -25,7 +25,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.description.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.description.valid }">
           <mat-label [translate]="'taxtypes.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
@@ -34,7 +34,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'taxtypes.nature'"></mat-label>
           <mat-select formControlName="nature" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
@@ -47,7 +47,7 @@
       <mat-divider></mat-divider>
     </form>
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="3">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

@@ -5,9 +5,9 @@
   </mat-card-title>
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'glsubgroups.structureType'"></mat-label>
           <mat-select formControlName="structureType" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -17,7 +17,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'glsubgroups.structureKey'"></mat-label>
           <mat-select formControlName="structureKey" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -27,7 +27,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.nature.valid, 'ng--invalid': !formControls.nature.valid  }">
           <mat-label>{{'glsubgroups.nature' | translate }}</mat-label>
           <mat-select formControlName="nature" (selectionChange)="getAccountNamelist()" appFocusOnEnter tabIndex="2">
@@ -40,7 +40,7 @@
             Account is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'glsubgroups.groupUnder' | translate }}</mat-label>
           <mat-select formControlName="groupUnder" (selectionChange)="getGLUnderGroupList()" appFocusOnEnter
             tabIndex="3">
@@ -50,7 +50,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field [hidden]="formData.item">
+        <mat-form-field  class="col-3" [hidden]="formData.item">
           <mat-label>{{'glsubgroups.Undersubaccount' | translate }}</mat-label>
           <mat-select formControlName="Undersubaccount" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -60,7 +60,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.accountGroupId.valid &&formControls.accountGroupId.status != 'DISABLED',
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.accountGroupId.valid &&formControls.accountGroupId.status != 'DISABLED',
            'ng--invalid': !formControls.accountGroupId.valid &&formControls.accountGroupId.status != 'DISABLED'  }">
           <mat-label [translate]="'glsubgroups.accountGroupId'"></mat-label>
           <input matInput disabled formControlName="accountGroupId" appFocusOnEnter tabIndex="5">
@@ -68,7 +68,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.accountGroupId.valid  }"> Code is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.accountGroupName.valid, 'ng--invalid': !formControls.accountGroupName.valid  }">
           <mat-label [translate]="'glsubgroups.accountGroupName'"></mat-label>
           <input matInput disabled formControlName="accountGroupName" appFocusOnEnter tabIndex="6">
@@ -76,17 +76,17 @@
             [ngClass]="{ 'ng--invalid': !formControls.accountGroupName.valid  }"> Name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'glsubgroups.narration'"></mat-label>
           <input matInput formControlName="narration" appFocusOnEnter tabIndex="7">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'glsubgroups.note'"></mat-label>
           <input matInput formControlName="note" appFocusOnEnter tabIndex="7">
         </mat-form-field>
 
-        <mat-slide-toggle class="form-element" formControlName="isDefault" style="margin-top: 25px;margin-left: 5px;"
+        <mat-slide-toggle class="col-3" formControlName="isDefault" style="margin-top: 25px;margin-left: 5px;"
           appFocusOnEnter tabIndex="8">
           No Further Group
         </mat-slide-toggle>
@@ -94,7 +94,7 @@
       <mat-divider></mat-divider>
     </form>
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="9">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

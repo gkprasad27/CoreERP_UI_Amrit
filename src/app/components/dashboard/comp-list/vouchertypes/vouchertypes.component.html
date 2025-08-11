@@ -8,8 +8,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.voucherTypeId.valid &&formControls.voucherTypeId.status != 'DISABLED',
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.voucherTypeId.valid &&formControls.voucherTypeId.status != 'DISABLED',
            'ng--invalid': !formControls.voucherTypeId.valid &&formControls.voucherTypeId.status != 'DISABLED'  }">
           <mat-label [translate]="'vouchertype.voucherTypeId'"></mat-label>
           <input matInput  formControlName="voucherTypeId"
@@ -18,7 +18,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.voucherTypeId.valid  }">Voucher Type Key is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.voucherTypeName.valid, 'ng--invalid': !formControls.voucherTypeName.valid  }">
           <mat-label [translate]="'vouchertype.voucherTypeName'"></mat-label>
           <input matInput formControlName="voucherTypeName"
@@ -28,7 +28,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'vouchertype.voucherClass' | translate }}</mat-label>
           <mat-select formControlName="voucherClass" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -38,7 +38,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'vouchertype.accountType'"></mat-label>
           <mat-select formControlName="accountType" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -48,7 +48,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'vouchertype.printText'"></mat-label>
           <input matInput formControlName="printText"
             maxlength="40" appFocusOnEnter tabIndex="4">
@@ -58,7 +58,7 @@
       <mat-divider></mat-divider>
     </form>
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="5">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

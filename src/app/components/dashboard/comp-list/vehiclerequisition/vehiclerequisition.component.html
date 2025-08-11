@@ -6,8 +6,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element">
+      <div class="row">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'vehiclerequisition.empCode' | translate }}"
                  (typeaheadOnSelect)="onSearchChange($event)"
                  (input)="getProductByProductCode($event.target.value)" class="typeahead"
@@ -15,71 +15,71 @@
                  formControlName="empCode" appFocusOnEnter tabIndex="1">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder=" {{'vehiclerequisition.empName' | translate }} " class="typeahead"
                  formControlName="empName" [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'
                  appFocusOnEnter tabIndex="2">
 
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'vehiclerequisition.applDate' | translate }}"
                  [formControl]="applDate" tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" placeholder="{{'vehiclerequisition.fromDate' | translate }}"
                   formControlName="fromDate" tabIndex="4">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'vehiclerequisition.fromTime' | translate }}" formControlName="fromTime"  appFocusOnEnter tabIndex="5">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" placeholder="{{'vehiclerequisition.todate' | translate }}"
                  formControlName="todate" tabIndex="6">
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'vehiclerequisition.totime' | translate }}" formControlName="totime" appFocusOnEnter tabIndex="7">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'vehiclerequisition.place' | translate }}" formControlName="place" appFocusOnEnter tabIndex="8">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'vehiclerequisition.reportingTime' | translate }}" formControlName="reportingTime" appFocusOnEnter tabIndex="9">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'vehiclerequisition.contactPersonNo' | translate }}" formControlName="contactPersonNo" appFocusOnEnter tabIndex="10">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'vehiclerequisition.reprtingAddress' | translate }}" formControlName="reprtingAddress" appFocusOnEnter tabIndex="11">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'vehiclerequisition.purpose' | translate }}" formControlName="purpose" appFocusOnEnter tabIndex="12">
         </mat-form-field>
 
       </div>
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+      <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
           {{ 'COMMON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
                 tabIndex="5">
 
           Apply VehicleRequisition

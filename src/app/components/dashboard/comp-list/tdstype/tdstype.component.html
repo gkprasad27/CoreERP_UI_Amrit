@@ -6,8 +6,8 @@
 
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.tdsCode.valid &&formControls.tdsCode.status != 'DISABLED',
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.tdsCode.valid &&formControls.tdsCode.status != 'DISABLED',
            'ng--invalid': !formControls.tdsCode.valid &&formControls.tdsCode.status != 'DISABLED' }">
           <mat-label [translate]="'tdstypes.tdsCode'"></mat-label>
           <input matInput formControlName="tdsCode" maxlength="5"
@@ -17,7 +17,7 @@
             is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.desctiption.valid, 'ng--invalid': !formControls.desctiption.valid  }">
           <mat-label [translate]="'tdstypes.desctiption'"></mat-label>
           <input matInput formControlName="desctiption"
@@ -29,7 +29,7 @@
       <mat-divider></mat-divider>
     </form>
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="3">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

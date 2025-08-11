@@ -75,7 +75,7 @@ export class OpeningBalanceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getOpeningBalBranchesList();
+    // this.getOpeningBalBranchesList();
     this.getPaymentType();
     this.commonService.setFocus('ledgerName');
     const user = JSON.parse(localStorage.getItem('user'));
@@ -89,21 +89,21 @@ export class OpeningBalanceComponent implements OnInit {
     }
   }
  
-  getOpeningBalBranchesList() {
-    const getOpeningBalBranchesListUrl = String.Join('/', this.apiConfigService.getObBranchesList);
-   this.apiService.apiGetRequest(getOpeningBalBranchesListUrl).subscribe(
-      response => {
-        const res = response.body;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            if (!this.commonService.checkNullOrUndefined(res.response['BranchesList']) && res.response['BranchesList'].length) {
-              this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
-            }
-          }
-        }
-      });
-  }
+  // getOpeningBalBranchesList() {
+  //   const getOpeningBalBranchesListUrl = String.Join('/', this.apiConfigService.getObBranchesList);
+  //  this.apiService.apiGetRequest(getOpeningBalBranchesListUrl).subscribe(
+  //     response => {
+  //       const res = response.body;
+  //       if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //         if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response['BranchesList']) && res.response['BranchesList'].length) {
+  //             this.GetBranchesListArray = res.response['BranchesList'];
+  //             this.spinner.hide();
+  //           }
+  //         }
+  //       }
+  //     });
+  // }
 
   getPaymentType() {
     const getPaymentTypeListUrl = String.Join('/', this.apiConfigService.getPaymentType);

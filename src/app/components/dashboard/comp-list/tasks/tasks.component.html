@@ -7,8 +7,8 @@
 
       <mat-tab label="{{'tasks.title1' | translate }}">
         <mat-card-content class="py-5 p-2 m-0">
-          <div class="d--flex">
-            <mat-form-field>
+          <div class="row">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.wbselement'"></mat-label>
               <mat-select formControlName="wbselement" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -18,19 +18,19 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.taskNumber'"></mat-label>
               <input matInput  formControlName="taskNumber"
                 appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.description'"></mat-label>
               <input matInput formControlName="description"
                 appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.immediatePrecedessors'"></mat-label>
               <mat-select formControlName="immediatePrecedessors" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -41,7 +41,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.successorTask'"></mat-label>
               <mat-select formControlName="successorTask" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -52,7 +52,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.wbselement'"></mat-label>
               <input matInput formControlName="timeNeeded"
                 appFocusOnEnter tabIndex="4">
@@ -60,37 +60,37 @@
 
 
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.wbselement'"></mat-label>
               <input matInput formControlName="earlyStart"
                 appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.wbselement'"></mat-label>
               <input matInput  formControlName="earlyFinish"
                 appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.wbselement'"></mat-label>
               <input matInput  formControlName="lateFinish"
                 appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.wbselement'"></mat-label>
               <input matInput formControlName="forwardTotal"
                 appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.wbselement'"></mat-label>
               <input matInput formControlName="backwardTotal"
                 appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.person'"></mat-label>
               <mat-select formControlName="person" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -100,7 +100,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'tasks.wbselement'"></mat-label>
               <input matInput formControlName="risk" appFocusOnEnter
                 tabIndex="4">
@@ -132,7 +132,7 @@
 
   </mat-tab-group>
 
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="reset()" appFocusOnEnter tabIndex="21">
       {{ 'COMMON.RESET' | translate }}
     </button>

@@ -8,8 +8,8 @@
 
         <mat-card-content class="py-5 p-2 m-0">
 
-          <div class="d--flex">
-            <mat-form-field>
+          <div class="row">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.company'"></mat-label>
               <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -19,7 +19,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.plant'"></mat-label>
               <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
                 <mat-option>None</mat-option>
@@ -29,7 +29,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.workcenterType'"></mat-label>
               <mat-select formControlName="workcenterType" appFocusOnEnter tabIndex="3">
                 <mat-option>None</mat-option>
@@ -39,12 +39,12 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.workcenterCode'"></mat-label>
               <input matInput formControlName="workcenterCode" appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.name'"></mat-label>
               <input matInput formControlName="name"
                 appFocusOnEnter tabIndex="5">
@@ -60,9 +60,9 @@
 
         <mat-card-content class="py-5 p-2 m-0">
 
-          <div class="d--flex">
+          <div class="row">
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.location'"></mat-label>
               <mat-select formControlName="location" appFocusOnEnter tabIndex="6">
                 <mat-option>None</mat-option>
@@ -72,7 +72,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.person'"></mat-label>
               <mat-select formControlName="person" appFocusOnEnter tabIndex="7">
                 <mat-option>None</mat-option>
@@ -83,7 +83,7 @@
             </mat-form-field>
 
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.usage'"></mat-label>
               <mat-select formControlName="usage" appFocusOnEnter tabIndex="8">
                 <mat-option>None</mat-option>
@@ -93,7 +93,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field floatLabel="always" class="remove-boader-bottom">
+            <mat-form-field floatLabel="always" class="col-3">
               <mat-label [translate]="'workcentercreation.autopostingGoods'"></mat-label>
               <mat-slide-toggle formControlName="autopostingGoods" appFocusOnEnter tabIndex="9"></mat-slide-toggle>
               <textarea matInput hidden></textarea>
@@ -123,34 +123,34 @@
 
         <mat-card-content class="py-5 p-2 m-0">
 
-          <div class="d--flex">
+          <div class="row">
 
-            <mat-form-field floatLabel="always" class="remove-boader-bottom">
+            <mat-form-field floatLabel="always" class="col-3">
               <mat-label [translate]="'workcentercreation.scheduling'"></mat-label>
               <mat-slide-toggle formControlName="scheduling" appFocusOnEnter tabIndex="15"></mat-slide-toggle>
               <textarea matInput hidden></textarea>
             </mat-form-field>
 
-            <mat-form-field floatLabel="always" class="remove-boader-bottom">
+            <mat-form-field floatLabel="always" class="col-3">
               <mat-label [translate]="'workcentercreation.costDerivation'"></mat-label>
               <mat-slide-toggle formControlName="costDerivation" appFocusOnEnter tabIndex="16"></mat-slide-toggle>
               <textarea matInput hidden></textarea>
             </mat-form-field>
 
-            <mat-form-field floatLabel="always" class="remove-boader-bottom">
+            <mat-form-field floatLabel="always" class="col-3">
               <mat-label [translate]="'workcentercreation.capacityReqirement'"></mat-label>
               <mat-slide-toggle formControlName="capacityReqirement"></mat-slide-toggle>
               <textarea matInput hidden></textarea>
             </mat-form-field>
 
-            <mat-form-field floatLabel="always" class="remove-boader-bottom">
+            <mat-form-field floatLabel="always" class="col-3">
               <mat-label [translate]="'workcentercreation.goodsReceiptPosting'"></mat-label>
               <mat-slide-toggle formControlName="goodsReceiptPosting" appFocusOnEnter tabIndex="17"></mat-slide-toggle>
               <textarea matInput hidden></textarea>
             </mat-form-field>
 
 
-            <mat-form-field floatLabel="always" class="remove-boader-bottom">
+            <mat-form-field floatLabel="always" class="col-3">
               <mat-label [translate]="'workcentercreation.qualityInspection'"></mat-label>
               <mat-slide-toggle formControlName="qualityInspection" appFocusOnEnter tabIndex="18"></mat-slide-toggle>
               <textarea matInput hidden></textarea>
@@ -180,32 +180,32 @@
 
         <mat-card-content class="py-5 p-2 m-0">
 
-          <div class="d--flex">
-            <mat-form-field class="form-element">
+          <div class="row">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.moveTime'"></mat-label>
               <input matInput formControlName="moveTime"
                 appFocusOnEnter tabIndex="27" (change)="calculateTime1()">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.waitTime'"></mat-label>
               <input matInput formControlName="waitTime"
                 appFocusOnEnter tabIndex="28" (change)="calculateTime2()">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.queueTime'"></mat-label>
               <input matInput  formControlName="queueTime"
                 appFocusOnEnter tabIndex="29" (change)="calculateTime3()">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.setupTime'"></mat-label>
               <input matInput formControlName="setupTime"
                 appFocusOnEnter tabIndex="30" (change)="calculateTime4()">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.runTimeforEachUnit'"></mat-label>
               <input matInput  formControlName="runTimeforEachUnit" appFocusOnEnter tabIndex="31">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'workcentercreation.leadTime'"></mat-label>
               <input matInput formControlName="leadTime"
                 appFocusOnEnter tabIndex="32" disabled="disabled">
@@ -219,7 +219,7 @@
 
   </mat-tab-group>
 
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="reset()" appFocusOnEnter tabIndex="21">
       {{ 'COMMON.RESET' | translate }}
     </button>

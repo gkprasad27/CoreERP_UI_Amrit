@@ -7,8 +7,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
            'ng--invalid': !formControls.code.valid&& formControls.code.status != 'DISABLED'}">
           <mat-label [translate]="'suppliertermsandconditions.code'"></mat-label>
           <input matInput  formControlName="code"
@@ -18,7 +18,7 @@
             required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
           <mat-label [translate]="'suppliertermsandconditions.description'"></mat-label>
           <input matInput 
@@ -27,13 +27,13 @@
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.deliveryPeriod'"></mat-label>
           <input matInput 
             formControlName="deliveryPeriod" maxlength="12" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.deliveryDate'"></mat-label>
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2"
              formControlName="deliveryDate"
@@ -44,7 +44,7 @@
 
 
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.deliveryMethod'"></mat-label>
           <mat-select formControlName="deliveryMethod" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
@@ -54,27 +54,27 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.deliveryPlace'"></mat-label>
           <input matInput 
             formControlName="deliveryPlace" maxlength="30" appFocusOnEnter tabIndex="6">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.contactPerson'"></mat-label>
           <input matInput 
             formControlName="contactPerson" maxlength="30" appFocusOnEnter tabIndex="7">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.phoneNumber'"></mat-label>
           <input matInput 
             formControlName="phoneNumber" maxlength="12" appFocusOnEnter tabIndex="8">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.creditPeriod'"></mat-label>
           <input matInput  type="number"
             formControlName="creditPeriod" maxlength="7" appFocusOnEnter tabIndex="9">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.advance'"></mat-label>
           <input matInput  type="number"
             formControlName="advance" maxlength="7" appFocusOnEnter tabIndex="10">
@@ -85,7 +85,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
       {{ 'COMMON.CANCEL' | translate }}

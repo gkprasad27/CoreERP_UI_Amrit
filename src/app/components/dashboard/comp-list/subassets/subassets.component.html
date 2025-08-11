@@ -7,9 +7,9 @@
       <mat-tab label="{{'subassets.title' | translate }}">
 
         <mat-card-content class="py-5 p-2 m-0">
-          <div class="d--flex">
+          <div class="row">
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.mainAssetNo'"></mat-label>
               <mat-select formControlName="mainAssetNo" (selectionChange)="getchartAccount($event)" appFocusOnEnter
                 tabIndex="1">
@@ -19,7 +19,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.subAssetNumber.valid && formControls.subAssetNumber.status != 'DISABLED',
+            <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.subAssetNumber.valid && formControls.subAssetNumber.status != 'DISABLED',
                'ng--invalid': !formControls.subAssetNumber.valid && formControls.subAssetNumber.status != 'DISABLED'}">
               <mat-label [translate]="'subassets.subAssetNumber'"></mat-label>
               <input matInput formControlName="subAssetNumber"
@@ -29,7 +29,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="form-element"
+            <mat-form-field class="col-3"
               [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
               <mat-label [translate]="'subassets.description'"></mat-label>
               <input matInput formControlName="description"
@@ -38,7 +38,7 @@
                 [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Name is required</mat-error>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.accountKey'"></mat-label>
               <mat-select formControlName="accountKey" appFocusOnEnter tabIndex="4">
                 <mat-option *ngFor="let ackey of acckeyList" [value]="ackey.code">
@@ -47,25 +47,25 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.materialNo'"></mat-label>
               <input matInput formControlName="materialNo"
                 maxlength="50" appFocusOnEnter tabIndex="5">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.quantity'"></mat-label>
               <input matInput formControlName="quantity"
                 maxlength="50" appFocusOnEnter tabIndex="6">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.serialNumber'"></mat-label>
               <input matInput formControlName="serialNumber"
                 maxlength="50" appFocusOnEnter tabIndex="7">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'subassets.branch' | translate }}</mat-label>
               <mat-select formControlName="branch" appFocusOnEnter tabIndex="8">
                 <mat-option *ngFor="let branch of branchesList" [value]="branch.branchCode">
@@ -74,7 +74,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'subassets.profitCenter' | translate }}</mat-label>
               <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="9">
                 <mat-option *ngFor="let profit of profitCenterList" [value]="profit.code">
@@ -83,7 +83,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'subassets.segment' | translate }}</mat-label>
               <mat-select formControlName="segment" appFocusOnEnter tabIndex="10">
                 <mat-option *ngFor="let seg of segmentList" [value]="seg.id">
@@ -92,7 +92,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'subassets.division' | translate }}</mat-label>
               <mat-select formControlName="division" appFocusOnEnter tabIndex="11">
                 <mat-option *ngFor="let div of divisionsList" [value]="div.code">
@@ -101,7 +101,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'subassets.plant' | translate }}</mat-label>
               <mat-select formControlName="plant" appFocusOnEnter tabIndex="12">
                 <mat-option *ngFor="let pnt of plantList" [value]="pnt.plantCode">
@@ -110,7 +110,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'subassets.location' | translate }}</mat-label>
               <mat-select formControlName="location" appFocusOnEnter tabIndex="13">
                 <mat-option *ngFor="let loc of locationList" [value]="loc.locationId">
@@ -119,19 +119,19 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.room'"></mat-label>
               <input matInput formControlName="room" maxlength="50"
                 appFocusOnEnter tabIndex="14">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.supplier'"></mat-label>
               <input matInput formControlName="supplier"
                 maxlength="50" appFocusOnEnter tabIndex="15">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.acquisitionDate'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" 
                 formControlName="acquisitionDate" appFocusOnEnter tabIndex="16">
@@ -139,19 +139,19 @@
               <mat-datepicker #picker3></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.usefulLifeInYears'"></mat-label>
               <input matInput 
                 formControlName="usefulLifeInYears" maxlength="5" appFocusOnEnter tabIndex="17">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.usefullLifeInDays'"></mat-label>
               <input matInput 
                 formControlName="usefullLifeInDays" maxlength="6" appFocusOnEnter tabIndex="18">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'mainassetmaster.depreciationData'"></mat-label>
               <mat-select formControlName="depreciationData" appFocusOnEnter tabIndex="19">
                 <mat-option *ngFor="let dpc of dpList" [value]="dpc.code">
@@ -160,7 +160,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'subassets.depreciationArea' | translate }}</mat-label>
               <mat-select formControlName="depreciationArea" appFocusOnEnter tabIndex="20">
                 <mat-option *ngFor="let dpr of dpareaList" [value]="dpr.code">
@@ -169,7 +169,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.depreciationStartDate'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" 
                 formControlName="depreciationStartDate" appFocusOnEnter tabIndex="21">
@@ -193,7 +193,7 @@
     </form>
   </mat-tab-group>
 
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>
