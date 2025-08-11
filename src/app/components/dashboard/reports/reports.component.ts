@@ -41,6 +41,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     DatePipe
   ]
 })
+
 export class ReportsComponent {
 
   tableData: any;
@@ -154,8 +155,8 @@ export class ReportsComponent {
               if (this.routeParam == 'AttendanceProcess') {
                 res.response[this.getComponentData.listName].forEach((a: any) => {
                   a.action = [
-  { id: 'Edit', type: 'edit' }
-];
+                    { id: 'Edit', type: 'edit' }
+                  ];
                 })
               }
               this.tableData = res.response[this.getComponentData.listName];
@@ -266,14 +267,12 @@ export class ReportsComponent {
       fromDate: [null, [Validators.required]],
       toDate: [null, [Validators.required]],
       vendorCode: ['-1']
-
     });
+    this.modelFormData.controls['companyCode'].disable();
     this.setValidator();
   }
 
-
   setValidator() {
-
     if (this.routeParam == 'salaryprocess') {
       this.modelFormData.controls['selected'].addValidators(Validators.required);
       this.modelFormData.controls['selected'].updateValueAndValidity();
@@ -312,7 +311,6 @@ export class ReportsComponent {
         });
   }
 
-
   getmaterialData() {
     const getmaterialUrl = String.Join('/', this.apiConfigService.getMaterialList);
     this.apiService.apiGetRequest(getmaterialUrl)
@@ -344,7 +342,6 @@ export class ReportsComponent {
           }
         });
   }
-
 
   getsuppliercodeList() {
     let obj = JSON.parse(localStorage.getItem("user"));
@@ -408,7 +405,6 @@ export class ReportsComponent {
         });
   }
 
-
   getEmployeesList() {
     let obj = JSON.parse(localStorage.getItem("user"));
     const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
@@ -438,6 +434,8 @@ export class ReportsComponent {
 
   reset() {
     this.modelFormData.reset();
+    let obj = JSON.parse(localStorage.getItem("user"));
+    this.modelFormData.patchValue({ companyCode: obj.companyCode  });
     this.setValidator();
   }
 

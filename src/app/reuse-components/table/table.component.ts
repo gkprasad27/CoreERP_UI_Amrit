@@ -63,7 +63,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
   highlightedRows = [];
   columnDefinitions = [];
   filterColData = [];
