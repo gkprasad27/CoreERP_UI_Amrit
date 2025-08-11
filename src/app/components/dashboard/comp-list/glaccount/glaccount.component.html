@@ -6,9 +6,9 @@
 
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field [ngClass]="{ 'ng--valid': formControls.chartAccount.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.chartAccount.valid }">
           <mat-label [translate]="'glaccount.chartAccount'"></mat-label>
           <mat-select formControlName="chartAccount" appFocusOnEnter tabIndex="1">
             <mat-option *ngFor="let coa of coaList" [value]="coa.code">
@@ -20,7 +20,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field [ngClass]="{ 'ng--valid': formControls.company.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.company.valid }">
           <mat-label [translate]="'glaccount.company'"></mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
             <mat-option *ngFor="let comp of companyList" [value]="comp.id">
@@ -32,7 +32,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field [ngClass]="{ 'ng--valid': formControls.accGroup.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.accGroup.valid }">
           <mat-label>{{'glsubgroups.nature' | translate }} </mat-label>
           <mat-select formControlName="accGroup" (selectionChange)="enableAccount()">
             <mat-option *ngFor="let accgrp of glAccgrpList" [value]="accgrp.groupCode">
@@ -44,7 +44,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.accountNumber.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.accountNumber.valid }">
           <mat-label [translate]="'glaccount.accountNumber'"></mat-label>
           <input matInput formControlName="accountNumber"
             maxlength="7" (change)="onChange($event)" appFocusOnEnter tabIndex="6">
@@ -53,13 +53,13 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'glaccount.glaccountName'"></mat-label>
           <input matInput formControlName="glaccountName"
             maxlength="50" appFocusOnEnter tabIndex="7">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'glaccount.currency' | translate }}</mat-label>
           <mat-select formControlName="currency" appFocusOnEnter tabIndex="9">
             <mat-option>None</mat-option>
@@ -69,7 +69,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'glaccount.taxCategory'"></mat-label>
           <mat-select formControlName="taxCategory" appFocusOnEnter tabIndex="10"
             (selectionChange)="onCategoryChange()">
@@ -80,7 +80,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'glaccount.bankKey' | translate }}</mat-label>
           <mat-select formControlName="bankKey" appFocusOnEnter tabIndex="11">
             <mat-option>None</mat-option>
@@ -90,13 +90,13 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'glaccount.legacyGl'"></mat-label>
           <input matInput formControlName="legacyGl" maxlength="50"
             appFocusOnEnter tabIndex="12">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'glaccount.costElementCategory'"></mat-label>
           <mat-select formControlName="costElementCategory" appFocusOnEnter tabIndex="13">
             <mat-option>None</mat-option>
@@ -106,7 +106,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'glaccount.controlAccount'"></mat-label>
           <mat-select formControlName="controlAccount" appFocusOnEnter tabIndex="14">
             <mat-option>None</mat-option>
@@ -116,7 +116,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'glaccount.consolidatedAccount'"></mat-label>
           <mat-select formControlName="consolidatedAccount" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
@@ -126,17 +126,17 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-slide-toggle class="form-element mb-3" formControlName="noPostingAllowed" appFocusOnEnter tabIndex="15"
+        <mat-slide-toggle class="d-flex align-items-center col-1 mb-3" formControlName="noPostingAllowed" appFocusOnEnter tabIndex="15"
           style="vertical-align: bottom; margin-left: 5px;">
           No Posting Allowed
         </mat-slide-toggle>
 
-        <mat-slide-toggle class="form-element mb-3" formControlName="clearingAccount" appFocusOnEnter tabIndex="16"
+        <mat-slide-toggle class="d-flex align-items-center col-1 mb-3" formControlName="clearingAccount" appFocusOnEnter tabIndex="16"
           style="vertical-align: bottom;margin-left: 20px;">
           Clearing Account
         </mat-slide-toggle>
 
-        <mat-slide-toggle class="form-element mb-3" formControlName="relevantCashFlow" appFocusOnEnter tabIndex="17"
+        <mat-slide-toggle class="d-flex align-items-center col-1 mb-3" formControlName="relevantCashFlow" appFocusOnEnter tabIndex="17"
           style="vertical-align: bottom;margin-left: 20px;">
           Relevant Cash Flow
         </mat-slide-toggle>
@@ -146,7 +146,7 @@
     </form>
   </mat-card-content>
 
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

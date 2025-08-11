@@ -7,9 +7,9 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'process.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -19,7 +19,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'process.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
@@ -29,7 +29,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'process.costUnit' | translate }}</mat-label>
           <mat-select formControlName="costUnit" appFocusOnEnter tabIndex="3" (selectionChange)="costunitSelect()">
             <mat-option>None</mat-option>
@@ -39,13 +39,13 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'process.material'"></mat-label>
           <input matInput formControlName="material" maxlength="50"
             appFocusOnEnter tabIndex="4" readonly=true>
         </mat-form-field>
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.processKey.valid && formControls.processKey.status != 'DISABLED',
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.processKey.valid && formControls.processKey.status != 'DISABLED',
            'ng--invalid': !formControls.processKey.valid  && formControls.processKey.status != 'DISABLED' }">
           <mat-label [translate]="'process.processKey'"></mat-label>
           <input matInput formControlName="processKey" maxlength="5"
@@ -54,13 +54,13 @@
             [ngClass]="{ 'ng--invalid': !formControls.processKey.valid  }">Process Key is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'process.nextProcess'"></mat-label>
           <input matInput formControlName="nextProcess"
             maxlength="50" appFocusOnEnter tabIndex="7">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'process.byProduct' | translate }}</mat-label>
           <mat-select formControlName="byProduct" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
@@ -70,7 +70,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'process.jointProduct' | translate }}</mat-label>
           <mat-select formControlName="jointProduct" appFocusOnEnter tabIndex="9">
             <mat-option>None</mat-option>
@@ -80,25 +80,25 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'process.normalLossIn'"></mat-label>
           <input matInput formControlName="normalLossIn"
             maxlength="7" appFocusOnEnter tabIndex="10">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'process.abnormalLossIn'"></mat-label>
           <input matInput formControlName="abnormalLossIn"
             maxlength="7" appFocusOnEnter tabIndex="11">
         </mat-form-field>
 
-        <mat-form-field floatLabel="always" class="remove-boader-bottom" style="vertical-align: bottom; margin-left: 5px;">
+        <mat-form-field floatLabel="always" class="col-1" style="vertical-align: bottom; margin-left: 5px;">
           <mat-label> {{'process.wipcalculation' | translate }}</mat-label>
           <mat-slide-toggle formControlName="wipcalculation"></mat-slide-toggle>
           <textarea matInput hidden></textarea>
         </mat-form-field>
 
-        <mat-form-field floatLabel="always" class="remove-boader-bottom" style="vertical-align: bottom; margin-left: 5px;">
+        <mat-form-field floatLabel="always" class="col-1" style="vertical-align: bottom; margin-left: 5px;">
           <mat-label> {{'process.reWork' | translate }}</mat-label>
           <mat-slide-toggle formControlName="reWork"></mat-slide-toggle>
           <textarea matInput hidden></textarea>
@@ -109,7 +109,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

@@ -17,9 +17,9 @@
 
         <form [formGroup]="modelFormData" autocomplete="off">
 
-            <div class="d--flex">
+            <div class="row">
 
-                <mat-form-field>
+                <mat-form-field class="col-3">
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" placeholder="{{'empAttendance.dateTimeStamp' | translate }}"
                         formControlName="dateTimeStamp">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -31,7 +31,7 @@
                     </mat-error>
                 </mat-form-field>
 
-                <div class="timepicker">
+                <div class="timepicker col-3">
                     <input [ngxMatTimepicker]="picker12" format="24"
                         placeholder="{{'empAttendance.logDatetime' | translate }}" formControlName="logDatetime">
                     <ngx-mat-timepicker #picker12></ngx-mat-timepicker>
@@ -62,7 +62,7 @@
     </mat-card-content>
 
     
-    <div class="form-element p-2 d-flex justify-content-end">
+    <div class="form-element mt-2 d-flex justify-content-end">
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
             {{ 'COMMON.SAVE' | translate }}
         </button>

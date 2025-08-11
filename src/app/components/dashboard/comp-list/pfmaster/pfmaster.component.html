@@ -8,8 +8,8 @@
     <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
        <form [formGroup]="modelFormData" autocomplete="off">
   
-        <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.pfName.valid }" >
+        <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.pfName.valid }" >
           <input matInput placeholder="{{'pfmaster.pfName' | translate }}" disabled formControlName="pfName" appFocusOnEnter tabIndex="1">
           <mat-error *ngIf="formControls.pfName.errors" class="help-block">
             <div *ngIf="formControls.pfName.errors.required">PF Name is required </div>
@@ -17,7 +17,7 @@
   
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'pfmaster.pfType' | translate }}</mat-label>
           <mat-select formControlName="pfType">
             <mat-option *ngFor="let pfType of pfType" [value]="pfType.value">
@@ -26,21 +26,21 @@
           </mat-select>
         </mat-form-field>
   
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.employeeContribution.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.employeeContribution.valid }">
           <input matInput placeholder="{{'pfmaster.employeeContribution' | translate }}" formControlName="employeeContribution" appFocusOnEnter tabIndex="2" type="number">
           <mat-error *ngIf="formControls.employeeContribution.errors" class="help-block">
             <div *ngIf="formControls.employeeContribution.errors.required">Employee Contribution is required and Number only Allow</div>
           </mat-error>
         </mat-form-field>
   
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.employerContribution.valid }" >
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.employerContribution.valid }" >
           <input matInput placeholder="{{'pfmaster.employerContribution' | translate }}" formControlName="employerContribution" appFocusOnEnter tabIndex="3" type="number">
           <mat-error *ngIf="formControls.employerContribution.errors" class="help-block">
             <div *ngIf="formControls.employerContribution.errors.required">Employer Contribution is required and Number only Allow</div>
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>Limit</mat-label>
           <mat-select formControlName="limit" placeholder="Limit">
             <mat-option *ngFor="let limit of limit" [value]="limit.value">
@@ -49,7 +49,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>Contribution Type</mat-label>
           <mat-select formControlName="contributionType" placeholder="Contribution Type" >
             <mat-option *ngFor="let contributionType of contributionType" [value]="contributionType.value">
@@ -57,7 +57,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'pfmaster.companyName'"></mat-label>
           <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="5">
             <mat-option *ngFor="let comp of companyList" [value]="comp.id">
@@ -65,7 +65,7 @@
             </mat-option>
           </mat-select>
           </mat-form-field>
-          <mat-form-field class="form-element" >
+          <mat-form-field class="col-3" >
             <input matInput placeholder="{{'pfmaster.Amount' | translate }}" formControlName="amount" appFocusOnEnter tabIndex="6">
           </mat-form-field>
       </div>
@@ -76,12 +76,12 @@
       </form>
   
     </mat-card-content>
-    <div class="form-element p-2 d-flex justify-content-end">
-      <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+    <div class="form-element mt-2 d-flex justify-content-end">
+      <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
         
         {{ 'COMMON.CANCEL' | translate }}
       </button>
-      <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" >
+      <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" >
         
         {{ 'COMMON.SAVE' | translate }}
       </button>

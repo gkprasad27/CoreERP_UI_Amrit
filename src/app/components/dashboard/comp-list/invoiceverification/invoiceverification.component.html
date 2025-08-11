@@ -8,8 +8,8 @@
 
         <mat-card-content class="py-5 p-2 m-0">
 
-          <div class="d--flex">
-            <mat-form-field class="form-element">
+          <div class="row">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'invoiceverification.purchaseOrderNo'"></mat-label>
               <mat-select formControlName="purchaseOrderNo">
                 <mat-option>None</mat-option>
@@ -19,7 +19,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'invoiceverification.company'"></mat-label>
               <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -29,7 +29,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'invoiceverification.plant'"></mat-label>
               <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
                 <mat-option>None</mat-option>
@@ -39,7 +39,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label>{{ 'invoiceverification.branch' | translate }}</mat-label>
               <mat-select formControlName="branch">
                 <mat-option>None</mat-option>
@@ -50,7 +50,7 @@
             </mat-form-field>
 
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'invoiceverification.profitCenter' | translate }}</mat-label>
               <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="6">
                 <mat-option>None</mat-option>
@@ -61,7 +61,7 @@
             </mat-form-field>
 
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'invoiceverification.supplierCode'"></mat-label>
               <mat-select formControlName="supplierCode" appFocusOnEnter tabIndex="2">
                 <mat-option>None</mat-option>
@@ -71,22 +71,22 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'invoiceverification.description'"></mat-label>
               <input matInput formControlName="description" appFocusOnEnter tabIndex="5">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'invoiceverification.invoiceAmount'"></mat-label>
               <input matInput formControlName="invoiceAmount" appFocusOnEnter tabIndex="5">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'invoiceverification.invoiceReferenceNo'"></mat-label>
               <input matInput formControlName="invoiceReferenceNo" appFocusOnEnter tabIndex="5">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'invoiceverification.invoiceDate'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="invoiceDate"
                 appFocusOnEnter tabIndex="3">
@@ -94,12 +94,12 @@
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'invoiceverification.grnno'"></mat-label>
               <input matInput formControlName="grnno" appFocusOnEnter tabIndex="5">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'invoiceverification.grndate'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="grndate"
                 appFocusOnEnter tabIndex="3">
@@ -148,11 +148,11 @@
 
   </mat-tab-group>
 
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="reset()" appFocusOnEnter tabIndex="21">
       {{ 'COMMON.RESET' | translate }}
     </button>
-    <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();" tabIndex="21">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="back();" tabIndex="21">
       {{ 'COMMON.BACK' | translate }}
     </button>
     <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter

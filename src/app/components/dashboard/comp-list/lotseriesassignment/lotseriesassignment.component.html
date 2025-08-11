@@ -7,9 +7,9 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field [ngClass]="{ 'ng--valid': formControls.lotSeries.valid && formControls.lotSeries.status != 'DISABLED', 
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.lotSeries.valid && formControls.lotSeries.status != 'DISABLED', 
           'ng--invalid': !formControls.lotSeries.valid && formControls.lotSeries.status != 'DISABLED'}">
           <mat-label>{{'lotseriesassignment.lotSeries' | translate }}</mat-label>
           <mat-select formControlName="lotSeries" appFocusOnEnter tabIndex="1">
@@ -23,7 +23,7 @@
             Lot Series is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.company.valid, 'ng--invalid': !formControls.company.valid  }">
           <mat-label>{{'lotseriesassignment.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
@@ -36,7 +36,7 @@
             Company is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'lotseriesassignment.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -46,7 +46,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'lotseriesassignment.materialType' | translate }}</mat-label>
           <mat-select formControlName="materialType" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -61,7 +61,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
       {{ 'COMMON.CANCEL' | translate }}

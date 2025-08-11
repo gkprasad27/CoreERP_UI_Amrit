@@ -6,8 +6,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.leaveCode.valid }">
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.leaveCode.valid }">
           <input matInput placeholder="Leavecode" formControlName="leaveCode" appFocusOnEnter tabIndex="1">
           <mat-error *ngIf="formControls.leaveCode.errors" class="help-block">
             <div *ngIf="formControls.leaveCode.errors.required">Code is required </div>
@@ -15,29 +15,29 @@
 
         </mat-form-field>
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.leaveName.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.leaveName.valid }">
           <input matInput placeholder="Name" formControlName="leaveName" appFocusOnEnter tabIndex="2">
           <mat-error *ngIf="formControls.leaveName.errors" class="help-block">
             <div *ngIf="formControls.leaveName.errors.required">Name is required</div>
           </mat-error>
         </mat-form-field>
-        <!--<mat-form-field class="form-element">
+        <!--<mat-form-field class="col-3">
           <input matInput placeholder="leaveMinLimit" formControlName="leaveMinLimit" appFocusOnEnter tabIndex="3">
         </mat-form-field>-->
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.leaveMinLimit.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.leaveMinLimit.valid }">
           <input matInput placeholder="leaveMinLimit" formControlName="leaveMinLimit" appFocusOnEnter tabIndex="3">
           <mat-error *ngIf="formControls.leaveMinLimit.errors" class="help-block">
             <div *ngIf="formControls.leaveMinLimit.errors.required"> only  Nummbers are allowed</div>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.leaveMaxLimit.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.leaveMaxLimit.valid }">
           <input matInput placeholder="MaxLimit" formControlName="leaveMaxLimit" appFocusOnEnter tabIndex="4">
           <mat-error *ngIf="formControls.leaveMaxLimit.errors" class="help-block">
             <div *ngIf="formControls.leaveMaxLimit.errors.required"> only  Nummbers are allowed</div>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'leavetype.companyName'"></mat-label>
           <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="5">
             <mat-option *ngFor="let comp of companyList" [value]="comp.id">
@@ -48,18 +48,18 @@
             <div *ngIf="formControls.company.errors.required">Company is required </div>
           </mat-error> -->
         </mat-form-field>
-        <!-- <mat-form-field class="form-element">
+        <!-- <mat-form-field class="col-3">
          <input matInput placeholder="companyCode" formControlName="companyCode" appFocusOnEnter tabIndex="4">
         </mat-form-field> -->
       </div>
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+      <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
           {{ 'COMMON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
                 tabIndex="5">
 
           {{ 'COMMON.SAVE' | translate }}

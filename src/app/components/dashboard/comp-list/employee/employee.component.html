@@ -3,9 +3,9 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.employeeCode.valid&& formControls.employeeCode.status != 'DISABLED', 
                    'ng--invalid': !formControls.employeeCode.valid && formControls.employeeCode.status != 'DISABLED' }">
           <mat-label [translate]="'employee.employeeCode'"></mat-label>
@@ -14,12 +14,12 @@
             [ngClass]="{ 'ng--invalid': !formControls.employeeCode.valid  }">Employee is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.employeeName'"></mat-label>
           <input matInput placeholder="employeeName" formControlName="employeeName" appFocusOnEnter tabIndex="4">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'employee.branchCode' | translate }}</mat-label>
           <mat-select formControlName="branchCode" appFocusOnEnter tabIndex="10">
             <mat-option *ngFor="let branch of branchesList" [value]="branch.branchCode">
@@ -28,7 +28,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'employee.companyCode' | translate }}</mat-label>
           <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -38,7 +38,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.designationId'"></mat-label>
           <mat-select formControlName="designationId" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -47,14 +47,14 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.dob'"></mat-label>
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="dob" appFocusOnEnter
             tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.maritalStatus'"></mat-label>
           <mat-select formControlName="maritalStatus" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -62,7 +62,7 @@
             <mat-option value="married"> Married</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.gender'"></mat-label>
           <mat-select formControlName="gender" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -70,7 +70,7 @@
             <mat-option value="female"> Female</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.qualification'"></mat-label>
           <mat-select formControlName="qualification" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -79,45 +79,45 @@
             <mat-option value="post graduate"> Post Graduate</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.address'"></mat-label>
           <input matInput formControlName="address" appFocusOnEnter tabIndex="8">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.phoneNumber'"></mat-label>
           <input matInput formControlName="phoneNumber" appFocusOnEnter tabIndex="9">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.mobileNumber'"></mat-label>
           <input matInput formControlName="mobileNumber" appFocusOnEnter tabIndex="10">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.email'"></mat-label>
           <input matInput formControlName="email" appFocusOnEnter tabIndex="11">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.joiningDate'"></mat-label>
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="joiningDate"
             appFocusOnEnter tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.releavingDate'"></mat-label>
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="releavingDate"
             appFocusOnEnter tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>
         </mat-form-field>
-        <mat-slide-toggle class="form-element col-2 d-flex" formControlName="isActive" appFocusOnEnter tabIndex="17"
+        <mat-slide-toggle class="col-1 d-flex" formControlName="isActive" appFocusOnEnter tabIndex="17"
           style="vertical-align: bottom;margin-left: 20px;">
           {{ 'employee.isActive' | translate }}
         </mat-slide-toggle>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.narration'"></mat-label>
           <input matInput placeholder="narration" formControlName="narration" appFocusOnEnter tabIndex="15">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.bloodGroup'"></mat-label>
           <mat-select formControlName="bloodGroup" appFocusOnEnter tabIndex="16">
             <mat-option>None</mat-option>
@@ -131,16 +131,16 @@
             <mat-option value="A-"> A-</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.passportNo'"></mat-label>
           <input matInput placeholder="passportNo" formControlName="passportNo" appFocusOnEnter tabIndex="17">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.accessCardNumber'"></mat-label>
           <input matInput placeholder="accessCardNumber" formControlName="accessCardNumber" appFocusOnEnter
             tabIndex="17">
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'employee.bankName' | translate }}</mat-label>
           <mat-select formControlName="bankName" appFocusOnEnter tabIndex="11">
             <mat-option>None</mat-option>
@@ -149,12 +149,12 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.bankAccountNumber'"></mat-label>
           <input matInput placeholder="bankAccountNumber" formControlName="bankAccountNumber" appFocusOnEnter
             tabIndex="29">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.employeeType'"></mat-label>
           <mat-select formControlName="employeeType" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -167,19 +167,19 @@
             <mat-option value="Interns"> Interns</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.iFSCCode'"></mat-label>
           <input matInput  formControlName="ifscCode" appFocusOnEnter tabIndex="29">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.panNumber'"></mat-label>
           <input matInput placeholder="panNumber" formControlName="panNumber" appFocusOnEnter tabIndex="29">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.aadharNumber'"></mat-label>
           <input matInput placeholder="aadharNumber" formControlName="aadharNumber" appFocusOnEnter tabIndex="29">
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'employee.recomendedBy' | translate }}</mat-label>
           <mat-select formControlName="recomendedBy" appFocusOnEnter tabIndex="20">
             <mat-option>None</mat-option>
@@ -188,7 +188,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'employee.reportedBy' | translate }}</mat-label>
           <mat-select formControlName="reportedBy" appFocusOnEnter tabIndex="20">
             <mat-option>None</mat-option>
@@ -197,7 +197,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'employee.approvedBy' | translate }}</mat-label>
           <mat-select formControlName="approvedBy" appFocusOnEnter tabIndex="20">
             <mat-option>None</mat-option>
@@ -206,11 +206,11 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.pfNumber'"></mat-label>
           <input matInput placeholder="pfNumber" formControlName="pfNumber" appFocusOnEnter tabIndex="29">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'employee.esiNumber'"></mat-label>
           <input matInput placeholder="esiNumber" formControlName="esiNumber" appFocusOnEnter tabIndex="29">
         </mat-form-field>
@@ -218,7 +218,7 @@
       </div>
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
+      <div class="form-element mt-2 d-flex justify-content-end">
         <button mat-raised-button class="button-color-red text-white mx-1" [translate]="'COMMON.CANCEL'"
           (click)="cancel()">Cancel</button>
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" [translate]="'COMMON.SAVE'"

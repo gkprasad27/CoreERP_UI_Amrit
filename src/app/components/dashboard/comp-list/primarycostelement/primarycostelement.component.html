@@ -7,10 +7,10 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
 
-        <mat-form-field
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.company.valid, 'ng--invalid': !formControls.company.valid  }">
           <mat-label>{{'primarycostelement.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
@@ -26,7 +26,7 @@
 
 
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'primarycostelement.usage' | translate }}</mat-label>
           <mat-select formControlName="usage" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
@@ -36,7 +36,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'primarycostelement.element' | translate }}</mat-label>
           <mat-select formControlName="element" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
@@ -46,7 +46,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'primarycostelement.uom' | translate }}</mat-label>
           <mat-select formControlName="uom" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -56,7 +56,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-slide-toggle formControlName="qty" (change)="approveOrReject($event.checked)">
+        <mat-slide-toggle class="col-1 d-flex align-item-center" formControlName="qty" (change)="approveOrReject($event.checked)">
           {{(modelFormData.get('qty').value != null) ? 'Quantity' : 'Reject'}}
         </mat-slide-toggle>
 
@@ -65,7 +65,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
       {{ 'COMMON.CANCEL' | translate }}

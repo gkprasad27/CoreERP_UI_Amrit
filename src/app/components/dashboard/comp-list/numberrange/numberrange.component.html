@@ -7,8 +7,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid &&formControls.code.status != 'DISABLED',
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid &&formControls.code.status != 'DISABLED',
            'ng--invalid': !formControls.code.valid  &&formControls.code.status != 'DISABLED' }">
           <mat-label [translate]="'numberrange.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4"
@@ -19,24 +19,24 @@
 
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'numberrange.rangeFrom'"></mat-label>
           <input matInput formControlName="rangeFrom"
             maxlength="7" (change)="validationcode()" appFocusOnEnter tabIndex="3">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'numberrange.rangeTo'"></mat-label>
           <input matInput formControlName="rangeTo"
             (change)="validationcode()" maxlength="7" appFocusOnEnter tabIndex="4">
         </mat-form-field>
 
-        <mat-checkbox class="mt-5" formControlName="nonNumaric">non Numaric</mat-checkbox>
+        <mat-checkbox class="col-1 d-flex align-item-center" formControlName="nonNumaric">non Numaric</mat-checkbox>
       </div>
       <mat-divider></mat-divider>
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
       {{ 'COMMON.CANCEL' | translate }}

@@ -6,10 +6,10 @@
 
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
+      <div class="row">
 
  
-        <mat-form-field [ngClass]="{ 'ng--valid': formControls.userName.valid, 'ng--invalid': !formControls.userName.valid  }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.userName.valid, 'ng--invalid': !formControls.userName.valid  }">
           <mat-label [translate]="'erpuser.userName'"></mat-label>
           <mat-select formControlName="userName">
             <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
@@ -21,7 +21,7 @@
         </mat-form-field>
 
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.password.valid, 'ng--invalid': !formControls.password.valid  }">
           <mat-label [translate]="'erpuser.password'"></mat-label>
           <input matInput formControlName="password" maxlength="50"
@@ -30,7 +30,7 @@
             Password is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'erpuser.role'"></mat-label>
           <mat-select formControlName="role" appFocusOnEnter tabIndex="3">
             <mat-option *ngFor="let role of RolesList" [value]="role.roleId">
@@ -39,7 +39,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'erpuser.companyCode'"></mat-label>
           <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="5">
             <mat-option *ngFor="let comp of companyList" [value]="comp.companyCode">
@@ -48,7 +48,7 @@
           </mat-select>
         </mat-form-field>
 
-        <div class="d-flex align-items-center p-2">
+        <div class="col-1 d-flex align-items-center p-2">
           <mat-slide-toggle formControlName="active" (change)="approveOrReject($event.checked)">
             {{(modelFormData.get('active').value != null) ? 'Active' : 'InActive '}}
           </mat-slide-toggle>
@@ -59,7 +59,7 @@
     </form>
   </mat-card-content>
 
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

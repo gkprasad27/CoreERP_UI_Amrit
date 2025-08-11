@@ -7,8 +7,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.bpgroup.valid &&formControls.bpgroup.status != 'DISABLED',
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.bpgroup.valid &&formControls.bpgroup.status != 'DISABLED',
            'ng--invalid': !formControls.bpgroup.valid &&formControls.bpgroup.status != 'DISABLED'}">
           <mat-label [translate]="'partnergroup.bpgroup'"></mat-label>
           <input matInput formControlName="bpgroup" maxlength="5"
@@ -18,7 +18,7 @@
             Code is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
           <mat-label [translate]="'partnergroup.description'"></mat-label>
           <input matInput formControlName="description"
@@ -27,7 +27,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'partnergroup.bptype' | translate }}</mat-label>
           <mat-select formControlName="bptype" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -37,7 +37,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'partnergroup.ext1'"></mat-label>
           <input matInput formControlName="ext1" maxlength="7"
             appFocusOnEnter tabIndex="4">
@@ -48,7 +48,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

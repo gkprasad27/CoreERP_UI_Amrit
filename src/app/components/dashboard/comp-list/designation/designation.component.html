@@ -6,10 +6,10 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
         
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.designationName.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.designationName.valid }">
           <input matInput placeholder="{{'designation.designationName' | translate }}" formControlName="designationName"
                  appFocusOnEnter tabIndex="1">
           <mat-error *ngIf="formControls.designationName.errors" class="help-block">
@@ -17,33 +17,33 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'designation.leaveDays' | translate }}"
                  formControlName="leaveDays" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'designation.advanceAmount' | translate }}"
                  formControlName="advanceAmount" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'designation.narration' | translate }}"
                  formControlName="narration" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'designation.extraDate' | translate }}" formControlName="extraDate">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
 
-        <!-- <mat-form-field class="form-element">
+        <!-- <mat-form-field class="col-3">
           <input matInput placeholder="{{'designation.extra1' | translate }}"
                  formControlName="extra1" appFocusOnEnter tabIndex="5">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'designation.extra2' | translate }}"
                  formControlName="extra2" appFocusOnEnter tabIndex="6">
         </mat-form-field> -->
@@ -51,14 +51,12 @@
       </div>
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white m-1" (click)="cancel()">
-
+      <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
           {{ 'COMMON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white m-1" (click)="save()"
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
                 appFocusOnEnter tabIndex="5">
-
           {{ 'COMMON.SAVE' | translate }}
         </button>
       </div>

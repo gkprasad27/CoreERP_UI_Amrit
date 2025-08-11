@@ -7,9 +7,9 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.orderType.valid && formControls.orderType.status != 'DISABLED',
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.orderType.valid && formControls.orderType.status != 'DISABLED',
            'ng--invalid': !formControls.orderType.valid && formControls.orderType.status != 'DISABLED'  }">
           <mat-label [translate]="'ordertype.orderType'"></mat-label>
           <input matInput formControlName="orderType" maxlength="5"
@@ -19,7 +19,7 @@
             Order Type is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
           <mat-label [translate]="'ordertype.description'"></mat-label>
           <input matInput formControlName="description"
@@ -28,7 +28,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'ordertype.printText' | translate }}</mat-label>
           <mat-select formControlName="printText" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -37,7 +37,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'ordertype.natureofOrder' | translate }}</mat-label>
           <mat-select formControlName="natureofOrder" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -47,19 +47,19 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'ordertype.numberSeriesFrom'"></mat-label>
           <input matInput formControlName="numberSeriesFrom"
             maxlength="7" appFocusOnEnter tabIndex="5">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'ordertype.numberSeriesTo'"></mat-label>
           <input matInput formControlName="numberSeriesTo"
             maxlength="7" appFocusOnEnter tabIndex="6">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'ordertype.costUnit' | translate }}</mat-label>
           <mat-select formControlName="costUnit" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
@@ -74,7 +74,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
       {{ 'COMMON.CANCEL' | translate }}

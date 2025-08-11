@@ -6,22 +6,23 @@
 
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
+      <div class="row">
 
-        <div id="by" class="multiselect-dropdown-list" *ngIf="dropdownSettings" >
-            <ng-multiselect-dropdown placeholder="{{ 'leaveopeningbalance.empCode' | translate }}"
+        <div class="multiselect-dropdown-list floating-dropdown col-3" [class.filled]="modelFormData.value?.empCode?.length > 0" *ngIf="dropdownSettings" >
+          <label> {{ 'leaveopeningbalance.empCode' | translate }} </label>
+            <ng-multiselect-dropdown placeholder=" "
               formControlName="empCode" [settings]="dropdownSettings" [data]="getProductByProductCodeArray">
             </ng-multiselect-dropdown>
         </div>
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.year.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.year.valid }">
           <input matInput placeholder="{{'leaveopeningbalance.year' | translate }}" formControlName="year" appFocusOnEnter tabIndex="2">
           <mat-error *ngIf="formControls.year.errors" class="help-block">
             <div *ngIf="formControls.year.errors.required">Year is required</div>
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'leaveopeningbalance.leaveCode'"></mat-label>
           <mat-select formControlName="leaveCode" appFocusOnEnter tabIndex="5">
             <mat-option *ngFor="let comp of companyList" [value]="comp.id">
@@ -45,31 +46,31 @@
           </mat-error>
         </mat-form-field> -->
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.opbal.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.opbal.valid }">
           <input matInput placeholder="{{'leaveopeningbalance.opbal' | translate }}" formControlName="opbal" appFocusOnEnter tabIndex="4">
           <mat-error *ngIf="formControls.opbal.errors" class="help-block">
             <div *ngIf="formControls.opbal.errors.required">Only Numbers are allowed </div>
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.balance.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.balance.valid }">
           <input matInput placeholder="{{'leaveopeningbalance.balance' | translate }}" formControlName="balance" appFocusOnEnter tabIndex="5" type="number">
           <mat-error *ngIf="formControls.balance.errors" class="help-block">
             <div *ngIf="formControls.balance.errors.required">Only Numbers are allowed</div>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'leaveopeningbalance.remarks' | translate }}" formControlName="remarks" appFocusOnEnter tabIndex="6">
         </mat-form-field>
 
-        <!--<mat-form-field class="form-element">
+        <!--<mat-form-field class="col-3">
     <input matInput placeholder="{{'leaveopeningbalance.compCode' | translate }}" formControlName="compCode" appFocusOnEnter tabIndex="7">
   </mat-form-field>-->
 
       </div>
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
+      <div class="form-element mt-2 d-flex justify-content-end">
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
           {{ 'COMMON.CANCEL' | translate }}

@@ -7,9 +7,9 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field [ngClass]="{ 'ng--valid': formControls.numberRange.valid&& formControls.numberRange.status != 'DISABLED',
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.numberRange.valid&& formControls.numberRange.status != 'DISABLED',
            'ng--invalid': !formControls.numberRange.valid && formControls.numberRange.status != 'DISABLED' }">
           <mat-label>{{'requisitionnumberassignment.numberRange' | translate }}</mat-label>
           <mat-select formControlName="numberRange" appFocusOnEnter tabIndex="1">
@@ -22,7 +22,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.numberRange.valid  }"> Number Range is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.company.valid, 'ng--invalid': !formControls.company.valid  }">
           <mat-label>{{'requisitionnumberassignment.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
@@ -35,7 +35,7 @@
             Company is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'requisitionnumberassignment.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -45,7 +45,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'requisitionnumberassignment.department' | translate }}</mat-label>
           <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -60,7 +60,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
       {{ 'COMMON.CANCEL' | translate }}

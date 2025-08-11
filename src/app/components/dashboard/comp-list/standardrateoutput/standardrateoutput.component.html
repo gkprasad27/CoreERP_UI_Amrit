@@ -10,9 +10,9 @@
       
       </h6>
 
-      <div class="d--flex p-1 mat-form-field-height">
+      <div class="row p-1">
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
            'ng--invalid': !formControls.code.valid&& formControls.code.status != 'DISABLED'  }">
           <mat-label [translate]="'standardrateoutput.code'"></mat-label>
           <input matInput formControlName="code" maxlength="15" appFocusOnEnter tabIndex="1">
@@ -21,7 +21,7 @@
 
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'standardrateoutput.qctype' | translate }}</mat-label>
           <mat-select formControlName="type" appFocusOnEnter tabIndex="3" (selectionChange)="getCommitmentList(formData.value.type)">
             <mat-option>None</mat-option>
@@ -33,7 +33,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.type.valid  }">Type is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'qcparamconfiguration.product' | translate }}</mat-label>
           <mat-select formControlName="product" appFocusOnEnter tabIndex="3" (selectionChange)="onProductChange()">
               <mat-option>None</mat-option>
@@ -43,8 +43,9 @@
           </mat-select>
       </mat-form-field>
 
-        <div class="mat-mdc-form-field typeahead">
-          <input placeholder="{{ 'standardrateoutput.materialCode' | translate }}" formControlName="materialCode"
+        <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="formData.value?.materialCode?.length > 0">
+          <label> {{ 'standardrateoutput.materialCode' | translate }} </label>
+          <input placeholder=" " formControlName="materialCode"
             [typeahead]="qnoList" typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="9"
             class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
           <ng-template #customItemTemplate let-model="item">
@@ -63,36 +64,36 @@
 
       <h6>
         Saleorder Details
-       
       </h6>
 
       <form [formGroup]="formData1" autocomplete="off">
 
-        <div class="d--flex p-1 mat-form-field-height">
+        <div class="row p-1">
 
-          <div class="multiselect-dropdown-list" *ngIf="routeEdit">
+          <div class="multiselect-dropdown-list  floating-dropdown col-3" [class.filled]="formData1.value?.customerCode?.length > 0"  *ngIf="routeEdit">
+            <label> {{ 'standardrateoutput.parameter' | translate }} </label>
             <ng-multiselect-dropdown  
-              placeholder="{{ 'standardrateoutput.parameter' | translate }}" formControlName="parameter"
+              placeholder=" " formControlName="parameter"
              [settings]="dropdownSettings" [data]="citemList">
             </ng-multiselect-dropdown>
           </div>
           
-          <mat-form-field class="form-element">
+          <mat-form-field class="col-3">
             <mat-label [translate]="'standardrateoutput.spec'"></mat-label>
             <input matInput formControlName="spec" type="text" maxlength="50" appFocusOnEnter tabIndex="2">
           </mat-form-field>
 
-          <mat-form-field class="form-element">
+          <mat-form-field class="col-3">
             <mat-label [translate]="'standardrateoutput.minval'"></mat-label>
             <input matInput formControlName="minValue" type="text" maxlength="50" appFocusOnEnter tabIndex="2">
           </mat-form-field>
           
-          <!-- <mat-form-field class="form-element">
+          <!-- <mat-form-field class="col-3">
             <mat-label [translate]="'standardrateoutput.maxval'"></mat-label>
             <input matInput formControlName="maxValue" type="text" maxlength="50" appFocusOnEnter tabIndex="2">
           </mat-form-field> -->
 
-          <mat-form-field>
+          <mat-form-field class="col-3">
             <mat-label>{{'standardrateoutput.uom' | translate }}</mat-label>
             <mat-select formControlName="uom" appFocusOnEnter tabIndex="3">
               <mat-option>None</mat-option>
@@ -102,7 +103,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="form-element">
+          <mat-form-field class="col-3">
             <mat-label [translate]="'standardrateoutput.instrument'"></mat-label>
             <mat-select formControlName="instrument" appFocusOnEnter tabIndex="3">
               <mat-option>None</mat-option>
@@ -114,7 +115,7 @@
 
         </div>
 
-        <div id="for" class="d-flex justify-content-end mb-3">
+        <div class="d-flex justify-content-end mb-3">
 
           <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
             {{ 'COMMON.UPDATE' | translate }}

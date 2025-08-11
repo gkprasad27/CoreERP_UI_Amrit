@@ -6,8 +6,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element">
+      <div class="row">
+        <mat-form-field class="col-3">
           <mat-label>{{ 'openingBalance.branchName' | translate }}</mat-label>
           <mat-select formControlName="branchCode" appFocusOnEnter tabIndex="3"  (selectionChange)="genarateVoucherNo();">
               <mat-option *ngFor="let branch of GetBranchesListArray" [value]="branch.id">
@@ -16,7 +16,7 @@
           </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field class="col-3">
         <mat-label>{{ 'openingBalance.ledgerName' | translate }}</mat-label>
         <input class="typeahead" matInput
             placeholder="{{ 'openingBalance.ledgerName' | translate }}" formControlName="ledgerCode"
@@ -29,7 +29,7 @@
         </ng-template>
     </mat-form-field>
     
-      <mat-form-field class="form-element">
+      <mat-form-field class="col-3">
         <mat-label>{{ 'openingBalance.paymentTypeName' | translate }}</mat-label>
         <mat-select formControlName="paymentTypeId" appFocusOnEnter tabIndex="3">
             <mat-option *ngFor="let payment of GetPaymentListArray" [value]="payment.id">
@@ -38,23 +38,23 @@
         </mat-select>
     </mat-form-field>
 
-      <mat-form-field class="form-element">
+      <mat-form-field class="col-3">
         <input matInput placeholder="{{ 'openingBalance.voucherNo' | translate }}" formControlName="voucherNo"
             appFocusOnEnter tabIndex="1" >
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="col-3">
       <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" placeholder="{{'openingBalance.openingBalanceDate' | translate }}"
           formControlName="openingBalanceDate" appFocusOnEnter  tabIndex="4" (click)="picker.open()" readonly>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <mat-form-field class="form-element">
+  <mat-form-field class="col-3">
     <input matInput placeholder="{{'openingBalance.amount' | translate }}" formControlName="amount" appFocusOnEnter tabIndex="2">
   </mat-form-field>
 
-  <mat-form-field class="form-element">
+  <mat-form-field class="col-3">
     <input matInput placeholder="{{ 'openingBalance.narration' | translate }}"
         formControlName="narration" appFocusOnEnter tabIndex="2" >
 </mat-form-field>
@@ -62,12 +62,12 @@
       </div>
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+      <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
           {{ 'COMMON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()"
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
                 appFocusOnEnter tabIndex="5">
 
           {{ 'COMMON.SAVE' | translate }}

@@ -6,8 +6,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element" class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
             'ng--invalid': !formControls.code.valid && formControls.code.status != 'DISABLED' }">
             <mat-label [translate]="'division.code'"></mat-label>
           <input matInput formControlName="code" appFocusOnEnter
@@ -17,7 +17,7 @@
             Code is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
           <mat-label [translate]="'division.description'"></mat-label>
           <input matInput formControlName="description"
@@ -26,7 +26,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Division Name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'division.responsiblePerson' | translate }}</mat-label>
           <mat-select formControlName="responsiblePerson" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -36,7 +36,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'division.active'"></mat-label>
           <mat-select formControlName="active" appFocusOnEnter tabIndex="4">
             <mat-option *ngFor="let active of active" [value]="active.value">
@@ -48,7 +48,7 @@
 
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
+      <div class="form-element mt-2 d-flex justify-content-end">
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter
           tabIndex="5">
           {{ 'COMMON.CANCEL' | translate }}

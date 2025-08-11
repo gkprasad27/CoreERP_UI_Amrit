@@ -6,8 +6,8 @@
 
       <mat-tab label="{{'routingfile.title1' | translate }}">
         <mat-card-content class="py-5 p-2 m-0">
-          <div class="d--flex">
-            <mat-form-field>
+          <div class="row">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'routingfile.company'"></mat-label>
               <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -17,7 +17,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'routingfile.plant'"></mat-label>
               <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
                 <mat-option>None</mat-option>
@@ -27,7 +27,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'routingfile.costUnit'"></mat-label>
               <mat-select formControlName="costUnit" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -37,7 +37,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'routingfile.material' | translate }}</mat-label>
               <mat-select formControlName="material" appFocusOnEnter tabIndex="4">
                 <mat-option>None</mat-option>
@@ -47,7 +47,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'routingfile.orderNumber'"></mat-label>
               <mat-select formControlName="orderNumber" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -57,7 +57,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'routingfile.saleOrder'"></mat-label>
               <mat-select formControlName="saleOrder" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -67,7 +67,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'routingfile.saleDocument'"></mat-label>
               <mat-select formControlName="saleDocument" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -77,19 +77,19 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'routingfile.routingKey'"></mat-label>
               <input matInput formControlName="routingKey"
                 appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'routingfile.description'"></mat-label>
               <input matInput formControlName="description"
                 appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'routingfile.creationDate'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="creationDate" appFocusOnEnter
                 tabIndex="3">
@@ -97,7 +97,7 @@
               <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'routingfile.version'"></mat-label>
               <input matInput  formControlName="version"
                 appFocusOnEnter tabIndex="4">
@@ -169,11 +169,11 @@
 
   </mat-tab-group>
 
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="reset()" appFocusOnEnter tabIndex="21">
       {{ 'COMMON.RESET' | translate }}
     </button>
-    <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="back();">
       {{ 'COMMON.BACK' | translate }}
     </button>
     <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter

@@ -6,8 +6,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.languageCode.valid&& formControls.languageCode.status != 'DISABLED', 
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.languageCode.valid&& formControls.languageCode.status != 'DISABLED', 
          'ng--invalid': !formControls.languageCode.valid && formControls.languageCode.status != 'DISABLED' }">
           <mat-label [translate]="'language.languageCode'"></mat-label>
           <input matInput formControlName="languageCode" appFocusOnEnter tabIndex="1" maxlength="5">
@@ -15,7 +15,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.languageCode.valid  }">code is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.languageName.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.languageName.valid }">
           <mat-label [translate]="'language.languageName'"></mat-label>
 
           <input matInput formControlName="languageName" appFocusOnEnter tabIndex="2" maxlength="50">
@@ -28,7 +28,7 @@
 
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
+      <div class="form-element mt-2 d-flex justify-content-end">
 
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
           {{ 'COMMON.CANCEL' | translate }}

@@ -8,8 +8,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.unitId.valid && formControls.unitId.status != 'DISABLED',
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.unitId.valid && formControls.unitId.status != 'DISABLED',
           'ng--invalid': !formControls.unitId.valid && formControls.unitId.status != 'DISABLED'  }">
           <mat-label [translate]="'sizes.unitId'"></mat-label>
           <input matInput disabled formControlName="unitId" maxlength="5"
@@ -19,7 +19,7 @@
             Id is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.unitName.valid, 'ng--invalid': !formControls.unitName.valid  }">
           <mat-label [translate]="'sizes.unitName'"></mat-label>
           <input matInput formControlName="unitName" maxlength="50"
@@ -29,13 +29,13 @@
         </mat-form-field>
 
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'sizes.noOfDecimalplaces'"></mat-label>
           <input matInput formControlName="noOfDecimalplaces"
             maxlength="5" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'sizes.narration'"></mat-label>
           <input matInput formControlName="narration" maxlength="50"
             appFocusOnEnter tabIndex="4">
@@ -46,7 +46,7 @@
 
   </mat-card-content>
 
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" tabindex="5" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

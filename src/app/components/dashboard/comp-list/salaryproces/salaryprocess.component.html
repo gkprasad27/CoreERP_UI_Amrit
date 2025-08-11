@@ -6,8 +6,8 @@
   </mat-card-title>
   <mat-card-content class="m-2">
       <form [formGroup]="modelFormData" autocomplete="off">
-          <div class="d--flex mat-form-field-height">
-            <!-- <mat-form-field>
+          <div class="row">
+            <!-- <mat-form-field class="col-3">
               <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label>
               <mat-select formControlName="structureName" placeholder="Structure Name" appFocusOnEnter>
                   <mat-option *ngFor="let List of structureList" [value]="List.text">
@@ -16,7 +16,7 @@
               </mat-select>
           </mat-form-field> -->
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'salaryprocess.sal_Month' | translate }}</mat-label>
               <mat-select formControlName="sal_Month" placeholder="sal_Month" >
                 <mat-option *ngFor="let month of month" [value]="month.value">
@@ -25,7 +25,7 @@
               </mat-select>
             </mat-form-field>
     
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'salaryprocess.sal_Year' | translate }}</mat-label>
               <mat-select formControlName="sal_Year" placeholder="sal_Year" >
                 <mat-option *ngFor="let year of year" [value]="year.value">
@@ -36,7 +36,7 @@
             </div>
           </form>
           </mat-card-content>
-          <div  class="form-element p-2 d-flex justify-content-end">
+          <div  class="form-element mt-2 d-flex justify-content-end">
             <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
               {{ 'COMMON.CANCEL' | translate }}

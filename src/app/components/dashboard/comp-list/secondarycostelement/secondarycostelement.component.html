@@ -7,9 +7,9 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'secondarycostelement.chartofAccount' | translate }}</mat-label>
           <mat-select formControlName="chartofAccount" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -19,7 +19,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.company.valid, 'ng--invalid': !formControls.company.valid  }">
           <mat-label>{{'secondarycostelement.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
@@ -33,7 +33,7 @@
 
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.secondaryCostCode.valid && formControls.secondaryCostCode.status != 'DISABLED',
            'ng--invalid': !formControls.secondaryCostCode.valid && formControls.secondaryCostCode.status != 'DISABLED' }">
           <mat-label [translate]="'secondarycostelement.secondaryCostCode'"></mat-label>
@@ -43,12 +43,12 @@
             [ngClass]="{ 'ng--invalid': !formControls.secondaryCostCode.valid  }"> Cost Code is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'secondarycostelement.description'"></mat-label>
           <input matInput formControlName="description" maxlength="50" appFocusOnEnter tabIndex="4">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'secondarycostelement.type' | translate }}</mat-label>
           <mat-select formControlName="type" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
@@ -58,7 +58,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'secondarycostelement.uom' | translate }}</mat-label>
           <mat-select formControlName="uom" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
@@ -69,7 +69,7 @@
         </mat-form-field>
 
 
-        <mat-form-field floatLabel="always" class="remove-boader-bottom" style="vertical-align: bottom; margin-left: 5px;">
+        <mat-form-field floatLabel="always" class="col-3" style="vertical-align: bottom; margin-left: 5px;">
           <mat-label> {{'secondarycostelement.recordQty' | translate }}</mat-label>
           <mat-slide-toggle formControlName="recordQty"></mat-slide-toggle>
           <textarea matInput hidden></textarea>
@@ -80,7 +80,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>
