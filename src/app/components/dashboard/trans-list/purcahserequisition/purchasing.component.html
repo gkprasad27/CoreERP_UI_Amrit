@@ -1,19 +1,16 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <mat-card>
 
     <mat-card-content>
 
         <form [formGroup]="formData" autocomplete="off">
 
-            <h6 id="background" >
-               Requisition Header
-                
+            <h6>
+                Requisition Header
             </h6>
 
-            <div id="forms" class="d--flex p-1 mat-form-field-height">
+            <div id="forms" class="row p-1">
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'purcahserequisition.company' | translate }}</mat-label>
                     <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
@@ -33,7 +30,7 @@
                     </mat-select>
                 </mat-form-field> -->
 
-                <mat-form-field>
+                <mat-form-field class="col-2">
                     <mat-label>{{'purcahserequisition.profitCenter' | translate }}</mat-label>
                     <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
@@ -43,7 +40,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field>
+                <mat-form-field class="col-2">
                     <mat-label>{{'purcahserequisition.department' | translate }}</mat-label>
                     <mat-select formControlName="department" appFocusOnEnter tabIndex="3">
                         <mat-option>None</mat-option>
@@ -53,8 +50,8 @@
                     </mat-select>
                 </mat-form-field>
 
-                
-                <!-- <mat-form-field class="form-element">
+
+                <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'purcahserequisition.branch' | translate }}</mat-label>
                     <mat-select formControlName="branch">
                         <mat-option>None</mat-option>
@@ -74,7 +71,7 @@
                     </mat-select>
                 </mat-form-field> -->
 
-               
+
 
                 <!-- <mat-form-field>
                     <mat-label>{{'purcahserequisition.wbs' | translate }}</mat-label>
@@ -98,7 +95,7 @@
 
 
 
-                <mat-form-field>
+                <mat-form-field class="col-2">
                     <mat-label>{{'purcahserequisition.requiredfor' | translate }}</mat-label>
                     <mat-select formControlName="requiredfor" appFocusOnEnter tabIndex="4">
                         <mat-option>None</mat-option>
@@ -108,21 +105,21 @@
                     </mat-select>
                 </mat-form-field>
 
-                <!-- <mat-form-field class="form-element">
+                <!-- <mat-form-field class="col-2">
                     <mat-label [translate]="'purcahserequisition.requisitionNumber'"></mat-label>
                     <input matInput type="text" formControlName="requisitionNumber" maxlength="50" appFocusOnEnter
                         tabIndex="2">
                 </mat-form-field> -->
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'purcahserequisition.requisitionDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" [nonEditable]="picker" formControlName="requisitionDate"
-                        appFocusOnEnter tabIndex="5">
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker"
+                        [nonEditable]="picker" formControlName="requisitionDate" appFocusOnEnter tabIndex="5">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'purcahserequisition.narration'"></mat-label>
                     <input matInput formControlName="narration" maxlength="100" required>
                     <mat-hint align="end">{{ formData.get('narration')?.value?.length || 0 }}/100</mat-hint>
@@ -140,55 +137,48 @@
 
         <div class="p-2 card">
 
-            <h6 id="background" >
+            <h6>
                 Material Details
-                
             </h6>
 
             <form [formGroup]="formData1" autocomplete="off">
 
+                <div class="row p-1">
 
-
-                <div id="forms" class="d--flex p-1 mat-form-field-height justify-content-between align-items-end">
-
-                    <div>
-
-                        <div class="mat-mdc-form-field typeahead">
-                            <input placeholder="{{ 'purcahserequisition.materialCode' | translate }}"  
-                                formControlName="materialCode" [typeahead]="materialList" typeaheadOptionField='id' (typeaheadOnSelect)="materialCodeChange()"
-                                appFocusOnEnter tabIndex="6" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
-                            <ng-template #customItemTemplate let-model="item">
-                                <span><strong>{{model.id}}</strong> - {{model.text}}</span>
-                            </ng-template>
-                        </div>
-
-                        <mat-form-field class="form-element">
-                            <mat-label [translate]="'purcahserequisition.stockQty'"></mat-label>
-                            <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="7">
-                        </mat-form-field>
-
-                        <mat-form-field class="form-element">
-                            <mat-label [translate]="'purcahserequisition.qty'"></mat-label>
-                            <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="8">
-                        </mat-form-field>
-
-                        
-
+                    <div class="mat-mdc-form-field  typeahead floating-dropdown col-2"
+                        [class.filled]="formData1.value?.materialCode?.length > 0">
+                        <label> {{ 'purcahserequisition.materialCode' | translate }} </label>
+                        <input placeholder=" " formControlName="materialCode" [typeahead]="materialList"
+                            typeaheadOptionField='id' (typeaheadOnSelect)="materialCodeChange()" appFocusOnEnter
+                            tabIndex="6" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
+                        <ng-template #customItemTemplate let-model="item">
+                            <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+                        </ng-template>
                     </div>
 
+                    <mat-form-field class="col-2">
+                        <mat-label [translate]="'purcahserequisition.stockQty'"></mat-label>
+                        <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="7">
+                    </mat-form-field>
 
-                    <div id="for" class="mb-3">
+                    <mat-form-field class="col-2">
+                        <mat-label [translate]="'purcahserequisition.qty'"></mat-label>
+                        <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="8">
+                    </mat-form-field>
 
-                        <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
-                            (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
-                            {{ 'COMMON.UPDATE' | translate }}
-                        </button>
-                        <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
-                            {{ 'COMMON.RESET' | translate }}
-                        </button>
+                </div>
 
-                    </div>
 
+                <div id="for" class="mb-3">
+
+                    <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
+                        (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
+                        {{ 'COMMON.UPDATE' | translate }}
+                    </button>
+                    <button mat-raised-button id="reset" class="button-color-red text-white mx-1"
+                        (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
+                        {{ 'COMMON.RESET' | translate }}
+                    </button>
 
                 </div>
 
@@ -215,8 +205,8 @@
 
     <mat-card-content class="d-flex justify-content-end py-1">
 
-        <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-            (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
+        <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i
+                class="fa-solid fa-floppy-disk"></i>
             {{ 'COMMON.SAVE' | translate }}
         </button>
         <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">

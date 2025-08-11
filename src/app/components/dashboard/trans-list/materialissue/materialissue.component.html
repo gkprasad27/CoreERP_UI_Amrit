@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<!-- <div style="margin: 10px;" id="printData" *ngIf="data"> -->
-  
 <mat-card>
 
     <mat-card-content>
@@ -12,9 +9,9 @@
                 
             </h6>
 
-            <div class="d--flex p-1 mat-form-field-height">
+            <div class="row p-1">
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'materialissue.company' | translate }}</mat-label>
                     <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
@@ -24,15 +21,17 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div class="multiselect-dropdown-list">
-                    <ng-multiselect-dropdown placeholder="{{ 'materialissue.issuedFrom' | translate }}"
+                <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData.value?.issuedFrom?.length > 0" >
+                    <label> {{ 'materialissue.issuedFrom' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" "
                         formControlName="issuedFrom"   (onSelect)="EmpChange($event)"
                         [settings]="dropdownSettings" [data]="employeesList">
                     </ng-multiselect-dropdown>
                 </div>
 
-                <div class="multiselect-dropdown-list">
-                    <ng-multiselect-dropdown placeholder="{{ 'materialissue.issuedTo' | translate }}"
+                <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData.value?.issuedTo?.length > 0" >
+                    <label> {{ 'materialissue.issuedTo' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" "
                         formControlName="issuedTo"   (onSelect)="EmpChange1($event)"
                         [settings]="dropdownSettings" [data]="employeesList">
                     </ng-multiselect-dropdown>
@@ -58,7 +57,7 @@
                     <input matInput type="text" readonly formControlName="issuedTo" appFocusOnEnter tabIndex="3">
                   </mat-form-field> -->
 
-                  <mat-form-field class="form-element">
+                  <mat-form-field class="col-2">
                     <mat-label [translate]="'materialissue.issuedDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="issuedDate"
                         appFocusOnEnter tabIndex="6">
@@ -66,13 +65,11 @@
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'materialissue.narration'"></mat-label>
                     <input matInput type="text" formControlName="narration" appFocusOnEnter tabIndex="5">
                 </mat-form-field>
 
-
-                
 
             </div>
 
@@ -87,12 +84,11 @@
 
             <form [formGroup]="formData1" autocomplete="off">
 
+                <div class="row p-1">
 
-
-                <div class="d--flex p-1 mat-form-field-height">
-
-                    <div class="mat-mdc-form-field typeahead">
-                        <input placeholder="{{ 'materialissue.materialCode' | translate }}" formControlName="materialCode"
+                    <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="formData1.value?.materialCode?.length > 0" >
+                        <label> {{ 'materialissue.materialCode' | translate }} </label>
+                        <input placeholder=" " formControlName="materialCode"
                             [typeahead]="mmasterListData" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
                             class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
                             (typeaheadOnSelect)="materialCodeChange()" (input)="materialChange()">
@@ -101,12 +97,12 @@
                         </ng-template>
                     </div>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'materialissue.stockQty'"></mat-label>
                         <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="10">
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'materialissue.qty'"></mat-label>
                         <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="12">
                     </mat-form-field>

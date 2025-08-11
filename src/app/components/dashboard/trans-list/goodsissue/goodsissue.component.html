@@ -1,6 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <mat-card>
 
   <mat-card-content>
@@ -9,14 +7,13 @@
 
       <h6>
         Material Data
-
       </h6>
 
       <!-- <div class="d--flex p-1 mat-form-field-height"> -->
-      <div id="form" class="d-flex align-content-stretch flex-wrap ">
+      <div id="form" class="row">
 
 
-        <mat-form-field>
+        <mat-form-field class="col-2">
 
           <mat-label>{{ 'goodsissue.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
@@ -30,7 +27,7 @@
 
 
 
-        <mat-form-field>
+        <mat-form-field class="col-2">
           <mat-label>{{'purchaseorder.profitCenter' | translate }}</mat-label>
           <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
@@ -43,19 +40,20 @@
 
 
 
-        <div class="multiselect-dropdown-list " *ngIf="!routeEdit">
-          <ng-multiselect-dropdown placeholder="{{ 'goodsissue.storesPerson' | translate }}"
+        <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData.value?.storesPerson?.length > 0" *ngIf="!routeEdit">
+          <label> {{ 'goodsissue.storesPerson' | translate }} </label>
+          <ng-multiselect-dropdown placeholder=" "
             formControlName="storesPerson" [settings]="dropdownSettings1" [data]="employeesList">
           </ng-multiselect-dropdown>
         </div>
-        <mat-form-field *ngIf="routeEdit">
+        <mat-form-field *ngIf="routeEdit" class="col-2">
           <mat-label>{{'goodsissue.storesPerson' | translate }}</mat-label>
           <input matInput type="text" readonly formControlName="storesPersonName" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
 
 
-        <mat-form-field>
+        <mat-form-field class="col-2">
           <mat-label>{{'goodsissue.department' | translate }}</mat-label>
           <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -69,7 +67,7 @@
 
 
 
-        <!-- <mat-form-field>
+        <!-- <mat-form-field class="col-2">
           <mat-label>{{'goodsissue.poType' | translate }}</mat-label>
           <mat-select formControlName="saleOrder" appFocusOnEnter tabIndex="5" (selectionChange)="toggle()">
             <mat-option>None</mat-option>
@@ -81,24 +79,26 @@
 
 
 
-        <div class="multiselect-dropdown-list form-item" *ngIf="!routeEdit">
-          <ng-multiselect-dropdown placeholder="{{ 'goodsissue.saleOrderNumber' | translate }}"
+        <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData.value?.saleOrderNumber?.length > 0" *ngIf="!routeEdit">
+          <label> {{ 'goodsissue.saleOrderNumber' | translate }} </label>
+          <ng-multiselect-dropdown placeholder=" "
             formControlName="saleOrderNumber" (onSelect)="getGoodsissueDetail()" [settings]="dropdownSettings"
             [data]="mreqList">
           </ng-multiselect-dropdown>
         </div>
-        <mat-form-field *ngIf="routeEdit">
+        <mat-form-field class="col-2" *ngIf="routeEdit">
           <mat-label>{{'goodsissue.saleOrderNumber' | translate }}</mat-label>
           <input matInput type="text" readonly formControlName="saleOrderNumber" appFocusOnEnter tabIndex="4">
         </mat-form-field>
 
 
-        <div class="multiselect-dropdown-list form-item" *ngIf="!routeEdit">
-          <ng-multiselect-dropdown placeholder="{{ 'goodsissue.productionPerson' | translate }}"
+        <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData.value?.productionPerson?.length > 0" *ngIf="!routeEdit">
+          <label> {{ 'goodsissue.productionPerson' | translate }} </label>
+          <ng-multiselect-dropdown placeholder=" "
             formControlName="productionPerson" [settings]="dropdownSettings1" [data]="employeesList">
           </ng-multiselect-dropdown>
         </div>
-        <mat-form-field *ngIf="routeEdit">
+        <mat-form-field class="col-2" *ngIf="routeEdit">
           <mat-label>{{'goodsissue.productionPerson' | translate }}</mat-label>
           <input matInput type="text" readonly formControlName="productionPersonName" appFocusOnEnter tabIndex="4">
         </mat-form-field>
@@ -106,7 +106,7 @@
 
 
 
-        <!-- <mat-form-field class="form-element element" id="sale">
+        <!-- <mat-form-field class="col-2">
           <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="productionPlanDate"
             appFocusOnEnter tabIndex="6">
@@ -118,7 +118,7 @@
 
 
 
-        <mat-form-field class="form-element element" id="sale">
+        <mat-form-field class="col-2">
           <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="productionTargetDate"
             appFocusOnEnter tabIndex="6">
@@ -136,44 +136,42 @@
 
       <h6>
         Material Details
-
       </h6>
 
       <form [formGroup]="formData1" autocomplete="off">
 
 
 
-        <div class="d--flex p-1 mat-form-field-height justify-content-between align-items-end">
+        <div class="row p-1">
 
-
-
-            <div class="multiselect-dropdown-list mx-3" *ngIf="routeEdit">
-              <ng-multiselect-dropdown (onSelect)="materialCodeChange()" placeholder="{{ 'purchaseorder.materialCode' | translate }}"
+            <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData1.value?.productionPerson?.length > 0" *ngIf="routeEdit">
+              <label> {{ 'purchaseorder.materialCode' | translate }} </label>
+              <ng-multiselect-dropdown (onSelect)="materialCodeChange()" placeholder=" "
                 formControlName="materialCodeBomKey" [settings]="dropdownSettings4" [data]="materialCodeList">
               </ng-multiselect-dropdown>
             </div>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-2">
               <mat-label [translate]="'goodsissue.qty'"></mat-label>
               <input matInput type="number" readonly formControlName="qty" appFocusOnEnter tabIndex="8">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-2">
               <mat-label [translate]="'goodsissue.availableqty'"></mat-label>
               <input matInput type="number" readonly formControlName="availableqty" appFocusOnEnter tabIndex="9">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-2">
               <mat-label [translate]="'goodsissue.allocatedqty'"></mat-label>
               <input matInput type="number" formControlName="allocatedqty" appFocusOnEnter tabIndex="10"
                 (change)="allocatedqtyChange()">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-2">
               <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"
                 appFocusOnEnter tabIndex="11">
               <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
               <mat-datepicker #picker3></mat-datepicker>
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-2">
               <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
                 appFocusOnEnter tabIndex="12">
@@ -182,7 +180,7 @@
             </mat-form-field>
 
 
-          <div id="for" class="mb-3">
+          <div id="for" class="d-flex justify-content-end mb-3">
 
             <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
               (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>

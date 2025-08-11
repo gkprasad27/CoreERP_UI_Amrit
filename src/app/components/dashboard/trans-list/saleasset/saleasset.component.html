@@ -4,9 +4,9 @@
 
         <form [formGroup]="formData" autocomplete="off">
 
-            <div class="d--flex p-1 mat-form-field-height">
+            <div class="row p-1">
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'saleasset.company' | translate }}</mat-label>
                     <mat-select formControlName="company">
                         <mat-option>None</mat-option>
@@ -16,7 +16,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'saleasset.branch' | translate }}</mat-label>
                     <mat-select formControlName="branch">
                         <mat-option>None</mat-option>
@@ -26,7 +26,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element" >
+                <mat-form-field class="col-2" >
                     <mat-label>{{ 'saleasset.transactionType' | translate }}</mat-label>
                     <mat-select formControlName="assetTransactionType" (selectionChange)="accountSelect()">
                         <mat-option>None</mat-option>
@@ -36,7 +36,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'saleasset.voucherType' | translate }}</mat-label>
                     <mat-select formControlName="voucherType"
                         (selectionChange)="voucherTypeSelect(); voucherNoCalculate();">
@@ -47,12 +47,12 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'saleasset.voucherNumber'"></mat-label>
                     <input matInput formControlName="voucherNumber" appFocusOnEnter tabIndex="2">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'saleasset.voucherDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="voucherDate"
                         appFocusOnEnter tabIndex="3">
@@ -60,7 +60,7 @@
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'saleasset.postingDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="postingDate"
                         appFocusOnEnter tabIndex="3">
@@ -68,10 +68,7 @@
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
 
-
-
-
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'saleasset.transferDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="transferDate"
                         appFocusOnEnter tabIndex="4">

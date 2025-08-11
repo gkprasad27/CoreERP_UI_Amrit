@@ -1,1 +1,0 @@
-export { PrimaryCostElementComponent } from './primary-cost-element/primary-cost-element.component';

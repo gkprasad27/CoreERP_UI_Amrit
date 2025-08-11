@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div style="margin: 10px;" *ngIf="quotationSupplier" id="quotationSupplierPrintData">
 
     <div style="display: flex;">
@@ -185,12 +184,11 @@
 
             <h6>
                 Requisition Header
-                
             </h6>
 
-            <div id="form" class="d-flex flex-wrap ">
+            <div class="row">
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'supplierquotation.company' | translate }}</mat-label>
                     <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
@@ -200,10 +198,7 @@
                     </mat-select>
                 </mat-form-field>
 
-
-
-
-                <mat-form-field>
+                <mat-form-field class="col-2">
                     <mat-label>{{'supplierquotation.profitCenter' | translate }}</mat-label>
                     <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
@@ -213,7 +208,8 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead">
+                <div class="mat-mdc-form-field  floating-dropdown col-3" [class.filled]="formData.value?.customerCode?.length > 0">
+                    <label> {{ 'supplierquotation.supplier' | translate }} </label>
                     <input placeholder="{{ 'supplierquotation.supplier' | translate }}" formControlName="customerCode"
                         [typeahead]="ptypeList" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
                         (typeaheadOnSelect)="supplierChange($event)" class="form-control typeahead"
@@ -223,8 +219,7 @@
                     </ng-template>
                 </div>
 
-
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'supplierquotation.quotationDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="quotationDate"
                         appFocusOnEnter tabIndex="4">
@@ -232,51 +227,42 @@
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-
-
-
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'supplierquotation.deliveryPeriod'"></mat-label>
                     <input matInput type="text" formControlName="deliveryPeriod" maxlength="50" appFocusOnEnter
                         tabIndex="5">
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'supplierquotation.creditDays'"></mat-label>
                     <input matInput type="text" formControlName="creditDays" maxlength="50" appFocusOnEnter
                         tabIndex="6">
                 </mat-form-field>
 
-
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'supplierquotation.deliveryMethod'"></mat-label>
                     <input matInput type="text" formControlName="deliveryMethod" maxlength="50" appFocusOnEnter
                         tabIndex="7">
                 </mat-form-field>
 
-
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'supplierquotation.refNo'"></mat-label>
                     <input matInput type="text" formControlName="refNo" maxlength="50" appFocusOnEnter tabIndex="8">
                 </mat-form-field>
 
-
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'supplierquotation.responsiblePerson'"></mat-label>
                     <input matInput type="text" formControlName="responsiblePerson" maxlength="50" appFocusOnEnter
                         tabIndex="9">
                 </mat-form-field>
 
-
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label [translate]="'supplierquotation.quotationfor'"></mat-label>
                     <input matInput type="text" formControlName="quotationfor" maxlength="50" appFocusOnEnter
                         tabIndex="10">
                 </mat-form-field>
 
-
-
-                <mat-form-field>
+                <mat-form-field class="col-2">
                     <mat-label>{{'supplierquotation.material' | translate }}</mat-label>
                     <mat-select formControlName="material" appFocusOnEnter tabIndex="11">
                         <mat-option>None</mat-option>
@@ -286,8 +272,9 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead">
-                    <input placeholder="{{ 'saleorder.bom' | translate }}" formControlName="bom" [typeahead]="qnoList"
+                <div class="mat-mdc-form-field  typeahead floating-dropdown col-3" [class.filled]="formData.value?.bom?.length > 0">
+                    <label> {{ 'saleorder.bom' | translate }} </label>
+                    <input placeholder=" " formControlName="bom" [typeahead]="qnoList"
                         typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="12" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate1" (typeaheadOnSelect)="getBomDetail()">
                     <ng-template #customItemTemplate1 let-model="item">
@@ -304,20 +291,13 @@
 
             <h6>
                 Saleorder Details
-               
             </h6>
 
             <form [formGroup]="formData1" autocomplete="off">
 
+                <div class="row p-1">
 
-
-                <div class="d--flex p-1 mat-form-field-height">
-
-                    
-
-                    
-
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label>{{ 'supplierquotation.taxCode' | translate }}</mat-label>
                         <mat-select formControlName="taxCode" appFocusOnEnter tabIndex="11">
                             <mat-option>None</mat-option>
@@ -327,29 +307,29 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'supplierquotation.qty'"></mat-label>
                         <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="12">
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'supplierquotation.rate'"></mat-label>
                         <input matInput type="number" formControlName="rate" appFocusOnEnter tabIndex="13">
                     </mat-form-field>
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'supplierquotation.discount'"></mat-label>
                         <input matInput type="text" formControlName="discount" appFocusOnEnter tabIndex="14"
                             (keypress)="commonService.numberOnly($event)" maxlength="2">
                     </mat-form-field>
 
-                    <!-- <mat-form-field class="form-element">
+                    <!-- <mat-form-field class="col-2">
                         <mat-label [translate]="'supplierquotation.stockQty'"></mat-label>
                         <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="13">
                     </mat-form-field> -->
 
 
-                    <mat-form-field class="form-element">
+                    <mat-form-field class="col-2">
                         <mat-label [translate]="'supplierquotation.deliveryDate'"></mat-label>
                         <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker13" [nonEditable]="picker13"
                             formControlName="deliveryDate" appFocusOnEnter tabIndex="15">

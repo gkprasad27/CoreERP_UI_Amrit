@@ -4,9 +4,9 @@
 
         <form [formGroup]="formData" autocomplete="off" *ngIf="formData">
 
-            <div class="d--flex p-1 mat-form-field-height">
+            <div class="row p-1">
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'sampleservice.usage' | translate }}</mat-label>
                     <mat-select formControlName="usage" (selectionChange)="onSelect($event)">
                         <mat-option>Select Option</mat-option>
@@ -16,7 +16,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-2">
                     <mat-label>{{ 'sampleservice.type' | translate }}</mat-label>
                     <mat-select formControlName="usagetype">
                         <mat-option>Select Option</mat-option>
