@@ -7,9 +7,9 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field [ngClass]="{ 'ng--valid': formControls.objectType.valid && formControls.objectType.status != 'DISABLED',
+        <mat-form-field  class="col-3" [ngClass]="{ 'ng--valid': formControls.objectType.valid && formControls.objectType.status != 'DISABLED',
           'ng--invalid': !formControls.objectType.valid && formControls.objectType.status != 'DISABLED' }">
           <mat-label>{{'assignnumberseries.objectType' | translate }}</mat-label>
           <mat-select formControlName="objectType" appFocusOnEnter tabIndex="1">
@@ -22,7 +22,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.objectType.valid  }"> Object Type is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.numberSeries.valid, 'ng--invalid': !formControls.numberSeries.valid  }">
           <mat-label>{{'assignnumberseries.numberSeries' | translate }}</mat-label>
           <mat-select formControlName="numberSeries" appFocusOnEnter tabIndex="2">
@@ -41,13 +41,11 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-
       {{ 'COMMON.CANCEL' | translate }}
     </button>
     <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-
       {{ 'COMMON.SAVE' | translate }}
     </button>
   </div>

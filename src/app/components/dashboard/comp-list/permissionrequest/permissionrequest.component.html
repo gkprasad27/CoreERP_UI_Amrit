@@ -6,15 +6,15 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element">
+      <div class="row">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'permissionrequest.empCode' | translate }}"
                  (input)="getProductByProductCode($event.target.value)" class="typeahead"
                  [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'
                  formControlName="empCode" appFocusOnEnter tabIndex="1">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'permissionrequest.permissionDate' | translate }}"
                  [formControl]="permissionDate" tabIndex="2">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -22,29 +22,29 @@
         </mat-form-field>
 
 
-        <!-- <mat-form-field>
+        <!-- <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" placeholder="{{'permissionrequest.fromDate' | translate }}"
                (dateChange)="fromdateValueChange()"  formControlName="fromdate"  tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field> -->
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'permissionrequest.fromTime' | translate }}" formControlName="fromTime" (input)="onSearchChange()" appFocusOnEnter tabIndex="4">
         </mat-form-field>
 
-        <!-- <mat-form-field>
+        <!-- <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" placeholder="{{'permissionrequest.todate' | translate }}"
                  formControlName="todate" tabIndex="5" readonly="readonly">
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>
         </mat-form-field> -->
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'permissionrequest.toTime' | translate }}" readonly="readonly" formControlName="toTime" appFocusOnEnter tabIndex="6">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'permissionrequest.purpose' | translate }}" formControlName="purpose" appFocusOnEnter tabIndex="7">
         </mat-form-field>
 
@@ -52,15 +52,13 @@
       </div>
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
-
+      <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
           {{ 'COMMON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
                 tabIndex="5">
-
-          Apply PermissonRequest
+          Apply Permisson Request
         </button>
       </div>
 

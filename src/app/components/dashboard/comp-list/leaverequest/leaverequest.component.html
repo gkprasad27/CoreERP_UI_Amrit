@@ -6,24 +6,25 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <div id="by" class="multiselect-dropdown-list" *ngIf="dropdownSettings">
-          <ng-multiselect-dropdown placeholder="{{ 'Leaverequest.empCode' | translate }}"
+        <div class="multiselect-dropdown-list floating-dropdown col-3"  [class.filled]="modelFormData.value?.empCode?.length > 0" *ngIf="dropdownSettings">
+          <label> {{ 'Leaverequest.empCode' | translate }} </label>
+          <ng-multiselect-dropdown placeholder=" "
             (onSelect)="getTableDataonempcodechangevent()" formControlName="empCode" [settings]="dropdownSettings"
             [data]="getProductByProductCodeArray">
           </ng-multiselect-dropdown>
         </div>
 
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'Leaverequest.applDate' | translate }}"
             [formControl]="applDate">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>Leave Type</mat-label>
           <mat-select placeholder="{{'Leaverequest.leaveCode' | translate }}" formControlName="leaveCode">
             <mat-option *ngFor="let ptlist of leaveTypeatList" [value]="ptlist.empCode">
@@ -32,15 +33,14 @@
           </mat-select>
         </mat-form-field>
 
-
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" placeholder="{{'Leaverequest.leaveFrom' | translate }}"
             (dateChange)="orgValueChange()" formControlName="leaveFrom">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>Session</mat-label>
           <mat-select formControlName="session1" placeholder="Session1" (selectionChange)="sessionevent();">
             <mat-option *ngFor="let session of sessions" [value]="session.value">
@@ -55,14 +55,14 @@
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>
         </mat-form-field>-->
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" placeholder="{{'Leaverequest.leaveTo' | translate }}"
             (dateChange)="leaveToValueChange()" formControlName="leaveTo">
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>Session</mat-label>
           <mat-select formControlName="session2" placeholder="Session2" (selectionChange)="sessionevent2();">
             <mat-option *ngFor="let session of sessions" [value]="session.value">
@@ -71,31 +71,31 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field  class="col-3">
           <input matInput placeholder="{{'Leaverequest.leaveDays' | translate }}" formControlName="leaveDays"
             readonly="readonly" type="number" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
 
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.reason.valid }">
+        <mat-form-field  class="col-3" [ngClass]="{ 'ng--valid': formControls.reason.valid }">
           <input matInput placeholder=" {{'Leaverequest.reason' | translate }}" formControlName="reason" appFocusOnEnter
             tabIndex="1">
           <mat-error *ngIf="formControls.reason.errors" class="help-block">
             <div *ngIf="formControls.reason.errors.required">Reason is required </div>
           </mat-error>
         </mat-form-field>
+
       </div>
+
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
+      <div class="form-element d-flex justify-content-end mt-2">
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-
           {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
           appFocusOnEnter tabIndex="5">
-
           ApplyLeave
         </button>
       </div>

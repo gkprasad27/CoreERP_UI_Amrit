@@ -121,11 +121,12 @@ export class PermissionRequestComponent implements OnInit {
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
         response => {
           const res = response.body;
+          this.spinner.hide();
+
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               if (!this.commonService.checkNullOrUndefined(res.response['Empcodes'])) {
                 this.getProductByProductCodeArray = res.response['Empcodes'];
-                this.spinner.hide();
               }
             }
           }

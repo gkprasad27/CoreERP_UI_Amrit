@@ -5,9 +5,9 @@
   </mat-card-title>
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid&&formControls.code.status != 'DISABLED',
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid&&formControls.code.status != 'DISABLED',
                            'ng--invalid': !formControls.code.valid &&formControls.code.status != 'DISABLED' }">
           <mat-label [translate]="'assignglaccount.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4" appFocusOnEnter tabIndex="1">
@@ -16,7 +16,7 @@
             required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'assignglaccount.toGl' | translate }}</mat-label>
           <mat-select formControlName="toGl" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -26,7 +26,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'assignglaccount.glgroup' | translate }}</mat-label>
           <mat-select formControlName="glgroup" appFocusOnEnter tabIndex="2"
             (selectionChange)="getSubacclist(); onGroupChange()">
@@ -37,7 +37,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'assignglaccount.subAccount' | translate }}</mat-label>
           <mat-select formControlName="subAccount" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -48,7 +48,7 @@
         </mat-form-field>
 
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'assignglaccount.fromGl' | translate }}</mat-label>
           <mat-select formControlName="fromGl" appFocusOnEnter tabIndex="4" multiple>
             <mat-option>None</mat-option>
@@ -62,7 +62,7 @@
       <mat-divider></mat-divider>
     </form>
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

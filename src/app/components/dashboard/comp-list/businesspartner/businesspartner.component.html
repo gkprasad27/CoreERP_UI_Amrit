@@ -8,8 +8,8 @@
 
         <mat-card-content class="py-5 p-2 m-0">
 
-          <div class="d--flex">
-            <mat-form-field>
+          <div class="row">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'glaccount.company'"></mat-label>
               <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
@@ -19,7 +19,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.bptype'"></mat-label>
               <mat-select formControlName="bptype" appFocusOnEnter tabIndex="2" (selectionChange)="onbpChange()">
                 <mat-option>None</mat-option>
@@ -29,7 +29,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.bpgroup'"></mat-label>
               <mat-select formControlName="bpgroup" (selectionChange)="getBPNumberData()" appFocusOnEnter tabIndex="3">
                 <mat-option>None</mat-option>
@@ -39,42 +39,42 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.bpnumber'"></mat-label>
               <input matInput formControlName="bpnumber" maxlength="6" appFocusOnEnter tabIndex="4">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.name'"></mat-label>
               <input matInput formControlName="name" maxlength="50" appFocusOnEnter tabIndex="6">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.search'"></mat-label>
               <input matInput formControlName="search" maxlength="50" appFocusOnEnter tabIndex="7">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.address'"></mat-label>
               <input matInput formControlName="address" maxlength="50" appFocusOnEnter tabIndex="8">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.address1'"></mat-label>
               <input matInput formControlName="address1" maxlength="50" appFocusOnEnter tabIndex="9">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.location'"></mat-label>
               <input matInput formControlName="location" maxlength="50" appFocusOnEnter tabIndex="10">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.city'"></mat-label>
               <input matInput formControlName="city" maxlength="50" appFocusOnEnter tabIndex="11">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'businesspartner.state' | translate }}</mat-label>
               <mat-select formControlName="state" appFocusOnEnter tabIndex="12">
                 <mat-option>None</mat-option>
@@ -84,7 +84,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'businesspartner.region' | translate }}</mat-label>
               <mat-select formControlName="region" appFocusOnEnter tabIndex="13">
                 <mat-option>None</mat-option>
@@ -94,7 +94,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'businesspartner.country' | translate }}</mat-label>
               <mat-select formControlName="country" appFocusOnEnter tabIndex="14">
                 <mat-option>None</mat-option>
@@ -104,17 +104,17 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.email'"></mat-label>
               <input matInput formControlName="email" maxlength="50" appFocusOnEnter tabIndex="15">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.phone'"></mat-label>
               <input matInput formControlName="phone" maxlength="20" appFocusOnEnter tabIndex="16">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.mobile'"></mat-label>
               <input matInput formControlName="mobile" maxlength="10" appFocusOnEnter tabIndex="17">
             </mat-form-field>
@@ -127,24 +127,24 @@
       <mat-tab label="Tax Data">
 
         <mat-card-content class="py-5 p-2 m-0">
-          <div class="d--flex">
+          <div class="row">
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.gstno'"></mat-label>
               <input matInput formControlName="gstno" maxlength="20" appFocusOnEnter tabIndex="18">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.panno'"></mat-label>
               <input matInput formControlName="panno" maxlength="12" appFocusOnEnter tabIndex="19">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.tanno'"></mat-label>
               <input matInput formControlName="tanno" maxlength="12" appFocusOnEnter tabIndex="20">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.taxClassification'"></mat-label>
               <mat-select formControlName="taxClassification" appFocusOnEnter tabIndex="21">
                 <mat-option>None</mat-option>
@@ -160,9 +160,9 @@
       </mat-tab>
       <mat-tab label="Company Code Data">
         <mat-card-content class="py-5 p-2 m-0">
-          <div class="d--flex">
+          <div class="row">
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.controlAccount'"></mat-label>
               <mat-select formControlName="controlAccount" appFocusOnEnter tabIndex="22">
                 <mat-option>None</mat-option>
@@ -172,7 +172,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'businesspartner.paymentTerms' | translate }}</mat-label>
               <mat-select formControlName="paymentTerms" appFocusOnEnter tabIndex="23">
                 <mat-option>None</mat-option>
@@ -189,8 +189,8 @@
       <mat-tab label="TDS Data">
 
         <mat-card-content class="py-5 p-2 m-0">
-          <div class="d--flex">
-            <mat-form-field>
+          <div class="row">
+            <mat-form-field class="col-3">
               <mat-label>{{'businesspartner.tdstype' | translate }}</mat-label>
               <mat-select formControlName="tdstype" appFocusOnEnter tabIndex="24">
                 <mat-option>None</mat-option>
@@ -199,7 +199,7 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field class="col-3">
               <mat-label>{{'businesspartner.tdsrate' | translate }}</mat-label>
               <mat-select formControlName="tdsrate" appFocusOnEnter tabIndex="25">
                 <mat-option>None</mat-option>
@@ -209,17 +209,17 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.baseAmount'"></mat-label>
               <input matInput formControlName="baseAmount" maxlength="50" appFocusOnEnter tabIndex="26">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.obligationFrom'"></mat-label>
               <input matInput formControlName="obligationFrom" maxlength="50" appFocusOnEnter tabIndex="27">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.obligationTo'"></mat-label>
               <input matInput formControlName="obligationTo" maxlength="50" appFocusOnEnter tabIndex="28">
             </mat-form-field>
@@ -230,38 +230,38 @@
       <mat-tab label="Bank Data">
 
         <mat-card-content class="py-5 p-2 m-0">
-          <div class="d--flex">
-            <mat-form-field class="form-element">
+          <div class="row">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.bankName'"></mat-label>
               <input matInput formControlName="bankName" maxlength="50" appFocusOnEnter tabIndex="29">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.bankAccountNo'"></mat-label>
               <input matInput formControlName="bankAccountNo" maxlength="20" appFocusOnEnter tabIndex="30">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.ifsccode'"></mat-label>
               <input matInput formControlName="ifsccode" maxlength="20" appFocusOnEnter tabIndex="31">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.swiftcode'"></mat-label>
               <input matInput formControlName="swiftcode" maxlength="20" appFocusOnEnter tabIndex="32">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.bankBranch'"></mat-label>
               <input matInput formControlName="bankBranch" maxlength="50" appFocusOnEnter tabIndex="33">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.bankBranchNo'"></mat-label>
               <input matInput formControlName="bankBranchNo" maxlength="15" appFocusOnEnter tabIndex="34">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.closingBalance'"></mat-label>
               <input matInput formControlName="closingBalance" maxlength="50" appFocusOnEnter tabIndex="36">
             </mat-form-field>
@@ -273,44 +273,44 @@
       <mat-tab label="Contact Data">
 
         <mat-card-content class="py-5 p-2 m-0">
-          <div class="d--flex">
+          <div class="row">
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.contactPersion'"></mat-label>
               <input matInput formControlName="contactPersion" maxlength="50" appFocusOnEnter tabIndex="37">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.contactPersionMobile'"></mat-label>
               <input matInput formControlName="contactPersionMobile" maxlength="12" appFocusOnEnter tabIndex="38">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.narration'"></mat-label>
               <input matInput formControlName="narration" appFocusOnEnter tabIndex="39">
             </mat-form-field>
 
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.shiptoAddress1'"></mat-label>
               <input matInput formControlName="shiptoAddress1" appFocusOnEnter tabIndex="40">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.shiptoAddress2'"></mat-label>
               <input matInput formControlName="shiptoAddress2" appFocusOnEnter tabIndex="41">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.shiptoState'"></mat-label>
               <input matInput formControlName="shiptoState" appFocusOnEnter tabIndex="42">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.shiptoCity'"></mat-label>
               <input matInput formControlName="shiptoCity" appFocusOnEnter tabIndex="43">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.shiptoZip'"></mat-label>
               <input matInput formControlName="shiptoZip" appFocusOnEnter tabIndex="44">
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="col-3">
               <mat-label [translate]="'businesspartner.shiptoPhone'"></mat-label>
               <input matInput formControlName="shiptoPhone" appFocusOnEnter tabIndex="45">
             </mat-form-field>
@@ -323,7 +323,7 @@
 
   </mat-tab-group>
 
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="21">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

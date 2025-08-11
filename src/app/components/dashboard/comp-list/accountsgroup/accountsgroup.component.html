@@ -5,8 +5,8 @@
   </mat-card-title>
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.groupCode.valid &&formControls.groupCode.status != 'DISABLED',
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.groupCode.valid &&formControls.groupCode.status != 'DISABLED',
            'ng--invalid': !formControls.groupCode.valid  &&formControls.groupCode.status != 'DISABLED' }">
           <mat-label [translate]="'accountgroup.groupCode'"></mat-label>
           <input matInput disabled formControlName="groupCode"
@@ -16,7 +16,7 @@
             Group Code is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.groupName.valid, 'ng--invalid': !formControls.groupName.valid  }">
           <mat-label [translate]="'accountgroup.groupName'"></mat-label>
           <input matInput formControlName="groupName"
@@ -26,17 +26,17 @@
             Group Name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountgroup.numberRangeFrom'"></mat-label>
           <input matInput 
             formControlName="numberRangeFrom" (change)="validationcode()" appFocusOnEnter tabIndex="3">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountgroup.numberRangeTo'"></mat-label>
           <input matInput (change)="validationcode()"
             formControlName="numberRangeTo" appFocusOnEnter tabIndex="4">
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountgroup.groupType'"></mat-label>
           <mat-select formControlName="groupType" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
@@ -49,7 +49,7 @@
       <mat-divider></mat-divider>
     </form>
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="6">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

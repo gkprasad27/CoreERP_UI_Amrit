@@ -6,8 +6,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field
+      <div class="row">
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.objectType.valid, 'ng--invalid': !formControls.objectType.valid  }">
           <mat-label>{{'costcenter.objectType' | translate }}</mat-label>
           <mat-select formControlName="objectType" (selectionChange)="getobjectNumberData()" appFocusOnEnter
@@ -21,7 +21,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.objectType.valid  }"> Object Type is required</mat-error>
         </mat-form-field>
 
-      <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
+      <mat-form-field  class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
           'ng--invalid': !formControls.code.valid && formControls.code.status != 'DISABLED' }">
         <mat-label [translate]="'costcenter.code'"></mat-label>
         <input matInput formControlName="code" maxlength="6"
@@ -31,13 +31,13 @@
           required</mat-error>
       </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field  class="col-3">
           <mat-label [translate]="'costcenter.name'"></mat-label>
           <input matInput formControlName="name"
             maxlength="50" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costcenter.functions' | translate }}</mat-label>
           <mat-select formControlName="functions" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -47,7 +47,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costcenter.type' | translate }}</mat-label>
           <mat-select formControlName="type" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
@@ -57,7 +57,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costcenter.uom' | translate }}</mat-label>
           <mat-select formControlName="uom" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
@@ -67,7 +67,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costcenter.department' | translate }}</mat-label>
           <mat-select formControlName="department" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
@@ -77,7 +77,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costcenter.costType' | translate }}</mat-label>
           <mat-select formControlName="costType" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
@@ -87,7 +87,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costcenter.responsiblePerson' | translate }}</mat-label>
           <mat-select formControlName="responsiblePerson" appFocusOnEnter tabIndex="9">
             <mat-option>None</mat-option>
@@ -96,7 +96,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'costcenter.fromDate'"></mat-label>
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="fromDate" appFocusOnEnter
             tabIndex="3">
@@ -104,17 +104,17 @@
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'costcenter.address'"></mat-label>
           <input matInput formControlName="address"
             maxlength="50" appFocusOnEnter tabIndex="11">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'costcenter.city'"></mat-label>
           <input matInput formControlName="city" maxlength="50"
             appFocusOnEnter tabIndex="12">
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costcenter.state' | translate }}</mat-label>
           <mat-select formControlName="state" appFocusOnEnter tabIndex="13">
             <mat-option>None</mat-option>
@@ -123,17 +123,17 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'costcenter.location'"></mat-label>
           <input matInput formControlName="location" maxlength="50"
             appFocusOnEnter tabIndex="14">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'costcenter.email'"></mat-label>
           <input matInput formControlName="email" maxlength="50"
             appFocusOnEnter tabIndex="15">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'costcenter.phone'"></mat-label>
           <input matInput formControlName="phone" maxlength="50"
             appFocusOnEnter tabIndex="16">
@@ -150,7 +150,7 @@
 
     </form>
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="13">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

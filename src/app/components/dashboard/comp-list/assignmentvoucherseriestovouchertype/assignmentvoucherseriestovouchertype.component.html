@@ -7,8 +7,8 @@
 
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
-        <mat-form-field>
+      <div class="row">
+        <mat-form-field class="col-3">
           <mat-label>{{'assignmentofvoucherseriestovouchertype.voucherType' | translate }}</mat-label>
           <mat-select formControlName="voucherType" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
@@ -18,7 +18,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'assignmentofvoucherseriestovouchertype.voucherSeries' | translate }}</mat-label>
           <mat-select formControlName="voucherSeries" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -28,13 +28,13 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assignmentofvoucherseriestovouchertype.suffix'"></mat-label>
           <input matInput
             formControlName="suffix" appFocusOnEnter tabIndex="4">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assignmentofvoucherseriestovouchertype.lastNumber'"></mat-label>
           <input matInput 
             formControlName="lastNumber" appFocusOnEnter tabIndex="5">
@@ -43,7 +43,7 @@
       <mat-divider></mat-divider>
     </form>
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="4">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

@@ -6,9 +6,9 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.countryCode.valid&& formControls.countryCode.status != 'DISABLED', 
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.countryCode.valid&& formControls.countryCode.status != 'DISABLED', 
            'ng--invalid': !formControls.countryCode.valid && formControls.countryCode.status != 'DISABLED' }">
           <mat-label [translate]="'country.countryCode'"></mat-label>
           <input matInput formControlName="countryCode"
@@ -17,7 +17,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.countryCode.valid  }">Country Code is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.countryName.valid, 'ng--invalid': !formControls.countryName.valid  }">
           <mat-label [translate]="'country.countryName'"></mat-label>
           <input matInput formControlName="countryName"
@@ -26,7 +26,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.countryName.valid  }">Country Name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'country.language' | translate }}</mat-label>
           <mat-select formControlName="language" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -36,7 +36,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'country.currency' | translate }}</mat-label>
           <mat-select formControlName="currency" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -50,7 +50,7 @@
 
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
+      <div class="form-element mt-2 d-flex justify-content-end">
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter
           tabIndex="5">
           {{ 'COMMON.CANCEL' | translate }}

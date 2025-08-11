@@ -7,9 +7,9 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assetbegningaccumulateddepreciation.mainAssetNo'"></mat-label>
           <mat-select formControlName="mainAssetNo" appFocusOnEnter tabIndex="1">
             <mat-option *ngFor="let mam of mamList" [value]="mam.assetNumber">
@@ -19,7 +19,7 @@
         </mat-form-field>
 
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'assetbegningaccumulateddepreciation.subAssetNo' | translate }}</mat-label>
           <mat-select formControlName="subAssetNo" appFocusOnEnter tabIndex="2">
             <mat-option *ngFor="let sa of saList" [value]="sa.subAssetNumber">
@@ -29,7 +29,7 @@
         </mat-form-field>
 
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'assetbegningaccumulateddepreciation.depreciationArea' | translate }}</mat-label>
           <mat-select formControlName="depreciationArea" appFocusOnEnter tabIndex="3">
             <mat-option *ngFor="let dpa of dpareaList" [value]="dpa.code">
@@ -38,7 +38,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assetbegningaccumulateddepreciation.accumulatedDepreciation'"></mat-label>
           <input matInput
             formControlName="accumulatedDepreciation" maxlength="50" appFocusOnEnter tabIndex="4">
@@ -53,13 +53,11 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-
       {{ 'COMMON.CANCEL' | translate }}
     </button>
     <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-
       {{ 'COMMON.SAVE' | translate }}
     </button>
   </div>

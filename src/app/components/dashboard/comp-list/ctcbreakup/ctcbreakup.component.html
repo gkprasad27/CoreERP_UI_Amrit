@@ -5,8 +5,8 @@
         </mat-card-title> -->
     <mat-card-content class="p-2 m-0 overflow-auto">
         <form [formGroup]="modelFormData" autocomplete="off">
-            <div class="d--flex mat-form-field-height">
-                <mat-form-field class="form-element">
+            <div class="row">
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'pfmaster.companyName'"></mat-label>
                     <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1" (selectionChange)="onCompanyChange($event.value)">
                       <mat-option *ngFor="let comp of companyList" [value]="comp.id">
@@ -14,8 +14,9 @@
                       </mat-option>
                     </mat-select>
                     </mat-form-field>
-                <div class="mat-mdc-form-field typeahead">
-                    <input placeholder="{{ 'CTCBreakup.empCode' | translate }}" formControlName="empCode"
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3"  [class.filled]="modelFormData.value?.empCode?.length > 0">
+                    <label> {{ 'CTCBreakup.empCode' | translate }} </label>
+                    <input placeholder=" " formControlName="empCode"
                         (input)="getctcEmployeeList($event.target.value, modelFormData.value.companyCode)" [typeahead]="GetEmployeeListArray"
                         typeaheadOptionField='id' appFocusOnEnter tabIndex="2" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200">
@@ -24,7 +25,7 @@
                     </ng-template>
                 </div>
                 
-                <mat-form-field>
+                <mat-form-field class="col-3">
                     <mat-label>Effect From</mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'CTCBreakup.effectFrom' | translate }}"
                         formControlName="effectFrom" appFocusOnEnter tabIndex="3">
@@ -32,13 +33,13 @@
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="form-element">
+                <mat-form-field class="col-3">
                     <mat-label>CTC</mat-label>
                     <input matInput placeholder="{{'CTCBreakup.ctc' | translate }}" formControlName="ctc"
                         appFocusOnEnter tabIndex="4" >
                 </mat-form-field>
 
-                <!-- <mat-form-field>
+                <!-- <mat-form-field class="col-3">
                     <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label>
                     <mat-select formControlName="structureName" placeholder="Structure Name" appFocusOnEnter>
                         <mat-option *ngFor="let List of structureList" [value]="List.text">
@@ -46,7 +47,7 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field> -->
-                 <mat-form-field>
+                 <mat-form-field class="col-3">
                     <mat-label>PF Type</mat-label>
                     <!-- <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label> -->
                     <mat-select formControlName="pfType" placeholder="{{'CTCBreakup.pftype' | translate }}" appFocusOnEnter tabIndex="5">
@@ -56,7 +57,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field>
+                <mat-form-field class="col-3">
                     <mat-label>PT Slab</mat-label>
                     <!-- <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label> -->
                     <mat-select formControlName="ptSlab" placeholder="{{'CTCBreakup.ptslab' | translate }}" appFocusOnEnter tabIndex="6">
@@ -117,7 +118,7 @@
         </mat-card-content>
     </mat-card-content>
 
-    <div class="form-element p-2 d-flex justify-content-end">
+    <div class="form-element mt-2 d-flex justify-content-end">
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
             {{ 'COMMON.CANCEL' | translate }}
         </button>

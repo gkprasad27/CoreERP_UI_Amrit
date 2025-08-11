@@ -8,8 +8,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field>
+      <div class="row">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'AlternateControlAccount.chartofAccount'"></mat-label>
           <mat-select formControlName="chartofAccount" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -19,7 +19,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'posting.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
@@ -29,7 +29,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'posting.branch' | translate }}</mat-label>
           <mat-select formControlName="branch" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
@@ -39,7 +39,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'posting.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
@@ -49,7 +49,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.code'"></mat-label>
           <mat-select formControlName="code"
             appFocusOnEnter tabIndex="1">
@@ -60,7 +60,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.sgstgl'"></mat-label>
           <mat-select formControlName="sgstgl" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -70,7 +70,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.cgstgl'"></mat-label>
           <mat-select formControlName="cgstgl" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -80,7 +80,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.igstgl'"></mat-label>
           <mat-select formControlName="igstgl" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -90,7 +90,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.ugstgl'"></mat-label>
           <mat-select formControlName="ugstgl" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -100,7 +100,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.compositeAccount'"></mat-label>
           <mat-select formControlName="compositeAccount" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
@@ -116,7 +116,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="9">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

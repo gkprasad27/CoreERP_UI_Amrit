@@ -7,9 +7,9 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid&&formControls.code.status != 'DISABLED',
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid&&formControls.code.status != 'DISABLED',
            'ng--invalid': !formControls.code.valid &&formControls.code.status != 'DISABLED' }">
           <mat-label [translate]="'accountkey.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4"
@@ -19,7 +19,7 @@
             required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
           <mat-label [translate]="'accountkey.description'"></mat-label>
           <input matInput formControlName="description"
@@ -28,7 +28,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.acquisitionsGl'"></mat-label>
           <mat-select formControlName="acquisitionsGl" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -38,7 +38,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.accumulatedGl'"></mat-label>
           <mat-select formControlName="accumulatedGl" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -48,7 +48,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.auggl'"></mat-label>
           <mat-select formControlName="auggl" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
@@ -58,7 +58,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.salesRevenueGl'"></mat-label>
           <mat-select formControlName="salesRevenueGl" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
@@ -68,7 +68,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.lossOnSaleGl'"></mat-label>
           <mat-select formControlName="lossOnSaleGl" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
@@ -78,7 +78,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.gainOnSaleGl'"></mat-label>
           <mat-select formControlName="gainOnSaleGl" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
@@ -88,7 +88,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.scrappingGl'"></mat-label>
           <mat-select formControlName="scrappingGl" appFocusOnEnter tabIndex="9">
             <mat-option>None</mat-option>
@@ -98,7 +98,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.depreciationGl'"></mat-label>
           <mat-select formControlName="depreciationGl" appFocusOnEnter tabIndex="10">
             <mat-option>None</mat-option>
@@ -108,7 +108,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.companyCode'"></mat-label>
           <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="11">
             <mat-option>None</mat-option>
@@ -118,7 +118,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.chartofAccount'"></mat-label>
           <mat-select formControlName="chartofAccount" appFocusOnEnter tabIndex="12">
             <mat-option>None</mat-option>
@@ -134,7 +134,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

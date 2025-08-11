@@ -8,8 +8,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.componentCode.valid }">
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.componentCode.valid }">
           <input matInput placeholder="{{'componentmaster.componentCode' | translate }}" disabled
             formControlName="componentCode" appFocusOnEnter tabIndex="1">
           <mat-error *ngIf="formControls.componentCode.errors" class="help-block">
@@ -18,7 +18,7 @@
 
         </mat-form-field>
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.componentName.valid }">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.componentName.valid }">
           <input matInput placeholder="{{'componentmaster.componentName' | translate }}" formControlName="componentName"
             appFocusOnEnter tabIndex="2">
           <mat-error *ngIf="formControls.componentName.errors" class="help-block">
@@ -26,7 +26,7 @@
           </mat-error>
         </mat-form-field>
        
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label>{{'componentmaster.componentType' | translate }}</mat-label>
           <mat-select formControlName="componentType">
             <mat-option *ngFor="let conflist of configureList" [value]="conflist.id">
@@ -35,7 +35,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'componentmaster.duration' | translate }}</mat-label>
           <mat-select formControlName="duration">
             <mat-option *ngFor="let conflist of duration" [value]="conflist.value">
@@ -44,7 +44,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'componentmaster.specificMonth' | translate }}</mat-label>
           <mat-select formControlName="specificMonth">
             <mat-option *ngFor="let conflist of months" [value]="conflist.value">
@@ -52,7 +52,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'componentmaster.companyName'"></mat-label>
           <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="5">
             <mat-option *ngFor="let comp of companyList" [value]="comp.id">
@@ -60,10 +60,10 @@
             </mat-option>
           </mat-select>
           </mat-form-field>
-          <mat-form-field class="form-element" >
+          <mat-form-field class="col-3" >
             <input matInput placeholder="{{'componentmaster.amount' | translate }}" formControlName="amount" appFocusOnEnter tabIndex="6">
           </mat-form-field>
-          <mat-form-field class="form-element" >
+          <mat-form-field class="col-3" >
             <input matInput placeholder="{{'componentmaster.percentage' | translate }}" formControlName="percentage" appFocusOnEnter tabIndex="7">
           </mat-form-field>
       </div>
@@ -74,12 +74,12 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+  <div class="form-element mt-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       
       {{ 'COMMON.CANCEL' | translate }}
     </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
       tabIndex="6">
       
       {{ 'COMMON.SAVE' | translate }}

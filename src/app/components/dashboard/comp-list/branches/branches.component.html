@@ -8,7 +8,7 @@
     <form [formGroup]="modelFormData" autocomplete="off">
       <div class="d--flex">
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.branchCode.valid&& formControls.branchCode.status != 'DISABLED', 
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.branchCode.valid&& formControls.branchCode.status != 'DISABLED', 
            'ng--invalid': !formControls.branchCode.valid && formControls.branchCode.status != 'DISABLED' }">
           <mat-label [translate]="'branches.branchCode'"></mat-label>
           <input matInput formControlName="branchCode"
@@ -17,7 +17,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.branchCode.valid  }">Branch Code is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.branchName.valid, 'ng--invalid': !formControls.branchName.valid  }">
           <mat-label [translate]="'branches.branchName'"></mat-label>
           <input matInput formControlName="branchName"
@@ -26,7 +26,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.branchName.valid  }">Branch Name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.companyCode'"></mat-label>
           <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -36,12 +36,12 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.city'"></mat-label>
           <input matInput formControlName="city" maxlength="50"
             appFocusOnEnter tabIndex="4">
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'company.state' | translate }}</mat-label>
           <mat-select formControlName="state" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
@@ -51,7 +51,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'company.region' | translate }}</mat-label>
           <mat-select formControlName="region" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
@@ -61,7 +61,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'company.country' | translate }}</mat-label>
           <mat-select formControlName="country" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
@@ -71,7 +71,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'company.currency' | translate }}</mat-label>
           <mat-select formControlName="currency" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
@@ -81,7 +81,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'company.language' | translate }}</mat-label>
           <mat-select formControlName="language" appFocusOnEnter tabIndex="9">
             <mat-option>None</mat-option>
@@ -91,31 +91,31 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.location'"></mat-label>
           <input matInput formControlName="location" maxlength="50"
             appFocusOnEnter tabIndex="10">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.address'"></mat-label>
           <input matInput formControlName="address" maxlength="50"
             appFocusOnEnter tabIndex="11">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.address2'"></mat-label>
           <input matInput formControlName="address2" maxlength="50"
             appFocusOnEnter tabIndex="12">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.pincode'"></mat-label>
           <input matInput formControlName="pincode" maxlength="6"
             appFocusOnEnter tabIndex="13">
         </mat-form-field>
 
-        <mat-form-field
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.phone.valid, 'ng--invalid': !formControls.phone.valid  }">
           <mat-label [translate]="'branches.phone'"></mat-label>
           <input matInput formControlName="phone" maxlength="10"
@@ -125,37 +125,37 @@
             required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.mobile'"></mat-label>
           <input matInput formControlName="mobile" maxlength="10"
             appFocusOnEnter tabIndex="15">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.email'"></mat-label>
           <input matInput formControlName="email" maxlength="50"
             appFocusOnEnter tabIndex="16">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.panno'"></mat-label>
           <input matInput formControlName="panno" maxlength="12"
             appFocusOnEnter tabIndex="17">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.gstno'"></mat-label>
           <input matInput formControlName="gstno" maxlength="20"
             appFocusOnEnter tabIndex="18">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'branches.tanno'"></mat-label>
           <input matInput formControlName="tanno" maxlength="12"
             appFocusOnEnter tabIndex="19">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'branches.responsiblePerson' | translate }}</mat-label>
           <mat-select formControlName="responsiblePerson" appFocusOnEnter tabIndex="20">
             <mat-option>None</mat-option>
@@ -170,7 +170,7 @@
     </form>
   </mat-card-content>
 
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="21">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

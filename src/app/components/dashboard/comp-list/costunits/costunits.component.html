@@ -7,8 +7,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field
+      <div class="row">
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.objectType.valid, 'ng--invalid': !formControls.objectType.valid  }">
           <mat-label>{{'costunits.objectType' | translate }}</mat-label>
           <mat-select formControlName="objectType" (selectionChange)="getobjectNumberData()" appFocusOnEnter
@@ -22,7 +22,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.objectType.valid  }"> Object Type is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.objectNumber.valid && formControls.objectNumber.status != 'DISABLED',
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.objectNumber.valid && formControls.objectNumber.status != 'DISABLED',
            'ng--invalid': !formControls.objectNumber.valid && formControls.objectNumber.status != 'DISABLED'  }">
           <mat-label [translate]="'costcenter.phone'"></mat-label>
           <input matInput formControlName="objectNumber"
@@ -31,13 +31,13 @@
             [ngClass]="{ 'ng--invalid': !formControls.objectNumber.valid  }"> Object Number is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'costcenter.phone'"></mat-label>
           <input matInput formControlName="description"
             appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costunits.costUnitType' | translate }}</mat-label>
           <mat-select formControlName="costUnitType" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -47,7 +47,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costunits.perUnitCostBy' | translate }}</mat-label>
           <mat-select formControlName="perUnitCostBy" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
@@ -57,7 +57,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costunits.manufacturingType' | translate }}</mat-label>
           <mat-select formControlName="manufacturingType" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
@@ -67,7 +67,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'costunits.material' | translate }}</mat-label>
           <mat-select formControlName="material" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
@@ -83,13 +83,11 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-
       {{ 'COMMON.CANCEL' | translate }}
     </button>
     <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-
       {{ 'COMMON.SAVE' | translate }}
     </button>
   </div>

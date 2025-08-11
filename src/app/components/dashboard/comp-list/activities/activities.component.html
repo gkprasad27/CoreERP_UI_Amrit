@@ -7,10 +7,10 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
 
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.activityCode.valid && formControls.activityCode.status != 'DISABLED',
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.activityCode.valid && formControls.activityCode.status != 'DISABLED',
           'ng--invalid': !formControls.activityCode.valid && formControls.activityCode.status != 'DISABLED'  }">
           <mat-label [translate]="'activities.activityCode'"></mat-label>
           <input matInput formControlName="activityCode"
@@ -19,7 +19,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.activityCode.valid  }"> Activity Code is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element"
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
           <mat-label [translate]="'activities.description'"></mat-label>
           <input matInput formControlName="description"
@@ -28,7 +28,7 @@
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'activities.uom' | translate }}</mat-label>
           <mat-select formControlName="uom" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -38,7 +38,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'activities.basisofFixedPrice' | translate }}</mat-label>
           <mat-select formControlName="basisofFixedPrice" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
@@ -48,7 +48,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'activities.costElement' | translate }}</mat-label>
           <mat-select formControlName="costElement" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
@@ -64,7 +64,7 @@
     </form>
 
   </mat-card-content>
-  <div class="form-element p-2 d-flex justify-content-end">
+  <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
       {{ 'COMMON.CANCEL' | translate }}

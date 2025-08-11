@@ -7,8 +7,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid &&formControls.code.status != 'DISABLED', 
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid &&formControls.code.status != 'DISABLED', 
           'ng--invalid': !formControls.code.valid &&formControls.code.status != 'DISABLED' }">
           <mat-label [translate]="'assetnumberrange.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4"
@@ -18,12 +18,12 @@
             required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assetnumberrange.fromRange'"></mat-label>
           <input matInput formControlName="fromRange"
             maxlength="7" (change)="validationcode()" appFocusOnEnter tabIndex="3">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'assetnumberrange.toRange'"></mat-label>
           <input matInput formControlName="toRange"
             maxlength="7" (change)="validationcode()" appFocusOnEnter tabIndex="4">

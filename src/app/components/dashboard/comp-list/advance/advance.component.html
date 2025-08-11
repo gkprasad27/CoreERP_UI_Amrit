@@ -6,7 +6,7 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
         <!-- <mat-form-field class="form-element">
           <input matInput placeholder="{{'advance.employeeId' | translate }}"
                  (input)="getProductByProductCode($event.target.value)" class="typeahead"
@@ -14,20 +14,21 @@
                  formControlName="employeeId" appFocusOnEnter tabIndex="1">
         </mat-form-field> -->
 
-        <div class="multiselect-dropdown-list" *ngIf="dropdownSettings">
-          <ng-multiselect-dropdown placeholder="{{ 'advance.employeeId' | translate }}"
+        <div class="multiselect-dropdown-list floating-dropdown col-3" [class.filled]="modelFormData.value?.employeeId?.length > 0" *ngIf="dropdownSettings">
+          <label> {{ 'advance.employeeId' | translate }} </label>
+          <ng-multiselect-dropdown placeholder=" "
             formControlName="employeeId"  [settings]="dropdownSettings" [data]="employeesList">
           </ng-multiselect-dropdown>
         </div>
        
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'advance.applyDate' | translate }}"
                  formControlName="applyDate" appFocusOnEnter tabIndex="1">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'advance.advanceType' | translate }}</mat-label>
           <mat-select formControlName="advanceType">
             <mat-option *ngFor="let comp of advanceList" [value]="comp.advanceTypeId">
@@ -36,11 +37,11 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field  class="col-3">
           <input matInput placeholder="{{'advance.advanceAmount' | translate }}" formControlName="advanceAmount" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field  class="col-3">
           <input matInput placeholder="{{'advance.reason' | translate }}" formControlName="reason" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
@@ -48,14 +49,12 @@
       </div>
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
-
+      <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
           {{ 'COMMON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
                 tabIndex="5">
-
                 {{ 'COMMON.SAVE' | translate }}
         </button>
       </div>

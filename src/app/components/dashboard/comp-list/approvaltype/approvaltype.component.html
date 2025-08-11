@@ -6,8 +6,8 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field>
+      <div class="row">
+        <mat-form-field class="col-3">
           <mat-label>{{'approvaltype.title' | translate }}</mat-label>
           <mat-select formControlName="approval"  >
             <mat-option *ngFor="let aptype of aptypes" [value]="aptype.formId">
@@ -16,7 +16,7 @@
           </mat-select>
         </mat-form-field>
 
-        <!-- <mat-form-field>
+        <!-- <mat-form-field class="col-3">
           <mat-label>{{'approvaltype.branchCode' | translate }}</mat-label>
           <mat-select formControlName="department">
             <mat-option *ngFor="let branch of branchesList" [value]="branch.id">
@@ -25,7 +25,7 @@
           </mat-select>
         </mat-form-field> -->
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'approvaltype.company' | translate }}</mat-label>
           <mat-select formControlName="company">
             <mat-option *ngFor="let comp of compiniesList" [value]="comp.id">
@@ -34,7 +34,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'approvaltype.recommendedBy' | translate }}</mat-label>
           <mat-select formControlName="recommendedBy">
             <mat-option *ngFor="let emp of employeesList" [value]="emp.userName">
@@ -43,7 +43,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'approvaltype.approvedBy' | translate }}</mat-label>
           <mat-select formControlName="approvedBy">
             <mat-option *ngFor="let emp of employeesList" [value]="emp.userName">
@@ -56,15 +56,13 @@
       </div>
       <mat-divider></mat-divider>
 
-      <div class="form-element p-2 d-flex justify-content-end">
+      <div class="form-element mt-2 d-flex justify-content-end">
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-
           {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
                 tabIndex="5">
-
-          ApplyApprovalType
+          Apply Approval Type
         </button>
       </div>
 
