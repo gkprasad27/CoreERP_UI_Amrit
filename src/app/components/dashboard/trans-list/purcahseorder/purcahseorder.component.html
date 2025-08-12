@@ -547,7 +547,7 @@
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'purchaseorder.deliveryDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="deliveryDate"
+                    <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="deliveryDate"
                         appFocusOnEnter tabIndex="9">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
