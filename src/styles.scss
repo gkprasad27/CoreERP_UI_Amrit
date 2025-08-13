@@ -22,16 +22,13 @@ body {
   // background-size: cover;
   // height: 100vh;
   // background-position: center;
-  background: linear-gradient(to right, #7ec094, #7ec094, );
+  // background: linear-gradient(to right, #7ec094, #7ec094, );
 
 }
 
 .mat-mdc-focus-indicator:hover {
   background-color: aqua;
 }
-
-
-
 
 .mat-card {
   padding: 0px !important;
@@ -43,9 +40,6 @@ body {
   width: auto !important;
 }
 
-.background--color {
-  background-color: reuse.$color-orange !important;
-}
 
 .mat-option.mat-active {
   background: lightblue !important
@@ -318,7 +312,8 @@ mat-tab-header {
 
 *h6,
 .header-bg {
-  background: linear-gradient(to right, #77bb97, #77bb97) !important;
+  background-color: reuse.$bg-color !important;
+  background-image: reuse.$bg-color-image !important;
   color: rgb(252, 252, 252) !important;
   padding: 12px 12px 12px 12px;
   font-weight: bold;
@@ -469,3 +464,14 @@ mat-tab-header {
 typeahead-container {
   height: 200px !important;
 }
+
+.button-green {
+  background-color: #3ea33a !important;
+}
+
+.background--color {
+  background-color: reuse.$bg-color !important;
+  background-image: reuse.$bg-color-image !important;
+}
+
+   

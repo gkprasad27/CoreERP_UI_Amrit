@@ -1,4 +1,4 @@
-<div class="nav"><mat-toolbar class="text-white">
+<div class="nav"><mat-toolbar class="text-white background--color">
   <mat-toolbar-row class="d-flex justify-content-between">
 
     <div class="d-flex">
@@ -20,7 +20,7 @@
         <span class="align-items-center d-flex">
           <mat-icon>account_circle</mat-icon>
         </span>
-        <small id="user" class="mx-1 my-2" *ngIf="loginUser != null"> {{loginUser.userName}} </small>
+        <small class="mx-1 my-2" *ngIf="loginUser != null"> {{loginUser.userName}} </small>
       </div>
 
       <button class="my-2" mat-button (click)="logout()" *ngIf="showExpandButtons">

@@ -1,7 +1,7 @@
 $background-shadow : rgba(0,0,0,.3);
 $background-color : rgba(0, 0, 0, 0.06);
 $color-blue: #3e77b1;
-$color-orange: #17b978;
+$color-orange: #e28d00;
 $color-green: #42a948;
 $color-error: #f44336;
 $color-red: #af3030;
@@ -10,4 +10,11 @@ $color-gray: #efefef;
 $color-white: white;
 $color-ddd : #ddd;
 $color-f9f9f9 : #f9f9f9;
-$color-color : rgba(0,0,0,.42)
+$color-color : rgba(0,0,0,.42);
+
+$bg-color: var(--start-color, #ff8226);
+$bg-color-image: linear-gradient(
+    90deg,
+    var(--start-color, #FF920B) 0%,
+    var(--end-color, #F35C17) 90%
+  );
