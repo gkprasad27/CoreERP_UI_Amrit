@@ -24,7 +24,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-erpuser',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule ],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule],
   templateUrl: './erpuser.component.html',
   styleUrls: ['./erpuser.component.scss']
 })
@@ -68,64 +68,91 @@ export class ErpUsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getRolesList();
+    // this.getRolesList();
     //this.getTableData();
-    this.getEmployeesList();
+    this.allApis();
   }
 
-  getEmployeesList() {
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
-    this.apiService.apiGetRequest(getEmployeeList)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.employeesList = res.response['emplist'];
-            }
-          }
-          this.spinner.hide();
-        });
-  }
+  allApis() {
+    const getrolelistUrl = String.Join('/', this.apiConfigService.getrolelist);
+    const getCompanyUrl = String.Join('/', this.apiConfigService.getCompanysList);
 
-  getRolesList() {
-    const getRolesListsUrl = String.Join('/', this.apiConfigService.getrolelist);
-    this.apiService.apiGetRequest(getRolesListsUrl).subscribe(
-      response => {
-        const res = response;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            if (!this.commonService.checkNullOrUndefined(res.response['roleList']) && res.response['roleList'].length) {
-              this.RolesList = res.response['roleList'];
-              //this.spinner.hide();
-            }
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getrolelistUrl),
+        this.apiService.apiGetRequest(getCompanyUrl),
+      ]).subscribe(([getrole, companies]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(getrole) && getrole.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(getrole.response)) {
+            this.RolesList = getrole.response['roleList']
           }
         }
-        this.getTableData();
-      });
-  }
 
-  getTableData() {
-    const getCompanyUrl = String.Join('/', this.apiConfigService.getCompanysList);
-    this.apiService.apiGetRequest(getCompanyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
-            }
+        if (!this.commonService.checkNullOrUndefined(companies) && companies.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(companies.response)) {
+            this.companyList = companies.response['companiesList']
           }
-          this.spinner.hide();
-        });
+        }
+
+      });
+    });
   }
 
-  
+  // getEmployeesList() {
+  //   let obj = JSON.parse(localStorage.getItem("user"));
+  //   const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
+  //   this.apiService.apiGetRequest(getEmployeeList)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.employeesList = res.response['emplist'];
+  //           }
+  //         }
+  //         this.spinner.hide();
+  //       });
+  // }
+
+  // getRolesList() {
+  //   const getRolesListsUrl = String.Join('/', this.apiConfigService.getrolelist);
+  //   this.apiService.apiGetRequest(getRolesListsUrl).subscribe(
+  //     response => {
+  //       const res = response;
+  //       if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //         if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response['roleList']) && res.response['roleList'].length) {
+  //             this.RolesList = res.response['roleList'];
+  //             //this.spinner.hide();
+  //           }
+  //         }
+  //       }
+  //       this.getTableData();
+  //     });
+  // }
+
+  // getTableData() {
+  //   const getCompanyUrl = String.Join('/', this.apiConfigService.getCompanysList);
+  //   this.apiService.apiGetRequest(getCompanyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companyList = res.response['companiesList'];
+  //           }
+  //         }
+  //         this.spinner.hide();
+  //       });
+  // }
+
+
   approveOrReject(event) {
-      this.modelFormData.patchValue({
-        active: event ? 1 : 0,
-      });
+    this.modelFormData.patchValue({
+      active: event ? 1 : 0,
+    });
   }
 
 
@@ -147,7 +174,7 @@ export class ErpUsersComponent implements OnInit {
 
   }
 
-  
+
 
   cancel() {
     this.dialogRef.close();

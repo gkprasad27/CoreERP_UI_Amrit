@@ -9,7 +9,7 @@
       <div class="row">
 
  
-        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.userName.valid, 'ng--invalid': !formControls.userName.valid  }">
+        <!-- <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.userName.valid, 'ng--invalid': !formControls.userName.valid  }">
           <mat-label [translate]="'erpuser.userName'"></mat-label>
           <mat-select formControlName="userName">
             <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
@@ -18,8 +18,17 @@
           </mat-select>
           <mat-error *ngIf="!formControls.userName.valid" [ngClass]="{ 'ng--invalid': !formControls.userName.valid  }">
             User Name is required</mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
+
+        <mat-form-field class="col-3"
+          [ngClass]="{ 'ng--valid': formControls.userName.valid, 'ng--invalid': !formControls.userName.valid  }">
+          <mat-label [translate]="'erpuser.userName'"></mat-label>
+          <input matInput formControlName="userName" maxlength="50"
+            appFocusOnEnter tabIndex="2">
+          <mat-error *ngIf="!formControls.userName.valid" [ngClass]="{ 'ng--invalid': !formControls.userName.valid  }">
+            User Name is required</mat-error>
+        </mat-form-field>
 
         <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.password.valid, 'ng--invalid': !formControls.password.valid  }">
