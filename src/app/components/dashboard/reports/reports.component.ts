@@ -25,14 +25,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
-import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { APP_DATE_FORMATS, AppDateAdapter } from '../../../directives/format-datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-reports',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TableComponent, TranslateModule, MatSelectModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule, NgMultiSelectDropDownModule, MatSlideToggleModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TypeaheadModule, TableComponent, TranslateModule, MatSelectModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, NgMultiSelectDropDownModule, MatSlideToggleModule],
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
   providers: [
@@ -167,7 +167,7 @@ export class ReportsComponent {
 
   salarySearch() {
     const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-    const costCenUrl = String.Join('', environment.baseUrl, `Ledger/SalaryProcess/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+    const costCenUrl = String.Join('', environment.baseUrl, `Ledger/SalaryProcess/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.controls.companyCode.value ? this.modelFormData.controls.companyCode.value : '-1'}/${obj ? obj.id : '-1'}`);
     this.apiService.apiPostRequest(costCenUrl)
       .subscribe(
         response => {
@@ -495,39 +495,39 @@ export class ReportsComponent {
     }
     let getUrl;
     if (this.routeParam == 'pendingjobworkreport') {
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.controls.companyCode.value}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
     } else if (this.routeParam == 'salesanalysis' || this.routeParam == 'materialinward' || this.routeParam == 'purchaseanalysis') {
       const encodedMaterialCode = this.modelFormData.value.materialCode ? encodeURIComponent(this.modelFormData.value.materialCode) : '-1';
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}/${encodedMaterialCode}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}/${encodedMaterialCode}`);
     } else if (this.routeParam == 'VendorPayments' || this.routeParam == 'CustomerPayments') {
       const obj = this.bpgLists.find((d: any) => d.text == this.modelFormData.value.partyAccount);
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.status) ? 'Y' : 'N'}/${this.modelFormData.value.bpcategory ? this.modelFormData.value.bpcategory : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value}/${(this.modelFormData.value.status) ? 'Y' : 'N'}/${this.modelFormData.value.bpcategory ? this.modelFormData.value.bpcategory : '-1'}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'employeeotreport' || this.routeParam == 'employeeattendance') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'AttendanceProcess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', environment.baseUrl, `Reports/GetAttendanceProcess/${fromDate}/${toDate}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `Reports/GetAttendanceProcess/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value ? this.modelFormData.controls.companyCode.value : '-1'}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'salaryprocess') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
-      getUrl = String.Join('', environment.baseUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.value.companyCode ? this.modelFormData.value.companyCode : '-1'}/${obj ? obj.id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `Reports/GetPayslip/${new Date(this.modelFormData.value.selected).getMonth() + 1}/${new Date(this.modelFormData.value.selected).getFullYear()}/${this.modelFormData.controls.companyCode.value ? this.modelFormData.controls.companyCode.value : '-1'}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'salesgst') {
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
     } else if (this.routeParam == 'purchasegst') {
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
     } else if (this.routeParam == 'stockvaluation') {
       // Encode only if materialCode exists, otherwise use '-1'
       const encodedMaterialCode = this.modelFormData.value.materialCode ? encodeURIComponent(this.modelFormData.value.materialCode) : '-1';
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${encodedMaterialCode}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.controls.companyCode.value}/${encodedMaterialCode}`);
     } else if (this.routeParam == 'pendingsales') {
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.controls.companyCode.value}/${(this.modelFormData.value.customerCode && this.modelFormData.value.customerCode.length) ? this.modelFormData.value.customerCode[0].id : '-1'}`);
     } else if (this.routeParam == 'pendingpurchaseorders') {
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.companyCode}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.controls.companyCode.value}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
     } else if (this.routeParam == 'consolidatedpayslip') {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.datepipe.transform(this.modelFormData.value.selected, 'yyyy-MM-dd')}`);
     }
     else {
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.value.companyCode}`);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value}`);
     }
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
@@ -586,7 +586,7 @@ export class ReportsComponent {
                   })
                   keys.push(cols);
                 });
-                const obj = this.companyList.find((c: any) => c.id == this.modelFormData.value.companyCode);
+                const obj = this.companyList.find((c: any) => c.id == this.modelFormData.controls.companyCode.value);
                 this.modelFormData.patchValue({
                   companyName: obj.text
                 })

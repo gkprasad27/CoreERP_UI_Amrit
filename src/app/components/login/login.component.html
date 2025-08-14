@@ -20,7 +20,7 @@
 
       <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.password.valid }">
         <mat-label [translate]="'LOGIN.PASSWORD'"></mat-label>
-        <input id="loginput" matInput type="password" formControlName="password">
+        <input id="passwordinput" matInput type="password" formControlName="password">
         <mat-error *ngIf="isSubmitted && formControls.password.errors" class="help-block">
           <div *ngIf="formControls.password.errors.required">Password is required</div>
         </mat-error>
