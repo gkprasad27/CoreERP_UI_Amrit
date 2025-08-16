@@ -804,6 +804,7 @@ export class PurchaseOrderComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['pomasters']);
+              debugger
               const obj = this.employeesList.find((e: any) => e.id == this.formData.value.createdBy);
               this.formData.patchValue({
                 createdBy: obj ? [{ id: obj.id, text: obj.name }]: [],
@@ -1080,8 +1081,7 @@ export class PurchaseOrderComponent implements OnInit {
     // this.formData.patchValue({
     //   totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
     // })
-    this.formData.patchValue({
-      totalAmount: (
+    const totalAmount = (
         (+this.formData.value.amount || 0) +      // Base amount, default to 0 if undefined
         (+this.formData.value.totalTax || 0) +    // Total tax, default to 0 if undefined
         (+this.formData.value.fright || 0) +      // Freight charges, default to 0 if undefined
@@ -1089,10 +1089,12 @@ export class PurchaseOrderComponent implements OnInit {
         (+this.formData.value.otherCharges || 0) + // Cutting charges, default to 0 if undefined
         (+this.formData.value.hamaliCharges || 0) + // Cutting charges, default to 0 if undefined
         (+this.formData.value.extaCharges || 0)    // Hamali charges, default to 0 if undefined
-      ).toFixed(2),  // Round to 2 decimal places
+      );
+    this.formData.patchValue({
+      totalAmount: totalAmount ? Math.round(totalAmount) : 0,  // Round to 2 decimal places
     });
 
-
+debugger
   }
   // emitColumnChanges(data) {
   //   this.tableData = data.data;

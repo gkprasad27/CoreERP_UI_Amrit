@@ -2851,7 +2851,7 @@
     "action": "Action"
   },
   "productstatus": {
-    "title": "Sale Order",
+    "title": "Product Status",
     "saleOrderNo": "Sale Order Number",
     "supplierName": "Customer Name",
     "orderDate": "Order Date",

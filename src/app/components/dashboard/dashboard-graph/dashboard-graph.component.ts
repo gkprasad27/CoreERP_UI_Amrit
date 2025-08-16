@@ -35,6 +35,7 @@ export class DashboardGraphComponent {
 
   companyList: any[] = [];
 
+  user = JSON.parse(localStorage.getItem("user"));
 
   constructor(
     private RuntimeConfigService: RuntimeConfigService, private apiConfigService: ApiConfigService,
@@ -53,8 +54,7 @@ export class DashboardGraphComponent {
 
 
   getEmpPresent() {
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const getEmpPresent = String.Join('/', this.apiConfigService.getEmpPresent, obj.companyCode);
+    const getEmpPresent = String.Join('/', this.apiConfigService.getEmpPresent, this.user.companyCode);
     this.apiService.apiGetRequest(getEmpPresent)
       .subscribe(
         response => {

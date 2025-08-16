@@ -5,7 +5,7 @@
             style="height: 100px; width: 65%;">
 
         <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
-        <img *ngIf="modelFormData.value.companyName !== 'AMT POWER TRANSMISSION'" src="/assets/images/AMRIT.jpg"
+        <img *ngIf="modelFormData.value.companyName !== 'AMT POWER TRANSMISSION'" src="/assets/images/AMRIT_1.jpg"
             style="height: 100px; width: 65%;">
         <div style="padding: 24px;
           border-top: 1px solid black;
@@ -129,7 +129,7 @@
         <div style="display: flex;">
             <img *ngIf="data.companyName === 'AMT POWER TRANSMISSION'" src="/assets/images/header.jpg"
                 style="height: 60px; width: 100%;">
-            <img *ngIf="data.companyName !== 'AMT POWER TRANSMISSION'" src="/assets/images/AMRIT.jpg"
+            <img *ngIf="data.companyName !== 'AMT POWER TRANSMISSION'" src="/assets/images/AMRIT_1.jpg"
                 style="height: 60px; width: 100%;">
         </div>
         <!-- <div style="display: flex;">
@@ -533,7 +533,11 @@
     <ng-container *ngIf="consolidatedpaysData && consolidatedpaysData.length">
 
         <div style="display: flex;">
-            <img src="/assets/images/header.jpg" style="height: 100px; width: 65%;">
+            <!-- <img src="/assets/images/header.jpg" style="height: 100px; width: 65%;"> -->
+            <img *ngIf="modelFormData.value.companyName === 'AMT POWER TRANSMISSION'" src="/assets/images/header.jpg"
+                style="height: 60px; width: 100%;">
+            <img *ngIf="modelFormData.value.companyName !== 'AMT POWER TRANSMISSION'" src="/assets/images/AMRIT_1.jpg"
+                style="height: 60px; width: 100%;">
 
             <div style="padding: 24px;
           border-top: 1px solid black;
@@ -565,7 +569,13 @@
                         S.NO </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
+                        EMPLOYEE Code </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                         EMPLOYEE NAME </th>
+                    <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
+                        Designation NAME </th>
                     <th
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;padding: 5px;text-align: start; -webkit-print-color-adjust: exact;">
                         BASIC SALARY </th>
@@ -590,7 +600,13 @@
                         {{ i + 1 }} </td>
                     <td
                         style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
+                        {{ data.employeeCode }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
                         {{ data.employeeName }} </td>
+                    <td
+                        style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
+                        {{ data.designationName }} </td>
                     <td
                         style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
                         {{ data.basic }} </td>

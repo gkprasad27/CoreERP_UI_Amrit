@@ -383,8 +383,9 @@ export class JobworkmaterialissueComponent {
         })
       }
     })
+    const totalAmount = ((+this.formData.value.amount) + (+this.formData.value.totalTax))
     this.formData.patchValue({
-      totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
+      totalAmount: totalAmount ? Math.round(totalAmount) : 0
     })
   }
 
