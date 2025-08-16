@@ -1112,7 +1112,8 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   save() {
-    if ((this.tableData.length == 0 || this.formData.invalid || (!(this.tableData.some((t: any) => t.changed))) && !this.routeEdit)) {
+    const flag = this.tableData.some((t: any) => t.changed)
+    if (this.tableData.length == 0 || this.formData.invalid || !flag) {
       this.formData.markAllAsTouched();
       return;
     }

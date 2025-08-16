@@ -146,6 +146,7 @@ import { SalaryProcessComponent} from './salaryproces/salaryprocess.component';
 import { QuorantineComponent } from './quorantine/quorantine.component';
 import { CAPAdetailsComponent } from './capadetails/capadetails.component';
 import { QcparamconfigurationComponent } from './qcparamconfiguration/qcparamconfiguration.component';
+import { DispatchstatusComponent } from './dispatchstatus/dispatchstatus.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -724,6 +725,9 @@ export class CompListService {
         break;
       case 'dispatchdetails':
         this.dynamicComp.component = DispatchdetailsComponent;
+        return this.dynamicComp.component;
+      case 'dispatchstatus':
+        this.dynamicComp.component = DispatchstatusComponent;
         return this.dynamicComp.component;
         break;
         case 'salaryprocess':

@@ -153,6 +153,9 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       data.item = null;
       this.addOrUpdateEvent.emit(data);
     }
+    else if (data.action === 'View' || this.commonService.userPermission?.canView) {
+      this.addOrUpdateEvent.emit(data);
+    }
   }
 
   onEditClick(row: any) {

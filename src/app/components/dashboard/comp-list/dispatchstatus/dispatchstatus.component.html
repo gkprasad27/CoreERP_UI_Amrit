@@ -1,0 +1,84 @@
+<div class="position-relative popup-class">
+    <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+        <span> {{'dispatchstatus.title' | translate }} </span>
+        <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+    </mat-card-title>
+    <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+        <form [formGroup]="modelFormData" autocomplete="off">
+
+            <div class="row">
+
+               
+                  <mat-form-field class="col-3">
+                    <mat-label [translate]="'dispatchstatus.saleOrder'"></mat-label>
+                    <mat-select formControlName="saleOrder" appFocusOnEnter tabIndex="2" >
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let invoice of getInvoiceListData" [value]="invoice.saleOrderNo">
+                            {{invoice.saleOrderNo}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'dispatchstatus.invoiceNumber'"></mat-label>
+                    <mat-select formControlName="invoiceNumber" appFocusOnEnter tabIndex="2" >
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let invoice of getInvoiceListData" [value]="invoice.invoiceNo">
+                            {{invoice.invoiceNo}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'dispatchstatus.poNumber'"></mat-label>
+                    <input matInput readonly formControlName="poNumber" appFocusOnEnter tabIndex="3">
+                </mat-form-field>
+
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'dispatchstatus.lrNumber'"></mat-label>
+                    <input matInput formControlName="lrNumber" appFocusOnEnter tabIndex="4">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'dispatchstatus.lrDate'"></mat-label>
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" tabIndex="5" formControlName="lrDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'dispatchstatus.transporter'"></mat-label>
+                    <input matInput formControlName="transporter" appFocusOnEnter tabIndex="6">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'dispatchstatus.boxes'"></mat-label>
+                    <input matInput type="number" formControlName="boxes" appFocusOnEnter tabIndex="7">
+                </mat-form-field>
+
+                <div class="col-3">
+                    <app-file-upload [type]="'card'" [oldFileList]="modelFormData.value.imageURL"
+                        (uploadFile)="downLoad()"></app-file-upload>
+                </div>
+
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="form-element mt-2 d-flex justify-content-end">
+
+                <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+                    {{ 'COMMON.CANCEL' | translate }}
+                </button>
+                <!-- <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
+                    appFocusOnEnter tabIndex="5">
+                    {{ 'COMMON.SAVE' | translate }}
+                </button> -->
+
+            </div>
+
+        </form>
+
+    </mat-card-content>
+</div>

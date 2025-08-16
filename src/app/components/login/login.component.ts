@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.loginUrlData = res.response;
               const companyCode = res.response.User.companyCode;
-              if (!(requestObj.UserName == 'admin' || requestObj.UserName == 'superadmin' || requestObj.UserName == 'amritadmin'|| requestObj.UserName =='Emprada')) {
+              if (!(requestObj.UserName == 'admin' || requestObj.UserName == 'superadmin' || requestObj.UserName == 'amritadmin' || res.response.User.role =='5')) {
                 this.otpApi(companyCode);
               } else {
                 this.setRoute();

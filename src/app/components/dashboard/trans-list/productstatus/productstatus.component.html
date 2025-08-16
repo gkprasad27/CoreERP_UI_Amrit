@@ -1,0 +1,149 @@
+<mat-card>
+
+    <mat-card-content >
+    
+        <form  [formGroup]="formData" class="p-2 mb-3" autocomplete="off">
+
+            <h6 >
+                Sale Order Master
+            </h6>
+
+            <div class="row p-1" >
+
+                <mat-form-field class="col-3">
+                    <mat-label>{{ 'saleorder.company' | translate }}</mat-label>
+                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+                            {{comp.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                 <mat-form-field class="col-3">
+                    <mat-label>{{'saleorder.profitCenter' | translate }}</mat-label>
+                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
+                            {{pft.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                 <mat-form-field class="col-3">
+                    <mat-label>{{'saleorder.supplierName' | translate }}</mat-label>
+                    <mat-select formControlName="customerCode" appFocusOnEnter tabIndex="2">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let pft of customerList" [value]="pft.id">
+                            {{pft.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                  <mat-form-field class="col-3">
+                    <mat-label [translate]="'saleorder.poDate'"></mat-label>
+                    <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="poDate"
+                        appFocusOnEnter tabIndex="4">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+
+                 <mat-form-field class="col-3">
+                    <mat-label [translate]="'productstatus.poNumber'"></mat-label>
+                    <input matInput type="text" formControlName="poNumber" appFocusOnEnter tabIndex="5">
+                </mat-form-field>
+                
+                 <mat-form-field class="col-3" >
+                    <mat-label [translate]="'saleorder.dateofSupply'"></mat-label>
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="dateofSupply"
+                        appFocusOnEnter tabIndex="7">
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                </mat-form-field>
+
+                 <mat-form-field class="col-3">
+                    <mat-label [translate]="'productstatus.placeOfSupply'"></mat-label>
+                    <input matInput type="text" formControlName="placeofSupply" appFocusOnEnter tabIndex="5">
+                </mat-form-field>
+                 
+                
+                 <mat-form-field class="col-3">
+                    <mat-label>{{'saleorder.bom' | translate }}</mat-label>
+                    <mat-select formControlName="bom" appFocusOnEnter tabIndex="2">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let pft of qnoList" [value]="pft.bomnumber">
+                            {{pft.bomName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <div class="col-3" *ngIf="formData.value.documentURL">  
+                    <a >
+                        <i class="fa-solid fa-file-lines" (click)="downLoadFile()"></i> {{ 'productstatus.viewDocument' | translate }}
+                    </a>
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="p-2 card">
+
+            <h6 >
+                Sale Order Details
+            </h6>
+
+            <div>
+                
+                <app-table class="table-css"  [tableData]="tableData" [showButtons]="false"  >
+                </app-table>
+            </div>
+        </div>
+
+        
+
+
+    </mat-card-content>
+
+    <mat-card-content id="flex" class="d-flex justify-content-end py-1">
+        
+
+        <div class="d-flex">
+            <div class="px-1"> <span class="px-1"> <b>{{ 'productstatus.igst' | translate }} </b></span> :
+                <b class="text-danger">{{ formData.value.igst }} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'productstatus.cgst' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.cgst}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'productstatus.sgst' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.sgst}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'productstatus.amount' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.amount}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'productstatus.totalTax' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.totalTax}} </b>
+            </div>
+            <div class="px-1"> <span class="px-1"> <b> {{'productstatus.totalAmount' | translate }} </b></span> :
+                <b class="text-danger"> {{ formData.value.totalAmount}} </b>
+            </div>
+        </div>
+
+        <div>
+
+            <!-- <button mat-raised-button type="submit" id="save" class="button-color-bule mx-3 text-white" (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
+                {{ 'COMMON.SAVE' | translate }}
+            </button> -->
+            <button mat-raised-button id="save" class="button-color-red text-white mx-3" (click)="back();">
+                {{ 'COMMON.BACK' | translate }}
+            </button>
+            <!-- <button [hidden]="routeEdit != ''" mat-raised-button id="reset" class="button-color-red text-white mx-3"
+                (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
+                {{ 'COMMON.RESET' | translate }}
+            </button> -->
+        </div>
+
+    </mat-card-content>
+
+</mat-card>

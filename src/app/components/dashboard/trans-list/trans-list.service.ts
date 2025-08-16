@@ -27,6 +27,7 @@ import { JobworkmaterialissueComponent } from './jobworkmaterialissue/jobworkmat
 import { MaterialissueComponent} from './materialissue/materialissue.component';
 import { StandardRateComponent } from '../comp-list/standardrateoutput/standardrateoutput.component';
 import { SwapOrderComponent } from './swap-order/swap-order.component';
+import { ProductstatusComponent } from './productstatus/productstatus.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -220,6 +221,13 @@ export class TransListService {
       case 'saleorder': {
         this.dynamicComp.component = SalesorderComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getSaleOrder;
+        this.dynamicComp.list = 'saleOrderMaster';
+        this.dynamicComp.editKey = 'saleOrderNo';
+        return this.dynamicComp;
+      }
+      case 'productstatus': {
+        this.dynamicComp.component = ProductstatusComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getCustomerSaleOrder;
         this.dynamicComp.list = 'saleOrderMaster';
         this.dynamicComp.editKey = 'saleOrderNo';
         return this.dynamicComp;

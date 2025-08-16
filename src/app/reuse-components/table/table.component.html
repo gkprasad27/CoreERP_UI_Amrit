@@ -22,6 +22,10 @@
           [hidden]="!commonService.userPermission?.canDelete">
           <mat-icon>delete</mat-icon> Delete
         </button>
+        <button class="mx-2" mat-raised-button (click)="openDialog('View')"
+          [hidden]="!commonService.userPermission?.canView">
+          <mat-icon>view</mat-icon> View
+        </button>
         <button class="mx-2" mat-raised-button>
           <mat-icon>print</mat-icon> Print
         </button>
