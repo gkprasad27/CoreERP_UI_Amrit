@@ -1130,10 +1130,10 @@ debugger
     obj.purchaseOrderDate = obj.purchaseOrderDate ? this.datepipe.transform(obj.purchaseOrderDate, 'MM-dd-yyyy') : '';
     obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
     if (typeof obj.saleOrderNo != 'string') {
-      obj.saleOrderNo = this.formData.value.saleOrderNo[0].saleOrderNo;
+      obj.saleOrderNo = (this.formData.value.saleOrderNo && this.formData.value.saleOrderNo.length) ? this.formData.value.saleOrderNo[0].saleOrderNo: '';
     }
     if (typeof obj.createdBy != 'string') {
-      obj.createdBy = this.formData.value.createdBy[0].id;
+      obj.createdBy = (this.formData.value.createdBy && this.formData.value.createdBy.length) ? this.formData.value.createdBy[0].id : '';
     }
     // if (typeof obj.material != 'string') {
     //   obj.material = this.formData.value.material[0].description;

@@ -155,10 +155,11 @@ export class SalesorderComponent {
       status: [''],
       materialName: [''],
       highlight: false,
+      changed: true,
       action: [[
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-]],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]],
       index: 0
     });
     this.formData1.disable();
@@ -169,9 +170,9 @@ export class SalesorderComponent {
     this.formData1.patchValue({
       index: 0,
       action: [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ],
       id: 0
     });
     this.formData1.disable();
@@ -182,7 +183,8 @@ export class SalesorderComponent {
       return;
     }
     this.formData1.patchValue({
-      highlight: true
+      highlight: true,
+      changed: true,
     });
     this.dataChange();
     let data: any = this.tableData;
@@ -417,15 +419,17 @@ export class SalesorderComponent {
                 // s.materialName = obj.text
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
-                s.id = 0
+                s.id = 0;
+                s.changed = true;
+                s.highlight = true;
                 s.action = s?.billable == 'N' ? [
-  { id: 'Delete', type: 'delete' }
-] : [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-];
+                { id: 'Delete', type: 'delete' }
+              ] : [
+                { id: 'Edit', type: 'edit' },
+                { id: 'Delete', type: 'delete' }
+              ];
               })
-              const tableData = [...this.finalTableData, ...res.response['bomDetail']];
+              const tableData = [...res.response['bomDetail'], ...this.finalTableData];
               tableData.forEach((t: any, index: number) => t.index = index + 1);
               this.tableData = tableData;
               this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
@@ -562,13 +566,12 @@ export class SalesorderComponent {
   }
 
   save() {
-    if (this.tableData.length == 0 || this.formData.invalid) {
+    let arr = this.tableData.filter((t: any) => t.changed)
+
+    if (this.tableData.length == 0 || this.formData.invalid || arr.length == 0) {
       return;
     }
-    this.addSaleOrder();
-  }
-
-  addSaleOrder() {
+   
     const addsq = String.Join('/', this.apiConfigService.addSaleOrder);
     const obj = this.formData.value;
     // obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
@@ -576,7 +579,7 @@ export class SalesorderComponent {
     obj.dateofSupply = obj.dateofSupply ? this.datepipe.transform(obj.dateofSupply, 'MM-dd-yyyy') : '';
     obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     obj.customerCode = this.formData.value.customerCode[0].id;
-    const arr = this.tableData;
+    
     arr.forEach((a: any) => {
       a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';
       a.id = this.routeEdit ? a.id : 0

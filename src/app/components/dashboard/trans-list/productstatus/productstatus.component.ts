@@ -27,12 +27,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { FileUploadComponent } from '../../../../reuse-components/file-upload/file-upload.component';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-productstatus',
-    imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, FileUploadComponent, TableComponent, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
+    imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, TableComponent, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
     templateUrl: './productstatus.component.html',
     styleUrls: ['./productstatus.component.scss'],
     providers: [
