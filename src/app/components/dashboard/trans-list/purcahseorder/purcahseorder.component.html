@@ -530,7 +530,7 @@
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead floating-dropdown col-3" *ngIf="!routeEdit"
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3" 
                     [class.filled]="formData.value?.supplierName?.length > 0">
                     <label> {{ 'purchaseorder.supplierCode' | translate }} </label>
                     <input placeholder=" " formControlName="supplierName" [typeahead]="bpaList"
@@ -540,10 +540,10 @@
                         <span><strong>{{model.bpnumber}}</strong> - {{model.name}}</span>
                     </ng-template>
                 </div>
-                <mat-form-field *ngIf="routeEdit" class="col-3">
+                <!-- <mat-form-field *ngIf="routeEdit" class="col-3">
                     <mat-label>{{'purchaseorder.supplierCode' | translate }}</mat-label>
                     <input matInput type="text" readonly formControlName="supplierName" appFocusOnEnter tabIndex="8">
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'purchaseorder.deliveryDate'"></mat-label>
