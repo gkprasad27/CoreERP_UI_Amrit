@@ -110,9 +110,9 @@ export class SourceOfSupplyComponent implements OnInit {
       id: [0],
       highlight: false,
       action: [[
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-]],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]],
       index: 0
     });
   }
@@ -176,9 +176,9 @@ export class SourceOfSupplyComponent implements OnInit {
                 s.id = s.id ? s.id : 0;
                 s.index = index + 1;
                 s.action = [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-];
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' }
+                ];
               })
               this.tableData = [...res.response['ssDetail']];
             }

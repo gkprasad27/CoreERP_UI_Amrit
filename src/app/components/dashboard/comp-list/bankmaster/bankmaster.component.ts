@@ -45,8 +45,10 @@ export class BankMasterComponent implements OnInit {
 
   AccountType: AccountType[] =
     [
-      { value: 'Savings', viewValue: 'Savings' },
-      { value: 'Current', viewValue: 'Current' },
+      { value: 'OD Account', viewValue: 'OD Account' },
+      { value: 'Guarantees', viewValue: 'Guarantees' },
+      { value: 'Savings Account', viewValue: 'Savings Account' },
+      { value: 'Current Account', viewValue: 'Current Account' },
       { value: 'Term loan', viewValue: 'Term loan' },
       { value: 'OCC', viewValue: 'OCC' },
       { value: 'KCC', viewValue: 'KCC' },

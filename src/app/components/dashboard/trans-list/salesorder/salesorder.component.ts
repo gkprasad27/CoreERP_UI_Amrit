@@ -252,7 +252,7 @@ export class SalesorderComponent {
 
       if (t.mainComponent == 'N' && flag) {
         const obj = this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y');
-        if (obj && obj.taxCode && !t.changed) {
+        if (obj && obj.taxCode) {
           t.qty = obj.qty * (t.bomqty ? t.bomqty : t.qty);
           t.changed = true
         }
@@ -420,8 +420,8 @@ export class SalesorderComponent {
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
                 s.id = 0;
-                s.changed = true;
-                s.highlight = true;
+               // s.changed = true;
+                // s.highlight = true;
                 s.action = s?.billable == 'N' ? [
                 { id: 'Delete', type: 'delete' }
               ] : [
