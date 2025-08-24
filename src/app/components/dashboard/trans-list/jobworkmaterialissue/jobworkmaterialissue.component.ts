@@ -171,7 +171,7 @@ export class JobworkmaterialissueComponent {
       contactNo: [''],
 
       saleOrderType: ['Sale Order'],
-      saleOrderNo: [null, this.user.companyCode !== '1000' ? Validators.required : null],
+      saleOrderNo: [null, Validators.required],
 
       documentURL: [''],
       invoiceURL: [''],

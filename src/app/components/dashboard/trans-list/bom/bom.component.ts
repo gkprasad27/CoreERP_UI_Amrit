@@ -136,6 +136,7 @@ export class BillOfMaterialComponent implements OnInit {
     private spinner: NgxSpinnerService,
     public route: ActivatedRoute,
     private router: Router,
+    private httpClient: HttpClient,
     private http: HttpClient
   ) {
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
@@ -254,7 +255,7 @@ export class BillOfMaterialComponent implements OnInit {
         });
   }
 
-   emitFilesList(event: any) {
+  emitFilesList(event: any) {
     this.fileList = event[0];
   }
 
@@ -778,6 +779,7 @@ export class BillOfMaterialComponent implements OnInit {
       response => {
         const res = response;
         this.tableData = [];
+        this.uploadFile();
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('BOM created Successfully..', Static.Close, SnackBar.success);
@@ -785,6 +787,27 @@ export class BillOfMaterialComponent implements OnInit {
           }
           this.reset();
           this.spinner.hide();
+        }
+      });
+  }
+
+
+  uploadFile() {
+    const addsq = String.Join('/', this.apiConfigService.uploadFile, this.fileList.name.split('.')[0]);
+    const formData = new FormData();
+    formData.append("file", this.fileList);
+    return this.httpClient.post<any>(addsq, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).subscribe(
+      (response: any) => {
+        this.spinner.hide();
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
+            this.back();
+          }
         }
       });
   }
