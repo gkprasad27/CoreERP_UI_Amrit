@@ -10,17 +10,22 @@
 
             <div class="row p-1" >
 
-                <mat-form-field class="col-3">
+                <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'saleorder.company' | translate }}</mat-label>
-                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+                    <mat-select formControlName="companyName" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let comp of companyList" [value]="comp.id">
                             {{comp.text}}
                         </mat-option>
                     </mat-select>
+                </mat-form-field> -->
+
+                 <mat-form-field class="col-2">
+                    <mat-label [translate]="'productstatus.company'"></mat-label>
+                    <input matInput type="text" formControlName="companyName" appFocusOnEnter tabIndex="5">
                 </mat-form-field>
 
-                 <mat-form-field class="col-3">
+                 <!-- <mat-form-field class="col-2">
                     <mat-label>{{'saleorder.profitCenter' | translate }}</mat-label>
                     <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
@@ -28,9 +33,14 @@
                             {{pft.text}}
                         </mat-option>
                     </mat-select>
+                </mat-form-field> -->
+
+                 <mat-form-field class="col-2">
+                    <mat-label [translate]="'productstatus.supplierName'"></mat-label>
+                    <input matInput type="text" formControlName="supplierName" appFocusOnEnter tabIndex="5">
                 </mat-form-field>
 
-                 <mat-form-field class="col-3">
+                 <!-- <mat-form-field class="col-2">
                     <mat-label>{{'saleorder.supplierName' | translate }}</mat-label>
                     <mat-select formControlName="customerCode" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
@@ -38,9 +48,9 @@
                             {{pft.text}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
 
-                  <mat-form-field class="col-3">
+                  <mat-form-field class="col-2">
                     <mat-label [translate]="'saleorder.poDate'"></mat-label>
                     <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="poDate"
                         appFocusOnEnter tabIndex="4">
@@ -48,12 +58,12 @@
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
 
-                 <mat-form-field class="col-3">
+                 <mat-form-field class="col-2">
                     <mat-label [translate]="'productstatus.poNumber'"></mat-label>
                     <input matInput type="text" formControlName="poNumber" appFocusOnEnter tabIndex="5">
                 </mat-form-field>
                 
-                 <mat-form-field class="col-3" >
+                 <mat-form-field class="col-2" >
                     <mat-label [translate]="'saleorder.dateofSupply'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="dateofSupply"
                         appFocusOnEnter tabIndex="7">
@@ -61,13 +71,13 @@
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
-                 <mat-form-field class="col-3">
+                 <mat-form-field class="col-2">
                     <mat-label [translate]="'productstatus.placeOfSupply'"></mat-label>
                     <input matInput type="text" formControlName="placeofSupply" appFocusOnEnter tabIndex="5">
                 </mat-form-field>
                  
                 
-                 <mat-form-field class="col-3">
+                 <!-- <mat-form-field class="col-2">
                     <mat-label>{{'saleorder.bom' | translate }}</mat-label>
                     <mat-select formControlName="bom" appFocusOnEnter tabIndex="2">
                         <mat-option>None</mat-option>
@@ -75,10 +85,10 @@
                             {{pft.bomName}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
 
 
-                <div class="col-3" *ngIf="formData.value.documentURL">  
+                <div class="col-2" *ngIf="formData.value.documentURL">  
                     <a >
                         <i class="fa-solid fa-file-lines" (click)="downLoadFile()"></i> {{ 'productstatus.viewDocument' | translate }}
                     </a>

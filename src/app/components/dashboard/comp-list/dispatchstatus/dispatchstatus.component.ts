@@ -69,7 +69,7 @@ export class DispatchstatusComponent {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
     this.modelFormData = this.formBuilder.group({
       id: 0,
-      saleOrder: ['', [Validators.required]],
+      saleOrder: [''],
       poNumber: [''],
       invoiceNumber: [''],
       lrNumber: [''],
@@ -83,10 +83,10 @@ export class DispatchstatusComponent {
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
     
-      this.modelFormData.patchValue({
-        saleOrder: [{ saleOrderNo: this.formData.item.saleOrder }],
-      })
-      this.getInvoiceListApi(false);
+      // this.modelFormData.patchValue({
+      //   saleOrder: [{ saleOrderNo: this.formData.item.saleOrder }],
+      // })
+    //  this.getInvoiceListApi(false);
       // this.modelFormData.controls['languageCode'].disable();
     }
     this.modelFormData.disable();
@@ -95,60 +95,60 @@ export class DispatchstatusComponent {
 
 
   ngOnInit() {
-    this.getInvoiceData();
+   // this.getInvoiceData();
   }
 
   get formControls() { return this.modelFormData.controls; }
 
 
-  getInvoiceData() {
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getInvoiceData, obj.companyCode);
-    this.apiService.apiGetRequest(getSaleOrderUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.getInvoiceList = res.response['InvoiceList'];
-            }
-          }
-        });
-  }
+  // getInvoiceData() {
+  //   let obj = JSON.parse(localStorage.getItem("user"));
+  //   const getSaleOrderUrl = String.Join('/', this.apiConfigService.getInvoiceData, obj.companyCode);
+  //   this.apiService.apiGetRequest(getSaleOrderUrl)
+  //     .subscribe(
+  //       response => {
+  //         this.spinner.hide();
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.getInvoiceList = res.response['InvoiceList'];
+  //           }
+  //         }
+  //       });
+  // }
 
-  invoiceNoDetail() {
+  // invoiceNoDetail() {
 
-    const obj = this.getInvoiceListData.find((i: any) => i.invoiceNo == this.modelFormData.value.invoiceNumber);
-    this.modelFormData.patchValue({
-      poNumber: obj.poNumber,
-      // invoiceNumber: obj.invoiceNo
-    })
-  }
+  //   const obj = this.getInvoiceListData.find((i: any) => i.invoiceNo == this.modelFormData.value.invoiceNumber);
+  //   this.modelFormData.patchValue({
+  //     poNumber: obj.poNumber,
+  //     // invoiceNumber: obj.invoiceNo
+  //   })
+  // }
 
 
-  getInvoiceListApi(flag = true) {
-    if (flag) {
-      this.modelFormData.patchValue({
-        poNumber: '',
-        invoiceNumber: ''
-      })
-    }
-    const url = String.Join('/', this.apiConfigService.getInvoiceList, this.modelFormData.value.saleOrder[0].saleOrderNo);
-    this.apiService.apiGetRequest(url)
-      .subscribe(
-        res => {
-          if (res) {
-            this.spinner.hide();
+  // getInvoiceListApi(flag = true) {
+  //   if (flag) {
+  //     this.modelFormData.patchValue({
+  //       poNumber: '',
+  //       invoiceNumber: ''
+  //     })
+  //   }
+  //   const url = String.Join('/', this.apiConfigService.getInvoiceList, this.modelFormData.value.saleOrder[0].saleOrderNo);
+  //   this.apiService.apiGetRequest(url)
+  //     .subscribe(
+  //       res => {
+  //         if (res) {
+  //           this.spinner.hide();
 
-            if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-              if (!this.commonService.checkNullOrUndefined(res.response)) {
-                this.getInvoiceListData = res.response.InvoiceData;
-              }
-            }
-          }
-        });
-  }
+  //           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //             if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //               this.getInvoiceListData = res.response.InvoiceData;
+  //             }
+  //           }
+  //         }
+  //       });
+  // }
 
 
   downLoad() {
@@ -162,55 +162,55 @@ export class DispatchstatusComponent {
   }
 
 
-  emitFilesList(event: any) {
-    this.fileList = event[0];
-  }
+  // emitFilesList(event: any) {
+  //   this.fileList = event[0];
+  // }
 
 
-  save() {
-    if (this.modelFormData.invalid) {
-      return;
-    }
-    // this.modelFormData.controls['languageCode'].enable();
-    this.formData.item = this.modelFormData.value;
-    this.formData.item.lrDate = this.modelFormData.get('lrDate').value ? this.datepipe.transform(this.modelFormData.get('lrDate').value, 'yyyy-MM-dd') : '';
-    this.formData.item.imageURL = this.fileList ? this.fileList.name.split('.')[0] : '';
+  // save() {
+  //   if (this.modelFormData.invalid) {
+  //     return;
+  //   }
+  //   // this.modelFormData.controls['languageCode'].enable();
+  //   this.formData.item = this.modelFormData.value;
+  //   this.formData.item.lrDate = this.modelFormData.get('lrDate').value ? this.datepipe.transform(this.modelFormData.get('lrDate').value, 'yyyy-MM-dd') : '';
+  //   this.formData.item.imageURL = this.fileList ? this.fileList.name.split('.')[0] : '';
   
-    if (typeof this.formData.item.saleOrder != 'string') {
-      this.formData.item.saleOrder = this.formData.item.saleOrder[0].saleOrderNo;
-    }
+  //   if (typeof this.formData.item.saleOrder != 'string') {
+  //     this.formData.item.saleOrder = this.formData.item.saleOrder[0].saleOrderNo;
+  //   }
 
-    this.addOrEditService[this.formData.action](this.formData, (res) => {
-      this.uploadFile();
-      this.dialogRef.close(this.formData);
-    });
-    if (this.formData.action == 'Edit') {
-      // this.modelFormData.controls['languageCode'].disable();
-    }
-  }
+  //   this.addOrEditService[this.formData.action](this.formData, (res) => {
+  //     this.uploadFile();
+  //     this.dialogRef.close(this.formData);
+  //   });
+  //   if (this.formData.action == 'Edit') {
+  //     // this.modelFormData.controls['languageCode'].disable();
+  //   }
+  // }
 
 
 
-  uploadFile() {
-    const addsq = String.Join('/', this.apiConfigService.uploadFile, this.fileList ? this.fileList.name.split('.')[0] : '');
-    const formData = new FormData();
-    formData.append("file", this.fileList);
+  // uploadFile() {
+  //   const addsq = String.Join('/', this.apiConfigService.uploadFile, this.fileList ? this.fileList.name.split('.')[0] : '');
+  //   const formData = new FormData();
+  //   formData.append("file", this.fileList);
 
-    return this.httpClient.post<any>(addsq, formData, {
-      reportProgress: true,
-      observe: 'events'
-    }).subscribe(
-      (response: any) => {
-        this.spinner.hide();
-        const res = response;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            // this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
-          }
-        }
-        // this.router.navigate(['/dashboard/transaction/saleorder'])
-      });
-  }
+  //   return this.httpClient.post<any>(addsq, formData, {
+  //     reportProgress: true,
+  //     observe: 'events'
+  //   }).subscribe(
+  //     (response: any) => {
+  //       this.spinner.hide();
+  //       const res = response;
+  //       if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //         if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //           // this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
+  //         }
+  //       }
+  //       // this.router.navigate(['/dashboard/transaction/saleorder'])
+  //     });
+  // }
 
 
   cancel() {

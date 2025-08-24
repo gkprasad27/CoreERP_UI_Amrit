@@ -2864,6 +2864,7 @@
     "company": "Company",
     "documentURL": "Document Url",
     "status": "Status",
+    "hsnsac": "HSN Code",
     "taxCode": "Tax Code",
     "materialName": "Material Name",
     "companyName": "Company",

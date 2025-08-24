@@ -98,22 +98,22 @@ export class ProductstatusComponent {
         if (this.routeEdit != '') {
             this.getSaleOrderDetail();
         }
-        this.getCustomerList();
+        // this.getCustomerList();
     }
 
 
     formDataGroup() {
         this.formData = this.formBuilder.group({
-            company: [null, Validators.required],
+            company: [null],
             companyName: [null],
             saleOrderNo: [0],
             materialCode: [''],
             bom: [''],
             id: 0,
-            customerCode: ['', Validators.required],
+            customerCode: [''],
             supplierName: [''],
             // orderDate: [null],
-            profitCenter: ['', Validators.required],
+            profitCenter: [''],
             profitcenterName: [''],
             poDate: [null],
             poNumber: [''],
@@ -166,298 +166,298 @@ export class ProductstatusComponent {
         // this.formData1.disable();
     }
 
-    resetForm() {
-        this.formData1.reset();
-        this.formData1.patchValue({
-            index: 0,
-            action: [
-                { id: 'Edit', type: 'edit' },
-                { id: 'Delete', type: 'delete' }
-            ],
-            id: 0
-        });
-        this.formData1.disable();
-    }
+    // resetForm() {
+    //     this.formData1.reset();
+    //     this.formData1.patchValue({
+    //         index: 0,
+    //         action: [
+    //             { id: 'Edit', type: 'edit' },
+    //             { id: 'Delete', type: 'delete' }
+    //         ],
+    //         id: 0
+    //     });
+    //     this.formData1.disable();
+    // }
 
-    saveForm() {
-        if (this.formData1.invalid) {
-            return;
-        }
-        this.formData1.patchValue({
-            highlight: true
-        });
-        this.dataChange();
-        let data: any = this.tableData;
-        this.tableData = null;
-        this.tableComponent.defaultValues();
-        const obj = data.find((d: any) => d.materialCode == this.formData1.value.materialCode)
-        if (this.formData1.value.index == 0 && !obj) {
-            this.formData1.patchValue({
-                index: data ? (data.length + 1) : 1
-            });
-            data = [this.formData1.value, ...data];
-        } else {
-            if (this.formData1.value.index == 0) {
-                data.forEach((res: any) => { if (res.materialCode == this.formData1.value.materialCode) { (res.qty = res.qty + this.formData1.value.qty) } });
-            } else {
-                data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
-            }
-        }
-        setTimeout(() => {
-            this.tableData = data;
-            this.calculate();
-            this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
-        });
-        this.resetForm();
-    }
+    // saveForm() {
+    //     if (this.formData1.invalid) {
+    //         return;
+    //     }
+    //     this.formData1.patchValue({
+    //         highlight: true
+    //     });
+    //     this.dataChange();
+    //     let data: any = this.tableData;
+    //     this.tableData = null;
+    //     this.tableComponent.defaultValues();
+    //     const obj = data.find((d: any) => d.materialCode == this.formData1.value.materialCode)
+    //     if (this.formData1.value.index == 0 && !obj) {
+    //         this.formData1.patchValue({
+    //             index: data ? (data.length + 1) : 1
+    //         });
+    //         data = [this.formData1.value, ...data];
+    //     } else {
+    //         if (this.formData1.value.index == 0) {
+    //             data.forEach((res: any) => { if (res.materialCode == this.formData1.value.materialCode) { (res.qty = res.qty + this.formData1.value.qty) } });
+    //         } else {
+    //             data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
+    //         }
+    //     }
+    //     setTimeout(() => {
+    //         this.tableData = data;
+    //         this.calculate();
+    //         this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+    //     });
+    //     this.resetForm();
+    // }
 
-    dataChange() {
-        const formObj = this.formData1.value;
-        const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == formObj.taxCode);
-        const discountAmount = (((+formObj.qty * +formObj.rate) * ((+formObj.discount) / 100)));
-        const amount = (+formObj.qty * +formObj.rate) - discountAmount
-        const igst = obj.igst ? (amount * obj.igst) / 100 : 0;
-        const cgst = obj.cgst ? (amount * obj.cgst) / 100 : 0;
-        const sgst = obj.sgst ? (amount * obj.sgst) / 100 : 0;
-        this.formData1.patchValue({
-            amount: amount,
-            totalTax: (igst + sgst + cgst),
-            total: (amount) + (igst + sgst + cgst),
-            igst: igst,
-            cgst: cgst,
-            sgst: sgst,
-        })
-    }
+    // dataChange() {
+    //     const formObj = this.formData1.value;
+    //     const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == formObj.taxCode);
+    //     const discountAmount = (((+formObj.qty * +formObj.rate) * ((+formObj.discount) / 100)));
+    //     const amount = (+formObj.qty * +formObj.rate) - discountAmount
+    //     const igst = obj.igst ? (amount * obj.igst) / 100 : 0;
+    //     const cgst = obj.cgst ? (amount * obj.cgst) / 100 : 0;
+    //     const sgst = obj.sgst ? (amount * obj.sgst) / 100 : 0;
+    //     this.formData1.patchValue({
+    //         amount: amount,
+    //         totalTax: (igst + sgst + cgst),
+    //         total: (amount) + (igst + sgst + cgst),
+    //         igst: igst,
+    //         cgst: cgst,
+    //         sgst: sgst,
+    //     })
+    // }
 
-    materialChange() {
-        const obj = this.materialList.some((m: any) => m.id == this.formData1.value.materialCode);
-        if (!obj) {
-            this.alertService.openSnackBar('Please enter valid material code', Static.Close, SnackBar.error);
-            this.formData1.patchValue({
-                materialCode: ''
-            })
-        }
-    }
+    // materialChange() {
+    //     const obj = this.materialList.some((m: any) => m.id == this.formData1.value.materialCode);
+    //     if (!obj) {
+    //         this.alertService.openSnackBar('Please enter valid material code', Static.Close, SnackBar.error);
+    //         this.formData1.patchValue({
+    //             materialCode: ''
+    //         })
+    //     }
+    // }
 
-    calculate(flag = true) {
-        this.formData.patchValue({
-            igst: 0,
-            cgst: 0,
-            sgst: 0,
-            amount: 0,
-            totalTax: 0,
-            totalAmount: 0,
-        })
-        this.tableData && this.tableData.forEach((t: any) => {
+    // calculate(flag = true) {
+    //     this.formData.patchValue({
+    //         igst: 0,
+    //         cgst: 0,
+    //         sgst: 0,
+    //         amount: 0,
+    //         totalTax: 0,
+    //         totalAmount: 0,
+    //     })
+    //     this.tableData && this.tableData.forEach((t: any) => {
 
-            if (t.mainComponent == 'N' && flag) {
-                const obj = this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y');
-                if (obj && obj.taxCode && !t.changed) {
-                    t.qty = obj.qty * (t.bomqty ? t.bomqty : t.qty);
-                    t.changed = true
-                }
-            }
-            // if (t.taxCode) {
-            //   // const formObj = t.mainComponent == 'N' ? this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y') : t;
-            //   const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == t.taxCode);
-            //   const discountAmount = (((+t.qty * +t.rate) * ((+t.discount) / 100)));
-            //   const amount = (+t.qty * +t.rate) - discountAmount
-            //   const igst = obj.igst ? (amount * obj.igst) / 100 : 0;
-            //   const cgst = obj.cgst ? (amount * obj.cgst) / 100 : 0;
-            //   const sgst = obj.sgst ? (amount * obj.sgst) / 100 : 0;
-            //   // this.formData1.patchValue({
-            //   t.amount = amount;
-            //   t.totalTax = (igst + sgst + cgst);
-            //   t.total = (amount) + (igst + sgst + cgst);
-            //   t.igst = igst;
-            //   t.cgst = cgst;
-            //   t.sgst = sgst;
-            //   //  })
-            // }
-
-
-            this.formData.patchValue({
-                igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
-                cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
-                sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-                amount: ((+this.formData.value.amount) + (t.amount)).toFixed(2),
-                totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
-            })
-        })
-        this.formData.patchValue({
-            totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
-        })
-    }
-
-    editOrDeleteEvent(value) {
-        if (value.action === 'Delete') {
-            this.tableComponent.defaultValues();
-            this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
-            this.calculate(false);
-            this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
-            this.formData1.disable();
-        } else {
-            this.formData1.patchValue(value.item);
-            this.formData1.enable();
-        }
-    }
-
-    getCustomerList() {
-        let obj = JSON.parse(localStorage.getItem("user"));
-        const costCenUrl = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
-        this.apiService.apiGetRequest(costCenUrl)
-            .subscribe(
-                response => {
-                    const res = response;
-                    if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                        if (!this.commonService.checkNullOrUndefined(res.response)) {
-                            const resp = res.response['bpList'];
-                            const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
-                            this.customerList = data;
-                        }
-                    }
-                    this.getCompanyList();
-                });
-    }
-
-    customerCodeChange(event?: any) {
-        const obj = this.customerList.find((c: any) => c.id == (event ? event.id : this.formData.value.customerCode));
-        this.formData.patchValue({
-            gstNo: obj ? obj.gstNo : ''
-        })
-        if (!event) {
-            this.formData.patchValue({
-                customerCode: [{ id: obj.id, text: obj.text }]
-            })
-        }
-    }
-
-    getCompanyList() {
-        const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-        this.apiService.apiGetRequest(companyUrl)
-            .subscribe(
-                response => {
-                    const res = response;
-                    if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                        if (!this.commonService.checkNullOrUndefined(res.response)) {
-                            this.companyList = res.response['companiesList'];
-                        }
-                    }
-                    this.getProfitcenterData();
-                });
-    }
-
-    getProfitcenterData() {
-        const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
-        this.apiService.apiGetRequest(getpcUrl)
-            .subscribe(
-                response => {
-                    const res = response;
-                    if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                        if (!this.commonService.checkNullOrUndefined(res.response)) {
-                            this.profitCenterList = res.response['profitCenterList'];
-                        }
-                    }
-                    this.getTaxRatesList()
-                });
-    }
-
-    getTaxRatesList() {
-        const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);
-        this.apiService.apiGetRequest(taxCodeUrl)
-            .subscribe(
-                response => {
-                    const res = response;
-                    if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                        if (!this.commonService.checkNullOrUndefined(res.response)) {
-                            const resp = res.response['TaxratesList'];
-                            const data = resp.length && resp.filter((t: any) => t.taxType == 'Output');
-                            this.taxCodeList = data;
-                        }
-                    }
-                    this.getBOMList();
-                });
-    }
-
-    getBOMList() {
-        const companyUrl = String.Join('/', this.apiConfigService.getBOMList);
-        this.apiService.apiGetRequest(companyUrl)
-            .subscribe(
-                response => {
-                    this.spinner.hide();
-                    const res = response;
-                    if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                        if (!this.commonService.checkNullOrUndefined(res.response)) {
-
-                            this.qnoList = res.response['BOMList'];
-                        }
-                    }
-                    this.getmaterialData();
-                });
-    }
-
-    getBomDetail() {
-        if (this.tableData.some((t: any) => t.bomKey == this.formData.value.bom)) {
-            this.formData.patchValue({
-                bom: ''
-            })
-            this.alertService.openSnackBar('Bom already selected...', Static.Close, SnackBar.error);
-            return;
-        }
-        this.tableData = null;
-        this.tableComponent.defaultValues();
-        const companyUrl = String.Join('/', this.apiConfigService.getBomDetail, this.formData.value.bom);
-        this.apiService.apiGetRequest(companyUrl)
-            .subscribe(
-                response => {
-                    this.spinner.hide();
-                    const res = response;
-                    if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                        if (!this.commonService.checkNullOrUndefined(res.response)) {
-                            res.response['bomDetail'].forEach((s: any, index: number) => {
-                                // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-                                // s.materialName = obj.text
-                                // s.stockQty = obj.availQTY
-                                // s.hsnsac = obj.hsnsac
-                                s.id = 0
-                                s.action = s?.billable == 'N' ? [
-                                    { id: 'Delete', type: 'delete' }
-                                ] : [
-                                    { id: 'Edit', type: 'edit' },
-                                    { id: 'Delete', type: 'delete' }
-                                ];
-                            })
-                            const tableData = [...this.finalTableData, ...res.response['bomDetail']];
-                            tableData.forEach((t: any, index: number) => t.index = index + 1);
-                            this.tableData = tableData;
-                            this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
-                            this.calculate(false);
-                        }
-                    }
-                    // this.getmaterialData();
-                });
-    }
+    //         if (t.mainComponent == 'N' && flag) {
+    //             const obj = this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y');
+    //             if (obj && obj.taxCode && !t.changed) {
+    //                 t.qty = obj.qty * (t.bomqty ? t.bomqty : t.qty);
+    //                 t.changed = true
+    //             }
+    //         }
+    //         // if (t.taxCode) {
+    //         //   // const formObj = t.mainComponent == 'N' ? this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y') : t;
+    //         //   const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == t.taxCode);
+    //         //   const discountAmount = (((+t.qty * +t.rate) * ((+t.discount) / 100)));
+    //         //   const amount = (+t.qty * +t.rate) - discountAmount
+    //         //   const igst = obj.igst ? (amount * obj.igst) / 100 : 0;
+    //         //   const cgst = obj.cgst ? (amount * obj.cgst) / 100 : 0;
+    //         //   const sgst = obj.sgst ? (amount * obj.sgst) / 100 : 0;
+    //         //   // this.formData1.patchValue({
+    //         //   t.amount = amount;
+    //         //   t.totalTax = (igst + sgst + cgst);
+    //         //   t.total = (amount) + (igst + sgst + cgst);
+    //         //   t.igst = igst;
+    //         //   t.cgst = cgst;
+    //         //   t.sgst = sgst;
+    //         //   //  })
+    //         // }
 
 
-    getmaterialData() {
-        let obj = JSON.parse(localStorage.getItem("user"));
-        const getmaterialUrl = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
-        this.apiService.apiGetRequest(getmaterialUrl)
-            .subscribe(
-                response => {
-                    this.spinner.hide();
-                    const res = response;
-                    if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                        if (!this.commonService.checkNullOrUndefined(res.response)) {
+    //         this.formData.patchValue({
+    //             igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
+    //             cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
+    //             sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
+    //             amount: ((+this.formData.value.amount) + (t.amount)).toFixed(2),
+    //             totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
+    //         })
+    //     })
+    //     this.formData.patchValue({
+    //         totalAmount: ((+this.formData.value.amount) + (+this.formData.value.totalTax)).toFixed(2),
+    //     })
+    // }
 
-                            this.materialList = res.response['mmasterList'];
-                            if (this.routeEdit != '') {
-                                this.getSaleOrderDetail();
-                            }
-                        }
-                    }
-                });
-    }
+    // editOrDeleteEvent(value) {
+    //     if (value.action === 'Delete') {
+    //         this.tableComponent.defaultValues();
+    //         this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
+    //         this.calculate(false);
+    //         this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+    //         this.formData1.disable();
+    //     } else {
+    //         this.formData1.patchValue(value.item);
+    //         this.formData1.enable();
+    //     }
+    // }
+
+    // getCustomerList() {
+    //     let obj = JSON.parse(localStorage.getItem("user"));
+    //     const costCenUrl = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
+    //     this.apiService.apiGetRequest(costCenUrl)
+    //         .subscribe(
+    //             response => {
+    //                 const res = response;
+    //                 if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //                     if (!this.commonService.checkNullOrUndefined(res.response)) {
+    //                         const resp = res.response['bpList'];
+    //                         const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
+    //                         this.customerList = data;
+    //                     }
+    //                 }
+    //                 this.getCompanyList();
+    //             });
+    // }
+
+    // customerCodeChange(event?: any) {
+    //     const obj = this.customerList.find((c: any) => c.id == (event ? event.id : this.formData.value.customerCode));
+    //     this.formData.patchValue({
+    //         gstNo: obj ? obj.gstNo : ''
+    //     })
+    //     if (!event) {
+    //         this.formData.patchValue({
+    //             customerCode: [{ id: obj.id, text: obj.text }]
+    //         })
+    //     }
+    // }
+
+    // getCompanyList() {
+    //     const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+    //     this.apiService.apiGetRequest(companyUrl)
+    //         .subscribe(
+    //             response => {
+    //                 const res = response;
+    //                 if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //                     if (!this.commonService.checkNullOrUndefined(res.response)) {
+    //                         this.companyList = res.response['companiesList'];
+    //                     }
+    //                 }
+    //                 this.getProfitcenterData();
+    //             });
+    // }
+
+    // getProfitcenterData() {
+    //     const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
+    //     this.apiService.apiGetRequest(getpcUrl)
+    //         .subscribe(
+    //             response => {
+    //                 const res = response;
+    //                 if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //                     if (!this.commonService.checkNullOrUndefined(res.response)) {
+    //                         this.profitCenterList = res.response['profitCenterList'];
+    //                     }
+    //                 }
+    //                 this.getTaxRatesList()
+    //             });
+    // }
+
+    // getTaxRatesList() {
+    //     const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);
+    //     this.apiService.apiGetRequest(taxCodeUrl)
+    //         .subscribe(
+    //             response => {
+    //                 const res = response;
+    //                 if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //                     if (!this.commonService.checkNullOrUndefined(res.response)) {
+    //                         const resp = res.response['TaxratesList'];
+    //                         const data = resp.length && resp.filter((t: any) => t.taxType == 'Output');
+    //                         this.taxCodeList = data;
+    //                     }
+    //                 }
+    //                 this.getBOMList();
+    //             });
+    // }
+
+    // getBOMList() {
+    //     const companyUrl = String.Join('/', this.apiConfigService.getBOMList);
+    //     this.apiService.apiGetRequest(companyUrl)
+    //         .subscribe(
+    //             response => {
+    //                 this.spinner.hide();
+    //                 const res = response;
+    //                 if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //                     if (!this.commonService.checkNullOrUndefined(res.response)) {
+
+    //                         this.qnoList = res.response['BOMList'];
+    //                     }
+    //                 }
+    //                 this.getmaterialData();
+    //             });
+    // }
+
+    // getBomDetail() {
+    //     if (this.tableData.some((t: any) => t.bomKey == this.formData.value.bom)) {
+    //         this.formData.patchValue({
+    //             bom: ''
+    //         })
+    //         this.alertService.openSnackBar('Bom already selected...', Static.Close, SnackBar.error);
+    //         return;
+    //     }
+    //     this.tableData = null;
+    //     this.tableComponent.defaultValues();
+    //     const companyUrl = String.Join('/', this.apiConfigService.getBomDetail, this.formData.value.bom);
+    //     this.apiService.apiGetRequest(companyUrl)
+    //         .subscribe(
+    //             response => {
+    //                 this.spinner.hide();
+    //                 const res = response;
+    //                 if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //                     if (!this.commonService.checkNullOrUndefined(res.response)) {
+    //                         res.response['bomDetail'].forEach((s: any, index: number) => {
+    //                             // const obj = this.materialList.find((m: any) => m.id == s.materialCode);
+    //                             // s.materialName = obj.text
+    //                             // s.stockQty = obj.availQTY
+    //                             // s.hsnsac = obj.hsnsac
+    //                             s.id = 0
+    //                             s.action = s?.billable == 'N' ? [
+    //                                 { id: 'Delete', type: 'delete' }
+    //                             ] : [
+    //                                 { id: 'Edit', type: 'edit' },
+    //                                 { id: 'Delete', type: 'delete' }
+    //                             ];
+    //                         })
+    //                         const tableData = [...this.finalTableData, ...res.response['bomDetail']];
+    //                         tableData.forEach((t: any, index: number) => t.index = index + 1);
+    //                         this.tableData = tableData;
+    //                         this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+    //                         this.calculate(false);
+    //                     }
+    //                 }
+    //                 // this.getmaterialData();
+    //             });
+    // }
+
+
+    // getmaterialData() {
+    //     let obj = JSON.parse(localStorage.getItem("user"));
+    //     const getmaterialUrl = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
+    //     this.apiService.apiGetRequest(getmaterialUrl)
+    //         .subscribe(
+    //             response => {
+    //                 this.spinner.hide();
+    //                 const res = response;
+    //                 if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //                     if (!this.commonService.checkNullOrUndefined(res.response)) {
+
+    //                         this.materialList = res.response['mmasterList'];
+    //                         if (this.routeEdit != '') {
+    //                             this.getSaleOrderDetail();
+    //                         }
+    //                     }
+    //                 }
+    //             });
+    // }
 
 
     getSaleOrderDetail() {
@@ -471,155 +471,160 @@ export class ProductstatusComponent {
                         if (!this.commonService.checkNullOrUndefined(res.response)) {
                             this.formData.patchValue(res.response['SaleOrderMasters']);
                             this.formData.patchValue({
-                                poDate: res.response['SaleOrderMasters'].poDate ? this.datepipe.transform(res.response['SaleOrderMasters'].poDate, 'MM-dd-yyyy') : '',
-                                dateofSupply: res.response['SaleOrderMasters'].dateofSupply ? this.datepipe.transform(res.response['SaleOrderMasters'].dateofSupply, 'MM-dd-yyyy') : '',
+                                // poDate: res.response['SaleOrderMasters'].poDate ? this.datepipe.transform(res.response['SaleOrderMasters'].poDate, 'MM-dd-yyyy') : '',
+                                // dateofSupply: res.response['SaleOrderMasters'].dateofSupply ? this.datepipe.transform(res.response['SaleOrderMasters'].dateofSupply, 'MM-dd-yyyy') : '',
                             });
 
-                            res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
-                                const obj = this.materialList.find((m: any) => m.id == s.materialCode);
-                                s.materialName = obj?.text ? obj?.text : ''
-                                s.stockQty = obj?.availQTY ? obj?.availQTY : ''
-                                s.hsnsac = obj?.hsnsac ? obj?.hsnsac : ''
-                                // s.action = s?.billable == 'N' ? [
-                                //     { id: 'Delete', type: 'delete' }
-                                // ] : [
-                                //     { id: 'Edit', type: 'edit' },
-                                //     { id: 'Delete', type: 'delete' }
-                                // ];
-                                s.index = index + 1;
-                            })
-                            this.tableData = res.response['SaleOrderDetails'];
-                            this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
-                            this.customerCodeChange();
+                            // res.response['SaleOrderDetails'].forEach((s: any, index: number) => {
+                            //     if (s.mainComponent == 'Y' || s.billable == 'Y') {
+                            //         const obj = this.materialList.find((m: any) => m.id == s.materialCode);
+                            //         // s.materialName = obj?.text ? obj?.text : ''
+                            //         s.stockQty = obj?.availQTY ? obj?.availQTY : ''
+                            //         s.hsnsac = obj?.hsnsac ? obj?.hsnsac : ''
+                            //         // s.action = s?.billable == 'N' ? [
+                            //         //     { id: 'Delete', type: 'delete' }
+                            //         // ] : [
+                            //         //     { id: 'Edit', type: 'edit' },
+                            //         //     { id: 'Delete', type: 'delete' }
+                            //         // ];
+                            //         s.index = index + 1;
+                            //         arr.push(s)
+                            //     }
+                            // })
+                            if (res.response['SaleOrderDetails'] && res.response['SaleOrderDetails'].length) {
+                                this.tableData = res.response['SaleOrderDetails'].filter((s: any) => (s.mainComponent == 'Y' || s.billable == 'Y'));
+                            }
+                            // this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+                            // this.customerCodeChange();
                         }
                     }
                 });
     }
 
 
-    downLoadFile() {
-        const url = String.Join('/', this.apiConfigService.getFile, this.formData.value.documentURL);
-        this.apiService.apiGetRequest(url)
-            .subscribe(
-                response => {
-                    this.spinner.hide();
-                    window.open(response.response, '_blank');
-                });
-    }
+    // downLoadFile() {
+    //     const url = String.Join('/', this.apiConfigService.getFile, this.formData.value.documentURL);
+    //     this.apiService.apiGetRequest(url)
+    //         .subscribe(
+    //             response => {
+    //                 this.spinner.hide();
+    //                 window.open(response.response, '_blank');
+    //             });
+    // }
 
-    emitColumnChanges(data) {
-        this.tableData = data.data;
-        this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
-    }
+    // emitColumnChanges(data) {
+    //     this.tableData = data.data;
+    //     this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
+    // }
 
-    materialCodeChange() {
+    // materialCodeChange() {
 
-        const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
-        this.formData1.patchValue({
-            netWeight: obj.netWeight,
-            stockQty: obj.availQTY,
-            materialName: obj.text,
-            hsnsac: obj.hsnsac
-        })
-        if (!obj.netWeight) {
-            this.alertService.openSnackBar('Net Weight has not provided for selected material..', Static.Close, SnackBar.error);
-        }
+    //     const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
+    //     this.formData1.patchValue({
+    //         netWeight: obj.netWeight,
+    //         stockQty: obj.availQTY,
+    //         materialName: obj.text,
+    //         hsnsac: obj.hsnsac
+    //     })
+    //     if (!obj.netWeight) {
+    //         this.alertService.openSnackBar('Net Weight has not provided for selected material..', Static.Close, SnackBar.error);
+    //     }
 
-    }
+    // }
 
-    materialCodehChange() {
-        const obj = this.materialList.find((m: any) => m.id == this.formData.value.materialCode);
-        if (obj && obj.bom)
-            this.formData.patchValue({
-                bom: obj.bom,
-            })
-        this.getBomDetail();
-    }
+    // materialCodehChange() {
+    //     const obj = this.materialList.find((m: any) => m.id == this.formData.value.materialCode);
+    //     if (obj && obj.bom)
+    //         this.formData.patchValue({
+    //             bom: obj.bom,
+    //         })
+    //     this.getBomDetail();
+    // }
 
-    emitFilesList(event: any) {
-        this.fileList = event[0];
-    }
+    // emitFilesList(event: any) {
+    //     this.fileList = event[0];
+    // }
 
 
-    uploadFile() {
-        const addsq = String.Join('/', this.apiConfigService.uploadFile, this.fileList ? this.fileList.name.split('.')[0] : '');
-        const formData = new FormData();
-        formData.append("file", this.fileList);
+    // uploadFile() {
+    //     const addsq = String.Join('/', this.apiConfigService.uploadFile, this.fileList ? this.fileList.name.split('.')[0] : '');
+    //     const formData = new FormData();
+    //     formData.append("file", this.fileList);
 
-        return this.httpClient.post<any>(addsq, formData, {
-            reportProgress: true,
-            observe: 'events'
-        }).subscribe(
-            (response: any) => {
-                this.spinner.hide();
-                const res = response;
-                if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                    if (!this.commonService.checkNullOrUndefined(res.response)) {
-                        this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
-                    }
-                }
-                this.router.navigate(['/dashboard/transaction/saleorder'])
-            });
-    }
+    //     return this.httpClient.post<any>(addsq, formData, {
+    //         reportProgress: true,
+    //         observe: 'events'
+    //     }).subscribe(
+    //         (response: any) => {
+    //             this.spinner.hide();
+    //             const res = response;
+    //             if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //                 if (!this.commonService.checkNullOrUndefined(res.response)) {
+    //                     this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
+    //                 }
+    //             }
+    //             this.router.navigate(['/dashboard/transaction/saleorder'])
+    //         });
+    // }
 
 
     back() {
         this.router.navigate(['dashboard/transaction/saleorder'])
     }
 
-    save() {
-        if (this.tableData.length == 0 || this.formData.invalid) {
-            return;
-        }
-        this.addSaleOrder();
-    }
+    // save() {
+    //     if (this.tableData.length == 0 || this.formData.invalid) {
+    //         return;
+    //     }
+    //     this.addSaleOrder();
+    // }
 
-    addSaleOrder() {
-        const addsq = String.Join('/', this.apiConfigService.addSaleOrder);
-        const obj = this.formData.value;
-        // obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
-        obj.poDate = obj.poDate ? this.datepipe.transform(obj.poDate, 'MM-dd-yyyy') : '';
-        obj.dateofSupply = obj.dateofSupply ? this.datepipe.transform(obj.dateofSupply, 'MM-dd-yyyy') : '';
-        obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
-        obj.customerCode = this.formData.value.customerCode[0].id;
-        const arr = this.tableData;
-        arr.forEach((a: any) => {
-            a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';
-            a.id = this.routeEdit ? a.id : 0
-        })
-        const requestObj = { qsHdr: this.formData.value, qsDtl: arr };
-        this.apiService.apiPostRequest(addsq, requestObj).subscribe(
-            response => {
-                this.spinner.hide();
-                const res = response;
-                if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-                    if (!this.commonService.checkNullOrUndefined(res.response)) {
-                        this.uploadFile();
-                        this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
-                    }
-                }
-            });
-    }
+    // addSaleOrder() {
+    //     const addsq = String.Join('/', this.apiConfigService.addSaleOrder);
+    //     const obj = this.formData.value;
+    //     // obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
+    //     obj.poDate = obj.poDate ? this.datepipe.transform(obj.poDate, 'MM-dd-yyyy') : '';
+    //     obj.dateofSupply = obj.dateofSupply ? this.datepipe.transform(obj.dateofSupply, 'MM-dd-yyyy') : '';
+    //     obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
+    //     obj.customerCode = this.formData.value.customerCode[0].id;
+    //     const arr = this.tableData;
+    //     arr.forEach((a: any) => {
+    //         a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';
+    //         a.id = this.routeEdit ? a.id : 0
+    //     })
+    //     const requestObj = { qsHdr: this.formData.value, qsDtl: arr };
+    //     this.apiService.apiPostRequest(addsq, requestObj).subscribe(
+    //         response => {
+    //             this.spinner.hide();
+    //             const res = response;
+    //             if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+    //                 if (!this.commonService.checkNullOrUndefined(res.response)) {
+    //                     this.uploadFile();
+    //                     this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
+    //                 }
+    //             }
+    //         });
+    // }
 
-    downLoad(event: any) {
-        const url = String.Join('/', this.apiConfigService.getFile, this.formData.get('documentURL').value);
-        this.apiService.apiGetRequest(url)
-            .subscribe(
-                response => {
-                    this.spinner.hide();
-                    window.open(response.response, '_blank');
-                });
-    }
+    // downLoad(event: any) {
+    //     const url = String.Join('/', this.apiConfigService.getFile, this.formData.get('documentURL').value);
+    //     this.apiService.apiGetRequest(url)
+    //         .subscribe(
+    //             response => {
+    //                 this.spinner.hide();
+    //                 window.open(response.response, '_blank');
+    //             });
+    // }
 
-    reset() {
-        this.tableData = [];
-        this.formData.reset();
-        this.tableComponent.defaultValues();
-        const companyField = document.getElementById('company');
-        if (companyField) {
-            companyField.focus();
-        }
-    }
+    // reset() {
+    //     this.tableData = [];
+    //     this.formData.reset();
+    //     this.tableComponent.defaultValues();
+    //     const companyField = document.getElementById('company');
+    //     if (companyField) {
+    //         companyField.focus();
+    //     }
+    // }
 
 
 }

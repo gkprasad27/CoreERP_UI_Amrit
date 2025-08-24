@@ -77,6 +77,9 @@ export class CompListComponent implements OnInit, OnDestroy {
       || this.tableUrl.url == "Employee/GetEmployeeList" || this.tableUrl.url == "Common/GetPOQList" || this.tableUrl.url == "Common/GetRejectionList") {
       let obj = JSON.parse(localStorage.getItem("user"));
       getUrl = String.Join('', environment.baseUrl, this.tableUrl.url, `/${obj.companyCode}`);
+    } else if ((this.tableUrl.url == "Dispatch/GetDispatchList" && this.commonService.routeParam == 'dispatchstatus')) {
+      let obj = JSON.parse(localStorage.getItem("user"));
+      getUrl = String.Join('', environment.baseUrl, this.tableUrl.url, `/${obj.userName}`);
     } else {
       getUrl = String.Join('', environment.baseUrl, this.tableUrl.url);
     }
