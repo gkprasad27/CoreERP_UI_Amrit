@@ -534,6 +534,9 @@ export class SalesInvoiceComponent implements OnInit {
                   productionTag: d.tagName ? d.tagName : '',
                   inspectionCheckNo: d.inspectionCheckNo ? d.inspectionCheckNo : '',
                   status: d.status ? d.status : '',
+                  igstCode: (d.igst) || 0,
+                  cgstCode: (d.cgst) || 0,
+                  sgstCode: (d.sgst) || 0,
                   checkbox: true,
                   index: index + 1,
                 }
