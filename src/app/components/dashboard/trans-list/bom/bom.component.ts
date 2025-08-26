@@ -779,7 +779,9 @@ export class BillOfMaterialComponent implements OnInit {
       response => {
         const res = response;
         this.tableData = [];
-        this.uploadFile();
+        if(this.fileList) {
+          this.uploadFile();
+        }
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('BOM created Successfully..', Static.Close, SnackBar.success);
