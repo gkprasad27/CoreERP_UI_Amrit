@@ -2890,6 +2890,16 @@
     "title": "Swap Order",
     "fromSaleOrder": "From Sale Order",
     "toSaleOrder": "To Sale Order",
-    "swap": "Swap"
+    "swap": "Swap",
+    "checkbox": "checkbox",
+    "saleOrderNo": "Sale Order Number",
+    "status": "Status",
+    "materialCode": "Material Code",
+    "materialName": "MaterialName",
+    "mainComponent": "Main Component",
+    "billable": "Billable",
+    "bomKey": "bomKey",
+    "qty": "Quantity",
+    "action": "Action"
   }
 }

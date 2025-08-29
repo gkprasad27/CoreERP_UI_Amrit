@@ -479,11 +479,11 @@ export class SalesorderComponent {
                 s.stockQty = obj?.availQTY ? obj?.availQTY : ''
                 s.hsnsac = obj?.hsnsac ? obj?.hsnsac : ''
                 s.action = s?.billable == 'N' ? [
-  { id: 'Delete', type: 'delete' }
-] : [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-];
+                  { id: 'Delete', type: 'delete' }
+                ] : [
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' }
+                ];
                 s.index = index + 1;
               })
               this.tableData = res.response['SaleOrderDetails'];
@@ -577,7 +577,7 @@ export class SalesorderComponent {
     // obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
     obj.poDate = obj.poDate ? this.datepipe.transform(obj.poDate, 'MM-dd-yyyy') : '';
     obj.dateofSupply = obj.dateofSupply ? this.datepipe.transform(obj.dateofSupply, 'MM-dd-yyyy') : '';
-    obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
+    obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : this.formData.get('documentURL').value;
     obj.customerCode = this.formData.value.customerCode[0].id;
     
     arr.forEach((a: any) => {
@@ -591,7 +591,9 @@ export class SalesorderComponent {
         const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.uploadFile();
+            if(this.fileList) {
+              this.uploadFile();
+            }
             this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
           }
         }

@@ -3604,7 +3604,17 @@
     "title": "Swap Order",
     "fromSaleOrder": "From Sale Order",
     "toSaleOrder": "To Sale Order",
-    "swap": "Swap"
+    "swap": "Swap",
+
+    "saleOrderNo": "Sale Order Number",
+    "status": "Status",
+    "materialCode": "Material Code",
+    "materialName": "Material Name",
+    "mainComponent": "Main Component",
+    "billable": "Billable",
+    "bomKey": "Bom Key",
+    "qty": "Quantity",
+    "action": "Action"
   },
   "consolidatedpayslip": {
     "title": "Consolidated Payslip"
