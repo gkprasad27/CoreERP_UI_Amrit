@@ -420,8 +420,8 @@ export class SalesorderComponent {
                 // s.stockQty = obj.availQTY
                 // s.hsnsac = obj.hsnsac
                 s.id = 0;
-               // s.changed = true;
-                // s.highlight = true;
+                s.changed = true;
+                s.highlight = true;
                 s.action = s?.billable == 'N' ? [
                 { id: 'Delete', type: 'delete' }
               ] : [
