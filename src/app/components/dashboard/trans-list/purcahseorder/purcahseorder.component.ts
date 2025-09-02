@@ -805,9 +805,9 @@ export class PurchaseOrderComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['pomasters']);
               debugger
-              const obj = this.employeesList.find((e: any) => e.id == this.formData.value.createdBy);
+              const obj = this.employeesList.filter((e: any) => e.text == this.formData.value.createdBy);
               this.formData.patchValue({
-                createdBy: obj ? [{ id: obj.id, text: obj.name }]: [],
+                createdBy: (obj && obj.length) ? obj : [],
               });
               // this.toggle();
 
@@ -1230,6 +1230,9 @@ debugger
 
   print() {
     let formObj = this.formData.value;
+     if (typeof formObj.createdBy != 'string') {
+      formObj.createdBy = (this.formData.value.createdBy && this.formData.value.createdBy.length) ? this.formData.value.createdBy[0].text : '';
+    }
     if (this.companyList.length) {
       const cObj = this.companyList.find((c: any) => c.companyCode == formObj.company);
       formObj['address'] = {

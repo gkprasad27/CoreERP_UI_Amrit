@@ -74,7 +74,7 @@
 
                 <div class="row p-1">
 
-                    <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="formData1.value?.materialCode?.length > 0">
+                    <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData1.value?.materialCode?.length > 0">
                         <label> {{ 'sourceofsupply.materialCode' | translate }} </label>
                         <input placeholder=" "
                             formControlName="materialCode" [typeahead]="materialList" typeaheadOptionField='id'
