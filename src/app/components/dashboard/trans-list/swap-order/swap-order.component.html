@@ -14,7 +14,7 @@
                     [class.filled]="formData.value?.fromSaleOrder?.length > 0">
                     <label> {{ 'swaporder.fromSaleOrder' | translate }} </label>
                     <input placeholder=" " formControlName="fromSaleOrder" (typeaheadOnSelect)="onSwapTypeChange()"
-                        [typeahead]="saleOrders" typeaheadOptionField='saleOrderNo' appFocusOnEnter tabIndex="1"
+                        [typeaheadOptionsLimit]="100000" [typeahead]="saleOrders" typeaheadOptionField='saleOrderNo' appFocusOnEnter tabIndex="1"
                         class="form-control typeahead w-100">
                 </div>
 
@@ -22,7 +22,7 @@
                 <div class="mat-mdc-form-field typeahead  floating-dropdown col-4"
                     [class.filled]="formData.value?.toSaleOrder?.length > 0">
                     <label> {{ 'swaporder.toSaleOrder' | translate }} </label>
-                    <input placeholder=" " formControlName="toSaleOrder" [typeahead]="saleOrders"
+                    <input placeholder=" " formControlName="toSaleOrder" [typeaheadOptionsLimit]="100000" [typeahead]="saleOrders"
                         typeaheadOptionField='saleOrderNo' appFocusOnEnter tabIndex="2"
                         class="form-control typeahead w-100">
                 </div>

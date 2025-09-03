@@ -76,7 +76,7 @@
                                 [disabled]="element.text != 'obj'" class="typeahead"
                                 (typeaheadOnSelect)="getStockTransferDetailsSection($event, dataSource.filteredData.indexOf(element), 'qty')"
                                 (input)="getProductByProductCode($event.target.value)"
-                                [typeahead]="getProductByProductCodeArray" typeaheadOptionField='text'
+                                [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductCodeArray" typeaheadOptionField='text'
                                 autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" (keydown.enter)="save()">
                         </td>
                     </ng-container>
@@ -87,7 +87,7 @@
                             <input class="typeAhead" [(ngModel)]="element.productName" [matTooltip]="element.productName"
                                 [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setProductName($event)"
                                 (input)="getProductByProductName($event.target.value)" class="typeahead"
-                                [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'
+                                [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'
                                 autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" (keydown.enter)="save()">
                         </td>
                     </ng-container>

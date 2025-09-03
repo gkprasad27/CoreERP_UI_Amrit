@@ -67,7 +67,7 @@
 
                 <!-- <div class="mat-mdc-form-field typeahead" id="typeaheads">
                     <input placeholder="{{ 'saleorder.materialCode' | translate }}" formControlName="materialCode"
-                        [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
+                        [typeaheadOptionsLimit]="100000" [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
                         (typeaheadOnSelect)="materialCodehChange()" >
                     <ng-template #customItemTemplate let-model="item">
@@ -78,7 +78,7 @@
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="formData.value?.bom?.length > 0" >
                     <label> {{ 'saleorder.bom' | translate }} </label>
                     <input placeholder=" " formControlName="bom"
-                    [typeahead]="qnoList" typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="10"
+                    [typeaheadOptionsLimit]="100000" [typeahead]="qnoList" typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="10"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1"
                         (typeaheadOnSelect)="getBomDetail()" >
                     <ng-template #customItemTemplate1 let-model="item">
@@ -106,7 +106,7 @@
 
                     <!-- <div class="mat-mdc-form-field typeahead">
                         <input placeholder="{{ 'saleorder.materialCode' | translate }}" formControlName="materialCode"
-                            [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
+                            [typeaheadOptionsLimit]="100000" [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
                             class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
                             (typeaheadOnSelect)="materialCodeChange()" (change)="materialChange()">
                         <ng-template #customItemTemplate let-model="item">

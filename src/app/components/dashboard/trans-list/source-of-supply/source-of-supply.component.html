@@ -13,7 +13,7 @@
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData.value?.supplierName?.length > 0">
                     <label> {{ 'sourceofsupply.supplierCode' | translate }} </label>
                     <input placeholder=" " formControlName="supplierName"
-                        [typeahead]="bpaList" typeaheadOptionField='name' appFocusOnEnter tabIndex="1"
+                        [typeaheadOptionsLimit]="100000" [typeahead]="bpaList" typeaheadOptionField='name' appFocusOnEnter tabIndex="1"
                         class="form-control typeahead" 
                         (typeaheadOnSelect)="supplierCodeChange()">
                 </div>
@@ -77,7 +77,7 @@
                     <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData1.value?.materialCode?.length > 0">
                         <label> {{ 'sourceofsupply.materialCode' | translate }} </label>
                         <input placeholder=" "
-                            formControlName="materialCode" [typeahead]="materialList" typeaheadOptionField='id'
+                            formControlName="materialCode" [typeaheadOptionsLimit]="100000" [typeahead]="materialList" typeaheadOptionField='id'
                             appFocusOnEnter tabIndex="10" class="form-control typeahead"
                             [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="materialCodehChange()">
                         <ng-template #customItemTemplate let-model="item">

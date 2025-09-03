@@ -87,7 +87,7 @@
         </mat-form-field> -->
 
         <!-- <div class="mat-mdc-form-field typeahead">
-          <input placeholder="{{ 'bom.product' | translate }}" formControlName="product" [typeahead]="mmasterList"
+          <input placeholder="{{ 'bom.product' | translate }}" formControlName="product" [typeaheadOptionsLimit]="100000" [typeahead]="mmasterList"
             typeaheadOptionField='id' appFocusOnEnter tabIndex="5" class="form-control typeahead"
             [typeaheadItemTemplate]="customItemTemplate" >
           <ng-template #customItemTemplate let-model="item">
@@ -183,7 +183,7 @@
           <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData1.value?.materialCode?.length > 0" >
             <label> {{ 'bom.materialCode' | translate }} </label>
             <input formControlName="materialCode" placeholder=" "
-              [typeahead]="mmasterListData" typeaheadOptionField='id' appFocusOnEnter tabIndex="6"
+             [typeaheadOptionsLimit]="100000" [typeaheadOptionsLimit]="100000" [typeahead]="mmasterListData" typeaheadOptionField='id' appFocusOnEnter tabIndex="6"
               class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
               (typeaheadOnSelect)="materialCodeChange()" (input)="onValueChange()">
             <ng-template #customItemTemplate let-model="item">
@@ -194,7 +194,7 @@
           <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData1.value?.materialName?.length > 0" >
             <label> {{ 'bom.materialName' | translate }} </label>
             <input formControlName="materialName" placeholder=" "
-              [typeahead]="mmasterListData" typeaheadOptionField='id' appFocusOnEnter tabIndex="6"
+              [typeaheadOptionsLimit]="100000" [typeahead]="mmasterListData" typeaheadOptionField='id' appFocusOnEnter tabIndex="6"
               class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
               (typeaheadOnSelect)="materialCodeChange()" (input)="onValueChange()">
             <ng-template #customItemTemplate let-model="item">

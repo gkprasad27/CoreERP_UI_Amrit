@@ -10,7 +10,7 @@
         <mat-form-field class="col-3">
           <input matInput placeholder="{{'permissionrequest.empCode' | translate }}"
                  (input)="getProductByProductCode($event.target.value)" class="typeahead"
-                 [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'
+                 [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'
                  formControlName="empCode" appFocusOnEnter tabIndex="1">
         </mat-form-field>
 

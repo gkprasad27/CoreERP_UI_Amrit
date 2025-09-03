@@ -134,6 +134,7 @@ export class SalesorderComponent {
       taxCode: ['', Validators.required],
       qty: ['', Validators.required],
       rate: ['', Validators.required],
+      dubQty: [0],
       discount: [''],
       saleOrderNo: [0],
       sgst: [''],
@@ -206,9 +207,9 @@ export class SalesorderComponent {
     setTimeout(() => {
       this.tableData = data;
       this.calculate();
+      this.resetForm();
       this.finalTableData = JSON.parse(JSON.stringify(this.tableData));
     });
-    this.resetForm();
   }
 
   dataChange() {
@@ -250,10 +251,10 @@ export class SalesorderComponent {
     })
     this.tableData && this.tableData.forEach((t: any) => {
 
-      if (t.mainComponent == 'N' && flag) {
+      if (t.mainComponent == 'N' && flag && t.bomKey === this.formData1.value.bomKey) {
         const obj = this.tableData.find((td: any) => td.bomKey == t.bomKey && td.mainComponent == 'Y');
         if (obj && obj.taxCode) {
-          t.qty = obj.qty * (t.bomqty ? t.bomqty : t.qty);
+          t.qty = obj.qty * (t.bomqty ? t.bomqty : t.dubQty);
           t.changed = true
         }
       }
@@ -422,6 +423,7 @@ export class SalesorderComponent {
                 s.id = 0;
                 s.changed = true;
                 s.highlight = true;
+                s.dubQty = s.qty;
                 s.action = s?.billable == 'N' ? [
                 { id: 'Delete', type: 'delete' }
               ] : [
@@ -478,6 +480,7 @@ export class SalesorderComponent {
                 s.materialName = obj?.text ? obj?.text : ''
                 s.stockQty = obj?.availQTY ? obj?.availQTY : ''
                 s.hsnsac = obj?.hsnsac ? obj?.hsnsac : ''
+                s.dubQty = s.qty;
                 s.action = s?.billable == 'N' ? [
                   { id: 'Delete', type: 'delete' }
                 ] : [

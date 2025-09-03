@@ -12,7 +12,7 @@
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="modelFormData.value?.tag?.length > 0">
                     <label> {{ 'quorantine.tag' | translate }} </label>
                     <input placeholder=" " formControlName="tag" (input)="getInvoiceDetailList($event.target.value)"
-                        (typeaheadOnSelect)="tagNameChange()" [typeahead]="getInvoiceDetail"
+                        (typeaheadOnSelect)="tagNameChange()" [typeaheadOptionsLimit]="100000" [typeahead]="getInvoiceDetail"
                         typeaheadOptionField='tagname' appFocusOnEnter tabIndex="1" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200">
                         <!-- [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200"> -->

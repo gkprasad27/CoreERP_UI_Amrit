@@ -17,7 +17,7 @@
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-3"  [class.filled]="modelFormData.value?.empCode?.length > 0">
                     <label> {{ 'CTCBreakup.empCode' | translate }} </label>
                     <input placeholder=" " formControlName="empCode"
-                        (input)="getctcEmployeeList($event.target.value, modelFormData.value.companyCode)" [typeahead]="GetEmployeeListArray"
+                        (input)="getctcEmployeeList($event.target.value, modelFormData.value.companyCode)" [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray"
                         typeaheadOptionField='id' appFocusOnEnter tabIndex="2" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200">
                     <ng-template #customItemTemplate let-model="item">

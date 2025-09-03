@@ -45,7 +45,7 @@
 
         <mat-form-field class="col-2">
           <!-- <input readonly placeholder="{{ 'standardrateoutput.materialCode' | translate }}" formControlName="materialCode"
-              [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
+              [typeaheadOptionsLimit]="100000" [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
               class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
             <ng-template #customItemTemplate let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>

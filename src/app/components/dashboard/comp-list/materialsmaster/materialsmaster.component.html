@@ -161,7 +161,7 @@
 
           <!-- <div class="mat-mdc-form-field typeahead mx-3" >
               <input placeholder="{{ 'COMMON.CUSTOMERCODE' | translate }}" formControlName="customerName"
-                [typeahead]="customerList" typeaheadOptionField='text' appFocusOnEnter tabIndex="17"
+                [typeaheadOptionsLimit]="100000" [typeahead]="customerList" typeaheadOptionField='text' appFocusOnEnter tabIndex="17"
                 class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
               <ng-template #customItemTemplate let-model="item">
                 <span><strong>{{model.id}}</strong> - {{model.text}}</span>
@@ -170,7 +170,7 @@
 
           <!-- <div class="mat-mdc-form-field typeahead mx-3" >
               <input placeholder="{{ 'materialsmaster.bomnumber' | translate }}" formControlName="bomName"
-                [typeahead]="qnoList" typeaheadOptionField='text' appFocusOnEnter tabIndex="18"
+                [typeaheadOptionsLimit]="100000" [typeahead]="qnoList" typeaheadOptionField='text' appFocusOnEnter tabIndex="18"
                 class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1">
               <ng-template #customItemTemplate1 let-model="item">
                 <span><strong>{{model.bomnumber}}</strong> - {{model.text}}</span>
@@ -319,7 +319,7 @@
             <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="modelFormData.value?.hsnsacName?.length > 0">
               <label> {{ 'materialsmaster.hsnsac' | translate }} </label>
               <input placeholder=" " formControlName="hsnsacName"
-                [typeahead]="hsnsacList" typeaheadOptionField='text' appFocusOnEnter tabIndex="26"
+                [typeaheadOptionsLimit]="100000" [typeahead]="hsnsacList" typeaheadOptionField='text' appFocusOnEnter tabIndex="26"
                 (typeaheadOnSelect)="hsnsacChange()" class="form-control typeahead">
             </div>
 

@@ -105,7 +105,7 @@
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData.value?.partyAccount?.length > 0" >
                     <label> {{ 'invoicesmemos.partyAccount' | translate }} </label>
                     <input placeholder=" " formControlName="partyAccount"
-                        [typeahead]="bpgLists" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
+                        [typeaheadOptionsLimit]="100000" [typeahead]="bpgLists" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
                     <ng-template #customItemTemplate let-model="item">
                         <span>{{model.text}}</span>

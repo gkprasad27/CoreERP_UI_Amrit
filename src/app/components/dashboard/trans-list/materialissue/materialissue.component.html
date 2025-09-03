@@ -89,7 +89,7 @@
                     <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="formData1.value?.materialCode?.length > 0" >
                         <label> {{ 'materialissue.materialCode' | translate }} </label>
                         <input placeholder=" " formControlName="materialCode"
-                            [typeahead]="mmasterListData" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
+                            [typeaheadOptionsLimit]="100000" [typeahead]="mmasterListData" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
                             class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
                             (typeaheadOnSelect)="materialCodeChange()" (input)="materialChange()">
                         <ng-template #customItemTemplate let-model="item">

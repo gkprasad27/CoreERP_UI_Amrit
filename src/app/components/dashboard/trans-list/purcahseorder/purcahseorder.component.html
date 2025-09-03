@@ -533,7 +533,7 @@
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-3" 
                     [class.filled]="formData.value?.supplierName?.length > 0">
                     <label> {{ 'purchaseorder.supplierCode' | translate }} </label>
-                    <input placeholder=" " formControlName="supplierName" [typeahead]="bpaList"
+                    <input placeholder=" " formControlName="supplierName" [typeaheadOptionsLimit]="100000" [typeahead]="bpaList"
                         typeaheadOptionField='name' appFocusOnEnter tabIndex="8" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="supplierCodeChange()">
                     <ng-template #customItemTemplate let-model="item">

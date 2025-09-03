@@ -67,7 +67,7 @@
         <input class="typeAhead" [(ngModel)]="element.productCode" type="search" class="typeahead"
                [disabled]="element.text != 'obj'" (typeaheadOnSelect)="getdata($event)"
                (input)="getProductByProductCode($event.target.value)"
-               [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'>
+               [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'>
 
       </td>
     </ng-container>
@@ -77,7 +77,7 @@
         <input class="typeAhead typeahead" [(ngModel)]="element.productName" type="search"
                [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setProductName($event)"
                (input)="getProductByProductName($event.target.value)"
-               [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'>
+               [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'>
       </td>
     </ng-container>
 

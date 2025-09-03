@@ -21,7 +21,7 @@
         <input class="typeahead" matInput
             placeholder="{{ 'openingBalance.ledgerName' | translate }}" formControlName="ledgerCode"
              (input)="getBankPAccountLedgerList($event.target.value)" class="typeahead"
-            [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' autocomplete="off"
+            [typeaheadOptionsLimit]="100000" [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' autocomplete="off"
             [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
             [typeaheadWaitMs]="200" id="ledgerName" >
         <ng-template #customItemTemplate let-model="item">

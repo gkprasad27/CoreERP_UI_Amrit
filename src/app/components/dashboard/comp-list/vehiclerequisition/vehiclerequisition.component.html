@@ -11,13 +11,13 @@
           <input matInput placeholder="{{'vehiclerequisition.empCode' | translate }}"
                  (typeaheadOnSelect)="onSearchChange($event)"
                  (input)="getProductByProductCode($event.target.value)" class="typeahead"
-                 [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'
+                 [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'
                  formControlName="empCode" appFocusOnEnter tabIndex="1">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <input matInput placeholder=" {{'vehiclerequisition.empName' | translate }} " class="typeahead"
-                 formControlName="empName" [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'
+                 formControlName="empName" [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'
                  appFocusOnEnter tabIndex="2">
 
         </mat-form-field>
