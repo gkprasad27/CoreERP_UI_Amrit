@@ -1581,6 +1581,7 @@
     "materialName": "Material Name",
     "bomNumber": "bomNumber",
     "qty": "Quantity",
+    "lotNo": "Lot No",
     "productionPerson": "Production In Charge",
     "availableqty": "Available QTY",
     "allocatedqty": "Allocated QTY",
@@ -2901,5 +2902,15 @@
     "bomKey": "bomKey",
     "qty": "Quantity",
     "action": "Action"
+  },
+  "lotwisematerial": {
+    "title": "Lot Wise material",
+    "materialcode": "Material Code",
+    "receivedQty": "Received Qty",
+    "rejectedQty": "Rejected Qty",
+    "invoiceNo": "Invoice No",
+    "vendor": "Vendor",
+    "receivedDate": "Date",
+    "amount": "Amount"
   }
 }

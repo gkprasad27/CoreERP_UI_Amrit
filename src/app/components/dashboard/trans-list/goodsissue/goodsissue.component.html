@@ -1,4 +1,3 @@
-
 <mat-card>
 
   <mat-card-content>
@@ -40,10 +39,11 @@
 
 
 
-        <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData.value?.storesPerson?.length > 0" *ngIf="!routeEdit">
+        <div class="multiselect-dropdown-list floating-dropdown col-2"
+          [class.filled]="formData.value?.storesPerson?.length > 0" *ngIf="!routeEdit">
           <label> {{ 'goodsissue.storesPerson' | translate }} </label>
-          <ng-multiselect-dropdown placeholder=" "
-            formControlName="storesPerson" [settings]="dropdownSettings1" [data]="employeesList">
+          <ng-multiselect-dropdown placeholder=" " formControlName="storesPerson" [settings]="dropdownSettings1"
+            [data]="employeesList">
           </ng-multiselect-dropdown>
         </div>
         <mat-form-field *ngIf="routeEdit" class="col-2">
@@ -79,28 +79,29 @@
 
 
 
-        <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData.value?.saleOrderNumber?.length > 0" *ngIf="!routeEdit">
+        <div class="multiselect-dropdown-list floating-dropdown col-2"
+          [class.filled]="formData.value?.saleOrderNumber?.length > 0" *ngIf="!routeEdit">
           <label> {{ 'goodsissue.saleOrderNumber' | translate }} </label>
-          <ng-multiselect-dropdown placeholder=" "
-            formControlName="saleOrderNumber" (onSelect)="getGoodsissueDetail()" [settings]="dropdownSettings"
-            [data]="mreqList">
+          <ng-multiselect-dropdown placeholder=" " formControlName="saleOrderNumber" (onSelect)="getGoodsissueDetail()"
+            [settings]="dropdownSettings" [data]="mreqList">
           </ng-multiselect-dropdown>
         </div>
         <mat-form-field class="col-2" *ngIf="routeEdit">
           <mat-label>{{'goodsissue.saleOrderNumber' | translate }}</mat-label>
-          <input matInput type="text" readonly formControlName="saleOrderNumber" appFocusOnEnter tabIndex="4">
+          <input matInput type="text" readonly formControlName="saleOrderNumber" appFocusOnEnter tabIndex="5">
         </mat-form-field>
 
 
-        <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData.value?.productionPerson?.length > 0" *ngIf="!routeEdit">
+        <div class="multiselect-dropdown-list floating-dropdown col-2"
+          [class.filled]="formData.value?.productionPerson?.length > 0" *ngIf="!routeEdit">
           <label> {{ 'goodsissue.productionPerson' | translate }} </label>
-          <ng-multiselect-dropdown placeholder=" "
-            formControlName="productionPerson" [settings]="dropdownSettings1" [data]="employeesList">
+          <ng-multiselect-dropdown placeholder=" " formControlName="productionPerson" [settings]="dropdownSettings1"
+            [data]="employeesList">
           </ng-multiselect-dropdown>
         </div>
         <mat-form-field class="col-2" *ngIf="routeEdit">
           <mat-label>{{'goodsissue.productionPerson' | translate }}</mat-label>
-          <input matInput type="text" readonly formControlName="productionPersonName" appFocusOnEnter tabIndex="4">
+          <input matInput type="text" readonly formControlName="productionPersonName" appFocusOnEnter tabIndex="6">
         </mat-form-field>
 
 
@@ -144,40 +145,52 @@
 
         <div class="row p-1">
 
-            <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData1.value?.productionPerson?.length > 0" *ngIf="routeEdit">
-              <label> {{ 'purchaseorder.materialCode' | translate }} </label>
-              <ng-multiselect-dropdown (onSelect)="materialCodeChange()" placeholder=" "
-                formControlName="materialCodeBomKey" [settings]="dropdownSettings4" [data]="materialCodeList">
-              </ng-multiselect-dropdown>
-            </div>
+          <div class="multiselect-dropdown-list floating-dropdown col-2"
+            [class.filled]="formData1.value?.productionPerson?.length > 0" *ngIf="routeEdit">
+            <label> {{ 'purchaseorder.materialCode' | translate }} </label>
+            <ng-multiselect-dropdown (onSelect)="materialCodeChange()" placeholder=" "
+              formControlName="materialCodeBomKey" [settings]="dropdownSettings4" [data]="materialCodeList">
+            </ng-multiselect-dropdown>
+          </div>
 
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'goodsissue.qty'"></mat-label>
-              <input matInput type="number" readonly formControlName="qty" appFocusOnEnter tabIndex="8">
-            </mat-form-field>
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'goodsissue.availableqty'"></mat-label>
-              <input matInput type="number" readonly formControlName="availableqty" appFocusOnEnter tabIndex="9">
-            </mat-form-field>
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'goodsissue.allocatedqty'"></mat-label>
-              <input matInput type="number" formControlName="allocatedqty" appFocusOnEnter tabIndex="10"
-                (change)="allocatedqtyChange()">
-            </mat-form-field>
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
-              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"
-                appFocusOnEnter tabIndex="11">
-              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-              <mat-datepicker #picker3></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
-              <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
-                appFocusOnEnter tabIndex="12">
-              <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-              <mat-datepicker #picker4></mat-datepicker>
-            </mat-form-field>
+          <mat-form-field class="col-2">
+            <mat-label [translate]="'goodsissue.qty'"></mat-label>
+            <input matInput type="number" readonly formControlName="qty" appFocusOnEnter tabIndex="7">
+          </mat-form-field>
+
+          <mat-form-field class="col-2">
+            <mat-label>{{'goodsissue.lotNo' | translate }}</mat-label>
+            <mat-select formControlName="lotNo" appFocusOnEnter tabIndex="8">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let pft of getLotList" [value]="pft.lotNo">
+                {{pft.lotNo}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field class="col-2">
+            <mat-label [translate]="'goodsissue.availableqty'"></mat-label>
+            <input matInput type="number" readonly formControlName="availableqty" appFocusOnEnter tabIndex="9">
+          </mat-form-field>
+          <mat-form-field class="col-2">
+            <mat-label [translate]="'goodsissue.allocatedqty'"></mat-label>
+            <input matInput type="number" formControlName="allocatedqty" appFocusOnEnter tabIndex="10"
+              (change)="allocatedqtyChange()">
+          </mat-form-field>
+          <mat-form-field class="col-2">
+            <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3"
+              [nonEditable]="picker3" formControlName="productionPlanDate" appFocusOnEnter tabIndex="11">
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="col-2">
+            <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
+            <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
+              appFocusOnEnter tabIndex="12">
+            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+            <mat-datepicker #picker4></mat-datepicker>
+          </mat-form-field>
 
 
           <div id="for" class="d-flex justify-content-end mb-3">

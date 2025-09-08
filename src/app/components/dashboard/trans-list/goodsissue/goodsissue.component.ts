@@ -28,7 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-goodsissue',
-  imports: [ CommonModule, ReactiveFormsModule, NonEditableDatepicker,  TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, NgMultiSelectDropDownModule ],
+  imports: [CommonModule, ReactiveFormsModule, NonEditableDatepicker, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, NgMultiSelectDropDownModule],
   templateUrl: './goodsissue.component.html',
   styleUrls: ['./goodsissue.component.scss'],
   providers: [
@@ -76,6 +76,7 @@ export class GoodsissueComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  getLotList: any[] = [];
 
   formData: FormGroup;
   formData1: FormGroup;
@@ -157,7 +158,8 @@ export class GoodsissueComponent implements OnInit {
       materialCodeBomKey: [''],
       materialCode: [''],
       materialName: [''],
-      qty: ['',],
+      qty: [''],
+      lotNo: [''],
       id: 0,
       changed: true,
       availableqty: [''],
@@ -168,11 +170,11 @@ export class GoodsissueComponent implements OnInit {
       productionTargetDate: [null],
       bomNumber: [''],
       bomType: [''],
-      status:[''],
-      bomKey:[''],
+      status: [''],
+      bomKey: [''],
       action: [[
-  { id: 'Edit', type: 'edit' }
-]],
+        { id: 'Edit', type: 'edit' }
+      ]],
       index: 0
     });
 
@@ -182,32 +184,32 @@ export class GoodsissueComponent implements OnInit {
   allocatedqtyChange() {
     // this.formData1.patchValue({ bomType: 'Special Bom' });
     const { requiredqty, allocatedqty, availableqty, qty, allocatedqty1, bomType } = this.formData1.value;
-  
+
     const isSpecialBom = this.formData1.value.bomType === 'Special BOM';
 
-     // Skip validation for Special Bom
-  if (isSpecialBom) {
-    console.log('Special Bom detected — skipping validation.');
-    return; // No error for Special Bom — exit the function early
-  }
-  
+    // Skip validation for Special Bom
+    if (isSpecialBom) {
+      console.log('Special Bom detected — skipping validation.');
+      return; // No error for Special Bom — exit the function early
+    }
+
     const exceedsRequiredQty = requiredqty && allocatedqty > requiredqty;
     const exceedsAvailableQty = allocatedqty > availableqty;
     const exceedsTotalQty = allocatedqty1 + allocatedqty > qty;
     const exceedsQtyLimit = availableqty > qty && allocatedqty > qty;
-  
+
     if (exceedsRequiredQty || exceedsAvailableQty || exceedsQtyLimit || exceedsTotalQty) {
       this.qtyErrorMessage('Allocation Quantity cannot be greater than the allowed quantity.');
       return; // Exit early if there's an error
     }
   }
-  
-  
+
+
   qtyErrorMessage(message: string) {
     this.alertService.openSnackBar(message, Static.Close, SnackBar.error);
     this.formData1.patchValue({ allocatedqty: '' });
   }
-  
+
   // allocatedqtyChange() {
   //   if ((this.formData1.value.requiredqty && (this.formData1.value.allocatedqty > this.formData1.value.requiredqty)) ||
   //     (this.formData1.value.allocatedqty > this.formData1.value.availableqty) ||
@@ -262,8 +264,8 @@ export class GoodsissueComponent implements OnInit {
     this.formData1.patchValue({
       index: 0,
       action: [
-  { id: 'Edit', type: 'edit' }
-]
+        { id: 'Edit', type: 'edit' }
+      ]
     });
   }
 
@@ -300,7 +302,7 @@ export class GoodsissueComponent implements OnInit {
     this.tableData = null;
     this.tableComponent.defaultValues();
     let fObj = JSON.parse(JSON.stringify(this.formData1.value));
-    if(fObj.materialCode) {
+    if (fObj.materialCode) {
       // fObj.materialCode = this.formData1.value.materialCode[0].materialCode;
       // fObj.materialName = this.formData1.value.materialCode[0].materialName
       fObj.bomNumber = this.formData1.value.bomNumber
@@ -308,7 +310,7 @@ export class GoodsissueComponent implements OnInit {
     }
     if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
-        fObj.index = data ? (data.length + 1) : 1
+      fObj.index = data ? (data.length + 1) : 1
       // });
       data = [fObj, ...data];
     } else {
@@ -324,16 +326,32 @@ export class GoodsissueComponent implements OnInit {
     this.resetForm();
   }
 
+
+  getLotData() {
+    const companyUrl = String.Join('/', this.apiConfigService.getLot);
+    this.apiService.apiPostRequest(companyUrl, { materialCode: this.formData1.value.materialCode })
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.getLotList = res.response['lot'];
+            }
+          }
+        });
+  }
+
   editOrDeleteEvent(value) {
     if (value.action === 'Delete') {
       this.tableComponent.defaultValues();
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
     } else {
       this.formData1.patchValue(value.item);
-   
+      this.getLotData();
+
       // this.formData1.patchValue({
       //   materialCode: [{ materialCodeBomKey: value.item.materialCode + '-' + value.item.bomKey }],
-        //id: 0-- commented by KP
+      //id: 0-- commented by KP
       // })
     }
   }
@@ -358,7 +376,7 @@ export class GoodsissueComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              
+
               this.formData.patchValue(res.response['goodsissueasters']);
               // this.formData.patchValue({
               //   saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }] : ''
@@ -380,7 +398,7 @@ export class GoodsissueComponent implements OnInit {
                   materialCode: s.materialCode ? s.materialCode : 0,
                   materialName: s.materialName ? s.materialName : 0,
                   availableqty: qty?.availQTY ? qty?.availQTY : 0,
-                  bomNumber:s.bomNumber?s.bomNumber:s.bomKey,
+                  bomNumber: s.bomNumber ? s.bomNumber : s.bomKey,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   allocatedqty1: s.allocatedQTY ? s.allocatedQTY : 0,
                   productionPlanDate: s.productionPlanDate ? s.productionPlanDate : null,
@@ -407,8 +425,8 @@ export class GoodsissueComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               const arr = res.response['SaleOrderDetails'];
-                // Filter out items already present in tableData (by materialCode and bomKey)
-                this.materialCodeList = arr
+              // Filter out items already present in tableData (by materialCode and bomKey)
+              this.materialCodeList = arr
                 .filter((s: any) => !this.tableData.some((t: any) => t.materialCode == s.materialCode && t.bomNumber == s.bomKey))
                 // Map to add materialCodeBomKey as a combination of materialCode and bomKey
                 .map((s: any) => ({
@@ -421,13 +439,13 @@ export class GoodsissueComponent implements OnInit {
   }
 
   materialCodeChange() {
-   
+
     const obj = this.materialCodeList.find((m: any) => m.materialCodeBomKey == this.formData1.value.materialCodeBomKey[0].materialCodeBomKey);
     const qty = this.mmasterList.find(resp => resp.id == obj.materialCode);
     if (obj) {
       this.formData1.patchValue(obj);
       this.formData1.patchValue({
-        materialCode: obj.materialCode,  
+        materialCode: obj.materialCode,
         materialName: obj.materialName,
         availableqty: qty.availQTY,
         id: 0,
@@ -675,7 +693,7 @@ export class GoodsissueComponent implements OnInit {
     this.tableComponent.defaultValues();
     let url = this.apiConfigService.getSaleOrderDetail;
     // if (this.formData.value.saleOrder == 'Sale Order') {
-      // url = this.apiConfigService.getSaleOrderDetail;
+    // url = this.apiConfigService.getSaleOrderDetail;
     // } 
     // else if (this.formData.value.saleOrder == 'Master Saleorder') {
     //   url = this.apiConfigService.getPurchaseRequisitionDetail;
@@ -693,8 +711,8 @@ export class GoodsissueComponent implements OnInit {
 
               let obj = { data: {}, data1: [] }
               // if (this.formData.value.saleOrder == 'Sale Order') {
-                obj.data = res.response['SaleOrderMasters'];
-                obj.data1 = res.response['SaleOrderDetails'];
+              obj.data = res.response['SaleOrderMasters'];
+              obj.data1 = res.response['SaleOrderDetails'];
               // } else if (this.formData.value.saleOrder == 'Master Saleorder') {
               //   obj.data = res.response['preqmasters']
               //   obj.data1 = res.response['preqDetail']
@@ -709,7 +727,7 @@ export class GoodsissueComponent implements OnInit {
               obj['data1'].forEach((s: any, index: number) => {
                 const qty = this.mmasterList.find(resp => resp.id == s.materialCode);
                 const allocatedqty = goodsissueastersDetail.find(resp => resp.materialCode == s.materialCode);
-                const bomNumber =s.bomKey;
+                const bomNumber = s.bomKey;
                 s.action = [
                   { id: 'Edit', type: 'edit' }
                 ];
@@ -721,7 +739,7 @@ export class GoodsissueComponent implements OnInit {
                   s.materialCode = s?.materialCode ? s.materialCode : 0;
                 s.allocatedqty = allocatedqty ? allocatedqty.allocatedQTY : 0;
                 s.allocatedqty1 = allocatedqty ? allocatedqty.allocatedQTY : 0;
-                s.bomNumber=s.bomKey?s.bomKey:s.bomNumber;
+                s.bomNumber = s.bomKey ? s.bomKey : s.bomNumber;
               })
 
               // this.sendDynTableData = { type: 'add', data: newData };
@@ -760,7 +778,7 @@ export class GoodsissueComponent implements OnInit {
   savegoodsissue() {
     const formData = this.formData.value;
     if (typeof formData.saleOrderNumber != 'string') {
-      formData.saleOrderNumber = this.formData.value.saleOrderNumber[0].saleOrderNo;     
+      formData.saleOrderNumber = this.formData.value.saleOrderNumber[0].saleOrderNo;
     }
     if (typeof formData.storesPerson != 'string') {
       formData.storesPerson = this.formData.value.storesPerson[0].id;

@@ -484,6 +484,8 @@ export class ApiConfigService {
    getStockTransferList = `${environment.baseUrl}transaction/StockTransfer/GetStockTransferList`;
    getStockTransferDetilsaRecords = `${environment.baseUrl}transaction/StockTransfer/GetStockTransferDetilsaRecords`;
 
+   getLot = `${environment.baseUrl}transactions/GetLot`;
+
    //AdvanceApproval
    getAdvanceApplDetailsList = `${environment.baseUrl}Selfservice/AdvanceApproval/GetAdvanceApprovalApplDetailsList`;
    RegisterAdvanceApprovalDetails = `${environment.baseUrl}Selfservice/AdvanceApproval/RegisterAdvanceApprovalDetails`;

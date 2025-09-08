@@ -1,0 +1,76 @@
+<div class="position-relative popup-class">
+    <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+        <span> {{'lotwisematerial.title' | translate }} </span>
+        <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+    </mat-card-title>
+
+    <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+        <form [formGroup]="modelFormData" autocomplete="off">
+
+            <div class="row">
+
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+                    [class.filled]="modelFormData.value?.materialcode?.length > 0">
+                    <label [translate]="'COMMON.MATERIALCODE'"></label>
+                    <input placeholder=" " formControlName="materialcode" [typeaheadOptionsLimit]="100000"
+                        [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="1"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1">
+                    <ng-template #customItemTemplate1 let-model="item">
+                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+                    </ng-template>
+                </div>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'lotwisematerial.receivedQty'"></mat-label>
+                    <input matInput type="number" formControlName="receivedQty" appFocusOnEnter tabIndex="2">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'lotwisematerial.rejectedQty'"></mat-label>
+                    <input matInput type="number" formControlName="rejectedQty" appFocusOnEnter tabIndex="3">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'lotwisematerial.invoiceNo'"></mat-label>
+                    <input matInput type="number" formControlName="invoiceNo" appFocusOnEnter tabIndex="4">
+                </mat-form-field>
+
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+                    [class.filled]="modelFormData.value?.vendor?.length > 0">
+                    <label> {{ 'lotwisematerial.vendor' | translate }} </label>
+                    <input placeholder=" " formControlName="vendor" [typeaheadOptionsLimit]="100000"
+                        [typeahead]="bpaList" typeaheadOptionField='name' appFocusOnEnter tabIndex="5"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate" >
+                    <ng-template #customItemTemplate let-model="item">
+                        <span><strong>{{model.bpnumber}}</strong> - {{model.name}}</span>
+                    </ng-template>
+                </div>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'lotwisematerial.receivedDate'"></mat-label>
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" [nonEditable]="picker" formControlName="receivedDate"
+                        appFocusOnEnter tabIndex="6">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'lotwisematerial.amount'"></mat-label>
+                    <input matInput type="number" formControlName="amount" appFocusOnEnter tabIndex="7">
+                </mat-form-field>
+
+            </div>
+            <mat-divider></mat-divider>
+        </form>
+
+    </mat-card-content>
+    <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+            {{ 'COMMON.CANCEL' | translate }}
+        </button>
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+
+            {{ 'COMMON.SAVE' | translate }}
+        </button>
+    </div>
+</div>
