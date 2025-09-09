@@ -159,7 +159,7 @@ export class GoodsissueComponent implements OnInit {
       materialCode: [''],
       materialName: [''],
       qty: [''],
-      lotNo: [''],
+      lotNo: ['', Validators.required],
       id: 0,
       changed: true,
       availableqty: [''],
@@ -329,7 +329,7 @@ export class GoodsissueComponent implements OnInit {
 
   getLotData() {
     const companyUrl = String.Join('/', this.apiConfigService.getLot);
-    this.apiService.apiPostRequest(companyUrl, { materialCode: 'PULLEY160X4A(TLB2517)' })
+    this.apiService.apiPostRequest(companyUrl, { materialCode: this.formData1.value.materialCode })
       .subscribe(
         response => {
           this.spinner.hide();
@@ -388,6 +388,12 @@ export class GoodsissueComponent implements OnInit {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
 
               this.formData.patchValue(res.response['goodsissueasters']);
+              if (this.employeesList.length && this.formData.value.storesPerson) {
+                const storeObj = this.employeesList.find((c: any) => c.id == this.formData.value.storesPerson);
+                this.formData.patchValue({
+                  storesPersonName: storeObj.text
+                })
+              }
               // this.formData.patchValue({
               //   saleOrderNumber: res.response['goodsissueasters'] ? [{ saleOrderNo: res.response['goodsissueasters'].saleOrderNumber }] : ''
               // })
@@ -493,6 +499,12 @@ export class GoodsissueComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.employeesList = res.response['emplist'];
+              if (this.formData.value.storesPerson) {
+                const storeObj = this.employeesList.find((c: any) => c.id == this.formData.value.storesPerson);
+                this.formData.patchValue({
+                  storesPersonName: storeObj.text
+                })
+              }
             }
           }
           this.getmaterialList();
