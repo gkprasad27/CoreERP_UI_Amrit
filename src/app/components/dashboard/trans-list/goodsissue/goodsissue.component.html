@@ -160,7 +160,7 @@
 
           <mat-form-field class="col-2">
             <mat-label>{{'goodsissue.lotNo' | translate }}</mat-label>
-            <mat-select formControlName="lotNo" appFocusOnEnter tabIndex="8">
+            <mat-select formControlName="lotNo" appFocusOnEnter tabIndex="8" (selectionChange)="lotChange()">
               <mat-option>None</mat-option>
               <mat-option *ngFor="let pft of getLotList" [value]="pft.lotNo">
                 {{pft.lotNo}}

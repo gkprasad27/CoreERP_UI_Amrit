@@ -187,7 +187,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
       addDate: [null],
       editWho: [null],
       editDate: [null],
-      lotNo: ['', Validators.required],
+      // lotNo: ['', Validators.required],
       documentURL: [''],
       invoiceURL: [''],
       igst: [0],
@@ -398,9 +398,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
           value: null, type: 'text', width: 75, maxLength: 15, disabled: true,
           // value: null, type: 'dropdown', list: this.movementList, id: 'code', text: 'description', displayMul: true, width: 100, 
         },
-        lotNo: {
-          value: null, type: 'number', width: 100, maxLength: 50, fieldEnable: true
-        },
+        // lotNo: {
+        //   value: null, type: 'number', width: 100, maxLength: 50, fieldEnable: true
+        // },
         lotDate: {
           value: null, type: 'datepicker', width: 100, fieldEnable: true
         },
@@ -738,7 +738,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
                   purchaseOrderNumber: d.purchaseOrderNumber ? d.purchaseOrderNumber : '',
                   rejectQty: d.rejectQty ? d.rejectQty : '',
                   qty: d.qty ? d.qty : '',
-                  lotNo: d.lotNo ? d.lotNo : '',
+                  // lotNo: d.lotNo ? d.lotNo : '',
                   documentURL: d.documentURL ? d.documentURL : '',
                   invoiceURL: d.invoiceURL ? d.invoiceURL : '',
                   supplierReferenceNo: d.supplierReferenceNo ? d.supplierReferenceNo : '',

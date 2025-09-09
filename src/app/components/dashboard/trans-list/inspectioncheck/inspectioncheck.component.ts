@@ -135,6 +135,7 @@ export class InspectioncheckComponent implements OnInit {
       heatNumber: [''],
       partDrgNo: [''],
       inspectionCheckNo: [''],
+      lotNo: [''],
 
       company: [''],
       bomKey: [''],
@@ -415,7 +416,8 @@ export class InspectioncheckComponent implements OnInit {
                   // saleOrderNumber: s.saleOrderNumber ? s.saleOrderNumber : 0,
                   // allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   // requiredqty: s.qty - s.allocatedQTY,
-                  materialName: s.materialName ? s.materialName : null,
+                  // materialName: s.materialName ? s.materialName : null,
+                  lotNo: s.lotNo ? s.lotNo : '',
                   allocatedPerson: s.allocatedPerson ? s.allocatedPerson : '',
                   endDate: s.endDate ? s.endDate : '',
                   company: s.company ? s.company : '',

@@ -329,16 +329,26 @@ export class GoodsissueComponent implements OnInit {
 
   getLotData() {
     const companyUrl = String.Join('/', this.apiConfigService.getLot);
-    this.apiService.apiPostRequest(companyUrl, { materialCode: this.formData1.value.materialCode })
+    this.apiService.apiPostRequest(companyUrl, { materialCode: 'PULLEY160X4A(TLB2517)' })
       .subscribe(
         response => {
+          this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.getLotList = res.response['lot'];
+              this.getLotList = res.response['Lot'];
             }
           }
         });
+  }
+
+  lotChange() {
+    const obj = this.getLotList.find((c: any) => c.lotNo == this.formData1.value.lotNo);
+    if (obj) {
+      this.formData1.patchValue({
+        availableqty: obj.receivedQty
+      });
+    }
   }
 
   editOrDeleteEvent(value) {
@@ -397,6 +407,7 @@ export class GoodsissueComponent implements OnInit {
                   changed: false,
                   materialCode: s.materialCode ? s.materialCode : 0,
                   materialName: s.materialName ? s.materialName : 0,
+                  lotNo: s.lotNo ? s.lotNo : '',
                   availableqty: qty?.availQTY ? qty?.availQTY : 0,
                   bomNumber: s.bomNumber ? s.bomNumber : s.bomKey,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
