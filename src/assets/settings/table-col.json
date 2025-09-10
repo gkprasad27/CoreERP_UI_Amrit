@@ -2906,6 +2906,7 @@
   "lotwisematerial": {
     "title": "Lot Wise material",
     "materialcode": "Material Code",
+    "lotNo": "Lot No",
     "receivedQty": "Received Qty",
     "rejectedQty": "Rejected Qty",
     "invoiceNo": "Invoice No",

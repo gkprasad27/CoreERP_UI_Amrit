@@ -55,6 +55,7 @@ export class LotwisematerialComponent {
         this.modelFormData = this.formBuilder.group({
             id: [''],
             materialcode: [''],
+            lotNo: [''],
             receivedQty: [''],
             rejectedQty: [''],
             invoiceNo: [''],
@@ -67,6 +68,7 @@ export class LotwisematerialComponent {
         this.formData = { ...data };
         if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
             this.modelFormData.patchValue(this.formData.item);
+            this.modelFormData.controls['lotNo'].disable();
         }
 
     }
@@ -113,12 +115,13 @@ export class LotwisematerialComponent {
         if (this.modelFormData.invalid) {
             return;
         }
+        this.modelFormData.controls['lotNo'].enable();
         this.formData.item = this.modelFormData.value;
         this.addOrEditService[this.formData.action](this.formData, (res) => {
             this.dialogRef.close(this.formData);
         });
         if (this.formData.action == 'Edit') {
-            // this.modelFormData.controls['lotSeries'].disable();
+            this.modelFormData.controls['lotNo'].disable();
         }
     }
 

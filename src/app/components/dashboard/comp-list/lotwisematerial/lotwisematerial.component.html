@@ -21,25 +21,30 @@
                 </div>
 
                 <mat-form-field class="col-3">
+                    <mat-label [translate]="'lotwisematerial.lotNo'"></mat-label>
+                    <input matInput type="number" formControlName="lotNo" appFocusOnEnter tabIndex="2">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
                     <mat-label [translate]="'lotwisematerial.receivedQty'"></mat-label>
-                    <input matInput type="number" formControlName="receivedQty" appFocusOnEnter tabIndex="2">
+                    <input matInput type="number" formControlName="receivedQty" appFocusOnEnter tabIndex="3">
                 </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'lotwisematerial.rejectedQty'"></mat-label>
-                    <input matInput type="number" formControlName="rejectedQty" appFocusOnEnter tabIndex="3">
+                    <input matInput type="number" formControlName="rejectedQty" appFocusOnEnter tabIndex="4">
                 </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'lotwisematerial.invoiceNo'"></mat-label>
-                    <input matInput type="number" formControlName="invoiceNo" appFocusOnEnter tabIndex="4">
+                    <input matInput type="number" formControlName="invoiceNo" appFocusOnEnter tabIndex="5">
                 </mat-form-field>
 
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
                     [class.filled]="modelFormData.value?.vendor?.length > 0">
                     <label> {{ 'lotwisematerial.vendor' | translate }} </label>
                     <input placeholder=" " formControlName="vendor" [typeaheadOptionsLimit]="100000"
-                        [typeahead]="bpaList" typeaheadOptionField='name' appFocusOnEnter tabIndex="5"
+                        [typeahead]="bpaList" typeaheadOptionField='name' appFocusOnEnter tabIndex="6"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate" >
                     <ng-template #customItemTemplate let-model="item">
                         <span><strong>{{model.bpnumber}}</strong> - {{model.name}}</span>
@@ -49,14 +54,14 @@
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'lotwisematerial.receivedDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" [nonEditable]="picker" formControlName="receivedDate"
-                        appFocusOnEnter tabIndex="6">
+                        appFocusOnEnter tabIndex="7">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'lotwisematerial.amount'"></mat-label>
-                    <input matInput type="number" formControlName="amount" appFocusOnEnter tabIndex="7">
+                    <input matInput type="number" formControlName="amount" appFocusOnEnter tabIndex="8">
                 </mat-form-field>
 
             </div>
