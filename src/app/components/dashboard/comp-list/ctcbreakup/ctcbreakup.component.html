@@ -6,29 +6,35 @@
     <mat-card-content class="p-2 m-0 overflow-auto">
         <form [formGroup]="modelFormData" autocomplete="off">
             <div class="row">
+
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'pfmaster.companyName'"></mat-label>
-                    <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1" (selectionChange)="onCompanyChange($event.value)">
-                      <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                        {{comp.text}}
-                      </mat-option>
+                    <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1" >
+                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+                            {{comp.text}}
+                        </mat-option>
                     </mat-select>
-                    </mat-form-field>
-                <div class="mat-mdc-form-field typeahead floating-dropdown col-3"  [class.filled]="modelFormData.value?.empCode?.length > 0">
+                </mat-form-field>
+
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+                    [class.filled]="modelFormData.value?.empCode?.length > 0">
                     <label> {{ 'CTCBreakup.empCode' | translate }} </label>
                     <input placeholder=" " formControlName="empCode"
-                        (input)="getctcEmployeeList($event.target.value, modelFormData.value.companyCode)" [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray"
-                        typeaheadOptionField='id' appFocusOnEnter tabIndex="2" class="form-control typeahead"
-                        [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200">
+                        (input)="getctcEmployeeList($event.target.value)"
+                        [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray" typeaheadOptionField='id'
+                        appFocusOnEnter tabIndex="2" class="form-control typeahead"
+                        [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
+                        [typeaheadWaitMs]="200">
                     <ng-template #customItemTemplate let-model="item">
                         <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                     </ng-template>
                 </div>
-                
+
                 <mat-form-field class="col-3">
                     <mat-label>Effect From</mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'CTCBreakup.effectFrom' | translate }}"
-                        formControlName="effectFrom" appFocusOnEnter tabIndex="3">
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
+                        placeholder="{{'CTCBreakup.effectFrom' | translate }}" formControlName="effectFrom"
+                        appFocusOnEnter tabIndex="3">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
@@ -36,7 +42,7 @@
                 <mat-form-field class="col-3">
                     <mat-label>CTC</mat-label>
                     <input matInput placeholder="{{'CTCBreakup.ctc' | translate }}" formControlName="ctc"
-                        appFocusOnEnter tabIndex="4" >
+                        appFocusOnEnter tabIndex="4">
                 </mat-form-field>
 
                 <!-- <mat-form-field class="col-3">
@@ -47,10 +53,11 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field> -->
-                 <mat-form-field class="col-3">
+                <mat-form-field class="col-3">
                     <mat-label>PF Type</mat-label>
                     <!-- <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label> -->
-                    <mat-select formControlName="pfType" placeholder="{{'CTCBreakup.pftype' | translate }}" appFocusOnEnter tabIndex="5">
+                    <mat-select formControlName="pfType" placeholder="{{'CTCBreakup.pftype' | translate }}"
+                        appFocusOnEnter tabIndex="5">
                         <mat-option *ngFor="let List of PfList" [value]="List.pfName">
                             {{List.pfName}}
                         </mat-option>
@@ -60,7 +67,8 @@
                 <mat-form-field class="col-3">
                     <mat-label>PT Slab</mat-label>
                     <!-- <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label> -->
-                    <mat-select formControlName="ptSlab" placeholder="{{'CTCBreakup.ptslab' | translate }}" appFocusOnEnter tabIndex="6">
+                    <mat-select formControlName="ptSlab" placeholder="{{'CTCBreakup.ptslab' | translate }}"
+                        appFocusOnEnter tabIndex="6">
                         <mat-option *ngFor="let List of PtList" [value]="List.ptslab">
                             {{List.ptslab}}
                         </mat-option>
@@ -68,17 +76,17 @@
                 </mat-form-field>
 
                 <div class="form-element p-2 d-flex justify-content-end align-items-center">
-                    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="getctcComponentsList()"
-                        appFocusOnEnter tabIndex="5">
+                    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1"
+                        (click)="getctcComponentsList()" appFocusOnEnter tabIndex="5">
                         {{ 'COMMON.CALCULATE' | translate }}
                     </button>
                 </div>
-        
+
             </div>
         </form>
 
-       
-        
+
+
         <mat-card-content class="m-2">
             <div>
                 <div class="table">

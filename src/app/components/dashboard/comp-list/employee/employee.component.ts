@@ -9,7 +9,6 @@ import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -26,6 +25,7 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { NonEditableDatepicker } from '../../../../directives/format-datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee',
@@ -55,9 +55,12 @@ export class EmployeeComponent implements OnInit {
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     public commonService: CommonService,
+    public dialogRef: MatDialogRef<EmployeeComponent>,
     private router: Router,
     private datepipe: DatePipe,
-    private addOrEditService: AddOrEditService) {
+    private addOrEditService: AddOrEditService,
+    // @Optional() is used to prevent error if no data is passed
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.modelFormData = this.formBuilder.group({
       branchId: [''],
@@ -97,7 +100,7 @@ export class EmployeeComponent implements OnInit {
 
     });
 
-    this.formData = { ...this.addOrEditService.editData };
+    this.formData = { ...data };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
       this.modelFormData.patchValue({
@@ -196,6 +199,10 @@ export class EmployeeComponent implements OnInit {
 
   showErrorAlert(caption: string, message: string) {
     // this.alertService.openSnackBar(caption, message);
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
   get formControls() { return this.modelFormData.controls; }

@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -29,7 +28,8 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
   selector: 'app-ctcbreakup',
   imports: [ CommonModule, FormsModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, MatInputModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './ctcbreakup.component.html',
-  styleUrls: ['./ctcbreakup.component.scss']
+  styleUrls: ['./ctcbreakup.component.scss'],
+  providers: [ DatePipe ]
 })
 export class CTCBreakupComponent implements OnInit {
   structure: any;
@@ -56,9 +56,11 @@ export class CTCBreakupComponent implements OnInit {
     private spinner: NgxSpinnerService,
     public route: ActivatedRoute,
     private router: Router,
+    private datepipe: DatePipe,
     private addOrEditService: AddOrEditService,
     // public dialogRef: MatDialogRef<CTCBreakupComponent>,
   ) {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.modelFormData = this.formBuilder.group({
       empCode: [null],
       effectFrom: [null, Validators.required],
@@ -66,9 +68,10 @@ export class CTCBreakupComponent implements OnInit {
       ptSlab: [null, Validators.required],
       id: 0,
       ctc: [null, Validators.required],
-      companyCode: [null],
+      companyCode: [obj.companyCode],
     });
-    
+    this.modelFormData.controls['companyCode'].disable();
+
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
@@ -76,6 +79,7 @@ export class CTCBreakupComponent implements OnInit {
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
     }
+
   }
 
   ngOnInit() {
@@ -94,6 +98,7 @@ export class CTCBreakupComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.companyList = res.response['companiesList'];
+              this.onCompanyChange(this.modelFormData.controls.companyCode.value);  // Fetch employees based on company
             }
           }
           this.spinner.hide();
@@ -286,7 +291,7 @@ export class CTCBreakupComponent implements OnInit {
 
   onCompanyChange(companyCode: string) {
     if (companyCode) {
-      this.getctcEmployeeList(this.modelFormData.value.empCode, this.modelFormData.value.companyCode);  // Fetch employees based on company
+      this.getctcEmployeeList(this.modelFormData.value.empCode);  // Fetch employees based on company
     } else {
       this.GetEmployeeListArray = [];  // Reset employee list if no company is selected
     }
@@ -315,11 +320,11 @@ export class CTCBreakupComponent implements OnInit {
   //   }
   // }
 
-  getctcEmployeeList(empCode: string, companyCode: string) {
+  getctcEmployeeList(empCode: string) {
     if (!this.commonService.checkNullOrUndefined(empCode) && empCode !== '' &&
-        !this.commonService.checkNullOrUndefined(companyCode) && companyCode !== '') {
+        !this.commonService.checkNullOrUndefined(this.modelFormData.controls.companyCode.value) && this.modelFormData.controls.companyCode.value !== '') {
       
-      const getctcEmployeeListUrl = String.Join('/', this.apiConfigService.getctcEmployeeList, empCode, companyCode);
+      const getctcEmployeeListUrl = String.Join('/', this.apiConfigService.getctcEmployeeList, empCode, this.modelFormData.controls.companyCode.value);
       this.apiService.apiGetRequest(getctcEmployeeListUrl).subscribe(
         response => {
           const res = response;
@@ -347,11 +352,11 @@ export class CTCBreakupComponent implements OnInit {
           // structureName: this.modelFormData.value.structureName,
           ctc: this.modelFormData.value.ctc,
           empcode: this.modelFormData.value.empCode,
-          effectfrom: this.modelFormData.value.effectFrom,
+          effectfrom: this.modelFormData.value.effectFrom ? this.datepipe.transform(this.modelFormData.value.effectFrom, 'yyyy-MM-dd') : '',
           id: this.modelFormData.value.id,
           pftype: this.modelFormData.value.pfType,
           ptslab: this.modelFormData.value.ptSlab,
-          companyCode:this.modelFormData.value.companyCode
+          companyCode:this.modelFormData.controls.companyCode.value
         },
         components: arr
       }
