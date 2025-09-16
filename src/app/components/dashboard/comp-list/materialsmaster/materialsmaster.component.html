@@ -316,12 +316,19 @@
               </mat-select>
             </mat-form-field> -->
 
-            <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="modelFormData.value?.hsnsacName?.length > 0">
-              <label> {{ 'materialsmaster.hsnsac' | translate }} </label>
-              <input placeholder=" " formControlName="hsnsacName"
-                [typeaheadOptionsLimit]="100000" [typeahead]="hsnsacList" typeaheadOptionField='text' appFocusOnEnter tabIndex="26"
-                (typeaheadOnSelect)="hsnsacChange()" class="form-control typeahead">
+          <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
+            [class.filled]="modelFormData.value?.hsnsacName?.length > 0">
+            <label> {{ 'materialsmaster.hsnsac' | translate }} </label>
+            <input placeholder=" " formControlName="hsnsacName" [typeaheadOptionsLimit]="100000"
+              [typeahead]="hsnsacList" typeaheadOptionField='text' appFocusOnEnter tabIndex="26"
+              (typeaheadOnSelect)="hsnsacChange()" class="form-control typeahead">
+            <div class="error_text mt-0" *ngIf="(modelFormData.controls.hsnsacName.dirty && modelFormData.controls.hsnsacName.touched && modelFormData.controls.hsnsacName.errors) ||
+                    (isSubmitted && modelFormData.controls.hsnsacName.errors)">
+              <div class="error_text mt-0" *ngIf="modelFormData.controls.hsnsacName.errors.required">
+                This feild is required
+              </div>
             </div>
+          </div>
 
 
             <mat-form-field class="col-2">

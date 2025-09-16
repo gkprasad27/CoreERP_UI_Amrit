@@ -53,7 +53,7 @@ export class LotwisematerialComponent {
         @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
         this.modelFormData = this.formBuilder.group({
-            id: [''],
+            id: 0,
             materialcode: [''],
             lotNo: [''],
             receivedQty: [''],

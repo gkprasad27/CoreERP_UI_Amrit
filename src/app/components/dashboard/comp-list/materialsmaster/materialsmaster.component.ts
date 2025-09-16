@@ -167,7 +167,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       qtyvalues: [null],
       transferPrice: [null],
       hsnsac: [null],
-      hsnsacName: [null],
+      hsnsacName: [null, Validators.required],
       classification: [null],
       taxable: [null],
       fileUpload: [null],
