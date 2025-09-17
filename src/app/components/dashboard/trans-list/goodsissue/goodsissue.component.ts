@@ -328,6 +328,7 @@ export class GoodsissueComponent implements OnInit {
 
 
   getLotData() {
+    this.getLotList = [];
     const companyUrl = String.Join('/', this.apiConfigService.getLot);
     this.apiService.apiPostRequest(companyUrl, { materialCode: this.formData1.value.materialCode })
       .subscribe(
@@ -466,8 +467,10 @@ export class GoodsissueComponent implements OnInit {
         materialName: obj.materialName,
         availableqty: qty.availQTY,
         id: 0,
-        bomNumber: obj.bomKey
+        bomNumber: obj.bomKey,
+        materialCodeBomKey: [{ materialCodeBomKey: `${obj.materialCode}-${obj.bomKey}` }]
       })
+      this.getLotData();
     } else {
       this.resetForm();
     }
