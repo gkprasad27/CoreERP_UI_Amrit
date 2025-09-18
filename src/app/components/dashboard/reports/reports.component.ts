@@ -547,7 +547,8 @@ export class ReportsComponent {
     } else if (this.routeParam == 'consolidatedpayslip') {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.datepipe.transform(this.modelFormData.value.selected, 'yyyy-MM-dd')}`);
     } else if (this.routeParam == 'employeeabsentreport') {
-      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromYear}/${this.modelFormData.value.fromMonth}/${this.modelFormData.value.toYear}/${this.modelFormData.value.toMonth}/${this.modelFormData.value.employee}`);
+      const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromYear}/${this.modelFormData.value.fromMonth}/${this.modelFormData.value.toYear}/${this.modelFormData.value.toMonth}/${obj ? obj.id : '-1'}`);
     }
     else {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value}`);

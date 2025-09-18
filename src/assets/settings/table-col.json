@@ -2915,8 +2915,7 @@
     "amount": "Amount"
   },
   "employeeabsentreport": {
-    "title": "Employee Absent Report",
-    "empCode": "Employee Code",
+    "emp_Code": "Employee Code",
     "employeeName": "Employee Name",
     "totalMonthDays": "Total Month Days",
     "totalPayDays": "Total Pay Days",
