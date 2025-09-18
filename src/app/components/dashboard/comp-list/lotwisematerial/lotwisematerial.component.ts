@@ -102,6 +102,10 @@ export class LotwisematerialComponent {
                         const resp = busienessPartnersAccList.response['bpaList'];
                         const data = resp.length && resp.filter((t: any) => t.bpTypeName == 'Vendor');
                         this.bpaList = data;
+                        const obj = this.bpaList.find(t => t.bpnumber == this.modelFormData.value.vendor);
+                        if (obj) {
+                            this.modelFormData.patchValue({ vendor: obj.name });
+                        }
                     }
                 }
 
@@ -117,6 +121,10 @@ export class LotwisematerialComponent {
         }
         this.modelFormData.controls['lotNo'].enable();
         this.formData.item = this.modelFormData.value;
+        const obj = this.bpaList.find(t => t.name == this.formData.item.vendor);
+        if (obj) {
+            this.formData.item.vendor = obj.bpnumber
+        }
         this.addOrEditService[this.formData.action](this.formData, (res) => {
             this.dialogRef.close(this.formData);
         });

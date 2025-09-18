@@ -228,6 +228,14 @@ export class JobworkmaterialissueComponent {
     if (this.formData1.invalid) {
       return;
     }
+    if ((+this.formData1.value.qty) <= 0) {
+      this.alertService.openSnackBar(`Provided Qty can't be zero`, Static.Close, SnackBar.error);
+      return;
+    }
+    if (((+this.formData1.value.qty) > (+this.formData1.value.soQty)) || ((+this.formData1.value.qty) > (+this.formData1.value.stockQty))) {
+      this.alertService.openSnackBar(`Provided Qty is greater than Available Qty`, Static.Close, SnackBar.error);
+      return;
+    }
     this.formData1.patchValue({
       highlight: true
     });
@@ -315,7 +323,7 @@ export class JobworkmaterialissueComponent {
                 s.index = index + 1;
                 s.poQty = s.poQty ? s.poQty : 0;
                 s.soQty = s.qty ? s.qty : 0;
-                s.qty = 0;
+                s.qty = s.qty ? s.qty : 0;
                 s.rate = s.rate ? s.rate : 0;
                 s.discount = s.discount ? s.discount : 0;
                 s.cgst = s.cgst ? s.cgst : 0;
@@ -641,7 +649,6 @@ export class JobworkmaterialissueComponent {
       netWeight: obj.netWeight,
       stockQty: obj.availQTY,
       materialName: obj.text,
-
     })
     if (!obj.netWeight) {
       this.alertService.openSnackBar('Net Weight has not provided for selected material..', Static.Close, SnackBar.error);

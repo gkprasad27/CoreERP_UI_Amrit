@@ -394,9 +394,9 @@ export class JobworkmaterialreceivingComponent {
     // })
     this.formData1.patchValue({
       qty: obj ? obj.qty : '',
-      weight: obj ? obj.weight : '',
+      weight: obj ? (obj.weight || 0) : '',
       materialName: obj ? obj.materialName : '',
-      pendingQty: obj.qty - obj.receivedQty
+      pendingQty: (obj.qty || 0) - (obj.receivedQty || 0)
     })
   }
 
