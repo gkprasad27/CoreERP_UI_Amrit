@@ -29,6 +29,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/mat
 import { APP_DATE_FORMATS, AppDateAdapter } from '../../../directives/format-datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-reports',
@@ -81,6 +82,11 @@ export class ReportsComponent {
     allowSearchFilter: true
   };
 
+  fromYear: any[] = [new Date().getFullYear()-1, new Date().getFullYear()];
+  fromMonth: any[] = [1,2,3,4,5,6,7,8,9,10,11,12];
+  toYear: any[] = [new Date().getFullYear()-1, new Date().getFullYear()];
+  toMonth: any[] = [1,2,3,4,5,6,7,8,9,10,11,12];
+
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
@@ -115,6 +121,7 @@ export class ReportsComponent {
         case 'employeeattendance':
         case 'AttendanceProcess':
         case 'salaryprocess':
+        case 'employeeabsentreport':
           this.getEmployeesList();
           break;
         case 'salesgst':
@@ -266,6 +273,10 @@ export class ReportsComponent {
       selected: [null],
       fromDate: [null, [Validators.required]],
       toDate: [null, [Validators.required]],
+      fromYear: [''],
+      toYear: [''],
+      fromMonth: [''],
+      toMonth: [''],
       vendorCode: ['-1']
     });
     this.modelFormData.controls['companyCode'].disable();
@@ -292,6 +303,16 @@ export class ReportsComponent {
         this.modelFormData.controls['toDate'].addValidators(Validators.required);
         this.modelFormData.controls['toDate'].updateValueAndValidity();
       }
+    }
+    if(this.routeParam == 'employeeabsentreport') {
+      this.modelFormData.controls['fromYear'].addValidators(Validators.required);
+      this.modelFormData.controls['fromYear'].updateValueAndValidity();
+      this.modelFormData.controls['toYear'].addValidators(Validators.required);
+      this.modelFormData.controls['toYear'].updateValueAndValidity();
+      this.modelFormData.controls['fromMonth'].addValidators(Validators.required);
+      this.modelFormData.controls['fromMonth'].updateValueAndValidity();
+      this.modelFormData.controls['toMonth'].addValidators(Validators.required);
+      this.modelFormData.controls['toMonth'].updateValueAndValidity();
     }
   }
 
@@ -525,6 +546,8 @@ export class ReportsComponent {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.controls.companyCode.value}/${(this.modelFormData.value.vendorCode && this.modelFormData.value.vendorCode.length) ? this.modelFormData.value.vendorCode[0].id : '-1'}`);
     } else if (this.routeParam == 'consolidatedpayslip') {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.datepipe.transform(this.modelFormData.value.selected, 'yyyy-MM-dd')}`);
+    } else if (this.routeParam == 'employeeabsentreport') {
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromYear}/${this.modelFormData.value.fromMonth}/${this.modelFormData.value.toYear}/${this.modelFormData.value.toMonth}/${this.modelFormData.value.employee}`);
     }
     else {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value}`);

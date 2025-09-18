@@ -2913,5 +2913,13 @@
     "vendor": "Vendor",
     "receivedDate": "Date",
     "amount": "Amount"
+  },
+  "employeeabsentreport": {
+    "title": "Employee Absent Report",
+    "empCode": "Employee Code",
+    "employeeName": "Employee Name",
+    "totalMonthDays": "Total Month Days",
+    "totalPayDays": "Total Pay Days",
+    "totalAbsentDays": "Total Absent Days"
   }
 }

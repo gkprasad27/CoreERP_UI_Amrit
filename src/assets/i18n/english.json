@@ -37,7 +37,11 @@
     "process": "Process",
     "otp": "Otp",
     "submit": "Submit",
-    "vendorCode": "Vendor Code"
+    "vendorCode": "Vendor Code",
+    "fromYear": "From Year",
+    "toYear": "To Year",
+    "fromMonth": "From Month",
+    "toMonth": "To Month"
   },
   "LOGIN": {
     "USERNAME": "Username",
@@ -3640,5 +3644,13 @@
     "vendor": "Vendor",
     "receivedDate": "Received Date",
     "amount": "Amount"
+  },
+  "employeeabsentreport": {
+    "title": "Employee Absent Report",
+    "empCode": "Employee Code",
+    "employeeName": "Employee Name",
+    "totalMonthDays": "Total Month Days",
+    "totalPayDays": "Total Pay Days",
+    "totalAbsentDays": "Total Absent Days"
   }
 }

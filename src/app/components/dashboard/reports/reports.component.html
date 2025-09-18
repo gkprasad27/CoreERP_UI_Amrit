@@ -633,7 +633,7 @@
         <form [formGroup]="modelFormData" autocomplete="off">
             <div class="row my-3 py-3">
 
-                <mat-form-field class="col-3">
+                <mat-form-field class="col-3" *ngIf="routeParam != 'employeeabsentreport'">
                     <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
                     <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
@@ -650,7 +650,7 @@
 
 
                 <mat-form-field class="col-3"
-                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' && routeParam != 'salaryprocess' && routeParam != 'consolidatedpayslip'">
+                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' && routeParam != 'salaryprocess' && routeParam != 'consolidatedpayslip' && routeParam != 'employeeabsentreport'">
                     <mat-label>Choose date</mat-label>
                     <mat-date-range-input [rangePicker]="picker">
                         <input matInput matStartDate placeholder="Start date" formControlName="fromDate">
@@ -726,9 +726,70 @@
                     </ng-template>
                 </div>
 
+
+
+                <mat-form-field class="col-3" *ngIf="routeParam == 'employeeabsentreport'">
+                    <mat-label [translate]="'COMMON.fromYear'"></mat-label>
+                    <mat-select formControlName="fromYear" appFocusOnEnter tabIndex="1">
+                        <mat-option readonly>None</mat-option>
+                        <mat-option *ngFor="let comp of fromYear" [value]="comp">
+                            {{comp}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.fromYear.valid && modelFormData.controls.fromYear.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.fromYear.valid  }"> This field is required
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field class="col-3" *ngIf="routeParam == 'employeeabsentreport'">
+                    <mat-label [translate]="'COMMON.fromMonth'"></mat-label>
+                    <mat-select formControlName="fromMonth" appFocusOnEnter tabIndex="1">
+                        <mat-option readonly>None</mat-option>
+                        <mat-option *ngFor="let comp of fromMonth" [value]="comp">
+                            {{comp}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.fromMonth.valid && modelFormData.controls.fromMonth.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.fromMonth.valid  }"> This field is required
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field class="col-3" *ngIf="routeParam == 'employeeabsentreport'">
+                    <mat-label [translate]="'COMMON.toYear'"></mat-label>
+                    <mat-select formControlName="toYear" appFocusOnEnter tabIndex="1">
+                        <mat-option readonly>None</mat-option>
+                        <mat-option *ngFor="let comp of toYear" [value]="comp">
+                            {{comp}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.toYear.valid && modelFormData.controls.toYear.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.toYear.valid  }"> This field is required
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field class="col-3" *ngIf="routeParam == 'employeeabsentreport'">
+                    <mat-label [translate]="'COMMON.toMonth'"></mat-label>
+                    <mat-select formControlName="toMonth" appFocusOnEnter tabIndex="1">
+                        <mat-option readonly>None</mat-option>
+                        <mat-option *ngFor="let comp of toMonth" [value]="comp">
+                            {{comp}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.toMonth.valid && modelFormData.controls.toMonth.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.toMonth.valid  }"> This field is required
+                    </mat-error>
+                </mat-form-field>
+
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
                     [class.filled]="modelFormData.value?.employee?.length > 0"
-                    *ngIf="routeParam == 'employeeotreport' || routeParam == 'employeeattendance' || routeParam == 'AttendanceProcess' || routeParam == 'salaryprocess'">
+                    *ngIf="routeParam == 'employeeabsentreport' || routeParam == 'employeeotreport' || routeParam == 'employeeattendance' || routeParam == 'AttendanceProcess' || routeParam == 'salaryprocess'">
                     <label [translate]="'COMMON.employee'"></label>
                     <input placeholder=" " formControlName="employee" [typeaheadOptionsLimit]="100000" [typeahead]="employeesList"
                         typeaheadOptionField='text' appFocusOnEnter tabIndex="9" class="form-control typeahead"
