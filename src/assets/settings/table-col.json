@@ -863,7 +863,6 @@
     "igstamount": "IGST",
     "ugstamount": "UGST",
     "partyInvoiceNo": "PartyInvoiceNo",
-    "partyInvoiceDate": "PartyInvoiceDate",
     "dueDate": "DueDate",
     "invoiceAmount": "InvoiceAmount",
     "memoAmount": "MemoAmount",

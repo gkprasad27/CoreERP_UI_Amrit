@@ -1085,7 +1085,7 @@
     "cgstamount": "CGST",
     "igstamount": "IGST",
     "ugstamount": "UGST",
-    "partyInvoiceNo": "Party Invoice No",
+    "partyInvoiceNo": "Customer PO Number",
     "partyInvoiceDate": "Party Invoice Date",
     "dueDate": "Due Date",
     "invoiceAmount": "Invoice Amount",

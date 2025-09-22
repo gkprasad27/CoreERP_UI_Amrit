@@ -331,6 +331,9 @@ export class ReceiptspaymentsComponent implements OnInit {
       //   partyAccount: this.bpgLists.length ? this.bpgLists[0].text : null
       // })
       if (flag) {
+        this.formData.patchValue({
+          partyAccount: ''
+        })
         this.puchaseinvoiceselect();
       }
     }
@@ -350,6 +353,7 @@ export class ReceiptspaymentsComponent implements OnInit {
         s.partyInvoiceDate = s.partyInvoiceDate ? s.partyInvoiceDate : '';
         s.dueDate = s.dueDate ? s.dueDate : '';
         s.totalAmount = s.totalAmount ? s.totalAmount : 0;
+        s.voucherNumber = s.voucherNumber ? s.voucherNumber : 0;
         s.memoAmount = s.memoAmount ? s.memoAmount : 0;
         s.clearedAmount = s.clearedAmount ? s.clearedAmount : 0;
         s.balanceDue = s.balanceDue ? s.balanceDue : 0;
