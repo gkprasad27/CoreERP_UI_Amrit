@@ -219,7 +219,7 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
     this.getModelPatternList();
     this.getpurchasingGroupList();
     this.getdivisionList();
-    this.getuomTypeData();
+    // this.getuomTypeData();
     this.gethsnsacList();
     this.getCustomerList();
     // this.getBOMList();
@@ -270,21 +270,21 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
           this.spinner.hide();
         });
   }
-  getuomTypeData() {
-    const getuomTypeUrl = String.Join('/', this.apiConfigService.getuomList);
-    this.apiService.apiGetRequest(getuomTypeUrl)
-      .subscribe(
-        response => {
-          const res = response;
+  // getuomTypeData() {
+  //   const getuomTypeUrl = String.Join('/', this.apiConfigService.getuomList);
+  //   this.apiService.apiGetRequest(getuomTypeUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
 
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.UomList = res.response['UOMList'];
-            }
-          }
-          this.spinner.hide();
-        });
-  }
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.UomList = res.response['UOMList'];
+  //           }
+  //         }
+  //         this.spinner.hide();
+  //       });
+  // }
   getTableData() {
     const getCompanyUrl = String.Join('/', this.apiConfigService.getCompanyList);
     this.apiService.apiGetRequest(getCompanyUrl)

@@ -31,7 +31,7 @@
 
         </form>
 
-        <div class="p-2 card" *ngIf="tableData.length > 0">
+        <div class="p-2 card" *ngIf="tableData && tableData.length > 0">
 
             <form [formGroup]="formData1" autocomplete="off">
 

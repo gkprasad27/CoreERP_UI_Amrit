@@ -88,8 +88,8 @@
             <mat-label>{{'materialsmaster.uom' | translate }}</mat-label>
             <mat-select formControlName="uom" appFocusOnEnter tabIndex="9">
               <mat-option>None</mat-option>
-              <mat-option *ngFor="let uom of UomList" [value]="uom.id">
-                {{uom.text}}
+              <mat-option *ngFor="let uom of msizeList" [value]="uom.unitId">
+                {{uom.unitName}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -120,8 +120,8 @@
             <mat-label>{{'materialsmaster.ouom' | translate }}</mat-label>
             <mat-select formControlName="ouom" appFocusOnEnter tabIndex="12">
               <mat-option>None</mat-option>
-              <mat-option *ngFor="let uom of UomList" [value]="uom.id">
-                {{uom.text}}
+              <mat-option *ngFor="let uom of msizeList" [value]="uom.unitId">
+                {{uom.unitName}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -136,8 +136,8 @@
             <mat-label>{{'materialsmaster.netWeightUom' | translate }}</mat-label>
             <mat-select formControlName="netWeightUom" appFocusOnEnter tabIndex="14">
               <mat-option>None</mat-option>
-              <mat-option *ngFor="let uom of UomList" [value]="uom.id">
-                {{uom.text}}
+              <mat-option *ngFor="let uom of msizeList" [value]="uom.unitId">
+                {{uom.unitName}}
               </mat-option>
             </mat-select>
           </mat-form-field>
