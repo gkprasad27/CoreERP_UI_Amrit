@@ -1,12 +1,6 @@
-<div class="position-relative">
-  
-  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
-    <span> {{'employee.title' | translate }} </span>
-    <mat-icon class="my-2 cursor--pointer" (click)="close()">close</mat-icon>
-  </mat-card-title>
+<div>
 
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
-    
     <form [formGroup]="modelFormData" autocomplete="off">
 
       <div class="row">
@@ -55,8 +49,8 @@
         </mat-form-field>
         <mat-form-field class="col-2">
           <mat-label [translate]="'employee.dob'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
-            [nonEditable]="picker1" formControlName="dob" appFocusOnEnter tabIndex="6">
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="dob" appFocusOnEnter
+            tabIndex="6">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
@@ -103,19 +97,19 @@
         </mat-form-field>
         <mat-form-field class="col-2">
           <mat-label [translate]="'employee.joiningDate'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
-            [nonEditable]="picker2" formControlName="joiningDate" appFocusOnEnter tabIndex="14">
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="joiningDate"
+            appFocusOnEnter tabIndex="14">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-2">
           <mat-label [translate]="'employee.releavingDate'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3"
-            [nonEditable]="picker3" formControlName="releavingDate" appFocusOnEnter tabIndex="15">
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="releavingDate"
+            appFocusOnEnter tabIndex="15">
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>
         </mat-form-field>
-        <mat-slide-toggle class="col-2 d-flex" formControlName="isActive" appFocusOnEnter tabIndex="16">
+        <mat-slide-toggle class="col-2 d-flex" formControlName="isActive" appFocusOnEnter tabIndex="16" >
           {{ 'employee.isActive' | translate }}
         </mat-slide-toggle>
         <mat-form-field class="col-2">
@@ -174,7 +168,7 @@
         </mat-form-field>
         <mat-form-field class="col-2">
           <mat-label [translate]="'employee.iFSCCode'"></mat-label>
-          <input matInput formControlName="ifscCode" appFocusOnEnter tabIndex="24">
+          <input matInput  formControlName="ifscCode" appFocusOnEnter tabIndex="24">
         </mat-form-field>
         <mat-form-field class="col-2">
           <mat-label [translate]="'employee.panNumber'"></mat-label>
