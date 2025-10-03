@@ -11,14 +11,14 @@ export class ApiConfigService {
 
    // login Url
    loginUrl = `${environment.baseUrl}Auth/login`;
-  //loginUrl = 'http://localhost:5000/api/Auth/login';
+   //loginUrl = 'http://localhost:5000/api/Auth/login';
    logoutUrl = `${environment.baseUrl}Auth/logout`;
    getBranchesForUser = `${environment.baseUrl}Auth/GetBranchesForUser`;
    //getBranchesForUser = 'http://localhost:5000/api/Auth/GetBranchesForUser';
    getComponentInfo = `${environment.baseUrl}Settings/GetComponentInfo`;
-   
+
    getAuthentication = `${environment.baseUrl}Common/GetAuthentication`;
-   
+
    // Common
    getprimeryList = `${environment.baseUrl}PrimaryCostElementsCreation/GetPrimaryCostElementsCreationList`;
    getprcList = `${environment.baseUrl}Common/GetPrimaryCostElementList`;
@@ -33,13 +33,13 @@ export class ApiConfigService {
    getpurchasenoList = `${environment.baseUrl}Common/GetPurchaseOrdernoList`;
    getJobworkList = `${environment.baseUrl}Common/GetJobworkList`;
    getquotationnoList = `${environment.baseUrl}Common/GetQuotationnoList`;
-   getSaleOrderList  = `${environment.baseUrl}Common/GetSaleOrderList`;
-   getSaleOrderApprovedList  = `${environment.baseUrl}Common/GetSaleOrderApprovedList`;
-   getSaleOrders  = `${environment.baseUrl}Common/GetSaleOrder`;
-   getsaleOrdernoListe  = `${environment.baseUrl}Common/GetsaleOrdernoListe`;
-   getsaleOrdernoList  = `${environment.baseUrl}Common/GetsaleOrdernoList`;
-   getSaleOrderData   = `${environment.baseUrl}Common/GetSaleOrderData`;
-   getProdSaleOrderList   = `${environment.baseUrl}Common/GetProdSaleOrderList`;
+   getSaleOrderList = `${environment.baseUrl}Common/GetSaleOrderList`;
+   getSaleOrderApprovedList = `${environment.baseUrl}Common/GetSaleOrderApprovedList`;
+   getSaleOrders = `${environment.baseUrl}Common/GetSaleOrder`;
+   getsaleOrdernoListe = `${environment.baseUrl}Common/GetsaleOrdernoListe`;
+   getsaleOrdernoList = `${environment.baseUrl}Common/GetsaleOrdernoList`;
+   getSaleOrderData = `${environment.baseUrl}Common/GetSaleOrderData`;
+   getProdSaleOrderList = `${environment.baseUrl}Common/GetProdSaleOrderList`;
    getCommitmentList = `${environment.baseUrl}QCParamConfig/GetCommitmentItemList`;
    getCommitmentLists = `${environment.baseUrl}CommitmentItem/GetCommitmentItemList`;
    getfundcenterList = `${environment.baseUrl}FundCenter/GetFundCenterList`;
@@ -181,18 +181,18 @@ export class ApiConfigService {
    getacquisitionlist = `${environment.baseUrl}AssetBegningAcqusition/GetAssetBegningAcqusitionList`;
 
    /**************************** Settings ********************************************************* */
-    getRoles = `${environment.baseUrl}Auth/getRoles`;
+   getRoles = `${environment.baseUrl}Auth/getRoles`;
    //getRoles = 'http://localhost:5000/api/Auth/getRoles';
    getParentMenus = `${environment.baseUrl}Auth/getParentMenu`;
    //getParentMenus = 'http://localhost:5000/api/Auth/getParentMenu';
-    getMenuList = `${environment.baseUrl}Auth/getMenuList`;
+   getMenuList = `${environment.baseUrl}Auth/getMenuList`;
    //getMenuList = 'http://localhost:5000/api/Auth/getMenuList';
    giveAccess = `${environment.baseUrl}Auth/GiveAccess`;
    //giveAccess = 'http://localhost:5000/api/Auth/GiveAccess';
    getMenuUrl = `${environment.baseUrl}Auth/getMenu`;
    //getMenuUrl = 'http://localhost:5000/api/Auth/getMenu';
-    getrolelist = `${environment.baseUrl}UserCreation/GetRoleList`;
-    getUserCreation = `${environment.baseUrl}UserCreation/GetUserCreation`;
+   getrolelist = `${environment.baseUrl}UserCreation/GetRoleList`;
+   getUserCreation = `${environment.baseUrl}UserCreation/GetUserCreation`;
    //getrolelist = 'http://localhost:5000/api/UserCreation/GetRoleList';
 
 
@@ -325,9 +325,22 @@ export class ApiConfigService {
 
    /*******************************PrimeryCost****************************************************** */
    addpccost = `${environment.baseUrl}PrimaryCostElementsCreation/UpdatePcost`;
-   
+
    registerEmployee = `${environment.baseUrl}Employee/RegisterEmployee`;
    updateEmployee = `${environment.baseUrl}Employee/UpdateEmployee`;
+   deleteEmployee = `${environment.baseUrl}Employee/deleteEmployee`;
+
+   registerEmployeeAddress = `${environment.baseUrl}Employee/RegisterEmployeeAddress`;
+   updateAddress = `${environment.baseUrl}Employee/UpdateAddress`;
+   deleteAddress = `${environment.baseUrl}Employee/deleteAddress`;
+
+   registerEducation = `${environment.baseUrl}Employee/RegisterEducation`;
+   updateEducation = `${environment.baseUrl}Employee/updateEducation`;
+   deleteEducation = `${environment.baseUrl}Employee/deleteEducation`;
+
+   registerExperiance = `${environment.baseUrl}Employee/registerExperiance`;
+   updateExperiance = `${environment.baseUrl}Employee/updateExperiance`;
+   deleteExperiance = `${environment.baseUrl}Employee/deleteExperiance`;
 
    getDesignationsList = `${environment.baseUrl}Designation/GetDesignationsList`;
 
@@ -379,13 +392,13 @@ export class ApiConfigService {
    updateComponent = `${environment.baseUrl}payroll/ComponentMaster/UpdateComponent`;
    deleteComponent = `${environment.baseUrl}payroll/ComponentMaster/DeleteComponent`;
 
-    // Structure Creation
-    getStructuresList = `${environment.baseUrl}payroll/StructureCreation/GetStructuresList`;
-    registerStructure = `${environment.baseUrl}payroll/StructureCreation/RegisterStructure`;
-    updateStructure = `${environment.baseUrl}payroll/StructureCreation/UpdateStructure`;
-    deleteStructure = `${environment.baseUrl}payroll/StructureCreation/DeleteStructure`;
-    getStructureComponentsList = `${environment.baseUrl}payroll/StructureCreation/GetComponentsList`;
-    getPFList = `${environment.baseUrl}payroll/StructureCreation/GetPFList`;
+   // Structure Creation
+   getStructuresList = `${environment.baseUrl}payroll/StructureCreation/GetStructuresList`;
+   registerStructure = `${environment.baseUrl}payroll/StructureCreation/RegisterStructure`;
+   updateStructure = `${environment.baseUrl}payroll/StructureCreation/UpdateStructure`;
+   deleteStructure = `${environment.baseUrl}payroll/StructureCreation/DeleteStructure`;
+   getStructureComponentsList = `${environment.baseUrl}payroll/StructureCreation/GetComponentsList`;
+   getPFList = `${environment.baseUrl}payroll/StructureCreation/GetPFList`;
 
    //PF Master
    getPfComponentsList = `${environment.baseUrl}Component/GetcomponentTypesList`;
@@ -413,7 +426,7 @@ export class ApiConfigService {
    getStructures = `${environment.baseUrl}CTC/GetStructures`;
    getctcComponentsList = `${environment.baseUrl}payroll/ComponentMaster/GetComponentsList`;
    getctcDetailList = `${environment.baseUrl}CTC/GetctcDetailList`;
-   
+
    //Leaveopeningbalance
 
    getLeaveTypeatListforlop = `${environment.baseUrl}masters/LeaveBalances/GetLeavetpeList`;
@@ -505,7 +518,7 @@ export class ApiConfigService {
    // Leave Approval
    getLeaveApplDetailsList = `${environment.baseUrl}Selfservice/LeaveApproval/GetLeaveApplDetailsList`;
    RegisterLeaveApprovalDetails = `${environment.baseUrl}Selfservice/LeaveApproval/RegisterLeaveApprovalDetails`;
-  
+
    getSaleOrder = `${environment.baseUrl}Transactions/GetSaleOrder`;
    getSaleOrderDetail = `${environment.baseUrl}Transactions/GetSaleOrderDetail`;
    getCustomerSaleOrder = `${environment.baseUrl}Common/GetCustomerSaleOrder`;
@@ -529,7 +542,7 @@ export class ApiConfigService {
    getFormList = `${environment.baseUrl}Common/GetFormList`;
 
    registerStandardRate = `${environment.baseUrl}StandardRate/RegisterStandardRate`;
-   
+
    getInspectionDetail = `${environment.baseUrl}Transactions/GetInspectionDetail`;
    getInspectionCheckDetailbySaleorder = `${environment.baseUrl}Transactions/GetInspectionCheckDetailbySaleorder`;
    deletePurchaseOrder = `${environment.baseUrl}Common/DeletePurchaseOrder`;
@@ -539,10 +552,10 @@ export class ApiConfigService {
    savePurchaseOrder = `${environment.baseUrl}Transactions/SavePurchaseOrder`;
    saveGoodsReceipt = `${environment.baseUrl}Transactions/SaveGoodsReceipt`;
    saveSaleOrderApproval = `${environment.baseUrl}Transactions/SaveSaleOrderApproval`;
-   
+
    getInvoiceData = `${environment.baseUrl}sales/Billing/GetInvoiceData`;
    getInvoiceDetailList = `${environment.baseUrl}sales/Billing/GetInvoiceDetailList`;
-   
+
    getJobWork = `${environment.baseUrl}Transactions/GetJobWork`;
    addJobWork = `${environment.baseUrl}Transactions/AddJobWork`;
    getJobworkDetail = `${environment.baseUrl}Transactions/GetJobworkDetail`;
@@ -550,7 +563,7 @@ export class ApiConfigService {
    getMaterialIssue = `${environment.baseUrl}Transactions/GetMaterialIssue`;
    addMaterialIssue = `${environment.baseUrl}Transactions/AddMaterialIssue`;
    getMaterialIssueDetail = `${environment.baseUrl}Transactions/GetMaterialIssueDetail`;
-   
+
    getJWReceipt = `${environment.baseUrl}Transactions/GetJWReceipt`;
    addJWReceipt = `${environment.baseUrl}Transactions/AddJWReceipt`;
    getJWReceiptDetail = `${environment.baseUrl}Transactions/GetJWReceiptDetail`;
@@ -563,7 +576,7 @@ export class ApiConfigService {
    gLsubAccountListbyCatetory = `${environment.baseUrl}Common/GLsubAccountListbyCatetory`;
 
    getBomDetail = `${environment.baseUrl}Common/GetBomDetail`;
-   
+
    registerAttendanceProcess = `${environment.baseUrl}AttendanceProcess/RegisterAttendanceProcess`;
 
    getSourceSupplyDetailByMaterial = `${environment.baseUrl}Transactions/GetSourceSupplyDetailByMaterial`;

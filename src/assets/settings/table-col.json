@@ -2006,7 +2006,34 @@
     "extra1": "extra1",
     "extra2": "extra2",
     "recomendedId": "Recomended Id",
-    "reportedBy": "Reported By"
+    "reportedBy": "Reported By",
+    
+    "education": "Education",
+    "percentage":"Percentage",
+    "yearofPassing":"Year of Passing",
+    "inistituateName":"Inistituate Name",
+    "university": "University",
+    "educationType": "Education Type",
+    "specialization": "Specialization",
+    "attachment": "Attachment",
+    "educationGap": "Education Gap",
+    "remarks": "Remarks",
+    "educationGapReasion": "Education Gap Reasion",
+
+    "companyName": "Company Name",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "totalExp": "Total Experience",
+      "reasionforleft": "Reasion For Left",
+      "attachment1": "Attachment",
+      "carrierGap": "Carrier Gap",
+      "carrierGapReasion": "Carrier Gap Reasion",
+      "carrierGapFrom": "Carrier Gap From",
+      "carrierGapTo": "Carrier Gap To",
+      "carrierGapDays": "Carrier Gap Days",
+      "designation1": "Designation"
+
+
   },
   "leavetype": {
     "title": "LeaveTypes",
