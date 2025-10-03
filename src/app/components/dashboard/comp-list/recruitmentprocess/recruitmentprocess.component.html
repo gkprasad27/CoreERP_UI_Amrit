@@ -1,0 +1,633 @@
+<div>
+
+  <mat-tab-group>
+
+    <mat-tab label="{{'recruitmentprocess.title1' | translate }}">
+
+      <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
+
+        <form [formGroup]="modelFormData" autocomplete="off">
+
+          <div class="row">
+
+            <mat-form-field class="col-2"
+              [ngClass]="{ 'ng--valid': formControls.employeeCode.valid&& formControls.employeeCode.status != 'DISABLED', 
+                   'ng--invalid': !formControls.employeeCode.valid && formControls.employeeCode.status != 'DISABLED' }">
+              <mat-label [translate]="'recruitmentprocess.employeeCode'"></mat-label>
+              <input matInput formControlName="employeeCode" maxlength="5" appFocusOnEnter tabIndex="1">
+              <mat-error *ngIf="!formControls.employeeCode.valid && formControls.employeeCode.status != 'DISABLED'"
+                [ngClass]="{ 'ng--invalid': !formControls.employeeCode.valid  }">Employee is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.employeeName'"></mat-label>
+              <input matInput formControlName="employeeName" appFocusOnEnter tabIndex="2">
+            </mat-form-field>
+
+            <mat-form-field class="col-2">
+              <mat-label>{{'recruitmentprocess.branchCode' | translate }}</mat-label>
+              <mat-select formControlName="branchCode" appFocusOnEnter tabIndex="3">
+                <mat-option *ngFor="let branch of branchesList" [value]="branch.branchCode">
+                  {{branch.branchCode}} - {{branch.branchName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-2">
+              <mat-label>{{'recruitmentprocess.companyCode' | translate }}</mat-label>
+              <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="4">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let company of companiesList" [value]="company.id">
+                  {{company.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.designationId'"></mat-label>
+              <mat-select formControlName="designationId" appFocusOnEnter tabIndex="5">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let designation of designationsList" [value]="designation.designationId">
+                  {{designation.designationName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.dob'"></mat-label>
+              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
+                [nonEditable]="picker1" formControlName="dob" appFocusOnEnter tabIndex="6">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.maritalStatus'"></mat-label>
+              <mat-select formControlName="maritalStatus" appFocusOnEnter tabIndex="7">
+                <mat-option>None</mat-option>
+                <mat-option value="single"> Single</mat-option>
+                <mat-option value="married"> Married</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.gender'"></mat-label>
+              <mat-select formControlName="gender" appFocusOnEnter tabIndex="8">
+                <mat-option>None</mat-option>
+                <mat-option value="male"> Male</mat-option>
+                <mat-option value="female"> Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.qualification'"></mat-label>
+              <mat-select formControlName="qualification" appFocusOnEnter tabIndex="9">
+                <mat-option>None</mat-option>
+                <mat-option value="graduate"> Graduate</mat-option>
+                <mat-option value="under graduate"> Under Graduate</mat-option>
+                <mat-option value="post graduate"> Post Graduate</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.address'"></mat-label>
+              <input matInput formControlName="address" appFocusOnEnter tabIndex="10">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.phoneNumber'"></mat-label>
+              <input matInput formControlName="phoneNumber" appFocusOnEnter tabIndex="11">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.mobileNumber'"></mat-label>
+              <input matInput formControlName="mobileNumber" appFocusOnEnter tabIndex="12">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.email'"></mat-label>
+              <input matInput formControlName="email" appFocusOnEnter tabIndex="13">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.joiningDate'"></mat-label>
+              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
+                [nonEditable]="picker2" formControlName="joiningDate" appFocusOnEnter tabIndex="14">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.releavingDate'"></mat-label>
+              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3"
+                [nonEditable]="picker3" formControlName="releavingDate" appFocusOnEnter tabIndex="15">
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+            <mat-slide-toggle class="col-2 d-flex" formControlName="isActive" appFocusOnEnter tabIndex="16">
+              {{ 'recruitmentprocess.isActive' | translate }}
+            </mat-slide-toggle>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.narration'"></mat-label>
+              <input matInput formControlName="narration" appFocusOnEnter tabIndex="17">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.bloodGroup'"></mat-label>
+              <mat-select formControlName="bloodGroup" appFocusOnEnter tabIndex="18">
+                <mat-option>None</mat-option>
+                <mat-option value="O+"> O+</mat-option>
+                <mat-option value="O-"> O-</mat-option>
+                <mat-option value="AB+"> AB+</mat-option>
+                <mat-option value="AB-"> AB-</mat-option>
+                <mat-option value="B+"> B+</mat-option>
+                <mat-option value="B-"> B-</mat-option>
+                <mat-option value="A+"> A+</mat-option>
+                <mat-option value="A-"> A-</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.passportNo'"></mat-label>
+              <input matInput formControlName="passportNo" appFocusOnEnter tabIndex="19">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.accessCardNumber'"></mat-label>
+              <input matInput formControlName="accessCardNumber" appFocusOnEnter tabIndex="20">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label>{{'recruitmentprocess.bankName' | translate }}</mat-label>
+              <mat-select formControlName="bankName" appFocusOnEnter tabIndex="21">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let bank of bankList" [value]="bank.id">
+                  {{bank.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.bankAccountNumber'"></mat-label>
+              <input matInput formControlName="bankAccountNumber" appFocusOnEnter tabIndex="22">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.employeeType'"></mat-label>
+              <mat-select formControlName="employeeType" appFocusOnEnter tabIndex="23">
+                <mat-option>None</mat-option>
+                <mat-option value="Permanent"> Permanent</mat-option>
+                <mat-option value="Contract"> Contract</mat-option>
+                <mat-option value="Trainee"> Trainee</mat-option>
+                <mat-option value="Part Time"> Part Time</mat-option>
+                <mat-option value="Seasonal workers"> Seasonal workers</mat-option>
+                <mat-option value="Temporary employees"> Temporary employees</mat-option>
+                <mat-option value="Interns"> Interns</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.iFSCCode'"></mat-label>
+              <input matInput formControlName="ifscCode" appFocusOnEnter tabIndex="24">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.panNumber'"></mat-label>
+              <input matInput formControlName="panNumber" appFocusOnEnter tabIndex="25">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.aadharNumber'"></mat-label>
+              <input matInput formControlName="aadharNumber" appFocusOnEnter tabIndex="26">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label>{{'recruitmentprocess.recomendedBy' | translate }}</mat-label>
+              <mat-select formControlName="recomendedBy" appFocusOnEnter tabIndex="27">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
+                  {{emp.id}} - {{emp.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label>{{'recruitmentprocess.reportedBy' | translate }}</mat-label>
+              <mat-select formControlName="reportedBy" appFocusOnEnter tabIndex="28">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
+                  {{emp.id}} - {{emp.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label>{{'recruitmentprocess.approvedBy' | translate }}</mat-label>
+              <mat-select formControlName="approvedBy" appFocusOnEnter tabIndex="29">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
+                  {{emp.id}} - {{emp.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.pfNumber'"></mat-label>
+              <input matInput formControlName="pfNumber" appFocusOnEnter tabIndex="30">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.esiNumber'"></mat-label>
+              <input matInput formControlName="esiNumber" appFocusOnEnter tabIndex="31">
+            </mat-form-field>
+
+          </div>
+          <mat-divider></mat-divider>
+
+          <div class="form-element mt-2 d-flex justify-content-end">
+            <button mat-raised-button class="button-color-red text-white mx-1" [translate]="'COMMON.CANCEL'"
+              (click)="cancel()">Cancel</button>
+            <button mat-raised-button type="submit" class="button-color-bule text-white mx-1"
+              [translate]="'COMMON.SAVE'" (click)="save()"> Save</button>
+          </div>
+
+        </form>
+
+      </mat-card-content>
+
+    </mat-tab>
+
+    <mat-tab label="{{'recruitmentprocess.title2' | translate }}">
+
+      <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
+
+        <form [formGroup]="modelFormData1" autocomplete="off">
+
+          <div class="row">
+
+            <div class="col-6">
+
+              <h6>
+                Permanent Address
+              </h6>
+
+              <div class="row p-2">
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'recruitmentprocess.address1'"></mat-label>
+                  <input matInput formControlName="pAddress1" appFocusOnEnter tabIndex="32">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'recruitmentprocess.address'"></mat-label>
+                  <input matInput formControlName="pAddress" appFocusOnEnter tabIndex="33">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label>{{'recruitmentprocess.country' | translate }}</mat-label>
+                  <mat-select formControlName="pCountry" (selectionChange)="onPCountryChange()">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let cntry of countryList" [value]="cntry.countryCode">
+                      {{cntry.countryName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label>{{'recruitmentprocess.state' | translate }}</mat-label>
+                  <mat-select formControlName="pState">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let state of stateList1" [value]="state.id">
+                      {{state.text}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'recruitmentprocess.city'"></mat-label>
+                  <input matInput formControlName="pCity" appFocusOnEnter tabIndex="34">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'recruitmentprocess.zip'"></mat-label>
+                  <input matInput formControlName="pZip" appFocusOnEnter tabIndex="36">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'recruitmentprocess.location'"></mat-label>
+                  <input matInput formControlName="pLocation" appFocusOnEnter tabIndex="37">
+                </mat-form-field>
+
+
+              </div>
+
+            </div>
+
+            <div class="col-6">
+
+              <h6>
+                Current Address
+              </h6>
+
+              <div class="row p-2">
+
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'recruitmentprocess.address1'"></mat-label>
+                  <input matInput formControlName="address1" appFocusOnEnter tabIndex="39">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'recruitmentprocess.address'"></mat-label>
+                  <input matInput formControlName="address" appFocusOnEnter tabIndex="40">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label>{{'recruitmentprocess.country' | translate }}</mat-label>
+                  <mat-select formControlName="country" (selectionChange)="onCountryChange()">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let cntry of countryList" [value]="cntry.countryCode">
+                      {{cntry.countryName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label>{{'recruitmentprocess.state' | translate }}</mat-label>
+                  <mat-select formControlName="state">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let state of stateList" [value]="state.id">
+                      {{state.text}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'recruitmentprocess.city'"></mat-label>
+                  <input matInput formControlName="city" appFocusOnEnter tabIndex="41">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'recruitmentprocess.zip'"></mat-label>
+                  <input matInput formControlName="zip" appFocusOnEnter tabIndex="43">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'recruitmentprocess.location'"></mat-label>
+                  <input matInput formControlName="location" appFocusOnEnter tabIndex="44">
+                </mat-form-field>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="form-element mt-2 d-flex justify-content-end">
+            <button mat-raised-button class="button-color-red text-white mx-1" [translate]="'COMMON.CANCEL'"
+              (click)="cancel()">Cancel</button>
+            <button mat-raised-button type="submit" class="button-color-bule text-white mx-1"
+              [translate]="'COMMON.SAVE'" (click)="save1()"> Save</button>
+          </div>
+
+        </form>
+
+      </mat-card-content>
+
+    </mat-tab>
+
+    <mat-tab label="{{'recruitmentprocess.title3' | translate }}">
+
+      <h6 class="mt-5"> Details </h6>
+
+      <form [formGroup]="modelFormData2" autocomplete="off">
+
+        <div class="row p-1">
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.qualification'"></mat-label>
+            <input matInput type="text" formControlName="qualification" appFocusOnEnter tabIndex="46">
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>{{'recruitmentprocess.education' | translate }}</mat-label>
+            <mat-select formControlName="education" appFocusOnEnter tabIndex="47">
+              <mat-option *ngFor="let education of educationList" [value]="education">
+                {{education}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.percentage'"></mat-label>
+            <input matInput type="text" formControlName="percentage" appFocusOnEnter tabIndex="48">
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.yearofPassing'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker122"
+              [nonEditable]="picker122" formControlName="yearofPassing" appFocusOnEnter tabIndex="49">
+            <mat-datepicker-toggle matSuffix [for]="picker122"></mat-datepicker-toggle>
+            <mat-datepicker #picker122></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.inistituateName'"></mat-label>
+            <input matInput type="text" formControlName="inistituateName" appFocusOnEnter tabIndex="50">
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.university'"></mat-label>
+            <input matInput type="text" formControlName="university" appFocusOnEnter tabIndex="51">
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>{{'recruitmentprocess.educationType' | translate }}</mat-label>
+            <mat-select formControlName="educationType" appFocusOnEnter tabIndex="52">
+              <mat-option *ngFor="let education of educationTypeList" [value]="education">
+                {{education}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.specialization'"></mat-label>
+            <input matInput type="text" formControlName="specialization" appFocusOnEnter tabIndex="53">
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>{{'recruitmentprocess.educationGap' | translate }}</mat-label>
+            <mat-select formControlName="educationGap" appFocusOnEnter tabIndex="54">
+              <mat-option *ngFor="let education of educationGapList" [value]="education">
+                {{education}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.educationGapFrom'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker172"
+              [nonEditable]="picker172" formControlName="educationGapFrom" appFocusOnEnter tabIndex="55">
+            <mat-datepicker-toggle matSuffix [for]="picker172"></mat-datepicker-toggle>
+            <mat-datepicker #picker172></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.educationGapTo'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker192"
+              [nonEditable]="picker192" formControlName="educationGapTo" appFocusOnEnter tabIndex="56">
+            <mat-datepicker-toggle matSuffix [for]="picker192"></mat-datepicker-toggle>
+            <mat-datepicker #picker192></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.remarks'"></mat-label>
+            <input matInput type="text" formControlName="remarks" appFocusOnEnter tabIndex="57">
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.educationGapReasion'"></mat-label>
+            <input matInput type="text" formControlName="educationGapReasion" appFocusOnEnter tabIndex="58">
+          </mat-form-field>
+
+          <div class="col-3">
+            <label> {{ 'recruitmentprocess.attachment' | translate }} </label>
+            <app-file-upload [type]="'card'" [oldFileList]="modelFormData2.value.attachment"
+              (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
+          </div>
+
+        </div>
+
+        <div id="for" class="d-flex justify-content-end mb-3">
+
+          <button mat-raised-button type="submit" id="submit" class="button-color-bule mx-1 text-white"
+            (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
+            {{ 'COMMON.UPDATE' | translate }}
+          </button>
+          <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i
+              class="fa-solid fa-arrow-rotate-right"></i>
+            {{ 'COMMON.RESET' | translate }}
+          </button>
+
+        </div>
+
+      </form>
+
+      <div>
+
+        <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
+          (editOrDeleteEvent)="editOrDeleteEvent($event)">
+        </app-table>
+      </div>
+
+      <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" [translate]="'COMMON.CANCEL'"
+          (click)="cancel()">Cancel</button>
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" [translate]="'COMMON.SAVE'"
+          (click)="save2()"> Save</button>
+      </div>
+
+    </mat-tab>
+
+
+    <mat-tab label="{{'recruitmentprocess.title4' | translate }}">
+
+      <h6 class="mt-5"> Details </h6>
+
+      <form [formGroup]="modelFormData3" autocomplete="off">
+
+        <div class="row p-1">
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.companyName'"></mat-label>
+            <input matInput type="text" formControlName="companyName" appFocusOnEnter tabIndex="59">
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.fromDate'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker12"
+              [nonEditable]="picker12" formControlName="fromDate" appFocusOnEnter tabIndex="60">
+            <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
+            <mat-datepicker #picker12></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.toDate'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker14"
+              [nonEditable]="picker14" formControlName="toDate" appFocusOnEnter tabIndex="61">
+            <mat-datepicker-toggle matSuffix [for]="picker14"></mat-datepicker-toggle>
+            <mat-datepicker #picker14></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.totalExp'"></mat-label>
+            <input matInput type="text" formControlName="totalExp" appFocusOnEnter tabIndex="62">
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.reasionforleft'"></mat-label>
+            <input matInput type="text" formControlName="reasionforleft" appFocusOnEnter tabIndex="63">
+          </mat-form-field>
+
+
+          <mat-form-field class="col-3">
+            <mat-label>{{'recruitmentprocess.carrierGap' | translate }}</mat-label>
+            <mat-select formControlName="carrierGap" appFocusOnEnter tabIndex="64">
+              <mat-option *ngFor="let carrier of carrierGapList" [value]="carrier">
+                {{carrier}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.carrierGapFrom'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker17"
+              [nonEditable]="picker17" formControlName="carrierGapFrom" appFocusOnEnter tabIndex="65">
+            <mat-datepicker-toggle matSuffix [for]="picker17"></mat-datepicker-toggle>
+            <mat-datepicker #picker17></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.carrierGapTo'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker19"
+              [nonEditable]="picker19" formControlName="carrierGapTo" appFocusOnEnter tabIndex="66">
+            <mat-datepicker-toggle matSuffix [for]="picker19"></mat-datepicker-toggle>
+            <mat-datepicker #picker19></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.carrierGapReasion'"></mat-label>
+            <input matInput type="text" formControlName="carrierGapReasion" appFocusOnEnter tabIndex="67">
+          </mat-form-field>
+
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.carrierGapDays'"></mat-label>
+            <input matInput type="text" formControlName="carrierGapDays" appFocusOnEnter tabIndex="68">
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'recruitmentprocess.designation'"></mat-label>
+            <input matInput type="text" formControlName="designation" appFocusOnEnter tabIndex="69">
+          </mat-form-field>
+
+          <div class="col-3">
+            <label> {{ 'recruitmentprocess.attachment' | translate }} </label>
+            <app-file-upload [type]="'card'" [oldFileList]="modelFormData3.value.attachment"
+              (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload>
+          </div>
+
+        </div>
+
+        <div id="for" class="d-flex justify-content-end mb-3">
+
+          <button mat-raised-button type="submit" id="submit" class="button-color-bule mx-1 text-white"
+            (click)="saveForm1()"><i class="fa-solid fa-arrows-rotate"></i>
+            {{ 'COMMON.UPDATE' | translate }}
+          </button>
+          <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm1();"><i
+              class="fa-solid fa-arrow-rotate-right"></i>
+            {{ 'COMMON.RESET' | translate }}
+          </button>
+
+        </div>
+
+      </form>
+
+      <div>
+
+        <app-table class="table-css" [tableData]="tableData1" [showButtons]="false"
+          (editOrDeleteEvent)="editOrDeleteEvent1($event)">
+        </app-table>
+      </div>
+
+      <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" [translate]="'COMMON.CANCEL'"
+          (click)="cancel()">Cancel</button>
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" [translate]="'COMMON.SAVE'"
+          (click)="save3()"> Save</button>
+      </div>
+
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>

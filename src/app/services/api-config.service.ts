@@ -345,6 +345,26 @@ export class ApiConfigService {
    updateExperiance = `${environment.baseUrl}Employee/updateExperiance`;
    deleteExperiance = `${environment.baseUrl}Employee/deleteExperiance`;
 
+
+   registerEmployeeR = `${environment.baseUrl}Recruitment/RegisterEmployee`;
+   updateEmployeeR = `${environment.baseUrl}Recruitment/UpdateEmployee`;
+   deleteEmployeeR = `${environment.baseUrl}Recruitment/deleteEmployee`;
+
+   getAddressListR = `${environment.baseUrl}Recruitment/GetAddressList`;
+   registerEmployeeAddressR = `${environment.baseUrl}Recruitment/RegisterEmployeeAddress`;
+   updateAddressR = `${environment.baseUrl}Recruitment/UpdateAddress`;
+   deleteAddressR = `${environment.baseUrl}Recruitment/deleteAddress`;
+
+   getEducationListR = `${environment.baseUrl}Recruitment/GetEducationList`;
+   registerEducationR = `${environment.baseUrl}Recruitment/RegisterEducation`;
+   updateEducationR = `${environment.baseUrl}Recruitment/updateEducation`;
+   deleteEducationR = `${environment.baseUrl}Recruitment/deleteEducation`;
+
+   getExperianceListR = `${environment.baseUrl}Recruitment/GetExperianceList`;
+   registerExperianceR = `${environment.baseUrl}Recruitment/registerExperiance`;
+   updateExperianceR = `${environment.baseUrl}Recruitment/updateExperiance`;
+   deleteExperianceR = `${environment.baseUrl}Recruitment/deleteExperiance`;
+
    getCountryList = `${environment.baseUrl}Country/GetCountryList`;
    getStatesList = `${environment.baseUrl}State/GetStatesList`;
 

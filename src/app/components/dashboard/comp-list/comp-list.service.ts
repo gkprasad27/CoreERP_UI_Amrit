@@ -148,6 +148,7 @@ import { CAPAdetailsComponent } from './capadetails/capadetails.component';
 import { QcparamconfigurationComponent } from './qcparamconfiguration/qcparamconfiguration.component';
 import { DispatchstatusComponent } from './dispatchstatus/dispatchstatus.component';
 import { LotwisematerialComponent } from './lotwisematerial/lotwisematerial.component';
+import { RecruitmentProcessComponent } from './recruitmentprocess/recruitmentprocess.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -745,6 +746,9 @@ export class CompListService {
         break;
         case 'lotwisematerial':
         this.dynamicComp.component = LotwisematerialComponent;
+        return this.dynamicComp.component;
+        case 'recruitmentprocess':
+        this.dynamicComp.component = RecruitmentProcessComponent;
         return this.dynamicComp.component;
         break;
       default:
