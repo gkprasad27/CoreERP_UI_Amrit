@@ -54,11 +54,11 @@ export class EmployeeComponent implements OnInit {
   countryList: any[] = [];
   stateList: any[] = [];
   stateList1: any[] = [];
-  educationList: any[] = [ 'Graduate', 'Under Graduate', 'Post Graduate' ];
-  educationTypeList: any[] = [ 'Full Time', 'Part Time' ];
-  educationGapList: any[] = [ 'Yes', 'No' ];
-  carrierGapList: any[] = [ 'Yes', 'No' ];
-  
+  educationList: any[] = ['Graduate', 'Under Graduate', 'Post Graduate'];
+  educationTypeList: any[] = ['Full Time', 'Part Time'];
+  educationGapList: any[] = ['Yes', 'No'];
+  carrierGapList: any[] = ['Yes', 'No'];
+
   genderList
   fileList: any;
   fileList1: any;
@@ -402,7 +402,6 @@ export class EmployeeComponent implements OnInit {
         { id: 'Delete', type: 'delete' }
       ]
     });
-    this.modelFormData2.disable();
   }
 
   saveForm() {
@@ -420,9 +419,7 @@ export class EmployeeComponent implements OnInit {
     this.tableData = null;
     this.tableComponent.defaultValues();
     if (this.modelFormData2.value.index == 0) {
-      this.modelFormData2.patchValue({
-        index: data ? (data.length + 1) : 1
-      });
+      fObj.index = data ? (data.length + 1) : 1;
       data = [fObj, ...data];
     } else {
       data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
@@ -441,7 +438,6 @@ export class EmployeeComponent implements OnInit {
         this.tableComponent.defaultValues();
         this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       }
-      this.modelFormData2.disable();
     } else {
       this.modelFormData2.patchValue(value.item);
       this.fileList = { name: value.item.attachment };
@@ -477,7 +473,6 @@ export class EmployeeComponent implements OnInit {
         { id: 'Delete', type: 'delete' }
       ]
     });
-    this.modelFormData3.disable();
   }
 
   saveForm1() {
@@ -496,9 +491,7 @@ export class EmployeeComponent implements OnInit {
     this.tableData1 = null;
     this.tableComponent.defaultValues();
     if (this.modelFormData3.value.index == 0) {
-      this.modelFormData3.patchValue({
-        index: data ? (data.length + 1) : 1
-      });
+      fObj.index = data ? (data.length + 1) : 1;
       data = [fObj, ...data];
     } else {
       data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
@@ -517,7 +510,6 @@ export class EmployeeComponent implements OnInit {
         this.tableComponent.defaultValues();
         this.tableData1 = this.tableData1.filter((res: any) => res.index != value.item.index);
       }
-      this.modelFormData3.disable();
     } else {
       this.modelFormData3.patchValue(value.item);
       this.fileList1 = { name: value.item.attachment };
