@@ -435,15 +435,16 @@ export class RecruitmentProcessComponent implements OnInit {
 
   editOrDeleteEvent(value) {
     if (value.action === 'Delete') {
-      this.tableComponent.defaultValues();
       if (value.item.id) {
         this.deleteItem(value.item);
       } else {
+        this.tableComponent.defaultValues();
         this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       }
       this.modelFormData2.disable();
     } else {
       this.modelFormData2.patchValue(value.item);
+      this.fileList = { name: value.item.attachment };
       this.modelFormData2.enable();
     }
   }
@@ -458,6 +459,7 @@ export class RecruitmentProcessComponent implements OnInit {
         this.apiService.apiDeleteRequest(deleteEducation).subscribe(response => {
           this.spinner.hide();
           if (response.status === StatusCodes.pass) {
+            this.tableComponent.defaultValues();
             this.tableData = this.tableData.filter((res: any) => res.index != item.index);
           }
         });
@@ -509,15 +511,16 @@ export class RecruitmentProcessComponent implements OnInit {
 
   editOrDeleteEvent1(value) {
     if (value.action === 'Delete') {
-      this.tableComponent.defaultValues();
       if (value.item.id) {
         this.deleteItem(value.item);
       } else {
+        this.tableComponent.defaultValues();
         this.tableData1 = this.tableData1.filter((res: any) => res.index != value.item.index);
       }
       this.modelFormData3.disable();
     } else {
       this.modelFormData3.patchValue(value.item);
+      this.fileList1 = { name: value.item.attachment };
       this.modelFormData3.enable();
     }
   }
@@ -532,6 +535,7 @@ export class RecruitmentProcessComponent implements OnInit {
         this.apiService.apiDeleteRequest(deleteExperiance).subscribe(response => {
           this.spinner.hide();
           if (response.status === StatusCodes.pass) {
+            this.tableComponent.defaultValues();
             this.tableData1 = this.tableData1.filter((res: any) => res.index != item.index);
           }
         });
