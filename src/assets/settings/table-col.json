@@ -1920,7 +1920,7 @@
     "button1": "button1",
     "drgNo": "Part/Drg No",
     "partDrgNo": "Part/Drg No",
-    "documentURL":"MTC Document"
+    "documentURL": "MTC Document"
   },
   "invoiceverification": {
     "title": "Invoice Verification",
@@ -1977,14 +1977,14 @@
     "bankAccountNumber": "BankAccountNumber",
     "gender": "Gender",
     "aadharNumber": "AadharNumber",
-    "dob": "Dob",
+    "dob": "Date",
     "maritalStatus": "MaritalStatus",
     "qualification": "Qualification",
     "address": "Address",
     "phoneNumber": "PhoneNumber",
     "mobileNumber": "MobileNumber",
     "email": "Email",
-    "joiningDate": "Joining Date",
+    "joiningDate": "Date",
     "terminationDate": "Date",
     "narration": "Comments",
     "bloodGroup": "BloodGroup",
@@ -2007,33 +2007,34 @@
     "extra2": "extra2",
     "recomendedId": "Recomended Id",
     "reportedBy": "Reported By",
-    
+
     "education": "Education",
-    "percentage":"Percentage",
-    "yearofPassing":"Year of Passing",
-    "inistituateName":"Inistituate Name",
+    "percentage": "Percentage",
+    "yearofPassing": "Date",
+    "inistituateName": "Inistituate Name",
     "university": "University",
     "educationType": "Education Type",
     "specialization": "Specialization",
     "attachment": "Attachment",
     "educationGap": "Education Gap",
+    "educationGapFrom": "Date",
+    "educationGapTo": "Date",
     "remarks": "Remarks",
     "educationGapReasion": "Education Gap Reasion",
-
+    
     "companyName": "Company Name",
-      "fromDate": "From Date",
-      "toDate": "To Date",
-      "totalExp": "Total Experience",
-      "reasionforleft": "Reasion For Left",
-      "attachment1": "Attachment",
-      "carrierGap": "Carrier Gap",
-      "carrierGapReasion": "Carrier Gap Reasion",
-      "carrierGapFrom": "Carrier Gap From",
-      "carrierGapTo": "Carrier Gap To",
-      "carrierGapDays": "Carrier Gap Days",
-      "designation1": "Designation"
-
-
+    "fromDate": "Date",
+    "toDate": "Date",
+    "totalExp": "Total Experience",
+    "reasionforleft": "Reasion For Left",
+    "attachment1": "Attachment",
+    "carrierGap": "Carrier Gap",
+    "carrierGapReasion": "Carrier Gap Reasion",
+    "carrierGapFrom": "Date",
+    "carrierGapTo": "Date",
+    "carrierGapDays": "Carrier Gap Days",
+    "designation1": "Designation",
+    "action": "Action"
   },
   "leavetype": {
     "title": "LeaveTypes",
@@ -2536,7 +2537,7 @@
     "qty": "QTY",
     "saleOrderNo": "Sale Order Number",
     "status": "Status",
-    "approvalStatus":"Approval Status",
+    "approvalStatus": "Approval Status",
     "link": "link"
   },
   "PurchaseorderApproval": {
@@ -2630,7 +2631,7 @@
     "poNumber": "PO Number",
     "imageURL": "Image URL"
   },
-   "dispatchstatus": {
+  "dispatchstatus": {
     "saleOrder": "Sale Order Number",
     "lrNumber": "lr Number",
     "invoiceNumber": "Invoice Number",

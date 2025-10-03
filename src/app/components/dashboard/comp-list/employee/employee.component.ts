@@ -54,7 +54,12 @@ export class EmployeeComponent implements OnInit {
   countryList: any[] = [];
   stateList: any[] = [];
   stateList1: any[] = [];
-
+  educationList: any[] = [ 'Graduate', 'Under Graduate', 'Post Graduate' ];
+  educationTypeList: any[] = [ 'Full Time', 'Part Time' ];
+  educationGapList: any[] = [ 'Yes', 'No' ];
+  carrierGapList: any[] = [ 'Yes', 'No' ];
+  
+  genderList
   fileList: any;
   fileList1: any;
 
@@ -148,6 +153,8 @@ export class EmployeeComponent implements OnInit {
       specialization: [''],
       attachment: [''],
       educationGap: [''],
+      educationGapFrom: [''],
+      educationGapTo: [''],
       remarks: [''],
       educationGapReasion: [''],
 
@@ -290,14 +297,14 @@ export class EmployeeComponent implements OnInit {
 
         if (!this.commonService.checkNullOrUndefined(addressList) && addressList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(addressList.response)) {
-            this.modelFormData1.patchValue(addressList.response['addressList'])
+            this.modelFormData1.patchValue(addressList.response['AddressList'])
           }
         }
 
         if (!this.commonService.checkNullOrUndefined(educationList) && educationList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(educationList.response)) {
-            if (educationList.response['educationList'] && educationList.response['educationList'].length) {
-              educationList.response['educationList'].forEach((s: any, index: number) => {
+            if (educationList.response['EducationList'] && educationList.response['EducationList'].length) {
+              educationList.response['EducationList'].forEach((s: any, index: number) => {
                 s.dubQty = s.qty;
                 s.index = index + 1;
                 s.action = [
@@ -305,15 +312,15 @@ export class EmployeeComponent implements OnInit {
                   { id: 'Delete', type: 'delete' }
                 ];
               })
-              this.tableData = educationList.response['educationList'];
+              this.tableData = educationList.response['EducationList'];
             }
           }
         }
 
         if (!this.commonService.checkNullOrUndefined(experianceList) && experianceList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(experianceList.response)) {
-            if (experianceList.response['experianceList'] && experianceList.response['experianceList'].length) {
-              experianceList.response['experianceList'].forEach((s: any, index: number) => {
+            if (experianceList.response['experienceList'] && experianceList.response['experienceList'].length) {
+              experianceList.response['experienceList'].forEach((s: any, index: number) => {
                 s.dubQty = s.qty;
                 s.index = index + 1;
                 s.action = [
@@ -321,7 +328,7 @@ export class EmployeeComponent implements OnInit {
                   { id: 'Delete', type: 'delete' }
                 ];
               })
-              this.tableData1 = experianceList.response['experianceList'];
+              this.tableData1 = experianceList.response['experienceList'];
             }
           }
         }
@@ -654,7 +661,12 @@ export class EmployeeComponent implements OnInit {
       return;
     }
 
-    arr.forEach((a: any) => a.empCode = this.modelFormData.get('employeeCode').value)
+    arr.forEach((a: any) => {
+      a.empCode = this.modelFormData.get('employeeCode').value;
+      a.yearofPassing = a.yearofPassing ? this.datepipe.transform(a.yearofPassing, 'MM-dd-yyyy') : '';
+      a.educationGapFrom = a.educationGapFrom ? this.datepipe.transform(a.educationGapFrom, 'MM-dd-yyyy') : '';
+      a.educationGapTo = a.educationGapTo ? this.datepipe.transform(a.educationGapTo, 'MM-dd-yyyy') : '';
+    })
 
     const registerEducation = String.Join('/', this.apiConfigService.registerEducation);
     this.apiService.apiPostRequest(registerEducation, arr).subscribe(

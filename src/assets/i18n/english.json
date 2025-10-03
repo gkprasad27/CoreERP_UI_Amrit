@@ -2500,6 +2500,8 @@
     "specialization": "Specialization",
     "attachment": "Attachment",
     "educationGap": "Education Gap",
+    "educationGapFrom": "Education Gap From",
+    "educationGapTo": "Education Gap To",
     "remarks": "Remarks",
     "educationGapReasion": "Education Gap Reasion",
     "phoneNumber": "PhoneNumber",
@@ -2538,7 +2540,8 @@
     "carrierGapReasion": "Carrier Gap Reasion",
     "carrierGapFrom": "Carrier Gap From",
     "carrierGapTo": "Carrier Gap To",
-    "carrierGapDays": "Carrier Gap Days"
+    "carrierGapDays": "Carrier Gap Days",
+    "action": "Action"
   },
   "leavetype": {
     "title": "LeaveTypes",

@@ -388,8 +388,12 @@
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'employee.education'"></mat-label>
-            <input matInput type="text" formControlName="education" appFocusOnEnter tabIndex="47">
+            <mat-label>{{'employee.education' | translate }}</mat-label>
+            <mat-select formControlName="education" appFocusOnEnter tabIndex="47">
+              <mat-option *ngFor="let education of educationList" [value]="education">
+                {{education}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field class="col-3">
@@ -397,10 +401,12 @@
             <input matInput type="text" formControlName="percentage" appFocusOnEnter tabIndex="48">
           </mat-form-field>
 
-
           <mat-form-field class="col-3">
             <mat-label [translate]="'employee.yearofPassing'"></mat-label>
-            <input matInput type="text" formControlName="yearofPassing" appFocusOnEnter tabIndex="49">
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker122"
+              [nonEditable]="picker122" formControlName="yearofPassing" appFocusOnEnter tabIndex="49">
+            <mat-datepicker-toggle matSuffix [for]="picker122"></mat-datepicker-toggle>
+            <mat-datepicker #picker122></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field class="col-3">
@@ -414,8 +420,12 @@
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'employee.educationType'"></mat-label>
-            <input matInput type="text" formControlName="educationType" appFocusOnEnter tabIndex="52">
+            <mat-label>{{'employee.educationType' | translate }}</mat-label>
+            <mat-select formControlName="educationType" appFocusOnEnter tabIndex="52">
+              <mat-option *ngFor="let education of educationTypeList" [value]="education">
+                {{education}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field class="col-3">
@@ -423,27 +433,46 @@
             <input matInput type="text" formControlName="specialization" appFocusOnEnter tabIndex="53">
           </mat-form-field>
 
+          <mat-form-field class="col-3">
+            <mat-label>{{'employee.educationGap' | translate }}</mat-label>
+            <mat-select formControlName="educationGap" appFocusOnEnter tabIndex="54">
+              <mat-option *ngFor="let education of educationGapList" [value]="education">
+                {{education}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'employee.educationGapFrom'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker172"
+              [nonEditable]="picker172" formControlName="educationGapFrom" appFocusOnEnter tabIndex="55">
+            <mat-datepicker-toggle matSuffix [for]="picker172"></mat-datepicker-toggle>
+            <mat-datepicker #picker172></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'employee.educationGapTo'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker192"
+              [nonEditable]="picker192" formControlName="educationGapTo" appFocusOnEnter tabIndex="56">
+            <mat-datepicker-toggle matSuffix [for]="picker192"></mat-datepicker-toggle>
+            <mat-datepicker #picker192></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'employee.remarks'"></mat-label>
+            <input matInput type="text" formControlName="remarks" appFocusOnEnter tabIndex="57">
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'employee.educationGapReasion'"></mat-label>
+            <input matInput type="text" formControlName="educationGapReasion" appFocusOnEnter tabIndex="58">
+          </mat-form-field>
 
           <div class="col-3">
             <label> {{ 'employee.attachment' | translate }} </label>
             <app-file-upload [type]="'card'" [oldFileList]="modelFormData2.value.attachment"
               (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
           </div>
-
-          <mat-form-field class="col-3">
-            <mat-label [translate]="'employee.educationGap'"></mat-label>
-            <input matInput type="text" formControlName="educationGap" appFocusOnEnter tabIndex="55">
-          </mat-form-field>
-
-          <mat-form-field class="col-3">
-            <mat-label [translate]="'employee.remarks'"></mat-label>
-            <input matInput type="text" formControlName="remarks" appFocusOnEnter tabIndex="56">
-          </mat-form-field>
-
-          <mat-form-field class="col-3">
-            <mat-label [translate]="'employee.educationGapReasion'"></mat-label>
-            <input matInput type="text" formControlName="educationGapReasion" appFocusOnEnter tabIndex="57">
-          </mat-form-field>
 
         </div>
 
@@ -489,13 +518,13 @@
 
           <mat-form-field class="col-3">
             <mat-label [translate]="'employee.companyName'"></mat-label>
-            <input matInput type="text" formControlName="companyName" appFocusOnEnter tabIndex="46">
+            <input matInput type="text" formControlName="companyName" appFocusOnEnter tabIndex="59">
           </mat-form-field>
 
           <mat-form-field class="col-3">
             <mat-label [translate]="'employee.fromDate'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker12"
-              [nonEditable]="picker12" formControlName="fromDate" appFocusOnEnter tabIndex="6">
+              [nonEditable]="picker12" formControlName="fromDate" appFocusOnEnter tabIndex="60">
             <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
             <mat-datepicker #picker12></mat-datepicker>
           </mat-form-field>
@@ -503,41 +532,35 @@
           <mat-form-field class="col-3">
             <mat-label [translate]="'employee.toDate'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker14"
-              [nonEditable]="picker14" formControlName="toDate" appFocusOnEnter tabIndex="6">
+              [nonEditable]="picker14" formControlName="toDate" appFocusOnEnter tabIndex="61">
             <mat-datepicker-toggle matSuffix [for]="picker14"></mat-datepicker-toggle>
             <mat-datepicker #picker14></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field class="col-3">
             <mat-label [translate]="'employee.totalExp'"></mat-label>
-            <input matInput type="text" formControlName="totalExp" appFocusOnEnter tabIndex="47">
+            <input matInput type="text" formControlName="totalExp" appFocusOnEnter tabIndex="62">
           </mat-form-field>
 
           <mat-form-field class="col-3">
             <mat-label [translate]="'employee.reasionforleft'"></mat-label>
-            <input matInput type="text" formControlName="reasionforleft" appFocusOnEnter tabIndex="48">
+            <input matInput type="text" formControlName="reasionforleft" appFocusOnEnter tabIndex="63">
           </mat-form-field>
 
-          <div class="col-3">
-            <label> {{ 'employee.attachment' | translate }} </label>
-            <app-file-upload [type]="'card'" [oldFileList]="modelFormData3.value.attachment"
-              (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload>
-          </div>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'employee.carrierGap'"></mat-label>
-            <input matInput type="text" formControlName="carrierGap" appFocusOnEnter tabIndex="50">
-          </mat-form-field>
-
-          <mat-form-field class="col-3">
-            <mat-label [translate]="'employee.carrierGapReasion'"></mat-label>
-            <input matInput type="text" formControlName="carrierGapReasion" appFocusOnEnter tabIndex="51">
+            <mat-label>{{'employee.carrierGap' | translate }}</mat-label>
+            <mat-select formControlName="carrierGap" appFocusOnEnter tabIndex="64">
+              <mat-option *ngFor="let carrier of carrierGapList" [value]="carrier">
+                {{carrier}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field class="col-3">
             <mat-label [translate]="'employee.carrierGapFrom'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker17"
-              [nonEditable]="picker17" formControlName="carrierGapFrom" appFocusOnEnter tabIndex="6">
+              [nonEditable]="picker17" formControlName="carrierGapFrom" appFocusOnEnter tabIndex="65">
             <mat-datepicker-toggle matSuffix [for]="picker17"></mat-datepicker-toggle>
             <mat-datepicker #picker17></mat-datepicker>
           </mat-form-field>
@@ -545,21 +568,32 @@
           <mat-form-field class="col-3">
             <mat-label [translate]="'employee.carrierGapTo'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker19"
-              [nonEditable]="picker19" formControlName="carrierGapTo" appFocusOnEnter tabIndex="6">
+              [nonEditable]="picker19" formControlName="carrierGapTo" appFocusOnEnter tabIndex="66">
             <mat-datepicker-toggle matSuffix [for]="picker19"></mat-datepicker-toggle>
             <mat-datepicker #picker19></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'employee.carrierGapReasion'"></mat-label>
+            <input matInput type="text" formControlName="carrierGapReasion" appFocusOnEnter tabIndex="67">
           </mat-form-field>
 
 
           <mat-form-field class="col-3">
             <mat-label [translate]="'employee.carrierGapDays'"></mat-label>
-            <input matInput type="text" formControlName="carrierGapDays" appFocusOnEnter tabIndex="52">
+            <input matInput type="text" formControlName="carrierGapDays" appFocusOnEnter tabIndex="68">
           </mat-form-field>
 
           <mat-form-field class="col-3">
             <mat-label [translate]="'employee.designation'"></mat-label>
-            <input matInput type="text" formControlName="designation" appFocusOnEnter tabIndex="53">
+            <input matInput type="text" formControlName="designation" appFocusOnEnter tabIndex="69">
           </mat-form-field>
+
+          <div class="col-3">
+            <label> {{ 'employee.attachment' | translate }} </label>
+            <app-file-upload [type]="'card'" [oldFileList]="modelFormData3.value.attachment"
+              (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload>
+          </div>
 
         </div>
 
