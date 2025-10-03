@@ -330,17 +330,23 @@ export class ApiConfigService {
    updateEmployee = `${environment.baseUrl}Employee/UpdateEmployee`;
    deleteEmployee = `${environment.baseUrl}Employee/deleteEmployee`;
 
+   getAddressList = `${environment.baseUrl}Employee/GetAddressList`;
    registerEmployeeAddress = `${environment.baseUrl}Employee/RegisterEmployeeAddress`;
    updateAddress = `${environment.baseUrl}Employee/UpdateAddress`;
    deleteAddress = `${environment.baseUrl}Employee/deleteAddress`;
 
+   getEducationList = `${environment.baseUrl}Employee/GetEducationList`;
    registerEducation = `${environment.baseUrl}Employee/RegisterEducation`;
    updateEducation = `${environment.baseUrl}Employee/updateEducation`;
    deleteEducation = `${environment.baseUrl}Employee/deleteEducation`;
 
+   getExperianceList = `${environment.baseUrl}Employee/GetExperianceList`;
    registerExperiance = `${environment.baseUrl}Employee/registerExperiance`;
    updateExperiance = `${environment.baseUrl}Employee/updateExperiance`;
    deleteExperiance = `${environment.baseUrl}Employee/deleteExperiance`;
+
+   getCountryList = `${environment.baseUrl}Country/GetCountryList`;
+   getStatesList = `${environment.baseUrl}State/GetStatesList`;
 
    getDesignationsList = `${environment.baseUrl}Designation/GetDesignationsList`;
 

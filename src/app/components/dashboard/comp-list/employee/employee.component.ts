@@ -26,10 +26,11 @@ import { DatePipe } from '@angular/common';
 import { NonEditableDatepicker } from '../../../../directives/format-datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TableComponent } from '../../../../reuse-components/table/table.component';
+import { FileUploadComponent } from '../../../../reuse-components/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-employee',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule, TableComponent],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule, TableComponent, FileUploadComponent],
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
   providers: [DatePipe]
@@ -50,6 +51,12 @@ export class EmployeeComponent implements OnInit {
   bankList: any[] = [];
   employeesList: any[] = [];
   designationsList: any[] = [];
+  countryList: any[] = [];
+  stateList: any[] = [];
+  stateList1: any[] = [];
+
+  fileList: any;
+  fileList1: any;
 
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
   tableData: any[] = [];
@@ -109,6 +116,7 @@ export class EmployeeComponent implements OnInit {
 
     this.modelFormData1 = this.formBuilder.group({
 
+      id: 0,
       empCode: [''],
       pAddress1: [''],
       pAddress: [''],
@@ -195,6 +203,10 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.allApis();
+    debugger
+    if (this.modelFormData.get('employeeCode').value) {
+      this.allApis1();
+    }
   }
 
 
@@ -205,6 +217,7 @@ export class EmployeeComponent implements OnInit {
     const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
     const getBankMastersList = String.Join('/', this.apiConfigService.getBankMastersList);
     const getDesignationsList = String.Join('/', this.apiConfigService.getDesignationsList);
+    const getCountryList = String.Join('/', this.apiConfigService.getCountryList);
 
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
@@ -214,9 +227,8 @@ export class EmployeeComponent implements OnInit {
         this.apiService.apiGetRequest(getEmployeeList),
         this.apiService.apiGetRequest(getBankMastersList),
         this.apiService.apiGetRequest(getDesignationsList),
-
-
-      ]).subscribe(([companyList, branchesList, employeeList, bankMastersList, designationsList]) => {
+        this.apiService.apiGetRequest(getCountryList),
+      ]).subscribe(([companyList, branchesList, employeeList, bankMastersList, designationsList, countrysList]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(companyList) && companyList.status === StatusCodes.pass) {
@@ -249,8 +261,126 @@ export class EmployeeComponent implements OnInit {
           }
         }
 
+        if (!this.commonService.checkNullOrUndefined(countrysList) && countrysList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(countrysList.response)) {
+            this.countryList = countrysList.response['countryList'];
+          }
+        }
+
       });
     });
+  }
+
+  allApis1() {
+
+    const getAddressList = String.Join('/', this.apiConfigService.getAddressList, this.modelFormData.get('employeeCode').value);
+    const getEducationList = String.Join('/', this.apiConfigService.getEducationList, this.modelFormData.get('employeeCode').value);
+    const getExperianceList = String.Join('/', this.apiConfigService.getExperianceList, this.modelFormData.get('employeeCode').value);
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getAddressList),
+        this.apiService.apiGetRequest(getEducationList),
+        this.apiService.apiGetRequest(getExperianceList),
+      ]).subscribe(([addressList, educationList, experianceList]) => {
+
+        this.spinner.hide();
+        debugger;
+
+        if (!this.commonService.checkNullOrUndefined(addressList) && addressList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(addressList.response)) {
+            this.modelFormData1.patchValue(addressList.response['addressList'])
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(educationList) && educationList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(educationList.response)) {
+            if (educationList.response['educationList'] && educationList.response['educationList'].length) {
+              educationList.response['educationList'].forEach((s: any, index: number) => {
+                s.dubQty = s.qty;
+                s.index = index + 1;
+                s.action = [
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' }
+                ];
+              })
+              this.tableData = educationList.response['educationList'];
+            }
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(experianceList) && experianceList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(experianceList.response)) {
+            if (experianceList.response['experianceList'] && experianceList.response['experianceList'].length) {
+              experianceList.response['experianceList'].forEach((s: any, index: number) => {
+                s.dubQty = s.qty;
+                s.index = index + 1;
+                s.action = [
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' }
+                ];
+              })
+              this.tableData1 = experianceList.response['experianceList'];
+            }
+          }
+        }
+
+      });
+    });
+  }
+
+
+  onPCountryChange() {
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getStatesList, this.modelFormData1.value.pCountry);
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          debugger
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.stateList1 = res.response['StatesList'];
+            }
+          }
+        });
+  }
+
+  onCountryChange() {
+    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getStatesList, this.modelFormData1.value.country);
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          debugger
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.stateList = res.response['StatesList'];
+            }
+          }
+        });
+  }
+
+
+  downLoadFile(event: any, flag = false) {
+    debugger
+    const url = String.Join('/', this.apiConfigService.getFile, flag ? event.item[event.action] : event.name);
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          window.open(response.response, '_blank');
+        });
+  }
+
+  emitFilesList(event: any) {
+    this.fileList = event[0];
+  }
+
+  emitFilesList1(event: any) {
+    this.fileList1 = event[0];
   }
 
   get formControls() { return this.modelFormData.controls; }
@@ -276,6 +406,9 @@ export class EmployeeComponent implements OnInit {
       highlight: true,
       changed: true,
     });
+    let fObj = this.modelFormData2.value;
+    fObj.attachment = this.fileList ? this.fileList.name.split('.')[0] : '';
+
     let data: any = this.tableData;
     this.tableData = null;
     this.tableComponent.defaultValues();
@@ -283,9 +416,9 @@ export class EmployeeComponent implements OnInit {
       this.modelFormData2.patchValue({
         index: data ? (data.length + 1) : 1
       });
-      data = [this.modelFormData2.value, ...data];
+      data = [fObj, ...data];
     } else {
-      data = data.map((res: any) => res = res.index == this.modelFormData2.value.index ? this.modelFormData2.value : res);
+      data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
     }
     setTimeout(() => {
       this.tableData = data;
@@ -346,6 +479,10 @@ export class EmployeeComponent implements OnInit {
       highlight: true,
       changed: true,
     });
+
+    let fObj = this.modelFormData3.value;
+    fObj.attachment = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
+
     let data: any = this.tableData1;
     this.tableData1 = null;
     this.tableComponent.defaultValues();
@@ -353,9 +490,9 @@ export class EmployeeComponent implements OnInit {
       this.modelFormData3.patchValue({
         index: data ? (data.length + 1) : 1
       });
-      data = [this.modelFormData3.value, ...data];
+      data = [fObj, ...data];
     } else {
-      data = data.map((res: any) => res = res.index == this.modelFormData3.value.index ? this.modelFormData3.value : res);
+      data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
     }
     setTimeout(() => {
       this.tableData1 = data;
@@ -408,7 +545,7 @@ export class EmployeeComponent implements OnInit {
 
     let formData: any = {};
 
-    formData = this.modelFormData.value.getRawValue();
+    formData = this.modelFormData.getRawValue();
     formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'dd-MM-yyyy') : '';
     formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'dd-MM-yyyy') : '';
     formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'dd-MM-yyyy') : '';
@@ -430,7 +567,7 @@ export class EmployeeComponent implements OnInit {
   update() {
     const addCashBank = String.Join('/', this.apiConfigService.updateEmployee);
 
-    this.formData.item = this.modelFormData.value.getRawValue();
+    this.formData.item = this.modelFormData.getRawValue();
     this.formData.item.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'yyyy-MM-dd') : '';
     this.formData.item.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'yyyy-MM-dd') : '';
     this.formData.item.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'yyyy-MM-dd') : '';
@@ -458,13 +595,13 @@ export class EmployeeComponent implements OnInit {
       return;
     }
 
-    if (this.formData.action == "Edit") {
+    if (this.formData.action == "Edit" && this.modelFormData1.value.id) {
       this.update1();
       return
     }
 
     let formData: any = {};
-    formData = this.modelFormData1.value.getRawValue();
+    formData = this.modelFormData1.getRawValue();
     formData.empCode = this.modelFormData.get('employeeCode').value;
 
     const addCashBank = String.Join('/', this.apiConfigService.registerEmployeeAddress);
@@ -486,7 +623,7 @@ export class EmployeeComponent implements OnInit {
     const addCashBank = String.Join('/', this.apiConfigService.updateAddress);
 
     let formData: any = {};
-    formData = this.modelFormData1.value.getRawValue();
+    formData = this.modelFormData1.getRawValue();
     formData.empCode = this.modelFormData.get('employeeCode').value;
 
     this.apiService.apiUpdateRequest(addCashBank, this.formData.item).subscribe(
@@ -517,11 +654,6 @@ export class EmployeeComponent implements OnInit {
       return;
     }
 
-    if (this.formData.action == "Edit") {
-      this.update2(arr);
-      return
-    }
-
     arr.forEach((a: any) => a.empCode = this.modelFormData.get('employeeCode').value)
 
     const registerEducation = String.Join('/', this.apiConfigService.registerEducation);
@@ -538,25 +670,6 @@ export class EmployeeComponent implements OnInit {
       });
   }
 
-  update2(items) {
-
-    const addCashBank = String.Join('/', this.apiConfigService.updateEducation);
-    items.forEach((a: any) => a.empCode = this.modelFormData.get('employeeCode').value);
-
-    this.apiService.apiUpdateRequest(addCashBank, items).subscribe(
-      response => {
-        const res = response;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.alertService.openSnackBar('Education Details Updated Successfully..', Static.Close, SnackBar.success);
-            // this.router.navigate(['/dashboard/master/employee']);
-          }
-          this.spinner.hide();
-        }
-      });
-  }
-
-
   save3() {
 
     if (this.modelFormData.invalid) {
@@ -568,11 +681,6 @@ export class EmployeeComponent implements OnInit {
     if (this.tableData1.length == 0 || arr.length == 0) {
       this.alertService.openSnackBar('Add Or Update One Experience Details', Static.Close, SnackBar.error);
       return;
-    }
-
-    if (this.formData.action == "Edit") {
-      this.update2(arr);
-      return
     }
 
     arr.forEach((a: any) => {
@@ -597,30 +705,6 @@ export class EmployeeComponent implements OnInit {
       });
   }
 
-  update3(items) {
-
-    const addCashBank = String.Join('/', this.apiConfigService.updateExperiance);
-    
-    items.forEach((a: any) => {
-      a.empCode = this.modelFormData.get('employeeCode').value;
-      a.fromDate = a.fromDate ? this.datepipe.transform(a.fromDate, 'MM-dd-yyyy') : '';
-      a.toDate = a.toDate ? this.datepipe.transform(a.toDate, 'MM-dd-yyyy') : '';
-      a.carrierGapFrom = a.carrierGapFrom ? this.datepipe.transform(a.carrierGapFrom, 'MM-dd-yyyy') : '';
-      a.carrierGapTo = a.carrierGapTo ? this.datepipe.transform(a.carrierGapTo, 'MM-dd-yyyy') : '';
-    })
-
-    this.apiService.apiUpdateRequest(addCashBank, items).subscribe(
-      response => {
-        const res = response;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.alertService.openSnackBar('Experience Details Updated Successfully..', Static.Close, SnackBar.success);
-            // this.router.navigate(['/dashboard/master/employee']);
-          }
-          this.spinner.hide();
-        }
-      });
-  }
 
   cancel() {
     this.router.navigate(['dashboard/master/employee'])

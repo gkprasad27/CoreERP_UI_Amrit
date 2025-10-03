@@ -239,92 +239,126 @@
 
         <form [formGroup]="modelFormData1" autocomplete="off">
 
-          <h6>
-            Permanent Address
-          </h6>
-
           <div class="row">
 
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.address1'"></mat-label>
-              <input matInput formControlName="pAddress1" appFocusOnEnter tabIndex="32">
-            </mat-form-field>
+            <div class="col-6">
 
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.address'"></mat-label>
-              <input matInput formControlName="pAddress" appFocusOnEnter tabIndex="33">
-            </mat-form-field>
+              <h6>
+                Permanent Address
+              </h6>
 
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.city'"></mat-label>
-              <input matInput formControlName="pCity" appFocusOnEnter tabIndex="34">
-            </mat-form-field>
+              <div class="row p-2">
 
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.state'"></mat-label>
-              <input matInput formControlName="pState" appFocusOnEnter tabIndex="35">
-            </mat-form-field>
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'employee.address1'"></mat-label>
+                  <input matInput formControlName="pAddress1" appFocusOnEnter tabIndex="32">
+                </mat-form-field>
 
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.zip'"></mat-label>
-              <input matInput formControlName="pZip" appFocusOnEnter tabIndex="36">
-            </mat-form-field>
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'employee.address'"></mat-label>
+                  <input matInput formControlName="pAddress" appFocusOnEnter tabIndex="33">
+                </mat-form-field>
 
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.location'"></mat-label>
-              <input matInput formControlName="pLocation" appFocusOnEnter tabIndex="37">
-            </mat-form-field>
+                <mat-form-field class="col-6">
+                  <mat-label>{{'employee.country' | translate }}</mat-label>
+                  <mat-select formControlName="pCountry" (selectionChange)="onPCountryChange()">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let cntry of countryList" [value]="cntry.countryCode">
+                      {{cntry.countryName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
 
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.country'"></mat-label>
-              <input matInput formControlName="pCountry" appFocusOnEnter tabIndex="38">
-            </mat-form-field>
+                <mat-form-field class="col-6">
+                  <mat-label>{{'employee.state' | translate }}</mat-label>
+                  <mat-select formControlName="pState">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let state of stateList1" [value]="state.id">
+                      {{state.text}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'employee.city'"></mat-label>
+                  <input matInput formControlName="pCity" appFocusOnEnter tabIndex="34">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'employee.zip'"></mat-label>
+                  <input matInput formControlName="pZip" appFocusOnEnter tabIndex="36">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'employee.location'"></mat-label>
+                  <input matInput formControlName="pLocation" appFocusOnEnter tabIndex="37">
+                </mat-form-field>
+
+
+              </div>
+
+            </div>
+
+            <div class="col-6">
+
+              <h6>
+                Current Address
+              </h6>
+
+              <div class="row p-2">
+
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'employee.address1'"></mat-label>
+                  <input matInput formControlName="address1" appFocusOnEnter tabIndex="39">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'employee.address'"></mat-label>
+                  <input matInput formControlName="address" appFocusOnEnter tabIndex="40">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label>{{'employee.country' | translate }}</mat-label>
+                  <mat-select formControlName="country" (selectionChange)="onCountryChange()">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let cntry of countryList" [value]="cntry.countryCode">
+                      {{cntry.countryName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label>{{'employee.state' | translate }}</mat-label>
+                  <mat-select formControlName="state">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let state of stateList" [value]="state.id">
+                      {{state.text}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'employee.city'"></mat-label>
+                  <input matInput formControlName="city" appFocusOnEnter tabIndex="41">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'employee.zip'"></mat-label>
+                  <input matInput formControlName="zip" appFocusOnEnter tabIndex="43">
+                </mat-form-field>
+
+                <mat-form-field class="col-6">
+                  <mat-label [translate]="'employee.location'"></mat-label>
+                  <input matInput formControlName="location" appFocusOnEnter tabIndex="44">
+                </mat-form-field>
+
+              </div>
+
+            </div>
 
           </div>
 
-          <h6>
-            Current Address
-          </h6>
-
-          <div class="row">
-
-
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.address1'"></mat-label>
-              <input matInput formControlName="address1" appFocusOnEnter tabIndex="39">
-            </mat-form-field>
-
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.address'"></mat-label>
-              <input matInput formControlName="address" appFocusOnEnter tabIndex="40">
-            </mat-form-field>
-
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.city'"></mat-label>
-              <input matInput formControlName="city" appFocusOnEnter tabIndex="41">
-            </mat-form-field>
-
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.state'"></mat-label>
-              <input matInput formControlName="state" appFocusOnEnter tabIndex="42">
-            </mat-form-field>
-
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.zip'"></mat-label>
-              <input matInput formControlName="zip" appFocusOnEnter tabIndex="43">
-            </mat-form-field>
-
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.location'"></mat-label>
-              <input matInput formControlName="location" appFocusOnEnter tabIndex="44">
-            </mat-form-field>
-
-            <mat-form-field class="col-2">
-              <mat-label [translate]="'employee.country'"></mat-label>
-              <input matInput formControlName="country" appFocusOnEnter tabIndex="45">
-            </mat-form-field>
-
-          </div>
           <mat-divider></mat-divider>
 
           <div class="form-element mt-2 d-flex justify-content-end">
@@ -342,69 +376,72 @@
 
     <mat-tab label="{{'employee.title3' | translate }}">
 
+      <h6 class="mt-5"> Details </h6>
+
       <form [formGroup]="modelFormData2" autocomplete="off">
 
         <div class="row p-1">
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.qualification'"></mat-label>
+            <mat-label [translate]="'employee.qualification'"></mat-label>
             <input matInput type="text" formControlName="qualification" appFocusOnEnter tabIndex="46">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.education'"></mat-label>
+            <mat-label [translate]="'employee.education'"></mat-label>
             <input matInput type="text" formControlName="education" appFocusOnEnter tabIndex="47">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.percentage'"></mat-label>
+            <mat-label [translate]="'employee.percentage'"></mat-label>
             <input matInput type="text" formControlName="percentage" appFocusOnEnter tabIndex="48">
           </mat-form-field>
 
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.yearofPassing'"></mat-label>
+            <mat-label [translate]="'employee.yearofPassing'"></mat-label>
             <input matInput type="text" formControlName="yearofPassing" appFocusOnEnter tabIndex="49">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.inistituateName'"></mat-label>
+            <mat-label [translate]="'employee.inistituateName'"></mat-label>
             <input matInput type="text" formControlName="inistituateName" appFocusOnEnter tabIndex="50">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.university'"></mat-label>
+            <mat-label [translate]="'employee.university'"></mat-label>
             <input matInput type="text" formControlName="university" appFocusOnEnter tabIndex="51">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.educationType'"></mat-label>
+            <mat-label [translate]="'employee.educationType'"></mat-label>
             <input matInput type="text" formControlName="educationType" appFocusOnEnter tabIndex="52">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.specialization'"></mat-label>
+            <mat-label [translate]="'employee.specialization'"></mat-label>
             <input matInput type="text" formControlName="specialization" appFocusOnEnter tabIndex="53">
           </mat-form-field>
 
 
-          <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.attachment'"></mat-label>
-            <input matInput type="text" formControlName="attachment" appFocusOnEnter tabIndex="54">
-          </mat-form-field>
+          <div class="col-3">
+            <label> {{ 'employee.attachment' | translate }} </label>
+            <app-file-upload [type]="'card'" [oldFileList]="modelFormData2.value.attachment"
+              (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
+          </div>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.educationGap'"></mat-label>
+            <mat-label [translate]="'employee.educationGap'"></mat-label>
             <input matInput type="text" formControlName="educationGap" appFocusOnEnter tabIndex="55">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.remarks'"></mat-label>
+            <mat-label [translate]="'employee.remarks'"></mat-label>
             <input matInput type="text" formControlName="remarks" appFocusOnEnter tabIndex="56">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.educationGapReasion'"></mat-label>
+            <mat-label [translate]="'employee.educationGapReasion'"></mat-label>
             <input matInput type="text" formControlName="educationGapReasion" appFocusOnEnter tabIndex="57">
           </mat-form-field>
 
@@ -444,16 +481,18 @@
 
     <mat-tab label="{{'employee.title4' | translate }}">
 
+      <h6 class="mt-5"> Details </h6>
+
       <form [formGroup]="modelFormData3" autocomplete="off">
 
         <div class="row p-1">
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.companyName'"></mat-label>
+            <mat-label [translate]="'employee.companyName'"></mat-label>
             <input matInput type="text" formControlName="companyName" appFocusOnEnter tabIndex="46">
           </mat-form-field>
 
-          <mat-form-field class="col-2">
+          <mat-form-field class="col-3">
             <mat-label [translate]="'employee.fromDate'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker12"
               [nonEditable]="picker12" formControlName="fromDate" appFocusOnEnter tabIndex="6">
@@ -461,7 +500,7 @@
             <mat-datepicker #picker12></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field class="col-2">
+          <mat-form-field class="col-3">
             <mat-label [translate]="'employee.toDate'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker14"
               [nonEditable]="picker14" formControlName="toDate" appFocusOnEnter tabIndex="6">
@@ -470,32 +509,32 @@
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.totalExp'"></mat-label>
+            <mat-label [translate]="'employee.totalExp'"></mat-label>
             <input matInput type="text" formControlName="totalExp" appFocusOnEnter tabIndex="47">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.reasionforleft'"></mat-label>
+            <mat-label [translate]="'employee.reasionforleft'"></mat-label>
             <input matInput type="text" formControlName="reasionforleft" appFocusOnEnter tabIndex="48">
           </mat-form-field>
 
-          <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.attachment'"></mat-label>
-            <input matInput type="text" formControlName="attachment" appFocusOnEnter tabIndex="49">
-          </mat-form-field>
+          <div class="col-3">
+            <label> {{ 'employee.attachment' | translate }} </label>
+            <app-file-upload [type]="'card'" [oldFileList]="modelFormData3.value.attachment"
+              (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload>
+          </div>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.carrierGap'"></mat-label>
+            <mat-label [translate]="'employee.carrierGap'"></mat-label>
             <input matInput type="text" formControlName="carrierGap" appFocusOnEnter tabIndex="50">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.carrierGapReasion'"></mat-label>
+            <mat-label [translate]="'employee.carrierGapReasion'"></mat-label>
             <input matInput type="text" formControlName="carrierGapReasion" appFocusOnEnter tabIndex="51">
           </mat-form-field>
 
-
-          <mat-form-field class="col-2">
+          <mat-form-field class="col-3">
             <mat-label [translate]="'employee.carrierGapFrom'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker17"
               [nonEditable]="picker17" formControlName="carrierGapFrom" appFocusOnEnter tabIndex="6">
@@ -503,9 +542,7 @@
             <mat-datepicker #picker17></mat-datepicker>
           </mat-form-field>
 
-
-
-          <mat-form-field class="col-2">
+          <mat-form-field class="col-3">
             <mat-label [translate]="'employee.carrierGapTo'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker19"
               [nonEditable]="picker19" formControlName="carrierGapTo" appFocusOnEnter tabIndex="6">
@@ -515,16 +552,14 @@
 
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.carrierGapDays'"></mat-label>
+            <mat-label [translate]="'employee.carrierGapDays'"></mat-label>
             <input matInput type="text" formControlName="carrierGapDays" appFocusOnEnter tabIndex="52">
           </mat-form-field>
 
           <mat-form-field class="col-3">
-            <mat-label [translate]="'saleorder.designation'"></mat-label>
+            <mat-label [translate]="'employee.designation'"></mat-label>
             <input matInput type="text" formControlName="designation" appFocusOnEnter tabIndex="53">
           </mat-form-field>
-
-
 
         </div>
 
@@ -545,8 +580,8 @@
 
       <div>
 
-        <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
-          (editOrDeleteEvent)="editOrDeleteEvent($event)">
+        <app-table class="table-css" [tableData]="tableData1" [showButtons]="false"
+          (editOrDeleteEvent)="editOrDeleteEvent1($event)">
         </app-table>
       </div>
 
