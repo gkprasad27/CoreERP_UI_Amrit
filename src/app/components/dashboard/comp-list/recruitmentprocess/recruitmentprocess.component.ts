@@ -58,6 +58,7 @@ export class RecruitmentProcessComponent implements OnInit {
   educationTypeList: any[] = ['Full Time', 'Part Time'];
   educationGapList: any[] = ['Yes', 'No'];
   carrierGapList: any[] = ['Yes', 'No'];
+  statusList: any[] = ['1st Round', '2nd Round', 'Screening', 'HR Round', 'Manager Round', 'System Test', 'Written Test', 'Selected', 'On Hold', 'Rejected'];
 
   genderList
   fileList: any;

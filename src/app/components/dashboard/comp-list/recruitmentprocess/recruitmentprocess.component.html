@@ -217,6 +217,16 @@
               <input matInput formControlName="esiNumber" appFocusOnEnter tabIndex="31">
             </mat-form-field>
 
+             <mat-form-field class="col-2">
+              <mat-label>{{'recruitmentprocess.status' | translate }}</mat-label>
+              <mat-select formControlName="status" appFocusOnEnter tabIndex="28">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let status of statusList" [value]="status">
+                  {{status}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
           </div>
           <mat-divider></mat-divider>
 
