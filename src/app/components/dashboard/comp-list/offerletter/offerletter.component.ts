@@ -1,4 +1,4 @@
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonService } from '../../../../services/common.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -16,27 +16,40 @@ import { MatIconModule } from '@angular/material/icon';
 import { AddOrEditService } from '../add-or-edit.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NonEditableDatepicker } from '../../../../directives/format-datepicker';
+import { String } from 'typescript-string-operations';
+import { ApiService } from '../../../../services/api.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiConfigService } from '../../../../services/api-config.service';
+import { StatusCodes } from '../../../../enums/common/common';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @Component({
   selector: 'app-offerletter',
-  imports: [ CommonModule, ReactiveFormsModule, NonEditableDatepicker, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule ],
+  imports: [CommonModule, ReactiveFormsModule, TypeaheadModule, NonEditableDatepicker, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule],
   templateUrl: './offerletter.component.html',
   styleUrl: './offerletter.component.scss',
   providers: [DatePipe]
 })
-export class OfferletterComponent {
+export class OfferletterComponent implements OnInit {
 
   modelFormData: FormGroup;
   isSubmitted = false;
   formData: any;
 
-  statusList: any[] = ['1st Round', '2nd Round', 'Screening', 'HR Round', 'Manager Round', 'System Test', 'Written Test', 'Selected', 'On Hold', 'Rejected'];
+  statusList: any[] = ['Accepted', 'Rejected', 'Cancelled', 'Hold'];
   jobTypeList: any[] = ['Permanent', 'PartTime', 'Daily vaiges', 'Contrat'];
+  designationsList: any[] = [];
+  employeesList: any[] = [];
+  getEmploeebyCodeArray = [];
 
   constructor(public commonService: CommonService,
     private addOrEditService: AddOrEditService,
     private formBuilder: FormBuilder,
     private datepipe: DatePipe,
+    private apiService: ApiService,
+    private spinner: NgxSpinnerService,
+    private apiConfigService: ApiConfigService,
+
     public dialogRef: MatDialogRef<OfferletterComponent>,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -61,7 +74,69 @@ export class OfferletterComponent {
       this.modelFormData.controls['empCode'].disable();
     }
   }
-  
+
+  ngOnInit(): void {
+    this.allApis();
+  }
+
+
+  allApis() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
+    const getDesignationsList = String.Join('/', this.apiConfigService.getDesignationsList);
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getEmployeeList),
+        this.apiService.apiGetRequest(getDesignationsList),
+      ]).subscribe(([employeeList, designationsList]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(employeeList) && employeeList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(employeeList.response)) {
+            this.employeesList = employeeList.response['emplist'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(designationsList) && designationsList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(designationsList.response)) {
+            this.designationsList = designationsList.response['designationsList'];
+          }
+        }
+
+      });
+    });
+  }
+
+
+  getEmploeebycode(value) {
+    if (!this.commonService.checkNullOrUndefined(value) && value != '') {
+      const getEmploeebycodeUrl = String.Join('/', this.apiConfigService.getEmploeebycode, value);
+      this.apiService.apiGetRequest(getEmploeebycodeUrl).subscribe(
+        response => {
+          this.spinner.hide();
+          if (!this.commonService.checkNullOrUndefined(response) && response.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(response.response)) {
+              if (!this.commonService.checkNullOrUndefined(response.response['EducationList'])) {
+                this.getEmploeebyCodeArray = response.response['EducationList'];
+                this.spinner.hide();
+              }
+            }
+          }
+
+        });
+    } else {
+      this.getEmploeebyCodeArray = [];
+    }
+  }
+
+  onSearchChange(code) {
+    this.modelFormData.patchValue({
+      empName: code.item.name
+    });
+  }
+
   get formControls() { return this.modelFormData.controls; }
 
   save() {

@@ -85,7 +85,7 @@ export class RecruitmentProcessComponent implements OnInit {
     this.modelFormData = this.formBuilder.group({
       branchId: [''],
       // employeeId: [0],
-      employeeCode: ['', Validators.required],
+      empCode: ['', Validators.required],
       companyCode: ['', Validators.required],
       // branchCode: [''],
       designationId: ['', Validators.required],
@@ -100,15 +100,15 @@ export class RecruitmentProcessComponent implements OnInit {
       email: [''],
       joiningDate: ['', Validators.required],
       releavingDate: [''], //
-      isActive: ['true'],
+      // isActive: ['true'],
       narration: [''],
       bloodGroup: [''],
       passportNo: [''],
-      accessCardNumber: [''], //
-      bankName: [''],
-      bankAccountNumber: [''],
+      // accessCardNumber: [''], //
+      // bankName: [''],
+      // bankAccountNumber: [''],
       employeeType: [''], //
-      ifscCode: [''], //
+      // ifscCode: [''], //
       panNumber: [''],
       aadharNumber: ['', Validators.required],
       recomendedBy: [''],
@@ -203,7 +203,7 @@ export class RecruitmentProcessComponent implements OnInit {
       this.modelFormData.patchValue({
         designationId: this.formData.item.designationId ? +this.formData.item.designationId : 0
       });
-      this.modelFormData.controls['employeeCode'].disable();
+      this.modelFormData.controls['empCode'].disable();
       // this.modelFormData.controls['employeeId'].disable();
     }
 
@@ -211,7 +211,7 @@ export class RecruitmentProcessComponent implements OnInit {
 
   ngOnInit() {
     this.allApis();
-    if (this.modelFormData.get('employeeCode').value) {
+    if (this.modelFormData.get('empCode').value) {
       this.allApis1();
     }
   }
@@ -280,9 +280,9 @@ export class RecruitmentProcessComponent implements OnInit {
 
   allApis1() {
 
-    const getAddressList = String.Join('/', this.apiConfigService.getAddressListR, this.modelFormData.get('employeeCode').value);
-    const getEducationList = String.Join('/', this.apiConfigService.getEducationListR, this.modelFormData.get('employeeCode').value);
-    const getExperianceList = String.Join('/', this.apiConfigService.getExperianceListR, this.modelFormData.get('employeeCode').value);
+    const getAddressList = String.Join('/', this.apiConfigService.getAddressListR, this.modelFormData.get('empCode').value);
+    const getEducationList = String.Join('/', this.apiConfigService.getEducationListR, this.modelFormData.get('empCode').value);
+    const getExperianceList = String.Join('/', this.apiConfigService.getExperianceListR, this.modelFormData.get('empCode').value);
 
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
@@ -609,7 +609,7 @@ export class RecruitmentProcessComponent implements OnInit {
 
     let formData: any = {};
     formData = this.modelFormData1.getRawValue();
-    formData.empCode = this.modelFormData.get('employeeCode').value;
+    formData.empCode = this.modelFormData.get('empCode').value;
 
     const addCashBank = String.Join('/', this.apiConfigService.registerEmployeeAddressR);
     this.apiService.apiPostRequest(addCashBank, formData).subscribe(
@@ -631,7 +631,7 @@ export class RecruitmentProcessComponent implements OnInit {
 
     let formData: any = {};
     formData = this.modelFormData1.getRawValue();
-    formData.empCode = this.modelFormData.get('employeeCode').value;
+    formData.empCode = this.modelFormData.get('empCode').value;
 
     this.apiService.apiUpdateRequest(addCashBank, formData).subscribe(
       response => {
@@ -662,7 +662,7 @@ export class RecruitmentProcessComponent implements OnInit {
     }
 
     arr.forEach((a: any) => {
-      a.empCode = this.modelFormData.get('employeeCode').value;
+      a.empCode = this.modelFormData.get('empCode').value;
       a.yearofPassing = a.yearofPassing ? this.datepipe.transform(a.yearofPassing, 'MM-dd-yyyy') : '';
       a.educationGapFrom = a.educationGapFrom ? this.datepipe.transform(a.educationGapFrom, 'MM-dd-yyyy') : '';
       a.educationGapTo = a.educationGapTo ? this.datepipe.transform(a.educationGapTo, 'MM-dd-yyyy') : '';
@@ -696,7 +696,7 @@ export class RecruitmentProcessComponent implements OnInit {
     }
 
     arr.forEach((a: any) => {
-      a.empCode = this.modelFormData.get('employeeCode').value;
+      a.empCode = this.modelFormData.get('empCode').value;
       a.fromDate = a.fromDate ? this.datepipe.transform(a.fromDate, 'MM-dd-yyyy') : '';
       a.toDate = a.toDate ? this.datepipe.transform(a.toDate, 'MM-dd-yyyy') : '';
       a.carrierGapFrom = a.carrierGapFrom ? this.datepipe.transform(a.carrierGapFrom, 'MM-dd-yyyy') : '';

@@ -611,4 +611,6 @@ export class ApiConfigService {
    swapOrder = `${environment.baseUrl}Transactions/swapOrder`;
    getSwapOrderList = `${environment.baseUrl}Transactions/GetSwapOrderList`;
 
+   // 
+   getEmploeebycode = `${environment.baseUrl}Recruitment/GetEmploeebycode`;
 }
