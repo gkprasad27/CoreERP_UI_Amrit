@@ -47,7 +47,7 @@ export class RecruitmentProcessComponent implements OnInit {
 
   companyList: any[] = [];
   companiesList: any[] = [];
-  branchesList: any[] = [];
+  // branchesList: any[] = [];
   bankList: any[] = [];
   employeesList: any[] = [];
   designationsList: any[] = [];
@@ -86,7 +86,7 @@ export class RecruitmentProcessComponent implements OnInit {
       // employeeId: [0],
       employeeCode: ['', Validators.required],
       companyCode: ['', Validators.required],
-      branchCode: [''],
+      // branchCode: [''],
       designationId: ['', Validators.required],
       employeeName: ['', Validators.required],
       dob: [''],
@@ -210,7 +210,6 @@ export class RecruitmentProcessComponent implements OnInit {
 
   ngOnInit() {
     this.allApis();
-    debugger
     if (this.modelFormData.get('employeeCode').value) {
       this.allApis1();
     }
@@ -220,7 +219,7 @@ export class RecruitmentProcessComponent implements OnInit {
   allApis() {
     let obj = JSON.parse(localStorage.getItem("user"));
     const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
-    const getBranchesList = String.Join('/', this.apiConfigService.getBranchesList);
+    // const getBranchesList = String.Join('/', this.apiConfigService.getBranchesList);
     const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
     const getBankMastersList = String.Join('/', this.apiConfigService.getBankMastersList);
     const getDesignationsList = String.Join('/', this.apiConfigService.getDesignationsList);
@@ -230,12 +229,12 @@ export class RecruitmentProcessComponent implements OnInit {
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
         this.apiService.apiGetRequest(getCompanyList),
-        this.apiService.apiGetRequest(getBranchesList),
+        // this.apiService.apiGetRequest(getBranchesList),
         this.apiService.apiGetRequest(getEmployeeList),
         this.apiService.apiGetRequest(getBankMastersList),
         this.apiService.apiGetRequest(getDesignationsList),
         this.apiService.apiGetRequest(getCountryList),
-      ]).subscribe(([companyList, branchesList, employeeList, bankMastersList, designationsList, countrysList]) => {
+      ]).subscribe(([companyList, employeeList, bankMastersList, designationsList, countrysList]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(companyList) && companyList.status === StatusCodes.pass) {
@@ -244,15 +243,15 @@ export class RecruitmentProcessComponent implements OnInit {
           }
         }
 
-        if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(branchesList.response)) {
-            this.branchesList = branchesList.response['branchesList'];
-          }
-        }
+        // if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(branchesList.response)) {
+        //     this.branchesList = branchesList.response['branchesList'];
+        //   }
+        // }
 
         if (!this.commonService.checkNullOrUndefined(employeeList) && employeeList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(employeeList.response)) {
-            this.employeesList = employeeList.response['employeeList'];
+            this.employeesList = employeeList.response['emplist'];
           }
         }
 
@@ -293,11 +292,16 @@ export class RecruitmentProcessComponent implements OnInit {
       ]).subscribe(([addressList, educationList, experianceList]) => {
 
         this.spinner.hide();
-        debugger;
 
         if (!this.commonService.checkNullOrUndefined(addressList) && addressList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(addressList.response)) {
-            this.modelFormData1.patchValue(addressList.response['AddressList'])
+            this.modelFormData1.patchValue(addressList.response['AddressList']);
+            if (this.modelFormData1.value.country) {
+              this.onCountryChange();
+            }
+            if (this.modelFormData1.value.pCountry) {
+              this.onPCountryChange();
+            }
           }
         }
 
@@ -345,7 +349,6 @@ export class RecruitmentProcessComponent implements OnInit {
         response => {
           this.spinner.hide();
           const res = response;
-          debugger
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.stateList1 = res.response['StatesList'];
@@ -361,7 +364,6 @@ export class RecruitmentProcessComponent implements OnInit {
         response => {
           this.spinner.hide();
           const res = response;
-          debugger
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.stateList = res.response['StatesList'];
@@ -372,7 +374,6 @@ export class RecruitmentProcessComponent implements OnInit {
 
 
   downLoadFile(event: any, flag = false) {
-    debugger
     const url = String.Join('/', this.apiConfigService.getFile, flag ? event.item[event.action] : event.name);
     this.apiService.apiGetRequest(url)
       .subscribe(
@@ -570,12 +571,14 @@ export class RecruitmentProcessComponent implements OnInit {
   update() {
     const addCashBank = String.Join('/', this.apiConfigService.updateEmployeeR);
 
-    this.formData.item = this.modelFormData.getRawValue();
-    this.formData.item.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'yyyy-MM-dd') : '';
-    this.formData.item.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'yyyy-MM-dd') : '';
-    this.formData.item.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'yyyy-MM-dd') : '';
+    let formData: any = {};
 
-    this.apiService.apiUpdateRequest(addCashBank, this.formData.item).subscribe(
+    formData = this.modelFormData.getRawValue();
+    formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'yyyy-MM-dd') : '';
+    formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'yyyy-MM-dd') : '';
+    formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'yyyy-MM-dd') : '';
+
+    this.apiService.apiUpdateRequest(addCashBank, formData).subscribe(
       response => {
         const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
@@ -629,7 +632,7 @@ export class RecruitmentProcessComponent implements OnInit {
     formData = this.modelFormData1.getRawValue();
     formData.empCode = this.modelFormData.get('employeeCode').value;
 
-    this.apiService.apiUpdateRequest(addCashBank, this.formData.item).subscribe(
+    this.apiService.apiUpdateRequest(addCashBank, formData).subscribe(
       response => {
         const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {

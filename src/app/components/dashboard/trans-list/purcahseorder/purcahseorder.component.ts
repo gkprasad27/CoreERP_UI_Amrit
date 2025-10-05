@@ -804,7 +804,6 @@ export class PurchaseOrderComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['pomasters']);
-              debugger
               const obj = this.employeesList.filter((e: any) => e.text == this.formData.value.createdBy);
               this.formData.patchValue({
                 createdBy: (obj && obj.length) ? obj : [],
@@ -1094,7 +1093,6 @@ export class PurchaseOrderComponent implements OnInit {
       totalAmount: totalAmount ? Math.round(totalAmount) : 0,  // Round to 2 decimal places
     });
 
-debugger
   }
   // emitColumnChanges(data) {
   //   this.tableData = data.data;
