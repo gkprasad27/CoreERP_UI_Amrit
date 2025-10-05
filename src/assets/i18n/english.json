@@ -3770,5 +3770,19 @@
     "carrierGapDays": "Carrier Gap Days",
     "status": "Status",
     "action": "Action"
+  },
+  "offerletter": {
+    "title": "Offer Letter",
+    "empCode": "Employee Code",
+    "role": "Role",
+    "jobType": "Job Type",
+    "reporting": "Reporting To",
+    "empName": "Employee Name",
+    "designation": "Designation",
+    "cTC": "CTC",
+    "offerValid": "Offer Valid",
+    "effectiveFrom": "Effective From",
+    "status": "Status",
+    "remarks": "Remarks"
   }
 }

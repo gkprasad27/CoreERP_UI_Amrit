@@ -1,0 +1,103 @@
+<div class="position-relative popup-class">
+    <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+        <span> {{'offerletter.title' | translate }} </span>
+        <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+    </mat-card-title>
+
+    <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+        <form [formGroup]="modelFormData" autocomplete="off">
+
+            <div class="row">
+
+                <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.empCode.valid &&formControls.empCode.status != 'DISABLED',
+           'ng--invalid': !formControls.empCode.valid  &&formControls.empCode.status != 'DISABLED' }">
+                    <mat-label [translate]="'offerletter.empCode'"></mat-label>
+                    <input matInput formControlName="empCode" maxlength="4" appFocusOnEnter tabIndex="1">
+                    <mat-error *ngIf="!formControls.empCode.valid  &&formControls.empCode.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !formControls.empCode.valid  }"> Employee Code is
+                        required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'offerletter.role'"></mat-label>
+                    <input matInput formControlName="role" appFocusOnEnter tabIndex="2">
+                </mat-form-field>
+
+                <mat-form-field class="col-2">
+                    <mat-label>{{'offerletter.jobType' | translate }}</mat-label>
+                    <mat-select formControlName="jobType" appFocusOnEnter tabIndex="3">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let jobTyp of jobTypeList" [value]="jobTyp">
+                            {{jobTyp}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'offerletter.reporting'"></mat-label>
+                    <input matInput formControlName="reporting" appFocusOnEnter tabIndex="4">
+                </mat-form-field>
+
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'offerletter.empName'"></mat-label>
+                    <input matInput formControlName="empName" appFocusOnEnter tabIndex="5">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'offerletter.designation'"></mat-label>
+                    <input matInput formControlName="designation" appFocusOnEnter tabIndex="6">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'offerletter.cTC'"></mat-label>
+                    <input matInput type="number" formControlName="cTC" appFocusOnEnter tabIndex="7">
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'offerletter.offerValid'"></mat-label>
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
+                        [nonEditable]="picker1" formControlName="offerValid" appFocusOnEnter tabIndex="8">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'offerletter.effectiveFrom'"></mat-label>
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
+                        [nonEditable]="picker2" formControlName="effectiveFrom" appFocusOnEnter tabIndex="9">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+
+
+                <mat-form-field class="col-2">
+                    <mat-label>{{'offerletter.status' | translate }}</mat-label>
+                    <mat-select formControlName="status" appFocusOnEnter tabIndex="10">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let status of statusList" [value]="status">
+                            {{status}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'offerletter.role'"></mat-label>
+                    <input matInput formControlName="role" appFocusOnEnter tabIndex="11">
+                </mat-form-field>
+
+            </div>
+            <mat-divider></mat-divider>
+        </form>
+
+    </mat-card-content>
+    <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+            {{ 'COMMON.CANCEL' | translate }}
+        </button>
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+
+            {{ 'COMMON.SAVE' | translate }}
+        </button>
+    </div>
+</div>

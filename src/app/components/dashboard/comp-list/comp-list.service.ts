@@ -149,6 +149,7 @@ import { QcparamconfigurationComponent } from './qcparamconfiguration/qcparamcon
 import { DispatchstatusComponent } from './dispatchstatus/dispatchstatus.component';
 import { LotwisematerialComponent } from './lotwisematerial/lotwisematerial.component';
 import { RecruitmentProcessComponent } from './recruitmentprocess/recruitmentprocess.component';
+import { OfferletterComponent } from './offerletter/offerletter.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -749,6 +750,9 @@ export class CompListService {
         return this.dynamicComp.component;
         case 'recruitmentprocess':
         this.dynamicComp.component = RecruitmentProcessComponent;
+        return this.dynamicComp.component;
+        case 'OfferLetter':
+        this.dynamicComp.component = OfferletterComponent;
         return this.dynamicComp.component;
         break;
       default:
