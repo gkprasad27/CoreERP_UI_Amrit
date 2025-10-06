@@ -10,8 +10,7 @@
 
           <div class="row">
 
-            <mat-form-field class="col-2"
-              [ngClass]="{ 'ng--valid': formControls.empCode.valid&& formControls.empCode.status != 'DISABLED', 
+            <mat-form-field class="col-2" [ngClass]="{ 'ng--valid': formControls.empCode.valid&& formControls.empCode.status != 'DISABLED', 
                    'ng--invalid': !formControls.empCode.valid && formControls.empCode.status != 'DISABLED' }">
               <mat-label [translate]="'recruitmentprocess.empCode'"></mat-label>
               <input matInput formControlName="empCode" maxlength="5" appFocusOnEnter tabIndex="1">
@@ -21,7 +20,7 @@
 
             <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.employeeName'"></mat-label>
-              <input matInput formControlName="employeeName" appFocusOnEnter tabIndex="2">
+              <input matInput formControlName="name" appFocusOnEnter tabIndex="2">
             </mat-form-field>
 
             <!-- <mat-form-field class="col-2">
@@ -217,7 +216,7 @@
               <input matInput formControlName="esiNumber" appFocusOnEnter tabIndex="31">
             </mat-form-field>
 
-             <mat-form-field class="col-2">
+            <mat-form-field class="col-2">
               <mat-label>{{'recruitmentprocess.status' | translate }}</mat-label>
               <mat-select formControlName="status" appFocusOnEnter tabIndex="28">
                 <mat-option>None</mat-option>
@@ -594,9 +593,15 @@
             <input matInput type="text" formControlName="carrierGapDays" appFocusOnEnter tabIndex="68">
           </mat-form-field>
 
+
           <mat-form-field class="col-3">
             <mat-label [translate]="'recruitmentprocess.designation'"></mat-label>
-            <input matInput type="text" formControlName="designation" appFocusOnEnter tabIndex="69">
+            <mat-select formControlName="designation" appFocusOnEnter tabIndex="69">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let designation of designationsList" [value]="designation.designationId">
+                {{designation.designationName}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
 
           <div class="col-3">

@@ -23,13 +23,17 @@
                     <input matInput readonly formControlName="empName" appFocusOnEnter tabIndex="2">
                 </mat-form-field>
 
-
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'offerletter.role'"></mat-label>
-                    <input matInput formControlName="role" appFocusOnEnter tabIndex="3">
+                    <mat-select formControlName="role" appFocusOnEnter tabIndex="3">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let designation of designationsList" [value]="designation.designationId">
+                            {{designation.designationName}}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="col-2">
+                <mat-form-field class="col-3">
                     <mat-label>{{'offerletter.jobType' | translate }}</mat-label>
                     <mat-select formControlName="jobType" appFocusOnEnter tabIndex="4">
                         <mat-option>None</mat-option>
@@ -39,7 +43,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="col-2">
+                <mat-form-field class="col-3">
                     <mat-label>{{'offerletter.reporting' | translate }}</mat-label>
                     <mat-select formControlName="reporting" appFocusOnEnter tabIndex="5">
                         <mat-option>None</mat-option>
@@ -49,13 +53,7 @@
                     </mat-select>
                 </mat-form-field>
 
-
                 <mat-form-field class="col-3">
-                    <mat-label [translate]="'offerletter.designation'"></mat-label>
-                    <input matInput formControlName="designation" appFocusOnEnter tabIndex="6">
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
                     <mat-label [translate]="'offerletter.designation'"></mat-label>
                     <mat-select formControlName="designation" appFocusOnEnter tabIndex="7">
                         <mat-option>None</mat-option>

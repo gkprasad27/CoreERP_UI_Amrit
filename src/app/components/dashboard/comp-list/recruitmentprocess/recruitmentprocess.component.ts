@@ -89,7 +89,7 @@ export class RecruitmentProcessComponent implements OnInit {
       companyCode: ['', Validators.required],
       // branchCode: [''],
       designationId: ['', Validators.required],
-      employeeName: ['', Validators.required],
+      name: ['', Validators.required],
       dob: [''],
       maritalStatus: [''],
       gender: ['', Validators.required],
@@ -114,7 +114,7 @@ export class RecruitmentProcessComponent implements OnInit {
       recomendedBy: [''],
       reportedBy: [''],
       approvedBy: [''],
-
+      status: [''],
       pfNumber: [''],
       esiNumber: [''],
 
@@ -618,7 +618,7 @@ export class RecruitmentProcessComponent implements OnInit {
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Employee Details Updated Successfully..', Static.Close, SnackBar.success);
-            this.router.navigate(['/dashboard/master/employee']);
+            this.router.navigate(['/dashboard/master/recruitmentprocess']);
           }
           this.spinner.hide();
         }
@@ -719,7 +719,7 @@ export class RecruitmentProcessComponent implements OnInit {
 
 
   cancel() {
-    this.router.navigate(['dashboard/master/employee'])
+    this.router.navigate(['dashboard/master/recruitmentprocess'])
   }
 
 }
