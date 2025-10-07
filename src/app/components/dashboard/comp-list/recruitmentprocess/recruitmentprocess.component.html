@@ -32,7 +32,7 @@
               </mat-select>
             </mat-form-field> -->
 
-            <mat-form-field class="col-2">
+            <!-- <mat-form-field class="col-2">
               <mat-label>{{'recruitmentprocess.companyCode' | translate }}</mat-label>
               <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="4">
                 <mat-option>None</mat-option>
@@ -40,9 +40,9 @@
                   {{company.text}}
                 </mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
 
-            <mat-form-field class="col-2">
+            <!-- <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.designationId'"></mat-label>
               <mat-select formControlName="designationId" appFocusOnEnter tabIndex="5">
                 <mat-option>None</mat-option>
@@ -50,7 +50,7 @@
                   {{designation.designationName}}
                 </mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
             <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.dob'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
@@ -99,20 +99,20 @@
               <mat-label [translate]="'recruitmentprocess.email'"></mat-label>
               <input matInput formControlName="email" appFocusOnEnter tabIndex="13">
             </mat-form-field>
-            <mat-form-field class="col-2">
+            <!-- <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.joiningDate'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
                 [nonEditable]="picker2" formControlName="joiningDate" appFocusOnEnter tabIndex="14">
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="col-2">
+            </mat-form-field> -->
+            <!-- <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.releavingDate'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3"
                 [nonEditable]="picker3" formControlName="releavingDate" appFocusOnEnter tabIndex="15">
               <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
               <mat-datepicker #picker3></mat-datepicker>
-            </mat-form-field>
+            </mat-form-field> -->
             <!-- <mat-slide-toggle class="col-2 d-flex" formControlName="isActive" appFocusOnEnter tabIndex="16">
               {{ 'recruitmentprocess.isActive' | translate }}
             </mat-slide-toggle> -->
@@ -166,6 +166,7 @@
                 <mat-option value="Seasonal workers"> Seasonal workers</mat-option>
                 <mat-option value="Temporary employees"> Temporary employees</mat-option>
                 <mat-option value="Interns"> Interns</mat-option>
+                <mat-option value="Probation Period"> Probation Period</mat-option>
               </mat-select>
             </mat-form-field>
             <!-- <mat-form-field class="col-2">
@@ -189,7 +190,7 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-2">
+            <!-- <mat-form-field class="col-2">
               <mat-label>{{'recruitmentprocess.reportedBy' | translate }}</mat-label>
               <mat-select formControlName="reportedBy" appFocusOnEnter tabIndex="28">
                 <mat-option>None</mat-option>
@@ -197,8 +198,8 @@
                   {{emp.id}} - {{emp.text}}
                 </mat-option>
               </mat-select>
-            </mat-form-field>
-            <mat-form-field class="col-2">
+            </mat-form-field> -->
+            <!-- <mat-form-field class="col-2">
               <mat-label>{{'recruitmentprocess.approvedBy' | translate }}</mat-label>
               <mat-select formControlName="approvedBy" appFocusOnEnter tabIndex="29">
                 <mat-option>None</mat-option>
@@ -206,7 +207,7 @@
                   {{emp.id}} - {{emp.text}}
                 </mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
             <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.pfNumber'"></mat-label>
               <input matInput formControlName="pfNumber" appFocusOnEnter tabIndex="30">
@@ -502,7 +503,7 @@
 
       <div>
 
-        <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
+        <app-table class="table-css"  #table1 [tableData]="tableData" [showButtons]="false"
           (editOrDeleteEvent)="editOrDeleteEvent($event)">
         </app-table>
       </div>
@@ -629,7 +630,7 @@
 
       <div>
 
-        <app-table class="table-css" [tableData]="tableData1" [showButtons]="false"
+        <app-table class="table-css" #table2 [tableData]="tableData1" [showButtons]="false"
           (editOrDeleteEvent)="editOrDeleteEvent1($event)">
         </app-table>
       </div>

@@ -46,7 +46,7 @@ export class RecruitmentProcessComponent implements OnInit {
   formData: any;
 
   companyList: any[] = [];
-  companiesList: any[] = [];
+  // companiesList: any[] = [];
   // branchesList: any[] = [];
   bankList: any[] = [];
   employeesList: any[] = [];
@@ -64,7 +64,9 @@ export class RecruitmentProcessComponent implements OnInit {
   fileList: any;
   fileList1: any;
 
-  @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
+  @ViewChild('table1', { static: false }) tableComponent1: TableComponent;
+  @ViewChild('table2', { static: false }) tableComponent2: TableComponent;
+
   tableData: any[] = [];
   tableData1: any[] = [];
 
@@ -85,10 +87,11 @@ export class RecruitmentProcessComponent implements OnInit {
     this.modelFormData = this.formBuilder.group({
       branchId: [''],
       // employeeId: [0],
+      id: [0],
       empCode: ['', Validators.required],
-      companyCode: ['', Validators.required],
+      // companyCode: ['', Validators.required],
       // branchCode: [''],
-      designationId: ['', Validators.required],
+      // designationId: ['', Validators.required],
       name: ['', Validators.required],
       dob: [''],
       maritalStatus: [''],
@@ -98,8 +101,8 @@ export class RecruitmentProcessComponent implements OnInit {
       phoneNumber: [''],
       mobileNumber: ['', Validators.required],
       email: [''],
-      joiningDate: ['', Validators.required],
-      releavingDate: [''], //
+      // joiningDate: ['', Validators.required],
+      // releavingDate: [''], //
       // isActive: ['true'],
       narration: [''],
       bloodGroup: [''],
@@ -112,8 +115,8 @@ export class RecruitmentProcessComponent implements OnInit {
       panNumber: [''],
       aadharNumber: ['', Validators.required],
       recomendedBy: [''],
-      reportedBy: [''],
-      approvedBy: [''],
+      // reportedBy: [''],
+      // approvedBy: [''],
       status: [''],
       pfNumber: [''],
       esiNumber: [''],
@@ -200,9 +203,9 @@ export class RecruitmentProcessComponent implements OnInit {
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
-      this.modelFormData.patchValue({
-        designationId: this.formData.item.designationId ? +this.formData.item.designationId : 0
-      });
+      // this.modelFormData.patchValue({
+      //   designationId: this.formData.item.designationId ? +this.formData.item.designationId : 0
+      // });
       this.modelFormData.controls['empCode'].disable();
       // this.modelFormData.controls['employeeId'].disable();
     }
@@ -219,7 +222,7 @@ export class RecruitmentProcessComponent implements OnInit {
 
   allApis() {
     let obj = JSON.parse(localStorage.getItem("user"));
-    const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
+    // const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
     // const getBranchesList = String.Join('/', this.apiConfigService.getBranchesList);
     const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
     const getBankMastersList = String.Join('/', this.apiConfigService.getBankMastersList);
@@ -229,20 +232,20 @@ export class RecruitmentProcessComponent implements OnInit {
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
-        this.apiService.apiGetRequest(getCompanyList),
+        // this.apiService.apiGetRequest(getCompanyList),
         // this.apiService.apiGetRequest(getBranchesList),
         this.apiService.apiGetRequest(getEmployeeList),
         this.apiService.apiGetRequest(getBankMastersList),
         this.apiService.apiGetRequest(getDesignationsList),
         this.apiService.apiGetRequest(getCountryList),
-      ]).subscribe(([companyList, employeeList, bankMastersList, designationsList, countrysList]) => {
+      ]).subscribe(([employeeList, bankMastersList, designationsList, countrysList]) => {
         this.spinner.hide();
 
-        if (!this.commonService.checkNullOrUndefined(companyList) && companyList.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(companyList.response)) {
-            this.companiesList = companyList.response['companiesList'];
-          }
-        }
+        // if (!this.commonService.checkNullOrUndefined(companyList) && companyList.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(companyList.response)) {
+        //     this.companiesList = companyList.response['companiesList'];
+        //   }
+        // }
 
         // if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
         //   if (!this.commonService.checkNullOrUndefined(branchesList.response)) {
@@ -324,8 +327,8 @@ export class RecruitmentProcessComponent implements OnInit {
 
         if (!this.commonService.checkNullOrUndefined(experianceList) && experianceList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(experianceList.response)) {
-            if (experianceList.response['experienceList'] && experianceList.response['experienceList'].length) {
-              experianceList.response['experienceList'].forEach((s: any, index: number) => {
+            if (experianceList.response['ExperianceList'] && experianceList.response['ExperianceList'].length) {
+              experianceList.response['ExperianceList'].forEach((s: any, index: number) => {
                 s.dubQty = s.qty;
                 s.index = index + 1;
                 s.action = [
@@ -333,7 +336,7 @@ export class RecruitmentProcessComponent implements OnInit {
                   { id: 'Delete', type: 'delete' }
                 ];
               })
-              this.tableData1 = experianceList.response['experienceList'];
+              this.tableData1 = experianceList.response['ExperianceList'];
             }
           }
         }
@@ -419,7 +422,7 @@ export class RecruitmentProcessComponent implements OnInit {
 
     let data: any = this.tableData;
     this.tableData = null;
-    this.tableComponent.defaultValues();
+    this.tableComponent1.defaultValues();
     if (this.modelFormData2.value.index == 0) {
       fObj.index = data ? (data.length + 1) : 1;
       data = [fObj, ...data];
@@ -437,7 +440,7 @@ export class RecruitmentProcessComponent implements OnInit {
       if (value.item.id) {
         this.deleteItem(value.item);
       } else {
-        this.tableComponent.defaultValues();
+        this.tableComponent1.defaultValues();
         this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       }
     } else {
@@ -457,7 +460,7 @@ export class RecruitmentProcessComponent implements OnInit {
         this.apiService.apiDeleteRequest(deleteEducation).subscribe(response => {
           this.spinner.hide();
           if (response.status === StatusCodes.pass) {
-            this.tableComponent.defaultValues();
+            this.tableComponent1.defaultValues();
             this.tableData = this.tableData.filter((res: any) => res.index != item.index);
           }
         });
@@ -491,7 +494,7 @@ export class RecruitmentProcessComponent implements OnInit {
 
     let data: any = this.tableData1;
     this.tableData1 = null;
-    this.tableComponent.defaultValues();
+    this.tableComponent2.defaultValues();
     if (this.modelFormData3.value.index == 0) {
       fObj.index = data ? (data.length + 1) : 1;
       data = [fObj, ...data];
@@ -500,7 +503,7 @@ export class RecruitmentProcessComponent implements OnInit {
     }
     setTimeout(() => {
       this.tableData1 = data;
-      this.resetForm();
+      this.resetForm1();
     });
   }
 
@@ -509,7 +512,7 @@ export class RecruitmentProcessComponent implements OnInit {
       if (value.item.id) {
         this.deleteItem(value.item);
       } else {
-        this.tableComponent.defaultValues();
+        this.tableComponent2.defaultValues();
         this.tableData1 = this.tableData1.filter((res: any) => res.index != value.item.index);
       }
     } else {
@@ -529,7 +532,7 @@ export class RecruitmentProcessComponent implements OnInit {
         this.apiService.apiDeleteRequest(deleteExperiance).subscribe(response => {
           this.spinner.hide();
           if (response.status === StatusCodes.pass) {
-            this.tableComponent.defaultValues();
+            this.tableComponent2.defaultValues();
             this.tableData1 = this.tableData1.filter((res: any) => res.index != item.index);
           }
         });
@@ -552,8 +555,8 @@ export class RecruitmentProcessComponent implements OnInit {
 
     formData = this.modelFormData.getRawValue();
     formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'dd-MM-yyyy') : '';
-    formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'dd-MM-yyyy') : '';
-    formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'dd-MM-yyyy') : '';
+    // formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'dd-MM-yyyy') : '';
+    // formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'dd-MM-yyyy') : '';
 
     const addCashBank = String.Join('/', this.apiConfigService.registerEmployeeR);
     this.apiService.apiPostRequest(addCashBank, formData).subscribe(
@@ -576,8 +579,8 @@ export class RecruitmentProcessComponent implements OnInit {
 
     formData = this.modelFormData.getRawValue();
     formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'yyyy-MM-dd') : '';
-    formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'yyyy-MM-dd') : '';
-    formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'yyyy-MM-dd') : '';
+    // formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'yyyy-MM-dd') : '';
+    // formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'yyyy-MM-dd') : '';
 
     this.apiService.apiUpdateRequest(addCashBank, formData).subscribe(
       response => {
