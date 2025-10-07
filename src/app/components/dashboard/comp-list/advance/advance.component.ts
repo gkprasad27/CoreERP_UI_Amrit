@@ -67,6 +67,11 @@ export class AdvanceComponent implements OnInit {
   //pipe = new DatePipe('en-US');
   //now = Date.now();
 
+  startYear: any[] = [new Date().getFullYear()-1, new Date().getFullYear()];
+  startMonth: any[] = [1,2,3,4,5,6,7,8,9,10,11,12];
+  endYear: any[] = [new Date().getFullYear()-1, new Date().getFullYear()];
+  endMonth: any[] = [1,2,3,4,5,6,7,8,9,10,11,12];
+
   constructor(
     private apiService: ApiService,
     private alertService: AlertService,
@@ -91,7 +96,12 @@ export class AdvanceComponent implements OnInit {
       approvedBy: [null],
       status: [null],
       balance: [null],
-      deductedAmount: [null]
+      deductedAmount: [null],
+
+      startMonth: [''],
+      startYear: [''],
+      endMonth: [''],
+      endYear: [''],
     });
 
 

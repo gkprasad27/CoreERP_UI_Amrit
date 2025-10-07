@@ -46,6 +46,78 @@
         </mat-form-field>
 
 
+        <mat-form-field  class="col-3">
+          <input matInput placeholder="{{'advance.status' | translate }}" formControlName="status" appFocusOnEnter tabIndex="3">
+        </mat-form-field>
+
+        <mat-form-field  class="col-3">
+          <input matInput type="number" placeholder="{{'advance.balance' | translate }}" formControlName="balance" appFocusOnEnter tabIndex="3">
+        </mat-form-field>
+
+        <mat-form-field  class="col-3">
+          <input matInput type="number" placeholder="{{'advance.deductedAmount' | translate }}" formControlName="deductedAmount" appFocusOnEnter tabIndex="3">
+        </mat-form-field>
+        
+                <mat-form-field class="col-3" >
+                    <mat-label [translate]="'advance.startYear'"></mat-label>
+                    <mat-select formControlName="startYear" appFocusOnEnter tabIndex="1">
+                        <mat-option readonly>None</mat-option>
+                        <mat-option *ngFor="let comp of startYear" [value]="comp">
+                            {{comp}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.startYear.valid && modelFormData.controls.startYear.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.startYear.valid  }"> This field is required
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field class="col-3" >
+                    <mat-label [translate]="'advance.startMonth'"></mat-label>
+                    <mat-select formControlName="startMonth" appFocusOnEnter tabIndex="1">
+                        <mat-option readonly>None</mat-option>
+                        <mat-option *ngFor="let comp of startMonth" [value]="comp">
+                            {{comp}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.startMonth.valid && modelFormData.controls.startMonth.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.startMonth.valid  }"> This field is required
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field class="col-3" >
+                    <mat-label [translate]="'advance.endYear'"></mat-label>
+                    <mat-select formControlName="endYear" appFocusOnEnter tabIndex="1">
+                        <mat-option readonly>None</mat-option>
+                        <mat-option *ngFor="let comp of endYear" [value]="comp">
+                            {{comp}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.endYear.valid && modelFormData.controls.endYear.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.endYear.valid  }"> This field is required
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field class="col-3" >
+                    <mat-label [translate]="'advance.endYear'"></mat-label>
+                    <mat-select formControlName="endYear" appFocusOnEnter tabIndex="1">
+                        <mat-option readonly>None</mat-option>
+                        <mat-option *ngFor="let comp of endYear" [value]="comp">
+                            {{comp}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.endYear.valid && modelFormData.controls.endYear.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.endYear.valid  }"> This field is required
+                    </mat-error>
+                </mat-form-field>
+
+
       </div>
       <mat-divider></mat-divider>
 
