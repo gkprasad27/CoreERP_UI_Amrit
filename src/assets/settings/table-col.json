@@ -2170,6 +2170,7 @@
   "CTCBreakup": {
     "title": "CTC Breakup",
     "companyCode": "Company Code",
+    "employeeName":"Employee Name",
     "empCode": "Emp Code",
     "effectFrom": "Date",
     "ctc": "CTC",
