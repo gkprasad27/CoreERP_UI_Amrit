@@ -42,15 +42,15 @@
               </mat-select>
             </mat-form-field> -->
 
-            <!-- <mat-form-field class="col-2">
+            <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.designationId'"></mat-label>
-              <mat-select formControlName="designationId" appFocusOnEnter tabIndex="5">
+              <mat-select formControlName="designation" appFocusOnEnter tabIndex="5">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let designation of designationsList" [value]="designation.designationId">
                   {{designation.designationName}}
                 </mat-option>
               </mat-select>
-            </mat-form-field> -->
+            </mat-form-field>
             <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.dob'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
@@ -99,6 +99,20 @@
               <mat-label [translate]="'recruitmentprocess.email'"></mat-label>
               <input matInput formControlName="email" appFocusOnEnter tabIndex="13">
             </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.interviewDate'"></mat-label>
+              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker23"
+                [nonEditable]="picker23" formControlName="interviewDate" appFocusOnEnter tabIndex="14">
+              <mat-datepicker-toggle matSuffix [for]="picker23"></mat-datepicker-toggle>
+              <mat-datepicker #picker23></mat-datepicker>
+            </mat-form-field>
+             <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.selectedDate'"></mat-label>
+              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker29"
+                [nonEditable]="picker29" formControlName="selectedDate" appFocusOnEnter tabIndex="15">
+              <mat-datepicker-toggle matSuffix [for]="picker29"></mat-datepicker-toggle>
+              <mat-datepicker #picker29></mat-datepicker>
+            </mat-form-field>
             <!-- <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.joiningDate'"></mat-label>
               <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
@@ -116,13 +130,21 @@
             <!-- <mat-slide-toggle class="col-2 d-flex" formControlName="isActive" appFocusOnEnter tabIndex="16">
               {{ 'recruitmentprocess.isActive' | translate }}
             </mat-slide-toggle> -->
+             <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.interViewPerson'"></mat-label>
+              <input matInput formControlName="interViewPerson" appFocusOnEnter tabIndex="16">
+            </mat-form-field>
+             <mat-form-field class="col-2">
+              <mat-label [translate]="'recruitmentprocess.selectedPerson'"></mat-label>
+              <input matInput formControlName="selectedPerson" appFocusOnEnter tabIndex="17">
+            </mat-form-field>
             <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.narration'"></mat-label>
-              <input matInput formControlName="narration" appFocusOnEnter tabIndex="17">
+              <input matInput formControlName="narration" appFocusOnEnter tabIndex="18">
             </mat-form-field>
             <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.bloodGroup'"></mat-label>
-              <mat-select formControlName="bloodGroup" appFocusOnEnter tabIndex="18">
+              <mat-select formControlName="bloodGroup" appFocusOnEnter tabIndex="19">
                 <mat-option>None</mat-option>
                 <mat-option value="O+"> O+</mat-option>
                 <mat-option value="O-"> O-</mat-option>
@@ -136,7 +158,7 @@
             </mat-form-field>
             <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.passportNo'"></mat-label>
-              <input matInput formControlName="passportNo" appFocusOnEnter tabIndex="19">
+              <input matInput formControlName="passportNo" appFocusOnEnter tabIndex="20">
             </mat-form-field>
             <!-- <mat-form-field class="col-2">
               <mat-label [translate]="'recruitmentprocess.accessCardNumber'"></mat-label>

@@ -101,6 +101,11 @@ export class RecruitmentProcessComponent implements OnInit {
       phoneNumber: [''],
       mobileNumber: ['', Validators.required],
       email: [''],
+      interviewDate: [''],
+      selectedDate: [''],
+      interViewPerson: [''],
+      selectedPerson: [''],
+      designation: [''],
       // joiningDate: ['', Validators.required],
       // releavingDate: [''], //
       // isActive: ['true'],
@@ -203,9 +208,9 @@ export class RecruitmentProcessComponent implements OnInit {
     this.formData = { ...this.addOrEditService.editData };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
-      // this.modelFormData.patchValue({
-      //   designationId: this.formData.item.designationId ? +this.formData.item.designationId : 0
-      // });
+      this.modelFormData.patchValue({
+        designation: this.formData.item.designation ? +this.formData.item.designation : 0
+      });
       this.modelFormData.controls['empCode'].disable();
       // this.modelFormData.controls['employeeId'].disable();
     }
@@ -555,6 +560,8 @@ export class RecruitmentProcessComponent implements OnInit {
 
     formData = this.modelFormData.getRawValue();
     formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'dd-MM-yyyy') : '';
+    formData.interviewDate = this.modelFormData.get('interviewDate').value ? this.datepipe.transform(this.modelFormData.get('interviewDate').value, 'dd-MM-yyyy') : '';
+    formData.selectedDate = this.modelFormData.get('selectedDate').value ? this.datepipe.transform(this.modelFormData.get('selectedDate').value, 'dd-MM-yyyy') : '';
     // formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'dd-MM-yyyy') : '';
     // formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'dd-MM-yyyy') : '';
 
@@ -579,6 +586,8 @@ export class RecruitmentProcessComponent implements OnInit {
 
     formData = this.modelFormData.getRawValue();
     formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'yyyy-MM-dd') : '';
+    formData.interviewDate = this.modelFormData.get('interviewDate').value ? this.datepipe.transform(this.modelFormData.get('interviewDate').value, 'yyyy-MM-dd') : '';
+    formData.selectedDate = this.modelFormData.get('selectedDate').value ? this.datepipe.transform(this.modelFormData.get('selectedDate').value, 'yyyy-MM-dd') : '';
     // formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'yyyy-MM-dd') : '';
     // formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'yyyy-MM-dd') : '';
 
