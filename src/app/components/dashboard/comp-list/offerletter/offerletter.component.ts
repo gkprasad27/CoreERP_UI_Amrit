@@ -22,6 +22,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { StatusCodes } from '../../../../enums/common/common';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-offerletter',
@@ -31,6 +32,8 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
   providers: [DatePipe]
 })
 export class OfferletterComponent implements OnInit {
+
+  newDate = new Date();
 
   modelFormData: FormGroup;
   isSubmitted = false;
@@ -79,18 +82,22 @@ export class OfferletterComponent implements OnInit {
     this.allApis();
   }
 
-
   allApis() {
     let obj = JSON.parse(localStorage.getItem("user"));
     const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
     const getDesignationsList = String.Join('/', this.apiConfigService.getDesignationsList);
+    const getCompanysList = this.formData.item ? String.Join('/', this.apiConfigService.getCompanysList) : of(null); // Emits null if optional
+    const getEmployeeListE = this.formData.item ? String.Join('/', this.apiConfigService.getEmployeeListE, obj.companyCode) : of(null); // Emits null if optional
 
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
         this.apiService.apiGetRequest(getEmployeeList),
         this.apiService.apiGetRequest(getDesignationsList),
-      ]).subscribe(([employeeList, designationsList]) => {
+                this.apiService.apiGetRequest(getCompanysList),
+
+        this.apiService.apiGetRequest(getEmployeeListE)
+      ]).subscribe(([employeeList, designationsList, companyList, employeeListE]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(employeeList) && employeeList.status === StatusCodes.pass) {
@@ -105,10 +112,22 @@ export class OfferletterComponent implements OnInit {
           }
         }
 
+        if (!this.commonService.checkNullOrUndefined(companyList) && companyList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(companyList.response)) {
+            const companiesList = companyList.response['companiesList'];
+            this.formData.item.companyName = companiesList.find(x => x.companyCode === obj.companyCode)?.companyName || '';
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(employeeListE) && employeeListE.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(employeeListE.response)) {
+            // this.employeeListE = employeeListE.response['employeeListE'];
+          }
+        }
+
       });
     });
   }
-
 
   getEmploeebycode(value) {
     if (!this.commonService.checkNullOrUndefined(value) && value != '') {
@@ -155,6 +174,18 @@ export class OfferletterComponent implements OnInit {
 
   cancel() {
     this.dialogRef.close();
+  }
+
+  offerLetterO: any;
+  print() {
+    this.offerLetterO = this.modelFormData.value;
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('offerLetterO').innerHTML;
+      w.document.body.innerHTML = html;
+      this.data = null;
+      w.print();
+    }, 1000);
   }
 
 }

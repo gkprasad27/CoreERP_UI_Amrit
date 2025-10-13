@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { String } from 'typescript-string-operations';
 
@@ -11,7 +11,6 @@ import { TableComponent } from '../../../reuse-components/table/table.component'
 import { AlertService } from '../../../services/alert.service';
 import { SnackBar } from '../../../enums/common/common';
 import { CompListService } from './comp-list.service';
-import { RuntimeConfigService } from '../../../services/runtime-config.service';
 import { ApiConfigService } from '../../../services/api-config.service';
 import { AddOrEditService } from './add-or-edit.service';
 import { CommonService } from '../../../services/common.service';

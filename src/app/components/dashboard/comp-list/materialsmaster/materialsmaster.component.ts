@@ -8,7 +8,6 @@ import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -19,8 +18,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { StatusCodes } from '../../../../enums/common/common';
 import { AddOrEditService } from '../add-or-edit.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { StandardRateOComponent } from './standard-rate-o/standard-rate-o.component';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -194,9 +192,9 @@ export class MaterialMasterComponent implements OnInit, OnDestroy {
       this.materialCode = this.formData.item.materialCode
 
       this.modelFormData.patchValue({
-        uom: this.formData.item.uom ? +this.formData.item.uom : null,
-        ouom: this.formData.item.ouom ? +this.formData.item.ouom : null,
-        netWeightUom: this.formData.item.netWeightUom ? +this.formData.item.netWeightUom : null,
+        // uom: this.formData.item.uom ? +this.formData.item.uom : null,
+        // ouom: this.formData.item.ouom ? +this.formData.item.ouom : null,
+        // netWeightUom: this.formData.item.netWeightUom ? +this.formData.item.netWeightUom : null,
         modelPattern: this.formData.item.modelPattern ? [{ description: this.formData.item.modelPattern }] : null
       })
       this.modelFormData.controls['materialCode'].disable();

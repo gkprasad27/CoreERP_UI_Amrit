@@ -1,3 +1,35 @@
+<div style="margin: 10px;" id="offerLetterO" *ngIf="offerLetterO">
+
+    <pre>
+
+{{ newDate | date:'MM/dd/yyyy' }}
+
+Candidate First and Last Name
+Candidate Address
+City, State, Zip
+
+ 
+Dear {{modelFormData.value?.empName}},
+
+ 
+We are pleased to offer you the {{formData.item?.empName}} position of {{ formData.item?.jobType }} at {{ formData.item?.jobType }} with a start date of {{ formData.item?.effectiveFrom }}. We believe your skills and experience are an excellent match for our company.
+ 
+ The annual starting salary for this position is {{formData.item?.ctc}}. In addition to this starting salary, we’re offering you [discuss stock options, bonuses, commission structures, etc. — if applicable].
+ 
+Your employment with {{ formData.item.companyName }} will be on an at-will basis, which means you and the company are free to terminate the employment relationship at any time for any reason. This letter is not a contract or guarantee of employment for a definitive period of time.
+ 
+As an employee of {{ formData.item.companyName }}, you are also eligible for our benefits program, which includes [medical insurance, 401(k), vacation time, etc.], and other benefits which will be described in more detail in the [employee handbook, orientation package, etc.].
+ 
+Please confirm your acceptance of this offer by signing and returning this letter by {{formData.item?.offerValid}}.
+
+We are excited to have you join our team! If you have any questions, please feel free to reach out at any time.
+ 
+Sincerely,
+{{ formData.item.companyName }}
+
+ </pre>
+</div>
+
 <div class="position-relative popup-class">
     <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
         <span> {{'offerletter.title' | translate }} </span>
@@ -9,14 +41,18 @@
 
             <div class="row">
 
-                <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
-                    [class.filled]="modelFormData.value?.empCode?.length > 0" >
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-3" *ngIf="!formData.item"
+                    [class.filled]="modelFormData.value?.empCode?.length > 0">
                     <label> {{ 'applyod.empCode' | translate }} </label>
                     <input matInput placeholder=" " (typeaheadOnSelect)="onSearchChange($event)" class="typeahead"
                         (input)="getEmploeebycode($event.target.value)" [typeaheadOptionsLimit]="100000"
-                        [typeahead]="getEmploeebyCodeArray" [typeaheadWaitMs]="200" typeaheadOptionField='empCode' formControlName="empCode"
-                        appFocusOnEnter tabIndex="1">
+                        [typeahead]="getEmploeebyCodeArray" [typeaheadWaitMs]="200" typeaheadOptionField='empCode'
+                        formControlName="empCode" appFocusOnEnter tabIndex="1">
                 </div>
+                <mat-form-field class="col-3" *ngIf="formData.item">
+                    <mat-label [translate]="'offerletter.empCode'"></mat-label>
+                    <input matInput readonly formControlName="empCode" appFocusOnEnter tabIndex="2">
+                </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'offerletter.empName'"></mat-label>
@@ -106,11 +142,13 @@
 
     </mat-card-content>
     <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button type="button" class="button-color-bule text-white mx-1" (click)="print()">
+            {{ 'COMMON.PRINT' | translate }}
+        </button>
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
             {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-
             {{ 'COMMON.SAVE' | translate }}
         </button>
     </div>
