@@ -151,8 +151,8 @@ export class VehicleRequisitionsComponent implements OnInit {
 
   ///gettting NoofdaysCount code
   NoofdaysCount() {
-    var date1 = this.pipe.transform(this.modelFormData.get('leaveFrom').value, 'dd-MM-yyyy');
-    var date2 = this.pipe.transform(this.modelFormData.get('leaveTo').value, 'dd-MM-yyyy');
+    var date1 = this.pipe.transform(this.modelFormData.get('leaveFrom').value, 'MM-dd-yyyy');
+    var date2 = this.pipe.transform(this.modelFormData.get('leaveTo').value, 'MM-dd-yyyy');
 
     var session1 = this.modelFormData.get('session1').value
     var session2 = this.modelFormData.get('session2').value

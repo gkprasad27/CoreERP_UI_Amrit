@@ -550,9 +550,9 @@ export class EmployeeComponent implements OnInit {
     let formData: any = {};
 
     formData = this.modelFormData.getRawValue();
-    formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'dd-MM-yyyy') : '';
-    formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'dd-MM-yyyy') : '';
-    formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'dd-MM-yyyy') : '';
+    formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'MM-dd-yyyy') : '';
+    formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'MM-dd-yyyy') : '';
+    formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'MM-dd-yyyy') : '';
 
     const addCashBank = String.Join('/', this.apiConfigService.registerEmployee);
     this.apiService.apiPostRequest(addCashBank, formData).subscribe(
@@ -561,7 +561,7 @@ export class EmployeeComponent implements OnInit {
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Employee Created Successfully..', Static.Close, SnackBar.success);
-            // this.router.navigate(['/dashboard/master/employee']);
+            this.router.navigate(['/dashboard/master/employee']);
           }
           this.spinner.hide();
         }

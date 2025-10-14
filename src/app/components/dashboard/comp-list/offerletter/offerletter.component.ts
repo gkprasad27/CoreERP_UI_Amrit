@@ -87,17 +87,17 @@ export class OfferletterComponent implements OnInit {
     const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
     const getDesignationsList = String.Join('/', this.apiConfigService.getDesignationsList);
     const getCompanysList = this.formData.item ? String.Join('/', this.apiConfigService.getCompanysList) : of(null); // Emits null if optional
-    const getEmployeeListE = this.formData.item ? String.Join('/', this.apiConfigService.getEmployeeListE, obj.companyCode) : of(null); // Emits null if optional
+    const getAddressList = this.formData.item ? String.Join('/', this.apiConfigService.getAddressList, '210') : of(null);
 
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
         this.apiService.apiGetRequest(getEmployeeList),
         this.apiService.apiGetRequest(getDesignationsList),
-                this.apiService.apiGetRequest(getCompanysList),
+        this.apiService.apiGetRequest(getCompanysList),
 
-        this.apiService.apiGetRequest(getEmployeeListE)
-      ]).subscribe(([employeeList, designationsList, companyList, employeeListE]) => {
+        this.apiService.apiGetRequest(getAddressList)
+      ]).subscribe(([employeeList, designationsList, companyList, addressList]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(employeeList) && employeeList.status === StatusCodes.pass) {
@@ -119,9 +119,11 @@ export class OfferletterComponent implements OnInit {
           }
         }
 
-        if (!this.commonService.checkNullOrUndefined(employeeListE) && employeeListE.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(employeeListE.response)) {
-            // this.employeeListE = employeeListE.response['employeeListE'];
+        if (!this.commonService.checkNullOrUndefined(addressList) && addressList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(addressList.response)) {
+            if(addressList.response['AddressList']) {
+              this.formData.item.address = addressList.response['AddressList'];
+            }
           }
         }
 

@@ -162,8 +162,8 @@ export class ApplyodComponent implements OnInit {
 
   ///gettting NoofdaysCount code
   NoofdaysCount() {
-    var date1 = this.pipe.transform(this.modelFormData.get('fromDate').value, 'dd-MM-yyyy');
-    var date2 = this.pipe.transform(this.modelFormData.get('toDate').value, 'dd-MM-yyyy');
+    var date1 = this.pipe.transform(this.modelFormData.get('fromDate').value, 'MM-dd-yyyy');
+    var date2 = this.pipe.transform(this.modelFormData.get('toDate').value, 'MM-dd-yyyy');
 
     var session1 = null;
     var session2 = null;

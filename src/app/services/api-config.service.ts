@@ -613,6 +613,6 @@ export class ApiConfigService {
 
    // 
    getEmploeebycode = `${environment.baseUrl}Recruitment/GetEmploeebycode`;
-   getEmployeeListE = `${environment.baseUrl}Employee/GetEmployeeList`;
+   getEmployee = `${environment.baseUrl}Employee/GetEmployee`;
 
 }

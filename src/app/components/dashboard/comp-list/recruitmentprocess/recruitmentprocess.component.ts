@@ -559,11 +559,11 @@ export class RecruitmentProcessComponent implements OnInit {
     let formData: any = {};
 
     formData = this.modelFormData.getRawValue();
-    formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'dd-MM-yyyy') : '';
-    formData.interviewDate = this.modelFormData.get('interviewDate').value ? this.datepipe.transform(this.modelFormData.get('interviewDate').value, 'dd-MM-yyyy') : '';
-    formData.selectedDate = this.modelFormData.get('selectedDate').value ? this.datepipe.transform(this.modelFormData.get('selectedDate').value, 'dd-MM-yyyy') : '';
-    // formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'dd-MM-yyyy') : '';
-    // formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'dd-MM-yyyy') : '';
+    formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'MM-dd-yyyy') : '';
+    formData.interviewDate = this.modelFormData.get('interviewDate').value ? this.datepipe.transform(this.modelFormData.get('interviewDate').value, 'MM-dd-yyyy') : '';
+    formData.selectedDate = this.modelFormData.get('selectedDate').value ? this.datepipe.transform(this.modelFormData.get('selectedDate').value, 'MM-dd-yyyy') : '';
+    // formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'MM-dd-yyyy') : '';
+    // formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'MM-dd-yyyy') : '';
 
     const addCashBank = String.Join('/', this.apiConfigService.registerEmployeeR);
     this.apiService.apiPostRequest(addCashBank, formData).subscribe(

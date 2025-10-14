@@ -4,9 +4,9 @@
 
 {{ newDate | date:'MM/dd/yyyy' }}
 
-Candidate First and Last Name
-Candidate Address
-City, State, Zip
+{{ modelFormData.value?.empName }},
+{{ formData.item.address?.pAddress }} {{ formData.item.address?.pAddress1 }},
+{{ formData.item.address?.pCity }}, {{ formData.item.address?.pState }}, {{ formData.item.address?.pZip }}
 
  
 Dear {{modelFormData.value?.empName}},
