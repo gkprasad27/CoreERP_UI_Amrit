@@ -392,7 +392,7 @@ export class GoodsissueComponent implements OnInit {
               if (this.employeesList.length && this.formData.value.storesPerson) {
                 const storeObj = this.employeesList.find((c: any) => c.id == this.formData.value.storesPerson);
                 this.formData.patchValue({
-                  storesPersonName: storeObj.text
+                  storesPersonName: storeObj?.text
                 })
               }
               // this.formData.patchValue({
@@ -505,7 +505,7 @@ export class GoodsissueComponent implements OnInit {
               if (this.formData.value.storesPerson) {
                 const storeObj = this.employeesList.find((c: any) => c.id == this.formData.value.storesPerson);
                 this.formData.patchValue({
-                  storesPersonName: storeObj.text
+                  storesPersonName: storeObj?.text
                 })
               }
             }

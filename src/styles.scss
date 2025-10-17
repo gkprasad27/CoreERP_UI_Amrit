@@ -427,6 +427,7 @@ mat-tab-header {
   ng-multiselect-dropdown {
     .multiselect-dropdown {
       .dropdown-btn {
+        overflow: scroll;
         height: 35px !important;
         padding: 0px !important;
         border: none !important;
@@ -471,5 +472,6 @@ typeahead-container {
   background-color: reuse.$bg-color !important;
   background-image: reuse.$bg-color-image !important;
 }
+
 
    
