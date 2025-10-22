@@ -125,6 +125,17 @@ export class PurchaseOrderComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  dropdownSettings3: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'materialCode',
+    textField: 'materialName',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
 
   constructor(
     public commonService: CommonService,
@@ -218,6 +229,7 @@ export class PurchaseOrderComponent implements OnInit {
       rate: [{ value:'', disabled: true }],
       discount: [''],
       availableQTY: [''],
+      givenQty: [''],
       // purchaseOrderNumber: [''],
       cgst: 0,
       sgst: 0,
@@ -829,6 +841,7 @@ export class PurchaseOrderComponent implements OnInit {
                   { id: 'View1', type: 'view' }
                 ];
                 s.changed = false;
+                s.givenQty = s.qty;
                 s.poQty = s.poQty ? s.poQty : 0;
                 s.supplierCode = s.supplierCode ? s.supplierCode : '';
                 s.index = index + 1;
@@ -900,7 +913,7 @@ export class PurchaseOrderComponent implements OnInit {
       checkqty = this.formData1.value.poQty ? (this.formData1.value.soQty - this.formData1.value.poQty) : this.formData1.value.soQty
     // }
 
-    if (this.formData1.value.qty > checkqty) {
+    if ((this.formData1.value.givenQty !==  this.formData1.value.qty) && (this.formData1.value.qty > checkqty)) {
       this.formData1.patchValue({
         qty: 0,
       });
@@ -1099,7 +1112,7 @@ export class PurchaseOrderComponent implements OnInit {
   // }
 
   materialCodeChange() {
-    const obj = this.materialCodeList.find((m: any) => m.materialCode == this.formData1.value.materialCode);
+    const obj = this.materialCodeList.find((m: any) => m.materialCode == this.formData1.value.materialCode[0].materialCode);
     if (obj) {
       this.formData1.patchValue(obj);
     } else {

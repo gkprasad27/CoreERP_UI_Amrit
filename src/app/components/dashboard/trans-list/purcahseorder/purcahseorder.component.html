@@ -1,4 +1,5 @@
 <div style="margin: 10px;" id="printData" *ngIf="data">
+    <div style="border: 2px solid;">
     <div style="display: flex;">
         <!-- Display this image only if the companyName is 'AMT POWER TRANSMISSION' -->
         <img *ngIf="data?.headingObj?.company === '1000'" src="/assets/images/header.jpg"
@@ -443,9 +444,7 @@
     </div>
 
 
-    <div style="text-align: center;">
-
-    </div>
+   </div>
 
 </div>
 
@@ -638,16 +637,14 @@
 
                 <div class="row p-1">
 
-                    <mat-form-field class="col-3" *ngIf="routeEdit && formData1.value.type == 'add'">
-                        <mat-label>{{ 'purchaseorder.materialCode' | translate }}</mat-label>
-                        <mat-select formControlName="materialCode" appFocusOnEnter tabIndex="15"
-                            (selectionChange)="materialCodeChange()">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let material of materialCodeList" [value]="material.materialCode">
-                                {{material.materialCode}} -- {{material.materialName}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <div class="multiselect-dropdown-list floating-dropdown col-3"  *ngIf="routeEdit && formData1.value.type == 'add'"
+                        [class.filled]="formData1.value?.materialCode?.length > 0">
+                        <label> {{ 'purchaseorder.materialCode' | translate }} </label>
+                        <ng-multiselect-dropdown placeholder=" " formControlName="materialCode"
+                            [settings]="dropdownSettings3" [data]="materialCodeList">
+                        </ng-multiselect-dropdown>
+                    </div>
+
                     <mat-form-field class="col-3" *ngIf="routeEdit && formData1.value.type == 'edit'">
                         <mat-label>{{ 'purchaseorder.materialCode' | translate }}</mat-label>
                         <input matInput type="text" readonly formControlName="materialCode" appFocusOnEnter
@@ -700,9 +697,9 @@
                             (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
                             {{ 'COMMON.UPDATE' | translate }}
                         </button>
-                        <!-- <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
+                        <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
                             {{ 'COMMON.RESET' | translate }}
-                        </button> -->
+                        </button>
 
                     </div>
 
