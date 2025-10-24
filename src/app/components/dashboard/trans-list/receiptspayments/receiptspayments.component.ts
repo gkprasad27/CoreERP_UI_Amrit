@@ -95,7 +95,7 @@ export class ReceiptspaymentsComponent implements OnInit {
   formDataGroup() {
     this.formData = this.formBuilder.group({
       company: [null, [Validators.required]],
-      branch: [null, [Validators.required]],
+      // branch: [null, [Validators.required]],
       voucherClass: [null],
       voucherType: [null, [Validators.required]],
       // voucherDate: [new Date()],
