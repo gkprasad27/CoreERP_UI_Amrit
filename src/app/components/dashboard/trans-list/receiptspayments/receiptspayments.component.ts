@@ -344,7 +344,7 @@ export class ReceiptspaymentsComponent implements OnInit {
     this.tableData = null;
     let data = [];
     const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('partyAccount').value)) {
+    if (!this.commonService.checkNullOrUndefined(this.formData.get('partyAccount').value) && bObj) {
       data = this.functionaldeptList.filter(resp => resp.partyAccount == bObj.id);
     }
     if (data.length) {
