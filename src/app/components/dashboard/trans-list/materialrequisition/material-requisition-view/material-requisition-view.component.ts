@@ -7,10 +7,9 @@ import { CommonService } from '../../../../../services/common.service';
 import { ApiConfigService } from '../../../../../services/api-config.service';
 import { ApiService } from '../../../../../services/api.service';
 import { AlertService } from '../../../../../services/alert.service';
-import { SnackBar, StatusCodes } from '../../../../../enums/common/common';
-import { Static } from '../../../../../enums/common/static';
+import { StatusCodes } from '../../../../../enums/common/common';
 
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,10 +23,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { TableComponent } from '../../../../../reuse-components/table/table.component';
 import { NonEditableDatepicker } from '../../../../../directives/format-datepicker';
 import { MatButtonModule } from '@angular/material/button';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-material-requisition-view',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, NgMultiSelectDropDownModule, TranslateModule, TableComponent, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './material-requisition-view.component.html',
   styleUrls: ['./material-requisition-view.component.scss']
 })
@@ -36,6 +36,13 @@ export class MaterialRequisitionViewComponent {
 
   @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
 
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'text',
+    textField: 'text',
+    enableCheckAll: true,
+    allowSearchFilter: true
+  };
 
   formData: FormGroup;
 
@@ -54,7 +61,6 @@ export class MaterialRequisitionViewComponent {
     public dialogRef: MatDialogRef<MaterialRequisitionViewComponent>,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
-
       this.formDataGroup();
   }
 
@@ -73,8 +79,8 @@ export class MaterialRequisitionViewComponent {
       productionTargetDate: [null],
       highlight: false,
       action: [
-  { id: 'Edit', type: 'edit' }
-],
+        { id: 'Edit', type: 'edit' }
+      ],
       index: 0
     });
   }
@@ -98,9 +104,9 @@ export class MaterialRequisitionViewComponent {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               response.response.tagsDetailStatus.forEach((d: any, index: number) => {
                 d.action = [
-  { id: 'Edit', type: 'edit' }
-],
-                  d.index = index + 1
+                  { id: 'Edit', type: 'edit' }
+                ],
+                d.index = index + 1
               })
               this.tableData = res.response.tagsDetailStatus;
             }
@@ -115,6 +121,9 @@ export class MaterialRequisitionViewComponent {
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
     } else {
       this.formData.patchValue(value.item);
+      this.formData.patchValue({
+        allocatedPerson: [{ text: value.item.allocatedPerson }],
+      })
     }
   }
 
@@ -134,8 +143,8 @@ export class MaterialRequisitionViewComponent {
     this.formData.patchValue({
       index: 0,
       action: [
-  { id: 'Edit', type: 'edit' }
-]
+        { id: 'Edit', type: 'edit' }
+      ]
     });
   };
 
@@ -147,16 +156,18 @@ export class MaterialRequisitionViewComponent {
       type: '',
       highlight: true
     })
+    const formValue = this.formData.value;
+    formValue.allocatedPerson = formValue.allocatedPerson && formValue.allocatedPerson.length ? formValue.allocatedPerson[0].text : null;
     let data: any = this.tableData;
     this.tableData = null;
     this.tableComponent.defaultValues();
-    if (this.formData.value.index == 0) {
+    if (formValue.index == 0) {
       this.formData.patchValue({
         index: data ? (data.length + 1) : 1
       });
-      data = [this.formData.value, ...data];
+      data = [formValue, ...data];
     } else {
-      data = data.map((res: any) => res = res.index == this.formData.value.index ? { ...res, ...this.formData.value } : res);
+      data = data.map((res: any) => res = res.index == formValue.index ? { ...res, ...formValue } : res);
     }
     setTimeout(() => {
       this.tableData = data;

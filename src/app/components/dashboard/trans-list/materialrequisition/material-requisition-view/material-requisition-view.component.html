@@ -111,15 +111,14 @@
 
             <div class="row p-1">
 
-                <mat-form-field class="col-2">
-                    <mat-label>{{'materialrequisition.allocatedPerson' | translate }}</mat-label>
-                    <mat-select formControlName="allocatedPerson" appFocusOnEnter tabIndex="1">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let emp of data.employeesList" [value]="emp.text">
-                            {{emp.id}}- {{emp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <div class="multiselect-dropdown-list floating-dropdown col-2" *ngIf="data.employeesList && data.employeesList.length"
+                [class.filled]="formData.value?.allocatedPerson?.length > 0" >
+                    <label> {{ 'materialrequisition.allocatedPerson' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="allocatedPerson"
+                    [settings]="dropdownSettings" [data]="data.employeesList">
+                    </ng-multiselect-dropdown>
+                </div>
+
                 <mat-form-field class="col-2">
                     <mat-label>{{'materialrequisition.mechine' | translate }}</mat-label>
                     <mat-select formControlName="mechine" appFocusOnEnter tabIndex="2">

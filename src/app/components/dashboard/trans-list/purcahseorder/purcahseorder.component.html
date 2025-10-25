@@ -208,8 +208,7 @@
                     </td>
                     <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
-                        <ng-container *ngIf="row.qty"> {{ row.qty *
-                            row.netWeight}} </ng-container>
+                        <ng-container *ngIf="row.qty"> {{ (row.qty * row.netWeight).toFixed(2) }} </ng-container>
                     </td>
                     <td
                         style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
@@ -232,8 +231,7 @@
                     </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                        {{
-                        data.headingObj1.totalQty }}
+                        {{ data.headingObj1.totalQty }}
                     </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
@@ -245,8 +243,7 @@
                     </td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                        {{
-                        data.headingObj1.totalWeight }}</td>
+                        {{ data.headingObj1.totalWeight }}</td>
                     <td
                         style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
                     </td>

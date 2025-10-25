@@ -1053,6 +1053,7 @@
     "customerName": "Customer Name",
     "branch": "Branch",
     "voucherNumber": "Voucher Number",
+    "referenceNumber": "Reference No",
     "voucherType": "Voucher Type",
     "voucherDate": "Voucher Date",
     "postingDate": "Posting Date",

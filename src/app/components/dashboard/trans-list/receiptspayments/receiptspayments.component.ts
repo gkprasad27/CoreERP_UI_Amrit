@@ -350,6 +350,7 @@ export class ReceiptspaymentsComponent implements OnInit {
     if (data.length) {
       data.forEach((s: any, index: number) => {
         s.partyInvoiceNo = s.partyInvoiceNo ? s.partyInvoiceNo : '';
+        s.referenceNumber = s.referenceNumber ? s.referenceNumber : '';
         s.partyInvoiceDate = s.partyInvoiceDate ? s.partyInvoiceDate : '';
         s.dueDate = s.dueDate ? s.dueDate : '';
         s.totalAmount = s.totalAmount ? s.totalAmount : 0;
