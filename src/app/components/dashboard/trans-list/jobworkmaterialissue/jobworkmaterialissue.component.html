@@ -437,15 +437,15 @@
                 <div class="multiselect-dropdown-list floating-dropdown col-3"
                     [class.filled]="formData.value?.vendor?.length > 0">
                     <label> {{ 'jobworkmaterialissue.vendor' | translate }} </label>
-                    <ng-multiselect-dropdown placeholder=" " formControlName="vendor" (onSelect)="vendorChange($event)"
-                        [settings]="dropdownSettings" [data]="customerList">
+                    <ng-multiselect-dropdown placeholder=" " [disabled]="routeEdit != ''"  formControlName="vendor" (onSelect)="vendorChange($event)"
+                        [settings]="dropdownSettings" [data]="customerList" appFocusOnEnter tabIndex="3">
                     </ng-multiselect-dropdown>
                 </div>
 
                 <div id="sale" class="multiselect-dropdown-list floating-dropdown col-3"
                     [class.filled]="formData.value?.saleOrderNo?.length > 0" >
                     <label> {{ 'jobworkmaterialissue.saleOrderNo' | translate }} </label>
-                    <ng-multiselect-dropdown placeholder=" " formControlName="saleOrderNo"
+                    <ng-multiselect-dropdown placeholder=" " [disabled]="routeEdit != ''" formControlName="saleOrderNo"
                         (onSelect)="getSaleOrderDetail()" [settings]="dropdownSettings3" [data]="qnoList"
                         appFocusOnEnter tabIndex="4">
                     </ng-multiselect-dropdown>
@@ -468,18 +468,18 @@
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'jobworkmaterialissue.deliveryDate'"></mat-label>
                     <input matInput [matDatepicker]="picker3"
-                        [nonEditable]="picker3" formControlName="deliveryDate" appFocusOnEnter tabIndex="6">
+                        [nonEditable]="picker3" formControlName="deliveryDate" appFocusOnEnter tabIndex="7">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'jobworkmaterialissue.createdBy'"></mat-label>
-                    <input matInput type="text" formControlName="createdBy" appFocusOnEnter tabIndex="7">
+                    <input matInput type="text" formControlName="createdBy" appFocusOnEnter tabIndex="8">
                 </mat-form-field>
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'jobworkmaterialissue.contactNo'"></mat-label>
-                    <input matInput type="text" formControlName="contactNo" appFocusOnEnter tabIndex="8">
+                    <input matInput type="text" formControlName="contactNo" appFocusOnEnter tabIndex="9">
                 </mat-form-field>
 
 
@@ -510,26 +510,31 @@
 
                 <div class="row p-1">
 
-                    <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="formData1.value?.materialCode?.length > 0">
+                    <!-- <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="formData1.value?.materialCode?.length > 0">
                         <label [translate]="'jobworkmaterialissue.materialCode'"></label>
                         <input placeholder=" "
-                            formControlName="materialCode" [typeaheadOptionsLimit]="100000" [typeahead]="mmasterListData" typeaheadOptionField='id'
+                            formControlName="materialCode" [typeaheadOptionsLimit]="100000" [typeahead]="materialList" typeaheadOptionField='id'
                             appFocusOnEnter tabIndex="9" class="form-control typeahead"
                             [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="materialCodeChange()"
                             (input)="materialChange()">
                         <ng-template #customItemTemplate let-model="item">
                             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                         </ng-template>
-                    </div>
+                    </div> -->
+                    
+                    <mat-form-field class="col-3">
+                        <mat-label [translate]="'jobworkmaterialissue.materialCode'"></mat-label>
+                        <input matInput type="text" readonly formControlName="materialCode" appFocusOnEnter tabIndex="10">
+                    </mat-form-field>
 
                     <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.stockQty'"></mat-label>
-                        <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="10">
+                        <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="11">
                     </mat-form-field>
 
                     <mat-form-field class="col-3">
                         <mat-label>{{ 'jobworkmaterialissue.taxCode' | translate }}</mat-label>
-                        <mat-select formControlName="taxCode" appFocusOnEnter tabIndex="11">
+                        <mat-select formControlName="taxCode" appFocusOnEnter tabIndex="12">
                             <mat-option>None</mat-option>
                             <mat-option *ngFor="let tax of taxCodeList" [value]="tax.taxRateCode">
                                 {{tax.description}}
@@ -539,22 +544,22 @@
 
                     <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.qty'"></mat-label>
-                        <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="12">
+                        <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="13">
                     </mat-form-field>
 
                     <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.netWeight'"></mat-label>
-                        <input matInput type="number" formControlName="netWeight" appFocusOnEnter tabIndex="20">
+                        <input matInput type="number" formControlName="netWeight" appFocusOnEnter tabIndex="14">
                     </mat-form-field>
 
                     <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.rate'"></mat-label>
-                        <input matInput type="number" formControlName="rate" appFocusOnEnter tabIndex="13">
+                        <input matInput type="number" formControlName="rate" appFocusOnEnter tabIndex="15">
                     </mat-form-field>
 
                     <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.discount'"></mat-label>
-                        <input matInput type="number" formControlName="discount" appFocusOnEnter tabIndex="14"
+                        <input matInput type="number" formControlName="discount" appFocusOnEnter tabIndex="16"
                             (keypress)="commonService.numberOnly($event)" maxlength="2">
                     </mat-form-field>
 
@@ -564,7 +569,7 @@
                     <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.deliveryDate'"></mat-label>
                         <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker13"
-                            [nonEditable]="picker13" formControlName="deliveryDate" appFocusOnEnter tabIndex="15">
+                            [nonEditable]="picker13" formControlName="deliveryDate" appFocusOnEnter tabIndex="17">
                         <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
                         <mat-datepicker #picker13></mat-datepicker>
                     </mat-form-field>

@@ -2,7 +2,7 @@ import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { AlertService } from '../../../../services/alert.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -21,12 +21,14 @@ import { ApiService } from '../../../../services/api.service';
 import { String } from 'typescript-string-operations';
 import { CommonService } from '../../../../services/common.service';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { AddOrEditService } from '../add-or-edit.service';
 
 @Component({
   selector: 'openingBalance',
   imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './openingBalance.component.html',
-  styleUrls: ['./openingBalance.component.scss']
+  styleUrls: ['./openingBalance.component.scss'],
+  providers: [DatePipe]
 })
 
 export class OpeningBalanceComponent implements OnInit {
@@ -37,11 +39,15 @@ export class OpeningBalanceComponent implements OnInit {
   voucherClass: any;
   compList: any;
   GetBranchesListArray:[];
-  GetPaymentListArray:any;
-  GetBankPAccountLedgerListArray:[];
+
+  gLAccountsList: any[] = [];
+  getPaymentListArray: any[] = [];
+  getBankPAccountLedgerListArray:any[] = [];
 
   constructor(
     private alertService: AlertService,
+    private addOrEditService: AddOrEditService,
+    private datepipe: DatePipe,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<OpeningBalanceComponent>,
     private spinner: NgxSpinnerService,
@@ -76,7 +82,7 @@ export class OpeningBalanceComponent implements OnInit {
 
   ngOnInit() {
     // this.getOpeningBalBranchesList();
-    this.getPaymentType();
+    this.allApis();
     this.commonService.setFocus('ledgerName');
     const user = JSON.parse(localStorage.getItem('user'));
     if (!this.commonService.checkNullOrUndefined(user.branchCode)) {
@@ -85,42 +91,40 @@ export class OpeningBalanceComponent implements OnInit {
         userId: user.seqId,
         userName: user.userName
       });
-      this.genarateVoucherNo(user.branchCode);
+      this.genarateVoucherNo(user.companyCode);
     }
   }
- 
-  // getOpeningBalBranchesList() {
-  //   const getOpeningBalBranchesListUrl = String.Join('/', this.apiConfigService.getObBranchesList);
-  //  this.apiService.apiGetRequest(getOpeningBalBranchesListUrl).subscribe(
-  //     response => {
-  //       const res = response.body;
-  //       if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-  //         if (!this.commonService.checkNullOrUndefined(res.response)) {
-  //           if (!this.commonService.checkNullOrUndefined(res.response['BranchesList']) && res.response['BranchesList'].length) {
-  //             this.GetBranchesListArray = res.response['BranchesList'];
-  //             this.spinner.hide();
-  //           }
-  //         }
-  //       }
-  //     });
-  // }
 
-  getPaymentType() {
-    const getPaymentTypeListUrl = String.Join('/', this.apiConfigService.getPaymentType);
-   this.apiService.apiGetRequest(getPaymentTypeListUrl).subscribe(
-      response => {
-        const res = response.body;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            if (!this.commonService.checkNullOrUndefined(res.response['BranchesList']) && res.response['BranchesList'].length) {
-              this.GetPaymentListArray = res.response['BranchesList'];
-              this.spinner.hide();
-            }
+
+  allApis() {
+    const getPaymentType = String.Join('/', this.apiConfigService.getPaymentType);
+    const getGLAccountsList = String.Join('/', this.apiConfigService.getGLAccountsList);
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getPaymentType),
+        this.apiService.apiGetRequest(getGLAccountsList),
+
+      ]).subscribe(([paymentType, gLAccountsList]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(paymentType) && paymentType.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(paymentType.response)) {
+            this.getPaymentListArray = paymentType.response['BranchesList'];
           }
         }
-      });
-  }
 
+        if (!this.commonService.checkNullOrUndefined(gLAccountsList) && gLAccountsList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(gLAccountsList.response)) {
+            this.gLAccountsList = gLAccountsList.response['glList'];
+          }
+        }
+
+      });
+    });
+  }
+ 
   genarateVoucherNo(branch?) {
     let genarateVoucherNoUrl;
     if (!this.commonService.checkNullOrUndefined(branch)) {
@@ -143,27 +147,29 @@ export class OpeningBalanceComponent implements OnInit {
         }
       });
   }
-  getBankPAccountLedgerList(value) {
-    if (!this.commonService.checkNullOrUndefined(value) && value != '') {
-      const getBankPAccountLedgerListUrl = String.Join('/', this.apiConfigService.getBPAccountLedgerList, value);
-      this.apiService.apiGetRequest(getBankPAccountLedgerListUrl).subscribe(
-        response => {
-          const res = response.body;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              if (!this.commonService.checkNullOrUndefined(res.response['AccountLedgerList']) && res.response['AccountLedgerList'].length) {
-                this.GetBankPAccountLedgerListArray = res.response['AccountLedgerList'];
-              } else {
-                this.GetBankPAccountLedgerListArray = [];
-              }
-            }
-            this.spinner.hide();
-          }
-        });
-    } else {
-      this.GetBankPAccountLedgerListArray = [];
-    }
+
+  onLedgerChange(code) {
+    this.modelFormData.patchValue({
+      ledgerCode: code.item.id
+    });
   }
+
+  // getOpeningBalBranchesList() {
+  //   const getOpeningBalBranchesListUrl = String.Join('/', this.apiConfigService.getObBranchesList);
+  //  this.apiService.apiGetRequest(getOpeningBalBranchesListUrl).subscribe(
+  //     response => {
+  //       const res = response.body;
+  //       if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //         if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response['BranchesList']) && res.response['BranchesList'].length) {
+  //             this.GetBranchesListArray = res.response['BranchesList'];
+  //             this.spinner.hide();
+  //           }
+  //         }
+  //       }
+  //     });
+  // }
+
 
   // setLedgerName(value) {
   //   const lname = this.GetBankPAccountLedgerListArray.filter(lCode => {
@@ -196,8 +202,12 @@ export class OpeningBalanceComponent implements OnInit {
     if (this.modelFormData.invalid) {
       return;
     }
-    this.formData.item = this.modelFormData.value;
-    this.dialogRef.close(this.formData);
+    this.formData.item = this.modelFormData.getRawValue();
+    this.formData.item.effectiveFrom = this.formData.item.effectiveFrom ? this.datepipe.transform(this.formData.item.effectiveFrom, 'MM-dd-yyyy') : '';
+
+    this.addOrEditService[this.formData.action](this.formData, (res) => {
+      this.dialogRef.close(this.formData);
+    });
   }
 
   cancel() {

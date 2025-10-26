@@ -72,7 +72,6 @@ export class JobworkmaterialissueComponent {
     allowSearchFilter: true
   };
 
-  qnoList: any[] = [];
 
   // form control
   formData: FormGroup;
@@ -83,10 +82,11 @@ export class JobworkmaterialissueComponent {
 
 
   // header props
-  customerList = [];
-  taxCodeList = [];
-  materialList = [];
-  profitCenterList = [];
+  qnoList: any[] = [];
+  customerList: any[] = [];
+  taxCodeList: any[] = [];
+  // materialList: any[] = [];
+  profitCenterList: any[] = [];
 
   routeEdit = '';
   http: any;
@@ -116,26 +116,8 @@ export class JobworkmaterialissueComponent {
 
   ngOnInit() {
     this.formDataGroup();
-    this.getCustomerList();
-    this.getSaleOrderList();
+    this.allApis();
   }
-
-  getSaleOrderList() {
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const getSaleOrderUrl = String.Join('/', this.apiConfigService.getSaleOrderApprovedList, obj.companyCode);
-    this.apiService.apiGetRequest(getSaleOrderUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.qnoList = res.response['BPList'];
-            }
-          }
-        });
-  }
-
 
   formDataGroup() {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -179,7 +161,8 @@ export class JobworkmaterialissueComponent {
 
 
     this.formData1 = this.formBuilder.group({
-      materialCode: ['', Validators.required],
+      materialCode: [''],
+      materialName: [''],
       taxCode: ['', Validators.required],
       qty: ['', Validators.required],
       rate: ['', Validators.required],
@@ -194,7 +177,6 @@ export class JobworkmaterialissueComponent {
       deliveryDate: [''],
       stockQty: [0],
       totalTax: [0],
-      materialName: [''],
       highlight: false,
       action: [[
         { id: 'Edit', type: 'edit' },
@@ -203,7 +185,148 @@ export class JobworkmaterialissueComponent {
       index: 0
     });
   }
-  public mmasterListData: EventEmitter<any[]> = new EventEmitter<any[]>();
+
+  allApis() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getSaleOrderApprovedList = String.Join('/', this.apiConfigService.getSaleOrderApprovedList, obj.companyCode);
+    const getCustomerList = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
+    const getCompanysList = String.Join('/', this.apiConfigService.getCompanysList);
+    const getBusienessPartnersAccList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList, obj.companyCode);
+    const getProfitCenterList = String.Join('/', this.apiConfigService.getProfitCenterList);
+    const getTaxRatesList = String.Join('/', this.apiConfigService.getTaxRatesList);
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getSaleOrderApprovedList),
+        this.apiService.apiGetRequest(getCustomerList),
+        this.apiService.apiGetRequest(getCompanysList),
+        this.apiService.apiGetRequest(getBusienessPartnersAccList),
+        this.apiService.apiGetRequest(getProfitCenterList),
+        this.apiService.apiGetRequest(getTaxRatesList),
+
+      ]).subscribe(([saleOrderApprovedList, customerList, companysList, busienessPartnersAccList, profitCenterList, taxRatesList]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(saleOrderApprovedList) && saleOrderApprovedList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(saleOrderApprovedList.response)) {
+            this.qnoList = saleOrderApprovedList.response['BPList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(customerList) && customerList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(customerList.response)) {
+            const resp = customerList.response['bpList'];
+            const data = resp.length && resp.filter((t: any) => t.bptype == 'Vendor' && t.bpgroup == "Jobwork Vendors");
+            this.customerList = data;
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(companysList) && companysList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(companysList.response)) {
+            this.companyList = companysList.response['companiesList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(busienessPartnersAccList) && busienessPartnersAccList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(busienessPartnersAccList.response)) {
+            const resp = busienessPartnersAccList.response['bpaList'];
+            const data = resp.length && resp.filter((t: any) => t.bpTypeName == 'Vendor');
+            this.bpaList = data;
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(profitCenterList) && profitCenterList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(profitCenterList.response)) {
+            this.profitCenterList = profitCenterList.response['profitCenterList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(taxRatesList) && taxRatesList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(taxRatesList.response)) {
+            const resp = taxRatesList.response['TaxratesList'];
+            const data = resp.length && resp.filter((t: any) => t.taxType == 'Output');
+            this.taxCodeList = data;
+          }
+        }
+
+        if (this.routeEdit != '') {
+          this.getJobworkDetail();
+        }
+
+      });
+    });
+  }
+
+   getJobworkDetail() {
+    const qsDetUrl = String.Join('/', this.apiConfigService.getJobworkDetail, this.routeEdit);
+    this.apiService.apiGetRequest(qsDetUrl).subscribe(response => {
+      this.spinner.hide();
+      const res = response;
+      if (res && res.status === StatusCodes.pass && res.response) {
+        this.formData.patchValue(res.response['JobWorkMasters']);
+
+        if (res.response['JobWorkDetails'] && res.response['JobWorkDetails'].length) {
+          let taxCode = res.response['JobWorkDetails'][0].taxCode;
+          const taxObj = this.taxCodeList.find((t: any) => t.taxRateCode == taxCode);
+          if (taxObj) {
+            this.formData1.patchValue({
+              taxCode: taxObj.igst ? taxObj.igst : taxObj.sgst
+            });
+          }
+
+          res.response['JobWorkDetails'].forEach((detail: any, index: number) => {
+            // const materialObj = this.materialList.find((m: any) => m.id == detail.materialCode);
+            // if (materialObj) {
+            //   detail.materialName = materialObj.text;
+            //   detail.stockQty = materialObj.availQTY;
+            //   detail.materialCode = { materialCode: materialObj.id, materialName: materialObj.text };
+            // }
+            detail.action = [
+              { id: 'Edit', type: 'edit' },
+              { id: 'Delete', type: 'delete' }
+            ],
+              detail.index = index + 1;
+          });
+
+          this.tableData = res.response['JobWorkDetails'];
+          this.calculate(true);
+          this.vendorChange();
+        }
+        this.formData.disable();
+      }
+    });
+  }
+
+
+  materialChange() {
+    // this.materialList = [];
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const voucherClassList = String.Join('/', this.apiConfigService.getMaterialList, obj.companyCode, this.formData1.value.materialCode);
+    this.apiService.apiGetRequest(voucherClassList)
+      .subscribe(((response: any) => {
+        this.spinner.hide();
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response) && res.response['mmasterList'].length) {
+            // this.materialList = res.response['mmasterList'];
+                  this.formData1.patchValue({
+                    stockQty: res.response['mmasterList'][0].availQTY,
+                    netWeight: res.response['mmasterList'][0].netWeight,
+                  });
+
+          }
+        }
+      })
+      )
+    // const obj = this.materialList.some((m: any) => m.id == this.formData1.value.materialCode);
+    // if (!obj) {
+    //   this.alertService.openSnackBar('Please enter valid material code', Static.Close, SnackBar.error);
+    //   this.formData1.patchValue({
+    //     materialCode: ''
+    //   })
+    // }
+  }
 
   resetForm() {
     this.formData1.reset();
@@ -344,32 +467,6 @@ export class JobworkmaterialissueComponent {
   }
 
 
-  materialChange() {
-    this.materialList = [];
-    this.mmasterListData.emit([]);
-    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const voucherClassList = String.Join('/', this.apiConfigService.getMaterialList, obj.companyCode, this.formData1.value.materialCode);
-    this.apiService.apiGetRequest(voucherClassList)
-      .subscribe(((response: any) => {
-        this.spinner.hide();
-        const res = response;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.materialList = res.response['mmasterList'];
-            this.mmasterListData.emit(res.response['mmasterList']);
-          }
-        }
-      })
-      )
-    // const obj = this.materialList.some((m: any) => m.id == this.formData1.value.materialCode);
-    // if (!obj) {
-    //   this.alertService.openSnackBar('Please enter valid material code', Static.Close, SnackBar.error);
-    //   this.formData1.patchValue({
-    //     materialCode: ''
-    //   })
-    // }
-  }
 
   calculate(flag = false) {
     this.formData.patchValue({
@@ -402,6 +499,12 @@ export class JobworkmaterialissueComponent {
       this.deleteRecord(value);
     } else {
       this.formData1.patchValue(value.item);
+      // if(!this.routeEdit) {
+      //   this.formData1.patchValue({
+      //     stockQty: value.item.availableQTY
+      //   });
+      // }
+      this.materialChange();
     }
   }
 
@@ -434,23 +537,6 @@ export class JobworkmaterialissueComponent {
     })
   }
 
-  getCustomerList() {
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const costCenUrl = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
-    this.apiService.apiGetRequest(costCenUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              const resp = res.response['bpList'];
-              const data = resp.length && resp.filter((t: any) => t.bptype == 'Vendor' && t.bpgroup == "Jobwork Vendors");
-              this.customerList = data;
-            }
-          }
-          this.getCompanyList();
-        });
-  }
 
   vendorChange(event?: any) {
     const obj = this.customerList.find((c: any) => c.id == (event ? event.id : this.formData.value.vendor));
@@ -462,74 +548,6 @@ export class JobworkmaterialissueComponent {
         vendor: [{ id: obj.id, text: obj.text }]
       })
     }
-  }
-
-  getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanysList);
-    this.apiService.apiGetRequest(companyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
-            }
-          }
-          this.getsuppliercodeList();
-        });
-  }
-
-  getsuppliercodeList() {
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const getsuppliercodeList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList, obj.companyCode);
-    this.apiService.apiGetRequest(getsuppliercodeList)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              const resp = res.response['bpaList'];
-              const data = resp.length && resp.filter((t: any) => t.bpTypeName == 'Vendor');
-              this.bpaList = data;
-            }
-          }
-          this.getProfitcenterData();
-        });
-  }
-
-  getProfitcenterData() {
-    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCenterList);
-    this.apiService.apiGetRequest(getpcUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.profitCenterList = res.response['profitCenterList'];
-            }
-          }
-          this.getTaxRatesList()
-        });
-  }
-
-  getTaxRatesList() {
-    const taxCodeUrl = String.Join('/', this.apiConfigService.getTaxRatesList);
-    this.apiService.apiGetRequest(taxCodeUrl)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              const resp = res.response['TaxratesList'];
-              const data = resp.length && resp.filter((t: any) => t.taxType == 'Output');
-              this.taxCodeList = data;
-            }
-          }
-          if (this.routeEdit != '') {
-            this.getJobworkDetail();
-          }
-        });
   }
 
   // getmaterialData() {
@@ -550,44 +568,7 @@ export class JobworkmaterialissueComponent {
   //       });
   // }
 
-  getJobworkDetail() {
-    const qsDetUrl = String.Join('/', this.apiConfigService.getJobworkDetail, this.routeEdit);
-    this.apiService.apiGetRequest(qsDetUrl).subscribe(response => {
-      this.spinner.hide();
-      const res = response;
-      if (res && res.status === StatusCodes.pass && res.response) {
-        this.formData.patchValue(res.response['JobWorkMasters']);
-
-        if (res.response['JobWorkDetails'] && res.response['JobWorkDetails'].length) {
-          let taxCode = res.response['JobWorkDetails'][0].taxCode;
-          const taxObj = this.taxCodeList.find((t: any) => t.taxRateCode == taxCode);
-          if (taxObj) {
-            this.formData1.patchValue({
-              taxCode: taxObj.igst ? taxObj.igst : taxObj.sgst
-            });
-          }
-
-          res.response['JobWorkDetails'].forEach((detail: any, index: number) => {
-            const materialObj = this.materialList.find((m: any) => m.id == detail.materialCode);
-            if (materialObj) {
-              detail.materialName = materialObj.text;
-              detail.stockQty = materialObj.availQTY;
-              detail.materialCode = { materialCode: materialObj.id, materialName: materialObj.text };
-            }
-            detail.action = [
-              { id: 'Edit', type: 'edit' },
-              { id: 'Delete', type: 'delete' }
-            ],
-              detail.index = index + 1;
-          });
-
-          this.tableData = res.response['JobWorkDetails'];
-          this.calculate(true);
-          this.vendorChange();
-        }
-      }
-    });
-  }
+ 
 
 
   // getJobworkDetail() {
@@ -644,15 +625,15 @@ export class JobworkmaterialissueComponent {
   }
 
   materialCodeChange() {
-    const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
-    this.formData1.patchValue({
-      netWeight: obj.netWeight,
-      stockQty: obj.availQTY,
-      materialName: obj.text,
-    })
-    if (!obj.netWeight) {
-      this.alertService.openSnackBar('Net Weight has not provided for selected material..', Static.Close, SnackBar.error);
-    }
+    // const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
+    // this.formData1.patchValue({
+    //   netWeight: obj.netWeight,
+    //   stockQty: obj.availQTY,
+    //   materialName: obj.text,
+    // })
+    // if (!obj.netWeight) {
+    //   this.alertService.openSnackBar('Net Weight has not provided for selected material..', Static.Close, SnackBar.error);
+    // }
 
   }
 
@@ -671,17 +652,17 @@ export class JobworkmaterialissueComponent {
 
   addJobWork() {
     const addsq = String.Join('/', this.apiConfigService.addJobWork);
-    const obj = this.formData.value;
+    const obj = this.formData.getRawValue();
     obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
     obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
-    obj.vendor = this.formData.value.vendor[0].id;
+    obj.vendor = obj.vendor[0].id;
     obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     obj.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
     const arr = this.tableData.filter((t: any) => t.highlight);
     arr.forEach((a: any) => {
       a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';
     })
-    const requestObj = { qsHdr: this.formData.value, qsDtl: arr };
+    const requestObj = { qsHdr: obj, qsDtl: arr };
     this.apiService.apiPostRequest(addsq, requestObj).subscribe(
       response => {
         this.spinner.hide();

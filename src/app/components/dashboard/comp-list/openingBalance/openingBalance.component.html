@@ -16,48 +16,48 @@
           </mat-select>
       </mat-form-field> -->
 
-      <mat-form-field class="col-3">
-        <mat-label>{{ 'openingBalance.ledgerName' | translate }}</mat-label>
-        <input class="typeahead" matInput
-            placeholder="{{ 'openingBalance.ledgerName' | translate }}" formControlName="ledgerCode"
-             (input)="getBankPAccountLedgerList($event.target.value)" class="typeahead"
-            [typeaheadOptionsLimit]="100000" [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' autocomplete="off"
-            [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
-            [typeaheadWaitMs]="200" id="ledgerName" >
-        <ng-template #customItemTemplate let-model="item">
+        <div class="mat-mdc-form-field typeahead floating-dropdown col-3" *ngIf="!formData.item"
+          [class.filled]="modelFormData.value?.ledgerName?.length > 0">
+          <label> {{ 'openingBalance.ledgerName' | translate }} </label>
+          <input matInput placeholder=" " class="typeahead" [typeaheadOptionsLimit]="100000"  (typeaheadOnSelect)="onLedgerChange($event)"
+            [typeahead]="gLAccountsList" typeaheadOptionField='text' [typeaheadItemTemplate]="customItemTemplate"
+            formControlName="ledgerName" appFocusOnEnter tabIndex="1">
+          <ng-template #customItemTemplate let-model="item">
             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
-        </ng-template>
-    </mat-form-field>
-    
-      <mat-form-field class="col-3">
-        <mat-label>{{ 'openingBalance.paymentTypeName' | translate }}</mat-label>
-        <mat-select formControlName="paymentTypeId" appFocusOnEnter tabIndex="3">
-            <mat-option *ngFor="let payment of GetPaymentListArray" [value]="payment.id">
+          </ng-template>
+        </div>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{ 'openingBalance.paymentTypeName' | translate }}</mat-label>
+          <mat-select formControlName="paymentTypeId" appFocusOnEnter tabIndex="3">
+            <mat-option *ngFor="let payment of getPaymentListArray" [value]="payment.id">
               {{payment.text}}
             </mat-option>
-        </mat-select>
-    </mat-form-field>
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field class="col-3">
-        <input matInput placeholder="{{ 'openingBalance.voucherNo' | translate }}" formControlName="voucherNo"
-            appFocusOnEnter tabIndex="1" >
-    </mat-form-field>
+        <mat-form-field class="col-3">
+          <input matInput placeholder="{{ 'openingBalance.voucherNo' | translate }}" formControlName="voucherNo"
+            appFocusOnEnter tabIndex="1">
+        </mat-form-field>
 
-    <mat-form-field class="col-3">
-      <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" placeholder="{{'openingBalance.openingBalanceDate' | translate }}"
-          formControlName="openingBalanceDate" appFocusOnEnter  tabIndex="4" (click)="picker.open()" readonly>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+        <mat-form-field class="col-3">
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker"
+            placeholder="{{'openingBalance.openingBalanceDate' | translate }}" formControlName="openingBalanceDate"
+            appFocusOnEnter tabIndex="4" (click)="picker.open()" readonly>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-  <mat-form-field class="col-3">
-    <input matInput placeholder="{{'openingBalance.amount' | translate }}" formControlName="amount" appFocusOnEnter tabIndex="2">
-  </mat-form-field>
+        <mat-form-field class="col-3">
+          <input matInput placeholder="{{'openingBalance.amount' | translate }}" formControlName="amount"
+            appFocusOnEnter tabIndex="2">
+        </mat-form-field>
 
-  <mat-form-field class="col-3">
-    <input matInput placeholder="{{ 'openingBalance.narration' | translate }}"
-        formControlName="narration" appFocusOnEnter tabIndex="2" >
-</mat-form-field>
+        <mat-form-field class="col-3">
+          <input matInput placeholder="{{ 'openingBalance.narration' | translate }}" formControlName="narration"
+            appFocusOnEnter tabIndex="2">
+        </mat-form-field>
 
       </div>
       <mat-divider></mat-divider>
@@ -68,7 +68,7 @@
           {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
-                appFocusOnEnter tabIndex="5">
+          appFocusOnEnter tabIndex="5">
 
           {{ 'COMMON.SAVE' | translate }}
         </button>

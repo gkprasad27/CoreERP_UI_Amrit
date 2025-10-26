@@ -426,7 +426,11 @@ mat-tab-header {
 .multiselect-dropdown-list {
   ng-multiselect-dropdown {
     .multiselect-dropdown {
+      .disabled > .dropdown-btn {
+        background-color: transparent !important;
+      }
       .dropdown-btn {
+
         height: 35px !important;
         padding: 0px !important;
         border: none !important;
