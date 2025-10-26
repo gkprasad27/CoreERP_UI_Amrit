@@ -465,13 +465,12 @@ export class ApiConfigService {
    getCompaniesList = `${environment.baseUrl}gl/VoucherType/GetCompaniesList`;
 
    // opening balance
-   getOpeningBalanceList = `${environment.baseUrl}masters/OpeningBalance/GetOpeningBalanceList`;
-   getObBranchesList = `${environment.baseUrl}masters/OpeningBalance/GetBranchesList`;
-   getObVoucherNo = `${environment.baseUrl}masters/OpeningBalance/GetVoucherNo`;
-   getPaymentType = `${environment.baseUrl}masters/OpeningBalance/GetPaymentType`;
-   registerOpeningBalance = `${environment.baseUrl}masters/OpeningBalance/RegisterOpeningBalance`;
+   getOpeningBalanceList = `${environment.baseUrl}OpeningBalance/GetOpeningBalanceList`;
+   getObBranchesList = `${environment.baseUrl}OpeningBalance/GetBranchesList`;
+   getObVoucherNo = `${environment.baseUrl}OpeningBalance/GetVoucherNo`;
+   getPaymentType = `${environment.baseUrl}OpeningBalance/GetPaymentType`;
+   registerOpeningBalance = `${environment.baseUrl}OpeningBalance/RegisterOpeningBalance`;
 
-   getBPAccountLedgerList = `${environment.baseUrl}transactions/BankPayment/GetAccountLedgerList`;
 
    // Stock Excess
    getStockexcessList = `${environment.baseUrl}transactions/StockExcess/GetStockexcessList`;
