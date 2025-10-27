@@ -29,32 +29,29 @@
 
     <div style="border-top: 1px solid black; display: flex;" *ngIf="routeParam != 'employeeabsentreport'">
         <div
-            style="width: 33.33%;border-left: 1px solid black;border-right: 1px solid black; display: flex;padding: 3px 15px;">
+            style="width: 33.33%;border-left: 1px solid black;border-right: 1px solid black; display: flex; align-items: center;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Company Name </b>
             <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:
                 {{
                 modelFormData.value.companyName }} </span>
         </div>
         <div *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' "
-            style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
+            style="width: 33.33%;border-right: 1px solid black; display: flex; align-items: center;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> From Date </b>
             <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:
-                {{
-                modelFormData.value.fromDate }} </span>
+                {{ modelFormData.value.fromDate ? (modelFormData.value.fromDate | date:'MM/dd/yyyy') : '' }} </span>
         </div>
         <div *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' "
-            style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
+            style="width: 33.33%;border-right: 1px solid black; display: flex; align-items: center;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> To Date </b>
             <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:
-                {{
-                modelFormData.value.toDate }} </span>
+                {{ modelFormData.value.toDate ? (modelFormData.value.toDate | date:'MM/dd/yyyy' ) : '' }} </span>
         </div>
         <div *ngIf="!(routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' )"
-            style="width: 33.33%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
+            style="width: 33.33%;border-right: 1px solid black; display: flex; align-items: center;padding: 3px 15px;">
             <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> As On Date </b>
             <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:
-                {{
-                date | date }} </span>
+                {{ date ? (date | date:'MM/dd/yyyy' ) : '' }} </span>
         </div>
     </div>
 

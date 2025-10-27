@@ -836,7 +836,7 @@
     "accName": "GL Account",
     "customerName": "Customer Name",
     "voucherNumber": "Voucher Number",
-    "referenceNumber": "Reference No",
+    "referenceNumber": "Invoice No",
     "voucherType": "Voucher Type",
     "voucherDate": "Date",
     "postingDate": "Date",

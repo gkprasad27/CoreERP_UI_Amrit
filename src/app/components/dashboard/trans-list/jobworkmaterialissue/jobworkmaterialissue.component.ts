@@ -716,9 +716,9 @@ export class JobworkmaterialissueComponent {
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
-            this.back();
           }
         }
+        this.back();
       });
   }
 

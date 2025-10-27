@@ -450,6 +450,9 @@ export class ReceiptspaymentsComponent implements OnInit {
       this.deleteRecord(value);
     } else {
       this.formData1.patchValue(value.item);
+      this.formData1.patchValue({
+        adjustmentAmount: (+value.item.totalAmount || 0)
+      });
       if (this.commonService.checkNullOrUndefined(this.formData1.value.discount)) {
         this.getDiscount();
       }
