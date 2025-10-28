@@ -129,9 +129,11 @@ export class ReceiptspaymentsComponent implements OnInit {
 
     this.formData1 = this.formBuilder.group({
       partyInvoiceNo: [''],
+      referenceNumber: [''],
       partyInvoiceDate: [''],
       dueDate: [''],
       totalAmount: [''],
+      voucherNumber: [''],
       memoAmount: [''],
       clearedAmount: [''],
       balanceDue: [''],

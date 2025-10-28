@@ -213,7 +213,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
       materialName: [''],
       netWeight: [''],
       purchaseOrderNumber: [''],
-      description: [''],
       heatNumber: [''],
       materialgrade: [''],
       milltcno: [''],
