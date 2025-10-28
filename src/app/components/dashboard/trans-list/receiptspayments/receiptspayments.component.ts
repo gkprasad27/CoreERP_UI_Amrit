@@ -521,6 +521,7 @@ export class ReceiptspaymentsComponent implements OnInit {
     const bObj = this.bpgLists.find((p: any) => p.text == this.formData.value.partyAccount);
     this.formData.patchValue({ partyAccount: bObj.id });
     this.formData.controls['voucherNumber'].enable();
+    arr.forEach((t: any) => t['invoiceNo'] = t.referenceNumber);
     const addCashBank = String.Join('/', this.apiConfigService.addPaymentsReceipts);
     const requestObj = { pcbHdr: this.formData.value, pcbDtl: arr };
     this.apiService.apiPostRequest(addCashBank, requestObj).subscribe(
