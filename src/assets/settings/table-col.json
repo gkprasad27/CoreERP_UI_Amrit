@@ -715,7 +715,6 @@
   "cashbank": {
     "id": "ID",
     "title": "Cash / Bank",
-    "company": "Company",
     "branch": "Branch",
     "voucherType": "Voucher Type",
     "voucherNumber": "Voucher Number",
@@ -753,8 +752,6 @@
   "journals": {
     "id": "ID",
     "title": "Journal",
-    "company": "Company",
-    "branch": "Branch",
     "voucherType": "Voucher Type",
     "voucherNumber": "Voucher Number",
     "voucherDate": "Date",
@@ -789,7 +786,6 @@
   "invoicesmemos": {
     "id": "ID",
     "title": "Invoice / Memo",
-    "compName": "Company Name",
     "voucherName": "Voucer Name",
     "customerName": "Customer Name",
     "saleOrderNo": "Sale Order No",
@@ -832,7 +828,6 @@
   "receiptspayments": {
     "checkAll": "Select",
     "title": "Party Payments / Receipts",
-    "compName": "Company Name",
     "accName": "GL Account",
     "customerName": "Customer Name",
     "voucherNumber": "Voucher Number",
@@ -881,7 +876,6 @@
   "purchasesaleasset": {
     "id": "ID",
     "title": "Purchase / Sale Asset",
-    "company": "Company",
     "branch": "Branch",
     "voucherNumber": "Voucher Number",
     "voucherClass": "Voucher Class",
@@ -929,7 +923,6 @@
   "saleasset": {
     "id": "ID",
     "title": "Transfer Asset",
-    "company": "Company",
     "branch": "Branch",
     "voucherNumber": "Voucher Number",
     "voucherClass": "Voucher Class",
@@ -1017,7 +1010,6 @@
   "requisitionnumberassignment": {
     "title": "Requisition Assignment",
     "noRangeName": "NoRangeName",
-    "companyName": "CompanyName",
     "plantName": "PlantName",
     "departmentName": "DepartmentName"
   },
@@ -1239,7 +1231,6 @@
   "primarycostelement": {
     "id": "ID",
     "title": "Primary Cost Element",
-    "company": "Company",
     "chartofAccount": "Chart Account Name",
     "glAccount": "GL Account",
     "glAccountName": "GLAccount Name",
@@ -1252,7 +1243,6 @@
   "secondarycostelement": {
     "title": "Secondary Cost Element",
     "secondaryCostCode": "Secondary Cost Code",
-    "companyName": "Company Name",
     "chartAccountName": "Chart of Account Name",
     "description": "Description",
     "type": "Type",
@@ -1418,8 +1408,6 @@
   },
   "bom": {
     "title": "BOM",
-    "companyName": "Company Name",
-    "profitcenterName": "Profitcenter Name",
     "plant": "Plant",
     "bomtype": "Bom Type",
     "bomnumber": "Bom Number",
@@ -1549,12 +1537,10 @@
   "goodsissue": {
     "checkAll": "Select",
     "title": "Production Planning",
-    "companyName": "Company Name",
-    "profitcenterName": "Profitcenter Name",
-    "customerName": "CustomerName",
+    "customerName": "Customer Name",
     "storesPersonName": "Stores In Charge",
-    "departmentName": "DepartmentName",
-    "saleOrderNumber": "saleOrderNumber",
+    "departmentName": "Department Name",
+    "saleOrderNumber": "Sale Order Number",
     "movementType": "Movement Type",
     "materialCode": "Material Code",
     "materialName": "Material Name",
@@ -1573,8 +1559,6 @@
   "goodsissueapproval": {
     "checkAll": "Select",
     "title": "Goods Issue Approval",
-    "companyName": "Company Name",
-    "profitcenterName": "Profitcenter Name",
     "customerName": "CustomerName",
     "storesPerson": "Stores In Charge",
     "departmentName": "DepartmentName",
@@ -1598,8 +1582,6 @@
   "materialrequisition": {
     "title": "Production Scheduling",
     "checkbox": "",
-    "companyName": "Company Name",
-    "profitcenterName": "ProfitcenterName",
     "customerName": "CustomerName",
     "saleOrderNumber": "saleOrderNumber",
     "plant": "Plant",
@@ -1642,8 +1624,6 @@
   },
   "purcahserequisition": {
     "title": "Master Sale order",
-    "companyName": "Company Name",
-    "profitcenterName": "Profitcenter Name",
     "departmentName": "Department Name",
     "requiredfor": "Requied For",
     "requisitionNumber": "Requisition Number",
@@ -1708,10 +1688,8 @@
   },
   "quotationanalysis": {
     "title": "Quotation Analysis",
-    "company": "Company",
     "plant": "Plant",
     "branch": "Branch",
-    "profitCenter": "Profit Center",
     "quotationNumber": "Quotation Number",
     "supplier": "Supplier",
     "materialCode": "Material code",
@@ -1730,8 +1708,6 @@
     "id": "ID",
     "title": "Purchase Order",
     "quotationNumber": "Quotation Number",
-    "companyName": "Company Name",
-    "profitcenterName": "ProfitCenter Name",
     "saleOrderType": "Saleorder Type",
     "status": "Status",
     "saleOrderNo": "SaleOrder Number",
@@ -1787,8 +1763,6 @@
   "goodsreceipts": {
     "checkAll": "Select",
     "title": "Goods Receipt",
-    "companyName": "Company Name",
-    "profitcenterName": "ProfitCenter Name",
     "purchaseOrderNo": "Purchase Order No",
     "supplierRefno": "Invoice Number",
     "customerName": "supplierName",
@@ -1803,10 +1777,11 @@
     "receivedQty": "Received QTY",
     "rejectQty": "Reject QTY",
     "netWeight": "Net Weight",
+    "amount": "Amount",
+    "tax": "Tax",
     "project": "Project",
     "lotNo": "Lot No",
     "lotDate": "Lot Date",
-    "description": "Description",
     "status": "Status",
     "approvalStatus": "Approval Status",
     "approvedBy": "Approved BY",
@@ -1821,8 +1796,6 @@
   "jobworkmaterialreceiving": {
     "checkAll": "Select",
     "title": "Job Work Material Receiving",
-    "companyName": "Company Name",
-    "profitcenterName": "ProfitCenter Name",
     "jobWorkNumber": "JobWork Number",
     "purchaseOrderNo": "Purchase Order No",
     "supplierRefno": "Invoice Number",
@@ -1854,9 +1827,7 @@
     "title": "Inspection Check",
     "checkbox": "",
     "inspectionCheckNo": "Inspection Check Number",
-    "companyName": "Company Name",
     "customerName": "CustomerName",
-    "profitcenterName": "ProfitCenter",
     "materialCode": "Material code",
     "bomKey": "BomKey",
     "description": "Description",
@@ -1903,7 +1874,6 @@
   "invoiceverification": {
     "title": "Invoice Verification",
     "purchaseOrderNo": "Purchase Number",
-    "company": "Company",
     "supplierCode": "Supplier Code",
     "invoiceAmount": "Invoice Amount",
     "invoiceReferenceNo": "Invoice Reference Number",
@@ -2313,8 +2283,6 @@
   },
   "saleorder": {
     "TITLE": "Sales Order",
-    "companyName": "Company",
-    "profitcenterName": "ProfitCenter",
     "saleOrderNo": "Saleorder Number",
     "poNumber": "PO Number",
     "status": "Status",
@@ -2415,8 +2383,6 @@
   },
   "jobworkmaterialissue": {
     "title": "Job Work Material Issue",
-    "companyName": "Company",
-    "profitcenterName": "ProfitCenter",
     "jobWorkNumber": "JobWork Number",
     "saleOrderNo": "Saleorder Number",
     "poNumber": "PO Number",
@@ -2885,6 +2851,7 @@
   "vendorMaterialList": {
     "id": "ID",
     "supplierCode": "Supplier Code",
+    "supplierName": "Supplier Name",
     "materialCode": "Material Code",
     "description": "Description",
     "priceperUnit": "Price Per Unit",

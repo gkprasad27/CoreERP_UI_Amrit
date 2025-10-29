@@ -99,13 +99,14 @@ export class PurchasesaleassetComponent implements OnInit {
   }
   ngOnInit() {
     this.formDataGroup();
-    this.getCompanyList();
+    this.getBranchList();
     this.formData.controls['voucherNumber'].disable();
   }
 
   formDataGroup() {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.formData = this.formBuilder.group({
-      company: [null, [Validators.required]],
+      company: [obj.companyCode],
       branch: [null, [Validators.required]],
       voucherClass: [null],
       voucherType: [null, [Validators.required]],
@@ -251,20 +252,20 @@ export class PurchasesaleassetComponent implements OnInit {
         });
   }
 
-  getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-    this.apiService.apiGetRequest(companyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
-            }
-          }
-          this.getBranchList();
-        });
-  }
+  // getCompanyList() {
+  //   const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+  //   this.apiService.apiGetRequest(companyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companyList = res.response['companiesList'];
+  //           }
+  //         }
+  //         this.getBranchList();
+  //       });
+  // }
 
   getBranchList() {
     const branchUrl = String.Join('/', this.apiConfigService.getBranchList);

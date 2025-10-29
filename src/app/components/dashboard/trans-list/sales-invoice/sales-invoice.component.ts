@@ -106,12 +106,12 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   formDataGroup() {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const obj = JSON.parse(localStorage.getItem('user'));
 
     this.formData = this.formBuilder.group({
 
-      userId: [user.userName],
-      company: ['', [Validators.required]],
+      userId: [obj.userName],
+      company: [obj.companyCode],
       profitCenter: ['', Validators.required],
       saleOrderNo: ['', Validators.required],
       invoiceMasterId: 0,
@@ -177,7 +177,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   allApis() {
     let obj = JSON.parse(localStorage.getItem("user"));
-    const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
+    // const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
     const getSaleOrderData = String.Join('/', this.apiConfigService.getSaleOrderData, obj.companyCode);
     const getCustomerList = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
     const getProfitCentersList = String.Join('/', this.apiConfigService.getProfitCentersList);
@@ -186,20 +186,20 @@ export class SalesInvoiceComponent implements OnInit {
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
-        this.apiService.apiGetRequest(getCompanyList),
+        // this.apiService.apiGetRequest(getCompanyList),
         this.apiService.apiGetRequest(getSaleOrderData),
         this.apiService.apiGetRequest(getCustomerList),
         this.apiService.apiGetRequest(getProfitCentersList),
         this.apiService.apiGetRequest(getTaxRatesList),
 
-      ]).subscribe(([supplierRes, getSaleOrderRes, customerRes, profitCenterRes, taxRatesRes]) => {
+      ]).subscribe(([getSaleOrderRes, customerRes, profitCenterRes, taxRatesRes]) => {
         this.spinner.hide();
 
-        if (!this.commonService.checkNullOrUndefined(supplierRes) && supplierRes.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(supplierRes.response)) {
-            this.companyList = supplierRes.response['companiesList']
-          }
-        }
+        // if (!this.commonService.checkNullOrUndefined(supplierRes) && supplierRes.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(supplierRes.response)) {
+        //     this.companyList = supplierRes.response['companiesList']
+        //   }
+        // }
 
         if (!this.commonService.checkNullOrUndefined(getSaleOrderRes) && getSaleOrderRes.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(getSaleOrderRes.response)) {

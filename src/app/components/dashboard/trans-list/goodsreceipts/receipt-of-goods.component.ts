@@ -159,9 +159,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   formDataGroup() {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.formData = this.formBuilder.group({
       purchaseOrderNo: [null, Validators.required],
-      company: [null, [Validators.required]],
+      company: [obj.companyCode],
       // plant: [null],
       // branch: [null],
       profitCenter: [null, Validators.required],
@@ -213,6 +214,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
       materialName: [''],
       netWeight: [''],
       purchaseOrderNumber: [''],
+      description: [''],
       heatNumber: [''],
       materialgrade: [''],
       milltcno: [''],
@@ -471,24 +473,24 @@ export class ReceiptOfGoodsComponent implements OnInit {
               this.porderList = res.response['porderList'];
             }
           }
-          this.getCompanyList();
-        });
-  }
-
-  getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-    this.apiService.apiGetRequest(companyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
-            }
-          }
           this.getpodetailsList();
         });
   }
+
+  // getCompanyList() {
+  //   const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+  //   this.apiService.apiGetRequest(companyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companyList = res.response['companiesList'];
+  //           }
+  //         }
+  //         this.getpodetailsList();
+  //       });
+  // }
   getpodetailsList() {
     const getpodetailsListUrl = String.Join('/', this.apiConfigService.getpodetailsList);
     this.apiService.apiGetRequest(getpodetailsListUrl)
@@ -826,12 +828,15 @@ export class ReceiptOfGoodsComponent implements OnInit {
         tax = igst + cgst + sgst;
       }
       amount = amount + ((+this.formData.value.amount) + (t.receivedQty * t.rate * t.netWeight))
+      tax = tax + (t.igst + t.cgst + t.sgst);
+      t.amount = amount.toFixed(2);
+      t.tax = tax.toFixed(2);
       this.formData.patchValue({
         igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
         cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
         sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-        amount: amount.toFixed(2),
-        totalTax: ((+this.formData.value.totalTax) + tax + (t.igst + t.cgst + t.sgst)).toFixed(2),
+        amount: ((+this.formData.value.amount) + amount).toFixed(2),
+        totalTax: ((+this.formData.value.totalTax) + tax).toFixed(2),
       })
     })
     this.formData.patchValue({

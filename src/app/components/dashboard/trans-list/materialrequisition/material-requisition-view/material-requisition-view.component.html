@@ -119,15 +119,15 @@
                     </ng-multiselect-dropdown>
                 </div>
 
-                <mat-form-field class="col-2">
-                    <mat-label>{{'materialrequisition.mechine' | translate }}</mat-label>
-                    <mat-select formControlName="mechine" appFocusOnEnter tabIndex="2">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let emp of data.mechenaryList" [value]="emp.description">
-                            {{emp.description}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+
+                <div class="multiselect-dropdown-list floating-dropdown col-2" *ngIf="data.employeesList && data.employeesList.length"
+                [class.filled]="formData.value?.mechine?.length > 0" >
+                    <label> {{ 'materialrequisition.mechine' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="mechine"
+                    [settings]="dropdownSettings1" [data]="data.mechenaryList">
+                    </ng-multiselect-dropdown>
+                </div>
+
                 <mat-form-field class="col-2">
                     <mat-label [translate]="'materialrequisition.startDate'"></mat-label>
                     <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="startDate"

@@ -116,8 +116,9 @@ export class JournalComponent implements OnInit {
   }
 
   formDataGroup() {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.formData = this.formBuilder.group({
-      company: [null, [Validators.required]],
+      company: [obj.companyCode],
       branch: [null],
       voucherType: [null, [Validators.required]],
       voucherNumber: [null, [Validators.required]],
@@ -164,7 +165,7 @@ export class JournalComponent implements OnInit {
   }
 
   allApis() {
-    const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
+    // const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
     const getVoucherTypesList = String.Join('/', this.apiConfigService.getVoucherTypesList);
     const getGLAccountList = String.Join('/', this.apiConfigService.getGLAccountList);
     const getTaxRatesList = String.Join('/', this.apiConfigService.getTaxRatesList);
@@ -173,20 +174,20 @@ export class JournalComponent implements OnInit {
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
-        this.apiService.apiGetRequest(getCompanyList),
+        // this.apiService.apiGetRequest(getCompanyList),
         this.apiService.apiGetRequest(getVoucherTypesList),
         this.apiService.apiGetRequest(getGLAccountList),
         this.apiService.apiGetRequest(getTaxRatesList),
         this.apiService.apiGetRequest(getHsnSacList),
 
-      ]).subscribe(([supplierRes, materialRes, glList, taxratesList, hsnsacList]) => {
+      ]).subscribe(([materialRes, glList, taxratesList, hsnsacList]) => {
         this.spinner.hide();
 
-        if (!this.commonService.checkNullOrUndefined(supplierRes) && supplierRes.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(supplierRes.response)) {
-            this.companyList = supplierRes.response['companiesList']
-          }
-        }
+        // if (!this.commonService.checkNullOrUndefined(supplierRes) && supplierRes.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(supplierRes.response)) {
+        //     this.companyList = supplierRes.response['companiesList']
+        //   }
+        // }
 
         if (!this.commonService.checkNullOrUndefined(materialRes) && materialRes.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(materialRes.response)) {

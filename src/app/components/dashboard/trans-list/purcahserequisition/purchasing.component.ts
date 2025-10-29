@@ -83,7 +83,7 @@ export class PurchasingComponent implements OnInit {
 
   ngOnInit() {
     this.formDataGroup();
-    this.getCompanyList();
+    this.getdepartmentData();
   }
 
   // tablePropsFunc() {
@@ -110,9 +110,10 @@ export class PurchasingComponent implements OnInit {
   // }
 
   formDataGroup() {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.formData = this.formBuilder.group({
       id: 0,
-      company: [null, [Validators.required]],
+      company: [obj.companyCode],
       departmentName: [null],
       profitcenterName: [''],
       companyName: [null],
@@ -156,20 +157,20 @@ export class PurchasingComponent implements OnInit {
     });
   }
 
-  getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-    this.apiService.apiGetRequest(companyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
-            }
-          }
-          this.getdepartmentData();
-        });
-  }
+  // getCompanyList() {
+  //   const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+  //   this.apiService.apiGetRequest(companyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companyList = res.response['companiesList'];
+  //           }
+  //         }
+  //         this.getdepartmentData();
+  //       });
+  // }
 
   // getplantList() {
   //   const getplantList = String.Join('/', this.apiConfigService.getplantList);

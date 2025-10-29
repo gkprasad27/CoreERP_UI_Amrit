@@ -24,10 +24,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatButtonModule } from '@angular/material/button';
 import { TableComponent } from '../../../../reuse-components/table/table.component';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-receiptspayments',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, TableComponent],
+  imports: [CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, TranslatePipe, TranslateModule, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, TableComponent],
   templateUrl: './receiptspayments.component.html',
   styleUrls: ['./receiptspayments.component.scss'],
   providers: [
@@ -70,6 +71,18 @@ export class ReceiptspaymentsComponent implements OnInit {
   amount = [];
   date = [];
 
+
+    dropdownSettings: IDropdownSettings = {
+      singleSelection: true,
+      idField: 'voucherTypeIdName',
+      textField: 'voucherTypeIdName',
+      enableCheckAll: true,
+      // selectAllText: 'Select All',
+      // unSelectAllText: 'UnSelect All',
+      // itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+
   constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -93,8 +106,9 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   formDataGroup() {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.formData = this.formBuilder.group({
-      company: [null, [Validators.required]],
+      company: [obj.companyCode],
       // branch: [null, [Validators.required]],
       voucherClass: [null],
       voucherType: [null, [Validators.required]],
@@ -175,7 +189,7 @@ export class ReceiptspaymentsComponent implements OnInit {
 
   // apis
   allApis() {
-    const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
+    // const getCompanyList = String.Join('/', this.apiConfigService.getCompanyList);
     const getVoucherTypesList = String.Join('/', this.apiConfigService.getVoucherTypesList);
     const getGLAccountsList = String.Join('/', this.apiConfigService.getGLAccountsList);
     const getpurchaseinvoiceList = String.Join('/', this.apiConfigService.getpurchaseinvoiceList);
@@ -185,25 +199,28 @@ export class ReceiptspaymentsComponent implements OnInit {
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
-        this.apiService.apiGetRequest(getCompanyList),
+        // this.apiService.apiGetRequest(getCompanyList),
         this.apiService.apiGetRequest(getVoucherTypesList),
         this.apiService.apiGetRequest(getGLAccountsList),
         this.apiService.apiGetRequest(getpurchaseinvoiceList),
         this.apiService.apiGetRequest(getBPList),
         this.apiService.apiGetRequest(getPartnerTypeList)
 
-      ]).subscribe(([supplierRes, materialRes, getmsizeRes, purchaseinvoice, bpList, ptypeList]) => {
+      ]).subscribe(([materialRes, getmsizeRes, purchaseinvoice, bpList, ptypeList]) => {
         this.spinner.hide();
 
-        if (!this.commonService.checkNullOrUndefined(supplierRes) && supplierRes.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(supplierRes.response)) {
-            this.companyList = supplierRes.response['companiesList']
-          }
-        }
+        // if (!this.commonService.checkNullOrUndefined(supplierRes) && supplierRes.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(supplierRes.response)) {
+        //     this.companyList = supplierRes.response['companiesList']
+        //   }
+        // }
 
         if (!this.commonService.checkNullOrUndefined(materialRes) && materialRes.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(materialRes.response)) {
-            this.voucherTypeList = materialRes.response['vouchertypeList'];
+            this.voucherTypeList = materialRes.response['vouchertypeList'].map((s: any) => ({
+                  ...s,
+                  voucherTypeIdName: `${s.voucherTypeId} - ${s.voucherTypeName}`
+                }));;
           }
         }
 
@@ -250,6 +267,7 @@ export class ReceiptspaymentsComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['paymentreceiptMasters']);
+
               this.accountSelect();
               this.onbpChange(false);
               const bObj = this.bpgLists.find((p: any) => p.id == this.formData.value.partyAccount);
@@ -296,7 +314,7 @@ export class ReceiptspaymentsComponent implements OnInit {
   }
 
   voucherTypeSelect() {
-    const record = this.voucherTypeList.find(res => res.voucherTypeId == this.formData.get('voucherType').value)
+    const record = this.voucherTypeList.find(res => res.voucherTypeIdName == this.formData.value.voucherType[0].voucherTypeIdName)
     this.formData.patchValue({
       voucherClass: !this.commonService.checkNullOrUndefined(record) ? record.voucherClass : null
     })
@@ -306,8 +324,8 @@ export class ReceiptspaymentsComponent implements OnInit {
     this.formData.patchValue({
       voucherNumber: null
     })
-    if (!this.commonService.checkNullOrUndefined(this.formData.get('voucherType').value)) {
-      const voucherNoUrl = String.Join('/', this.apiConfigService.getVoucherNumber, this.formData.get('voucherType').value);
+    if (!this.commonService.checkNullOrUndefined(this.formData.value.voucherType[0].voucherTypeIdName)) {
+      const voucherNoUrl = String.Join('/', this.apiConfigService.getVoucherNumber, this.formData.value.voucherType[0].voucherTypeIdName.split('-')[0].trim());
       this.apiService.apiGetRequest(voucherNoUrl)
         .subscribe(
           response => {
@@ -522,8 +540,13 @@ export class ReceiptspaymentsComponent implements OnInit {
     this.formData.patchValue({ partyAccount: bObj.id });
     this.formData.controls['voucherNumber'].enable();
     arr.forEach((t: any) => t['invoiceNo'] = t.referenceNumber);
+
+    const formData = this.formData.getRawValue();
+    if (typeof formData.voucherType != 'string') {
+      formData.voucherType = this.formData.value.voucherType[0].voucherTypeIdName.split('-')[0].trim();
+    }
     const addCashBank = String.Join('/', this.apiConfigService.addPaymentsReceipts);
-    const requestObj = { pcbHdr: this.formData.value, pcbDtl: arr };
+    const requestObj = { pcbHdr: formData, pcbDtl: arr };
     this.apiService.apiPostRequest(addCashBank, requestObj).subscribe(
       response => {
         const res = response;

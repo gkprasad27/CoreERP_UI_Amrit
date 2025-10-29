@@ -101,27 +101,25 @@
 
 
 
-      <div class="row p-1">
+     <div class="row p-1">
 
 
-          <mat-form-field class="col-2">
-            <mat-label>{{'materialrequisition.typeofWork' | translate }}</mat-label>
-            <mat-select formControlName="typeofWork" appFocusOnEnter tabIndex="1">
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="let emp of citemList" [value]="emp.description">
-                {{emp.description}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="col-2">
-            <mat-label>{{'materialrequisition.allocatedPerson' | translate }}</mat-label>
-            <mat-select formControlName="allocatedPerson" appFocusOnEnter tabIndex="2">
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="let emp of employeesList" [value]="emp.text">
-                {{emp.id}}- {{emp.text}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="multiselect-dropdown-list floating-dropdown col-2"
+            [class.filled]="formData1.value?.typeofWork?.length > 0">
+            <label> {{ 'materialrequisition.typeofWork' | translate }} </label>
+            <ng-multiselect-dropdown placeholder=" " formControlName="typeofWork" [settings]="dropdownSettings"
+              [data]="citemList">
+            </ng-multiselect-dropdown>
+          </div>
+
+          <div class="multiselect-dropdown-list floating-dropdown col-2"
+            [class.filled]="formData1.value?.allocatedPerson?.length > 0">
+            <label> {{ 'materialrequisition.allocatedPerson' | translate }} </label>
+            <ng-multiselect-dropdown placeholder=" " formControlName="allocatedPerson" [settings]="dropdownSettings1"
+              [data]="employeesList">
+            </ng-multiselect-dropdown>
+          </div>
+
           <mat-form-field class="col-2">
             <mat-label>{{'materialrequisition.mechine' | translate }}</mat-label>
             <mat-select formControlName="mechine" appFocusOnEnter tabIndex="3">
@@ -151,17 +149,15 @@
             <mat-label [translate]="'materialrequisition.remarks'"></mat-label>
             <input matInput formControlName="remarks" appFocusOnEnter tabIndex="4">
           </mat-form-field>
-          <mat-form-field class="col-2">
-            <mat-label>{{'materialrequisition.workStatus' | translate }}</mat-label>
-            <mat-select formControlName="workStatus" appFocusOnEnter tabIndex="3">
-              <mat-option>None</mat-option>
-              <mat-option value="Assigned"> Assigned </mat-option>
-              <mat-option value="In Progress"> In Progress </mat-option>
-              <mat-option value="Completed"> Completed </mat-option>
-              <mat-option value="Rejected"> Rejected </mat-option>
-              <mat-option value="Assigned to QC"> Assigned to QC </mat-option>
-            </mat-select>
-          </mat-form-field>
+
+          <div class="multiselect-dropdown-list floating-dropdown col-2"
+            [class.filled]="formData1.value?.workStatus?.length > 0">
+            <label> {{ 'materialrequisition.workStatus' | translate }} </label>
+            <ng-multiselect-dropdown placeholder=" " formControlName="workStatus" [settings]="dropdownSettings2"
+              [data]="statusList">
+            </ng-multiselect-dropdown>
+          </div>
+
           <mat-form-field  class="col-2">
             <mat-label [translate]="'materialrequisition.productionPlanDate'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"

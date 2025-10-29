@@ -151,7 +151,7 @@ export class BillOfMaterialComponent implements OnInit {
 
   ngOnInit() {
     this.formDataGroup();
-    this.getCompanyList();
+    this.getprofircenterData();
     this.getSaleOrderList();
 
     
@@ -187,8 +187,9 @@ export class BillOfMaterialComponent implements OnInit {
     }
 
   formDataGroup() {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.formData = this.formBuilder.group({
-      company: [null, [Validators.required]],
+      company: [obj.companyCode],
       amount: [''],
       profitcenterName: [''],
       companyName: [null],
@@ -536,24 +537,24 @@ export class BillOfMaterialComponent implements OnInit {
         });
   }
 
-  getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-    this.apiService.apiGetRequest(companyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
-              this.formData.patchValue({
-                company: this.companyList.length ? this.companyList[0].id : null
-              })
-              //this.companyChange();
-            }
-          }
-          this.getprofircenterData();
-        });
-  }
+  // getCompanyList() {
+  //   const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+  //   this.apiService.apiGetRequest(companyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companyList = res.response['companiesList'];
+  //             this.formData.patchValue({
+  //               company: this.companyList.length ? this.companyList[0].id : null
+  //             })
+  //             //this.companyChange();
+  //           }
+  //         }
+  //         this.getprofircenterData();
+  //       });
+  // }
 
 
   getprofircenterData() {

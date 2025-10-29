@@ -414,7 +414,7 @@
 
             <div class="row p-1">
 
-                <mat-form-field class="col-3">
+                <!-- <mat-form-field class="col-3">
                     <mat-label>{{ 'jobworkmaterialissue.company' | translate }}</mat-label>
                     <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
@@ -422,7 +422,7 @@
                             {{comp.companyName}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <mat-form-field class="col-3">
                     <mat-label>{{'jobworkmaterialissue.profitCenter' | translate }}</mat-label>
@@ -473,10 +473,18 @@
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="col-3">
+                
+                <div class="mat-mdc-form-field typeahead typeahead floating-dropdown col-3"
+                    [class.filled]="formData.value?.createdBy?.length > 0">
                     <mat-label [translate]="'jobworkmaterialissue.createdBy'"></mat-label>
-                    <input matInput type="text" formControlName="createdBy" appFocusOnEnter tabIndex="8">
-                </mat-form-field>
+                    <input placeholder=" " formControlName="createdBy" [typeaheadOptionsLimit]="100000" [typeahead]="employeesList"
+                        typeaheadOptionField='text' appFocusOnEnter tabIndex="9" class="form-control typeahead"
+                        [typeaheadItemTemplate]="customItemTemplate">
+                    <ng-template #customItemTemplate let-model="item">
+                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+                    </ng-template>
+                </div>
+                
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'jobworkmaterialissue.contactNo'"></mat-label>
                     <input matInput type="text" formControlName="contactNo" appFocusOnEnter tabIndex="9">
@@ -568,7 +576,7 @@
 
                     <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.deliveryDate'"></mat-label>
-                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker13"
+                        <input matInput [matDatepicker]="picker13"
                             [nonEditable]="picker13" formControlName="deliveryDate" appFocusOnEnter tabIndex="17">
                         <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
                         <mat-datepicker #picker13></mat-datepicker>

@@ -102,8 +102,9 @@ export class SalesorderComponent {
 
 
   formDataGroup() {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.formData = this.formBuilder.group({
-      company: [null, Validators.required],
+      company: [obj.companyCode],
       companyName: [null],
       saleOrderNo: [0],
       materialCode: [''],
@@ -317,7 +318,7 @@ export class SalesorderComponent {
               this.customerList = data;
             }
           }
-          this.getCompanyList();
+          this.getProfitcenterData();
         });
   }
 
@@ -333,20 +334,20 @@ export class SalesorderComponent {
     }
   }
 
-  getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-    this.apiService.apiGetRequest(companyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
-            }
-          }
-          this.getProfitcenterData();
-        });
-  }
+  // getCompanyList() {
+  //   const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+  //   this.apiService.apiGetRequest(companyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companyList = res.response['companiesList'];
+  //           }
+  //         }
+  //         this.getProfitcenterData();
+  //       });
+  // }
 
   getProfitcenterData() {
     const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
@@ -596,6 +597,8 @@ export class SalesorderComponent {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             if(this.fileList) {
               this.uploadFile();
+            } else {
+              this.router.navigate(['/dashboard/transaction/saleorder'])
             }
             this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
           }

@@ -438,7 +438,6 @@ mat-tab-header {
         border-radius: 0px !important;
 
         .selected-item {
-          overflow: hidden !important;
           border: none !important;
           background: none !important;
           color: rgba(0, 0, 0, .87) !important;
@@ -463,6 +462,30 @@ mat-tab-header {
     }
   }
 }
+
+/* Make the dropdown button full width */
+ .multiselect-dropdown .dropdown-btn {
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* For the selected-item container when single selection */
+ .multiselect-dropdown .dropdown-btn .selected-item-container {
+  width: 100% !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* And the selected-item itself */
+ .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item {
+  display: inline-block;
+  max-width: 100% !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 
 typeahead-container {
   height: 200px !important;

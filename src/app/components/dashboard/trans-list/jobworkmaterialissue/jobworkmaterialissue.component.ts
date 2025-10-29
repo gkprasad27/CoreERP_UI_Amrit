@@ -87,6 +87,7 @@ export class JobworkmaterialissueComponent {
   taxCodeList: any[] = [];
   // materialList: any[] = [];
   profitCenterList: any[] = [];
+  employeesList = [];
 
   routeEdit = '';
   http: any;
@@ -94,8 +95,6 @@ export class JobworkmaterialissueComponent {
 
   fileList: any;
   fileList1: any;
-
-  user: any;
 
   constructor(
     public commonService: CommonService,
@@ -120,14 +119,14 @@ export class JobworkmaterialissueComponent {
   }
 
   formDataGroup() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    const obj = JSON.parse(localStorage.getItem('user'));
 
     this.formData = this.formBuilder.group({
 
       id: [0],
       jobWorkNumber: [0],
 
-      company: [null, Validators.required],
+      company: [obj.companyCode],
       companyName: [null],
 
       profitCenter: ['', Validators.required],
@@ -135,8 +134,8 @@ export class JobworkmaterialissueComponent {
       vendor: ['', Validators.required],
       vendorGSTN: [null],
 
-      addWho: this.user.userName,
-      editWho: this.user.userName,
+      addWho: obj.userName,
+      editWho: obj.userName,
 
       orderDate: [null],
       deliveryDate: [null],
@@ -178,6 +177,11 @@ export class JobworkmaterialissueComponent {
       stockQty: [0],
       totalTax: [0],
       highlight: false,
+      supplierCode: [''],
+      availableQTY: [''],
+      hsnsac: [''],
+      saleOrderNo: [''],
+      status: [''],
       action: [[
         { id: 'Edit', type: 'edit' },
         { id: 'Delete', type: 'delete' }
@@ -190,22 +194,24 @@ export class JobworkmaterialissueComponent {
     let obj = JSON.parse(localStorage.getItem("user"));
     const getSaleOrderApprovedList = String.Join('/', this.apiConfigService.getSaleOrderApprovedList, obj.companyCode);
     const getCustomerList = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
-    const getCompanysList = String.Join('/', this.apiConfigService.getCompanysList);
+    // const getCompanysList = String.Join('/', this.apiConfigService.getCompanysList);
     const getBusienessPartnersAccList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList, obj.companyCode);
     const getProfitCenterList = String.Join('/', this.apiConfigService.getProfitCenterList);
     const getTaxRatesList = String.Join('/', this.apiConfigService.getTaxRatesList);
+    const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
 
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
         this.apiService.apiGetRequest(getSaleOrderApprovedList),
         this.apiService.apiGetRequest(getCustomerList),
-        this.apiService.apiGetRequest(getCompanysList),
+        // this.apiService.apiGetRequest(getCompanysList),
         this.apiService.apiGetRequest(getBusienessPartnersAccList),
         this.apiService.apiGetRequest(getProfitCenterList),
         this.apiService.apiGetRequest(getTaxRatesList),
+        this.apiService.apiGetRequest(getEmployeeList),
 
-      ]).subscribe(([saleOrderApprovedList, customerList, companysList, busienessPartnersAccList, profitCenterList, taxRatesList]) => {
+      ]).subscribe(([saleOrderApprovedList, customerList, busienessPartnersAccList, profitCenterList, taxRatesList, employeeList]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(saleOrderApprovedList) && saleOrderApprovedList.status === StatusCodes.pass) {
@@ -222,11 +228,11 @@ export class JobworkmaterialissueComponent {
           }
         }
 
-        if (!this.commonService.checkNullOrUndefined(companysList) && companysList.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(companysList.response)) {
-            this.companyList = companysList.response['companiesList'];
-          }
-        }
+        // if (!this.commonService.checkNullOrUndefined(companysList) && companysList.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(companysList.response)) {
+        //     this.companyList = companysList.response['companiesList'];
+        //   }
+        // }
 
         if (!this.commonService.checkNullOrUndefined(busienessPartnersAccList) && busienessPartnersAccList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(busienessPartnersAccList.response)) {
@@ -247,6 +253,12 @@ export class JobworkmaterialissueComponent {
             const resp = taxRatesList.response['TaxratesList'];
             const data = resp.length && resp.filter((t: any) => t.taxType == 'Output');
             this.taxCodeList = data;
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(employeeList) && employeeList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(employeeList.response)) {
+              this.employeesList = employeeList.response['emplist'];
           }
         }
 
@@ -310,11 +322,11 @@ export class JobworkmaterialissueComponent {
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response) && res.response['mmasterList'].length) {
             // this.materialList = res.response['mmasterList'];
-                  this.formData1.patchValue({
-                    stockQty: res.response['mmasterList'][0].availQTY,
-                    netWeight: res.response['mmasterList'][0].netWeight,
-                  });
-
+            const materialObj = res.response['mmasterList'].find((m: any) => m.id == this.formData1.value.materialCode);
+            this.formData1.patchValue({
+              stockQty: materialObj.availQTY,
+              netWeight: materialObj.netWeight,
+            });
           }
         }
       })
@@ -353,6 +365,10 @@ export class JobworkmaterialissueComponent {
     }
     if ((+this.formData1.value.qty) <= 0) {
       this.alertService.openSnackBar(`Provided Qty can't be zero`, Static.Close, SnackBar.error);
+      return;
+    }
+    if ((+this.formData1.value.rate) <= 0) {
+      this.alertService.openSnackBar(`Provided Rate can't be zero`, Static.Close, SnackBar.error);
       return;
     }
     if (((+this.formData1.value.qty) > (+this.formData1.value.soQty)) || ((+this.formData1.value.qty) > (+this.formData1.value.stockQty))) {

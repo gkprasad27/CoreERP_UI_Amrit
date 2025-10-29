@@ -95,15 +95,15 @@ export class MaterialissueComponent {
 
 
   formDataGroup() {
-    const user = JSON.parse(localStorage.getItem('user'));
+    let obj = JSON.parse(localStorage.getItem("user"));
 
     this.formData = this.formBuilder.group({
 
       id: [0],
-      company: [null, Validators.required],
+      company: [obj.companyCode],
       companyName: [null],
-      addWho: user.userName,
-      editWho: user.userName,
+      addWho: obj.userName,
+      editWho: obj.userName,
       issuedDate: [null],
       issuedFrom:[null],
       issuedTo:[null],

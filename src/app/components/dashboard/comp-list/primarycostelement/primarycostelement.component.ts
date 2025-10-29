@@ -81,10 +81,11 @@ export class PrimaryCostElementsCreationComponent implements OnInit {
     private apiService: ApiService,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+    let obj = JSON.parse(localStorage.getItem("user"));
 
     this.modelFormData = this.formBuilder.group({
       //primaryCostCode: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(4)]],
-      company: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
+      company: [obj.companyCode],
       chartofAccount: [null],
       generalLedger: [null],
       description: [null],
@@ -106,7 +107,7 @@ export class PrimaryCostElementsCreationComponent implements OnInit {
 
   ngOnInit() {
     this.getChartofAccountData();
-    this.getcompanyData();
+    // this.getcompanyData();
     this.getuomTypeData();
   }
   approveOrReject(event) {
@@ -137,20 +138,20 @@ export class PrimaryCostElementsCreationComponent implements OnInit {
         });
   }
 
-  getcompanyData() {
-    const getompanyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-    this.apiService.apiGetRequest(getompanyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companiesList = res.response['companiesList'];
-            }
-          }
-          this.spinner.hide();
-        });
-  }
+  // getcompanyData() {
+  //   const getompanyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+  //   this.apiService.apiGetRequest(getompanyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companiesList = res.response['companiesList'];
+  //           }
+  //         }
+  //         this.spinner.hide();
+  //       });
+  // }
 
 
   getuomTypeData() {

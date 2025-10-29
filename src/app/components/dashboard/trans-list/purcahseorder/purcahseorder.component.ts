@@ -959,15 +959,15 @@ export class PurchaseOrderComponent implements OnInit {
       }
     } else if (value.action === 'View') {
       this.dialog.open(PoHistoryComponent, {
-        width: '100%',
-        height: '700px',
+        height: '900px',
+      position: { top: '5%', left: '10%' },
         data: value,
         panelClass: 'full-width-centered-dialog'
       });
     } else if (value.action === 'View1') {
       const dialogRef = this.dialog.open(VendorMaterialListComponent, {
-        width: '100%',
-        height: '700px',
+       height: '900px',
+      position: { top: '5%', left: '10%' },
         data: value,
         panelClass: 'full-width-centered-dialog'
       });

@@ -127,13 +127,14 @@ export class GoodsissueComponent implements OnInit {
 
   ngOnInit() {
     this.formDataGroup();
-    this.getCompanyList();
+    this.getEmployeesList();
     this.getreqList();
   }
 
   formDataGroup() {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.formData = this.formBuilder.group({
-      company: [null, [Validators.required]],
+      company: [obj.companyCode],
       // plant: [null, [Validators.required]],
       goodsIssueId: ['0'],
       storesPerson: [null, Validators.required],
@@ -477,20 +478,20 @@ export class GoodsissueComponent implements OnInit {
   }
 
 
-  getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-    this.apiService.apiGetRequest(companyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
-            }
-          }
-          this.getEmployeesList();
-        });
-  }
+  // getCompanyList() {
+  //   const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+  //   this.apiService.apiGetRequest(companyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companyList = res.response['companiesList'];
+  //           }
+  //         }
+  //         this.getEmployeesList();
+  //       });
+  // }
 
   getEmployeesList() {
     let obj = JSON.parse(localStorage.getItem("user"));

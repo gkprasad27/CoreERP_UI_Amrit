@@ -44,6 +44,14 @@ export class MaterialRequisitionViewComponent {
     allowSearchFilter: true
   };
 
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'description',
+    textField: 'description',
+    enableCheckAll: true,
+    allowSearchFilter: true
+  };
+
   formData: FormGroup;
 
   tableData = [];
@@ -123,6 +131,7 @@ export class MaterialRequisitionViewComponent {
       this.formData.patchValue(value.item);
       this.formData.patchValue({
         allocatedPerson: [{ text: value.item.allocatedPerson }],
+        mechine: [{ description: value.item.mechine }],
       })
     }
   }
@@ -158,6 +167,7 @@ export class MaterialRequisitionViewComponent {
     })
     const formValue = this.formData.value;
     formValue.allocatedPerson = formValue.allocatedPerson && formValue.allocatedPerson.length ? formValue.allocatedPerson[0].text : null;
+    formValue.mechine = formValue.mechine && formValue.mechine.length ? formValue.mechine[0].description : null;
     let data: any = this.tableData;
     this.tableData = null;
     this.tableComponent.defaultValues();

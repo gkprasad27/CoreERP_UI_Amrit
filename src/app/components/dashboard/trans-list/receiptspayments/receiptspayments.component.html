@@ -10,7 +10,7 @@
 
             <div class="row p-1">
 
-                <mat-form-field class="col-2">
+                <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'receiptspayments.company' | translate }}</mat-label>
                     <mat-select formControlName="company">
                         <mat-option>None</mat-option>
@@ -18,7 +18,7 @@
                             {{comp.text}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'receiptspayments.branch' | translate }}</mat-label>
@@ -51,16 +51,19 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="col-2">
-                    <mat-label>{{ 'receiptspayments.voucherType' | translate }}</mat-label>
-                    <mat-select formControlName="voucherType"
-                        (selectionChange)="voucherTypeSelect(); voucherNoCalculate();">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let type of voucherTypeList" [value]="type.voucherTypeId">
-                            {{type.voucherTypeId}}- {{type.voucherTypeName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                
+                    <div class="multiselect-dropdown-list floating-dropdown col-2" *ngIf="!routeEdit" 
+                        [class.filled]="formData.value?.voucherType?.length > 0">
+                        <label> {{ 'receiptspayments.voucherType' | translate }} </label>
+                        <ng-multiselect-dropdown placeholder=" " formControlName="voucherType" [settings]="dropdownSettings"
+                            [data]="voucherTypeList" 
+                        (onSelect)="voucherTypeSelect(); voucherNoCalculate();">
+                        </ng-multiselect-dropdown>
+                    </div>
+                     <mat-form-field class="col-2" *ngIf="routeEdit">
+                    <mat-label>{{'receiptspayments.voucherType' | translate }}</mat-label>
+                    <input matInput type="text" readonly formControlName="voucherType" appFocusOnEnter tabIndex="5">
+                    </mat-form-field>
 
                 <mat-form-field class="col-2">
                     <mat-label [translate]="'receiptspayments.voucherNumber'"></mat-label>

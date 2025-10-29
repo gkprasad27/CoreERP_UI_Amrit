@@ -25,10 +25,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-materialrequisition',
-  imports: [ CommonModule, ReactiveFormsModule, NonEditableDatepicker, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [CommonModule, ReactiveFormsModule, NgMultiSelectDropDownModule, NonEditableDatepicker, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './materialrequisition.component.html',
   styleUrls: ['./materialrequisition.component.scss'],
   providers: [
@@ -79,6 +80,44 @@ export class MaterialrequisitionComponents implements OnInit {
 
   filePath: any;
 
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'description',
+    textField: 'description',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'text',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+
+  dropdownSettings2: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'status',
+    textField: 'status',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+  statusList: any[] = [{ status: 'Assigned' }, { status: 'In Progress' }, { status: 'Completed' }, { status: 'Rejected' }, { status: 'Assigned to QC' }];
+
   constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -119,20 +158,20 @@ export class MaterialrequisitionComponents implements OnInit {
       materialCode: [''],
       productionTag: [''],
       saleOrderNumber: [''],
-      company:[''],
+      company: [''],
       bomKey: [''],
       bomName: [''],
 
       highlight: false,
       id: 0,
       action: [[
-  { id: 'Edit', type: 'edit' },
-  { id: 'View', type: 'view' }
-]],
+        { id: 'Edit', type: 'edit' },
+        { id: 'View', type: 'view' }
+      ]],
       index: 0
     });
     // this.formData = this.formBuilder.group({
-       //: [null//],
+    //: [null//],
     //   plant: [null, [Validators.required]],
     //   branch: [null],
     //   project: [null],
@@ -242,12 +281,16 @@ export class MaterialrequisitionComponents implements OnInit {
       //   changed: true
     });
     let data: any = this.tableData1;
+    const obj = this.formData1.getRawValue();
+    obj.typeofWork = obj.typeofWork ? obj.typeofWork[0].description : '';
+    obj.allocatedPerson = obj.allocatedPerson ? obj.allocatedPerson[0].text : '';
+    obj.workStatus = obj.workStatus ? obj.workStatus[0].status : '';
+
     this.tableData1 = null;
     this.tableComponent.defaultValues();
-    if (this.formData1.value.index == 0) {
+    if (obj.index == 0) {
       data.forEach((d: any) => {
         if (d.checkbox) {
-          const obj = this.formData1.value;
           Object.keys(obj).forEach((key: any) => {
             d[key] = obj[key] ? obj[key] : d[key]
           })
@@ -255,7 +298,7 @@ export class MaterialrequisitionComponents implements OnInit {
         d.checkbox = false
       })
     } else {
-      data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
+      data = data.map((res: any) => res = res.index == obj.index ? obj : res);
     }
     setTimeout(() => {
       this.tableData1 = data;
@@ -268,9 +311,9 @@ export class MaterialrequisitionComponents implements OnInit {
     this.formData1.patchValue({
       index: 0,
       action: [
-  { id: 'Edit', type: 'edit' },
-  { id: 'View', type: 'view' }
-],
+        { id: 'Edit', type: 'edit' },
+        { id: 'View', type: 'view' }
+      ],
     });
   }
 
@@ -281,6 +324,11 @@ export class MaterialrequisitionComponents implements OnInit {
       this.tableData1 = this.tableData1.filter((res: any) => res.index != value.item.index);
     } else if (value.action === 'Edit') {
       this.formData1.patchValue(value.item);
+      this.formData1.patchValue({
+        typeofWork: value.item.typeofWork ? [{ description: value.item.typeofWork }] : '',
+        allocatedPerson: value.item.allocatedPerson ? [{ text: value.item.allocatedPerson }] : '',
+        workStatus: value.item.workStatus ? [{ status: value.item.workStatus }] : '',
+      })
     } else {
       this.inspectioncheck(value);
     }
@@ -328,10 +376,10 @@ export class MaterialrequisitionComponents implements OnInit {
     this.getTagsissueDetail(event.saleOrderNumber, encodedMaterialCode, event.bomNumber);
   }
 
-  getTagsissueDetail(val, val1,bomNumber) {
+  getTagsissueDetail(val, val1, bomNumber) {
     this.filePath = '';
     this.tableComponent.defaultValues();
-    const jvDetUrl = String.Join('/', this.apiConfigService.getTagsissueDetail, val, val1,bomNumber);
+    const jvDetUrl = String.Join('/', this.apiConfigService.getTagsissueDetail, val, val1, bomNumber);
     this.apiService.apiGetRequest(jvDetUrl)
       .subscribe(
         response => {
@@ -357,15 +405,15 @@ export class MaterialrequisitionComponents implements OnInit {
                   typeofWork: s.typeofWork ? s.typeofWork : '',
                   workStatus: s.workStatus ? s.workStatus : '',
                   bomKey: s.bomKey ? s.bomKey : '',
-                  company:s.company?s.company:'',
-                  bomName: s.bomName ? s.bomName : '',            
+                  company: s.company ? s.company : '',
+                  bomName: s.bomName ? s.bomName : '',
                   id: s.id ? s.id : '',
                   action: s.status != 'Rejected' ? [
-  { id: 'Edit', type: 'edit' },
-  { id: 'View', type: 'view' }
-] : [
-  { id: 'View', type: 'view' }
-],
+                    { id: 'Edit', type: 'edit' },
+                    { id: 'View', type: 'view' }
+                  ] : [
+                    { id: 'View', type: 'view' }
+                  ],
                   index: index + 1,
                   checkbox: false
                 }

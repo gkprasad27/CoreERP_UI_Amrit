@@ -82,7 +82,7 @@ export class InvoiceverificationComponent implements OnInit {
 
   ngOnInit() {
     this.formDataGroup();
-    this.getCompanyList();
+    this.getsuppliercodeList();
   }
 
   tablePropsActivityFunc() {
@@ -186,9 +186,10 @@ export class InvoiceverificationComponent implements OnInit {
     this.capacityTableData = data.data;
   }
 
-  formDataGroup() {
+  formDataGroup() {    
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.modelFormData = this.formBuilder.group({
-      company: [null, [Validators.required]],
+      company: [obj.companyCode],
       plant: [null, [Validators.required]],
       purchaseOrderNo: [null],
       supplierCode: [null],
@@ -212,23 +213,23 @@ export class InvoiceverificationComponent implements OnInit {
     }
   }
 
-  getCompanyList() {
-    const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
-    this.apiService.apiGetRequest(companyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
-              this.modelFormData.patchValue({
-                company: this.companyList.length ? this.companyList[0].id : null
-              })
-            }
-          }
-          this.getsuppliercodeList();
-        });
-  }
+  // getCompanyList() {
+  //   const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
+  //   this.apiService.apiGetRequest(companyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companyList = res.response['companiesList'];
+  //             this.modelFormData.patchValue({
+  //               company: this.companyList.length ? this.companyList[0].id : null
+  //             })
+  //           }
+  //         }
+  //         this.getsuppliercodeList();
+  //       });
+  // }
   getsuppliercodeList() {
     let obj = JSON.parse(localStorage.getItem("user"));
     const getsuppliercodeList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList, obj.companyCode);

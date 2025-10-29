@@ -188,7 +188,7 @@
 
             <div class="row">
 
-                <mat-form-field class="col-2">
+                <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'supplierquotation.company' | translate }}</mat-label>
                     <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
@@ -196,7 +196,7 @@
                             {{comp.text}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <mat-form-field class="col-2">
                     <mat-label>{{'supplierquotation.profitCenter' | translate }}</mat-label>
@@ -208,7 +208,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div class="mat-mdc-form-field  floating-dropdown col-3" [class.filled]="formData.value?.customerCode?.length > 0">
+                <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData.value?.customerCode?.length > 0">
                     <label> {{ 'supplierquotation.supplier' | translate }} </label>
                     <input placeholder="{{ 'supplierquotation.supplier' | translate }}" formControlName="customerCode"
                         [typeaheadOptionsLimit]="100000" [typeahead]="ptypeList" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
@@ -272,7 +272,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div class="mat-mdc-form-field  typeahead floating-dropdown col-3" [class.filled]="formData.value?.bom?.length > 0">
+                <div class="mat-mdc-form-field  typeahead floating-dropdown col-2" [class.filled]="formData.value?.bom?.length > 0">
                     <label> {{ 'saleorder.bom' | translate }} </label>
                     <input placeholder=" " formControlName="bom" [typeaheadOptionsLimit]="100000" [typeahead]="qnoList"
                         typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="12" class="form-control typeahead"
