@@ -64,7 +64,7 @@
 
                 <div class="mat-mdc-form-field typeahead typeahead floating-dropdown col-3"
                     [class.filled]="formData.value?.receivedBy?.length > 0">
-                    <mat-label [translate]="'jobworkmaterialreceiving.receivedDate'"></mat-label>
+                    <label> {{ 'jobworkmaterialreceiving.receivedDate' | translate }} </label>
                     <input placeholder=" " formControlName="receivedBy" [typeaheadOptionsLimit]="100000" [typeahead]="employeesList"
                         typeaheadOptionField='text' appFocusOnEnter tabIndex="9" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate">

@@ -691,7 +691,7 @@
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
                     [class.filled]="modelFormData.value?.materialCode?.length > 0"
                     *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'|| routeParam=='purchaseanalysis'|| routeParam=='stockvaluation'">
-                    <label [translate]="'COMMON.MATERIALCODE'"></label>
+                    <label> {{ 'COMMON.MATERIALCODE' | translate }} </label>
                     <input placeholder=" " formControlName="materialCode" [typeaheadOptionsLimit]="100000" [typeahead]="materialList"
                         typeaheadOptionField='id' appFocusOnEnter tabIndex="3" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate1">
@@ -714,7 +714,7 @@
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
                     [class.filled]="modelFormData.value?.partyAccount?.length > 0"
                     *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
-                    <label [translate]="'invoicesmemos.partyAccount'"></label>
+                    <label> {{ 'invoicesmemos.partyAccount' | translate }} </label>
                     <input placeholder=" " formControlName="partyAccount" [typeaheadOptionsLimit]="100000" [typeahead]="bpgLists"
                         typeaheadOptionField='text' appFocusOnEnter tabIndex="3" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate">
@@ -787,7 +787,7 @@
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
                     [class.filled]="modelFormData.value?.employee?.length > 0"
                     *ngIf="routeParam == 'employeeabsentreport' || routeParam == 'employeeotreport' || routeParam == 'employeeattendance' || routeParam == 'AttendanceProcess' || routeParam == 'salaryprocess'">
-                    <label [translate]="'COMMON.employee'"></label>
+                    <label> {{ 'COMMON.employee' | translate }} </label>
                     <input placeholder=" " formControlName="employee" [typeaheadOptionsLimit]="100000" [typeahead]="employeesList"
                         typeaheadOptionField='text' appFocusOnEnter tabIndex="9" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate">

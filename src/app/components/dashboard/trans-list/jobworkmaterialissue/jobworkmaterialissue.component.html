@@ -434,15 +434,19 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div class="multiselect-dropdown-list floating-dropdown col-3"
+                <div class="multiselect-dropdown-list floating-dropdown col-3" *ngIf="!routeEdit"
                     [class.filled]="formData.value?.vendor?.length > 0">
                     <label> {{ 'jobworkmaterialissue.vendor' | translate }} </label>
                     <ng-multiselect-dropdown placeholder=" " [disabled]="routeEdit != ''"  formControlName="vendor" (onSelect)="vendorChange($event)"
                         [settings]="dropdownSettings" [data]="customerList" appFocusOnEnter tabIndex="3">
                     </ng-multiselect-dropdown>
                 </div>
+                <mat-form-field *ngIf="routeEdit" class="col-3">
+                    <mat-label>{{'jobworkmaterialissue.vendor' | translate }}</mat-label>
+                    <input matInput type="text" readonly formControlName="vendor" appFocusOnEnter tabIndex="4">
+                </mat-form-field>
 
-                <div id="sale" class="multiselect-dropdown-list floating-dropdown col-3"
+                <div id="sale" class="multiselect-dropdown-list floating-dropdown col-3"  *ngIf="!routeEdit"
                     [class.filled]="formData.value?.saleOrderNo?.length > 0" >
                     <label> {{ 'jobworkmaterialissue.saleOrderNo' | translate }} </label>
                     <ng-multiselect-dropdown placeholder=" " [disabled]="routeEdit != ''" formControlName="saleOrderNo"
@@ -450,6 +454,10 @@
                         appFocusOnEnter tabIndex="4">
                     </ng-multiselect-dropdown>
                 </div>
+                <mat-form-field *ngIf="routeEdit" class="col-3">
+                    <mat-label>{{'jobworkmaterialissue.saleOrderNo' | translate }}</mat-label>
+                    <input matInput type="text" readonly formControlName="saleOrderNo" appFocusOnEnter tabIndex="4">
+                </mat-form-field>
 
                 <mat-form-field class="col-3">
                     <mat-label [translate]="'jobworkmaterialissue.vendorGSTN'"></mat-label>
@@ -476,7 +484,7 @@
                 
                 <div class="mat-mdc-form-field typeahead typeahead floating-dropdown col-3"
                     [class.filled]="formData.value?.createdBy?.length > 0">
-                    <mat-label [translate]="'jobworkmaterialissue.createdBy'"></mat-label>
+                    <label> {{ 'jobworkmaterialissue.createdBy' | translate }} </label>
                     <input placeholder=" " formControlName="createdBy" [typeaheadOptionsLimit]="100000" [typeahead]="employeesList"
                         typeaheadOptionField='text' appFocusOnEnter tabIndex="9" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate">

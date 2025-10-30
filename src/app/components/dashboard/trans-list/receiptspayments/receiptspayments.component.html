@@ -168,7 +168,7 @@
                 </mat-form-field> -->
 
                 <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData.value?.partyAccount?.length > 0">
-                    <label [translate]="'receiptspayments.partyAccount'"></label>
+                    <label> {{ 'receiptspayments.partyAccount' | translate }} </label>
                     <input placeholder=" " formControlName="partyAccount"
                         [typeaheadOptionsLimit]="100000" [typeahead]="bpgLists" typeaheadOptionField='text' appFocusOnEnter tabIndex="9" (typeaheadOnSelect)="puchaseinvoiceselect()"
                         class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"  >

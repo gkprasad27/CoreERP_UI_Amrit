@@ -559,11 +559,6 @@ export class JobworkmaterialissueComponent {
     this.formData.patchValue({
       vendorGSTN: obj ? obj.gstNo : ''
     })
-    if (!event) {
-      this.formData.patchValue({
-        vendor: [{ id: obj.id, text: obj.text }]
-      })
-    }
   }
 
   // getmaterialData() {
@@ -674,6 +669,9 @@ export class JobworkmaterialissueComponent {
     obj.vendor = obj.vendor[0].id;
     obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     obj.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
+    if (typeof obj.saleOrderNo != 'string') {
+      obj.saleOrderNo = obj[0].saleOrderNo;
+    }
     const arr = this.tableData.filter((t: any) => t.highlight);
     arr.forEach((a: any) => {
       a.deliveryDate = a.deliveryDate ? this.datepipe.transform(a.deliveryDate, 'MM-dd-yyyy') : '';
