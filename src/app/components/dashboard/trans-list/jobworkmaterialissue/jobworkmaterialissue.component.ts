@@ -670,7 +670,7 @@ export class JobworkmaterialissueComponent {
     obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     obj.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
     if (typeof obj.saleOrderNo != 'string') {
-      obj.saleOrderNo = obj[0].saleOrderNo;
+      obj.saleOrderNo = obj.saleOrderNo[0].saleOrderNo;
     }
     const arr = this.tableData.filter((t: any) => t.highlight);
     arr.forEach((a: any) => {
