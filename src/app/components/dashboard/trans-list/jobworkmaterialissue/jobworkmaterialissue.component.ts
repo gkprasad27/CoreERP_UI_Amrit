@@ -137,8 +137,8 @@ export class JobworkmaterialissueComponent {
       addWho: obj.userName,
       editWho: obj.userName,
 
-      orderDate: [null],
-      deliveryDate: [null],
+      orderDate: [null, Validators.required],
+      deliveryDate: [null, Validators.required],
 
       materialCode: [''],
 
@@ -148,7 +148,7 @@ export class JobworkmaterialissueComponent {
       amount: [0],
       totalTax: [0],
       totalAmount: [0],
-      createdBy: [''],
+      createdBy: ['', Validators.required],
       contactNo: [''],
 
       saleOrderType: ['Sale Order'],
@@ -194,7 +194,7 @@ export class JobworkmaterialissueComponent {
     let obj = JSON.parse(localStorage.getItem("user"));
     const getSaleOrderApprovedList = String.Join('/', this.apiConfigService.getSaleOrderApprovedList, obj.companyCode);
     const getCustomerList = String.Join('/', this.apiConfigService.getCustomerList, obj.companyCode);
-    // const getCompanysList = String.Join('/', this.apiConfigService.getCompanysList);
+    const getCompanysList = String.Join('/', this.apiConfigService.getCompanysList);
     const getBusienessPartnersAccList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList, obj.companyCode);
     const getProfitCenterList = String.Join('/', this.apiConfigService.getProfitCenterList);
     const getTaxRatesList = String.Join('/', this.apiConfigService.getTaxRatesList);
@@ -205,13 +205,13 @@ export class JobworkmaterialissueComponent {
       rxjs.forkJoin([
         this.apiService.apiGetRequest(getSaleOrderApprovedList),
         this.apiService.apiGetRequest(getCustomerList),
-        // this.apiService.apiGetRequest(getCompanysList),
+        this.apiService.apiGetRequest(getCompanysList),
         this.apiService.apiGetRequest(getBusienessPartnersAccList),
         this.apiService.apiGetRequest(getProfitCenterList),
         this.apiService.apiGetRequest(getTaxRatesList),
         this.apiService.apiGetRequest(getEmployeeList),
 
-      ]).subscribe(([saleOrderApprovedList, customerList, busienessPartnersAccList, profitCenterList, taxRatesList, employeeList]) => {
+      ]).subscribe(([saleOrderApprovedList, customerList, companysList, busienessPartnersAccList, profitCenterList, taxRatesList, employeeList]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(saleOrderApprovedList) && saleOrderApprovedList.status === StatusCodes.pass) {
@@ -228,11 +228,11 @@ export class JobworkmaterialissueComponent {
           }
         }
 
-        // if (!this.commonService.checkNullOrUndefined(companysList) && companysList.status === StatusCodes.pass) {
-        //   if (!this.commonService.checkNullOrUndefined(companysList.response)) {
-        //     this.companyList = companysList.response['companiesList'];
-        //   }
-        // }
+        if (!this.commonService.checkNullOrUndefined(companysList) && companysList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(companysList.response)) {
+            this.companyList = companysList.response['companiesList'];
+          }
+        }
 
         if (!this.commonService.checkNullOrUndefined(busienessPartnersAccList) && busienessPartnersAccList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(busienessPartnersAccList.response)) {
@@ -363,10 +363,10 @@ export class JobworkmaterialissueComponent {
     if (this.formData1.invalid) {
       return;
     }
-    if ((+this.formData1.value.qty) <= 0) {
-      this.alertService.openSnackBar(`Provided Qty can't be zero`, Static.Close, SnackBar.error);
-      return;
-    }
+    // if ((+this.formData1.value.qty) <= 0) {
+    //   this.alertService.openSnackBar(`Provided Qty can't be zero`, Static.Close, SnackBar.error);
+    //   return;
+    // }
     if ((+this.formData1.value.rate) <= 0) {
       this.alertService.openSnackBar(`Provided Rate can't be zero`, Static.Close, SnackBar.error);
       return;
@@ -752,8 +752,11 @@ export class JobworkmaterialissueComponent {
       }
     }
     if (this.bpaList.length) {
-      const str = (this.formData.value.vendor && this.formData.value.vendor) ? this.formData.value.vendor[0].id : ''
-      const bpaObj = this.bpaList.find((c: any) => c.bpnumber == str);
+      const obj = this.formData.value;
+      if (obj.vendor && typeof obj.vendor != 'string') {
+        obj.vendor = obj.vendor[0].id;
+      }
+      const bpaObj = this.bpaList.find((c: any) => c.bpnumber == obj?.vendor);
       formObj['vAddress'] = {
         name: bpaObj.name,
         address: bpaObj.address,
