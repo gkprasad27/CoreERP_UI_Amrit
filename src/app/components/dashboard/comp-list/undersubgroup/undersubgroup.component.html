@@ -21,8 +21,8 @@
           <mat-label [translate]="'glsubgroups.structureKey'"></mat-label>
           <mat-select formControlName="structureKey" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let stkey of structkeyList" [value]="stkey">
-              {{stkey}}
+            <mat-option *ngFor="let stkey of structkeyList" [value]="stkey.structureKey">
+              {{stkey.structureName}}
             </mat-option>
           </mat-select>
         </mat-form-field>

@@ -20,8 +20,8 @@
           <mat-label>{{'assignglaccount.toGl' | translate }}</mat-label>
           <mat-select formControlName="toGl" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let stkey of structkeyList" [value]="stkey">
-              {{stkey}}
+            <mat-option *ngFor="let stkey of structkeyList" [value]="stkey.structureKey">
+              {{stkey.structureName}}
             </mat-option>
           </mat-select>
         </mat-form-field>

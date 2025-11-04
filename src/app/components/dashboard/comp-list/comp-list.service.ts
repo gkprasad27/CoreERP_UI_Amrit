@@ -201,7 +201,7 @@ export class CompListService {
         this.dynamicComp.component = LanguageComponent;
         return this.dynamicComp.component;
         break;
-        case 'financialstatement':
+        case 'FinancialStatement':
         this.dynamicComp.component = financialstatementComponent;
         return this.dynamicComp.component;
         break;
