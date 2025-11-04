@@ -1,0 +1,46 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'financialstatement.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.structureKey.valid&& formControls.structureKey.status != 'DISABLED', 
+         'ng--invalid': !formControls.structureKey.valid && formControls.structureKey.status != 'DISABLED' }">
+          <mat-label [translate]="'financialstatement.structureKey'"></mat-label>
+          <input matInput formControlName="structureKey" appFocusOnEnter tabIndex="1" maxlength="5">
+          <mat-error *ngIf="!formControls.structureKey.valid && formControls.structureKey.status != 'DISABLED'"
+            [ngClass]="{ 'ng--invalid': !formControls.structureKey.valid  }">code is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.structureName.valid }">
+          <mat-label [translate]="'financialstatement.structureName'"></mat-label>
+
+          <input matInput formControlName="structureName" appFocusOnEnter tabIndex="2" maxlength="50">
+          <mat-error *ngIf="formControls.structureName.errors" class="help-block">
+            <div *ngIf="formControls.structureName.errors.required">Name is required</div>
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="form-element mt-2 d-flex justify-content-end">
+
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+          {{ 'COMMON.CANCEL' | translate }}
+        </button>
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
+          appFocusOnEnter tabIndex="5">
+          {{ 'COMMON.SAVE' | translate }}
+        </button>
+
+      </div>
+
+    </form>
+
+  </mat-card-content>
+</div>

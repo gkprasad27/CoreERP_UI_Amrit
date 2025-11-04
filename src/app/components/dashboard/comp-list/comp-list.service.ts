@@ -4,6 +4,7 @@ import { CompanyComponent } from './company/company.component';
 import { BranchesComponent } from './branches/branches.component';
 import { CostCenterComponent } from './cost-center/cost-center.component';
 import { LanguageComponent } from './language/language.component';
+import { financialstatementComponent } from './financialstatement/financialstatement.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { CountryComponent } from './country/country.component';
 import { RegionComponent } from './region/region.component';
@@ -198,6 +199,10 @@ export class CompListService {
         break;
       case 'language':
         this.dynamicComp.component = LanguageComponent;
+        return this.dynamicComp.component;
+        break;
+        case 'financialstatement':
+        this.dynamicComp.component = financialstatementComponent;
         return this.dynamicComp.component;
         break;
       case 'currency':

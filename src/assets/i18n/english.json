@@ -60,6 +60,11 @@
     "languageCode": "Language Code",
     "languageName": "Language Name"
   },
+     "financialstatement": {
+    "title": "Financial Statement",
+    "structureKey": "Financial Code",
+    "structureName": "Financial Name"
+  },
   "sizes": {
     "title": "Sizes",
     "unitId": "UOM Code",
