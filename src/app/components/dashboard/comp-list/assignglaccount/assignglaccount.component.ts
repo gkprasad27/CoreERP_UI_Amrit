@@ -37,6 +37,7 @@ export class AssignGLaccounttoSubGroupComponent implements OnInit {
   glList: any;
   structkeyList: any;
   fromGlList = [];
+  companyList: any[] = [];
   constructor(private commonService: CommonService,
     private addOrEditService: AddOrEditService,
     private formBuilder: FormBuilder,
@@ -48,7 +49,7 @@ export class AssignGLaccounttoSubGroupComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.modelFormData = this.formBuilder.group({
-      code: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(5)]],
+      compCode: [null, Validators.required],
       glgroup: [null],
       subAccount: [null],
       fromGl: [null],
@@ -61,12 +62,13 @@ export class AssignGLaccounttoSubGroupComponent implements OnInit {
       this.modelFormData.patchValue({
         fromGl: [this.formData.item['fromGl']]
       });
-      this.modelFormData.controls['code'].disable();
+      this.modelFormData.controls['compCode'].disable();
     }
   }
 
   ngOnInit() {
     this.geStructurekeyData();
+    this.getcompaniesList();
   }
 
   clearDropdown(contrl) {
@@ -90,6 +92,7 @@ export class AssignGLaccounttoSubGroupComponent implements OnInit {
         });
   }
 
+  
   getSubacclist() {
     if (!this.commonService.checkNullOrUndefined(this.modelFormData.get('glgroup').value)) {
       const getAccountNamelist = String.Join('/', this.apiConfigService.subgrouplist, this.modelFormData.get('glgroup').value);
@@ -125,6 +128,8 @@ export class AssignGLaccounttoSubGroupComponent implements OnInit {
           this.getglAccgrpList();
         });
   }
+
+
   // Check data with grid and listdata(Filter combobox data)
   filterGlList(glArray) {
     let glList = [];
@@ -159,6 +164,21 @@ export class AssignGLaccounttoSubGroupComponent implements OnInit {
         });
   }
 
+   getcompaniesList() {
+    const getcompanyList = String.Join('/', this.apiConfigService.getCompanyList);
+    this.apiService.apiGetRequest(getcompanyList)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.companyList = res.response['companiesList'];
+            }
+          }
+          this.spinner.hide();
+        });
+  }
   onGroupChange() {
     this.fromGlList = [];
     if (this.commonService.checkNullOrUndefined(this.formData.item)) {
@@ -180,7 +200,7 @@ export class AssignGLaccounttoSubGroupComponent implements OnInit {
     if (this.modelFormData.invalid) {
       return;
     }
-    this.modelFormData.controls['code'].enable();
+    this.modelFormData.controls['compCode'].enable();
 
     let array = [];
     this.formData.item = { ...this.modelFormData.value };

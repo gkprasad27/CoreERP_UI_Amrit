@@ -896,7 +896,7 @@
   },
   "assignglaccount": {
     "title": "Assign GLaccount To SubGroup",
-    "code": "Code",
+    "compCode": "Company Code",
     "toGl": "Structure Key",
     "glgroup": "GL Group",
     "subAccount": "Sub Account",
