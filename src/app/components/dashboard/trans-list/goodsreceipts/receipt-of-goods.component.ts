@@ -827,7 +827,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
         const sgst = obj.sgst ? ((+(amount ? amount : 1)) * obj.sgst) / 100 : 0;
         tax = igst + cgst + sgst;
       }
-      amount = amount + ((+this.formData.value.amount) + (t.receivedQty * t.rate * t.netWeight))
+      amount = amount + ((t.receivedQty * t.rate * t.netWeight))
       tax = tax + (t.igst + t.cgst + t.sgst);
       t.amount = amount.toFixed(2);
       t.tax = tax.toFixed(2);

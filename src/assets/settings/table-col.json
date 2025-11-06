@@ -1783,6 +1783,7 @@
     "receivedQty": "Received QTY",
     "rejectQty": "Reject QTY",
     "netWeight": "Net Weight",
+    "rate":"Rate",
     "amount": "Amount",
     "tax": "Tax",
     "project": "Project",

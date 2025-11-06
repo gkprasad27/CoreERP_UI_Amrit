@@ -2253,6 +2253,7 @@
     "grndate": "GRN Date",
     "qualityCheck": "Quality Check",
     "inspectionNoteNo": "Inspection No",
+    "rate":"Rate",
     "materialCode": "Material code",
     "materialName": "Material Name",
     "customerName": "Customer Name",
