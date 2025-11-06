@@ -36,7 +36,7 @@ export class OpenLedgerComponent implements OnInit {
   modelFormData: FormGroup;
   formData: any;
   ledgerList: any;
-
+ companyList: any[] = [];
   financialYearEndTo: MonthList[] =
     [
       { value: '1', viewValue: 'January' },
@@ -68,7 +68,8 @@ export class OpenLedgerComponent implements OnInit {
       id: ['0'],
       financialYearEndTo: [null],
       accountingYear: [null],
-      financialYearStartFrom: [null]
+      financialYearStartFrom: [null],
+      compCode: [null, Validators.required],
     });
 
     this.formData = { ...data };
@@ -80,6 +81,7 @@ export class OpenLedgerComponent implements OnInit {
 
   ngOnInit() {
     this.getLedgerList();
+     this.getcompaniesList();
   }
 
   get formControls() { return this.modelFormData.controls; }
@@ -115,4 +117,19 @@ export class OpenLedgerComponent implements OnInit {
           this.spinner.hide();
         });
   }
+    getcompaniesList() {
+      const getcompanyList = String.Join('/', this.apiConfigService.getCompanyList);
+      this.apiService.apiGetRequest(getcompanyList)
+        .subscribe(
+          response => {
+            this.spinner.hide();
+            const res = response;
+            if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+              if (!this.commonService.checkNullOrUndefined(res.response)) {
+                this.companyList = res.response['companiesList'];
+              }
+            }
+            this.spinner.hide();
+          });
+    }
 }

@@ -8,6 +8,22 @@
     <form [formGroup]="modelFormData" autocomplete="off">
 
       <div class="row">
+
+          <mat-form-field class="col-3">
+          <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
+          <mat-select formControlName="compCode" appFocusOnEnter tabIndex="0">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+              {{comp.text}}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="!formControls.compCode.valid && formControls.compCode.status != 'DISABLED'"
+            [ngClass]="{ 'ng--invalid': !formControls.compCode.valid  }"> Company Code is
+            required
+          </mat-error>
+        </mat-form-field>
+
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.ledgerKey.valid && formControls.ledgerKey.status != 'DISABLED', 
            'ng--invalid': !formControls.ledgerKey.valid && formControls.ledgerKey.status != 'DISABLED' }">
           <mat-label>{{'openledger.ledgerKey' | translate }}</mat-label>

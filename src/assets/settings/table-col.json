@@ -256,7 +256,8 @@
     "ledgerName": "Ledger Name",
     "financialYearStartFrom": "FY Start",
     "financialYearEndTo": "FY End",
-    "accountingYear": "Accounting Year"
+    "accountingYear": "Accounting Year",
+    "compCode": "Company Code"
   },
   "vouchertype": {
     "title": "Voucher Type",
@@ -376,7 +377,7 @@
     "groupType": "GroupType"
   },
   "glsubgroups": {
-    "title": "General Ledger",
+    "title": "Financial Statement Grouping",
     "accountGroupId": "Account Group ID",
     "structureKey": "Structure Key",
     "accountGroupName": "Account Group Name",
@@ -696,7 +697,7 @@
     "compCode": "Company Code",
     "toGl": "Structure Key",
     "glgroup": "GL Group",
-    "underAccountName": "Sub Account",
+    "underAccountName": "Sub Group",
     "glAccountName": "GL Account"
   },
   "glsubaccount": {
