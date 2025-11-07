@@ -129,8 +129,7 @@
     "webSite": "Web Site",
     "mailingName": "Mailing Name",
     "phone": "Phone",
-    "financialYearFrom": "Financial Year From",
-    "booksBeginingFrom": "Books Begining From"
+     "ext": "Nature"
   },
   "segment": {
     "title": "Segment",
@@ -350,7 +349,8 @@
     "title": " Ledger",
     "code": "Code",
     "description": "Ledger Name",
-    "ledgerType": "Ledger Type"
+    "ledgerType": "Ledger Type",
+    "ext": "Currency"
   },
   "openledger": {
     "title": "Open Ledger",

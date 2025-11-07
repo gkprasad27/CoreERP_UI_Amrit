@@ -15,6 +15,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AddOrEditService } from '../add-or-edit.service';
+import { ApiService } from '../../../../services/api.service';
+import { ApiConfigService } from '../../../../services/api-config.service';
+import { StatusCodes } from '../../../../enums/common/common';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { String } from 'typescript-string-operations';
 
 interface LedgerType {
   value: string;
@@ -31,7 +36,7 @@ export class LedgerComponent implements OnInit {
 
   modelFormData: FormGroup;
   formData: any;
-
+  currencyList: any;
   ledgertype: LedgerType[] =
     [
       { value: '1', viewValue: 'Day ledger' },
@@ -44,6 +49,9 @@ export class LedgerComponent implements OnInit {
     private formBuilder: FormBuilder,
     private addOrEditService: AddOrEditService,
     public dialogRef: MatDialogRef<LedgerComponent>,
+     private apiService: ApiService,
+     private apiConfigService: ApiConfigService,
+       private spinner: NgxSpinnerService,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
@@ -51,6 +59,7 @@ export class LedgerComponent implements OnInit {
       code: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(5)]],
       description: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       ledgerType: [null],
+       ext:[null],
     });
 
     this.formData = { ...data };
@@ -62,9 +71,23 @@ export class LedgerComponent implements OnInit {
   }
 
   ngOnInit() {
-
+this.getcurrencyList();
   }
 
+ getcurrencyList() {
+    const getcurrencyList = String.Join('/', this.apiConfigService.getcurrencyList);
+    this.apiService.apiGetRequest(getcurrencyList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.currencyList = res.response['CurrencyList'];
+            }
+          }
+          this.spinner.hide();
+        });
+  }
   get formControls() { return this.modelFormData.controls; }
 
   save() {

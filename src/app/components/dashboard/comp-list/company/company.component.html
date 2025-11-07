@@ -160,7 +160,17 @@
           <input matInput formControlName="phone" maxlength="50" appFocusOnEnter tabIndex="20">
         </mat-form-field>
 
-        <mat-form-field class="col-3">
+          <mat-form-field class="col-3">
+          <mat-label [translate]="'company.ext'"></mat-label>
+          <mat-select formControlName="ext" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let nature of nature" [value]="nature.value">
+              {{nature.Description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="col-3">
           <mat-label [translate]="'company.financialYearFrom'"></mat-label>
           <input matInput formControlName="financialYearFrom" maxlength="50" appFocusOnEnter tabIndex="20">
         </mat-form-field>
@@ -168,7 +178,7 @@
         <mat-form-field class="col-3">
           <mat-label [translate]="'company.booksBeginingFrom'"></mat-label>
           <input matInput formControlName="booksBeginingFrom" maxlength="50" appFocusOnEnter tabIndex="20">
-        </mat-form-field>
+        </mat-form-field> -->
 
       </div>
       <mat-divider></mat-divider>

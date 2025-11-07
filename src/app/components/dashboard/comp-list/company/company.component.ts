@@ -21,6 +21,11 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AddOrEditService } from '../add-or-edit.service';
 
+interface Nature {
+  value: string;
+  Description: string;
+}
+
 @Component({
   selector: 'app-company',
   imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
@@ -38,6 +43,12 @@ export class CompanyComponent implements OnInit {
   languageList: any;
   locList: any;
 
+    nature: Nature[] =
+    [
+      { value: 'Holding Company', Description: 'Holding Company' },
+      { value: 'Subsidiary Company', Description: 'Subsidiary Company' }
+    ];
+
   constructor(private commonService: CommonService,
     private apiService: ApiService,
     private addOrEditService: AddOrEditService,
@@ -48,7 +59,7 @@ export class CompanyComponent implements OnInit {
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
     this.modelFormData = this.formBuilder.group({
-
+      nature: [null],
       companyCode: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(5)]],
       companyName: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       shortName: [null, [Validators.minLength(1), Validators.maxLength(10)]],
@@ -70,7 +81,7 @@ export class CompanyComponent implements OnInit {
       panno: [null],
       gstno: [null],
       tanno: [null],
-
+      ext:[null],
       webSite: [null],
       mailingName: [null],
       financialYearFrom: [null],

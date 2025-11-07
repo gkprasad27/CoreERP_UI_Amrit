@@ -37,6 +37,17 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'ledger.ext' | translate }}</mat-label>
+          <mat-select formControlName="ext" appFocusOnEnter tabIndex="8">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let cncy of currencyList" [value]="cncy.id">
+              {{cncy.text}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
       </div>
       <mat-divider></mat-divider>
 
