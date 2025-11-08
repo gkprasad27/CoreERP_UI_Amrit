@@ -21,6 +21,12 @@ import { ApiService } from '../../../../services/api.service';
 import { String } from 'typescript-string-operations';
 import { AddOrEditService } from '../add-or-edit.service';
 
+
+interface Nature {
+  value: string;
+  Description: string;
+}
+
 @Component({
   selector: 'app-assignglaccount',
   imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
@@ -29,6 +35,13 @@ import { AddOrEditService } from '../add-or-edit.service';
 })
 
 export class AssignGLaccounttoSubGroupComponent implements OnInit {
+
+    nature: Nature[] =
+    [
+      { value: 'Plus Balance', Description: 'Plus Balance' },
+      { value: 'Minus Balance', Description: 'Minus Balance' },
+      { value: 'Both Balance', Description: 'Both Balance' }
+    ];
 
   modelFormData: FormGroup;
   formData: any;
@@ -49,11 +62,14 @@ export class AssignGLaccounttoSubGroupComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.modelFormData = this.formBuilder.group({
+      id: [null],
       compCode: [null, Validators.required],
       glgroup: [null],
       subAccount: [null],
       fromGl: [null],
-      toGl: [null]
+      toGl: [null],
+      nature: [null],
+       ext1:[null]
     });
 
     this.formData = { ...data };

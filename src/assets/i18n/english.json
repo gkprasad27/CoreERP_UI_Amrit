@@ -903,7 +903,8 @@
     "subAccount": "Sub Group",
     "fromGl": "GL Account",
     "underAccountName": "Sub Group",
-    "glAccountName": "GL Account"
+    "glAccountName": "GL Account",
+    "ext1": "Nature of Balance"
   },
   "glsubaccount": {
     "title": "GL subaccount",

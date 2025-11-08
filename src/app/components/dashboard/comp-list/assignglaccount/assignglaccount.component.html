@@ -72,6 +72,16 @@
           </mat-select>
         </mat-form-field>
 
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'assignglaccount.ext1'"></mat-label>
+          <mat-select formControlName="ext1" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let nature of nature" [value]="nature.value">
+              {{nature.Description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
       </div>
       <mat-divider></mat-divider>
     </form>
