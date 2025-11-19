@@ -749,16 +749,20 @@ export class InspectioncheckComponent implements OnInit {
 
   inspectioncheck(event: any) {
     this.dialog.open(InspectionComponent, {
-      width: '100%',
-      height: '700px',
+   
+      width: '80%',
+        height: '80vh',
+      position: { top: '5%', left: '10%' },
       data: event.item
     });
   }
 
   balanceCertificate(event: any) {
     this.dialog.open(BalanceCertificateComponent, {
-      width: '40%',
-      height: '600px',
+     
+      width: '80%',
+        height: '80vh',
+      position: { top: '5%', left: '10%' },
       data: event.item
     });
 

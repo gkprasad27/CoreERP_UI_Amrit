@@ -127,12 +127,13 @@ export class JobworkmaterialissueComponent {
       jobWorkNumber: [0],
 
       company: [obj.companyCode],
-      companyName: [null],
+      companyName: [''],
 
       profitCenter: ['', Validators.required],
 
       vendor: ['', Validators.required],
-      vendorGSTN: [null],
+      vendorName: [''],
+      vendorGSTN: [''],
 
       addWho: obj.userName,
       editWho: obj.userName,
@@ -171,7 +172,7 @@ export class JobworkmaterialissueComponent {
       igst: [''],
       cgst: [''],
       amount: [0],
-      netWeight:[''],
+      weight:[''],
       total: [0],
       deliveryDate: [''],
       stockQty: [0],
@@ -179,8 +180,10 @@ export class JobworkmaterialissueComponent {
       highlight: false,
       supplierCode: [''],
       availableQTY: [''],
-      hsnsac: [''],
-      saleOrderNo: [''],
+
+      uom: [''],
+      hsnSac: [''],
+      // saleOrderNo: [''],
       status: [''],
       action: [[
         { id: 'Edit', type: 'edit' },
@@ -278,6 +281,12 @@ export class JobworkmaterialissueComponent {
       if (res && res.status === StatusCodes.pass && res.response) {
         this.formData.patchValue(res.response['JobWorkMasters']);
 
+          const obj = this.customerList.find((c: any) => c.id == this.formData.value.vendor);
+          this.formData.patchValue({
+            vendorName: obj ? obj.text : '',
+            vendorGSTN: obj ? obj.gstNo : ''
+          })
+
         if (res.response['JobWorkDetails'] && res.response['JobWorkDetails'].length) {
           let taxCode = res.response['JobWorkDetails'][0].taxCode;
           const taxObj = this.taxCodeList.find((t: any) => t.taxRateCode == taxCode);
@@ -325,7 +334,7 @@ export class JobworkmaterialissueComponent {
             const materialObj = res.response['mmasterList'].find((m: any) => m.id == this.formData1.value.materialCode);
             this.formData1.patchValue({
               stockQty: materialObj.availQTY,
-              netWeight: materialObj.netWeight,
+              weight: this.formData1.value.weight ? this.formData1.value.weight: materialObj.netWeight,
             });
           }
         }
@@ -371,7 +380,9 @@ export class JobworkmaterialissueComponent {
       this.alertService.openSnackBar(`Provided Rate can't be zero`, Static.Close, SnackBar.error);
       return;
     }
-    if (((+this.formData1.value.qty) > (+this.formData1.value.soQty)) || ((+this.formData1.value.qty) > (+this.formData1.value.stockQty))) {
+    // if (((+this.formData1.value.qty) > (+this.formData1.value.soQty)) || ((+this.formData1.value.qty) > (+this.formData1.value.stockQty))) {
+
+    if (((+this.formData1.value.qty) > (+this.formData1.value.soQty))) {
       this.alertService.openSnackBar(`Provided Qty is greater than Available Qty`, Static.Close, SnackBar.error);
       return;
     }
@@ -406,7 +417,7 @@ export class JobworkmaterialissueComponent {
     const formObj = this.formData1.value
     const obj = this.taxCodeList.find((tax: any) => tax.taxRateCode == formObj.taxCode);
     const discountAmount = (((+formObj.qty * +formObj.rate) * ((+formObj.discount) / 100)));
-    const amount = (+formObj.qty * +formObj.rate * (+(formObj.netWeight ? formObj.netWeight : 1))) - discountAmount
+    const amount = (+formObj.qty * +formObj.rate * (+(formObj.weight ? formObj.weight : 1))) - discountAmount
     const igst = obj.igst ? (amount * obj.igst) / 100 : 0;
     const cgst = obj.cgst ? (amount * obj.cgst) / 100 : 0;
     const sgst = obj.sgst ? (amount * obj.sgst) / 100 : 0;
@@ -470,7 +481,8 @@ export class JobworkmaterialissueComponent {
                 s.changed = false;
                 s.igst = s.igst ? s.igst : 0;
                 s.taxCode = s.taxCode ? s.taxCode : '';
-                s.hsnsac = s.hsnsac ? s.hsnsac : '';
+                s.hsnSac = s.hsnSac ? s.hsnSac : '';
+                s.uom = s.uom ? s.uom : '';
                 s.availableQTY = s.availableQTY ? s.availableQTY : '';
                 s.amount = s.amount ? s.amount : 0;
                 s.total = s.total ? s.total : 0;
@@ -499,7 +511,7 @@ export class JobworkmaterialissueComponent {
           igst: ((+this.formData.value.igst) + t.igst).toFixed(2),
           cgst: ((+this.formData.value.cgst) + t.cgst).toFixed(2),
           sgst: ((+this.formData.value.sgst) + t.sgst).toFixed(2),
-          amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.netWeight ? t.netWeight : 1))).toFixed(2),
+          amount: ((+this.formData.value.amount) + (t.qty * t.rate * (t.weight ? t.weight : 1))).toFixed(2),
           totalTax: ((+this.formData.value.totalTax) + (t.igst + t.cgst + t.sgst)).toFixed(2),
         })
       }
@@ -638,7 +650,7 @@ export class JobworkmaterialissueComponent {
   materialCodeChange() {
     // const obj = this.materialList.find((m: any) => m.id == this.formData1.value.materialCode);
     // this.formData1.patchValue({
-    //   netWeight: obj.netWeight,
+    //   weight: obj.netWeight,
     //   stockQty: obj.availQTY,
     //   materialName: obj.text,
     // })
@@ -666,7 +678,10 @@ export class JobworkmaterialissueComponent {
     const obj = this.formData.getRawValue();
     obj.orderDate = obj.orderDate ? this.datepipe.transform(obj.orderDate, 'MM-dd-yyyy') : '';
     obj.deliveryDate = obj.deliveryDate ? this.datepipe.transform(obj.deliveryDate, 'MM-dd-yyyy') : '';
-    obj.vendor = obj.vendor[0].id;
+    if (obj.vendor && typeof obj.vendor != 'string')
+    {
+      obj.vendor = obj.vendor[0].id;
+    }
     obj.documentURL = this.fileList ? this.fileList.name.split('.')[0] : '';
     obj.invoiceURL = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
     if (obj.saleOrderNo && typeof obj.saleOrderNo != 'string') {

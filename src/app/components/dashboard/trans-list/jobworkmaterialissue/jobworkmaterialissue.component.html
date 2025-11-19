@@ -443,7 +443,7 @@
                 </div>
                 <mat-form-field *ngIf="routeEdit" class="col-3">
                     <mat-label>{{'jobworkmaterialissue.vendor' | translate }}</mat-label>
-                    <input matInput type="text" readonly formControlName="vendor" appFocusOnEnter tabIndex="4">
+                    <input matInput type="text" readonly formControlName="vendorName" appFocusOnEnter tabIndex="4">
                 </mat-form-field>
 
                 <div id="sale" class="multiselect-dropdown-list floating-dropdown col-3"  *ngIf="!routeEdit"
@@ -565,7 +565,7 @@
 
                     <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.netWeight'"></mat-label>
-                        <input matInput type="number" formControlName="netWeight" appFocusOnEnter tabIndex="14">
+                        <input matInput type="number" formControlName="weight" appFocusOnEnter tabIndex="14">
                     </mat-form-field>
 
                     <mat-form-field class="col-3">

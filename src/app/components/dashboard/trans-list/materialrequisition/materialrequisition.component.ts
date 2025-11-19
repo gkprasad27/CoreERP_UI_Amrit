@@ -444,7 +444,8 @@ export class MaterialrequisitionComponents implements OnInit {
 
   inspectioncheck(event: any) {
     this.dialog.open(MaterialRequisitionViewComponent, {
-      height: '900px',
+      width: '80%',
+        height: '80vh',
       position: { top: '5%', left: '10%' },
       data: {
         row: event.item,

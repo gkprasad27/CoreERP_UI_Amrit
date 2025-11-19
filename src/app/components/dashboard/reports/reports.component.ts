@@ -218,9 +218,11 @@ export class ReportsComponent {
           break;
       }
       const dialogRef = this.dialog.open(comp, {
-        width: '80%',
+     
+      width: '80%',
+        height: '80vh',
+      position: { top: '5%', left: '10%' },
         data: value,
-        panelClass: 'custom-dialog-container',
         disableClose: true
       });
 
@@ -471,8 +473,10 @@ export class ReportsComponent {
   tableButtonEvent(event: any) {
     if (this.routeParam == 'AttendanceProcess') {
       const dialogRef = this.dialog.open(EmployeeAttendanceComponent, {
-        width: '80%',
+       
+      width: '80%',
         height: '80vh',
+      position: { top: '5%', left: '10%' },
         data: {
           fromDate: this.modelFormData.value.fromDate,
           toDate: this.modelFormData.value.toDate,

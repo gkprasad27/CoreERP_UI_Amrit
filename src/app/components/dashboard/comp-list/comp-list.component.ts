@@ -126,10 +126,11 @@ export class CompListComponent implements OnInit, OnDestroy {
       } else {
         value.tableData = this.tableData;
         const dialogRef = this.dialog.open(this.compListService.getDynComponents(this.tableUrl.formName), {
-          width: '80%',
-          minHeight: '400px',
+          
+      width: '80%',
+        height: '80vh',
+      position: { top: '5%', left: '10%' },
           data: value,
-          panelClass: 'custom-dialog-container',
           disableClose: true
         });
 
@@ -147,7 +148,10 @@ export class CompListComponent implements OnInit, OnDestroy {
   deleteRecord(value) {
     value.primary = this.tableUrl.delete;
     const dialogRef = this.dialog.open(DeleteItemComponent, {
-      width: '1024px',
+     
+      width: '80%',
+        height: '80vh',
+      position: { top: '5%', left: '10%' },
       data: value,
       disableClose: true
     });

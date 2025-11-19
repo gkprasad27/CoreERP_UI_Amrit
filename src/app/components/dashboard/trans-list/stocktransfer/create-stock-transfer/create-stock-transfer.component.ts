@@ -542,7 +542,10 @@ export class CreateStockTransferComponent implements OnInit {
     }
 
     const dialogRef = this.dialog.open(SaveItemComponent, {
-      width: '1024px',
+      
+      width: '80%',
+        height: '80vh',
+      position: { top: '5%', left: '10%' },
       data: '',
       disableClose: true
     });
