@@ -2256,6 +2256,8 @@
     "openingBalanceDate": "Opening Balance Date",
     "paymentTypeName": "Payment Type",
     "amount": "Amount",
+    "openingBalance": "Opening Balance",
+    "closingBalance": "Closing Balance",
     "narration": "Narration",
     "shiftId": "Shift",
     "userName": "User Name"

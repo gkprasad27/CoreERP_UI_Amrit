@@ -232,6 +232,7 @@ export class CashbankComponent implements OnInit {
     this.apiService.apiGetRequest(cashDetUrl)
       .subscribe(
         response => {
+          this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {

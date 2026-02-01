@@ -7,13 +7,13 @@ import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 import { StatusCodes } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../services/api-config.service';
@@ -25,7 +25,7 @@ import { AddOrEditService } from '../add-or-edit.service';
 
 @Component({
   selector: 'openingBalance',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TypeaheadModule, MatRadioModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './openingBalance.component.html',
   styleUrls: ['./openingBalance.component.scss'],
   providers: [DatePipe]
@@ -43,6 +43,8 @@ export class OpeningBalanceComponent implements OnInit {
   gLAccountsList: any[] = [];
   getPaymentListArray: any[] = [];
   getBankPAccountLedgerListArray:any[] = [];
+  getBusinessPartnersAccList: any[] = [];
+
 
   constructor(
     private alertService: AlertService,
@@ -69,7 +71,9 @@ export class OpeningBalanceComponent implements OnInit {
       narration: [null],
       ledgerCode: [null],
       ledgerName: [null],
-      amount:[null]
+      openingBalance:[null],
+      closingBalance:[null],
+      itemType:['GLAccounts'],
     });
 
 
@@ -97,16 +101,19 @@ export class OpeningBalanceComponent implements OnInit {
 
 
   allApis() {
+
+    let obj = JSON.parse(localStorage.getItem("user"));
     const getPaymentType = String.Join('/', this.apiConfigService.getPaymentType);
     const getGLAccountsList = String.Join('/', this.apiConfigService.getGLAccountsList);
+    const getBusienessPartnersAccList = String.Join('/', this.apiConfigService.getBusienessPartnersAccList, obj.companyCode);
 
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
         this.apiService.apiGetRequest(getPaymentType),
         this.apiService.apiGetRequest(getGLAccountsList),
-
-      ]).subscribe(([paymentType, gLAccountsList]) => {
+        this.apiService.apiGetRequest(getBusienessPartnersAccList),
+      ]).subscribe(([paymentType, gLAccountsList, businessPartnersAccList]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(paymentType) && paymentType.status === StatusCodes.pass) {
@@ -118,6 +125,13 @@ export class OpeningBalanceComponent implements OnInit {
         if (!this.commonService.checkNullOrUndefined(gLAccountsList) && gLAccountsList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(gLAccountsList.response)) {
             this.gLAccountsList = gLAccountsList.response['glList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(businessPartnersAccList) && businessPartnersAccList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(businessPartnersAccList.response)) {
+            const resp = businessPartnersAccList.response['bpaList'];
+            this.getBusinessPartnersAccList = resp;
           }
         }
 

@@ -2820,6 +2820,8 @@
   },
   "openingBalance": {
     "title": "Opening Balance",
+    "glAccounts": "GL Accounts",
+    "businessPartners": "Business Partners",
     "branchCode": "Branch Code",
     "branchName": "Branch Name",
     "ledgerCode": "Account No",
@@ -2827,6 +2829,8 @@
     "voucherNo": "Voucher No",
     "openingBalanceDate": "Opening Balance Date",
     "paymentTypeName": "Payment Type",
+    "openingBalance": "Opening Balance",
+    "closingBalance": "Closing Balance",
     "amount": "Amount",
     "narration": "Narration",
     "shiftId": "Shift",
@@ -3415,7 +3419,7 @@
     "total": "Total Amount"
   },
   "pendingsales": {
-    "title": "Pending Sales",
+    "title": "Pending Sales Order",
     "date": "Date",
     "customer": "Customer Name",
     "saleOrderNo": "Sale Order Number",

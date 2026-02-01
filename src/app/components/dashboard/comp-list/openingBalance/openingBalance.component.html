@@ -16,7 +16,14 @@
           </mat-select>
       </mat-form-field> -->
 
-        <div class="mat-mdc-form-field typeahead floating-dropdown col-3" *ngIf="!formData.item"
+        <div *ngIf="!formData.item" class="col-12">
+          <mat-radio-group class="d-flex" formControlName="itemType" appFocusOnEnter tabIndex="0">
+            <mat-radio-button class="me-3" value="GLAccounts"> {{ 'openingBalance.glAccounts' | translate }} </mat-radio-button>
+            <mat-radio-button class="me-3" value="BusinessPartners"> {{ 'openingBalance.businessPartners' | translate }} </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="mat-mdc-form-field typeahead floating-dropdown col-3" *ngIf="!formData.item && modelFormData.get('itemType').value === 'GLAccounts'"
           [class.filled]="modelFormData.value?.ledgerName?.length > 0">
           <label> {{ 'openingBalance.ledgerName' | translate }} </label>
           <input matInput placeholder=" " class="typeahead" [typeaheadOptionsLimit]="100000"  (typeaheadOnSelect)="onLedgerChange($event)"
@@ -27,9 +34,20 @@
           </ng-template>
         </div>
 
+        <div class="mat-mdc-form-field typeahead floating-dropdown col-3" *ngIf="!formData.item && modelFormData.get('itemType').value === 'BusinessPartners'"
+          [class.filled]="modelFormData.value?.ledgerName?.length > 0">
+          <label> {{ 'openingBalance.ledgerName' | translate }} </label>
+          <input matInput placeholder=" " class="typeahead" [typeaheadOptionsLimit]="100000" 
+            [typeahead]="getBusinessPartnersAccList" typeaheadOptionField='name' [typeaheadItemTemplate]="customItemTemplate"
+            formControlName="ledgerName" appFocusOnEnter tabIndex="1">
+          <ng-template #customItemTemplate let-model="item">
+            <span><strong>{{model.name}}</strong> </span>
+          </ng-template>
+        </div>
+
         <mat-form-field class="col-3">
           <mat-label>{{ 'openingBalance.paymentTypeName' | translate }}</mat-label>
-          <mat-select formControlName="paymentTypeId" appFocusOnEnter tabIndex="3">
+          <mat-select formControlName="paymentTypeId" appFocusOnEnter tabIndex="2">
             <mat-option *ngFor="let payment of getPaymentListArray" [value]="payment.id">
               {{payment.text}}
             </mat-option>
@@ -38,7 +56,7 @@
 
         <mat-form-field class="col-3">
           <input matInput placeholder="{{ 'openingBalance.voucherNo' | translate }}" formControlName="voucherNo"
-            appFocusOnEnter tabIndex="1">
+            appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -50,25 +68,29 @@
         </mat-form-field>
 
         <mat-form-field class="col-3">
-          <input matInput placeholder="{{'openingBalance.amount' | translate }}" formControlName="amount"
-            appFocusOnEnter tabIndex="2">
+          <input matInput placeholder="{{'openingBalance.openingBalance' | translate }}" formControlName="openingBalance"
+            appFocusOnEnter tabIndex="5">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <input matInput placeholder="{{'openingBalance.closingBalance' | translate }}" formControlName="closingBalance"
+            appFocusOnEnter tabIndex="6">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <input matInput placeholder="{{ 'openingBalance.narration' | translate }}" formControlName="narration"
-            appFocusOnEnter tabIndex="2">
+            appFocusOnEnter tabIndex="7">
         </mat-form-field>
 
       </div>
       <mat-divider></mat-divider>
 
       <div class="form-element mt-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="8">
           {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
-          appFocusOnEnter tabIndex="5">
+          appFocusOnEnter tabIndex="9">
 
           {{ 'COMMON.SAVE' | translate }}
         </button>
