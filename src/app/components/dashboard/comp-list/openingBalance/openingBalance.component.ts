@@ -58,21 +58,23 @@ export class OpeningBalanceComponent implements OnInit {
     public commonService: CommonService,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+    let obj = JSON.parse(localStorage.getItem("user"));
 
     this.modelFormData = this.formBuilder.group({
       // departmentId: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4)]],
       // departmentName: ['', [Validators.required, Validators.minLength(2)]],
-      openingBalanceId:  ['0'],
-      branchCode: [null],
-      branchName:[null],
+      openingBalanceId:  [0],
+      companyCode: [obj.companyCode],
       voucherNo:[null],
-      paymentTypeId: [null],
       openingBalanceDate: [null],
-      narration: [null],
+      ledgerId: [null],
       ledgerCode: [null],
       ledgerName: [null],
+      paymentTypeId: [null],
       openingBalance:[null],
+      narration: [null],
       closingBalance:[null],
+
       itemType:['GLAccounts'],
     });
 

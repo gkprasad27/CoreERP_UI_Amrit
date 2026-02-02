@@ -55,30 +55,35 @@
         </mat-form-field>
 
         <mat-form-field class="col-3">
-          <input matInput placeholder="{{ 'openingBalance.voucherNo' | translate }}" formControlName="voucherNo"
+          <mat-label>{{ 'openingBalance.voucherNo' | translate }}</mat-label>
+          <input matInput formControlName="voucherNo"
             appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
         <mat-form-field class="col-3">
+          <mat-label>{{ 'openingBalance.openingBalanceDate' | translate }}</mat-label>
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker"
-            placeholder="{{'openingBalance.openingBalanceDate' | translate }}" formControlName="openingBalanceDate"
+             formControlName="openingBalanceDate"
             appFocusOnEnter tabIndex="4" (click)="picker.open()" readonly>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field class="col-3">
-          <input matInput placeholder="{{'openingBalance.openingBalance' | translate }}" formControlName="openingBalance"
+          <mat-label>{{ 'openingBalance.openingBalance' | translate }}</mat-label>
+          <input matInput formControlName="openingBalance"
             appFocusOnEnter tabIndex="5">
         </mat-form-field>
 
         <mat-form-field class="col-3">
-          <input matInput placeholder="{{'openingBalance.closingBalance' | translate }}" formControlName="closingBalance"
+          <mat-label>{{ 'openingBalance.closingBalance' | translate }}</mat-label>
+          <input matInput formControlName="closingBalance"
             appFocusOnEnter tabIndex="6">
         </mat-form-field>
 
         <mat-form-field class="col-3">
-          <input matInput placeholder="{{ 'openingBalance.narration' | translate }}" formControlName="narration"
+          <mat-label>{{ 'openingBalance.narration' | translate }}</mat-label>
+          <input matInput formControlName="narration"
             appFocusOnEnter tabIndex="7">
         </mat-form-field>
 
