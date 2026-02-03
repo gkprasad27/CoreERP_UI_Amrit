@@ -148,10 +148,7 @@ export class CompListComponent implements OnInit, OnDestroy {
   deleteRecord(value) {
     value.primary = this.tableUrl.delete;
     const dialogRef = this.dialog.open(DeleteItemComponent, {
-     
-      width: '80%',
-        height: '80vh',
-      position: { top: '5%', left: '10%' },
+      width: '1024px',
       data: value,
       disableClose: true
     });
