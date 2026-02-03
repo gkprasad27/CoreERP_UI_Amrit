@@ -2253,7 +2253,7 @@
     "ledgerCode": "Account No",
     "ledgerName": "Account Name",
     "voucherNo": "Voucher No",
-    "openingBalanceDate": "Opening Balance Date",
+    "openingBalanceDate": "Date",
     "paymentTypeName": "Payment Type",
     "amount": "Amount",
     "openingBalance": "Opening Balance",

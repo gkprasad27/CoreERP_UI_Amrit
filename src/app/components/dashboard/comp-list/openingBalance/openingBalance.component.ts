@@ -71,6 +71,7 @@ export class OpeningBalanceComponent implements OnInit {
       ledgerCode: [null],
       ledgerName: [null],
       paymentTypeId: [null],
+      paymentTypeName: [null],
       openingBalance:[null],
       narration: [null],
       closingBalance:[null],
@@ -120,7 +121,22 @@ export class OpeningBalanceComponent implements OnInit {
 
         if (!this.commonService.checkNullOrUndefined(paymentType) && paymentType.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(paymentType.response)) {
-            this.getPaymentListArray = paymentType.response['BranchesList'];
+            // id are comming 1.0 2.0 3.0 from api that's why using + to convert number to string
+            const branchesList = paymentType.response['BranchesList'].map(item => ({
+              ...item,
+              id: item.id ? (+item.id).toString() : ''
+            }));
+            if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
+              const ptype = branchesList.filter(ptype => {
+                if (ptype.id == this.modelFormData.get('paymentTypeId').value) {
+                  return ptype;
+                }
+              });
+              this.modelFormData.patchValue({
+                paymentTypeName: !this.commonService.checkNullOrUndefined(ptype[0]) ? ptype[0].text : null
+              });
+            }
+            this.getPaymentListArray = branchesList;
           }
         }
 
@@ -166,7 +182,9 @@ export class OpeningBalanceComponent implements OnInit {
 
   onLedgerChange(code) {
     this.modelFormData.patchValue({
-      ledgerCode: code.item.id
+      ledgerCode: this.modelFormData.value.itemType === 'GLAccounts' ? code.item.id : code.item.bpnumber,
+      ledgerId: this.modelFormData.value.itemType === 'GLAccounts' ? code.item.id : code.item.bpnumber,
+      ledgerName: this.modelFormData.value.itemType === 'GLAccounts' ? code.item.text : code.item.name
     });
   }
 

@@ -37,7 +37,7 @@
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3" *ngIf="!formData.item && modelFormData.get('itemType').value === 'BusinessPartners'"
           [class.filled]="modelFormData.value?.ledgerName?.length > 0">
           <label> {{ 'openingBalance.ledgerName' | translate }} </label>
-          <input matInput placeholder=" " class="typeahead" [typeaheadOptionsLimit]="100000" 
+          <input matInput placeholder=" " class="typeahead" [typeaheadOptionsLimit]="100000" (typeaheadOnSelect)="onLedgerChange($event)"
             [typeahead]="getBusinessPartnersAccList" typeaheadOptionField='name' [typeaheadItemTemplate]="customItemTemplate"
             formControlName="ledgerName" appFocusOnEnter tabIndex="1">
           <ng-template #customItemTemplate let-model="item">
@@ -45,7 +45,12 @@
           </ng-template>
         </div>
 
-        <mat-form-field class="col-3">
+        <mat-form-field class="col-3" *ngIf="formData.item">
+          <mat-label>{{ 'openingBalance.ledgerName' | translate }}</mat-label>
+          <input matInput formControlName="ledgerName" appFocusOnEnter readonly tabIndex="1">
+        </mat-form-field>
+
+        <mat-form-field class="col-3" *ngIf="!formData.item">
           <mat-label>{{ 'openingBalance.paymentTypeName' | translate }}</mat-label>
           <mat-select formControlName="paymentTypeId" appFocusOnEnter tabIndex="2">
             <mat-option *ngFor="let payment of getPaymentListArray" [value]="payment.id">
@@ -54,10 +59,19 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="col-3">
+        <mat-form-field class="col-3" *ngIf="formData.item">
+          <mat-label>{{ 'openingBalance.paymentTypeName' | translate }}</mat-label>
+          <input matInput formControlName="paymentTypeName" appFocusOnEnter readonly tabIndex="2">
+        </mat-form-field>
+
+        <mat-form-field class="col-3" *ngIf="!formData.item">
           <mat-label>{{ 'openingBalance.voucherNo' | translate }}</mat-label>
-          <input matInput formControlName="voucherNo"
-            appFocusOnEnter tabIndex="3">
+          <input matInput formControlName="voucherNo" appFocusOnEnter tabIndex="3">
+        </mat-form-field>
+
+         <mat-form-field class="col-3" *ngIf="formData.item">
+          <mat-label>{{ 'openingBalance.voucherNo' | translate }}</mat-label>
+          <input matInput formControlName="voucherNo" readonly appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
         <mat-form-field class="col-3">
