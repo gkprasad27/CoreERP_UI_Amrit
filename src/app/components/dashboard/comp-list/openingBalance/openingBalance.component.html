@@ -50,7 +50,7 @@
           <input matInput formControlName="ledgerName" appFocusOnEnter readonly tabIndex="1">
         </mat-form-field>
 
-        <mat-form-field class="col-3" *ngIf="!formData.item">
+        <mat-form-field class="col-3" *ngIf="formData.item">
           <mat-label>{{ 'openingBalance.paymentTypeName' | translate }}</mat-label>
           <mat-select formControlName="paymentTypeId" appFocusOnEnter tabIndex="2">
             <mat-option *ngFor="let payment of getPaymentListArray" [value]="payment.id">
@@ -59,10 +59,19 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="col-3" *ngIf="formData.item">
+         <mat-form-field class="col-3" *ngIf="!formData.item">
           <mat-label>{{ 'openingBalance.paymentTypeName' | translate }}</mat-label>
-          <input matInput formControlName="paymentTypeName" appFocusOnEnter readonly tabIndex="2">
+          <mat-select formControlName="paymentTypeId" appFocusOnEnter tabIndex="2">
+            <mat-option *ngFor="let payment of getPaymentListArray" [value]="payment.id">
+              {{payment.text}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
+
+        <!-- <mat-form-field class="col-3" *ngIf="formData.item">
+          <mat-label>{{ 'openingBalance.paymentTypeName' | translate }}</mat-label>
+          <input matInput formControlName="paymentTypeName" appFocusOnEnter tabIndex="2">
+        </mat-form-field> -->
 
         <mat-form-field class="col-3" *ngIf="!formData.item">
           <mat-label>{{ 'openingBalance.voucherNo' | translate }}</mat-label>
@@ -71,7 +80,7 @@
 
          <mat-form-field class="col-3" *ngIf="formData.item">
           <mat-label>{{ 'openingBalance.voucherNo' | translate }}</mat-label>
-          <input matInput formControlName="voucherNo" readonly appFocusOnEnter tabIndex="3">
+          <input matInput formControlName="voucherNo" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
         <mat-form-field class="col-3">

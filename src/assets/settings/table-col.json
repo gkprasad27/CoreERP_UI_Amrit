@@ -2254,7 +2254,7 @@
     "ledgerName": "Account Name",
     "voucherNo": "Voucher No",
     "openingBalanceDate": "Date",
-    "paymentTypeName": "Payment Type",
+    "paymentTypeId": "Payment Type",
     "amount": "Amount",
     "openingBalance": "Opening Balance",
     "closingBalance": "Closing Balance",
