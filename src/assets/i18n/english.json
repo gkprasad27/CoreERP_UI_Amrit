@@ -2829,6 +2829,7 @@
     "voucherNo": "Voucher No",
     "openingBalanceDate": "Opening Balance Date",
     "paymentTypeId": "Payment Type",
+    "paymentTypeName": "Payment Type Name",
     "openingBalance": "Opening Balance",
     "closingBalance": "Closing Balance",
     "amount": "Amount",

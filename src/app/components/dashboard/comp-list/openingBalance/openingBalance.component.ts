@@ -180,6 +180,17 @@ export class OpeningBalanceComponent implements OnInit {
       });
   }
 
+  onPaymentTypeChange(event) {
+    const ptype = this.getPaymentListArray.filter(ptype => {
+      if (ptype.id == event.value) {
+        return ptype;
+      }
+    });
+    this.modelFormData.patchValue({
+      paymentTypeName: !this.commonService.checkNullOrUndefined(ptype[0]) ? ptype[0].text : null
+    });
+  }
+
   onLedgerChange(code) {
     this.modelFormData.patchValue({
       ledgerCode: this.modelFormData.value.itemType === 'GLAccounts' ? code.item.id : code.item.bpnumber,
