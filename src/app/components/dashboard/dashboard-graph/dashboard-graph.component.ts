@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { TableComponent } from '../../../reuse-components/table/table.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-dashboard-graph',
@@ -34,6 +35,8 @@ export class DashboardGraphComponent {
   tableData1 = [];
 
   companyList: any[] = [];
+
+  displayedColumns: string[] = [];
 
   user = JSON.parse(localStorage.getItem("user"));
 
@@ -182,6 +185,36 @@ export class DashboardGraphComponent {
     return (value ? (Math.ceil(value / 100) * 10) : 10)
   }
 
+  onFileChange(event: any): void {
+    const target: DataTransfer = <DataTransfer>(event.target);
 
+    if (target.files.length !== 1) {
+      console.error('Cannot upload multiple files');
+      return;
+    }
+    debugger
+
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      const binaryData: string = e.target.result;
+      const workbook: XLSX.WorkBook = XLSX.read(binaryData, { type: 'binary' });
+
+      // Assuming the first sheet contains the data
+      const sheetName: string = workbook.SheetNames[0];
+      const sheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
+
+      // Convert sheet data to JSON
+      const data: any[] = XLSX.utils.sheet_to_json(sheet);
+      console.log('Extracted Data:', data);
+
+      // Update table data and columns
+      if (data.length > 0) {
+        this.displayedColumns = Object.keys(data[0]);
+        this.tableData = data;
+      }
+    };
+
+    reader.readAsBinaryString(target.files[0]);
+  }
 
 }
