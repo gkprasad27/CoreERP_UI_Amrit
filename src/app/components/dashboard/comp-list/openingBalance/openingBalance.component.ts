@@ -249,6 +249,9 @@ export class OpeningBalanceComponent implements OnInit {
     }
     this.formData.item = this.modelFormData.getRawValue();
     this.formData.item.effectiveFrom = this.formData.item.effectiveFrom ? this.datepipe.transform(this.formData.item.effectiveFrom, 'MM-dd-yyyy') : '';
+    if(!this.data.item) {
+      delete this.formData.item['openingBalanceId'];
+    }
 
     this.addOrEditService[this.formData.action](this.formData, (res) => {
       this.dialogRef.close(this.formData);
