@@ -42,7 +42,8 @@
     "toYear": "To Year",
     "fromMonth": "From Month",
     "toMonth": "To Month",
-    "totalOtherCharges":  "Other Charges"
+    "totalOtherCharges":  "Other Charges",
+    "UPLOAD": "Update"
   },
   "LOGIN": {
     "USERNAME": "Username",
@@ -3812,5 +3813,34 @@
     "effectiveFrom": "Effective From",
     "status": "Status",
     "remarks": "Remarks"
+  },
+  "gstupload": {
+    "title": "GST Upload",
+   "GSTNumber": "GSTIN of supplier",
+    "SupplierName": "Trade/Legal name of the Supplier",
+    "InvoiceNumber": "Invoice Number",
+    "InvoiceType": "Invoice Type",
+    "InvoiceDate": "Invoice Date",
+    "InvoiceValue": "Invoice Value",
+    "PlaceofSupply": "Place of Supply",
+    "GSTRate": "GST Rate",
+    "TaxableValue": "Taxable Value",
+    "IGST": "IGST",
+    "CGST": "CGST",
+    "SGST": "SGST",
+    "Cess": "Cess",
+    "GSTRFillingStatus": "GSTR Filling Status",
+    "GSTRFillingDate": "GSTR Filling Date",
+    "GSTRFillingPeriod": "GSTR Filling Period",
+    "GSTR3BFillingStatus": "GSTR3B Filling Status",
+    "AmmendementMade": "Amendment Made",
+    "AmendedTaxPeriod": "Amended Tax Period",
+    "CancellationDate": "Cancellation Date",
+    "Source": "Source",
+    "IRN": "IRN",
+    "IRNDate": "IRN Date",
+    "Ext1": "Ext1",
+    "Company": "Company"
   }
+  
 }

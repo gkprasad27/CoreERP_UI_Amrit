@@ -29,7 +29,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/mat
 import { APP_DATE_FORMATS, AppDateAdapter } from '../../../directives/format-datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { from } from 'rxjs';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-reports',
@@ -673,6 +673,178 @@ export class ReportsComponent {
       this.data = null;
       w.print();
     }, 50);
+  }
+
+  onFileChange(event: any): void {
+    const input = event.target as HTMLInputElement;
+    if (!input?.files || input.files.length !== 1) return;
+
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: 'array' });
+
+      const sheetName = workbook.SheetNames.find(s => s.toLowerCase() === 'b2b');
+      if (!sheetName) return;
+
+      const sheet = workbook.Sheets[sheetName];
+      const rows: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' });
+      if (!rows.length) return;
+
+      /* ----- AUTO HEADER DETECTION ----- */
+
+      let parentHeaderIndex = -1;
+      for (let i = 0; i < rows.length; i++) {
+        const t = rows[i].join(' ').toLowerCase();
+        if (t.includes('gstin of supplier') && t.includes('invoice details')) {
+          parentHeaderIndex = i;
+          break;
+        }
+      }
+      if (parentHeaderIndex === -1) return;
+
+      const childHeaderIndex = parentHeaderIndex + 1;
+      const parentRow = rows[parentHeaderIndex] || [];
+      const childRow = rows[childHeaderIndex] || [];
+
+      const headerRow: string[] = parentRow.map((p, i) =>
+        (childRow[i] || '').toString().trim() || (p || '').toString().trim()
+      );
+
+      const dataStartIndex = childHeaderIndex + 1;
+
+      /* ----- HELPERS ----- */
+
+      const clean = (h: string) =>
+        h.toLowerCase().replace(/\(.*?\)/g, '').replace(/₹/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+
+      const num = (v: any) => isNaN(parseFloat(v)) ? 0 : parseFloat(v.toString().replace(/,/g, ''));
+      const date = (v: any) =>
+        typeof v === 'number'
+          ? (() => { const d = XLSX.SSF.parse_date_code(v); return d ? new Date(d.y, d.m - 1, d.d) : null; })()
+          : isNaN(new Date(v).getTime()) ? null : new Date(v);
+
+      const map = (h: string) => {
+        const s = clean(h);
+        if (s.includes('gstin')) return 'GSTNumber';
+        if (s.includes('trade') || s.includes('supplier')) return 'SupplierName';
+        if (s.includes('invoice number')) return 'InvoiceNumber';
+        if (s.includes('invoice type')) return 'InvoiceType';
+        if (s.includes('invoice date')) return 'InvoiceDate';
+        if (s.includes('invoice value')) return 'InvoiceValue';
+        if (s.includes('place of supply')) return 'PlaceofSupply';
+        if (s.includes('reverse')) return 'SupplyAttractReverseCharge';
+        if (s.includes('rate')) return 'GSTRate';
+        if (s.includes('taxable')) return 'TaxableValue';
+        if (s.includes('igst')) return 'IGST';
+        if (s.includes('cgst')) return 'CGST';
+        if (s.includes('sgst')) return 'SGST';
+        if (s.includes('cess')) return 'Cess';
+        if (s.includes('gstr') && s.includes('status')) return 'GSTRFillingStatus';
+        if (s.includes('gstr') && s.includes('date')) return 'GSTRFillingDate';
+        if (s.includes('gstr') && s.includes('period')) return 'GSTRFillingPeriod';
+        if (s.includes('3b')) return 'GSTR3BFillingStatus';
+        if (s.includes('amendment')) return 'AmmendementMade';
+        if (s.includes('amended')) return 'AmendedTaxPeriod';
+        if (s.includes('cancellation')) return 'CancellationDate';
+        if (s === 'irn') return 'IRN';
+        if (s.includes('irn date')) return 'IRNDate';
+        if (s.includes('source')) return 'Source';
+        return null;
+      };
+
+      const defaultRow = {
+        GSTNumber: '',
+        SupplierName: '',
+        InvoiceNumber: '',
+        InvoiceType: '',
+        InvoiceDate: null,
+        InvoiceValue: 0,
+        PlaceofSupply: '',
+        SupplyAttractReverseCharge: '',
+        GSTRate: 0,
+        TaxableValue: 0,
+        IGST: 0,
+        CGST: 0,
+        SGST: 0,
+        Cess: 0,
+        GSTRFillingStatus: '',
+        GSTRFillingDate: null,
+        GSTRFillingPeriod: '',
+        GSTR3BFillingStatus: '',
+        AmmendementMade: '',
+        AmendedTaxPeriod: '',
+        CancellationDate: null,
+        Source: '',
+        IRN: '',
+        IRNDate: null
+      };
+
+      const headerMap: Record<number, string> = {};
+      headerRow.forEach((h, i) => {
+        const k = map(h);
+        if (k) headerMap[i] = k;
+      });
+
+      const result: any[] = [];
+      let id = 1;
+
+      for (let r = dataStartIndex; r < rows.length; r++) {
+        const row = rows[r];
+        if (!row || row.every(c => c === '')) continue;
+
+        const obj: any = { ID: id++, ...defaultRow };
+
+        Object.keys(headerMap).forEach(i => {
+          const key = headerMap[+i];
+          const val = row[+i];
+          if (['InvoiceDate','GSTRFillingDate','IRNDate','CancellationDate'].includes(key))
+            obj[key] = date(val);
+          else if (['InvoiceValue','TaxableValue','IGST','CGST','SGST','Cess','GSTRate'].includes(key))
+            obj[key] = num(val);
+          else obj[key] = val?.toString().trim() || '';
+        });
+
+        if (obj.InvoiceNumber) result.push(obj);
+      }
+
+      // this.displayedColumns = [
+      //   'ID','GSTNumber','SupplierName','InvoiceNumber','InvoiceType','InvoiceDate','InvoiceValue',
+      //   'PlaceofSupply','SupplyAttractReverseCharge','GSTRate','TaxableValue',
+      //   'IGST','CGST','SGST','Cess',
+      //   'GSTRFillingStatus','GSTRFillingDate','GSTRFillingPeriod','GSTR3BFillingStatus',
+      //   'AmmendementMade','AmendedTaxPeriod','CancellationDate','Source','IRN','IRNDate'
+      // ];
+
+      this.tableData = result;
+
+      console.log(this.tableData)
+    };
+
+    reader.readAsArrayBuffer(input.files[0]);
+  }
+
+  saveExcel() {
+    if(!this.tableData || !this.tableData.length) return;
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    const registerInvoiceUrl = String.Join('/', this.apiConfigService.GSTUpload);
+    const requestObj = {  code: user.userName, Dtl: this.tableData };
+    this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
+      response => {
+        const res = response.body;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar('GST Upload Successfully..', Static.Close, SnackBar.success);
+            //this.branchFormData.reset();
+          }
+          this.reset();
+
+          this.spinner.hide();
+
+        }
+      });
   }
 
   ngOnDestroy() {

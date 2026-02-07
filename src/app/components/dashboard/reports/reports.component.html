@@ -630,7 +630,7 @@
         <form [formGroup]="modelFormData" autocomplete="off">
             <div class="row my-3 py-3">
 
-                <mat-form-field class="col-3" *ngIf="routeParam != 'employeeabsentreport'">
+                <mat-form-field class="col-3" *ngIf="routeParam != 'employeeabsentreport' && routeParam != 'gstupload'">
                     <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
                     <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1">
                         <mat-option>None</mat-option>
@@ -647,7 +647,7 @@
 
 
                 <mat-form-field class="col-3"
-                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' && routeParam != 'salaryprocess' && routeParam != 'consolidatedpayslip' && routeParam != 'employeeabsentreport'">
+                    *ngIf="routeParam != 'stockvaluation' && routeParam != 'pendingpurchaseorders' && routeParam != 'pendingsales' && routeParam != 'pendingjobworkreport' && routeParam != 'salaryprocess' && routeParam != 'consolidatedpayslip' && routeParam != 'employeeabsentreport' && routeParam != 'gstupload'">
                     <mat-label>Choose date</mat-label>
                     <mat-date-range-input [rangePicker]="picker">
                         <input matInput matStartDate placeholder="Start date" formControlName="fromDate">
@@ -803,7 +803,7 @@
                 </mat-slide-toggle>
 
 
-                <div class="col-3 d-flex  align-items-center">
+                <div class="d-flex  align-items-center">
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()"
                         *ngIf="routeParam == 'AttendanceProcess'">
                         {{ "COMMON.process" | translate }}
@@ -813,15 +813,22 @@
                         {{ "COMMON.process" | translate }}
                     </button>
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="search()"
-                        *ngIf="routeParam != 'AttendanceProcess'">
+                        *ngIf="routeParam != 'AttendanceProcess' && routeParam != 'gstupload'">
                         {{ "COMMON.PRINT" | translate }}
                     </button>
                     <button mat-raised-button class="button-color-bule text-white mx-2" (click)="searchProcess()"
                         *ngIf="routeParam == 'AttendanceProcess'">
                         {{ "COMMON.SEARCH" | translate }}
                     </button>
-                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="reset()">
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="reset()" *ngIf="routeParam != 'gstupload'">
                         {{ "COMMON.RESET" | translate }}
+                    </button>
+                     <div class="" *ngIf="routeParam === 'gstupload'">
+                        <button mat-raised-button class="button-color-bule text-white mx-2" (click)="fileInput.click()"> {{ "COMMON.UPLOAD" | translate }} </button>
+                        <input #fileInput type="file" accept=".xlsx, .xls" style="display: none;" (change)="onFileChange($event)" />
+                    </div>
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="saveExcel()" *ngIf="routeParam == 'gstupload'">
+                        {{ "COMMON.SAVE" | translate }}
                     </button>
                 </div>
 
@@ -836,7 +843,7 @@
             </button>
         </div>
 
-        <app-table *ngIf="routeParam == 'AttendanceProcess'" [tableData]="tableData"
+        <app-table *ngIf="routeParam == 'AttendanceProcess' || routeParam == 'gstupload'" [tableData]="tableData"
             (editOrDeleteEvent)="editOrDeleteEvent($event)" (tableButtonEvent)="tableButtonEvent($event)"></app-table>
 
 

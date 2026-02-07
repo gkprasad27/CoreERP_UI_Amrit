@@ -3000,5 +3000,32 @@
     "effectiveFrom": "Date",
     "status": "Status",
     "remarks": "Remarks"
+  },
+  "gstupload": {
+    "GSTNumber": "GST Number",
+    "SupplierName": "Supplier Name",
+    "InvoiceNumber": "Invoice Number",
+    "InvoiceType": "Invoice Type",
+    "InvoiceDate": "Date",
+    "InvoiceValue": "Invoice Value",
+    "PlaceofSupply": "Place of Supply",
+    "GSTRate": "GST Rate",
+    "TaxableValue": "Taxable Value",
+    "IGST": "IGST",
+    "CGST": "CGST",
+    "SGST": "SGST",
+    "Cess": "Cess",
+    "GSTRFillingStatus": "GSTR Filling Status",
+    "GSTRFillingDate": "Date",
+    "GSTRFillingPeriod": "GSTR Filling Period",
+    "GSTR3BFillingStatus": "GSTR3B Filling Status",
+    "AmmendementMade": "Amendment Made",
+    "AmendedTaxPeriod": "Amended Tax Period",
+    "CancellationDate": "Date",
+    "Source": "Source",
+    "IRN": "IRN",
+    "IRNDate": "Date",
+    "Ext1": "Ext1",
+    "Company": "Company"
   }
 }
