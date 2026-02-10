@@ -2287,6 +2287,7 @@
     "status": "Status",
     "delete": "Delete",
     "materialgrade": "Material Grade",
+    "receiptDate": " Invoice Date",
     "milltcno": "Mill TCNo",
     "tptcno": "Third Party TC No",
     "action": "Action"

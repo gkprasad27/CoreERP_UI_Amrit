@@ -83,6 +83,14 @@
                     <input matInput type="number" formControlName="totalAmount" appFocusOnEnter tabIndex="10">
                 </mat-form-field>
 
+                <mat-form-field class="col-3">
+                    <mat-label [translate]="'goodsreceipts.receiptDate'"></mat-label>
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="receiptDate"
+                        appFocusOnEnter tabIndex="11">
+                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker #picker4></mat-datepicker>
+                </mat-form-field>
+
                 <!-- <mat-form-field class="col-3">
                     <mat-label [translate]="'goodsreceipts.lotNo'"></mat-label>
                     <input matInput type="text" formControlName="lotNo" appFocusOnEnter tabIndex="11">

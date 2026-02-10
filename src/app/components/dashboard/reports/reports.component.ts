@@ -830,7 +830,7 @@ export class ReportsComponent {
 
     const user = JSON.parse(localStorage.getItem('user'));
     const registerInvoiceUrl = String.Join('/', this.apiConfigService.GSTUpload);
-    const requestObj = {  code: user.userName, Dtl: this.tableData };
+    const requestObj = { code: user.userName, Dtl: this.tableData };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
         const res = response.body;
