@@ -3002,11 +3002,11 @@
     "remarks": "Remarks"
   },
   "gstupload": {
-    "GSTNumber": "GST Number",
-    "SupplierName": "Supplier Name",
+    "GSTNumber": "GSTIN of supplier",
+    "SupplierName": "Trade/Legal name of the Supplier",
     "InvoiceNumber": "Invoice Number",
     "InvoiceType": "Invoice Type",
-    "InvoiceDate": "Date",
+    "InvoiceDate": "Invoice Date",
     "InvoiceValue": "Invoice Value",
     "PlaceofSupply": "Place of Supply",
     "GSTRate": "GST Rate",
@@ -3016,15 +3016,15 @@
     "SGST": "SGST",
     "Cess": "Cess",
     "GSTRFillingStatus": "GSTR Filling Status",
-    "GSTRFillingDate": "Date",
+    "GSTRFillingDate": "GSTR Filling Date",
     "GSTRFillingPeriod": "GSTR Filling Period",
     "GSTR3BFillingStatus": "GSTR3B Filling Status",
     "AmmendementMade": "Amendment Made",
     "AmendedTaxPeriod": "Amended Tax Period",
-    "CancellationDate": "Date",
+    "CancellationDate": "Cancellation Date",
     "Source": "Source",
     "IRN": "IRN",
-    "IRNDate": "Date",
+    "IRNDate": "IRN Date",
     "Ext1": "Ext1",
     "Company": "Company"
   }

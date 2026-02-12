@@ -675,155 +675,227 @@ export class ReportsComponent {
     }, 50);
   }
 
-  onFileChange(event: any): void {
-    const input = event.target as HTMLInputElement;
-    if (!input?.files || input.files.length !== 1) return;
 
-    const reader = new FileReader();
+onFileChange(event: Event): void {
+  const input = event.target as HTMLInputElement;
 
-    reader.onload = (e: any) => {
-      const data = new Uint8Array(e.target.result);
-      const workbook = XLSX.read(data, { type: 'array' });
+  if (!input?.files || input.files.length !== 1) {
+    console.warn('Please upload exactly one file.');
+    return;
+  }
 
-      const sheetName = workbook.SheetNames.find(s => s.toLowerCase() === 'b2b');
-      if (!sheetName) return;
+  const reader = new FileReader();
 
-      const sheet = workbook.Sheets[sheetName];
-      const rows: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' });
-      if (!rows.length) return;
+  reader.onload = (e: ProgressEvent<FileReader>) => {
+    if (!e.target?.result) return;
 
-      /* ----- AUTO HEADER DETECTION ----- */
+    const data = new Uint8Array(e.target.result as ArrayBuffer);
+    const workbook = XLSX.read(data, { type: 'array' });
 
-      let parentHeaderIndex = -1;
-      for (let i = 0; i < rows.length; i++) {
-        const t = rows[i].join(' ').toLowerCase();
-        if (t.includes('gstin of supplier') && t.includes('invoice details')) {
-          parentHeaderIndex = i;
-          break;
-        }
-      }
-      if (parentHeaderIndex === -1) return;
+    /* ----- FIND B2B SHEET ----- */
 
-      const childHeaderIndex = parentHeaderIndex + 1;
-      const parentRow = rows[parentHeaderIndex] || [];
-      const childRow = rows[childHeaderIndex] || [];
+    const sheetName = workbook.SheetNames.find(
+      s => s.trim().toLowerCase() === 'b2b'
+    );
 
-      const headerRow: string[] = parentRow.map((p, i) =>
-        (childRow[i] || '').toString().trim() || (p || '').toString().trim()
-      );
+    if (!sheetName) {
+      console.warn('B2B sheet not found.');
+      return;
+    }
 
-      const dataStartIndex = childHeaderIndex + 1;
+    const sheet = workbook.Sheets[sheetName];
+    const rows: any[][] = XLSX.utils.sheet_to_json(sheet, {
+      header: 1,
+      defval: ''
+    });
 
-      /* ----- HELPERS ----- */
+    if (!rows.length) return;
 
-      const clean = (h: string) =>
-        h.toLowerCase().replace(/\(.*?\)/g, '').replace(/₹/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+    /* ----- AUTO HEADER DETECTION ----- */
 
-      const num = (v: any) => isNaN(parseFloat(v)) ? 0 : parseFloat(v.toString().replace(/,/g, ''));
-      const date = (v: any) =>
-        typeof v === 'number'
-          ? (() => { const d = XLSX.SSF.parse_date_code(v); return d ? new Date(d.y, d.m - 1, d.d) : null; })()
-          : isNaN(new Date(v).getTime()) ? null : new Date(v);
+    let parentHeaderIndex = rows.findIndex(r =>
+      r.join(' ').toLowerCase().includes('gstin of supplier') &&
+      r.join(' ').toLowerCase().includes('invoice details')
+    );
 
-      const map = (h: string) => {
-        const s = clean(h);
-        if (s.includes('gstin')) return 'GSTNumber';
-        if (s.includes('trade') || s.includes('supplier')) return 'SupplierName';
-        if (s.includes('invoice number')) return 'InvoiceNumber';
-        if (s.includes('invoice type')) return 'InvoiceType';
-        if (s.includes('invoice date')) return 'InvoiceDate';
-        if (s.includes('invoice value')) return 'InvoiceValue';
-        if (s.includes('place of supply')) return 'PlaceofSupply';
-        if (s.includes('reverse')) return 'SupplyAttractReverseCharge';
-        if (s.includes('rate')) return 'GSTRate';
-        if (s.includes('taxable')) return 'TaxableValue';
-        if (s.includes('igst')) return 'IGST';
-        if (s.includes('cgst')) return 'CGST';
-        if (s.includes('sgst')) return 'SGST';
-        if (s.includes('cess')) return 'Cess';
-        if (s.includes('gstr') && s.includes('status')) return 'GSTRFillingStatus';
-        if (s.includes('gstr') && s.includes('date')) return 'GSTRFillingDate';
-        if (s.includes('gstr') && s.includes('period')) return 'GSTRFillingPeriod';
-        if (s.includes('3b')) return 'GSTR3BFillingStatus';
-        if (s.includes('amendment')) return 'AmmendementMade';
-        if (s.includes('amended')) return 'AmendedTaxPeriod';
-        if (s.includes('cancellation')) return 'CancellationDate';
-        if (s === 'irn') return 'IRN';
-        if (s.includes('irn date')) return 'IRNDate';
-        if (s.includes('source')) return 'Source';
-        return null;
-      };
+    if (parentHeaderIndex === -1) {
+      console.warn('Header row not detected.');
+      return;
+    }
 
-      const defaultRow = {
-        GSTNumber: '',
-        SupplierName: '',
-        InvoiceNumber: '',
-        InvoiceType: '',
-        InvoiceDate: null,
-        InvoiceValue: 0,
-        PlaceofSupply: '',
-        SupplyAttractReverseCharge: '',
-        GSTRate: 0,
-        TaxableValue: 0,
-        IGST: 0,
-        CGST: 0,
-        SGST: 0,
-        Cess: 0,
-        GSTRFillingStatus: '',
-        GSTRFillingDate: null,
-        GSTRFillingPeriod: '',
-        GSTR3BFillingStatus: '',
-        AmmendementMade: '',
-        AmendedTaxPeriod: '',
-        CancellationDate: null,
-        Source: '',
-        IRN: '',
-        IRNDate: null
-      };
+    const childHeaderIndex = parentHeaderIndex + 1;
 
-      const headerMap: Record<number, string> = {};
-      headerRow.forEach((h, i) => {
-        const k = map(h);
-        if (k) headerMap[i] = k;
-      });
+    const parentRow = rows[parentHeaderIndex] || [];
+    const childRow = rows[childHeaderIndex] || [];
 
-      const result: any[] = [];
-      let id = 1;
+    const headerRow: string[] = parentRow.map((p, i) =>
+      (childRow[i] || p || '').toString().trim()
+    );
 
-      for (let r = dataStartIndex; r < rows.length; r++) {
-        const row = rows[r];
-        if (!row || row.every(c => c === '')) continue;
+    const dataStartIndex = childHeaderIndex + 1;
 
-        const obj: any = { ID: id++, ...defaultRow };
+    /* ----- HELPERS ----- */
 
-        Object.keys(headerMap).forEach(i => {
-          const key = headerMap[+i];
-          const val = row[+i];
-          if (['InvoiceDate','GSTRFillingDate','IRNDate','CancellationDate'].includes(key))
-            obj[key] = date(val);
-          else if (['InvoiceValue','TaxableValue','IGST','CGST','SGST','Cess','GSTRate'].includes(key))
-            obj[key] = num(val);
-          else obj[key] = val?.toString().trim() || '';
-        });
+    const clean = (h: string) =>
+      h.toLowerCase()
+        .replace(/\(.*?\)/g, '')
+        .replace(/₹/g, '')
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
 
-        if (obj.InvoiceNumber) result.push(obj);
-      }
+    // const num = (v: any) =>
+    //   isNaN(parseFloat(v))
+    //     ? 0
+    //     : parseFloat(v.toString().replace(/,/g, ''));
 
-      // this.displayedColumns = [
-      //   'ID','GSTNumber','SupplierName','InvoiceNumber','InvoiceType','InvoiceDate','InvoiceValue',
-      //   'PlaceofSupply','SupplyAttractReverseCharge','GSTRate','TaxableValue',
-      //   'IGST','CGST','SGST','Cess',
-      //   'GSTRFillingStatus','GSTRFillingDate','GSTRFillingPeriod','GSTR3BFillingStatus',
-      //   'AmmendementMade','AmendedTaxPeriod','CancellationDate','Source','IRN','IRNDate'
-      // ];
+    // const date = (v: any): string => {
+    //   let parsed: Date | null = null;
 
-      this.tableData = result;
+    //   // Excel numeric date
+    //   if (typeof v === 'number') {
+    //     const d = XLSX.SSF.parse_date_code(v);
+    //     if (d) {
+    //       parsed = new Date(d.y, d.m - 1, d.d);
+    //     }
+    //   }
 
-      console.log(this.tableData)
+    //   // If already dd-mm-yyyy
+    //   else if (typeof v === 'string' && v.includes('-')) {
+    //     const parts = v.split('-');
+    //     if (parts.length === 3) {
+    //       const day = parseInt(parts[0], 10);
+    //       const month = parseInt(parts[1], 10) - 1;
+    //       const year = parseInt(parts[2], 10);
+
+    //       parsed = new Date(year, month, day);
+    //     }
+    //   }
+
+    //   // Other valid formats
+    //   else if (v) {
+    //     const temp = new Date(v);
+    //     if (!isNaN(temp.getTime())) {
+    //       parsed = temp;
+    //     }
+    //   }
+
+    //   if (!parsed || isNaN(parsed.getTime())) return '';
+
+    //   const day = parsed.getDate().toString().padStart(2, '0');
+    //   const month = (parsed.getMonth() + 1).toString().padStart(2, '0');
+    //   const year = parsed.getFullYear();
+
+    //   return `${day}-${month}-${year}`;
+    // };
+
+    const map = (h: string): string | null => {
+      const s = clean(h);
+
+      if (s === 'gstin of supplier') return 'GSTNumber';
+      if (s === 'trade legal name of the supplier') return 'SupplierName';
+      if (s === 'invoice number') return 'InvoiceNumber';
+      if (s === 'invoice type') return 'InvoiceType';
+      if (s === 'invoice date') return 'InvoiceDate';
+      if (s === 'invoice value') return 'InvoiceValue';
+      if (s === 'place of supply') return 'PlaceofSupply';
+      if (s === 'reverse charge') return 'SupplyAttractReverseCharge';
+      if (s === 'rate') return 'GSTRate';
+      if (s === 'taxable value') return 'TaxableValue';
+      if (s === 'igst') return 'IGST';
+      if (s === 'cgst') return 'CGST';
+      if (s === 'sgst') return 'SGST';
+      if (s === 'cess') return 'Cess';
+      if (s === 'gstr 1 iff gstr 1a 5 filing status') return 'GSTRFillingStatus';
+      if (s === 'gstr 1 iff gstr 1a 5 filing date') return 'GSTRFillingDate';
+      if (s === 'gstr 1 iff gstr 1a 5 filing period') return 'GSTRFillingPeriod';
+      if (s === 'gstr 3b filing status') return 'GSTR3BFillingStatus';
+      if (s === 'amendment made if any') return 'AmmendementMade';
+      if (s === 'tax period in which amended') return 'AmendedTaxPeriod';
+      if (s === 'effective date of cancellation') return 'CancellationDate';
+      if (s === 'irn') return 'IRN';
+      if (s === 'irn date') return 'IRNDate';
+      if (s === 'source') return 'Source';
+
+      return null;
     };
 
-    reader.readAsArrayBuffer(input.files[0]);
-  }
+    /* ----- DEFAULT STRUCTURE ----- */
+
+    const defaultRow = {
+      GSTNumber: '',
+      SupplierName: '',
+      InvoiceNumber: '',
+      InvoiceType: '',
+      InvoiceDate: null,
+      InvoiceValue: 0,
+      PlaceofSupply: '',
+      SupplyAttractReverseCharge: '',
+      GSTRate: 0,
+      TaxableValue: 0,
+      IGST: 0,
+      CGST: 0,
+      SGST: 0,
+      Cess: 0,
+      GSTRFillingStatus: '',
+      GSTRFillingDate: null,
+      GSTRFillingPeriod: '',
+      GSTR3BFillingStatus: '',
+      AmmendementMade: '',
+      AmendedTaxPeriod: '',
+      CancellationDate: null,
+      Source: '',
+      IRN: '',
+      IRNDate: null
+    };
+
+    /* ----- HEADER MAP ----- */
+
+    const headerMap: Record<number, string> = {};
+
+    headerRow.forEach((h, i) => {
+      const key = map(h);
+      if (key) headerMap[i] = key;
+    });
+
+    /* ----- DATA PARSING ----- */
+
+    const result: any[] = [];
+
+    for (let r = dataStartIndex; r < rows.length; r++) {
+      const row = rows[r];
+      if (!row || row.every(c => c === '')) continue;
+
+      const obj: any = { ID: 0, ...defaultRow };
+
+      Object.keys(headerMap).forEach(i => {
+        const key = headerMap[+i];
+        const val = row[+i];
+
+        // if (['InvoiceDate', 'IRNDate','CancellationDate'].includes(key)) {
+        //   obj[key] = date(val);
+        // } 
+        // if (['InvoiceValue','TaxableValue','IGST','CGST','SGST','Cess','GSTRate'].includes(key)) {
+        //   obj[key] = num(val);
+        // } 
+        // else {
+          obj[key] = val?.toString().trim() || '';
+        // }
+      });
+
+      // ✅ Only push rows where InvoiceNumber exists AND GSTRate > 0
+      if (obj.GSTRate > 0) {
+        result.push(obj);
+      }
+    }
+
+    this.tableData = result;
+
+    console.log('Filtered Data (Rate > 0):', this.tableData);
+  };
+
+  reader.readAsArrayBuffer(input.files[0]);
+}
 
   saveExcel() {
     if(!this.tableData || !this.tableData.length) return;
