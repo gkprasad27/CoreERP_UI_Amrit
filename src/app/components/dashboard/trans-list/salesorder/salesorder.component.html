@@ -86,6 +86,10 @@
                     </ng-template>
                 </div>
 
+                <mat-form-field  class="col-3">
+                    <input matInput placeholder="{{'saleorder.advanceAmount' | translate }}" formControlName="advanceAmount" appFocusOnEnter tabIndex="2">
+                </mat-form-field>
+
                 <div class="col-3">  <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL"
                         (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList($event)"></app-file-upload>
                 </div>

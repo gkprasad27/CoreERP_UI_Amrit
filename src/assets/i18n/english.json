@@ -43,7 +43,7 @@
     "fromMonth": "From Month",
     "toMonth": "To Month",
     "totalOtherCharges":  "Other Charges",
-    "UPLOAD": "Update"
+    "UPLOAD": "Upload"
   },
   "LOGIN": {
     "USERNAME": "Username",
@@ -2882,6 +2882,7 @@
     "status": "Status",
     "taxCode": "Tax Code",
     "materialName": "Material Name",
+    "advanceAmount": "Advance Amount",
     "companyName": "Company",
     "profitcenterName": "Profit Center",
     "saleOrderNumber": "Sale Order Number",

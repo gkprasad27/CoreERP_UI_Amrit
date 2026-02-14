@@ -126,6 +126,7 @@ export class SalesorderComponent {
       amount: [0],
       totalTax: [0],
       totalAmount: [0],
+      advanceAmount: [],
       documentURL: [''],
     });
 

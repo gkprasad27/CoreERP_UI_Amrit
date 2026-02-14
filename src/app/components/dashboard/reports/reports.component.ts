@@ -866,7 +866,8 @@ onFileChange(event: Event): void {
       const row = rows[r];
       if (!row || row.every(c => c === '')) continue;
 
-      const obj: any = { ID: 0, ...defaultRow };
+      let data = JSON.parse(localStorage.getItem("user"));
+      const obj: any = { company: data.companyCode, addWho: data.userName, editWho: data.userName, addDate: new Date(), editDate: new Date(), ...defaultRow };
 
       Object.keys(headerMap).forEach(i => {
         const key = headerMap[+i];
