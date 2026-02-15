@@ -796,6 +796,42 @@
                     </ng-template>
                 </div>
 
+                <mat-form-field class="col-3" *ngIf="routeParam == 'gstupload'">
+                    <mat-label>Select Month</mat-label>
+                    <mat-select formControlName="gstMonth" appFocusOnEnter tabIndex="1">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let month of gstMonths" [value]="month.id">
+                            {{month.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.gstMonth.valid && modelFormData.controls.gstMonth.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.gstMonth.valid  }"> This field is
+                        required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-3" *ngIf="routeParam == 'gstupload'">
+                    <mat-label>Select Year</mat-label>
+                    <mat-select formControlName="gstYear" appFocusOnEnter tabIndex="2">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let year of gstYears" [value]="year">
+                            {{year}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!modelFormData.controls.gstYear.valid && modelFormData.controls.gstYear.status != 'DISABLED'"
+                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.gstYear.valid  }"> This field is
+                        required
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="col-3" *ngIf="routeParam == 'gstupload'">
+                    <button mat-raised-button  class="button-color-bule text-white mx-2" (click)="show()">
+                        {{ "COMMON.SHOW" | translate }}
+                    </button>
+                </div>
+
 
                 <mat-slide-toggle class="col-1 d-flex" formControlName="status"
                     *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">

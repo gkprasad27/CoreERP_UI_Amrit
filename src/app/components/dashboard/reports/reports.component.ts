@@ -87,6 +87,23 @@ export class ReportsComponent {
   toYear: any[] = [new Date().getFullYear()-1, new Date().getFullYear()];
   toMonth: any[] = [1,2,3,4,5,6,7,8,9,10,11,12];
 
+  // GST Upload Month and Year
+  gstYears: any[] = [2025, 2026, 2027];
+  gstMonths: any[] = [
+    { id: 1, name: 'January' },
+    { id: 2, name: 'February' },
+    { id: 3, name: 'March' },
+    { id: 4, name: 'April' },
+    { id: 5, name: 'May' },
+    { id: 6, name: 'June' },
+    { id: 7, name: 'July' },
+    { id: 8, name: 'August' },
+    { id: 9, name: 'September' },
+    { id: 10, name: 'October' },
+    { id: 11, name: 'November' },
+    { id: 12, name: 'December' }
+  ];
+
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
@@ -279,7 +296,9 @@ export class ReportsComponent {
       toYear: [''],
       fromMonth: [''],
       toMonth: [''],
-      vendorCode: ['-1']
+      vendorCode: ['-1'],
+      gstMonth: [''],
+      gstYear: ['']
     });
     this.modelFormData.controls['companyCode'].disable();
     this.setValidator();
@@ -509,6 +528,27 @@ export class ReportsComponent {
         }
       });
     }
+  }
+
+  show() {
+
+    const selectedMonth = this.gstMonths.find((m: any) => m.id == this.modelFormData.value.gstMonth);
+    const monthName = selectedMonth ? selectedMonth.name.substring(0, 3) : '';
+    const yearSuffix = this.modelFormData.value.gstYear ? this.modelFormData.value.gstYear.toString().substring(2) : '';
+    const monYear = `${monthName}-${yearSuffix}`;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const getGSTUploadDataUrl = String.Join('/', this.apiConfigService.getGSTUploadData, monYear);
+    this.apiService.apiGetRequest(getGSTUploadDataUrl).subscribe(
+      response => {
+        const res = response.body;
+        this.spinner.hide();
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            //this.branchFormData.reset();
+          }
+        }
+      });
+    
   }
 
   print() {
@@ -907,15 +947,12 @@ onFileChange(event: Event): void {
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
         const res = response.body;
+          this.spinner.hide();
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('GST Upload Successfully..', Static.Close, SnackBar.success);
             //this.branchFormData.reset();
           }
-          this.reset();
-
-          this.spinner.hide();
-
         }
       });
   }

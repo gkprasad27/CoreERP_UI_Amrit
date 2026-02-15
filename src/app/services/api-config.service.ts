@@ -545,6 +545,7 @@ export class ApiConfigService {
    RegisterLeaveApprovalDetails = `${environment.baseUrl}Selfservice/LeaveApproval/RegisterLeaveApprovalDetails`;
 
    GSTUpload = `${environment.baseUrl}Transactions/GSTUpload`;
+   getGSTUploadData = `${environment.baseUrl}Transactions/GetGSTUploadData`;
 
    getSaleOrder = `${environment.baseUrl}Transactions/GetSaleOrder`;
    getSaleOrderDetail = `${environment.baseUrl}Transactions/GetSaleOrderDetail`;

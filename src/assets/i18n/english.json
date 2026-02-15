@@ -43,7 +43,8 @@
     "fromMonth": "From Month",
     "toMonth": "To Month",
     "totalOtherCharges":  "Other Charges",
-    "UPLOAD": "Upload"
+    "UPLOAD": "Upload",
+    "SHOW": "Show"
   },
   "LOGIN": {
     "USERNAME": "Username",
