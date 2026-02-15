@@ -692,9 +692,9 @@
                     [class.filled]="modelFormData.value?.materialCode?.length > 0"
                     *ngIf="routeParam == 'salesanalysis' || routeParam == 'materialinward'|| routeParam=='purchaseanalysis'|| routeParam=='stockvaluation'">
                     <label> {{ 'COMMON.MATERIALCODE' | translate }} </label>
-                    <input placeholder=" " formControlName="materialCode" [typeaheadOptionsLimit]="100000" [typeahead]="materialList"
-                        typeaheadOptionField='id' appFocusOnEnter tabIndex="3" class="form-control typeahead"
-                        [typeaheadItemTemplate]="customItemTemplate1">
+                    <input placeholder=" " formControlName="materialCode" [typeaheadOptionsLimit]="100000"
+                        [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="3"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1">
                     <ng-template #customItemTemplate1 let-model="item">
                         <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                     </ng-template>
@@ -715,9 +715,9 @@
                     [class.filled]="modelFormData.value?.partyAccount?.length > 0"
                     *ngIf="routeParam == 'VendorPayments' || routeParam == 'CustomerPayments'">
                     <label> {{ 'invoicesmemos.partyAccount' | translate }} </label>
-                    <input placeholder=" " formControlName="partyAccount" [typeaheadOptionsLimit]="100000" [typeahead]="bpgLists"
-                        typeaheadOptionField='text' appFocusOnEnter tabIndex="3" class="form-control typeahead"
-                        [typeaheadItemTemplate]="customItemTemplate">
+                    <input placeholder=" " formControlName="partyAccount" [typeaheadOptionsLimit]="100000"
+                        [typeahead]="bpgLists" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
                     <ng-template #customItemTemplate let-model="item">
                         <span>{{model.text}}</span>
                     </ng-template>
@@ -788,49 +788,15 @@
                     [class.filled]="modelFormData.value?.employee?.length > 0"
                     *ngIf="routeParam == 'employeeabsentreport' || routeParam == 'employeeotreport' || routeParam == 'employeeattendance' || routeParam == 'AttendanceProcess' || routeParam == 'salaryprocess'">
                     <label> {{ 'COMMON.employee' | translate }} </label>
-                    <input placeholder=" " formControlName="employee" [typeaheadOptionsLimit]="100000" [typeahead]="employeesList"
-                        typeaheadOptionField='text' appFocusOnEnter tabIndex="9" class="form-control typeahead"
-                        [typeaheadItemTemplate]="customItemTemplate">
+                    <input placeholder=" " formControlName="employee" [typeaheadOptionsLimit]="100000"
+                        [typeahead]="employeesList" typeaheadOptionField='text' appFocusOnEnter tabIndex="9"
+                        class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
                     <ng-template #customItemTemplate let-model="item">
                         <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                     </ng-template>
                 </div>
 
-                <mat-form-field class="col-3" *ngIf="routeParam == 'gstupload'">
-                    <mat-label>Select Month</mat-label>
-                    <mat-select formControlName="gstMonth" appFocusOnEnter tabIndex="1">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let month of gstMonths" [value]="month.id">
-                            {{month.name}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error
-                        *ngIf="!modelFormData.controls.gstMonth.valid && modelFormData.controls.gstMonth.status != 'DISABLED'"
-                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.gstMonth.valid  }"> This field is
-                        required
-                    </mat-error>
-                </mat-form-field>
 
-                <mat-form-field class="col-3" *ngIf="routeParam == 'gstupload'">
-                    <mat-label>Select Year</mat-label>
-                    <mat-select formControlName="gstYear" appFocusOnEnter tabIndex="2">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let year of gstYears" [value]="year">
-                            {{year}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error
-                        *ngIf="!modelFormData.controls.gstYear.valid && modelFormData.controls.gstYear.status != 'DISABLED'"
-                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.gstYear.valid  }"> This field is
-                        required
-                    </mat-error>
-                </mat-form-field>
-
-                <div class="col-3" *ngIf="routeParam == 'gstupload'">
-                    <button mat-raised-button  class="button-color-bule text-white mx-2" (click)="show()">
-                        {{ "COMMON.SHOW" | translate }}
-                    </button>
-                </div>
 
 
                 <mat-slide-toggle class="col-1 d-flex" formControlName="status"
@@ -856,19 +822,68 @@
                         *ngIf="routeParam == 'AttendanceProcess'">
                         {{ "COMMON.SEARCH" | translate }}
                     </button>
-                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="reset()" *ngIf="routeParam != 'gstupload'">
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="reset()"
+                        *ngIf="routeParam != 'gstupload'">
                         {{ "COMMON.RESET" | translate }}
-                    </button>
-                     <div class="" *ngIf="routeParam === 'gstupload'">
-                        <button mat-raised-button class="button-color-bule text-white mx-2" (click)="fileInput.click()"> {{ "COMMON.UPLOAD" | translate }} </button>
-                        <input #fileInput type="file" accept=".xlsx, .xls" style="display: none;" (change)="onFileChange($event)" />
-                    </div>
-                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="saveExcel()" *ngIf="routeParam == 'gstupload'">
-                        {{ "COMMON.SAVE" | translate }}
                     </button>
                 </div>
 
             </div>
+
+            <div class="row my-3 py-3" *ngIf="routeParam == 'gstupload'">
+                <div class="col-6">
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="fileInput.click()"> {{
+                        "COMMON.UPLOAD" | translate }} </button>
+                    <input #fileInput type="file" accept=".xlsx, .xls" style="display: none;"
+                        (change)="onFileChange($event)" />
+                    <button mat-raised-button class="button-color-bule text-white mx-2" (click)="saveExcel()"
+                        *ngIf="routeParam == 'gstupload'">
+                        {{ "COMMON.SAVE" | translate }}
+                    </button>
+                </div>
+
+                <div class="col-6 d-flex align-items-center justify-content-end">
+                    <mat-form-field class="col-4 mx-2">
+                        <mat-label>Select Month</mat-label>
+                        <mat-select formControlName="gstMonth" appFocusOnEnter tabIndex="1">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let month of gstMonths" [value]="month.id">
+                                {{month.name}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="!modelFormData.controls.gstMonth.valid && modelFormData.controls.gstMonth.status != 'DISABLED'"
+                            [ngClass]="{ 'ng--invalid': !modelFormData.controls.gstMonth.valid  }"> This field is
+                            required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-4 mx-2">
+                        <mat-label>Select Year</mat-label>
+                        <mat-select formControlName="gstYear" appFocusOnEnter tabIndex="2">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let year of gstYears" [value]="year">
+                                {{year}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="!modelFormData.controls.gstYear.valid && modelFormData.controls.gstYear.status != 'DISABLED'"
+                            [ngClass]="{ 'ng--invalid': !modelFormData.controls.gstYear.valid  }"> This field is
+                            required
+                        </mat-error>
+                    </mat-form-field>
+
+                        <button mat-raised-button class="button-color-bule text-white mx-2" (click)="show()">
+                            {{ "COMMON.SHOW" | translate }}
+                        </button>
+
+                </div>
+            </div>
+
+
+
+
+
 
         </form>
 
