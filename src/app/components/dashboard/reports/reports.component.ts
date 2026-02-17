@@ -531,7 +531,7 @@ export class ReportsComponent {
   }
 
   show() {
-
+    this.tableData = null;
     const selectedMonth = this.gstMonths.find((m: any) => m.id == this.modelFormData.value.gstMonth);
     const monthName = selectedMonth ? selectedMonth.name.substring(0, 3) : '';
     const yearSuffix = this.modelFormData.value.gstYear ? this.modelFormData.value.gstYear.toString().substring(2) : '';
@@ -539,13 +539,11 @@ export class ReportsComponent {
     const user = JSON.parse(localStorage.getItem('user'));
     const getGSTUploadDataUrl = String.Join('/', this.apiConfigService.getGSTUploadData, monYear);
     this.apiService.apiGetRequest(getGSTUploadDataUrl).subscribe(
-      response => {
-        const res = response.body;
+      res => {
         this.spinner.hide();
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.tableData = [ res.response['GSTUploadData'] ];
             //this.branchFormData.reset();
-          }
         }
       });
     
@@ -832,30 +830,30 @@ onFileChange(event: Event): void {
     const map = (h: string): string | null => {
       const s = clean(h);
 
-      if (s === 'gstin of supplier') return 'GSTNumber';
-      if (s === 'trade legal name of the supplier') return 'SupplierName';
-      if (s === 'invoice number') return 'InvoiceNumber';
-      if (s === 'invoice type') return 'InvoiceType';
-      if (s === 'invoice date') return 'InvoiceDate';
-      if (s === 'invoice value') return 'InvoiceValue';
-      if (s === 'place of supply') return 'PlaceofSupply';
-      if (s === 'reverse charge') return 'SupplyAttractReverseCharge';
-      if (s === 'rate') return 'GSTRate';
-      if (s === 'taxable value') return 'TaxableValue';
-      if (s === 'igst') return 'IGST';
-      if (s === 'cgst') return 'CGST';
-      if (s === 'sgst') return 'SGST';
-      if (s === 'cess') return 'Cess';
-      if (s === 'gstr 1 iff gstr 1a 5 filing status') return 'GSTRFillingStatus';
-      if (s === 'gstr 1 iff gstr 1a 5 filing date') return 'GSTRFillingDate';
-      if (s === 'gstr 1 iff gstr 1a 5 filing period') return 'GSTRFillingPeriod';
-      if (s === 'gstr 3b filing status') return 'GSTR3BFillingStatus';
-      if (s === 'amendment made if any') return 'AmmendementMade';
-      if (s === 'tax period in which amended') return 'AmendedTaxPeriod';
-      if (s === 'effective date of cancellation') return 'CancellationDate';
-      if (s === 'irn') return 'IRN';
-      if (s === 'irn date') return 'IRNDate';
-      if (s === 'source') return 'Source';
+      if (s === 'gstin of supplier') return 'gstNumber';
+      if (s === 'trade legal name of the supplier') return 'supplierName';
+      if (s === 'invoice number') return 'invoiceNumber';
+      if (s === 'invoice type') return 'invoiceType';
+      if (s === 'invoice date') return 'invoiceDate';
+      if (s === 'invoice value') return 'invoiceValue';
+      if (s === 'place of supply') return 'placeofSupply';
+      if (s === 'reverse charge') return 'supplyAttractReverseCharge';
+      if (s === 'rate') return 'gstRate';
+      if (s === 'taxable value') return 'taxableValue';
+      if (s === 'igst') return 'igst';
+      if (s === 'cgst') return 'cgst';
+      if (s === 'sgst') return 'sgst';
+      if (s === 'cess') return 'cess';
+      if (s === 'gstr 1 iff gstr 1a 5 filing status') return 'gstrFillingStatus';
+      if (s === 'gstr 1 iff gstr 1a 5 filing date') return 'gstrFillingDate';
+      if (s === 'gstr 1 iff gstr 1a 5 filing period') return 'gstrFillingPeriod';
+      if (s === 'gstr 3b filing status') return 'gstr3BFillingStatus';
+      if (s === 'amendment made if any') return 'ammendementMade';
+      if (s === 'tax period in which amended') return 'amendedTaxPeriod';
+      if (s === 'effective date of cancellation') return 'cancellationDate';
+      if (s === 'irn') return 'irn';
+      if (s === 'irn date') return 'irnDate';
+      if (s === 'source') return 'source';
 
       return null;
     };
@@ -925,7 +923,7 @@ onFileChange(event: Event): void {
       });
 
       // ✅ Only push rows where InvoiceNumber exists AND GSTRate > 0
-      if (obj.GSTRate > 0) {
+      if (obj.gstRate > 0) {
         result.push(obj);
       }
     }
