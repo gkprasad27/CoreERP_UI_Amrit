@@ -542,7 +542,7 @@ export class ReportsComponent {
       res => {
         this.spinner.hide();
           if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.tableData = [ res.response['GSTUploadData'] ];
+            this.tableData = res.response['GSTUploadData'];
             //this.branchFormData.reset();
         }
       });
