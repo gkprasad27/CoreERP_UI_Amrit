@@ -110,6 +110,7 @@ export class GoodsissueComponent implements OnInit {
   mmasterList: any;
 
   materialCodeList = [];
+  purchasingData: any;
 
   constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
@@ -612,7 +613,10 @@ export class GoodsissueComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.mreqList = res.response['BPList'];
+
+              this.mreqList = res.response['BPList'].filter((item, index, self) =>
+                index === self.findIndex(t => t.saleOrderNo === item.saleOrderNo)
+              );
             }
           }
         });
@@ -628,7 +632,7 @@ export class GoodsissueComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.mreqList = res.response['BPList'];
+              // this.mreqList = res.response['BPList'];
             }
           }
         });
@@ -644,7 +648,7 @@ export class GoodsissueComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.mreqList = res.response['BOMList'];
+              // this.mreqList = res.response['BOMList'];
             }
           }
         });
@@ -832,4 +836,23 @@ export class GoodsissueComponent implements OnInit {
         }
       });
   }
+
+   print() {
+    this.purchasingData = {
+      soNumber: this.formData.value.saleOrderNumber,
+      requistionDate: new Date(),
+      storesPersonName: this.formData.value.storesPersonName,
+      productionPersonName: this.formData.value.productionPersonName,
+      detailArray: this.tableData
+    };
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('purchasingPrintData').innerHTML;
+      w.document.body.innerHTML = html;
+      this.purchasingData = null;
+      w.print();
+
+    }, 1000);
+  }
+
 }

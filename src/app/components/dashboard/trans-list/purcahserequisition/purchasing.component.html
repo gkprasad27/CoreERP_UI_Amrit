@@ -1,3 +1,96 @@
+@if(purcahseRequisitionData) {
+<div style="margin: 10px;" id="purchasingRequisitionPrintData">
+
+    <div style="display: flex;">
+        @if(formData.value.company === '1000') {
+        <img src="/assets/images/header.jpg" style="height: 100px; width: 65%;">
+        }
+        @if(formData.value.company !== '1000') {
+        <img src="/assets/images/AMRIT.jpg" style="height: 100px; width: 65%;">
+        }
+
+        <div style="padding: 24px; border-top: 1px solid black; -webkit-print-color-adjust: exact; background: rgb(22 106 132) !important;
+                    color: white;font-size: 20px;width: 35%;align-items: center; justify-content: space-around; display: flex; height: 50px;
+    "> PURCHASE REQUISTION </div>
+    </div>
+
+    <div style="border-top: 1px solid black; display: flex;">
+        <div style="padding: 5px;width: 50%;padding-left: 15px;">
+            <b> MSO Number </b>
+            <span style="padding-left: 60px;">: {{ purcahseRequisitionData?.msoNumber }} </span>
+        </div>
+        <div style="padding: 5px;width: 50%;padding-left: 15px;">
+            <b> Date </b>
+            <span style="padding-left: 92px;">: {{ purcahseRequisitionData?.requisitionDate | date:'dd/MM/yyyy' }}
+            </span>
+        </div>
+    </div>
+
+    <div style="border-top: 1px solid black;">
+        <div style="padding: 5px;width: 100%;padding-left: 15px;">
+            <b> Requested By </b>
+            <span style="padding-left: 75px;">: {{ purcahseRequisitionData?.recomendedBy }} </span>
+        </div>
+        <div style="padding: 5px;width: 100%;padding-left: 15px;">
+            <b> Requested For </b>
+            <span style="padding-left: 68px;">: {{ purcahseRequisitionData?.requestedFor }} </span>
+        </div>
+        <div style="padding: 5px;width: 100%;padding-left: 15px;">
+            <b> Target Date: </b>
+            <span style="padding-left: 83px;">: {{ purcahseRequisitionData?.deliveryDate }} </span>
+        </div>
+    </div>
+
+
+    @if(purcahseRequisitionData?.detailArray && purcahseRequisitionData?.detailArray.length) {
+    <div
+        style="border-top: 1px solid black;border-bottom: 1px solid black;-webkit-print-color-adjust: exact; margin-top: 10px;">
+        <table
+            style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+            <thead>
+                <tr>
+                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
+                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Material Code </th>
+                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Material Name </th>
+                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Material Grade </th>
+                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Required Qty </th>
+                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Available Qty </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+                    *ngFor="let row of purcahseRequisitionData?.detailArray; let i = index">
+                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
+                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialCode }}
+                    </td>
+                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialName}}
+                    </td>
+                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.material }}
+                    </td>
+                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty }}</td>
+                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.stockQty }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    }
+
+
+    <div style="display: flex;margin-top: 250px;">
+        <div style="width: 50%;display: flex;flex-direction: column; align-items: center;">
+           <div> <b> Prepared By </b> </div>
+            <b> M/s Amrit Stone Crusher Equipments </b>
+        </div>
+        <div style="width: 50%;display: flex;flex-direction: column; align-items: center;">
+           <div> <b> Approved By </b> </div>
+            <b> M/s Amrit Stone Crusher Equipments </b>
+        </div>
+    </div>
+
+
+</div>
+}
 <mat-card>
 
     <mat-card-content>
@@ -95,6 +188,23 @@
 
 
 
+                @if(!routeEdit) {
+                <div class="multiselect-dropdown-list floating-dropdown col-2"
+                    [class.filled]="formData1.value?.recomendedBy?.length > 0">
+                    <label> {{ 'purcahserequisition.recomendedBy' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="recomendedBy"
+                        [settings]="dropdownSettings1" [data]="employeesList">
+                    </ng-multiselect-dropdown>
+                </div>
+                }
+                @if(routeEdit) {
+                <mat-form-field class="col-2">
+                    <mat-label>{{'purcahserequisition.recomendedBy' | translate }}</mat-label>
+                    <input matInput type="text" readonly formControlName="recomendedBy" appFocusOnEnter tabIndex="5">
+                </mat-form-field>
+                }
+
+
                 <mat-form-field class="col-2">
                     <mat-label>{{'purcahserequisition.requiredfor' | translate }}</mat-label>
                     <mat-select formControlName="requiredfor" appFocusOnEnter tabIndex="4">
@@ -117,6 +227,14 @@
                         [nonEditable]="picker" formControlName="requisitionDate" appFocusOnEnter tabIndex="5">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="col-2">
+                    <mat-label [translate]="'purcahserequisition.deliveryDate'"></mat-label>
+                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
+                        [nonEditable]="picker1" formControlName="deliveryDate" appFocusOnEnter tabIndex="5">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field class="col-2">
@@ -148,9 +266,10 @@
                     <div class="mat-mdc-form-field  typeahead floating-dropdown col-2"
                         [class.filled]="formData1.value?.materialCode?.length > 0">
                         <label> {{ 'purcahserequisition.materialCode' | translate }} </label>
-                        <input placeholder=" " formControlName="materialCode" [typeaheadOptionsLimit]="100000" [typeahead]="materialList"
-                            typeaheadOptionField='id' (typeaheadOnSelect)="materialCodeChange()" appFocusOnEnter
-                            tabIndex="6" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
+                        <input placeholder=" " formControlName="materialCode" [typeaheadOptionsLimit]="100000"
+                            [typeahead]="materialList" typeaheadOptionField='id'
+                            (typeaheadOnSelect)="materialCodeChange()" appFocusOnEnter tabIndex="6"
+                            class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
                         <ng-template #customItemTemplate let-model="item">
                             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                         </ng-template>
@@ -165,6 +284,14 @@
                         <mat-label [translate]="'purcahserequisition.qty'"></mat-label>
                         <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="8">
                     </mat-form-field>
+
+                    <div class="multiselect-dropdown-list floating-dropdown col-3"
+                        [class.filled]="formData1.value?.material?.length > 0">
+                        <label> {{ 'purchaseorder.material' | translate }} </label>
+                        <ng-multiselect-dropdown placeholder=" " formControlName="material"
+                            [settings]="dropdownSettings" [data]="mpatternList" appFocusOnEnter tabIndex="21">
+                        </ng-multiselect-dropdown>
+                    </div>
 
                 </div>
 
@@ -219,6 +346,11 @@
         <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
             (click)="return();">
             {{ 'COMMON.RETURN' | translate }}
+        </button>
+
+        <button [hidden]="routeEdit == ''" mat-raised-button type="submit" class="button-color-bule text-white mx-1"
+            (click)="print()">
+            {{ 'COMMON.PRINT' | translate }}
         </button>
 
     </mat-card-content>

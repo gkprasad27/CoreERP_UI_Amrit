@@ -13,7 +13,7 @@ import { AppDateAdapter, APP_DATE_FORMATS, NonEditableDatepicker } from '../../.
 import { TableComponent } from '../../../../reuse-components/table/table.component';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -25,15 +25,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatButtonModule } from '@angular/material/button';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-purchasing',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, NgMultiSelectDropDownModule, TranslateModule, TableComponent, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './purchasing.component.html',
   styleUrls: ['./purchasing.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    DatePipe
   ]
 })
 export class PurchasingComponent implements OnInit {
@@ -65,6 +67,32 @@ export class PurchasingComponent implements OnInit {
   pcgroupList: any;
   functionaldeptList: any;
   costunitList: any;
+  purcahseRequisitionData: any;
+  employeesList: any[] = [];
+
+  mpatternList: any[] = [];
+
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'description',
+    textField: 'description',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+  dropdownSettings1: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'text',
+    textField: 'text',
+    enableCheckAll: true,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
 
   constructor(
     public commonService: CommonService,
@@ -74,6 +102,7 @@ export class PurchasingComponent implements OnInit {
     private alertService: AlertService,
     private spinner: NgxSpinnerService,
     public route: ActivatedRoute,
+    private datepipe: DatePipe,
     private router: Router
   ) {
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
@@ -83,7 +112,67 @@ export class PurchasingComponent implements OnInit {
 
   ngOnInit() {
     this.formDataGroup();
-    this.getdepartmentData();
+    this.allApis();
+  }
+
+
+  allApis() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getdepartmentTypeUrl = String.Join('/', this.apiConfigService.getfunctionaldeptList);
+    const getProfitCentersList = String.Join('/', this.apiConfigService.getProfitCentersList);
+    const getMaterialDataUrl = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
+    const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
+    const getmpList = String.Join('/', this.apiConfigService.getModelPatternList);
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getdepartmentTypeUrl),
+        this.apiService.apiGetRequest(getProfitCentersList),
+        this.apiService.apiGetRequest(getMaterialDataUrl),
+        this.apiService.apiGetRequest(getEmployeeList),
+        this.apiService.apiGetRequest(getmpList),
+
+      ]).subscribe(([departmentType, profitCentersList, materialList, employeeList, mpList]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(departmentType) && departmentType.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(departmentType.response)) {
+            this.functionaldeptList = departmentType.response['fdeptList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(profitCentersList) && profitCentersList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(profitCentersList.response)) {
+            this.profitCenterList = profitCentersList.response['profitCenterList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(materialList) && materialList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(materialList.response)) {
+            this.materialList = materialList.response['mmasterList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(employeeList) && employeeList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(employeeList.response)) {
+            this.employeesList = employeeList.response['emplist'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(mpList) && mpList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(mpList.response)) {
+            this.mpatternList = mpList.response['mpatternList'];
+          }
+        }
+
+        if (this.routeEdit != '') {
+          this.getPurchasingDetails(this.routeEdit);
+        }
+
+
+      });
+    });
   }
 
   // tablePropsFunc() {
@@ -135,27 +224,30 @@ export class PurchasingComponent implements OnInit {
       recomendedBy: null,
       recomendedDate: [null],
       approvedBy: null,
+      deliveryDate: [null],
       approvedDate: [null],
       status: [null],
-      totalQty : [0],
+      totalQty: [0],
     });
 
     this.formData1 = this.formBuilder.group({
       materialCode: ['', Validators.required],
       materialName: [''],
+      material: [''],
       netWeight: [0],
       qty: ['', Validators.required],
       stockQty: [0],
       id: [0],
-      totalQty : [0],
+      totalQty: [0],
       highlight: false,
       action: [[
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-]],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]],
       index: 0
     });
   }
+
 
   // getCompanyList() {
   //   const companyUrl = String.Join('/', this.apiConfigService.getCompanyList);
@@ -201,20 +293,20 @@ export class PurchasingComponent implements OnInit {
   //         this.getdepartmentData();
   //       });
   // }
-  getdepartmentData() {
-    const getdepartmentTypeUrl = String.Join('/', this.apiConfigService.getfunctionaldeptList);
-    this.apiService.apiGetRequest(getdepartmentTypeUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.functionaldeptList = res.response['fdeptList'];
-            }
-          }
-          this.getProfitcenterData();
-        });
-  }
+  // getdepartmentData() {
+  //   const getdepartmentTypeUrl = String.Join('/', this.apiConfigService.getfunctionaldeptList);
+  //   this.apiService.apiGetRequest(getdepartmentTypeUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.functionaldeptList = res.response['fdeptList'];
+  //           }
+  //         }
+  //         this.getProfitcenterData();
+  //       });
+  // }
 
   // getBranchList() {
   //   const branchUrl = String.Join('/', this.apiConfigService.getBranchList);
@@ -246,41 +338,41 @@ export class PurchasingComponent implements OnInit {
   //       });
   // }
 
-  getProfitcenterData() {
-    const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
-    this.apiService.apiGetRequest(getpcUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.profitCenterList = res.response['profitCenterList'];
-            }
-          }
+  // getProfitcenterData() {
+  //   const getpcUrl = String.Join('/', this.apiConfigService.getProfitCentersList);
+  //   this.apiService.apiGetRequest(getpcUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.profitCenterList = res.response['profitCenterList'];
+  //           }
+  //         }
 
-          this.getmaterialData()
-        });
-  }
-  
-  getmaterialData() {
-    let obj = JSON.parse(localStorage.getItem("user"));
-    const getmaterialList = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
-    this.apiService.apiGetRequest(getmaterialList)
-      .subscribe(
-        response => {
-          this.spinner.hide();
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              
-              this.materialList = res.response['mmasterList'];
-            }
-          }
-          if (this.routeEdit != '') {
-            this.getPurchasingDetails(this.routeEdit);
-          }
-        });
-  }
+  //         this.getmaterialData()
+  //       });
+  // }
+
+  // getmaterialData() {
+  //   let obj = JSON.parse(localStorage.getItem("user"));
+  //   const getmaterialList = String.Join('/', this.apiConfigService.getmaterialdata, obj.companyCode);
+  //   this.apiService.apiGetRequest(getmaterialList)
+  //     .subscribe(
+  //       response => {
+  //         this.spinner.hide();
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+
+  //             this.materialList = res.response['mmasterList'];
+  //           }
+  //         }
+  //         if (this.routeEdit != '') {
+  //           this.getPurchasingDetails(this.routeEdit);
+  //         }
+  //       });
+  // }
 
   // getWbsList() {
   //   const segUrl = String.Join('/', this.apiConfigService.getwbselement);
@@ -318,9 +410,9 @@ export class PurchasingComponent implements OnInit {
                 const obj = this.materialList.find((m: any) => m.id == s.materialCode);
                 s.materialName = obj.text
                 s.action = [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-];
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' }
+                ];
                 s.index = index + 1;
                 s.qty = s.qty;
                 s.stockQty = obj.availQTY;
@@ -341,9 +433,9 @@ export class PurchasingComponent implements OnInit {
     this.formData1.patchValue({
       index: 0,
       action: [
-  { id: 'Edit', type: 'edit' },
-  { id: 'Delete', type: 'delete' }
-],
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ],
       id: 0
     });
   }
@@ -383,9 +475,13 @@ export class PurchasingComponent implements OnInit {
       this.formData1.patchValue({
         index: data ? (data.length + 1) : 1
       });
-      data = [this.formData1.value, ...data];
+      const obj = this.formData1.getRawValue();
+      obj.material = obj.material ? obj.material[0].description : '';
+      data = [obj, ...data];
     } else {
-      data = data.map((res: any) => res = res.index == this.formData1.value.index ? this.formData1.value : res);
+      const obj = this.formData1.getRawValue();
+      obj.material = obj.material ? obj.material[0].description : '';
+      data = data.map((res: any) => res = res.index == this.formData1.value.index ? obj : res);
     }
     setTimeout(() => {
       this.tableData = data;
@@ -399,6 +495,9 @@ export class PurchasingComponent implements OnInit {
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
     } else {
       this.formData1.patchValue(value.item);
+      this.formData1.patchValue({
+        material: value.item.material ? [{ description: value.item.material }] : '',
+      })
     }
   }
 
@@ -426,7 +525,16 @@ export class PurchasingComponent implements OnInit {
 
   savepurcahserequisition() {
     const addprreq = String.Join('/', this.apiConfigService.addpurchasereq);
-    const requestObj = { preqHdr: this.formData.value, preqDtl: this.tableData };
+
+    const  obj = this.formData.getRawValue();
+    obj.requisitionDate = this.formData.get('requisitionDate').value ? this.datepipe.transform(this.formData.get('requisitionDate').value, 'yyyy-MM-dd') : '';
+    obj.deliveryDate = this.formData.get('deliveryDate').value ? this.datepipe.transform(this.formData.get('deliveryDate').value, 'yyyy-MM-dd') : '';
+
+    if(!this.commonService.checkNullOrUndefined(obj.recomendedBy) && obj.recomendedBy.length > 0) {
+      obj.recomendedBy = obj.recomendedBy[0].id;
+    }
+
+    const requestObj = { preqHdr: obj, preqDtl: this.tableData };
     this.apiService.apiPostRequest(addprreq, requestObj).subscribe(
       response => {
         const res = response;
@@ -461,5 +569,25 @@ export class PurchasingComponent implements OnInit {
     this.formData.reset();
     this.sendDynTableData = { type: 'reset', data: this.tableData };
   }
+
+  print() {
+    this.purcahseRequisitionData = {
+      msoNumber: this.formData.value.requisitionNumber,
+      requisitionDate: this.formData.value.requisitionDate,
+      requestedBy: this.formData.value.recomendedBy,
+      requestedFor: this.formData.value.requiredfor,
+      deliveryDate: this.formData.value.deliveryDate,
+      detailArray: this.tableData
+    };
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('purchasingRequisitionPrintData').innerHTML;
+      w.document.body.innerHTML = html;
+      this.purcahseRequisitionData = null;
+      w.print();
+
+    }, 1000);
+  }
+
 
 }

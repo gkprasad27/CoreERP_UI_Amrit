@@ -203,6 +203,7 @@ export class CashbankComponent implements OnInit {
         if (!this.commonService.checkNullOrUndefined(glList) && glList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(glList.response)) {
             this.glAccountList = glList.response['glList'];
+            this.accountSelect();
           }
         }
 

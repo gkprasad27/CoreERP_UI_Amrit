@@ -545,6 +545,10 @@ export class ReceiptspaymentsComponent implements OnInit {
     if (typeof formData.voucherType != 'string') {
       formData.voucherType = this.formData.value.voucherType[0].voucherTypeIdName.split('-')[0].trim();
     }
+    formData.voucherDate = this.commonService.formatDate(formData.voucherDate);
+    formData.postingDate = this.commonService.formatDate(formData.postingDate);
+    formData.referenceDate = this.commonService.formatDate(formData.referenceDate);
+    formData.chequeDate = this.commonService.formatDate(formData.chequeDate);
     const addCashBank = String.Join('/', this.apiConfigService.addPaymentsReceipts);
     const requestObj = { pcbHdr: formData, pcbDtl: arr };
     this.apiService.apiPostRequest(addCashBank, requestObj).subscribe(

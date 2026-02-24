@@ -76,7 +76,7 @@ export class MaterialRequisitionViewComponent {
     const user = JSON.parse(localStorage.getItem('user'));
 
     this.formData = this.formBuilder.group({
-
+      company: [user ? user.companyCode : null],
       allocatedPerson: [null],
       mechine: [null],
       startDate: [null],

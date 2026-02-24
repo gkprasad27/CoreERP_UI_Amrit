@@ -1,5 +1,11 @@
 <div style="margin: 10px;" *ngIf="materialPrintData && materialPrintData.length" id="materialPrintData">
     <div style="display: flex;">
+        @if(formData.value.company === '1000') {
+            <img src="/assets/images/header.jpg"  style="height: 100px; width: 65%;"> 
+        }
+        @if(formData.value.company !== '1000') {
+            <img src="/assets/images/AMRIT.jpg" style="height: 100px; width: 65%;">
+        }
         <img src="/assets/images/header.jpg" style="height: 100px; width: 65%;">
         <span style="font-size: 25px;font-weight: 700;font-family: sans-serif;"> Production Scheduling </span>
     </div>
@@ -137,7 +143,7 @@
                 </mat-form-field>
                 <mat-form-field class="col-2">
                     <mat-label [translate]="'materialrequisition.endDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="endDate"
+                    <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="endDate"
                         appFocusOnEnter tabIndex="4">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
