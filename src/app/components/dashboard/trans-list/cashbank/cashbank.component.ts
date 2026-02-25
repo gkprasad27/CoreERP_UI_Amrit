@@ -12,7 +12,7 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS, NonEditableDatepicker } from '../../../../directives/format-datepicker';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -33,7 +33,8 @@ import { TableComponent } from '../../../../reuse-components/table/table.compone
   styleUrls: ['./cashbank.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    DatePipe
   ]
 })
 
@@ -95,6 +96,7 @@ export class CashbankComponent implements OnInit {
   fcList: any;
   citemList: any;
   ordertypeList: any;
+  cashBankData: any;
 
 
   constructor(
@@ -105,6 +107,7 @@ export class CashbankComponent implements OnInit {
     private spinner: NgxSpinnerService,
     public commonService: CommonService,
     public route: ActivatedRoute,
+    private datepipe: DatePipe,
     private router: Router
   ) {
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
@@ -203,7 +206,6 @@ export class CashbankComponent implements OnInit {
         if (!this.commonService.checkNullOrUndefined(glList) && glList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(glList.response)) {
             this.glAccountList = glList.response['glList'];
-            this.accountSelect();
           }
         }
 
@@ -238,7 +240,7 @@ export class CashbankComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['CashBankMasters']);
-
+              this.accountSelect();
               const arr = [...res.response['CashBankDetail']];
               arr.forEach((s: any, index: number) => {
                 s.glaccount = s.glaccount ? s.glaccount : '';
@@ -474,8 +476,14 @@ export class CashbankComponent implements OnInit {
       const obj = this.glAccountList.find((g: any) => g.glaccountName == t.glaccount);
       t.glaccount = obj.accountNumber
     })
+
+    const formData = this.formData.value;
+    formData.voucherDate = this.formData.get('voucherDate').value ? this.datepipe.transform(this.formData.get('voucherDate').value, 'MM-dd-yyyy') : '';
+    formData.postingDate = this.formData.get('postingDate').value ? this.datepipe.transform(this.formData.get('postingDate').value, 'MM-dd-yyyy') : '';
+    formData.referenceDate = this.formData.get('referenceDate').value ? this.datepipe.transform(this.formData.get('referenceDate').value, 'MM-dd-yyyy') : '';
+
     const addCashBank = String.Join('/', this.apiConfigService.addCashBank);
-    const requestObj = { cashbankHdr: this.formData.value, cashbankDtl: arr };
+    const requestObj = { cashbankHdr: formData, cashbankDtl: arr };
     this.apiService.apiPostRequest(addCashBank, requestObj).subscribe(
       response => {
         const res = response;
@@ -508,6 +516,25 @@ export class CashbankComponent implements OnInit {
           }
         }
       });
+  }
+
+  
+  print() {
+    this.cashBankData = {
+      vcNumber: this.formData.value.voucherNumber,
+      voucherDate: this.formData.value.voucherDate,
+      issuingTo: this.formData.value.narration,
+      totalAmount: this.tableData.reduce((a: any, b: any) => a + b.amount, 0),
+      detailArray: this.tableData
+    };
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('cashBankPrintData').innerHTML;
+      w.document.body.innerHTML = html;
+      this.cashBankData = null;
+      w.print();
+
+    }, 1000);
   }
 
   // tablePropsFunc(subGlAccountList = []) {

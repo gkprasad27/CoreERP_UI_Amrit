@@ -287,7 +287,8 @@ export class ReceiptspaymentsComponent implements OnInit {
                 s.writeOffAmount = s.writeOffAmount ? s.writeOffAmount : 0;
                 s.partyAccount = s.partyAccount ? s.partyAccount : 0;
                 s.paymentterms = s.paymentterms ? s.paymentterms : 0;
-                s.postingDate = s.postingDate ? s.postingDate : '';
+                s.invoiceAmount = s.invoiceAmount ? s.invoiceAmount : 0;
+                // s.postingDate = s.postingDate ? s.postingDate : '';
                 s.discountGl = s.discountGl ? s.discountGl : '';
                 s.writeOffGl = s.writeOffGl ? s.writeOffGl : '';
                 s.narration = s.narration ? s.narration : '';
@@ -545,10 +546,11 @@ export class ReceiptspaymentsComponent implements OnInit {
     if (typeof formData.voucherType != 'string') {
       formData.voucherType = this.formData.value.voucherType[0].voucherTypeIdName.split('-')[0].trim();
     }
-    formData.voucherDate = this.commonService.formatDate(formData.voucherDate);
-    formData.postingDate = this.commonService.formatDate(formData.postingDate);
-    formData.referenceDate = this.commonService.formatDate(formData.referenceDate);
-    formData.chequeDate = this.commonService.formatDate(formData.chequeDate);
+    formData.voucherDate = this.formData.get('voucherDate').value ? this.datepipe.transform(this.formData.get('voucherDate').value, 'MM-dd-yyyy') : '';
+    formData.postingDate = this.formData.get('postingDate').value ? this.datepipe.transform(this.formData.get('postingDate').value, 'MM-dd-yyyy') : '';
+    formData.referenceDate = this.formData.get('referenceDate').value ? this.datepipe.transform(this.formData.get('referenceDate').value, 'MM-dd-yyyy') : '';
+    formData.chequeDate = this.formData.get('chequeDate').value ? this.datepipe.transform(this.formData.get('chequeDate').value, 'MM-dd-yyyy') : '';
+
     const addCashBank = String.Join('/', this.apiConfigService.addPaymentsReceipts);
     const requestObj = { pcbHdr: formData, pcbDtl: arr };
     this.apiService.apiPostRequest(addCashBank, requestObj).subscribe(
