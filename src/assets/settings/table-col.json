@@ -853,7 +853,6 @@
     "igstamount": "IGST",
     "ugstamount": "UGST",
     "partyInvoiceNo": "PartyInvoiceNo",
-    "dueDate": "DueDate",
     "invoiceAmount": "InvoiceAmount",
     "memoAmount": "MemoAmount",
     "clearedAmount": "ClearedAmount",
@@ -1531,6 +1530,7 @@
   "goodsissue": {
     "checkAll": "Select",
     "title": "Production Planning",
+    "checkbox": "",
     "customerName": "Customer Name",
     "storesPersonName": "Stores In Charge",
     "departmentName": "Department Name",

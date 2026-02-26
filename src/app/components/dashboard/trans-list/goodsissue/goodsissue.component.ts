@@ -172,6 +172,7 @@ export class GoodsissueComponent implements OnInit {
       productionTargetDate: [null],
       bomNumber: [''],
       bomType: [''],
+      checkbox: [''],
       status: [''],
       bomKey: [''],
       action: [[
@@ -421,6 +422,7 @@ export class GoodsissueComponent implements OnInit {
                   bomNumber: s.bomNumber ? s.bomNumber : s.bomKey,
                   allocatedqty: s.allocatedQTY ? s.allocatedQTY : 0,
                   allocatedqty1: s.allocatedQTY ? s.allocatedQTY : 0,
+                  checkbox: false,
                   productionPlanDate: s.productionPlanDate ? s.productionPlanDate : null,
                   productionTargetDate: s.productionTargetDate ? s.productionTargetDate : null,
                   requiredqty: s.qty - s.allocatedQTY
@@ -432,6 +434,11 @@ export class GoodsissueComponent implements OnInit {
             }
           }
         });
+  }
+
+  
+  tableCheckboxEvent(event: any) {
+    this.tableData.forEach((res: any) => res.checkbox = (event.item == 'All' ? event.flag.checked : ((res.index == event.item.index) ? event.flag.checked : res.checkbox)));
   }
 
 
@@ -838,12 +845,13 @@ export class GoodsissueComponent implements OnInit {
   }
 
    print() {
+    const arr = this.tableData.filter((d: any) => d.checkbox);
     this.purchasingData = {
       soNumber: this.formData.value.saleOrderNumber,
       requistionDate: new Date(),
       storesPersonName: this.formData.value.storesPersonName,
       productionPersonName: this.formData.value.productionPersonName,
-      detailArray: this.tableData
+      detailArray: arr
     };
     setTimeout(() => {
       var w = window.open();

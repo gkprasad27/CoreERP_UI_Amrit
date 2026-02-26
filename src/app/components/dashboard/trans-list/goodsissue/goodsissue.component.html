@@ -296,7 +296,7 @@
 
       <div>
         <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
-          (editOrDeleteEvent)="editOrDeleteEvent($event)">
+          (editOrDeleteEvent)="editOrDeleteEvent($event)"  (tableCheckboxEvent)="tableCheckboxEvent($event)">
         </app-table>
       </div>
     </div>
