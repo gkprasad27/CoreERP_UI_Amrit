@@ -83,6 +83,17 @@ export class ReceiptspaymentsComponent implements OnInit {
       allowSearchFilter: true
     };
 
+    dropdownSettings1: IDropdownSettings = {
+      singleSelection: true,
+      idField: 'code',
+      textField: 'description',
+      enableCheckAll: true,
+      // selectAllText: 'Select All',
+      // unSelectAllText: 'UnSelect All',
+      // itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+
   constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -346,7 +357,9 @@ export class ReceiptspaymentsComponent implements OnInit {
   onbpChange(flag = true) {
     this.bpgLists = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('bpcategory').value)) {
-      let data = this.bpTypeList.find(res => res.code == this.formData.get('bpcategory').value);
+      let bpCategoryValue = this.formData.get('bpcategory').value;
+      let bpCategoryCode = Array.isArray(bpCategoryValue) ? bpCategoryValue[0].code : bpCategoryValue;
+      let data = this.bpTypeList.find(res => res.code == bpCategoryCode);
       this.bpgLists = this.bpList.filter(res => res.bptype == data.code);
       // this.formData.patchValue({
       //   partyAccount: this.bpgLists.length ? this.bpgLists[0].text : null
@@ -545,6 +558,9 @@ export class ReceiptspaymentsComponent implements OnInit {
     const formData = this.formData.getRawValue();
     if (typeof formData.voucherType != 'string') {
       formData.voucherType = this.formData.value.voucherType[0].voucherTypeIdName.split('-')[0].trim();
+    }
+    if (typeof formData.bpcategory != 'string') {
+      formData.bpcategory = this.formData.value.bpcategory[0].code;
     }
     formData.voucherDate = this.formData.get('voucherDate').value ? this.datepipe.transform(this.formData.get('voucherDate').value, 'MM-dd-yyyy') : '';
     formData.postingDate = this.formData.get('postingDate').value ? this.datepipe.transform(this.formData.get('postingDate').value, 'MM-dd-yyyy') : '';

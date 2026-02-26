@@ -14,9 +14,11 @@
                     <mat-label>{{ 'receiptspayments.company' | translate }}</mat-label>
                     <mat-select formControlName="company">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+                        @for (comp of companyList; track comp.id) {
+                        <mat-option [value]="comp.id">
                             {{comp.text}}
                         </mat-option>
+                        }
                     </mat-select>
                 </mat-form-field> -->
 
@@ -24,9 +26,11 @@
                     <mat-label>{{ 'receiptspayments.branch' | translate }}</mat-label>
                     <mat-select formControlName="branch">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let branch of branchList" [value]="branch.id">
+                        @for (branch of branchList; track branch.id) {
+                        <mat-option [value]="branch.id">
                             {{branch.text}}
                         </mat-option>
+                        }
                     </mat-select>
                 </mat-form-field> -->
 
@@ -35,9 +39,11 @@
                     <mat-select formControlName="transactionType"
                         (selectionChange)="checkTransType(); accountSelect();">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let trans of transactionTypeList" [value]="trans">
+                        @for (trans of transactionTypeList; track $index) {
+                        <mat-option [value]="trans">
                             {{ trans }}
                         </mat-option>
+                        }
                     </mat-select>
                 </mat-form-field>
 
@@ -45,14 +51,17 @@
                     <mat-label>{{ 'receiptspayments.natureofTransaction' | translate }}</mat-label>
                     <mat-select formControlName="natureofTransaction">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let nature of natureofTransactionList" [value]="nature">
+                        @for (nature of natureofTransactionList; track $index) {
+                        <mat-option [value]="nature">
                             {{ nature }}
                         </mat-option>
+                        }
                     </mat-select>
                 </mat-form-field>
 
                 
-                    <div class="multiselect-dropdown-list floating-dropdown col-2" *ngIf="!routeEdit" 
+                @if (!routeEdit) {
+                    <div class="multiselect-dropdown-list floating-dropdown col-2" 
                         [class.filled]="formData.value?.voucherType?.length > 0">
                         <label> {{ 'receiptspayments.voucherType' | translate }} </label>
                         <ng-multiselect-dropdown placeholder=" " formControlName="voucherType" [settings]="dropdownSettings"
@@ -60,10 +69,13 @@
                         (onSelect)="voucherTypeSelect(); voucherNoCalculate();">
                         </ng-multiselect-dropdown>
                     </div>
-                     <mat-form-field class="col-2" *ngIf="routeEdit">
+                }
+                @if (routeEdit) {
+                    <mat-form-field class="col-2">
                     <mat-label>{{'receiptspayments.voucherType' | translate }}</mat-label>
                     <input matInput type="text" readonly formControlName="voucherType" appFocusOnEnter tabIndex="5">
                     </mat-form-field>
+                }
 
                 <mat-form-field class="col-2">
                     <mat-label [translate]="'receiptspayments.voucherNumber'"></mat-label>
@@ -90,9 +102,11 @@
                     <mat-label>{{ 'receiptspayments.account' | translate }}</mat-label>
                     <mat-select formControlName="account">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let acc of accountList" [value]="acc.id">
+                        @for (acc of accountList; track acc.id) {
+                        <mat-option [value]="acc.id">
                             {{ acc.id }} - {{acc.text}}
                         </mat-option>
+                        }
                     </mat-select>
                 </mat-form-field>
 
@@ -113,9 +127,11 @@
                     <mat-label>{{ 'receiptspayments.profitCenter' | translate }}</mat-label>
                     <mat-select formControlName="profitCenter">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let profCen of profitCenterList" [value]="profCen.id">
+                        @for (profCen of profitCenterList; track profCen.id) {
+                        <mat-option [value]="profCen.id">
                             {{profCen.text}}
                         </mat-option>
+                        }
                     </mat-select>
                 </mat-form-field>
 
@@ -123,9 +139,11 @@
                     <mat-label>{{ 'receiptspayments.segment' | translate }}</mat-label>
                     <mat-select formControlName="segment">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let segm of segmentList" [value]="segm.id">
+                        @for (segm of segmentList; track segm.id) {
+                        <mat-option [value]="segm.id">
                             {{segm.name}}
                         </mat-option>
+                        }
                     </mat-select>
                 </mat-form-field> -->
 
@@ -147,23 +165,39 @@
                     <mat-datepicker #chequeDatepicker1></mat-datepicker>
                 </mat-form-field>
 
+                @if (!routeEdit) {
+                <div class="multiselect-dropdown-list floating-dropdown col-2" 
+                    [class.filled]="formData.value?.bpcategory?.length > 0">
+                    <label> {{ 'receiptspayments.bpcategory' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="bpcategory" [settings]="dropdownSettings1"
+                        [data]="bpTypeList" 
+                    (onSelect)="onbpChange();">
+                    </ng-multiselect-dropdown>
+                </div>
+                }
+                @if (routeEdit) {
                 <mat-form-field class="col-2">
                     <mat-label>{{ 'receiptspayments.bpcategory' | translate }}</mat-label>
                     <mat-select formControlName="bpcategory" (selectionChange)="onbpChange()">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let acc of bpTypeList" [value]="acc.code">
+                        @for (acc of bpTypeList; track acc.code) {
+                        <mat-option [value]="acc.code">
                             {{acc.description}}
                         </mat-option>
+                        }
                     </mat-select>
                 </mat-form-field>
+                }
 
                 <!-- <mat-form-field class="col-2">
                     <mat-label>{{ 'receiptspayments.partyAccount' | translate }}</mat-label>
                     <mat-select formControlName="partyAccount" (selectionChange)="puchaseinvoiceselect()">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let acc of bpgLists" [value]="acc.id">
+                        @for (acc of bpgLists; track acc.id) {
+                        <mat-option [value]="acc.id">
                             {{acc.text}}
                         </mat-option>
+                        }
                     </mat-select>
                 </mat-form-field> -->
 
