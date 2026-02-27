@@ -438,11 +438,11 @@
                                 <td
                                     style="font-size: 12px;font-family: sans-serif;padding: 5px; -webkit-print-color-adjust: exact;">
                                     {{
+                                    att.status === 'Half Day' ? 'H/F' :
                                     att.lateIn !== null && att.lateIn === 'LateIn' ? 'LT/EL#' :
                                     att.earlyOut !== null && att.earlyOut === 'EarlyOut' ? 'LT/EL#' :
                                     att.status === 'Present' ? 'P' :
                                     att.status === 'Absent' ? 'A' :
-                                    att.status === 'Half Day' ? 'A*' :
                                     'H'
                                     }} </td>
                                 <td
