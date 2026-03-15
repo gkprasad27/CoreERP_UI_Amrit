@@ -8,81 +8,101 @@
     <form [formGroup]="modelFormData" autocomplete="off">
       <div class="row">
 
-        <div class="multiselect-dropdown-list floating-dropdown col-3" [class.filled]="modelFormData.value?.empCode?.length > 0" *ngIf="dropdownSettings" >
-          <label> {{ 'leaveopeningbalance.empCode' | translate }} </label>
+        @if (dropdownSettings) {
+          <div class="multiselect-dropdown-list floating-dropdown col-3" [class.filled]="modelFormData.value?.empCode?.length > 0" >
+            <label> {{ 'leaveopeningbalance.empCode' | translate }} </label>
             <ng-multiselect-dropdown placeholder=" "
               formControlName="empCode" [settings]="dropdownSettings" [data]="getProductByProductCodeArray">
             </ng-multiselect-dropdown>
-        </div>
+          </div>
+        }
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.year.valid }">
           <input matInput placeholder="{{'leaveopeningbalance.year' | translate }}" formControlName="year" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="formControls.year.errors" class="help-block">
-            <div *ngIf="formControls.year.errors.required">Year is required</div>
-          </mat-error>
+          @if (formControls.year.errors) {
+            <mat-error class="help-block">
+              @if (formControls.year.errors.required) {
+                <div>Year is required</div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'leaveopeningbalance.leaveCode'"></mat-label>
           <mat-select formControlName="leaveCode" appFocusOnEnter tabIndex="5">
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
+            @for (comp of companyList; track comp) {
+              <mat-option [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="formControls.leaveCode.errors" class="help-block">
-            <div *ngIf="formControls.leaveCode.errors.required">Leave Type is required</div>
-          </mat-error>
+          @if (formControls.leaveCode.errors) {
+            <mat-error class="help-block">
+              @if (formControls.leaveCode.errors.required) {
+                <div>Leave Type is required</div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
         <!-- <mat-form-field>
-          <mat-label>Leave Type</mat-label>
-          <mat-select formControlName="leaveCode">
-            <mat-option *ngFor="let ptlist of LeaveTypeatList" [value]="ptlist.id">
-              {{ptlist.text}}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="formControls.leaveCode.errors" class="help-block">
-            <div *ngIf="formControls.leaveCode.errors.required">LeaveCode is required</div>
+        <mat-label>Leave Type</mat-label>
+        <mat-select formControlName="leaveCode">
+          <mat-option *ngFor="let ptlist of LeaveTypeatList" [value]="ptlist.id">
+            {{ptlist.text}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControls.leaveCode.errors" class="help-block">
+          <div *ngIf="formControls.leaveCode.errors.required">LeaveCode is required</div>
+        </mat-error>
+      </mat-form-field> -->
+
+      <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.opbal.valid }">
+        <input matInput placeholder="{{'leaveopeningbalance.opbal' | translate }}" formControlName="opbal" appFocusOnEnter tabIndex="4">
+        @if (formControls.opbal.errors) {
+          <mat-error class="help-block">
+            @if (formControls.opbal.errors.required) {
+              <div>Only Numbers are allowed </div>
+            }
           </mat-error>
-        </mat-form-field> -->
+        }
+      </mat-form-field>
 
-        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.opbal.valid }">
-          <input matInput placeholder="{{'leaveopeningbalance.opbal' | translate }}" formControlName="opbal" appFocusOnEnter tabIndex="4">
-          <mat-error *ngIf="formControls.opbal.errors" class="help-block">
-            <div *ngIf="formControls.opbal.errors.required">Only Numbers are allowed </div>
+      <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.balance.valid }">
+        <input matInput placeholder="{{'leaveopeningbalance.balance' | translate }}" formControlName="balance" appFocusOnEnter tabIndex="5" type="number">
+        @if (formControls.balance.errors) {
+          <mat-error class="help-block">
+            @if (formControls.balance.errors.required) {
+              <div>Only Numbers are allowed</div>
+            }
           </mat-error>
-        </mat-form-field>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-3">
+        <input matInput placeholder="{{'leaveopeningbalance.remarks' | translate }}" formControlName="remarks" appFocusOnEnter tabIndex="6">
+      </mat-form-field>
 
-        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.balance.valid }">
-          <input matInput placeholder="{{'leaveopeningbalance.balance' | translate }}" formControlName="balance" appFocusOnEnter tabIndex="5" type="number">
-          <mat-error *ngIf="formControls.balance.errors" class="help-block">
-            <div *ngIf="formControls.balance.errors.required">Only Numbers are allowed</div>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="col-3">
-          <input matInput placeholder="{{'leaveopeningbalance.remarks' | translate }}" formControlName="remarks" appFocusOnEnter tabIndex="6">
-        </mat-form-field>
+      <!--<mat-form-field class="col-3">
+      <input matInput placeholder="{{'leaveopeningbalance.compCode' | translate }}" formControlName="compCode" appFocusOnEnter tabIndex="7">
+    </mat-form-field>-->
 
-        <!--<mat-form-field class="col-3">
-    <input matInput placeholder="{{'leaveopeningbalance.compCode' | translate }}" formControlName="compCode" appFocusOnEnter tabIndex="7">
-  </mat-form-field>-->
+  </div>
+  <mat-divider></mat-divider>
 
-      </div>
-      <mat-divider></mat-divider>
+  <div class="form-element mt-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
-      <div class="form-element mt-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+      tabIndex="8">
 
-          {{ 'COMMON.CANCEL' | translate }}
-        </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
-                tabIndex="8">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
 
-          {{ 'COMMON.SAVE' | translate }}
-        </button>
-      </div>
+</form>
 
-    </form>
-
-  </mat-card-content>
+</mat-card-content>
 </div>

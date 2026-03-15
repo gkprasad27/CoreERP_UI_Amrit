@@ -13,9 +13,11 @@
           <mat-label [translate]="'partnergroup.bpgroup'"></mat-label>
           <input matInput formControlName="bpgroup" maxlength="5"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.bpgroup.valid  &&formControls.bpgroup.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.bpgroup.valid  }">
+          @if (!formControls.bpgroup.valid  &&formControls.bpgroup.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.bpgroup.valid  }">
             Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -23,17 +25,21 @@
           <mat-label [translate]="'partnergroup.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'partnergroup.bptype' | translate }}</mat-label>
           <mat-select formControlName="bptype" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ptype of ptypeList" [value]="ptype.code">
-              {{ptype.description}}
-            </mat-option>
+            @for (ptype of ptypeList; track ptype) {
+              <mat-option [value]="ptype.code">
+                {{ptype.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

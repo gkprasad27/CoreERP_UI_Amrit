@@ -13,9 +13,11 @@
           <mat-label>{{'process.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let company of companiesList" [value]="company.id">
-              {{company.text}}
-            </mat-option>
+            @for (company of companiesList; track company) {
+              <mat-option [value]="company.id">
+                {{company.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -23,9 +25,11 @@
           <mat-label>{{'process.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plant of plantList" [value]="plant.id">
-              {{plant.text}}
-            </mat-option>
+            @for (plant of plantList; track plant) {
+              <mat-option [value]="plant.id">
+                {{plant.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -33,9 +37,11 @@
           <mat-label>{{'process.costUnit' | translate }}</mat-label>
           <mat-select formControlName="costUnit" appFocusOnEnter tabIndex="3" (selectionChange)="costunitSelect()">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let costunit of costunitList" [value]="costunit.id">
-              {{costunit.text}}
-            </mat-option>
+            @for (costunit of costunitList; track costunit) {
+              <mat-option [value]="costunit.id">
+                {{costunit.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -50,8 +56,10 @@
           <mat-label [translate]="'process.processKey'"></mat-label>
           <input matInput formControlName="processKey" maxlength="5"
             appFocusOnEnter tabIndex="5">
-          <mat-error *ngIf="!formControls.processKey.valid  && formControls.processKey.status != 'DISABLED'"
+          @if (!formControls.processKey.valid  && formControls.processKey.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.processKey.valid  }">Process Key is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -64,9 +72,11 @@
           <mat-label>{{'process.byProduct' | translate }}</mat-label>
           <mat-select formControlName="byProduct" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let matype of matypeList" [value]="matype.id">
-              {{matype.text}}
-            </mat-option>
+            @for (matype of matypeList; track matype) {
+              <mat-option [value]="matype.id">
+                {{matype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -74,9 +84,11 @@
           <mat-label>{{'process.jointProduct' | translate }}</mat-label>
           <mat-select formControlName="jointProduct" appFocusOnEnter tabIndex="9">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let matype of matypeList" [value]="matype.id">
-              {{matype.text}}
-            </mat-option>
+            @for (matype of matypeList; track matype) {
+              <mat-option [value]="matype.id">
+                {{matype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

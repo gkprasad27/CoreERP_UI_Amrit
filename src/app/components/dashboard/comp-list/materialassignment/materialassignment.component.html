@@ -14,12 +14,16 @@
           <mat-label>{{'materialassignment.numberRange' | translate }}</mat-label>
           <mat-select formControlName="numberRange" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let mseries of mnosList" [value]="mseries.code">
-              {{mseries.code}}
-            </mat-option>
+            @for (mseries of mnosList; track mseries) {
+              <mat-option [value]="mseries.code">
+                {{mseries.code}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.numberRange.valid && formControls.numberRange.status != 'DISABLED'"
+          @if (!formControls.numberRange.valid && formControls.numberRange.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.numberRange.valid  }"> Number Range is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -27,21 +31,27 @@
           <mat-label>{{'materialassignment.companyCode' | translate }}</mat-label>
           <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let company of companiesList" [value]="company.id">
-              {{company.text}}
-            </mat-option>
+            @for (company of companiesList; track company) {
+              <mat-option [value]="company.id">
+                {{company.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.companyCode.valid"
+          @if (!formControls.companyCode.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.companyCode.valid  }">Company is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'materialassignment.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plant of plantsList" [value]="plant.id">
-              {{plant.text}}
-            </mat-option>
+            @for (plant of plantsList; track plant) {
+              <mat-option [value]="plant.id">
+                {{plant.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -49,9 +59,11 @@
           <mat-label>{{'materialassignment.materialType' | translate }}</mat-label>
           <mat-select formControlName="materialType" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let mtype of matypeList" [value]="mtype.code">
-              {{mtype.description}}
-            </mat-option>
+            @for (mtype of matypeList; track mtype) {
+              <mat-option [value]="mtype.code">
+                {{mtype.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

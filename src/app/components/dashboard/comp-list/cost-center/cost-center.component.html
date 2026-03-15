@@ -13,23 +13,29 @@
           <mat-select formControlName="objectType" (selectionChange)="getobjectNumberData()" appFocusOnEnter
             tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cot of cotList" [value]="cot.id">
-              {{cot.text}}
-            </mat-option>
+            @for (cot of cotList; track cot) {
+              <mat-option [value]="cot.id">
+                {{cot.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.objectType.valid"
+          @if (!formControls.objectType.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.objectType.valid  }"> Object Type is required</mat-error>
+          }
         </mat-form-field>
 
       <mat-form-field  class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
           'ng--invalid': !formControls.code.valid && formControls.code.status != 'DISABLED' }">
-        <mat-label [translate]="'costcenter.code'"></mat-label>
-        <input matInput formControlName="code" maxlength="6"
-          appFocusOnEnter tabIndex="2">
-        <mat-error *ngIf="!formControls.code.valid && formControls.code.status != 'DISABLED'"
-          [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
-          required</mat-error>
-      </mat-form-field>
+          <mat-label [translate]="'costcenter.code'"></mat-label>
+          <input matInput formControlName="code" maxlength="6"
+            appFocusOnEnter tabIndex="2">
+          @if (!formControls.code.valid && formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
+            required</mat-error>
+          }
+        </mat-form-field>
 
         <mat-form-field  class="col-3">
           <mat-label [translate]="'costcenter.name'"></mat-label>
@@ -41,9 +47,11 @@
           <mat-label>{{'costcenter.functions' | translate }}</mat-label>
           <mat-select formControlName="functions" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let functions of Function" [value]="functions.value">
-              {{functions.viewValue}}
-            </mat-option>
+            @for (functions of Function; track functions) {
+              <mat-option [value]="functions.value">
+                {{functions.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -51,9 +59,11 @@
           <mat-label>{{'costcenter.type' | translate }}</mat-label>
           <mat-select formControlName="type" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let type of Type" [value]="type.value">
-              {{type.viewValue}}
-            </mat-option>
+            @for (type of Type; track type) {
+              <mat-option [value]="type.value">
+                {{type.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -61,9 +71,11 @@
           <mat-label>{{'costcenter.uom' | translate }}</mat-label>
           <mat-select formControlName="uom" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let uom of UomList" [value]="uom.id">
-              {{uom.text}}
-            </mat-option>
+            @for (uom of UomList; track uom) {
+              <mat-option [value]="uom.id">
+                {{uom.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -71,9 +83,11 @@
           <mat-label>{{'costcenter.department' | translate }}</mat-label>
           <mat-select formControlName="department" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let dept of fdeptList" [value]="dept.code">
-              {{dept.description}}
-            </mat-option>
+            @for (dept of fdeptList; track dept) {
+              <mat-option [value]="dept.code">
+                {{dept.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -81,9 +95,11 @@
           <mat-label>{{'costcenter.costType' | translate }}</mat-label>
           <mat-select formControlName="costType" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let CostType of costType" [value]="CostType.value">
-              {{CostType.viewValue}}
-            </mat-option>
+            @for (CostType of costType; track CostType) {
+              <mat-option [value]="CostType.value">
+                {{CostType.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -91,9 +107,11 @@
           <mat-label>{{'costcenter.responsiblePerson' | translate }}</mat-label>
           <mat-select formControlName="responsiblePerson" appFocusOnEnter tabIndex="9">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-              {{emp.id}} - {{emp.text}}
-            </mat-option>
+            @for (emp of employeesList; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.id}} - {{emp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-3">
@@ -118,9 +136,11 @@
           <mat-label>{{'costcenter.state' | translate }}</mat-label>
           <mat-select formControlName="state" appFocusOnEnter tabIndex="13">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let state of StatesList" [value]="state.id">
-              {{state.text}}
-            </mat-option>
+            @for (state of StatesList; track state) {
+              <mat-option [value]="state.id">
+                {{state.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-3">

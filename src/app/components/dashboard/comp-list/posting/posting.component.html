@@ -12,9 +12,11 @@
           <mat-label [translate]="'AlternateControlAccount.chartofAccount'"></mat-label>
           <mat-select formControlName="chartofAccount" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let coa of coaList" [value]="coa.code">
-              {{coa.desctiption}}
-            </mat-option>
+            @for (coa of coaList; track coa) {
+              <mat-option [value]="coa.code">
+                {{coa.desctiption}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -22,9 +24,11 @@
           <mat-label>{{'posting.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let companyList of compList" [value]="companyList.id">
-              {{companyList.text}}
-            </mat-option>
+            @for (companyList of compList; track companyList) {
+              <mat-option [value]="companyList.id">
+                {{companyList.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -32,9 +36,11 @@
           <mat-label>{{'posting.branch' | translate }}</mat-label>
           <mat-select formControlName="branch" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let branch of branchList" [value]="branch.id">
-              {{branch.text}}
-            </mat-option>
+            @for (branch of branchList; track branch) {
+              <mat-option [value]="branch.id">
+                {{branch.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -42,9 +48,11 @@
           <mat-label>{{'posting.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plants of plantList" [value]="plants.id">
-              {{plants.text}}
-            </mat-option>
+            @for (plants of plantList; track plants) {
+              <mat-option [value]="plants.id">
+                {{plants.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -52,9 +60,11 @@
           <mat-label>{{'posting.tdsrate' | translate }}</mat-label>
           <mat-select formControlName="tdsrate" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let tdsrate of tdsratesList" [value]="tdsrate.id">
-              {{tdsrate.text}}
-            </mat-option>
+            @for (tdsrate of tdsratesList; track tdsrate) {
+              <mat-option [value]="tdsrate.id">
+                {{tdsrate.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -62,9 +72,11 @@
           <mat-label [translate]="'posting.glaccount'"></mat-label>
           <mat-select formControlName="glaccount" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ltype of glList" [value]="ltype.id">
-              {{ltype.id}} - {{ltype.text}}
-            </mat-option>
+            @for (ltype of glList; track ltype) {
+              <mat-option [value]="ltype.id">
+                {{ltype.id}} - {{ltype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>

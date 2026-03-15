@@ -2,14 +2,20 @@
   [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}"
   class="menu-list-item ">
   <span class="px-2 font-style"> {{item.displayName}} </span>
-  <span  *ngIf="item.children && item.children.length">
-    <span ></span>
-    <mat-icon class="font-style">
-      {{ expanded ? 'expand_less' : 'expand_more' }}
-    </mat-icon>
-  </span>
+  @if (item.children && item.children.length) {
+    <span >
+      <span ></span>
+      <mat-icon class="font-style">
+        {{ expanded ? 'expand_less' : 'expand_more' }}
+      </mat-icon>
+    </span>
+  }
 </a>
-<div *ngIf="expanded">
-  <app-sidebar *ngFor="let child of item.children" [item]="child" [depth]="depth+1">
-  </app-sidebar>
-</div>
+@if (expanded) {
+  <div>
+    @for (child of item.children; track child) {
+      <app-sidebar [item]="child" [depth]="depth+1">
+      </app-sidebar>
+    }
+  </div>
+}

@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { HighchartsChartComponent } from 'highcharts-angular';
-import { CommonModule } from '@angular/common';
+
 import { TableComponent } from '../../../reuse-components/table/table.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +20,7 @@ import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-dashboard-graph',
-  imports: [CommonModule, HighchartsChartComponent, TableComponent, MatCardModule, MatButtonModule],
+  imports: [HighchartsChartComponent, TableComponent, MatCardModule, MatButtonModule],
   templateUrl: './dashboard-graph.component.html',
   styleUrls: ['./dashboard-graph.component.scss']
 })

@@ -13,9 +13,11 @@
               <mat-label [translate]="'subassets.mainAssetNo'"></mat-label>
               <mat-select formControlName="mainAssetNo" (selectionChange)="getchartAccount($event)" appFocusOnEnter
                 tabIndex="1">
-                <mat-option *ngFor="let mam of mamList" [value]="mam.assetNumber">
-                  {{mam.assetNumber}}- {{mam.name}}
-                </mat-option>
+                @for (mam of mamList; track mam) {
+                  <mat-option [value]="mam.assetNumber">
+                    {{mam.assetNumber}}- {{mam.name}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -24,9 +26,11 @@
               <mat-label [translate]="'subassets.subAssetNumber'"></mat-label>
               <input matInput formControlName="subAssetNumber"
                 maxlength="7" appFocusOnEnter tabIndex="2">
-              <mat-error *ngIf="!formControls.subAssetNumber.valid && formControls.subAssetNumber.status != 'DISABLED'"
-                [ngClass]="{ 'ng--invalid': !formControls.subAssetNumber.valid  }"> SubAsset Number is required
-              </mat-error>
+              @if (!formControls.subAssetNumber.valid && formControls.subAssetNumber.status != 'DISABLED') {
+                <mat-error
+                  [ngClass]="{ 'ng--invalid': !formControls.subAssetNumber.valid  }"> SubAsset Number is required
+                </mat-error>
+              }
             </mat-form-field>
 
             <mat-form-field class="col-3"
@@ -34,16 +38,20 @@
               <mat-label [translate]="'subassets.description'"></mat-label>
               <input matInput formControlName="description"
                 maxlength="50" appFocusOnEnter tabIndex="3">
-              <mat-error *ngIf="!formControls.description.valid"
+              @if (!formControls.description.valid) {
+                <mat-error
                 [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Name is required</mat-error>
+              }
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.accountKey'"></mat-label>
               <mat-select formControlName="accountKey" appFocusOnEnter tabIndex="4">
-                <mat-option *ngFor="let ackey of acckeyList" [value]="ackey.code">
-                  {{ackey.code}}- {{ackey.code}}
-                </mat-option>
+                @for (ackey of acckeyList; track ackey) {
+                  <mat-option [value]="ackey.code">
+                    {{ackey.code}}- {{ackey.code}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -68,54 +76,66 @@
             <mat-form-field class="col-3">
               <mat-label>{{'subassets.branch' | translate }}</mat-label>
               <mat-select formControlName="branch" appFocusOnEnter tabIndex="8">
-                <mat-option *ngFor="let branch of branchesList" [value]="branch.branchCode">
-                  {{branch.branchCode}} - {{branch.branchName}}
-                </mat-option>
+                @for (branch of branchesList; track branch) {
+                  <mat-option [value]="branch.branchCode">
+                    {{branch.branchCode}} - {{branch.branchName}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'subassets.profitCenter' | translate }}</mat-label>
               <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="9">
-                <mat-option *ngFor="let profit of profitCenterList" [value]="profit.code">
-                  {{profit.code}} - {{profit.description}}
-                </mat-option>
+                @for (profit of profitCenterList; track profit) {
+                  <mat-option [value]="profit.code">
+                    {{profit.code}} - {{profit.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'subassets.segment' | translate }}</mat-label>
               <mat-select formControlName="segment" appFocusOnEnter tabIndex="10">
-                <mat-option *ngFor="let seg of segmentList" [value]="seg.id">
-                  {{seg.id}} - {{seg.name}}
-                </mat-option>
+                @for (seg of segmentList; track seg) {
+                  <mat-option [value]="seg.id">
+                    {{seg.id}} - {{seg.name}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'subassets.division' | translate }}</mat-label>
               <mat-select formControlName="division" appFocusOnEnter tabIndex="11">
-                <mat-option *ngFor="let div of divisionsList" [value]="div.code">
-                  {{div.code}} - {{div.description}}
-                </mat-option>
+                @for (div of divisionsList; track div) {
+                  <mat-option [value]="div.code">
+                    {{div.code}} - {{div.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'subassets.plant' | translate }}</mat-label>
               <mat-select formControlName="plant" appFocusOnEnter tabIndex="12">
-                <mat-option *ngFor="let pnt of plantList" [value]="pnt.plantCode">
-                  {{pnt.plantCode}} - {{pnt.plantname}}
-                </mat-option>
+                @for (pnt of plantList; track pnt) {
+                  <mat-option [value]="pnt.plantCode">
+                    {{pnt.plantCode}} - {{pnt.plantname}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'subassets.location' | translate }}</mat-label>
               <mat-select formControlName="location" appFocusOnEnter tabIndex="13">
-                <mat-option *ngFor="let loc of locationList" [value]="loc.locationId">
-                  {{loc.locationId}} - {{loc.description}}
-                </mat-option>
+                @for (loc of locationList; track loc) {
+                  <mat-option [value]="loc.locationId">
+                    {{loc.locationId}} - {{loc.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -133,7 +153,7 @@
 
             <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.acquisitionDate'"></mat-label>
-              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" 
+              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3"
                 formControlName="acquisitionDate" appFocusOnEnter tabIndex="16">
               <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
               <mat-datepicker #picker3></mat-datepicker>
@@ -141,37 +161,41 @@
 
             <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.usefulLifeInYears'"></mat-label>
-              <input matInput 
+              <input matInput
                 formControlName="usefulLifeInYears" maxlength="5" appFocusOnEnter tabIndex="17">
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.usefullLifeInDays'"></mat-label>
-              <input matInput 
+              <input matInput
                 formControlName="usefullLifeInDays" maxlength="6" appFocusOnEnter tabIndex="18">
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label [translate]="'mainassetmaster.depreciationData'"></mat-label>
               <mat-select formControlName="depreciationData" appFocusOnEnter tabIndex="19">
-                <mat-option *ngFor="let dpc of dpList" [value]="dpc.code">
-                  {{dpc.code}}- {{dpc.description}}
-                </mat-option>
+                @for (dpc of dpList; track dpc) {
+                  <mat-option [value]="dpc.code">
+                    {{dpc.code}}- {{dpc.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'subassets.depreciationArea' | translate }}</mat-label>
               <mat-select formControlName="depreciationArea" appFocusOnEnter tabIndex="20">
-                <mat-option *ngFor="let dpr of dpareaList" [value]="dpr.code">
-                  {{dpr.code}} - {{dpr.description}}
-                </mat-option>
+                @for (dpr of dpareaList; track dpr) {
+                  <mat-option [value]="dpr.code">
+                    {{dpr.code}} - {{dpr.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label [translate]="'subassets.depreciationStartDate'"></mat-label>
-              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" 
+              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4"
                 formControlName="depreciationStartDate" appFocusOnEnter tabIndex="21">
               <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
               <mat-datepicker #picker4></mat-datepicker>
@@ -184,21 +208,21 @@
 
       <mat-tab label="Transaction Data">
         <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
-          [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
+        [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
       </mat-tab>
       <!-- <mat-tab label="Transaction Data">
-        <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitTableData($event)"
-          (emitColumnChanges)="emitColumnChanges($event);" [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
-      </mat-tab> -->
-    </form>
-  </mat-tab-group>
+      <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitTableData($event)"
+      (emitColumnChanges)="emitColumnChanges($event);" [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
+    </mat-tab> -->
+  </form>
+</mat-tab-group>
 
-  <div class="form-element mt-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-      {{ 'COMMON.CANCEL' | translate }}
-    </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-      {{ 'COMMON.SAVE' | translate }}
-    </button>
-  </div>
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 </div>

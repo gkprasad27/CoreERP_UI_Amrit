@@ -11,46 +11,68 @@
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.chartAccount.valid }">
           <mat-label [translate]="'glaccount.chartAccount'"></mat-label>
           <mat-select formControlName="chartAccount" appFocusOnEnter tabIndex="1">
-            <mat-option *ngFor="let coa of coaList" [value]="coa.code">
-              {{coa.desctiption}}
-            </mat-option>
+            @for (coa of coaList; track coa) {
+              <mat-option [value]="coa.code">
+                {{coa.desctiption}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="formControls.chartAccount.errors" class="help-block">
-            <div *ngIf="formControls.chartAccount.errors.required">Chart Account is required </div>
-          </mat-error>
+          @if (formControls.chartAccount.errors) {
+            <mat-error class="help-block">
+              @if (formControls.chartAccount.errors.required) {
+                <div>Chart Account is required </div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.company.valid }">
           <mat-label [translate]="'glaccount.company'"></mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
+            @for (comp of companyList; track comp) {
+              <mat-option [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="formControls.company.errors" class="help-block">
-            <div *ngIf="formControls.company.errors.required">Company is required </div>
-          </mat-error>
+          @if (formControls.company.errors) {
+            <mat-error class="help-block">
+              @if (formControls.company.errors.required) {
+                <div>Company is required </div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.accGroup.valid }">
           <mat-label>{{'glsubgroups.nature' | translate }} </mat-label>
           <mat-select formControlName="accGroup" (selectionChange)="enableAccount()">
-            <mat-option *ngFor="let accgrp of glAccgrpList" [value]="accgrp.groupCode">
-              {{accgrp.groupCode}} - {{accgrp.groupName}}
-            </mat-option>
+            @for (accgrp of glAccgrpList; track accgrp) {
+              <mat-option [value]="accgrp.groupCode">
+                {{accgrp.groupCode}} - {{accgrp.groupName}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="formControls.accGroup.errors" class="help-block">
-            <div *ngIf="formControls.accGroup.errors.required">Account Group is required </div>
-          </mat-error>
+          @if (formControls.accGroup.errors) {
+            <mat-error class="help-block">
+              @if (formControls.accGroup.errors.required) {
+                <div>Account Group is required </div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.accountNumber.valid }">
           <mat-label [translate]="'glaccount.accountNumber'"></mat-label>
           <input matInput formControlName="accountNumber"
             maxlength="7" (change)="onChange($event)" appFocusOnEnter tabIndex="6">
-          <mat-error *ngIf="formControls.accountNumber.errors" class="help-block">
-            <div *ngIf="formControls.accountNumber.errors.required">accountNumber is required </div>
-          </mat-error>
+          @if (formControls.accountNumber.errors) {
+            <mat-error class="help-block">
+              @if (formControls.accountNumber.errors.required) {
+                <div>accountNumber is required </div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -63,9 +85,11 @@
           <mat-label>{{'glaccount.currency' | translate }}</mat-label>
           <mat-select formControlName="currency" appFocusOnEnter tabIndex="9">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cncy of currencyList" [value]="cncy.id">
-              {{cncy.text}}
-            </mat-option>
+            @for (cncy of currencyList; track cncy) {
+              <mat-option [value]="cncy.id">
+                {{cncy.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -74,9 +98,11 @@
           <mat-select formControlName="taxCategory" appFocusOnEnter tabIndex="10"
             (selectionChange)="onCategoryChange()">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let taxc of taxCategorys" [value]="taxc.value">
-              {{taxc.viewValue}}
-            </mat-option>
+            @for (taxc of taxCategorys; track taxc) {
+              <mat-option [value]="taxc.value">
+                {{taxc.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -84,9 +110,11 @@
           <mat-label>{{'glaccount.bankKey' | translate }}</mat-label>
           <mat-select formControlName="bankKey" appFocusOnEnter tabIndex="11">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let bank of bankList" [value]="bank.id">
-              {{bank.text}}
-            </mat-option>
+            @for (bank of bankList; track bank) {
+              <mat-option [value]="bank.id">
+                {{bank.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -100,9 +128,11 @@
           <mat-label [translate]="'glaccount.costElementCategory'"></mat-label>
           <mat-select formControlName="costElementCategory" appFocusOnEnter tabIndex="13">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cec of costElementCategorys" [value]="cec.value">
-              {{cec.viewValue}}
-            </mat-option>
+            @for (cec of costElementCategorys; track cec) {
+              <mat-option [value]="cec.value">
+                {{cec.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -110,9 +140,11 @@
           <mat-label [translate]="'glaccount.controlAccount'"></mat-label>
           <mat-select formControlName="controlAccount" appFocusOnEnter tabIndex="14">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let act of accounts" [value]="act.value">
-              {{act.viewValue}}
-            </mat-option>
+            @for (act of accounts; track act) {
+              <mat-option [value]="act.value">
+                {{act.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -121,38 +153,38 @@
           <mat-select formControlName="consolidatedAccount" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
             <!-- <mat-option *ngFor="let act of accounts" [value]="act.value">
-              {{act.viewValue}}
-            </mat-option> -->
-          </mat-select>
-        </mat-form-field>
+            {{act.viewValue}}
+          </mat-option> -->
+        </mat-select>
+      </mat-form-field>
 
-        <mat-slide-toggle class="d-flex align-items-center col-1 mb-3" formControlName="noPostingAllowed" appFocusOnEnter tabIndex="15"
-          style="vertical-align: bottom; margin-left: 5px;">
-          No Posting Allowed
-        </mat-slide-toggle>
+      <mat-slide-toggle class="d-flex align-items-center col-1 mb-3" formControlName="noPostingAllowed" appFocusOnEnter tabIndex="15"
+        style="vertical-align: bottom; margin-left: 5px;">
+        No Posting Allowed
+      </mat-slide-toggle>
 
-        <mat-slide-toggle class="d-flex align-items-center col-1 mb-3" formControlName="clearingAccount" appFocusOnEnter tabIndex="16"
-          style="vertical-align: bottom;margin-left: 20px;">
-          Clearing Account
-        </mat-slide-toggle>
+      <mat-slide-toggle class="d-flex align-items-center col-1 mb-3" formControlName="clearingAccount" appFocusOnEnter tabIndex="16"
+        style="vertical-align: bottom;margin-left: 20px;">
+        Clearing Account
+      </mat-slide-toggle>
 
-        <mat-slide-toggle class="d-flex align-items-center col-1 mb-3" formControlName="relevantCashFlow" appFocusOnEnter tabIndex="17"
-          style="vertical-align: bottom;margin-left: 20px;">
-          Relevant Cash Flow
-        </mat-slide-toggle>
+      <mat-slide-toggle class="d-flex align-items-center col-1 mb-3" formControlName="relevantCashFlow" appFocusOnEnter tabIndex="17"
+        style="vertical-align: bottom;margin-left: 20px;">
+        Relevant Cash Flow
+      </mat-slide-toggle>
 
-      </div>
-      <mat-divider></mat-divider>
-    </form>
-  </mat-card-content>
+    </div>
+    <mat-divider></mat-divider>
+  </form>
+</mat-card-content>
 
-  <div class="form-element mt-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-      {{ 'COMMON.CANCEL' | translate }}
-    </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
-      tabIndex="25">
-      {{ 'COMMON.SAVE' | translate }}
-    </button>
-  </div>
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+    tabIndex="25">
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 </div>

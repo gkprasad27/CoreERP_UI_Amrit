@@ -1,65 +1,71 @@
 <div class="position-relative popup-class">
-    <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
-        <span> {{'qcparamconfiguration.title' | translate }} </span>
-        <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
-    </mat-card-title>
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'qcparamconfiguration.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
 
-    <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
-        <form [formGroup]="modelFormData" autocomplete="off">
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
 
-            <div class="row">
+      <div class="row">
 
                 <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.paramName.valid && formControls.paramName.status != 'DISABLED',
              'ng--invalid': !formControls.paramName.valid && formControls.paramName.status != 'DISABLED'  }">
-                    <mat-label [translate]="'qcparamconfiguration.paramName'"></mat-label>
-                    <input matInput formControlName="paramName" appFocusOnEnter tabIndex="1">
-                    <mat-error *ngIf="!formControls.paramName.valid && formControls.paramName.status != 'DISABLED'"
-                        [ngClass]="{ 'ng--invalid': !formControls.paramName.valid  }">This feild is
-                        required</mat-error>
-                </mat-form-field>
+          <mat-label [translate]="'qcparamconfiguration.paramName'"></mat-label>
+          <input matInput formControlName="paramName" appFocusOnEnter tabIndex="1">
+          @if (!formControls.paramName.valid && formControls.paramName.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.paramName.valid  }">This feild is
+            required</mat-error>
+          }
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'qcparamconfiguration.sortOrder'"></mat-label>
-                    <input matInput formControlName="sortOrder" (keypress)="commonService.numberOnly($event)"
-                        appFocusOnEnter tabIndex="2">
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'qcparamconfiguration.sortOrder'"></mat-label>
+          <input matInput formControlName="sortOrder" (keypress)="commonService.numberOnly($event)"
+            appFocusOnEnter tabIndex="2">
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label>{{'qcparamconfiguration.product' | translate }}</mat-label>
-                    <mat-select formControlName="product" appFocusOnEnter tabIndex="3">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let type of ProductType" [value]="type.value">
-                            {{type.viewValue}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-
-                <mat-form-field class="col-3">
-                    <mat-label>{{'qcparamconfiguration.type' | translate }}</mat-label>
-                    <mat-select formControlName="type" appFocusOnEnter tabIndex="3">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let type of Type" [value]="type.value">
-                            {{type.viewValue}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label>{{'qcparamconfiguration.product' | translate }}</mat-label>
+          <mat-select formControlName="product" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            @for (type of ProductType; track type) {
+              <mat-option [value]="type.value">
+                {{type.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
 
+        <mat-form-field class="col-3">
+          <mat-label>{{'qcparamconfiguration.type' | translate }}</mat-label>
+          <mat-select formControlName="type" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            @for (type of Type; track type) {
+              <mat-option [value]="type.value">
+                {{type.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
-            </div>
-            <mat-divider></mat-divider>
-        </form>
 
-    </mat-card-content>
-    <div class="form-element mt-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
-            {{ 'COMMON.CANCEL' | translate }}
-        </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+      </div>
+      <mat-divider></mat-divider>
+    </form>
 
-            {{ 'COMMON.SAVE' | translate }}
-        </button>
-    </div>
+  </mat-card-content>
+  <div class="form-element mt-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
 </div>

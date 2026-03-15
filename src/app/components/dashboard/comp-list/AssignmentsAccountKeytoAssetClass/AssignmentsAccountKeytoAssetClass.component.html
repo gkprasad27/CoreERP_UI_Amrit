@@ -12,9 +12,11 @@
           <mat-label>{{'AssignmentsAccountKeytoAssetClass.assetClass' | translate }}</mat-label>
           <mat-select formControlName="assetClass" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let asc of assetList" [value]="asc.id">
-              {{asc.text}}
-            </mat-option>
+            @for (asc of assetList; track asc) {
+              <mat-option [value]="asc.id">
+                {{asc.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -22,9 +24,11 @@
           <mat-label>{{'AssignmentsAccountKeytoAssetClass.accountKey' | translate }}</mat-label>
           <mat-select formControlName="accountKey" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ack of acckeyList" [value]="ack.id">
-              {{ack.text}}
-            </mat-option>
+            @for (ack of acckeyList; track ack) {
+              <mat-option [value]="ack.id">
+                {{ack.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

@@ -14,12 +14,16 @@
           <mat-select formControlName="objectType" (selectionChange)="getobjectNumberData()" appFocusOnEnter
             tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cot of cotList" [value]="cot.id">
-              {{cot.text}}
-            </mat-option>
+            @for (cot of cotList; track cot) {
+              <mat-option [value]="cot.id">
+                {{cot.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.objectType.valid"
+          @if (!formControls.objectType.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.objectType.valid  }"> Object Type is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.objectNumber.valid && formControls.objectNumber.status != 'DISABLED',
@@ -27,8 +31,10 @@
           <mat-label [translate]="'costcenter.phone'"></mat-label>
           <input matInput formControlName="objectNumber"
             appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.objectNumber.valid && formControls.objectNumber.status != 'DISABLED'"
+          @if (!formControls.objectNumber.valid && formControls.objectNumber.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.objectNumber.valid  }"> Object Number is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -41,9 +47,11 @@
           <mat-label>{{'costunits.costUnitType' | translate }}</mat-label>
           <mat-select formControlName="costUnitType" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let costunit of costunit" [value]="costunit.value">
-              {{costunit.viewValue}}
-            </mat-option>
+            @for (costunit of costunit; track costunit) {
+              <mat-option [value]="costunit.value">
+                {{costunit.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -51,9 +59,11 @@
           <mat-label>{{'costunits.perUnitCostBy' | translate }}</mat-label>
           <mat-select formControlName="perUnitCostBy" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let pcostunit of perunitcost" [value]="pcostunit.value">
-              {{pcostunit.viewValue}}
-            </mat-option>
+            @for (pcostunit of perunitcost; track pcostunit) {
+              <mat-option [value]="pcostunit.value">
+                {{pcostunit.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -61,9 +71,11 @@
           <mat-label>{{'costunits.manufacturingType' | translate }}</mat-label>
           <mat-select formControlName="manufacturingType" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let manufacturing of manufacturing" [value]="manufacturing.value">
-              {{manufacturing.viewValue}}
-            </mat-option>
+            @for (manufacturing of manufacturing; track manufacturing) {
+              <mat-option [value]="manufacturing.value">
+                {{manufacturing.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -71,9 +83,11 @@
           <mat-label>{{'costunits.material' | translate }}</mat-label>
           <mat-select formControlName="material" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let mtype of materialList" [value]="mtype.text">
-              {{mtype.text}}
-            </mat-option>
+            @for (mtype of materialList; track mtype) {
+              <mat-option [value]="mtype.text">
+                {{mtype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

@@ -13,9 +13,11 @@
           <mat-label [translate]="'AlternateControlAccount.chartofAccount'"></mat-label>
           <mat-select formControlName="chartofAccount" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let coa of coaList" [value]="coa.code">
-              {{coa.desctiption}}
-            </mat-option>
+            @for (coa of coaList; track coa) {
+              <mat-option [value]="coa.code">
+                {{coa.desctiption}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -23,9 +25,11 @@
           <mat-label>{{'posting.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let companyList of compList" [value]="companyList.id">
-              {{companyList.text}}
-            </mat-option>
+            @for (companyList of compList; track companyList) {
+              <mat-option [value]="companyList.id">
+                {{companyList.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -33,9 +37,11 @@
           <mat-label>{{'posting.branch' | translate }}</mat-label>
           <mat-select formControlName="branch" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let branch of branchList" [value]="branch.id">
-              {{branch.text}}
-            </mat-option>
+            @for (branch of branchList; track branch) {
+              <mat-option [value]="branch.id">
+                {{branch.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -43,9 +49,11 @@
           <mat-label>{{'posting.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plants of plantList" [value]="plants.id">
-              {{plants.text}}
-            </mat-option>
+            @for (plants of plantList; track plants) {
+              <mat-option [value]="plants.id">
+                {{plants.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -54,9 +62,11 @@
           <mat-select formControlName="code"
             appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let taxtrnsn of TaxTypeList" [value]="taxtrnsn.id">
-              {{taxtrnsn.text}}
-            </mat-option>
+            @for (taxtrnsn of TaxTypeList; track taxtrnsn) {
+              <mat-option [value]="taxtrnsn.id">
+                {{taxtrnsn.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -64,9 +74,11 @@
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.sgstgl'"></mat-label>
           <mat-select formControlName="sgstgl" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let gl of glList" [value]="gl.id">
-              {{gl.id}} - {{gl.text}}
-            </mat-option>
+            @for (gl of glList; track gl) {
+              <mat-option [value]="gl.id">
+                {{gl.id}} - {{gl.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -74,9 +86,11 @@
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.cgstgl'"></mat-label>
           <mat-select formControlName="cgstgl" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let gl of glList" [value]="gl.id">
-              {{gl.id}} - {{gl.text}}
-            </mat-option>
+            @for (gl of glList; track gl) {
+              <mat-option [value]="gl.id">
+                {{gl.id}} - {{gl.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -84,9 +98,11 @@
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.igstgl'"></mat-label>
           <mat-select formControlName="igstgl" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let gl of glList" [value]="gl.id">
-              {{gl.id}} - {{gl.text}}
-            </mat-option>
+            @for (gl of glList; track gl) {
+              <mat-option [value]="gl.id">
+                {{gl.id}} - {{gl.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -94,9 +110,11 @@
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.ugstgl'"></mat-label>
           <mat-select formControlName="ugstgl" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let gl of glList" [value]="gl.id">
-              {{gl.id}} - {{gl.text}}
-            </mat-option>
+            @for (gl of glList; track gl) {
+              <mat-option [value]="gl.id">
+                {{gl.id}} - {{gl.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -104,9 +122,11 @@
           <mat-label [translate]="'assignmentoftaxaccountstotaxcodes.compositeAccount'"></mat-label>
           <mat-select formControlName="compositeAccount" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let gl of glList" [value]="gl.id">
-              {{gl.id}} - {{gl.text}}
-            </mat-option>
+            @for (gl of glList; track gl) {
+              <mat-option [value]="gl.id">
+                {{gl.id}} - {{gl.text}}
+              </mat-option>
+            }
           </mat-select>
 
         </mat-form-field>

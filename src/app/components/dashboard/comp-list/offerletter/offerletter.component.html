@@ -1,155 +1,157 @@
-<div style="margin: 10px;" id="offerLetterO" *ngIf="offerLetterO">
-
+@if (offerLetterO) {
+  <div style="margin: 10px;" id="offerLetterO">
     <pre>
-
-{{ newDate | date:'MM/dd/yyyy' }}
-
-{{ modelFormData.value?.empName }},
-{{ formData.item.address?.pAddress }} {{ formData.item.address?.pAddress1 }},
-{{ formData.item.address?.pCity }}, {{ formData.item.address?.pState }}, {{ formData.item.address?.pZip }}
-
- 
-Dear {{modelFormData.value?.empName}},
-
- 
-We are pleased to offer you the {{formData.item?.empName}} position of {{ formData.item?.jobType }} at {{ formData.item?.jobType }} with a start date of {{ formData.item?.effectiveFrom }}. We believe your skills and experience are an excellent match for our company.
- 
- The annual starting salary for this position is {{formData.item?.ctc}}. In addition to this starting salary, we’re offering you [discuss stock options, bonuses, commission structures, etc. — if applicable].
- 
-Your employment with {{ formData.item.companyName }} will be on an at-will basis, which means you and the company are free to terminate the employment relationship at any time for any reason. This letter is not a contract or guarantee of employment for a definitive period of time.
- 
-As an employee of {{ formData.item.companyName }}, you are also eligible for our benefits program, which includes [medical insurance, 401(k), vacation time, etc.], and other benefits which will be described in more detail in the [employee handbook, orientation package, etc.].
- 
-Please confirm your acceptance of this offer by signing and returning this letter by {{formData.item?.offerValid}}.
-
-We are excited to have you join our team! If you have any questions, please feel free to reach out at any time.
- 
-Sincerely,
-{{ formData.item.companyName }}
-
- </pre>
-</div>
+      {{ newDate | date:'MM/dd/yyyy' }}
+      {{ modelFormData.value?.empName }},
+      {{ formData.item.address?.pAddress }} {{ formData.item.address?.pAddress1 }},
+      {{ formData.item.address?.pCity }}, {{ formData.item.address?.pState }}, {{ formData.item.address?.pZip }}
+      Dear {{modelFormData.value?.empName}},
+      We are pleased to offer you the {{formData.item?.empName}} position of {{ formData.item?.jobType }} at {{ formData.item?.jobType }} with a start date of {{ formData.item?.effectiveFrom }}. We believe your skills and experience are an excellent match for our company.
+      The annual starting salary for this position is {{formData.item?.ctc}}. In addition to this starting salary, we’re offering you [discuss stock options, bonuses, commission structures, etc. — if applicable].
+      Your employment with {{ formData.item.companyName }} will be on an at-will basis, which means you and the company are free to terminate the employment relationship at any time for any reason. This letter is not a contract or guarantee of employment for a definitive period of time.
+      As an employee of {{ formData.item.companyName }}, you are also eligible for our benefits program, which includes [medical insurance, 401(k), vacation time, etc.], and other benefits which will be described in more detail in the [employee handbook, orientation package, etc.].
+      Please confirm your acceptance of this offer by signing and returning this letter by {{formData.item?.offerValid}}.
+      We are excited to have you join our team! If you have any questions, please feel free to reach out at any time.
+      Sincerely,
+      {{ formData.item.companyName }}
+    </pre>
+  </div>
+}
 
 <div class="position-relative popup-class">
-    <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
-        <span> {{'offerletter.title' | translate }} </span>
-        <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
-    </mat-card-title>
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'offerletter.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
 
-    <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
-        <form [formGroup]="modelFormData" autocomplete="off">
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
 
-            <div class="row">
+      <div class="row">
 
-                <div class="mat-mdc-form-field typeahead floating-dropdown col-3" *ngIf="!formData.item"
-                    [class.filled]="modelFormData.value?.empCode?.length > 0">
-                    <label> {{ 'applyod.empCode' | translate }} </label>
-                    <input matInput placeholder=" " (typeaheadOnSelect)="onSearchChange($event)" class="typeahead"
-                        (input)="getEmploeebycode($event.target.value)" [typeaheadOptionsLimit]="100000"
-                        [typeahead]="getEmploeebyCodeArray" [typeaheadWaitMs]="200" typeaheadOptionField='empCode'
-                        formControlName="empCode" appFocusOnEnter tabIndex="1">
-                </div>
-                <mat-form-field class="col-3" *ngIf="formData.item">
-                    <mat-label [translate]="'offerletter.empCode'"></mat-label>
-                    <input matInput readonly formControlName="empCode" appFocusOnEnter tabIndex="2">
-                </mat-form-field>
+        @if (!formData.item) {
+          <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+            [class.filled]="modelFormData.value?.empCode?.length > 0">
+            <label> {{ 'applyod.empCode' | translate }} </label>
+            <input matInput placeholder=" " (typeaheadOnSelect)="onSearchChange($event)" class="typeahead"
+              (input)="getEmploeebycode($event.target.value)" [typeaheadOptionsLimit]="100000"
+              [typeahead]="getEmploeebyCodeArray" [typeaheadWaitMs]="200" typeaheadOptionField='empCode'
+              formControlName="empCode" appFocusOnEnter tabIndex="1">
+          </div>
+        }
+        @if (formData.item) {
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'offerletter.empCode'"></mat-label>
+            <input matInput readonly formControlName="empCode" appFocusOnEnter tabIndex="2">
+          </mat-form-field>
+        }
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'offerletter.empName'"></mat-label>
-                    <input matInput readonly formControlName="empName" appFocusOnEnter tabIndex="2">
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'offerletter.empName'"></mat-label>
+          <input matInput readonly formControlName="empName" appFocusOnEnter tabIndex="2">
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'offerletter.role'"></mat-label>
-                    <mat-select formControlName="role" appFocusOnEnter tabIndex="3">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let designation of designationsList" [value]="designation.designationId">
-                            {{designation.designationName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'offerletter.role'"></mat-label>
+          <mat-select formControlName="role" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            @for (designation of designationsList; track designation) {
+              <mat-option [value]="designation.designationId">
+                {{designation.designationName}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label>{{'offerletter.jobType' | translate }}</mat-label>
-                    <mat-select formControlName="jobType" appFocusOnEnter tabIndex="4">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let jobTyp of jobTypeList" [value]="jobTyp">
-                            {{jobTyp}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label>{{'offerletter.jobType' | translate }}</mat-label>
+          <mat-select formControlName="jobType" appFocusOnEnter tabIndex="4">
+            <mat-option>None</mat-option>
+            @for (jobTyp of jobTypeList; track jobTyp) {
+              <mat-option [value]="jobTyp">
+                {{jobTyp}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label>{{'offerletter.reporting' | translate }}</mat-label>
-                    <mat-select formControlName="reporting" appFocusOnEnter tabIndex="5">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-                            {{emp.id}} - {{emp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label>{{'offerletter.reporting' | translate }}</mat-label>
+          <mat-select formControlName="reporting" appFocusOnEnter tabIndex="5">
+            <mat-option>None</mat-option>
+            @for (emp of employeesList; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.id}} - {{emp.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'offerletter.designation'"></mat-label>
-                    <mat-select formControlName="designation" appFocusOnEnter tabIndex="7">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let designation of designationsList" [value]="designation.designationId">
-                            {{designation.designationName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'offerletter.designation'"></mat-label>
+          <mat-select formControlName="designation" appFocusOnEnter tabIndex="7">
+            <mat-option>None</mat-option>
+            @for (designation of designationsList; track designation) {
+              <mat-option [value]="designation.designationId">
+                {{designation.designationName}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'offerletter.cTC'"></mat-label>
-                    <input matInput type="number" formControlName="cTC" appFocusOnEnter tabIndex="8">
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'offerletter.cTC'"></mat-label>
+          <input matInput type="number" formControlName="cTC" appFocusOnEnter tabIndex="8">
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'offerletter.offerValid'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
-                        [nonEditable]="picker1" formControlName="offerValid" appFocusOnEnter tabIndex="9">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'offerletter.offerValid'"></mat-label>
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
+            [nonEditable]="picker1" formControlName="offerValid" appFocusOnEnter tabIndex="9">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'offerletter.effectiveFrom'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
-                        [nonEditable]="picker2" formControlName="effectiveFrom" appFocusOnEnter tabIndex="10">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'offerletter.effectiveFrom'"></mat-label>
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
+            [nonEditable]="picker2" formControlName="effectiveFrom" appFocusOnEnter tabIndex="10">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
 
 
-                <mat-form-field class="col-2">
-                    <mat-label>{{'offerletter.status' | translate }}</mat-label>
-                    <mat-select formControlName="status" appFocusOnEnter tabIndex="11">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let status of statusList" [value]="status">
-                            {{status}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label>{{'offerletter.status' | translate }}</mat-label>
+          <mat-select formControlName="status" appFocusOnEnter tabIndex="11">
+            <mat-option>None</mat-option>
+            @for (status of statusList; track status) {
+              <mat-option [value]="status">
+                {{status}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'offerletter.remarks'"></mat-label>
-                    <input matInput formControlName="remarks" appFocusOnEnter tabIndex="12">
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'offerletter.remarks'"></mat-label>
+          <input matInput formControlName="remarks" appFocusOnEnter tabIndex="12">
+        </mat-form-field>
 
-            </div>
-            <mat-divider></mat-divider>
-        </form>
+      </div>
+      <mat-divider></mat-divider>
+    </form>
 
-    </mat-card-content>
-    <div class="form-element mt-2 d-flex justify-content-end">
-        <button mat-raised-button type="button" class="button-color-bule text-white mx-1" (click)="print()">
-            {{ 'COMMON.PRINT' | translate }}
-        </button>
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-            {{ 'COMMON.CANCEL' | translate }}
-        </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-            {{ 'COMMON.SAVE' | translate }}
-        </button>
-    </div>
+  </mat-card-content>
+  <div class="form-element mt-2 d-flex justify-content-end">
+    <button mat-raised-button type="button" class="button-color-bule text-white mx-1" (click)="print()">
+      {{ 'COMMON.PRINT' | translate }}
+    </button>
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
 </div>

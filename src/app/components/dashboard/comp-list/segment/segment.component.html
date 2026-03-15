@@ -12,9 +12,11 @@
            'ng--invalid': !formControls.id.valid && formControls.id.status != 'DISABLED'  }">
           <mat-label [translate]="'segment.id'"></mat-label>
           <input matInput  formControlName="id" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.id.valid && formControls.id.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.id.valid  }">Segment Code
+          @if (!formControls.id.valid && formControls.id.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.id.valid  }">Segment Code
             is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -22,16 +24,20 @@
           <mat-label [translate]="'segment.name'"></mat-label>
           <input matInput  formControlName="name" appFocusOnEnter
             tabIndex="2" maxlength="50">
-          <mat-error *ngIf="!formControls.name.valid" [ngClass]="{ 'ng--invalid': !formControls.name.valid  }">Segment
+          @if (!formControls.name.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.name.valid  }">Segment
             Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'segment.active'"></mat-label>
           <mat-select formControlName="active" appFocusOnEnter tabIndex="3">
-            <mat-option *ngFor="let active of active" [value]="active.value">
-              {{active.viewValue}}
-            </mat-option>
+            @for (active of active; track active) {
+              <mat-option [value]="active.value">
+                {{active.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>

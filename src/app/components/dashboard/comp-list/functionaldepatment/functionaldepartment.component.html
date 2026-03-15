@@ -12,9 +12,11 @@
           <mat-label [translate]="'functionaldepatment.code'"></mat-label>
           <input matInput formControlName="code" maxlength="5"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid  && formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Functional
+          @if (!formControls.code.valid  && formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Functional
             Department Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -22,18 +24,22 @@
           <mat-label [translate]="'functionaldepatment.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
-            [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Functional Department Name is required
-          </mat-error>
+          @if (!formControls.description.valid) {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Functional Department Name is required
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'functionaldepatment.responsiblePerson' | translate }}</mat-label>
           <mat-select formControlName="responsiblePerson" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-              {{emp.id}} - {{emp.text}}
-            </mat-option>
+            @for (emp of employeesList; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.id}} - {{emp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

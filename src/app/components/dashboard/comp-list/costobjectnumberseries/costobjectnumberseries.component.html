@@ -12,8 +12,10 @@
           <mat-label [translate]="'costobjectnumberseries.numberObject'"></mat-label>
           <input matInput
             formControlName="numberObject" maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.numberObject.valid && formControls.numberObject.status != 'DISABLED'"
+          @if (!formControls.numberObject.valid && formControls.numberObject.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.numberObject.valid  }">Number Object is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -21,13 +23,15 @@
           <mat-label [translate]="'costobjectnumberseries.fromInterval'"></mat-label>
           <input matInput
             formControlName="fromInterval" maxlength="30" (change)="validationcode()" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.fromInterval.valid"
+          @if (!formControls.fromInterval.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.fromInterval.valid  }">From Interval is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'costobjectnumberseries.toInterval'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="toInterval" maxlength="30" (change)="validationcode()" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 

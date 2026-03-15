@@ -14,9 +14,11 @@
           <mat-label [translate]="'grnnumberseries.glsubName'"></mat-label>
           <input matInput formControlName="grnseries"
             maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.grnseries.valid && formControls.grnseries.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.grnseries.valid  }">
+          @if (!formControls.grnseries.valid && formControls.grnseries.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.grnseries.valid  }">
             GRN Series is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -24,8 +26,10 @@
           <mat-label [translate]="'grnnumberseries.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">

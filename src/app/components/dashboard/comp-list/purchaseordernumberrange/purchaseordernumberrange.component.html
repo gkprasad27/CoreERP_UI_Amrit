@@ -12,8 +12,10 @@
           <mat-label [translate]="'purchaseordernumberrange.numberRange'"></mat-label>
           <input matInput
             formControlName="numberRange" maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.numberRange.valid && formControls.numberRange.status != 'DISABLED'"
+          @if (!formControls.numberRange.valid && formControls.numberRange.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.numberRange.valid  }"> Number Range is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field  class="col-3"
@@ -21,8 +23,10 @@
           <mat-label [translate]="'purchaseordernumberrange.fromInterval'"></mat-label>
           <input matInput
             formControlName="fromInterval" (change)="validationcode()" maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.fromInterval.valid"
+          @if (!formControls.fromInterval.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.fromInterval.valid  }"> From Interval is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field  class="col-3">

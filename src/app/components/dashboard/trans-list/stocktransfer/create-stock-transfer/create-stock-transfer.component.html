@@ -1,281 +1,300 @@
 <div class="pt-1 d-flex">
-    <h5 [routerLink]="['/dashboard/sales/stockTransfer']"> <u class="cursor--pointer">
-            {{ 'STOCKTRANSFER.TITLE' | translate }} </u> </h5>
-    &nbsp; &nbsp; <h5> / </h5> &nbsp;
-    <h6 *ngIf="routeUrl != ''" class="p-1"> {{ 'STOCKTRANSFER.viewStock' | translate }} </h6>
-    <h6 *ngIf="routeUrl == ''" class="p-1"> {{ 'STOCKTRANSFER.CreatenewStock' | translate }} </h6>
+  <h5 [routerLink]="['/dashboard/sales/stockTransfer']"> <u class="cursor--pointer">
+  {{ 'STOCKTRANSFER.TITLE' | translate }} </u> </h5>
+  &nbsp; &nbsp; <h5> / </h5> &nbsp;
+  @if (routeUrl != '') {
+    <h6 class="p-1"> {{ 'STOCKTRANSFER.viewStock' | translate }} </h6>
+  }
+  @if (routeUrl == '') {
+    <h6 class="p-1"> {{ 'STOCKTRANSFER.CreatenewStock' | translate }} </h6>
+  }
 </div>
 
 <div class="">
-    <mat-card>
+  <mat-card>
 
-        <mat-card-content>
+    <mat-card-content>
 
-            <form [formGroup]="formData" autocomplete="off">
+      <form [formGroup]="formData" autocomplete="off">
 
-                <div class="d--flex p-1 mat-form-field-height">
+        <div class="d--flex p-1 mat-form-field-height">
 
-                    <mat-form-field class="form-element">
-                        <mat-label>{{ 'STOCKTRANSFER.FromBranchCode' | translate }}</mat-label>
-                        <mat-select formControlName="fromBranchCode"
-                            (selectionChange)="setBranchCode('fromBranchCode','fromBranchName');">
-                            <mat-option *ngFor="let branch of GetBranchesListArray" [value]="branch.id">
-                                {{ branch.id }} - {{branch.text}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+          <mat-form-field class="form-element">
+            <mat-label>{{ 'STOCKTRANSFER.FromBranchCode' | translate }}</mat-label>
+            <mat-select formControlName="fromBranchCode"
+              (selectionChange)="setBranchCode('fromBranchCode','fromBranchName');">
+              @for (branch of GetBranchesListArray; track branch) {
+                <mat-option [value]="branch.id">
+                  {{ branch.id }} - {{branch.text}}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
 
-                    <mat-form-field>
-                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker"
-                            placeholder="{{'STOCKTRANSFER.StockTransferDate' | translate }}"
-                            formControlName="stockTransferDate" (click)="picker.open()" readonly>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker"
+              placeholder="{{'STOCKTRANSFER.StockTransferDate' | translate }}"
+              formControlName="stockTransferDate" (click)="picker.open()" readonly>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
 
-                    <mat-form-field>
-                        <mat-label>{{ 'STOCKTRANSFER.ToBranchCode' | translate }}</mat-label>
-                        <mat-select formControlName="toBranchCode"
-                            (selectionChange)="setBranchCode('toBranchCode','toBranchName');">
-                            <mat-option *ngFor="let branch of GetBranchesListArray" [value]="branch.id">
-                                {{ branch.id }} - {{branch.text}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+            <mat-form-field>
+              <mat-label>{{ 'STOCKTRANSFER.ToBranchCode' | translate }}</mat-label>
+              <mat-select formControlName="toBranchCode"
+                (selectionChange)="setBranchCode('toBranchCode','toBranchName');">
+                @for (branch of GetBranchesListArray; track branch) {
+                  <mat-option [value]="branch.id">
+                    {{ branch.id }} - {{branch.text}}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
 
-                    <mat-form-field class="form-element">
-                        <input matInput placeholder="{{ 'STOCKTRANSFER.StockTransferNo' | translate }}"
-                            formControlName="stockTransferNo" (keydown.enter)="save()">
-                    </mat-form-field>
+            <mat-form-field class="form-element">
+              <input matInput placeholder="{{ 'STOCKTRANSFER.StockTransferNo' | translate }}"
+                formControlName="stockTransferNo" (keydown.enter)="save()">
+              </mat-form-field>
 
 
-                </div>
-            </form>
+            </div>
+          </form>
         </mat-card-content>
 
-    </mat-card>
+      </mat-card>
 
-    <mat-card class="mt-2">
+      <mat-card class="mt-2">
 
         <mat-card-content>
-            <div class="table mt-3 mat-form-field-height">
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+          <div class="table mt-3 mat-form-field-height">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
 
-                    <ng-container matColumnDef="SlNo">
-                        <th class="p-0" mat-header-cell *matHeaderCellDef> {{ 'SALESINVOICE.SlNo' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input matInput disabled value="{{ dataSource.filteredData.indexOf(element) + 1}}" />
-                        </td>
-                    </ng-container>
+              <ng-container matColumnDef="SlNo">
+                <th class="p-0" mat-header-cell *matHeaderCellDef> {{ 'SALESINVOICE.SlNo' | translate }} </th>
+                <td mat-cell *matCellDef="let element;">
+                  <input matInput disabled value="{{ dataSource.filteredData.indexOf(element) + 1}}" />
+                </td>
+              </ng-container>
 
-                    <ng-container matColumnDef="productCode">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.productCode' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input class="typeAhead" [(ngModel)]="element.productCode" type="search"
-                            id="productCode{{ dataSource.filteredData.indexOf(element) }}"
-                                [disabled]="element.text != 'obj'" class="typeahead"
-                                (typeaheadOnSelect)="getStockTransferDetailsSection($event, dataSource.filteredData.indexOf(element), 'qty')"
-                                (input)="getProductByProductCode($event.target.value)"
-                                [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductCodeArray" typeaheadOptionField='text'
-                                autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" (keydown.enter)="save()">
-                        </td>
-                    </ng-container>
+              <ng-container matColumnDef="productCode">
+                <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.productCode' | translate }} </th>
+                <td mat-cell *matCellDef="let element;">
+                  <input class="typeAhead" [(ngModel)]="element.productCode" type="search"
+                    id="productCode{{ dataSource.filteredData.indexOf(element) }}"
+                    [disabled]="element.text != 'obj'" class="typeahead"
+                    (typeaheadOnSelect)="getStockTransferDetailsSection($event, dataSource.filteredData.indexOf(element), 'qty')"
+                    (input)="getProductByProductCode($event.target.value)"
+                    [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductCodeArray" typeaheadOptionField='text'
+                    autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" (keydown.enter)="save()">
+                  </td>
+                </ng-container>
 
-                    <ng-container matColumnDef="productName">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.productName' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input class="typeAhead" [(ngModel)]="element.productName" [matTooltip]="element.productName"
-                                [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setProductName($event)"
-                                (input)="getProductByProductName($event.target.value)" class="typeahead"
-                                [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'
-                                autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" (keydown.enter)="save()">
-                        </td>
-                    </ng-container>
+                <ng-container matColumnDef="productName">
+                  <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.productName' | translate }} </th>
+                  <td mat-cell *matCellDef="let element;">
+                    <input class="typeAhead" [(ngModel)]="element.productName" [matTooltip]="element.productName"
+                      [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setProductName($event)"
+                      (input)="getProductByProductName($event.target.value)" class="typeahead"
+                      [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'
+                      autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" (keydown.enter)="save()">
+                    </td>
+                  </ng-container>
 
-                    <ng-container matColumnDef="hsnNo">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.hsnNo' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.hsnNo"
-                                [(ngModel)]="element.hsnNo" 
-                                (input)="setToFormModel(element.text, 'hsnNo', element.hsnNo)" (keydown.enter)="save()"/> </td>
+                  <ng-container matColumnDef="hsnNo">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.hsnNo' | translate }} </th>
+                    <td mat-cell *matCellDef="let element;">
+                      <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.hsnNo"
+                        [(ngModel)]="element.hsnNo"
+                      (input)="setToFormModel(element.text, 'hsnNo', element.hsnNo)" (keydown.enter)="save()"/> </td>
                     </ng-container>
 
                     <ng-container matColumnDef="unitId">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.unitId' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.unitId"
-                                [(ngModel)]="element.unitId" 
-                                (input)="setToFormModel(element.text, 'unitId', element.unitId)" (keydown.enter)="save()"/> </td>
-                    </ng-container>
+                      <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.unitId' | translate }} </th>
+                      <td mat-cell *matCellDef="let element;">
+                        <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.unitId"
+                          [(ngModel)]="element.unitId"
+                        (input)="setToFormModel(element.text, 'unitId', element.unitId)" (keydown.enter)="save()"/> </td>
+                      </ng-container>
 
-                    <ng-container matColumnDef="qty">
+                      <ng-container matColumnDef="qty">
                         <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.qty' | translate }} </th>
                         <td mat-cell *matCellDef="let element;">
-                            <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.qty"
+                          <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.qty"
                             id="qty{{ dataSource.filteredData.indexOf(element) }}"
-                                (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
-                                [(ngModel)]="element.qty" 
-                                (input)="setToFormModel(element.text, 'qty', element.qty); clearQty(dataSource.filteredData.indexOf(element), element.qty, 'qty', element)" (keydown.enter)="save()"/>
-                        </td>
-                    </ng-container>
-                    <ng-container matColumnDef="ltrs">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.ltrs' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.ltrs"
-                            id="ltrs{{ dataSource.filteredData.indexOf(element) }}"
-                                (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
-                                [(ngModel)]="element.ltrs" 
-                                (input)="setToFormModel(element.text, 'ltrs', element.ltrs); clearQty(dataSource.filteredData.indexOf(element), element.ltrs, 'ltrs', element)" (keydown.enter)="save()"/>
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="fQty">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.fQty' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input *ngIf="dataSource.filteredData.indexOf(element) == 0" matInput type="number" disabled
-                                [value]="element.fQty" [(ngModel)]="element.fQty" />
-                            <input *ngIf="dataSource.filteredData.indexOf(element) != 0" matInput type="number"
-                                [disabled]="element.text != 'obj'" [value]="element.fQty" [(ngModel)]="element.fQty"
-                                (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
-                                
-                                (input)="setToFormModel(element.text, 'fQty', element.fQty); clearQty(dataSource.filteredData.indexOf(element), element.fQty, 'fQty', element);" (keydown.enter)="save()"/>
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="rate">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.rate' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input matInput [value]="element.rate" [(ngModel)]="element.rate"
                             (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
+                            [(ngModel)]="element.qty"
+                            (input)="setToFormModel(element.text, 'qty', element.qty); clearQty(dataSource.filteredData.indexOf(element), element.qty, 'qty', element)" (keydown.enter)="save()"/>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="ltrs">
+                          <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.ltrs' | translate }} </th>
+                          <td mat-cell *matCellDef="let element;">
+                            <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.ltrs"
+                              id="ltrs{{ dataSource.filteredData.indexOf(element) }}"
+                              (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
+                              [(ngModel)]="element.ltrs"
+                              (input)="setToFormModel(element.text, 'ltrs', element.ltrs); clearQty(dataSource.filteredData.indexOf(element), element.ltrs, 'ltrs', element)" (keydown.enter)="save()"/>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="fQty">
+                            <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.fQty' | translate }} </th>
+                            <td mat-cell *matCellDef="let element;">
+                              @if (dataSource.filteredData.indexOf(element) == 0) {
+                                <input matInput type="number" disabled
+                                  [value]="element.fQty" [(ngModel)]="element.fQty" />
+                              }
+                              @if (dataSource.filteredData.indexOf(element) != 0) {
+                                <input matInput type="number"
+                                  [disabled]="element.text != 'obj'" [value]="element.fQty" [(ngModel)]="element.fQty"
+                                  (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
+                                  (input)="setToFormModel(element.text, 'fQty', element.fQty); clearQty(dataSource.filteredData.indexOf(element), element.fQty, 'fQty', element);" (keydown.enter)="save()"/>
+                              }
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="rate">
+                            <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.rate' | translate }} </th>
+                            <td mat-cell *matCellDef="let element;">
+                              <input matInput [value]="element.rate" [(ngModel)]="element.rate"
+                                (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
                                 (input)="setToFormModel(element.text, 'rate', element.rate)"  (keydown.enter)="save()"/>
-                        </td>
-                    </ng-container>
+                              </td>
+                            </ng-container>
 
-                    <ng-container matColumnDef="totalAmount">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.totalAmount' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input type="number" matInput disabled [value]="element.totalAmount"
-                                [(ngModel)]="element.totalAmount"
-                                (input)="setToFormModel(element.text, 'totalAmount', element.totalAmount)"
+                            <ng-container matColumnDef="totalAmount">
+                              <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.totalAmount' | translate }} </th>
+                              <td mat-cell *matCellDef="let element;">
+                                <input type="number" matInput disabled [value]="element.totalAmount"
+                                  [(ngModel)]="element.totalAmount"
+                                  (input)="setToFormModel(element.text, 'totalAmount', element.totalAmount)"
                                 (keydown.enter)="save()" /> </td>
-                    </ng-container>
+                              </ng-container>
 
-                    <ng-container matColumnDef="availStock">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.availStock' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input matInput disabled [value]="element.availStock" [(ngModel)]="element.availStock"
-                                (input)="setToFormModel(element.text, 'availStock', element.availStock)" (keydown.enter)="save()"/>
-                        </td>
-                    </ng-container>
+                              <ng-container matColumnDef="availStock">
+                                <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.availStock' | translate }} </th>
+                                <td mat-cell *matCellDef="let element;">
+                                  <input matInput disabled [value]="element.availStock" [(ngModel)]="element.availStock"
+                                    (input)="setToFormModel(element.text, 'availStock', element.availStock)" (keydown.enter)="save()"/>
+                                  </td>
+                                </ng-container>
 
-                    <ng-container matColumnDef="batchNo">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.batchNo' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <input matInput disabled [value]="element.batchNo" [(ngModel)]="element.batchNo"
-                                (input)="setToFormModel(element.text, 'batchNo', element.batchNo)"  (keydown.enter)="save()"/>
-                        </td>
-                    </ng-container>
+                                <ng-container matColumnDef="batchNo">
+                                  <th mat-header-cell *matHeaderCellDef> {{ 'STOCKTRANSFER.batchNo' | translate }} </th>
+                                  <td mat-cell *matCellDef="let element;">
+                                    <input matInput disabled [value]="element.batchNo" [(ngModel)]="element.batchNo"
+                                      (input)="setToFormModel(element.text, 'batchNo', element.batchNo)"  (keydown.enter)="save()"/>
+                                    </td>
+                                  </ng-container>
 
-                    <ng-container matColumnDef="delete">
-                        <th mat-header-cell *matHeaderCellDef> </th>
-                        <td mat-cell *matCellDef="let element;">
-                            <mat-icon *ngIf="(element.text == 'obj')" class="cursor--pointer delete-icon"
-                                (click)="deleteRow(dataSource.filteredData.indexOf(element))">delete</mat-icon>
-                        </td>
-                    </ng-container>
+                                  <ng-container matColumnDef="delete">
+                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <td mat-cell *matCellDef="let element;">
+                                      @if ((element.text == 'obj')) {
+                                        <mat-icon class="cursor--pointer delete-icon"
+                                        (click)="deleteRow(dataSource.filteredData.indexOf(element))">delete</mat-icon>
+                                      }
+                                    </td>
+                                  </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-                    </tr>
-                </table>
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                                  </tr>
+                                </table>
 
-            </div>
+                              </div>
 
-            <div *ngIf="!dataSource" class="d-flex justify-content-center p-2">
-                <strong> No records found </strong>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="mt-2">
-
-        <mat-card-content>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <form [formGroup]="formData" autocomplete="off">
-
-
-
-                                <div class="d-flex justify-content-end">
-                                    <div class="w-75">
-                                        <mat-form-field class="form-element">
-                                            <input matInput placeholder="{{ 'SALESINVOICE.userName' | translate }}"
-                                                formControlName="userName">
-                                        </mat-form-field>
-
-                                        <mat-form-field>
-                                            <mat-label>{{ 'STOCKTRANSFER.NARRATION' | translate }}</mat-label>
-                                            <textarea matInput formControlName="narration" cdkTextareaAutosize
-                                                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"
-                                                cdkAutosizeMaxRows="3"></textarea>
-                                        </mat-form-field>
-                                    </div>
+                              @if (!dataSource) {
+                                <div class="d-flex justify-content-center p-2">
+                                  <strong> No records found </strong>
                                 </div>
+                              }
+                            </mat-card-content>
+                          </mat-card>
 
-                        </form>
-                    </div>
-                    <div class="col-md-3">
+                          <mat-card class="mt-2">
 
-                        
-                        <div class="d-flex justify-content-end">
-                            <div class="w-75">
-                                <mat-form-field class="form-element">
-                                    <input matInput disabled placeholder="Total Quantity"
-                                      [(ngModel)]="totalQty">
-                                </mat-form-field>
+                            <mat-card-content>
 
-                                <mat-form-field class="form-element">
-                                    <input matInput disabled placeholder="{{ 'SALESINVOICE.totalAmount' | translate }}"
-                                      [(ngModel)]="totalAmount">
-                                </mat-form-field>
-                                <mat-form-field class="form-element">
-                                    <input matInput disabled placeholder="Total Litres"
-                                      [(ngModel)]="totalLtrs">
-                                </mat-form-field>
-
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="d-flex justify-content-center m-5 ">
-                            <div class="d-flex flex-column mr-3">
-                                <mat-label>{{ 'COMMON.PRINT' | translate }}</mat-label>
-                                <mat-slide-toggle [(ngModel)]="printBill" [checked]="printBill"></mat-slide-toggle>
-                            </div>
-                            <button *ngIf="(routeUrl != 'return' && routeUrl != '')" mat-raised-button type="submit"
-                              class="button-color-bule mr-3 text-white" (click)="exportToPdf()">
-                                {{ 'COMMON.PRINT' | translate }}
-                            </button>
-                           <button *ngIf="(routeUrl == 'return' || routeUrl == '')" mat-raised-button type="submit"
-                               class="button-color-bule mr-3 text-white" (click)="save()">
-                                      {{ 'COMMON.SAVE' | translate }}
-                           </button>
-                            <button id="reset" mat-raised-button class="button-color-red text-white mr-3"
-                                [disabled]="routeUrl != ''" (click)="reset();">
-
-                                {{ 'COMMON.RESET' | translate }}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </mat-card-content>
-    </mat-card>
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <form [formGroup]="formData" autocomplete="off">
 
 
-</div>
+
+                                      <div class="d-flex justify-content-end">
+                                        <div class="w-75">
+                                          <mat-form-field class="form-element">
+                                            <input matInput placeholder="{{ 'SALESINVOICE.userName' | translate }}"
+                                              formControlName="userName">
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                              <mat-label>{{ 'STOCKTRANSFER.NARRATION' | translate }}</mat-label>
+                                              <textarea matInput formControlName="narration" cdkTextareaAutosize
+                                                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"
+                                              cdkAutosizeMaxRows="3"></textarea>
+                                            </mat-form-field>
+                                          </div>
+                                        </div>
+
+                                      </form>
+                                    </div>
+                                    <div class="col-md-3">
+
+
+                                      <div class="d-flex justify-content-end">
+                                        <div class="w-75">
+                                          <mat-form-field class="form-element">
+                                            <input matInput disabled placeholder="Total Quantity"
+                                              [(ngModel)]="totalQty">
+                                            </mat-form-field>
+
+                                            <mat-form-field class="form-element">
+                                              <input matInput disabled placeholder="{{ 'SALESINVOICE.totalAmount' | translate }}"
+                                                [(ngModel)]="totalAmount">
+                                              </mat-form-field>
+                                              <mat-form-field class="form-element">
+                                                <input matInput disabled placeholder="Total Litres"
+                                                  [(ngModel)]="totalLtrs">
+                                                </mat-form-field>
+
+                                              </div>
+                                            </div>
+
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <div class="d-flex justify-content-center m-5 ">
+                                              <div class="d-flex flex-column mr-3">
+                                                <mat-label>{{ 'COMMON.PRINT' | translate }}</mat-label>
+                                                <mat-slide-toggle [(ngModel)]="printBill" [checked]="printBill"></mat-slide-toggle>
+                                              </div>
+                                              @if ((routeUrl != 'return' && routeUrl != '')) {
+                                                <button mat-raised-button type="submit"
+                                                  class="button-color-bule mr-3 text-white" (click)="exportToPdf()">
+                                                  {{ 'COMMON.PRINT' | translate }}
+                                                </button>
+                                              }
+                                              @if ((routeUrl == 'return' || routeUrl == '')) {
+                                                <button mat-raised-button type="submit"
+                                                  class="button-color-bule mr-3 text-white" (click)="save()">
+                                                  {{ 'COMMON.SAVE' | translate }}
+                                                </button>
+                                              }
+                                              <button id="reset" mat-raised-button class="button-color-red text-white mr-3"
+                                                [disabled]="routeUrl != ''" (click)="reset();">
+
+                                                {{ 'COMMON.RESET' | translate }}
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </mat-card-content>
+                                  </mat-card>
+
+
+                                </div>

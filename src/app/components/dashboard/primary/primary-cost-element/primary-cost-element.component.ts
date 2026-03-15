@@ -11,7 +11,7 @@ import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
-import { CommonModule } from '@angular/common';
+
 import { DynamicTableComponent } from '../../../../reuse-components/dynamic-table/dynamic-table.component';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatCardModule } from '@angular/material/card';
@@ -28,7 +28,7 @@ interface Element {
 
 @Component({
   selector: 'app-primary-cost-element',
-  imports: [ CommonModule , TranslatePipe , DynamicTableComponent, MatCardModule],
+  imports: [TranslatePipe, DynamicTableComponent, MatCardModule],
   templateUrl: './primary-cost-element.component.html',
   styleUrls: ['./primary-cost-element.component.scss']
 })

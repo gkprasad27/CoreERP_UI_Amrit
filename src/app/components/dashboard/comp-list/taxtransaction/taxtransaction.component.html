@@ -12,9 +12,11 @@
           <mat-label [translate]="'taxtransactions.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid  &&formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
+          @if (!formControls.code.valid  &&formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -22,8 +24,10 @@
           <mat-label [translate]="'taxtransactions.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -31,9 +35,11 @@
           <mat-select formControlName="taxType" appFocusOnEnter
             tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let taxtrnsn of taxTypelist" [value]="taxtrnsn.taxKey">
-              {{taxtrnsn.taxKey}} - {{taxtrnsn.description}}
-            </mat-option>
+            @for (taxtrnsn of taxTypelist; track taxtrnsn) {
+              <mat-option [value]="taxtrnsn.taxKey">
+                {{taxtrnsn.taxKey}} - {{taxtrnsn.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>

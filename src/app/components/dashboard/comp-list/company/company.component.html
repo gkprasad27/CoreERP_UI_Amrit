@@ -13,16 +13,20 @@
            'ng--invalid': !formControls.companyCode.valid&& formControls.companyCode.status != 'DISABLED' }">
           <mat-label [translate]="'company.companyCode'"></mat-label>
           <input matInput disabled formControlName="companyCode" maxlength="5" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.companyCode.valid&& formControls.companyCode.status != 'DISABLED'"
+          @if (!formControls.companyCode.valid&& formControls.companyCode.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.companyCode.valid  }">Company Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.companyName.valid, 'ng--invalid': !formControls.companyName.valid  }">
           <mat-label [translate]="'company.companyName'"></mat-label>
           <input matInput formControlName="companyName" maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.companyName.valid"
+          @if (!formControls.companyName.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.companyName.valid  }">Company Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -39,9 +43,11 @@
           <mat-label>{{'company.state' | translate }}</mat-label>
           <mat-select formControlName="state" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let state of stateList" [value]="state.id">
-              {{state.text}}
-            </mat-option>
+            @for (state of stateList; track state) {
+              <mat-option [value]="state.id">
+                {{state.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -49,9 +55,11 @@
           <mat-label>{{'company.region' | translate }}</mat-label>
           <mat-select formControlName="region" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let rgn of regionsList" [value]="rgn.id">
-              {{rgn.text}}
-            </mat-option>
+            @for (rgn of regionsList; track rgn) {
+              <mat-option [value]="rgn.id">
+                {{rgn.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -59,9 +67,11 @@
           <mat-label>{{'company.country' | translate }}</mat-label>
           <mat-select formControlName="country" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cntry of countrysList" [value]="cntry.id">
-              {{cntry.text}}
-            </mat-option>
+            @for (cntry of countrysList; track cntry) {
+              <mat-option [value]="cntry.id">
+                {{cntry.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -69,9 +79,11 @@
           <mat-label>{{'company.currency' | translate }}</mat-label>
           <mat-select formControlName="currency" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cncy of currencyList" [value]="cncy.id">
-              {{cncy.text}}
-            </mat-option>
+            @for (cncy of currencyList; track cncy) {
+              <mat-option [value]="cncy.id">
+                {{cncy.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -79,9 +91,11 @@
           <mat-label>{{'company.language' | translate }}</mat-label>
           <mat-select formControlName="language" appFocusOnEnter tabIndex="9">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let lng of languageList" [value]="lng.id">
-              {{lng.text}}
-            </mat-option>
+            @for (lng of languageList; track lng) {
+              <mat-option [value]="lng.id">
+                {{lng.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -104,9 +118,11 @@
           <mat-label [translate]="'company.location'"></mat-label>
           <mat-select formControlName="location" appFocusOnEnter tabIndex="13">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let loc of locList" [value]="loc.id">
-              {{loc.text}}
-            </mat-option>
+            @for (loc of locList; track loc) {
+              <mat-option [value]="loc.id">
+                {{loc.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -160,41 +176,43 @@
           <input matInput formControlName="phone" maxlength="50" appFocusOnEnter tabIndex="20">
         </mat-form-field>
 
-          <mat-form-field class="col-3">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'company.ext'"></mat-label>
           <mat-select formControlName="ext" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let nature of nature" [value]="nature.value">
-              {{nature.Description}}
-            </mat-option>
+            @for (nature of nature; track nature) {
+              <mat-option [value]="nature.value">
+                {{nature.Description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
         <!-- <mat-form-field class="col-3">
-          <mat-label [translate]="'company.financialYearFrom'"></mat-label>
-          <input matInput formControlName="financialYearFrom" maxlength="50" appFocusOnEnter tabIndex="20">
-        </mat-form-field>
+        <mat-label [translate]="'company.financialYearFrom'"></mat-label>
+        <input matInput formControlName="financialYearFrom" maxlength="50" appFocusOnEnter tabIndex="20">
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'company.booksBeginingFrom'"></mat-label>
-          <input matInput formControlName="booksBeginingFrom" maxlength="50" appFocusOnEnter tabIndex="20">
-        </mat-form-field> -->
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'company.booksBeginingFrom'"></mat-label>
+        <input matInput formControlName="booksBeginingFrom" maxlength="50" appFocusOnEnter tabIndex="20">
+      </mat-form-field> -->
 
-      </div>
-      <mat-divider></mat-divider>
+    </div>
+    <mat-divider></mat-divider>
 
-    </form>
+  </form>
 
-  </mat-card-content>
+</mat-card-content>
 
-  <div class="form-element mt-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="21">
-      {{ 'COMMON.CANCEL' | translate }}
-    </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
-      tabIndex="22">
-      {{ 'COMMON.SAVE' | translate }}
-    </button>
-  </div>
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="21">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+    tabIndex="22">
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 
 </div>

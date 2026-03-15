@@ -13,9 +13,11 @@
           <mat-label [translate]="'fundcenter.code'"></mat-label>
           <input matInput formControlName="code" maxlength="5"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid && formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
+          @if (!formControls.code.valid && formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -23,17 +25,21 @@
           <mat-label [translate]="'fundcenter.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Description is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'fundcenter.person' | translate }}</mat-label>
           <mat-select formControlName="person" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-              {{emp.id}} - {{emp.text}}
-            </mat-option>
+            @for (emp of employeesList; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.id}} - {{emp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -41,9 +47,11 @@
           <mat-label>{{'fundcenter.department' | translate }}</mat-label>
           <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let dept of deptList" [value]="dept.id">
-              {{dept.text}}
-            </mat-option>
+            @for (dept of deptList; track dept) {
+              <mat-option [value]="dept.id">
+                {{dept.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -51,27 +59,33 @@
           <mat-label>{{'fundcenter.costCenter' | translate }}</mat-label>
           <mat-select formControlName="costCenter" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cost of costcenterList" [value]="cost.code">
-              {{cost.name}}
-            </mat-option>
+            @for (cost of costcenterList; track cost) {
+              <mat-option [value]="cost.code">
+                {{cost.name}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-3">
           <mat-label>{{'fundcenter.profitCenter' | translate }}</mat-label>
           <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let pft of profitCenterList" [value]="pft.code">
-              {{pft.name}}
-            </mat-option>
+            @for (pft of profitCenterList; track pft) {
+              <mat-option [value]="pft.code">
+                {{pft.name}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-3">
           <mat-label>{{'fundcenter.segment' | translate }}</mat-label>
           <mat-select formControlName="segment" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let seg of segmentList" [value]="seg.id">
-              {{seg.name}}
-            </mat-option>
+            @for (seg of segmentList; track seg) {
+              <mat-option [value]="seg.id">
+                {{seg.name}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

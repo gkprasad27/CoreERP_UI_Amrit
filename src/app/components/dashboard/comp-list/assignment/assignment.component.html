@@ -13,9 +13,11 @@
           <mat-label>{{'assignment.bpgroup' | translate }}</mat-label>
           <mat-select formControlName="bpgroup" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let bpg of bpgList" [value]="bpg.id">
-              {{bpg.text}}
-            </mat-option>
+            @for (bpg of bpgList; track bpg) {
+              <mat-option [value]="bpg.id">
+                {{bpg.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -23,9 +25,11 @@
           <mat-label>{{'assignment.numberRangeKey' | translate }}</mat-label>
           <mat-select formControlName="numberRangeKey" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let nrr of nrrList" [value]="nrr.code">
-              {{nrr.code}}
-            </mat-option>
+            @for (nrr of nrrList; track nrr) {
+              <mat-option [value]="nrr.code">
+                {{nrr.code}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

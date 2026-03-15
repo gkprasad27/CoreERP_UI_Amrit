@@ -10,7 +10,7 @@ import { AlertService } from '../../../../../services/alert.service';
 import { StatusCodes } from '../../../../../enums/common/common';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -27,7 +27,7 @@ import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-d
 
 @Component({
   selector: 'app-material-requisition-view',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, NgMultiSelectDropDownModule, TranslateModule, TableComponent, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ReactiveFormsModule, TranslatePipe, NgMultiSelectDropDownModule, TranslateModule, TableComponent, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './material-requisition-view.component.html',
   styleUrls: ['./material-requisition-view.component.scss']
 })

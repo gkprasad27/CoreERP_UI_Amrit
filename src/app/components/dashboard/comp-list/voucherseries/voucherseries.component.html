@@ -12,11 +12,13 @@
         <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.voucherSeriesKey.valid &&formControls.voucherSeriesKey.status != 'DISABLED',
            'ng--invalid': !formControls.voucherSeriesKey.valid && formControls.voucherSeriesKey.status != 'DISABLED' }">
-           <mat-label [translate]="'voucherclass.voucherSeriesKey'"></mat-label>
+          <mat-label [translate]="'voucherclass.voucherSeriesKey'"></mat-label>
           <input matInput  formControlName="voucherSeriesKey" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.voucherSeriesKey.valid && formControls.voucherSeriesKey.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.voucherSeriesKey.valid  }">voucher Series Key is required
-          </mat-error>
+          @if (!formControls.voucherSeriesKey.valid && formControls.voucherSeriesKey.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.voucherSeriesKey.valid  }">voucher Series Key is required
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -36,9 +38,11 @@
           <mat-label>{{'voucherseries.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plants of plantList" [value]="plants.id">
-              {{plants.text}}
-            </mat-option>
+            @for (plants of plantList; track plants) {
+              <mat-option [value]="plants.id">
+                {{plants.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -46,9 +50,11 @@
           <mat-label>{{'voucherseries.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let companyList of compList" [value]="companyList.id">
-              {{companyList.text}}
-            </mat-option>
+            @for (companyList of compList; track companyList) {
+              <mat-option [value]="companyList.id">
+                {{companyList.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -56,9 +62,11 @@
           <mat-label>{{'voucherseries.branch' | translate }}</mat-label>
           <mat-select formControlName="branch" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let branch of branchList" [value]="branch.id">
-              {{branch.text}}
-            </mat-option>
+            @for (branch of branchList; track branch) {
+              <mat-option [value]="branch.id">
+                {{branch.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

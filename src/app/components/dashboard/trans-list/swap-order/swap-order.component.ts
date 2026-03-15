@@ -8,7 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { AlertService } from '../../../../services/alert.service';
 import { Static } from '../../../../enums/common/static';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
@@ -21,7 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
     selector: 'app-swap-order',
-    imports: [CommonModule, TypeaheadModule, MatCardModule, ReactiveFormsModule, TranslateModule, MatButtonModule, MatSlideToggleModule, MatFormFieldModule, MatFormFieldModule, MatCardModule, MatInputModule, MatButtonModule, TableComponent],
+    imports: [TypeaheadModule, MatCardModule, ReactiveFormsModule, TranslateModule, MatButtonModule, MatSlideToggleModule, MatFormFieldModule, MatFormFieldModule, MatCardModule, MatInputModule, MatButtonModule, TableComponent],
     templateUrl: './swap-order.component.html',
     styleUrls: ['./swap-order.component.scss']
 })

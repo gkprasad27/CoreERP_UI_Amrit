@@ -14,9 +14,11 @@
           <mat-label [translate]="'ginnumberseries.ginseries'"></mat-label>
           <input matInput formControlName="ginseries"
             maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.ginseries.valid && formControls.ginseries.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.ginseries.valid  }">
+          @if (!formControls.ginseries.valid && formControls.ginseries.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.ginseries.valid  }">
             GIN Series is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -24,8 +26,10 @@
           <mat-label [translate]="'ginnumberseries.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">

@@ -13,9 +13,11 @@
           <mat-label>{{'glsubaccount.glaccount' | translate }}</mat-label>
           <mat-select formControlName="glaccount" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let gl of glList" [value]="gl.accountNumber">
-              {{gl.accountNumber}} - {{gl.glaccountName}}
-            </mat-option>
+            @for (gl of glList; track gl) {
+              <mat-option [value]="gl.accountNumber">
+                {{gl.accountNumber}} - {{gl.glaccountName}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -24,9 +26,11 @@
           <mat-label [translate]="'glsubaccount.glsubCode'"></mat-label>
           <input matInput formControlName="glsubCode"
             maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.glsubCode.valid &&formControls.glsubCode.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.glsubCode.valid  }">
+          @if (!formControls.glsubCode.valid &&formControls.glsubCode.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.glsubCode.valid  }">
             Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -34,9 +38,11 @@
           <mat-label [translate]="'glsubaccount.glsubName'"></mat-label>
           <input matInput formControlName="glsubName"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.glsubName.valid"
-            [ngClass]="{ 'ng--invalid': !formControls.glsubName.valid  }">
+          @if (!formControls.glsubName.valid) {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.glsubName.valid  }">
             Name is required</mat-error>
+          }
         </mat-form-field>
 
       </div>

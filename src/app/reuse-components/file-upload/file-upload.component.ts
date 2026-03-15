@@ -3,12 +3,12 @@ import { SnackBar } from '../../enums/common/common';
 import { Static } from '../../enums/common/static';
 import { AlertService } from '../../services/alert.service';
 import { CommonService } from '../../services/common.service';
-import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-file-upload',
-  imports: [ CommonModule, MatIconModule, ],
+  imports: [MatIconModule],
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })

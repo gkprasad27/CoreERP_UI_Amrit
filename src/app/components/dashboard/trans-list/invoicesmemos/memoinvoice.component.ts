@@ -11,7 +11,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS, NonEditableDatepicker } from '../../../../directives/format-datepicker';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -28,7 +28,7 @@ import { TableComponent } from '../../../../reuse-components/table/table.compone
 
 @Component({
   selector: 'app-invoicesmemos',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, NgMultiSelectDropDownModule, TableComponent, TranslateModule, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
+  imports: [ReactiveFormsModule, TranslatePipe, NgMultiSelectDropDownModule, TableComponent, TranslateModule, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './memoinvoice.component.html',
   styleUrls: ['./memoinvoice.component.scss'],
   providers: [

@@ -11,9 +11,11 @@
           <mat-label [translate]="'hsnsac.code'"></mat-label>
           <input matInput formControlName="code" appFocusOnEnter
             tabIndex="1" maxlength="5">
-          <mat-error *ngIf="!formControls.code.valid &&formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
+          @if (!formControls.code.valid &&formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -21,8 +23,10 @@
           <mat-label [translate]="'hsnsac.description'"></mat-label>
           <input matInput formControlName="description"
             appFocusOnEnter tabIndex="2" maxlength="50">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Name is required</mat-error>
+          }
         </mat-form-field>
       </div>
       <mat-divider></mat-divider>

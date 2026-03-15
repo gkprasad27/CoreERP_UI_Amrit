@@ -1,141 +1,147 @@
 <div class="">
-    <!-- <mat-card-title class="table-boarder-color">
-            CTC Breakup
+  <!-- <mat-card-title class="table-boarder-color">
+  CTC Breakup
 
-        </mat-card-title> -->
-    <mat-card-content class="p-2 m-0 overflow-auto">
-        <form [formGroup]="modelFormData" autocomplete="off">
-            <div class="row">
+</mat-card-title> -->
+<mat-card-content class="p-2 m-0 overflow-auto">
+  <form [formGroup]="modelFormData" autocomplete="off">
+    <div class="row">
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'pfmaster.companyName'"></mat-label>
-                    <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1" >
-                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                            {{comp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'pfmaster.companyName'"></mat-label>
+        <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="1" >
+          @for (comp of companyList; track comp) {
+            <mat-option [value]="comp.id">
+              {{comp.text}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
-                    [class.filled]="modelFormData.value?.empCode?.length > 0">
-                    <label> {{ 'CTCBreakup.empCode' | translate }} </label>
-                    <input placeholder=" " formControlName="empCode"
-                        (input)="getctcEmployeeList($event.target.value)"
-                        [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray" typeaheadOptionField='id'
-                        appFocusOnEnter tabIndex="2" class="form-control typeahead"
-                        [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
-                        [typeaheadWaitMs]="200">
-                    <ng-template #customItemTemplate let-model="item">
-                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
-                    </ng-template>
-                </div>
+      <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+        [class.filled]="modelFormData.value?.empCode?.length > 0">
+        <label> {{ 'CTCBreakup.empCode' | translate }} </label>
+        <input placeholder=" " formControlName="empCode"
+          (input)="getctcEmployeeList($event.target.value)"
+          [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray" typeaheadOptionField='id'
+          appFocusOnEnter tabIndex="2" class="form-control typeahead"
+          [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
+          [typeaheadWaitMs]="200">
+        <ng-template #customItemTemplate let-model="item">
+          <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+        </ng-template>
+      </div>
 
-                <mat-form-field class="col-3">
-                    <mat-label>Effect From</mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
-                        placeholder="{{'CTCBreakup.effectFrom' | translate }}" formControlName="effectFrom"
-                        appFocusOnEnter tabIndex="3">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
+      <mat-form-field class="col-3">
+        <mat-label>Effect From</mat-label>
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
+          placeholder="{{'CTCBreakup.effectFrom' | translate }}" formControlName="effectFrom"
+          appFocusOnEnter tabIndex="3">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label>CTC</mat-label>
-                    <input matInput placeholder="{{'CTCBreakup.ctc' | translate }}" formControlName="ctc"
-                        appFocusOnEnter tabIndex="4">
-                </mat-form-field>
+      <mat-form-field class="col-3">
+        <mat-label>CTC</mat-label>
+        <input matInput placeholder="{{'CTCBreakup.ctc' | translate }}" formControlName="ctc"
+          appFocusOnEnter tabIndex="4">
+      </mat-form-field>
 
-                <!-- <mat-form-field class="col-3">
-                    <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label>
-                    <mat-select formControlName="structureName" placeholder="Structure Name" appFocusOnEnter>
-                        <mat-option *ngFor="let List of structureList" [value]="List.text">
-                            {{List.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
-                <mat-form-field class="col-3">
-                    <mat-label>PF Type</mat-label>
-                    <!-- <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label> -->
-                    <mat-select formControlName="pfType" placeholder="{{'CTCBreakup.pftype' | translate }}"
-                        appFocusOnEnter tabIndex="5">
-                        <mat-option *ngFor="let List of PfList" [value]="List.pfName">
-                            {{List.pfName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+      <!-- <mat-form-field class="col-3">
+      <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label>
+      <mat-select formControlName="structureName" placeholder="Structure Name" appFocusOnEnter>
+        <mat-option *ngFor="let List of structureList" [value]="List.text">
+          {{List.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <mat-form-field class="col-3">
+      <mat-label>PF Type</mat-label>
+      <!-- <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label> -->
+      <mat-select formControlName="pfType" placeholder="{{'CTCBreakup.pftype' | translate }}"
+        appFocusOnEnter tabIndex="5">
+        @for (List of PfList; track List) {
+          <mat-option [value]="List.pfName">
+            {{List.pfName}}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label>PT Slab</mat-label>
-                    <!-- <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label> -->
-                    <mat-select formControlName="ptSlab" placeholder="{{'CTCBreakup.ptslab' | translate }}"
-                        appFocusOnEnter tabIndex="6">
-                        <mat-option *ngFor="let List of PtList" [value]="List.ptslab">
-                            {{List.ptslab}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+    <mat-form-field class="col-3">
+      <mat-label>PT Slab</mat-label>
+      <!-- <mat-label>{{'CTCBreakup.structureName' | translate }}</mat-label> -->
+      <mat-select formControlName="ptSlab" placeholder="{{'CTCBreakup.ptslab' | translate }}"
+        appFocusOnEnter tabIndex="6">
+        @for (List of PtList; track List) {
+          <mat-option [value]="List.ptslab">
+            {{List.ptslab}}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
 
-                <div class="form-element p-2 d-flex justify-content-end align-items-center">
-                    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1"
-                        (click)="getctcComponentsList()" appFocusOnEnter tabIndex="5">
-                        {{ 'COMMON.CALCULATE' | translate }}
-                    </button>
-                </div>
-
-            </div>
-        </form>
-
-
-
-        <mat-card-content class="m-2">
-            <div>
-                <div class="table">
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
-
-                        <ng-container matColumnDef="componentCode">
-                            <th mat-header-cell *matHeaderCellDef> Component Code </th>
-                            <td mat-cell *matCellDef="let element;"> {{element.componentCode}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="componentName">
-                            <th mat-header-cell *matHeaderCellDef> Component Name </th>
-                            <td mat-cell *matCellDef="let element;"> {{element.componentName}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="EarnDednAmount">
-                            <th mat-header-cell *matHeaderCellDef> Amount </th>
-                            <td mat-cell *matCellDef="let element;">
-                                <input matInput [value]="element.EarnDednAmount" [(ngModel)]="element.EarnDednAmount" />
-                            </td>
-                        </ng-container>
-                        <ng-container matColumnDef="duration">
-                            <th mat-header-cell *matHeaderCellDef> Duration </th>
-                            <td mat-cell *matCellDef="let element;">
-                                <input matInput [value]="element.duration" [(ngModel)]="element.duration" />
-                            </td>
-                        </ng-container>
-                        <ng-container matColumnDef="specificMonth">
-                            <th mat-header-cell *matHeaderCellDef> Specific Month </th>
-                            <td mat-cell *matCellDef="let element;">
-                                <input matInput [value]="element.specificMonth" [(ngModel)]="element.specificMonth" />
-                            </td>
-                        </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card-content>
-
-    <div class="form-element mt-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-            {{ 'COMMON.CANCEL' | translate }}
-        </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
-            appFocusOnEnter tabIndex="5">
-
-            {{ 'COMMON.SAVE' | translate }}
-        </button>
+    <div class="form-element p-2 d-flex justify-content-end align-items-center">
+      <button mat-raised-button type="submit" class="button-color-bule text-white mx-1"
+        (click)="getctcComponentsList()" appFocusOnEnter tabIndex="5">
+        {{ 'COMMON.CALCULATE' | translate }}
+      </button>
     </div>
+
+  </div>
+</form>
+
+
+
+<mat-card-content class="m-2">
+  <div>
+    <div class="table">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+
+        <ng-container matColumnDef="componentCode">
+          <th mat-header-cell *matHeaderCellDef> Component Code </th>
+          <td mat-cell *matCellDef="let element;"> {{element.componentCode}} </td>
+        </ng-container>
+        <ng-container matColumnDef="componentName">
+          <th mat-header-cell *matHeaderCellDef> Component Name </th>
+          <td mat-cell *matCellDef="let element;"> {{element.componentName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="EarnDednAmount">
+          <th mat-header-cell *matHeaderCellDef> Amount </th>
+          <td mat-cell *matCellDef="let element;">
+            <input matInput [value]="element.EarnDednAmount" [(ngModel)]="element.EarnDednAmount" />
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="duration">
+          <th mat-header-cell *matHeaderCellDef> Duration </th>
+          <td mat-cell *matCellDef="let element;">
+            <input matInput [value]="element.duration" [(ngModel)]="element.duration" />
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="specificMonth">
+          <th mat-header-cell *matHeaderCellDef> Specific Month </th>
+          <td mat-cell *matCellDef="let element;">
+            <input matInput [value]="element.specificMonth" [(ngModel)]="element.specificMonth" />
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</mat-card-content>
+</mat-card-content>
+
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
+    appFocusOnEnter tabIndex="5">
+
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 
 
 

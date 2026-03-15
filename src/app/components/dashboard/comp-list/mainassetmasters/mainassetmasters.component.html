@@ -14,9 +14,11 @@
             <mat-form-field class="col-3">
               <mat-label [translate]="'mainassetmaster.company'"></mat-label>
               <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
-                <mat-option *ngFor="let comp of companyList" [value]="comp.companyCode">
-                  {{comp.companyCode}} - {{comp.companyName}}
-                </mat-option>
+                @for (comp of companyList; track comp) {
+                  <mat-option [value]="comp.companyCode">
+                    {{comp.companyCode}} - {{comp.companyName}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -24,9 +26,11 @@
               <mat-label [translate]="'mainassetmaster.assetclass'"></mat-label>
               <mat-select formControlName="assetclass" (selectionChange)="getassetNumberData()" appFocusOnEnter
                 tabIndex="2">
-                <mat-option *ngFor="let asset of assetList" [value]="asset.code">
-                  {{asset.code}} - {{asset.description}}
-                </mat-option>
+                @for (asset of assetList; track asset) {
+                  <mat-option [value]="asset.code">
+                    {{asset.code}} - {{asset.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -35,8 +39,10 @@
               <mat-label [translate]="'mainassetmaster.assetNumber'"></mat-label>
               <input matInput formControlName="assetNumber"
                 maxlength="7" (change)="onChange($event)" appFocusOnEnter tabIndex="3">
-              <mat-error *ngIf="!formControls.assetNumber.valid"
+              @if (!formControls.assetNumber.valid) {
+                <mat-error
                 [ngClass]="{ 'ng--invalid': !formControls.assetNumber.valid  }"> Code is required</mat-error>
+              }
             </mat-form-field>
 
             <mat-form-field class="col-3"
@@ -44,8 +50,10 @@
               <mat-label [translate]="'mainassetmaster.name'"></mat-label>
               <input matInput formControlName="name"
                 maxlength="50" appFocusOnEnter tabIndex="4">
-              <mat-error *ngIf="!formControls.name.valid" [ngClass]="{ 'ng--invalid': !formControls.name.valid  }"> Name
+              @if (!formControls.name.valid) {
+                <mat-error [ngClass]="{ 'ng--invalid': !formControls.name.valid  }"> Name
                 is required</mat-error>
+              }
             </mat-form-field>
 
             <mat-form-field class="col-3">
@@ -57,9 +65,11 @@
             <mat-form-field class="col-3">
               <mat-label [translate]="'mainassetmaster.accountKey'"></mat-label>
               <mat-select formControlName="accountKey" appFocusOnEnter tabIndex="6">
-                <mat-option *ngFor="let ackey of acckeyList" [value]="ackey.code">
-                  {{ackey.code}}- {{ackey.description}}
-                </mat-option>
+                @for (ackey of acckeyList; track ackey) {
+                  <mat-option [value]="ackey.code">
+                    {{ackey.code}}- {{ackey.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -84,54 +94,66 @@
             <mat-form-field class="col-3">
               <mat-label>{{'mainassetmaster.branch' | translate }}</mat-label>
               <mat-select formControlName="branch" appFocusOnEnter tabIndex="10">
-                <mat-option *ngFor="let branch of branchesList" [value]="branch.branchCode">
-                  {{branch.branchCode}} - {{branch.branchName}}
-                </mat-option>
+                @for (branch of branchesList; track branch) {
+                  <mat-option [value]="branch.branchCode">
+                    {{branch.branchCode}} - {{branch.branchName}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'mainassetmaster.profitCenter' | translate }}</mat-label>
               <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="11">
-                <mat-option *ngFor="let profit of profitCenterList" [value]="profit.code">
-                  {{profit.code}} - {{profit.description}}
-                </mat-option>
+                @for (profit of profitCenterList; track profit) {
+                  <mat-option [value]="profit.code">
+                    {{profit.code}} - {{profit.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'mainassetmaster.segment' | translate }}</mat-label>
               <mat-select formControlName="segment" appFocusOnEnter tabIndex="12">
-                <mat-option *ngFor="let seg of segmentList" [value]="seg.id">
-                  {{seg.id}} - {{seg.name}}
-                </mat-option>
+                @for (seg of segmentList; track seg) {
+                  <mat-option [value]="seg.id">
+                    {{seg.id}} - {{seg.name}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'mainassetmaster.division' | translate }}</mat-label>
               <mat-select formControlName="division" appFocusOnEnter tabIndex="13">
-                <mat-option *ngFor="let div of divisionsList" [value]="div.code">
-                  {{div.code}} - {{div.description}}
-                </mat-option>
+                @for (div of divisionsList; track div) {
+                  <mat-option [value]="div.code">
+                    {{div.code}} - {{div.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'mainassetmaster.plant' | translate }}</mat-label>
               <mat-select formControlName="plant" appFocusOnEnter tabIndex="14">
-                <mat-option *ngFor="let pnt of plantList" [value]="pnt.plantCode">
-                  {{pnt.plantCode}} - {{pnt.plantname}}
-                </mat-option>
+                @for (pnt of plantList; track pnt) {
+                  <mat-option [value]="pnt.plantCode">
+                    {{pnt.plantCode}} - {{pnt.plantname}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label>{{'mainassetmaster.location' | translate }}</mat-label>
               <mat-select formControlName="location" appFocusOnEnter tabIndex="15">
-                <mat-option *ngFor="let loc of locationList" [value]="loc.locationId">
-                  {{loc.locationId}} - {{loc.description}}
-                </mat-option>
+                @for (loc of locationList; track loc) {
+                  <mat-option [value]="loc.locationId">
+                    {{loc.locationId}} - {{loc.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -174,7 +196,7 @@
       </mat-tab>
       <mat-tab label="Depreciation Data">
         <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
-          [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
+        [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
       </mat-tab>
     </form>
 

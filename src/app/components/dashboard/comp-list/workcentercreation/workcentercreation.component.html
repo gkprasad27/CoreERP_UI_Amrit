@@ -13,9 +13,11 @@
               <mat-label [translate]="'workcentercreation.company'"></mat-label>
               <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                  {{comp.text}}
-                </mat-option>
+                @for (comp of companyList; track comp) {
+                  <mat-option [value]="comp.id">
+                    {{comp.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -23,9 +25,11 @@
               <mat-label [translate]="'workcentercreation.plant'"></mat-label>
               <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let plants of plantList" [value]="plants.id">
-                  {{plants.text}}
-                </mat-option>
+                @for (plants of plantList; track plants) {
+                  <mat-option [value]="plants.id">
+                    {{plants.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -33,9 +37,11 @@
               <mat-label [translate]="'workcentercreation.workcenterType'"></mat-label>
               <mat-select formControlName="workcenterType" appFocusOnEnter tabIndex="3">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let work of workCenterTypeList" [value]="work.id ">
-                  {{work.text}}
-                </mat-option>
+                @for (work of workCenterTypeList; track work) {
+                  <mat-option [value]="work.id ">
+                    {{work.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -66,9 +72,11 @@
               <mat-label [translate]="'workcentercreation.location'"></mat-label>
               <mat-select formControlName="location" appFocusOnEnter tabIndex="6">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let loc of locList" [value]="loc.id">
-                  {{loc.text}}
-                </mat-option>
+                @for (loc of locList; track loc) {
+                  <mat-option [value]="loc.id">
+                    {{loc.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -76,9 +84,11 @@
               <mat-label [translate]="'workcentercreation.person'"></mat-label>
               <mat-select formControlName="person" appFocusOnEnter tabIndex="7">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let emp of empList" [value]="emp.id">
-                  {{emp.id}}-{{emp.text}}
-                </mat-option>
+                @for (emp of empList; track emp) {
+                  <mat-option [value]="emp.id">
+                    {{emp.id}}-{{emp.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -87,9 +97,11 @@
               <mat-label [translate]="'workcentercreation.usage'"></mat-label>
               <mat-select formControlName="usage" appFocusOnEnter tabIndex="8">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let usage of usageList" [value]="usage.id">
-                  {{usage.text}}
-                </mat-option>
+                @for (usage of usageList; track usage) {
+                  <mat-option [value]="usage.id">
+                    {{usage.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 

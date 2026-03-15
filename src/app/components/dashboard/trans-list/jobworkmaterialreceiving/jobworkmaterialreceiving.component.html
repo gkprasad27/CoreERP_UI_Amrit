@@ -1,209 +1,221 @@
 <mat-card>
 
-    <mat-card-content>
+  <mat-card-content>
 
-        <form [formGroup]="formData" autocomplete="off">
+    <form [formGroup]="formData" autocomplete="off">
 
-            <h6>
-                Material Header
-            </h6>
+      <h6>
+        Material Header
+      </h6>
 
-            <div id="form" class="row p-1">
+      <div id="form" class="row p-1">
 
-                <mat-form-field class="col-3">
-                    <mat-label>{{ 'jobworkmaterialreceiving.company' | translate }}</mat-label>
-                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                            {{comp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label>{{ 'jobworkmaterialreceiving.company' | translate }}</mat-label>
+          <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+            <mat-option>None</mat-option>
+            @for (comp of companyList; track comp) {
+              <mat-option [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label>{{'jobworkmaterialreceiving.profitCenter' | translate }}</mat-label>
-                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
-                            {{pft.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label>{{'jobworkmaterialreceiving.profitCenter' | translate }}</mat-label>
+          <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
+            <mat-option>None</mat-option>
+            @for (pft of profitCenterList; track pft) {
+              <mat-option [value]="pft.id">
+                {{pft.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label>{{ 'jobworkmaterialreceiving.jobWorkNumber' | translate }}</mat-label>
-                    <mat-select formControlName="jobWorkNumber" (selectionChange)="ponoselect()" *ngIf="routeEdit == ''"
-                        appFocusOnEnter tabIndex="3">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let poNo of getJobworkListData" [value]="poNo.id">
-                            {{poNo.id}}
-                        </mat-option>
-                    </mat-select>
-                    <input *ngIf="routeEdit != ''" matInput type="text" readonly formControlName="jobWorkNumber"
-                        appFocusOnEnter tabIndex="4">
+        <mat-form-field class="col-3">
+          <mat-label>{{ 'jobworkmaterialreceiving.jobWorkNumber' | translate }}</mat-label>
+          @if (routeEdit == '') {
+            <mat-select formControlName="jobWorkNumber" (selectionChange)="ponoselect()"
+              appFocusOnEnter tabIndex="3">
+              <mat-option>None</mat-option>
+              @for (poNo of getJobworkListData; track poNo) {
+                <mat-option [value]="poNo.id">
+                  {{poNo.id}}
+                </mat-option>
+              }
+            </mat-select>
+          }
+          @if (routeEdit != '') {
+            <input matInput type="text" readonly formControlName="jobWorkNumber"
+              appFocusOnEnter tabIndex="4">
+          }
 
-                </mat-form-field>
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'jobworkmaterialreceiving.vendor'"></mat-label>
-                    <input matInput type="text" readonly formControlName="vendor" appFocusOnEnter tabIndex="5">
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'jobworkmaterialreceiving.vendor'"></mat-label>
+          <input matInput type="text" readonly formControlName="vendor" appFocusOnEnter tabIndex="5">
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'jobworkmaterialreceiving.vehicleNo'"></mat-label>
-                    <input matInput type="text" formControlName="vehicleNo" appFocusOnEnter tabIndex="7">
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'jobworkmaterialreceiving.vehicleNo'"></mat-label>
+          <input matInput type="text" formControlName="vehicleNo" appFocusOnEnter tabIndex="7">
+        </mat-form-field>
 
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'jobworkmaterialreceiving.receivedDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
-                        [nonEditable]="picker2" formControlName="receivedDate" appFocusOnEnter tabIndex="8">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'jobworkmaterialreceiving.receivedDate'"></mat-label>
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2"
+            [nonEditable]="picker2" formControlName="receivedDate" appFocusOnEnter tabIndex="8">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead typeahead floating-dropdown col-3"
-                    [class.filled]="formData.value?.receivedBy?.length > 0">
-                    <label> {{ 'jobworkmaterialreceiving.receivedBy' | translate }} </label>
-                    <input placeholder=" " formControlName="receivedBy" [typeaheadOptionsLimit]="100000" [typeahead]="employeesList"
-                        typeaheadOptionField='text' appFocusOnEnter tabIndex="9" class="form-control typeahead"
-                        [typeaheadItemTemplate]="customItemTemplate">
-                    <ng-template #customItemTemplate let-model="item">
-                        <span><strong>{{model.id}}</strong> - {{model.text}}</span>
-                    </ng-template>
-                </div>
-
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'jobworkmaterialreceiving.totalAmount'"></mat-label>
-                    <input matInput type="number" formControlName="totalAmount" appFocusOnEnter tabIndex="10">
-                </mat-form-field>
-
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'jobworkmaterialreceiving.lotNo'"></mat-label>
-                    <input matInput type="text" formControlName="lotNo" appFocusOnEnter tabIndex="11">
-                </mat-form-field>
-
-                <mat-form-field class="col-3">
-                    <mat-label [translate]="'jobworkmaterialreceiving.invoiceNumber'"></mat-label>
-                    <input matInput type="text" formControlName="invoiceNumber" appFocusOnEnter tabIndex="11">
-                </mat-form-field>
-
-
-                <div class="col-3">
-                    <label> {{ 'jobworkmaterialreceiving.mtcDocumentUpload' | translate }} </label>
-                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL"
-                            (uploadFile)="downLoadFile1($event)"
-                            (emitFilesList)="emitFilesList($event)"></app-file-upload>
-                </div>
-
-                <div class="col-3">
-                    <label id="invoice"> {{ 'jobworkmaterialreceiving.invoiceUpload' | translate }} </label>
-                    <app-file-upload [type]="'card'" [oldFileList]="formData.value.invoiceURL"
-                            (uploadFile)="downLoadFile1($event)"
-                            (emitFilesList)="emitFilesList1($event)"></app-file-upload>
-                </div>
-
-
+          <div class="mat-mdc-form-field typeahead typeahead floating-dropdown col-3"
+            [class.filled]="formData.value?.receivedBy?.length > 0">
+            <label> {{ 'jobworkmaterialreceiving.receivedBy' | translate }} </label>
+            <input placeholder=" " formControlName="receivedBy" [typeaheadOptionsLimit]="100000" [typeahead]="employeesList"
+              typeaheadOptionField='text' appFocusOnEnter tabIndex="9" class="form-control typeahead"
+              [typeaheadItemTemplate]="customItemTemplate">
+              <ng-template #customItemTemplate let-model="item">
+                <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+              </ng-template>
             </div>
+
+            <mat-form-field class="col-3">
+              <mat-label [translate]="'jobworkmaterialreceiving.totalAmount'"></mat-label>
+              <input matInput type="number" formControlName="totalAmount" appFocusOnEnter tabIndex="10">
+            </mat-form-field>
+
+            <mat-form-field class="col-3">
+              <mat-label [translate]="'jobworkmaterialreceiving.lotNo'"></mat-label>
+              <input matInput type="text" formControlName="lotNo" appFocusOnEnter tabIndex="11">
+            </mat-form-field>
+
+            <mat-form-field class="col-3">
+              <mat-label [translate]="'jobworkmaterialreceiving.invoiceNumber'"></mat-label>
+              <input matInput type="text" formControlName="invoiceNumber" appFocusOnEnter tabIndex="11">
+            </mat-form-field>
+
+
+            <div class="col-3">
+              <label> {{ 'jobworkmaterialreceiving.mtcDocumentUpload' | translate }} </label>
+              <app-file-upload [type]="'card'" [oldFileList]="formData.value.documentURL"
+                (uploadFile)="downLoadFile1($event)"
+              (emitFilesList)="emitFilesList($event)"></app-file-upload>
+            </div>
+
+            <div class="col-3">
+              <label id="invoice"> {{ 'jobworkmaterialreceiving.invoiceUpload' | translate }} </label>
+              <app-file-upload [type]="'card'" [oldFileList]="formData.value.invoiceURL"
+                (uploadFile)="downLoadFile1($event)"
+              (emitFilesList)="emitFilesList1($event)"></app-file-upload>
+            </div>
+
+
+          </div>
 
         </form>
 
         <div class="p-2 card">
 
-            <h6>
-                Material Details
-            </h6>
+          <h6>
+            Material Details
+          </h6>
 
-            <form [formGroup]="formData1" autocomplete="off">
+          <form [formGroup]="formData1" autocomplete="off">
 
 
 
-                <div class="row p-1">
+            <div class="row p-1">
 
-                        <mat-form-field class="col-3">
-                            <mat-label>{{ 'jobworkmaterialreceiving.materialCode' | translate }}</mat-label>
-                            <mat-select formControlName="materialCode" appFocusOnEnter tabIndex="12"
-                                (selectionChange)="materialCodeChange()">
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let material of materialCodeList" [value]="material.materialCode">
-                                    {{material.materialCode}} -- {{material.materialName}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
+              <mat-form-field class="col-3">
+                <mat-label>{{ 'jobworkmaterialreceiving.materialCode' | translate }}</mat-label>
+                <mat-select formControlName="materialCode" appFocusOnEnter tabIndex="12"
+                  (selectionChange)="materialCodeChange()">
+                  <mat-option>None</mat-option>
+                  @for (material of materialCodeList; track material) {
+                    <mat-option [value]="material.materialCode">
+                      {{material.materialCode}} -- {{material.materialName}}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
 
-                        <mat-form-field class="col-3">
-                            <mat-label [translate]="'jobworkmaterialreceiving.weight'"></mat-label>
-                            <input matInput readonly type="text" formControlName="weight" appFocusOnEnter tabIndex="13">
-                        </mat-form-field>
-                        <mat-form-field class="col-3">
-                            <mat-label [translate]="'jobworkmaterialreceiving.qty'"></mat-label>
-                            <input matInput type="text" readonly formControlName="qty" appFocusOnEnter tabIndex="14">
-                        </mat-form-field>
-                        <mat-form-field class="col-3">
-                            <mat-label [translate]="'jobworkmaterialreceiving.pendingQty'"></mat-label>
-                            <input matInput type="text" readonly formControlName="pendingQty" appFocusOnEnter
-                                tabIndex="15">
-                        </mat-form-field>
+              <mat-form-field class="col-3">
+                <mat-label [translate]="'jobworkmaterialreceiving.weight'"></mat-label>
+                <input matInput readonly type="text" formControlName="weight" appFocusOnEnter tabIndex="13">
+              </mat-form-field>
+              <mat-form-field class="col-3">
+                <mat-label [translate]="'jobworkmaterialreceiving.qty'"></mat-label>
+                <input matInput type="text" readonly formControlName="qty" appFocusOnEnter tabIndex="14">
+              </mat-form-field>
+              <mat-form-field class="col-3">
+                <mat-label [translate]="'jobworkmaterialreceiving.pendingQty'"></mat-label>
+                <input matInput type="text" readonly formControlName="pendingQty" appFocusOnEnter
+                  tabIndex="15">
+                </mat-form-field>
 
-                        <mat-form-field class="col-3">
-                            <mat-label [translate]="'jobworkmaterialreceiving.receivedQty'"></mat-label>
-                            <input matInput type="number" formControlName="receivedQty" appFocusOnEnter tabIndex="16">
-                        </mat-form-field>
+                <mat-form-field class="col-3">
+                  <mat-label [translate]="'jobworkmaterialreceiving.receivedQty'"></mat-label>
+                  <input matInput type="number" formControlName="receivedQty" appFocusOnEnter tabIndex="16">
+                </mat-form-field>
 
-                        <mat-form-field class="col-3">
-                            <mat-label [translate]="'jobworkmaterialreceiving.rejectQty'"></mat-label>
-                            <input matInput type="number" formControlName="rejectQty" appFocusOnEnter tabIndex="17">
-                        </mat-form-field>
+                <mat-form-field class="col-3">
+                  <mat-label [translate]="'jobworkmaterialreceiving.rejectQty'"></mat-label>
+                  <input matInput type="number" formControlName="rejectQty" appFocusOnEnter tabIndex="17">
+                </mat-form-field>
 
-                        <mat-form-field class="col-3">
-                            <mat-label [translate]="'jobworkmaterialreceiving.heatNumber'"></mat-label>
-                            <input matInput type="text" formControlName="heatNumber" appFocusOnEnter tabIndex="18">
-                        </mat-form-field>
+                <mat-form-field class="col-3">
+                  <mat-label [translate]="'jobworkmaterialreceiving.heatNumber'"></mat-label>
+                  <input matInput type="text" formControlName="heatNumber" appFocusOnEnter tabIndex="18">
+                </mat-form-field>
 
-                </div>
+              </div>
 
-                <div id="for" class="d-flex justify-content-end mb-3">
+              <div id="for" class="d-flex justify-content-end mb-3">
 
-                        <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
-                            (click)="saveForm()"><i class="fa-solid fa-circle-plus"></i>
-                            {{ 'COMMON.ADD' | translate }}
-                        </button>
-                        <button mat-raised-button id="reset" class="button-color-red text-white mx-1"
-                            (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
-                            {{ 'COMMON.RESET' | translate }}
-                        </button>
+                <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
+                  (click)="saveForm()"><i class="fa-solid fa-circle-plus"></i>
+                  {{ 'COMMON.ADD' | translate }}
+                </button>
+                <button mat-raised-button id="reset" class="button-color-red text-white mx-1"
+                  (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
+                  {{ 'COMMON.RESET' | translate }}
+                </button>
 
-                    </div>
+              </div>
 
             </form>
 
             <div>
-                <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
-                    (editOrDeleteEvent)="editOrDeleteEvent($event)" (onLinkEmitEvent)="downLoadFile($event)">
-                </app-table>
+              <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
+                (editOrDeleteEvent)="editOrDeleteEvent($event)" (onLinkEmitEvent)="downLoadFile($event)">
+              </app-table>
             </div>
-        </div>
+          </div>
 
-    </mat-card-content>
+        </mat-card-content>
 
-    <mat-card-content class="d-flex justify-content-end py-1">
+        <mat-card-content class="d-flex justify-content-end py-1">
 
-        <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i
-                class="fa-solid fa-floppy-disk"></i>
-            {{ 'COMMON.SAVE' | translate }}
+          <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i
+          class="fa-solid fa-floppy-disk"></i>
+          {{ 'COMMON.SAVE' | translate }}
         </button>
         <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
-            {{ 'COMMON.BACK' | translate }}
+          {{ 'COMMON.BACK' | translate }}
         </button>
         <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
-            (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
-            {{ 'COMMON.RESET' | translate }}
+          (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
+          {{ 'COMMON.RESET' | translate }}
         </button>
         <!-- <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
-            (click)="return();">
-            {{ 'COMMON.RETURN' | translate }}
-        </button> -->
+        (click)="return();">
+        {{ 'COMMON.RETURN' | translate }}
+      </button> -->
 
     </mat-card-content>
 
-</mat-card>
+  </mat-card>

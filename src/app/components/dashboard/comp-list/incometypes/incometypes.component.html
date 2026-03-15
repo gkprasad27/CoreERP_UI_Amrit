@@ -13,9 +13,11 @@
           <mat-label [translate]="'incometypes.code'"></mat-label>
           <input matInput formControlName="code" maxlength="5"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid  &&formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
+          @if (!formControls.code.valid  &&formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -23,8 +25,10 @@
           <mat-label [translate]="'incometypes.desctiption'"></mat-label>
           <input matInput formControlName="desctiption"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.desctiption.valid"
+          @if (!formControls.desctiption.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.desctiption.valid  }">Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">

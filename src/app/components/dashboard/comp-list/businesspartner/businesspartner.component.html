@@ -13,9 +13,11 @@
               <mat-label [translate]="'glaccount.company'"></mat-label>
               <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                  {{comp.text}}
-                </mat-option>
+                @for (comp of companyList; track comp) {
+                  <mat-option [value]="comp.id">
+                    {{comp.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -23,9 +25,11 @@
               <mat-label [translate]="'businesspartner.bptype'"></mat-label>
               <mat-select formControlName="bptype" appFocusOnEnter tabIndex="2" (selectionChange)="onbpChange()">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let bptype of ptypeList" [value]="bptype.code">
-                  {{bptype.description}}
-                </mat-option>
+                @for (bptype of ptypeList; track bptype) {
+                  <mat-option [value]="bptype.code">
+                    {{bptype.description}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -33,9 +37,11 @@
               <mat-label [translate]="'businesspartner.bpgroup'"></mat-label>
               <mat-select formControlName="bpgroup" (selectionChange)="getBPNumberData()" appFocusOnEnter tabIndex="3">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let bpg of bpgLists" [value]="bpg.id">
-                  {{bpg.text}}
-                </mat-option>
+                @for (bpg of bpgLists; track bpg) {
+                  <mat-option [value]="bpg.id">
+                    {{bpg.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -78,9 +84,11 @@
               <mat-label>{{'businesspartner.state' | translate }}</mat-label>
               <mat-select formControlName="state" appFocusOnEnter tabIndex="12">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let state of stateList" [value]="state.id">
-                  {{state.text}}
-                </mat-option>
+                @for (state of stateList; track state) {
+                  <mat-option [value]="state.id">
+                    {{state.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -88,9 +96,11 @@
               <mat-label>{{'businesspartner.region' | translate }}</mat-label>
               <mat-select formControlName="region" appFocusOnEnter tabIndex="13">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let rgn of regionsList" [value]="rgn.id">
-                  {{rgn.text}}
-                </mat-option>
+                @for (rgn of regionsList; track rgn) {
+                  <mat-option [value]="rgn.id">
+                    {{rgn.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -98,9 +108,11 @@
               <mat-label>{{'businesspartner.country' | translate }}</mat-label>
               <mat-select formControlName="country" appFocusOnEnter tabIndex="14">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let cntry of countrysList" [value]="cntry.id">
-                  {{cntry.text}}
-                </mat-option>
+                @for (cntry of countrysList; track cntry) {
+                  <mat-option [value]="cntry.id">
+                    {{cntry.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -148,9 +160,11 @@
               <mat-label [translate]="'businesspartner.taxClassification'"></mat-label>
               <mat-select formControlName="taxClassification" appFocusOnEnter tabIndex="21">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let act of taxClassification" [value]="act.value">
-                  {{act.viewValue}}
-                </mat-option>
+                @for (act of taxClassification; track act) {
+                  <mat-option [value]="act.value">
+                    {{act.viewValue}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -166,9 +180,11 @@
               <mat-label [translate]="'businesspartner.controlAccount'"></mat-label>
               <mat-select formControlName="controlAccount" appFocusOnEnter tabIndex="22">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let act of controlAccountList" [value]="act.id">
-                  {{act.id}} - {{act.text}}
-                </mat-option>
+                @for (act of controlAccountList; track act) {
+                  <mat-option [value]="act.id">
+                    {{act.id}} - {{act.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -176,9 +192,11 @@
               <mat-label>{{'businesspartner.paymentTerms' | translate }}</mat-label>
               <mat-select formControlName="paymentTerms" appFocusOnEnter tabIndex="23">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let pterms of ptermsList" [value]="pterms.id">
-                  {{pterms.text}}
-                </mat-option>
+                @for (pterms of ptermsList; track pterms) {
+                  <mat-option [value]="pterms.id">
+                    {{pterms.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -194,18 +212,22 @@
               <mat-label>{{'businesspartner.tdstype' | translate }}</mat-label>
               <mat-select formControlName="tdstype" appFocusOnEnter tabIndex="24">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let tds of tdsList" [value]="tds.tdsCode">
-                  {{tds.desctiption}}
-                </mat-option>
+                @for (tds of tdsList; track tds) {
+                  <mat-option [value]="tds.tdsCode">
+                    {{tds.desctiption}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
             <mat-form-field class="col-3">
               <mat-label>{{'businesspartner.tdsrate' | translate }}</mat-label>
               <mat-select formControlName="tdsrate" appFocusOnEnter tabIndex="25">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let tdsrate of tdsratesList" [value]="tdsrate.id">
-                  {{tdsrate.text}}
-                </mat-option>
+                @for (tdsrate of tdsratesList; track tdsrate) {
+                  <mat-option [value]="tdsrate.id">
+                    {{tdsrate.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -265,7 +287,7 @@
               <mat-label [translate]="'businesspartner.closingBalance'"></mat-label>
               <input matInput formControlName="closingBalance" maxlength="50" appFocusOnEnter tabIndex="36">
             </mat-form-field>
-            
+
           </div>
         </mat-card-content>
 

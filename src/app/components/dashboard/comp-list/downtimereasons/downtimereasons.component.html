@@ -14,8 +14,10 @@
           <mat-label [translate]="'downtimereasons.reasonCode'"></mat-label>
           <input matInput  formControlName="reasonCode"
             maxlength="5" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.reasonCode.valid && formControls.reasonCode.status != 'DISABLED'"
+          @if (!formControls.reasonCode.valid && formControls.reasonCode.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.reasonCode.valid  }">Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -23,17 +25,21 @@
           <mat-label [translate]="'downtimereasons.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Description is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'downtimereasons.type' | translate }}</mat-label>
           <mat-select formControlName="type" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let type of Type" [value]="type.value">
-              {{type.viewValue}}
-            </mat-option>
+            @for (type of Type; track type) {
+              <mat-option [value]="type.value">
+                {{type.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

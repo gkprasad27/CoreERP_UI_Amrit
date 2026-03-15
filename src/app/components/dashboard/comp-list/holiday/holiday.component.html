@@ -7,28 +7,36 @@
     <form [formGroup]="modelFormData" autocomplete="off">
 
       <div class="row">
-        
+
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.holidayName.valid }">
           <input matInput placeholder="{{'holiday.holidayName' | translate }}" formControlName="holidayName"
-                 appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="formControls.holidayName.errors" class="help-block">
-            <div *ngIf="formControls.holidayName.errors.required">Name is required</div>
-          </mat-error>
+            appFocusOnEnter tabIndex="1">
+          @if (formControls.holidayName.errors) {
+            <mat-error class="help-block">
+              @if (formControls.holidayName.errors.required) {
+                <div>Name is required</div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
-              <mat-form-field class="col-3">
+        <mat-form-field class="col-3">
           <input matInput placeholder="{{'holiday.narration' | translate }}"
-                 formControlName="narration" appFocusOnEnter tabIndex="3">
+            formControlName="narration" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <input matInput [matDatepicker]="picker1" placeholder="{{'holiday.date' | translate }}" formControlName="date" [ngClass]="{ 'ng--valid': formControls.date.valid }">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
-          <mat-error *ngIf="formControls.date.errors" class="help-block">
-            <div *ngIf="formControls.date.errors.required">Date is required</div>
-          </mat-error>
+          @if (formControls.date.errors) {
+            <mat-error class="help-block">
+              @if (formControls.date.errors.required) {
+                <div>Date is required</div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
       </div>
@@ -40,7 +48,7 @@
           {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
-                appFocusOnEnter tabIndex="5">
+          appFocusOnEnter tabIndex="5">
 
           {{ 'COMMON.SAVE' | translate }}
         </button>

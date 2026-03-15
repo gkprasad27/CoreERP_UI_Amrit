@@ -7,16 +7,16 @@
       <h6>
         Saleorder Master
         <hr>
-      </h6>
+        </h6>
 
-      <div class="row p-1">
+        <div class="row p-1">
 
         <mat-form-field class="col-2" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
              'ng--invalid': !formControls.code.valid&& formControls.code.status != 'DISABLED'  }">
-          <mat-label [translate]="'standardrateoutput.code'"></mat-label>
-          <input matInput formControlName="code" readonly appFocusOnEnter tabIndex="1">
-          <!-- <mat-error *ngIf="!formControls.code.valid && formControls.code.status != 'DISABLED'"
-              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is required</mat-error> -->
+            <mat-label [translate]="'standardrateoutput.code'"></mat-label>
+            <input matInput formControlName="code" readonly appFocusOnEnter tabIndex="1">
+            <!-- <mat-error *ngIf="!formControls.code.valid && formControls.code.status != 'DISABLED'"
+          [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is required</mat-error> -->
 
         </mat-form-field>
 
@@ -25,48 +25,54 @@
           <mat-select formControlName="type" appFocusOnEnter tabIndex="3"
             (selectionChange)="getCommitmentList(formData.value.type)">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let type of Type" [value]="type.value">
-              {{type.viewValue}}
-            </mat-option>
+            @for (type of Type; track type) {
+              <mat-option [value]="type.value">
+                {{type.viewValue}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.type.valid && formControls.type.status != 'DISABLED'"
+          @if (!formControls.type.valid && formControls.type.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.type.valid  }">Type is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-2">
           <mat-label>{{'qcparamconfiguration.product' | translate }}</mat-label>
           <mat-select formControlName="product" appFocusOnEnter tabIndex="3" (selectionChange)="onProductChange()">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let type of ProductType" [value]="type.value">
-              {{type.viewValue}}
-            </mat-option>
+            @for (type of ProductType; track type) {
+              <mat-option [value]="type.value">
+                {{type.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-2">
           <!-- <input readonly placeholder="{{ 'standardrateoutput.materialCode' | translate }}" formControlName="materialCode"
-              [typeaheadOptionsLimit]="100000" [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
-              class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
-            <ng-template #customItemTemplate let-model="item">
-              <span><strong>{{model.id}}</strong> - {{model.text}}</span>
-            </ng-template> -->
-                      <mat-label [translate]="'standardrateoutput.materialCode'"></mat-label>
+          [typeaheadOptionsLimit]="100000" [typeahead]="materialList" typeaheadOptionField='id' appFocusOnEnter tabIndex="9"
+          class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate">
+          <ng-template #customItemTemplate let-model="item">
+            <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+          </ng-template> -->
+          <mat-label [translate]="'standardrateoutput.materialCode'"></mat-label>
 
           <input matInput formControlName="materialCode" readonly appFocusOnEnter tabIndex="1">
           <!-- <mat-error *ngIf="!formControls.materialCode.valid && formControls.materialCode.status != 'DISABLED'"
-              [ngClass]="{ 'ng--invalid': !formControls.materialCode.valid  }">Material Code is required</mat-error> -->
-        </mat-form-field>
+        [ngClass]="{ 'ng--invalid': !formControls.materialCode.valid  }">Material Code is required</mat-error> -->
+      </mat-form-field>
 
 
-      </div>
+    </div>
 
-    </form>
+  </form>
 
-    <div class="p-2 card">
+  <div class="p-2 card">
 
-      <h6>
-        Saleorder Details
-        <hr>
+    <h6>
+      Saleorder Details
+      <hr>
       </h6>
 
       <form [formGroup]="formData1" autocomplete="off">
@@ -100,9 +106,11 @@
             <mat-label>{{'standardrateoutput.uom' | translate }}</mat-label>
             <mat-select formControlName="uom" appFocusOnEnter tabIndex="3">
               <mat-option>None</mat-option>
-              <mat-option *ngFor="let size of msizeList" [value]="size.unitId">
-                {{size.unitName}}
-              </mat-option>
+              @for (size of msizeList; track size) {
+                <mat-option [value]="size.unitId">
+                  {{size.unitName}}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
 
@@ -110,9 +118,11 @@
             <mat-label [translate]="'standardrateoutput.instrument'"></mat-label>
             <mat-select formControlName="instrument" appFocusOnEnter tabIndex="3">
               <mat-option>None</mat-option>
-              <mat-option *ngFor="let instrument of instruments" [value]="instrument.description">
-                {{instrument.description}}
-              </mat-option>
+              @for (instrument of instruments; track instrument) {
+                <mat-option [value]="instrument.description">
+                  {{instrument.description}}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
 
@@ -144,15 +154,15 @@
   <mat-card-content class="d-flex justify-content-end py-1">
 
     <!-- <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
-        {{ 'COMMON.SAVE' | translate }}
-      </button>
-      <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
-        {{ 'COMMON.BACK' | translate }}
-      </button> -->
-    <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();">
-      {{ 'COMMON.RESET' | translate }}
-    </button>
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+  <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+    {{ 'COMMON.BACK' | translate }}
+  </button> -->
+  <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();">
+    {{ 'COMMON.RESET' | translate }}
+  </button>
 
-  </mat-card-content>
+</mat-card-content>
 
 </mat-card>

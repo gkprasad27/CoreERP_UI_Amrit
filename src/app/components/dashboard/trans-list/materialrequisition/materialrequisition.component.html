@@ -8,221 +8,225 @@
 
     <!-- <form [formGroup]="formData" autocomplete="off">
 
-      <div class="d--flex p-1 mat-form-field-height">
+    <div class="d--flex p-1 mat-form-field-height">
 
-        <mat-form-field class="form-element">
-          <mat-label>{{ 'materialrequisition.company' | translate }}</mat-label>
-          <mat-select formControlName="company" tabIndex="1">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field class="form-element">
+        <mat-label>{{ 'materialrequisition.company' | translate }}</mat-label>
+        <mat-select formControlName="company" tabIndex="1">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+            {{comp.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{'materialrequisition.plant' | translate }}</mat-label>
-          <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let plant of plantList" [value]="plant.id">
-              {{plant.text}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'materialrequisition.plant' | translate }}</mat-label>
+        <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let plant of plantList" [value]="plant.id">
+            {{plant.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{'materialrequisition.branch' | translate }}</mat-label>
-          <mat-select formControlName="branch" appFocusOnEnter tabIndex="3">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let branch of branchList" [value]="branch.id">
-              {{branch.text}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'materialrequisition.branch' | translate }}</mat-label>
+        <mat-select formControlName="branch" appFocusOnEnter tabIndex="3">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let branch of branchList" [value]="branch.id">
+            {{branch.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{'materialrequisition.department' | translate }}</mat-label>
-          <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let dept of fdeptList" [value]="dept.code">
-              {{dept.description}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-
-        <mat-form-field>
-          <mat-label [translate]="'materialrequisition.project'"></mat-label>
-          <mat-select formControlName="project" appFocusOnEnter tabIndex="1">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let costUnit of costunitList" [value]="costUnit.id">
-              {{costUnit.text}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="form-element">
-          <mat-label [translate]="'materialrequisition.bomorderNumber'"></mat-label>
-          <input matInput formControlName="bomorderNumber" appFocusOnEnter tabIndex="7">
-        </mat-form-field>
-
-        <mat-form-field class="form-element">
-          <mat-label [translate]="'materialrequisition.requisitionNmber'"></mat-label>
-          <input matInput formControlName="requisitionNmber" appFocusOnEnter tabIndex="7">
-        </mat-form-field>
-
-        <mat-form-field class="form-element">
-          <mat-label [translate]="'materialrequisition.requisitionDate'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="requisitionDate"
-            appFocusOnEnter tabIndex="3">
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'materialrequisition.department' | translate }}</mat-label>
+        <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let dept of fdeptList" [value]="dept.code">
+            {{dept.description}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
 
+      <mat-form-field>
+        <mat-label [translate]="'materialrequisition.project'"></mat-label>
+        <mat-select formControlName="project" appFocusOnEnter tabIndex="1">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let costUnit of costunitList" [value]="costUnit.id">
+            {{costUnit.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      </div>
-    </form> -->
+      <mat-form-field class="form-element">
+        <mat-label [translate]="'materialrequisition.bomorderNumber'"></mat-label>
+        <input matInput formControlName="bomorderNumber" appFocusOnEnter tabIndex="7">
+      </mat-form-field>
 
-    <div>
-      <!-- <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
-        [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table> -->
-      <app-table class="table-css" [tableData]="tableData" [showButtons]="false" (onEditEmit)="onEditEmit($event)">
-      </app-table>
+      <mat-form-field class="form-element">
+        <mat-label [translate]="'materialrequisition.requisitionNmber'"></mat-label>
+        <input matInput formControlName="requisitionNmber" appFocusOnEnter tabIndex="7">
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label [translate]="'materialrequisition.requisitionDate'"></mat-label>
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="requisitionDate"
+          appFocusOnEnter tabIndex="3">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+
+
     </div>
+  </form> -->
+
+  <div>
+    <!-- <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
+  [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table> -->
+  <app-table class="table-css" [tableData]="tableData" [showButtons]="false" (onEditEmit)="onEditEmit($event)">
+  </app-table>
+</div>
 
 
-    <div class="p-2 card">
+<div class="p-2 card">
 
-       <h6>  Production Details </h6> 
-
-
-    <form [formGroup]="formData1" autocomplete="off" >
+  <h6>  Production Details </h6>
 
 
-
-     <div class="row p-1">
-
-
-          <div class="multiselect-dropdown-list floating-dropdown col-2"
-            [class.filled]="formData1.value?.typeofWork?.length > 0">
-            <label> {{ 'materialrequisition.typeofWork' | translate }} </label>
-            <ng-multiselect-dropdown placeholder=" " formControlName="typeofWork" [settings]="dropdownSettings"
-              [data]="citemList">
-            </ng-multiselect-dropdown>
-          </div>
-
-          <div class="multiselect-dropdown-list floating-dropdown col-2"
-            [class.filled]="formData1.value?.allocatedPerson?.length > 0">
-            <label> {{ 'materialrequisition.allocatedPerson' | translate }} </label>
-            <ng-multiselect-dropdown placeholder=" " formControlName="allocatedPerson" [settings]="dropdownSettings1"
-              [data]="employeesList">
-            </ng-multiselect-dropdown>
-          </div>
-
-          <mat-form-field class="col-2">
-            <mat-label>{{'materialrequisition.mechine' | translate }}</mat-label>
-            <mat-select formControlName="mechine" appFocusOnEnter tabIndex="3">
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="let emp of mechenaryList" [value]="emp.description">
-                {{emp.description}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="col-2">
-            <mat-label>{{'materialrequisition.startDate' | translate }}</mat-label>
-
-            <input matInput  [matDatepicker]="picker1" tabIndex="4"
-              placeholder="{{'materialrequisition.startDate' | translate }}" formControlName="startDate">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field class="col-2">
-            <mat-label>{{'materialrequisition.endDate' | translate }}</mat-label>
-
-            <input matInput  [matDatepicker]="picker2" tabIndex="5"
-              placeholder="{{'materialrequisition.endDate' | translate }}" formControlName="endDate">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field  class="col-2">
-            <mat-label [translate]="'materialrequisition.remarks'"></mat-label>
-            <input matInput formControlName="remarks" appFocusOnEnter tabIndex="4">
-          </mat-form-field>
-
-          <div class="multiselect-dropdown-list floating-dropdown col-2"
-            [class.filled]="formData1.value?.workStatus?.length > 0">
-            <label> {{ 'materialrequisition.workStatus' | translate }} </label>
-            <ng-multiselect-dropdown placeholder=" " formControlName="workStatus" [settings]="dropdownSettings2"
-              [data]="statusList">
-            </ng-multiselect-dropdown>
-          </div>
-
-          <mat-form-field  class="col-2">
-            <mat-label [translate]="'materialrequisition.productionPlanDate'"></mat-label>
-            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"
-              appFocusOnEnter tabIndex="11">
-            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-            <mat-datepicker #picker3></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field  class="col-2">
-            <mat-label [translate]="'materialrequisition.productionTargetDate'"></mat-label>
-            <input matInput  [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
-              appFocusOnEnter tabIndex="12">
-            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-            <mat-datepicker #picker4></mat-datepicker>
-          </mat-form-field>
-          <div *ngIf="filePath" class="col-2 d-flex flex-column justify-content-center">
-            <b> {{ 'inspectioncheck.designDocument' | translate }} </b>
-            <span class="underscore" (click)="downLoadFile()"> {{ filePath }} </span>
-          </div>
+  <form [formGroup]="formData1" autocomplete="off" >
 
 
 
+    <div class="row p-1">
 
 
+      <div class="multiselect-dropdown-list floating-dropdown col-2"
+        [class.filled]="formData1.value?.typeofWork?.length > 0">
+        <label> {{ 'materialrequisition.typeofWork' | translate }} </label>
+        <ng-multiselect-dropdown placeholder=" " formControlName="typeofWork" [settings]="dropdownSettings"
+          [data]="citemList">
+        </ng-multiselect-dropdown>
       </div>
 
-       <div  id="for" class="d-flex justify-content-end mb-3">
-
-        <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
-          {{ 'COMMON.UPDATE' | translate }}
-        </button>
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
-          {{ 'COMMON.RESET' | translate }}
-        </button>
-
+      <div class="multiselect-dropdown-list floating-dropdown col-2"
+        [class.filled]="formData1.value?.allocatedPerson?.length > 0">
+        <label> {{ 'materialrequisition.allocatedPerson' | translate }} </label>
+        <ng-multiselect-dropdown placeholder=" " formControlName="allocatedPerson" [settings]="dropdownSettings1"
+          [data]="employeesList">
+        </ng-multiselect-dropdown>
       </div>
 
+      <mat-form-field class="col-2">
+        <mat-label>{{'materialrequisition.mechine' | translate }}</mat-label>
+        <mat-select formControlName="mechine" appFocusOnEnter tabIndex="3">
+          <mat-option>None</mat-option>
+          @for (emp of mechenaryList; track emp) {
+            <mat-option [value]="emp.description">
+              {{emp.description}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-2">
+        <mat-label>{{'materialrequisition.startDate' | translate }}</mat-label>
 
-    </form>
+        <input matInput  [matDatepicker]="picker1" tabIndex="4"
+          placeholder="{{'materialrequisition.startDate' | translate }}" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="col-2">
+        <mat-label>{{'materialrequisition.endDate' | translate }}</mat-label>
 
-    <div>
-      <app-table #tableRef class="table-css" [tableData]="tableData1" [showButtons]="false"
-        (editOrDeleteEvent)="editOrDeleteEvent($event)">
-      </app-table>
-    </div>
+        <input matInput  [matDatepicker]="picker2" tabIndex="5"
+          placeholder="{{'materialrequisition.endDate' | translate }}" formControlName="endDate">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field  class="col-2">
+        <mat-label [translate]="'materialrequisition.remarks'"></mat-label>
+        <input matInput formControlName="remarks" appFocusOnEnter tabIndex="4">
+      </mat-form-field>
+
+      <div class="multiselect-dropdown-list floating-dropdown col-2"
+        [class.filled]="formData1.value?.workStatus?.length > 0">
+        <label> {{ 'materialrequisition.workStatus' | translate }} </label>
+        <ng-multiselect-dropdown placeholder=" " formControlName="workStatus" [settings]="dropdownSettings2"
+          [data]="statusList">
+        </ng-multiselect-dropdown>
+      </div>
+
+      <mat-form-field  class="col-2">
+        <mat-label [translate]="'materialrequisition.productionPlanDate'"></mat-label>
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="productionPlanDate"
+          appFocusOnEnter tabIndex="11">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field  class="col-2">
+        <mat-label [translate]="'materialrequisition.productionTargetDate'"></mat-label>
+        <input matInput  [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
+          appFocusOnEnter tabIndex="12">
+        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+        <mat-datepicker #picker4></mat-datepicker>
+      </mat-form-field>
+      @if (filePath) {
+        <div class="col-2 d-flex flex-column justify-content-center">
+          <b> {{ 'inspectioncheck.designDocument' | translate }} </b>
+          <span class="underscore" (click)="downLoadFile()"> {{ filePath }} </span>
+        </div>
+      }
+
+
+
+
 
     </div>
 
-  </mat-card-content>
-  <mat-card-content class="d-flex justify-content-end py-1">
+    <div  id="for" class="d-flex justify-content-end mb-3">
 
-    <div>
-      <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
-        {{ 'COMMON.SAVE' | translate }}
+      <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
+        {{ 'COMMON.UPDATE' | translate }}
       </button>
-      <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();">
+      <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
         {{ 'COMMON.RESET' | translate }}
       </button>
-      <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
-        {{ 'COMMON.BACK' | translate }}
-      </button>
-      <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3" (click)="return();">
-        {{ 'COMMON.RETURN' | translate }}
-      </button>
+
     </div>
 
-  </mat-card-content>
+
+  </form>
+
+  <div>
+    <app-table #tableRef class="table-css" [tableData]="tableData1" [showButtons]="false"
+      (editOrDeleteEvent)="editOrDeleteEvent($event)">
+    </app-table>
+  </div>
+
+</div>
+
+</mat-card-content>
+<mat-card-content class="d-flex justify-content-end py-1">
+
+  <div>
+    <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+    <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();">
+      {{ 'COMMON.RESET' | translate }}
+    </button>
+    <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+      {{ 'COMMON.BACK' | translate }}
+    </button>
+    <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3" (click)="return();">
+      {{ 'COMMON.RETURN' | translate }}
+    </button>
+  </div>
+
+</mat-card-content>
 
 </mat-card>

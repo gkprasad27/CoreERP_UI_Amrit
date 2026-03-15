@@ -14,13 +14,17 @@
           <mat-label>{{'ginassignment.ginseries' | translate }}</mat-label>
           <mat-select formControlName="ginseries" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let issueno of issuenoList" [value]="issueno.ginseries">
-              {{issueno.description}}
-            </mat-option>
+            @for (issueno of issuenoList; track issueno) {
+              <mat-option [value]="issueno.ginseries">
+                {{issueno.description}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.ginseries.valid && formControls.ginseries.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.ginseries.valid  }">
+          @if (!formControls.ginseries.valid && formControls.ginseries.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.ginseries.valid  }">
             GIN Series is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -28,21 +32,27 @@
           <mat-label>{{'ginassignment.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let company of companiesList" [value]="company.id">
-              {{company.text}}
-            </mat-option>
+            @for (company of companiesList; track company) {
+              <mat-option [value]="company.id">
+                {{company.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.company.valid" [ngClass]="{ 'ng--invalid': !formControls.company.valid  }">
+          @if (!formControls.company.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.company.valid  }">
             Company is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'ginassignment.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plant of plantsList" [value]="plant.id">
-              {{plant.text}}
-            </mat-option>
+            @for (plant of plantsList; track plant) {
+              <mat-option [value]="plant.id">
+                {{plant.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -50,9 +60,11 @@
           <mat-label>{{'ginassignment.materilaType' | translate }}</mat-label>
           <mat-select formControlName="materilaType" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let mtype of matypeList" [value]="mtype.code">
-              {{mtype.description}}
-            </mat-option>
+            @for (mtype of matypeList; track mtype) {
+              <mat-option [value]="mtype.code">
+                {{mtype.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

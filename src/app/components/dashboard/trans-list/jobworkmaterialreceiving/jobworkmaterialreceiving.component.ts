@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -31,7 +31,7 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @Component({
   selector: 'app-jobworkmaterialreceiving',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, NonEditableDatepicker, TranslateModule, TypeaheadModule, FileUploadComponent, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ReactiveFormsModule, TranslatePipe, NonEditableDatepicker, TranslateModule, TypeaheadModule, FileUploadComponent, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './jobworkmaterialreceiving.component.html',
   styleUrls: ['./jobworkmaterialreceiving.component.scss'],
   providers: [

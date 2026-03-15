@@ -7,29 +7,33 @@
     <form [formGroup]="modelFormData" autocomplete="off">
 
       <div class="row">
-        
+
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.designationName.valid }">
           <input matInput placeholder="{{'designation.designationName' | translate }}" formControlName="designationName"
-                 appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="formControls.designationName.errors" class="help-block">
-            <div *ngIf="formControls.designationName.errors.required">Name is required</div>
-          </mat-error>
+            appFocusOnEnter tabIndex="1">
+          @if (formControls.designationName.errors) {
+            <mat-error class="help-block">
+              @if (formControls.designationName.errors.required) {
+                <div>Name is required</div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <input matInput placeholder="{{'designation.leaveDays' | translate }}"
-                 formControlName="leaveDays" appFocusOnEnter tabIndex="2">
+            formControlName="leaveDays" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <input matInput placeholder="{{'designation.advanceAmount' | translate }}"
-                 formControlName="advanceAmount" appFocusOnEnter tabIndex="3">
+            formControlName="advanceAmount" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <input matInput placeholder="{{'designation.narration' | translate }}"
-                 formControlName="narration" appFocusOnEnter tabIndex="3">
+            formControlName="narration" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -39,29 +43,29 @@
         </mat-form-field>
 
         <!-- <mat-form-field class="col-3">
-          <input matInput placeholder="{{'designation.extra1' | translate }}"
-                 formControlName="extra1" appFocusOnEnter tabIndex="5">
-        </mat-form-field>
+        <input matInput placeholder="{{'designation.extra1' | translate }}"
+          formControlName="extra1" appFocusOnEnter tabIndex="5">
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <input matInput placeholder="{{'designation.extra2' | translate }}"
-                 formControlName="extra2" appFocusOnEnter tabIndex="6">
-        </mat-form-field> -->
+      <mat-form-field class="col-3">
+        <input matInput placeholder="{{'designation.extra2' | translate }}"
+          formControlName="extra2" appFocusOnEnter tabIndex="6">
+      </mat-form-field> -->
 
-      </div>
-      <mat-divider></mat-divider>
+    </div>
+    <mat-divider></mat-divider>
 
-      <div class="form-element mt-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-          {{ 'COMMON.CANCEL' | translate }}
-        </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
-                appFocusOnEnter tabIndex="5">
-          {{ 'COMMON.SAVE' | translate }}
-        </button>
-      </div>
+    <div class="form-element mt-2 d-flex justify-content-end">
+      <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+        {{ 'COMMON.CANCEL' | translate }}
+      </button>
+      <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
+        appFocusOnEnter tabIndex="5">
+        {{ 'COMMON.SAVE' | translate }}
+      </button>
+    </div>
 
-    </form>
+  </form>
 
-  </mat-card-content>
+</mat-card-content>
 </div>

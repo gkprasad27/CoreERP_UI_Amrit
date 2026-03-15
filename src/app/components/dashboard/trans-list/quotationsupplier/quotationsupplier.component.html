@@ -1,14 +1,17 @@
-<div style="margin: 10px;" *ngIf="quotationSupplier" id="quotationSupplierPrintData">
-
+@if (quotationSupplier) {
+  <div style="margin: 10px;" id="quotationSupplierPrintData">
     <div style="display: flex;">
-        <img *ngIf="quotationSupplier?.headingObj?.company === '1000'" 
-        src="/assets/images/header.jpg" 
-        style="height: 100px; width: 65%;">
-  
-   <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
-   <img *ngIf="quotationSupplier?.headingObj?.company !== '1000'" 
-        src="/assets/images/AMRIT.jpg" 
-        style="height: 100px; width: 65%;">
+      @if (quotationSupplier?.headingObj?.company === '1000') {
+        <img
+          src="/assets/images/header.jpg"
+          style="height: 100px; width: 65%;">
+      }
+      <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
+      @if (quotationSupplier?.headingObj?.company !== '1000') {
+        <img
+          src="/assets/images/AMRIT.jpg"
+          style="height: 100px; width: 65%;">
+      }
         <!-- <img src="/assets/images/header.jpg" style="height: 100px;
         width: 65%;"> -->
         <div style="padding: 24px;
@@ -24,396 +27,393 @@
         height: 50px;
         flex-direction: column;
     "> <span style="font-size: 35px;font-weight: 700;font-family: sans-serif;text-align: center;"> {{
-                quotationSupplier.heading }} </span> </div>
+      quotationSupplier.heading }} </span> </div>
     </div>
-
     <div style="display: flex;margin-top: 10px;">
-        <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> BD-F002, DATED : </b></div>
-            <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
-                quotationSupplier?.headingObj?.qDate ? (quotationSupplier?.headingObj?.qDate | date) : '' }} </div>
-        </div>
-        <div style="width: 50%;padding-left: 15px;display: flex;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Ref: </b></div>
-            <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
-                quotationSupplier?.headingObj?.refNo }}</div>
-        </div>
+      <div style="width: 50%;padding-left: 15px;display: flex;">
+        <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> BD-F002, DATED : </b></div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
+        quotationSupplier?.headingObj?.qDate ? (quotationSupplier?.headingObj?.qDate | date) : '' }} </div>
+      </div>
+      <div style="width: 50%;padding-left: 15px;display: flex;">
+        <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Ref: </b></div>
+        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
+        quotationSupplier?.headingObj?.refNo }}</div>
+      </div>
     </div>
-
     <div style="margin-top: 10px;">
-        <div style="width: 100%;padding-left: 15px;display: flex;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> To: </b></div>
-            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
-                quotationSupplier?.headingObj?.responsiblePerson }} </div>
-        </div>
-        <div style="width: 100%;padding-left: 15px;display: flex;">
-            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
-                quotationSupplier?.headingObj?.name }} </div>
-        </div>
-        <div style="width: 100%;padding-left: 15px;display: flex;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Head Office: </div>
-            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
-                quotationSupplier?.headingObj?.office }} </div>
-        </div>
+      <div style="width: 100%;padding-left: 15px;display: flex;">
+        <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> To: </b></div>
+        <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
+        quotationSupplier?.headingObj?.responsiblePerson }} </div>
+      </div>
+      <div style="width: 100%;padding-left: 15px;display: flex;">
+        <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
+        quotationSupplier?.headingObj?.name }} </div>
+      </div>
+      <div style="width: 100%;padding-left: 15px;display: flex;">
+        <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Head Office: </div>
+        <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;"> {{
+        quotationSupplier?.headingObj?.office }} </div>
+      </div>
     </div>
-
     <div style="display: flex;margin-top: 30px;">
-        <div style="width: 100%;padding-left: 15px;display: flex; text-decoration: underline;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Quotation for {{ quotationSupplier?.headingObj?.quotationfor }} </b></div>
-        </div>
+      <div style="width: 100%;padding-left: 15px;display: flex; text-decoration: underline;">
+        <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Quotation for {{ quotationSupplier?.headingObj?.quotationfor }} </b></div>
+      </div>
     </div>
-
     <div style="margin-top: 10px;">
-        <div style="width: 100%;padding-left: 15px;">
-            <span style="font-size: 15px;font-family: sans-serif;"> Dear Sir, </span> <br>
-            <span style="font-size: 15px;font-family: sans-serif;"> We quote our lowest quotation for the
-                following items. </span>
-        </div>
+      <div style="width: 100%;padding-left: 15px;">
+        <span style="font-size: 15px;font-family: sans-serif;"> Dear Sir, </span> <br>
+        <span style="font-size: 15px;font-family: sans-serif;"> We quote our lowest quotation for the
+        following items. </span>
+      </div>
     </div>
-
-
     <div style="padding-left: 15px;margin-top: 10px;">
-
+      @if (quotationSupplier.detailArray && quotationSupplier.detailArray.length) {
         <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-            *ngIf="quotationSupplier.detailArray && quotationSupplier.detailArray.length">
-            <table
-                style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
-                <thead>
-                    <tr>
-                        <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-                            S.No </th>
-                        <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-                            Item Code </th>
-                        <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-                            Item Description </th>
-                        <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-                            Qty </th>
-                        <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-                            Rate </th>
-                        <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-                            Amount </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-                        *ngFor="let row of quotationSupplier.detailArray; let i = index">
-                        <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                            {{ i + 1 }}  </td>
-                        <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                            {{ row.materialCode }} </td>
-                        <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                            {{ row.materialName }} </td>
-                        <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                            {{ row.qty }} </td>
-                        <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                            {{ row.rate }} </td>
-                        <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                            {{ row.amount }} </td>
-                    </tr>
-                </tbody>
-            </table>
+          >
+          <table
+            style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+            <thead>
+              <tr>
+                <th
+                  style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                S.No </th>
+                <th
+                  style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                Item Code </th>
+                <th
+                  style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                Item Description </th>
+                <th
+                  style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                Qty </th>
+                <th
+                  style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                Rate </th>
+                <th
+                  style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                Amount </th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of quotationSupplier.detailArray; track row; let i = $index) {
+                <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+                  >
+                  <td
+                    style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                  {{ i + 1 }}  </td>
+                  <td
+                    style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                  {{ row.materialCode }} </td>
+                  <td
+                    style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                  {{ row.materialName }} </td>
+                  <td
+                    style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                  {{ row.qty }} </td>
+                  <td
+                    style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                  {{ row.rate }} </td>
+                  <td
+                    style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                  {{ row.amount }} </td>
+                </tr>
+              }
+            </tbody>
+          </table>
         </div>
-
+      }
     </div>
-
-
     <div style="margin-top: 10px;">
-        <div style="width: 100%;padding-left: 15px;display: flex;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Terms & Conditions : </b></div>
-        </div>
-        <ul>
-            <li> 
-                <div style="width: 100%;padding-left: 15px;display: flex;">
-                    <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Material </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  {{ quotationSupplier.headingObj.material }}  </div>
-                </div>
-            </li>
-            <li> 
-                <div style="width: 100%;padding-left: 15px;display: flex;">
-                    <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Payment </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  As per Aggrement </div>
-                </div>
-            </li>
-            <li> 
-                <div style="width: 100%;padding-left: 15px;display: flex;">
-                    <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Delivery </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  {{ quotationSupplier.headingObj.deliveryPeriod }}</div>
-                </div>
-            </li>
-            <li> 
-                <div style="width: 100%;padding-left: 15px;display: flex;">
-                    <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Taxes </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:   GST Extra </div>
-                </div>
-            </li>
-            <li> 
-                <div style="width: 100%;padding-left: 15px;display: flex;">
-                    <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Transport </div>
-                    <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:   {{ quotationSupplier.headingObj.deliveryMethod }} </div>
-                </div>
-            </li>
-        </ul>
-
-        <div style="width: 100%;padding-left: 15px;display: flex;margin-top: 30px;">
-            <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> For AMT Power Transmission </b></div>
-        </div>
-
+      <div style="width: 100%;padding-left: 15px;display: flex;">
+        <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Terms & Conditions : </b></div>
+      </div>
+      <ul>
+        <li>
+          <div style="width: 100%;padding-left: 15px;display: flex;">
+            <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Material </div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  {{ quotationSupplier.headingObj.material }}  </div>
+          </div>
+        </li>
+        <li>
+          <div style="width: 100%;padding-left: 15px;display: flex;">
+            <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Payment </div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  As per Aggrement </div>
+          </div>
+        </li>
+        <li>
+          <div style="width: 100%;padding-left: 15px;display: flex;">
+            <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Delivery </div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:  {{ quotationSupplier.headingObj.deliveryPeriod }}</div>
+          </div>
+        </li>
+        <li>
+          <div style="width: 100%;padding-left: 15px;display: flex;">
+            <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Taxes </div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:   GST Extra </div>
+          </div>
+        </li>
+        <li>
+          <div style="width: 100%;padding-left: 15px;display: flex;">
+            <div style="width: 150px; font-size: 15px;font-family: sans-serif;"> Transport </div>
+            <div style="font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">:   {{ quotationSupplier.headingObj.deliveryMethod }} </div>
+          </div>
+        </li>
+      </ul>
+      <div style="width: 100%;padding-left: 15px;display: flex;margin-top: 30px;">
+        <div style="font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> For AMT Power Transmission </b></div>
+      </div>
     </div>
-
-
-</div>
+  </div>
+}
 
 
 <mat-card>
 
-    <mat-card-content>
+  <mat-card-content>
 
-        <form [formGroup]="formData" autocomplete="off">
+    <form [formGroup]="formData" autocomplete="off">
 
-            <h6>
-                Requisition Header
-            </h6>
+      <h6>
+        Requisition Header
+      </h6>
 
-            <div class="row">
+      <div class="row">
 
-                <!-- <mat-form-field class="col-2">
-                    <mat-label>{{ 'supplierquotation.company' | translate }}</mat-label>
-                    <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                            {{comp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
+        <!-- <mat-form-field class="col-2">
+        <mat-label>{{ 'supplierquotation.company' | translate }}</mat-label>
+        <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+            {{comp.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
 
-                <mat-form-field class="col-2">
-                    <mat-label>{{'supplierquotation.profitCenter' | translate }}</mat-label>
-                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
-                            {{pft.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+      <mat-form-field class="col-2">
+        <mat-label>{{'supplierquotation.profitCenter' | translate }}</mat-label>
+        <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
+          <mat-option>None</mat-option>
+          @for (pft of profitCenterList; track pft) {
+            <mat-option [value]="pft.id">
+              {{pft.text}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
 
-                <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData.value?.customerCode?.length > 0">
-                    <label> {{ 'supplierquotation.supplier' | translate }} </label>
-                    <input placeholder="{{ 'supplierquotation.supplier' | translate }}" formControlName="customerCode"
-                        [typeaheadOptionsLimit]="100000" [typeahead]="ptypeList" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
-                        (typeaheadOnSelect)="supplierChange($event)" class="form-control typeahead"
-                        [typeaheadItemTemplate]="customItemTemplate">
-                    <ng-template #customItemTemplate let-model="item">
-                        <span>{{model.text}}</span>
-                    </ng-template>
-                </div>
+      <div class="mat-mdc-form-field typeahead floating-dropdown col-2" [class.filled]="formData.value?.customerCode?.length > 0">
+        <label> {{ 'supplierquotation.supplier' | translate }} </label>
+        <input placeholder="{{ 'supplierquotation.supplier' | translate }}" formControlName="customerCode"
+          [typeaheadOptionsLimit]="100000" [typeahead]="ptypeList" typeaheadOptionField='text' appFocusOnEnter tabIndex="3"
+          (typeaheadOnSelect)="supplierChange($event)" class="form-control typeahead"
+          [typeaheadItemTemplate]="customItemTemplate">
+          <ng-template #customItemTemplate let-model="item">
+            <span>{{model.text}}</span>
+          </ng-template>
+        </div>
 
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'supplierquotation.quotationDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="quotationDate"
-                        appFocusOnEnter tabIndex="4">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'supplierquotation.quotationDate'"></mat-label>
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="quotationDate"
+            appFocusOnEnter tabIndex="4">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
 
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'supplierquotation.deliveryPeriod'"></mat-label>
-                    <input matInput type="text" formControlName="deliveryPeriod" maxlength="50" appFocusOnEnter
-                        tabIndex="5">
-                </mat-form-field>
+          <mat-form-field class="col-2">
+            <mat-label [translate]="'supplierquotation.deliveryPeriod'"></mat-label>
+            <input matInput type="text" formControlName="deliveryPeriod" maxlength="50" appFocusOnEnter
+              tabIndex="5">
+            </mat-form-field>
 
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'supplierquotation.creditDays'"></mat-label>
-                    <input matInput type="text" formControlName="creditDays" maxlength="50" appFocusOnEnter
-                        tabIndex="6">
-                </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'supplierquotation.creditDays'"></mat-label>
+              <input matInput type="text" formControlName="creditDays" maxlength="50" appFocusOnEnter
+                tabIndex="6">
+              </mat-form-field>
 
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'supplierquotation.deliveryMethod'"></mat-label>
-                    <input matInput type="text" formControlName="deliveryMethod" maxlength="50" appFocusOnEnter
-                        tabIndex="7">
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'supplierquotation.refNo'"></mat-label>
-                    <input matInput type="text" formControlName="refNo" maxlength="50" appFocusOnEnter tabIndex="8">
+              <mat-form-field class="col-2">
+                <mat-label [translate]="'supplierquotation.deliveryMethod'"></mat-label>
+                <input matInput type="text" formControlName="deliveryMethod" maxlength="50" appFocusOnEnter
+                  tabIndex="7">
                 </mat-form-field>
 
                 <mat-form-field class="col-2">
-                    <mat-label [translate]="'supplierquotation.responsiblePerson'"></mat-label>
-                    <input matInput type="text" formControlName="responsiblePerson" maxlength="50" appFocusOnEnter
-                        tabIndex="9">
+                  <mat-label [translate]="'supplierquotation.refNo'"></mat-label>
+                  <input matInput type="text" formControlName="refNo" maxlength="50" appFocusOnEnter tabIndex="8">
                 </mat-form-field>
 
                 <mat-form-field class="col-2">
+                  <mat-label [translate]="'supplierquotation.responsiblePerson'"></mat-label>
+                  <input matInput type="text" formControlName="responsiblePerson" maxlength="50" appFocusOnEnter
+                    tabIndex="9">
+                  </mat-form-field>
+
+                  <mat-form-field class="col-2">
                     <mat-label [translate]="'supplierquotation.quotationfor'"></mat-label>
                     <input matInput type="text" formControlName="quotationfor" maxlength="50" appFocusOnEnter
-                        tabIndex="10">
-                </mat-form-field>
+                      tabIndex="10">
+                    </mat-form-field>
 
-                <mat-form-field class="col-2">
-                    <mat-label>{{'supplierquotation.material' | translate }}</mat-label>
-                    <mat-select formControlName="material" appFocusOnEnter tabIndex="11">
+                    <mat-form-field class="col-2">
+                      <mat-label>{{'supplierquotation.material' | translate }}</mat-label>
+                      <mat-select formControlName="material" appFocusOnEnter tabIndex="11">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let mpattern of mpatternList" [value]="mpattern.description">
+                        @for (mpattern of mpatternList; track mpattern) {
+                          <mat-option [value]="mpattern.description">
                             {{mpattern.description}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                          </mat-option>
+                        }
+                      </mat-select>
+                    </mat-form-field>
 
-                <div class="mat-mdc-form-field  typeahead floating-dropdown col-2" [class.filled]="formData.value?.bom?.length > 0">
-                    <label> {{ 'saleorder.bom' | translate }} </label>
-                    <input placeholder=" " formControlName="bom" [typeaheadOptionsLimit]="100000" [typeahead]="qnoList"
+                    <div class="mat-mdc-form-field  typeahead floating-dropdown col-2" [class.filled]="formData.value?.bom?.length > 0">
+                      <label> {{ 'saleorder.bom' | translate }} </label>
+                      <input placeholder=" " formControlName="bom" [typeaheadOptionsLimit]="100000" [typeahead]="qnoList"
                         typeaheadOptionField='bomnumber' appFocusOnEnter tabIndex="12" class="form-control typeahead"
                         [typeaheadItemTemplate]="customItemTemplate1" (typeaheadOnSelect)="getBomDetail()">
-                    <ng-template #customItemTemplate1 let-model="item">
-                        <span><strong>{{model.bomnumber}}</strong> - {{model.bomName}}</span>
-                    </ng-template>
-                </div>
+                        <ng-template #customItemTemplate1 let-model="item">
+                          <span><strong>{{model.bomnumber}}</strong> - {{model.bomName}}</span>
+                        </ng-template>
+                      </div>
 
-            </div>
+                    </div>
 
-        </form>
+                  </form>
 
 
-        <div class="p-2 card">
+                  <div class="p-2 card">
 
-            <h6>
-                Saleorder Details
-            </h6>
+                    <h6>
+                      Saleorder Details
+                    </h6>
 
-            <form [formGroup]="formData1" autocomplete="off">
+                    <form [formGroup]="formData1" autocomplete="off">
 
-                <div class="row p-1">
+                      <div class="row p-1">
 
-                    <mat-form-field class="col-2">
-                        <mat-label>{{ 'supplierquotation.taxCode' | translate }}</mat-label>
-                        <mat-select formControlName="taxCode" appFocusOnEnter tabIndex="11">
+                        <mat-form-field class="col-2">
+                          <mat-label>{{ 'supplierquotation.taxCode' | translate }}</mat-label>
+                          <mat-select formControlName="taxCode" appFocusOnEnter tabIndex="11">
                             <mat-option>None</mat-option>
-                            <mat-option *ngFor="let tax of taxCodeList" [value]="tax.taxRateCode">
+                            @for (tax of taxCodeList; track tax) {
+                              <mat-option [value]="tax.taxRateCode">
                                 {{tax.description}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                              </mat-option>
+                            }
+                          </mat-select>
+                        </mat-form-field>
 
-                    <mat-form-field class="col-2">
-                        <mat-label [translate]="'supplierquotation.qty'"></mat-label>
-                        <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="12">
-                    </mat-form-field>
+                        <mat-form-field class="col-2">
+                          <mat-label [translate]="'supplierquotation.qty'"></mat-label>
+                          <input matInput type="number" formControlName="qty" appFocusOnEnter tabIndex="12">
+                        </mat-form-field>
 
-                    <mat-form-field class="col-2">
-                        <mat-label [translate]="'supplierquotation.rate'"></mat-label>
-                        <input matInput type="number" formControlName="rate" appFocusOnEnter tabIndex="13">
-                    </mat-form-field>
+                        <mat-form-field class="col-2">
+                          <mat-label [translate]="'supplierquotation.rate'"></mat-label>
+                          <input matInput type="number" formControlName="rate" appFocusOnEnter tabIndex="13">
+                        </mat-form-field>
 
-                    <mat-form-field class="col-2">
-                        <mat-label [translate]="'supplierquotation.discount'"></mat-label>
-                        <input matInput type="text" formControlName="discount" appFocusOnEnter tabIndex="14"
+                        <mat-form-field class="col-2">
+                          <mat-label [translate]="'supplierquotation.discount'"></mat-label>
+                          <input matInput type="text" formControlName="discount" appFocusOnEnter tabIndex="14"
                             (keypress)="commonService.numberOnly($event)" maxlength="2">
-                    </mat-form-field>
+                          </mat-form-field>
 
-                    <!-- <mat-form-field class="col-2">
-                        <mat-label [translate]="'supplierquotation.stockQty'"></mat-label>
-                        <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="13">
-                    </mat-form-field> -->
+                          <!-- <mat-form-field class="col-2">
+                          <mat-label [translate]="'supplierquotation.stockQty'"></mat-label>
+                          <input matInput type="number" readonly formControlName="stockQty" appFocusOnEnter tabIndex="13">
+                        </mat-form-field> -->
 
 
-                    <mat-form-field class="col-2">
-                        <mat-label [translate]="'supplierquotation.deliveryDate'"></mat-label>
-                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker13" [nonEditable]="picker13"
+                        <mat-form-field class="col-2">
+                          <mat-label [translate]="'supplierquotation.deliveryDate'"></mat-label>
+                          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker13" [nonEditable]="picker13"
                             formControlName="deliveryDate" appFocusOnEnter tabIndex="15">
-                        <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
-                        <mat-datepicker #picker13></mat-datepicker>
-                    </mat-form-field>
+                            <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
+                            <mat-datepicker #picker13></mat-datepicker>
+                          </mat-form-field>
 
+                        </div>
+
+                        <div id="for" class="d-flex justify-content-end mb-3">
+
+                          <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
+                            (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
+                            {{ 'COMMON.UPDATE' | translate }}
+                          </button>
+                          <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
+                          {{ 'COMMON.RESET' | translate }}
+                        </button>
+
+                      </div>
+
+                    </form>
+
+                    <div>
+                      <app-table class="table-css" [tableData]="tableData" [showFilters]="false"
+                        (editOrDeleteEvent)="editOrDeleteEvent($event)">
+                      </app-table>
+                    </div>
+                  </div>
+
+
+                </mat-card-content>
+
+                <mat-card-content class="d-flex justify-content-end py-1">
+
+                  <div class="d-flex">
+                    <div class="px-1"> <span class="px-1"> <b>{{ 'supplierquotation.igst' | translate }} </b></span> :
+                    <b class="text-danger">{{ formData.value.igst }} </b>
+                  </div>
+                  <div class="px-1"> <span class="px-1"> <b> {{'supplierquotation.cgst' | translate }} </b></span> :
+                  <b class="text-danger"> {{ formData.value.cgst}} </b>
                 </div>
-
-                <div id="for" class="d-flex justify-content-end mb-3">
-
-                    <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
-                        (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
-                        {{ 'COMMON.UPDATE' | translate }}
-                    </button>
-                    <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
-                        {{ 'COMMON.RESET' | translate }}
-                    </button>
-
-                </div>
-
-            </form>
-
-            <div>
-                <app-table class="table-css" [tableData]="tableData" [showFilters]="false"
-                    (editOrDeleteEvent)="editOrDeleteEvent($event)">
-                </app-table>
-            </div>
-        </div>
-
-
-    </mat-card-content>
-
-    <mat-card-content class="d-flex justify-content-end py-1">
-
-        <div class="d-flex">
-            <div class="px-1"> <span class="px-1"> <b>{{ 'supplierquotation.igst' | translate }} </b></span> :
-                <b class="text-danger">{{ formData.value.igst }} </b>
-            </div>
-            <div class="px-1"> <span class="px-1"> <b> {{'supplierquotation.cgst' | translate }} </b></span> :
-                <b class="text-danger"> {{ formData.value.cgst}} </b>
-            </div>
-            <div class="px-1"> <span class="px-1"> <b> {{'supplierquotation.sgst' | translate }} </b></span> :
+                <div class="px-1"> <span class="px-1"> <b> {{'supplierquotation.sgst' | translate }} </b></span> :
                 <b class="text-danger"> {{ formData.value.sgst}} </b>
-            </div>
-            <div class="px-1"> <span class="px-1"> <b> {{'supplierquotation.amount' | translate }} </b></span> :
-                <b class="text-danger"> {{ formData.value.amount}} </b>
+              </div>
+              <div class="px-1"> <span class="px-1"> <b> {{'supplierquotation.amount' | translate }} </b></span> :
+              <b class="text-danger"> {{ formData.value.amount}} </b>
             </div>
             <div class="px-1"> <span class="px-1"> <b> {{'supplierquotation.totalTax' | translate }} </b></span> :
-                <b class="text-danger"> {{ formData.value.totalTax}} </b>
-            </div>
-            <div class="px-1"> <span class="px-1"> <b> {{'supplierquotation.totalAmount' | translate }} </b></span> :
-                <b class="text-danger"> {{ formData.value.totalAmount}} </b>
-            </div>
+            <b class="text-danger"> {{ formData.value.totalTax}} </b>
+          </div>
+          <div class="px-1"> <span class="px-1"> <b> {{'supplierquotation.totalAmount' | translate }} </b></span> :
+          <b class="text-danger"> {{ formData.value.totalAmount}} </b>
         </div>
+      </div>
 
 
-        <div>
-            <button [hidden]="routeEdit == ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-                (click)="print()">
-                {{ 'COMMON.PRINT' | translate }}
-            </button>
-            <button [hidden]="routeEdit == ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-                (click)="convertToSaleOrder()">
-                {{ 'supplierquotation.CONVERTTOSALEORDER' | translate }}
-            </button>
-            <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-                (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
-                {{ 'COMMON.SAVE' | translate }}
-            </button>
-            <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
-                {{ 'COMMON.BACK' | translate }}
-            </button>
-            <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
-                (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
-                {{ 'COMMON.RESET' | translate }}
-            </button>
-            <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
-                (click)="return();">
-                {{ 'COMMON.RETURN' | translate }}
-            </button>
+      <div>
+        <button [hidden]="routeEdit == ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+          (click)="print()">
+          {{ 'COMMON.PRINT' | translate }}
+        </button>
+        <button [hidden]="routeEdit == ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+          (click)="convertToSaleOrder()">
+          {{ 'supplierquotation.CONVERTTOSALEORDER' | translate }}
+        </button>
+        <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+          (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
+          {{ 'COMMON.SAVE' | translate }}
+        </button>
+        <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+          {{ 'COMMON.BACK' | translate }}
+        </button>
+        <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
+          (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
+          {{ 'COMMON.RESET' | translate }}
+        </button>
+        <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
+          (click)="return();">
+          {{ 'COMMON.RETURN' | translate }}
+        </button>
 
-        </div>
+      </div>
 
     </mat-card-content>
 
-</mat-card>
+  </mat-card>

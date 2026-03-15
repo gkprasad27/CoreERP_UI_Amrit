@@ -13,8 +13,10 @@
           <mat-label [translate]="'currency.currencySymbol'"></mat-label>
           <input matInput formControlName="currencySymbol"
             appFocusOnEnter tabIndex="1" maxlength="5">
-          <mat-error *ngIf="!formControls.currencySymbol.valid&& formControls.currencySymbol.status != 'DISABLED'"
+          @if (!formControls.currencySymbol.valid&& formControls.currencySymbol.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.currencySymbol.valid  }">code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -22,8 +24,10 @@
           <mat-label [translate]="'currency.currencyName'"></mat-label>
           <input matInput formControlName="currencyName"
             appFocusOnEnter tabIndex="2" maxlength="50">
-          <mat-error *ngIf="!formControls.currencyName.valid"
+          @if (!formControls.currencyName.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.currencyName.valid  }">Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">

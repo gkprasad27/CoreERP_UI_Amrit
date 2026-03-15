@@ -12,60 +12,76 @@
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.componentCode.valid }">
           <input matInput placeholder="{{'componentmaster.componentCode' | translate }}" disabled
             formControlName="componentCode" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="formControls.componentCode.errors" class="help-block">
-            <div *ngIf="formControls.componentCode.errors.required">Component Code is required </div>
-          </mat-error>
+          @if (formControls.componentCode.errors) {
+            <mat-error class="help-block">
+              @if (formControls.componentCode.errors.required) {
+                <div>Component Code is required </div>
+              }
+            </mat-error>
+          }
 
         </mat-form-field>
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.componentName.valid }">
           <input matInput placeholder="{{'componentmaster.componentName' | translate }}" formControlName="componentName"
             appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="formControls.componentName.errors" class="help-block">
-            <div *ngIf="formControls.componentName.errors.required">Component Name is required</div>
-          </mat-error>
+          @if (formControls.componentName.errors) {
+            <mat-error class="help-block">
+              @if (formControls.componentName.errors.required) {
+                <div>Component Name is required</div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
-       
+
         <mat-form-field class="col-3">
           <mat-label>{{'componentmaster.componentType' | translate }}</mat-label>
           <mat-select formControlName="componentType">
-            <mat-option *ngFor="let conflist of configureList" [value]="conflist.id">
-              {{conflist.text}}
-            </mat-option>
+            @for (conflist of configureList; track conflist) {
+              <mat-option [value]="conflist.id">
+                {{conflist.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'componentmaster.duration' | translate }}</mat-label>
           <mat-select formControlName="duration">
-            <mat-option *ngFor="let conflist of duration" [value]="conflist.value">
-              {{conflist.viewValue}}
-            </mat-option>
+            @for (conflist of duration; track conflist) {
+              <mat-option [value]="conflist.value">
+                {{conflist.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'componentmaster.specificMonth' | translate }}</mat-label>
           <mat-select formControlName="specificMonth">
-            <mat-option *ngFor="let conflist of months" [value]="conflist.value">
-              {{conflist.viewValue}}
-            </mat-option>
+            @for (conflist of months; track conflist) {
+              <mat-option [value]="conflist.value">
+                {{conflist.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-3">
           <mat-label [translate]="'componentmaster.companyName'"></mat-label>
           <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="5">
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
+            @for (comp of companyList; track comp) {
+              <mat-option [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            }
           </mat-select>
-          </mat-form-field>
-          <mat-form-field class="col-3" >
-            <input matInput placeholder="{{'componentmaster.amount' | translate }}" formControlName="amount" appFocusOnEnter tabIndex="6">
-          </mat-form-field>
-          <mat-form-field class="col-3" >
-            <input matInput placeholder="{{'componentmaster.percentage' | translate }}" formControlName="percentage" appFocusOnEnter tabIndex="7">
-          </mat-form-field>
+        </mat-form-field>
+        <mat-form-field class="col-3" >
+          <input matInput placeholder="{{'componentmaster.amount' | translate }}" formControlName="amount" appFocusOnEnter tabIndex="6">
+        </mat-form-field>
+        <mat-form-field class="col-3" >
+          <input matInput placeholder="{{'componentmaster.percentage' | translate }}" formControlName="percentage" appFocusOnEnter tabIndex="7">
+        </mat-form-field>
       </div>
       <mat-divider></mat-divider>
 
@@ -76,12 +92,12 @@
   </mat-card-content>
   <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-      
+
       {{ 'COMMON.CANCEL' | translate }}
     </button>
     <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
       tabIndex="6">
-      
+
       {{ 'COMMON.SAVE' | translate }}
     </button>
   </div>

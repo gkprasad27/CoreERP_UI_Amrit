@@ -12,9 +12,11 @@
         <mat-form-field class="col-3">
           <mat-label [translate]="'assetbegningaccumulateddepreciation.mainAssetNo'"></mat-label>
           <mat-select formControlName="mainAssetNo" appFocusOnEnter tabIndex="1">
-            <mat-option *ngFor="let mam of mamList" [value]="mam.assetNumber">
-              {{mam.assetNumber}}- {{mam.name}}
-            </mat-option>
+            @for (mam of mamList; track mam) {
+              <mat-option [value]="mam.assetNumber">
+                {{mam.assetNumber}}- {{mam.name}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -22,9 +24,11 @@
         <mat-form-field class="col-3">
           <mat-label>{{'assetbegningaccumulateddepreciation.subAssetNo' | translate }}</mat-label>
           <mat-select formControlName="subAssetNo" appFocusOnEnter tabIndex="2">
-            <mat-option *ngFor="let sa of saList" [value]="sa.subAssetNumber">
-              {{sa.subAssetNumber}} - {{sa.description}}
-            </mat-option>
+            @for (sa of saList; track sa) {
+              <mat-option [value]="sa.subAssetNumber">
+                {{sa.subAssetNumber}} - {{sa.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -32,9 +36,11 @@
         <mat-form-field class="col-3">
           <mat-label>{{'assetbegningaccumulateddepreciation.depreciationArea' | translate }}</mat-label>
           <mat-select formControlName="depreciationArea" appFocusOnEnter tabIndex="3">
-            <mat-option *ngFor="let dpa of dpareaList" [value]="dpa.code">
-              {{dpa.code}} - {{dpa.description}}
-            </mat-option>
+            @for (dpa of dpareaList; track dpa) {
+              <mat-option [value]="dpa.code">
+                {{dpa.code}} - {{dpa.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

@@ -14,22 +14,28 @@
           <mat-label>{{'purchaserequisitionnumberrange.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plant of plantsList" [value]="plant.id">
-              {{plant.text}}
-            </mat-option>
+            @for (plant of plantsList; track plant) {
+              <mat-option [value]="plant.id">
+                {{plant.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.plant.valid && formControls.plant.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.plant.valid  }"> Plant
+          @if (!formControls.plant.valid && formControls.plant.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.plant.valid  }"> Plant
             is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'purchaserequisitionnumberrange.department' | translate }}</mat-label>
           <mat-select formControlName="department" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let pol of fdeptList" [value]="pol.code">
-              {{pol.description}}
-            </mat-option>
+            @for (pol of fdeptList; track pol) {
+              <mat-option [value]="pol.code">
+                {{pol.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

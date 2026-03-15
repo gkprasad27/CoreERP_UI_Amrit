@@ -1,15 +1,17 @@
-<div style="margin: 10px;" *ngIf="inspectionPrint" id="inspectionPrintData">
-
-  <div *ngFor="let data of inspectionPrint">
-
-    <div style="text-align: end;"> <b> {{ data?.headingObj?.drawingRevNo }}</b> </div>
-
-    <div style="display: flex;">
-      <img *ngIf="data?.headingObj?.company==='1000'" src="/assets/images/header.jpg"
-        style="height: 100px; width: 65%;">
-
-      <!-- Display this image if productionTag starts with 'AMRIT-' -->
-      <img *ngIf="data?.headingObj?.company!=='1000'" src="/assets/images/AMRIT.jpg" style="height: 100px; width: 65%;">
+@if (inspectionPrint) {
+  <div style="margin: 10px;" id="inspectionPrintData">
+    @for (data of inspectionPrint; track data) {
+      <div>
+        <div style="text-align: end;"> <b> {{ data?.headingObj?.drawingRevNo }}</b> </div>
+        <div style="display: flex;">
+          @if (data?.headingObj?.company==='1000') {
+            <img src="/assets/images/header.jpg"
+              style="height: 100px; width: 65%;">
+          }
+          <!-- Display this image if productionTag starts with 'AMRIT-' -->
+          @if (data?.headingObj?.company!=='1000') {
+            <img src="/assets/images/AMRIT.jpg" style="height: 100px; width: 65%;">
+          }
       <!-- <img src="/assets/images/header.jpg" style="height: 100px;
         width: 65%;"> -->
       <div style="padding: 24px;
@@ -25,199 +27,195 @@
         height: 50px;
         flex-direction: column;
     "> <span style="font-size: 25px;font-weight: 700;font-family: sans-serif;text-align: center;"> {{ data.heading }}
-        </span> </div>
-    </div>
-
-    <div style="border-top: 1px solid black; display: flex;">
-      <div style="width: 40%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-        <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Customer Name </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.supplierName }} </span>
+          </span> </div>
+        </div>
+        <div style="border-top: 1px solid black; display: flex;">
+          <div style="width: 40%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
+            <b style="width: 115px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Customer Name </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.supplierName }} </span>
+          </div>
+          <div style="width: 60%;display: flex;padding: 3px 15px;">
+            <b style="width: 130px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Item Description </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.description }} </span>
+          </div>
+        </div>
+        <div style="border-top: 1px solid black; display: flex;">
+          <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
+            <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Number </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.invoiceNo }} </span>
+          </div>
+          <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
+            <b style="width: 80px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Number </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.poNumber }} </span>
+          </div>
+          <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
+            <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Heat Number </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.heatNumber }} </span>
+          </div>
+          <div style="width: 25%; display: flex;padding: 3px 15px;">
+            <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Report Date </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.completionDate | date }} </span>
+          </div>
+        </div>
+        <div style="border-top: 1px solid black; display: flex;">
+          <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
+            <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Date </b>
+            <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.invoiceDate | date }}</span>
+          </div>
+          <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
+            <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Date </b>
+            <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.poDate | date }} </span>
+          </div>
+          <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
+            <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Part/Drg No </b>
+            <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.drgNo }} </span>
+          </div>
+          <div style="width: 25%;padding: 3px 15px;display: flex;">
+            <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Drawing Rev. No </b>
+            <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: NA
+            </span>
+          </div>
+        </div>
+        <div style="border-top: 1px solid black; display: flex;">
+          <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
+            <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Quantity </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.invoiceQty }}</span>
+          </div>
+          <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
+            <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Quantity </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+            data?.headingObj?.matQty }} </span>
+          </div>
+          <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
+            <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
+            </span>
+          </div>
+          <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
+            <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> </b>
+            <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
+            </span>
+          </div>
+        </div>
+        @if (data.detailArray && data.detailArray.length) {
+          <div style="min-height: 350px;border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+            >
+            <table
+              style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+              <thead>
+                <tr>
+                  <th
+                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                  S.No </th>
+                  <th
+                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                  Parameter </th>
+                  <th
+                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                  Specification </th>
+                  <th
+                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                  Tolerance </th>
+                  <th
+                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                  UOM </th>
+                  <th
+                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                  Instrument </th>
+                  @for (row of data.detailArray[0] | keyvalue; track row; let i = $index) {
+                    @if (row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument' && row.key != 'Tolerance') {
+                      <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
+                        >
+                        {{ row.key }}
+                      </th>
+                    }
+                  }
+                  <!-- <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Remarks </th> -->
+                  <th
+                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                    Remarks
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (row of data.detailArray; track row; let i = $index) {
+                  <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+                    >
+                    <td
+                      style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                    {{ i + 1 }} </td>
+                    <td
+                      style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                      {{ row.Parameter }}
+                    </td>
+                    <td
+                      style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                      {{ row.Specification
+                    }} </td>
+                    <td
+                      style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                      {{ row.Tolerance
+                    }} </td>
+                    <td
+                      style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                    {{ row.UOM }} </td>
+                    <td
+                      style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                      {{ row.Instrument }}
+                    </td>
+                    @for (cell of row | keyvalue; track cell; let i = $index) {
+                      @if (cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument' && cell.key != 'Tolerance') {
+                        <td
+                          style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                          {{ cell.value }}
+                        </td>
+                      }
+                    }
+                    <td
+                      style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                      {{
+                    row.description }} </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+        <div style="border-top: 1px solid black;border-bottom: 1px solid black; display: flex;margin-top: 40px;">
+          <div style="width: 33.33%;padding: 15px;border-right: 1px solid black;">
+            <b style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Prepared By : </b>
+            <span style="padding-left: 80px;"> </span>
+          </div>
+          <div style="width: 33.33%;padding: 15px;border-right: 1px solid black;">
+            <b style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Checked By : </b>
+            <span style="padding-left: 80px;"> </span>
+          </div>
+          <div style="width: 33.33%;padding: 15px">
+            <b style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Approved By : </b>
+            <span style="padding-left: 80px;"> </span>
+          </div>
+        </div>
       </div>
-      <div style="width: 60%;display: flex;padding: 3px 15px;">
-        <b style="width: 130px;font-size: 15px;font-family: sans-serif;font-weight: 700;"> Item Description </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.description }} </span>
-      </div>
-    </div>
-
-    <div style="border-top: 1px solid black; display: flex;">
-      <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-        <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Number </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.invoiceNo }} </span>
-      </div>
-      <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-        <b style="width: 80px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Number </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.poNumber }} </span>
-      </div>
-      <div style="width: 25%;border-right: 1px solid black; display: flex;padding: 3px 15px;">
-        <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Heat Number </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.heatNumber }} </span>
-      </div>
-      <div style="width: 25%; display: flex;padding: 3px 15px;">
-        <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Report Date </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.completionDate | date }} </span>
-      </div>
-    </div>
-
-    <div style="border-top: 1px solid black; display: flex;">
-      <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
-        <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Date </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.invoiceDate | date }}</span>
-      </div>
-      <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
-        <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Date </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.poDate | date }} </span>
-      </div>
-      <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black;display: flex;">
-        <b style="width: 90px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Part/Drg No </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.drgNo }} </span>
-      </div>
-      <div style="width: 25%;padding: 3px 15px;display: flex;">
-        <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Drawing Rev. No </b>
-        <span style="padding-left: 5;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: NA
-        </span>
-      </div>
-    </div>
-
-    <div style="border-top: 1px solid black; display: flex;">
-      <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
-        <b style="width: 115px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> Invoice Quantity </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.invoiceQty }}</span>
-      </div>
-      <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
-        <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> PO Quantity </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.matQty }} </span>
-      </div>
-      <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
-        <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
-        </span>
-      </div>
-      <div style="width: 25%;padding: 3px 15px;border-right: 1px solid black; display: flex;">
-        <b style="width: 125px;font-size: 14px;font-family: sans-serif;font-weight: 700;"> </b>
-        <span style="padding-left: 5px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
-        </span>
-      </div>
-    </div>
-
-
-
-    <div style="min-height: 350px;border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-      *ngIf="data.detailArray && data.detailArray.length">
-      <table
-        style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
-        <thead>
-          <tr>
-            <th
-              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-              S.No </th>
-            <th
-              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-              Parameter </th>
-            <th
-              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-              Specification </th>
-            <th
-              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-              Tolerance </th>
-            <th
-              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-              UOM </th>
-            <th
-              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-              Instrument </th>
-            <ng-container *ngFor="let row of data.detailArray[0] | keyvalue; let i = index">
-              <th
-                style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
-                *ngIf="row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument' && row.key != 'Tolerance'">
-                {{ row.key }}
-              </th>
-            </ng-container>
-            <!-- <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Remarks </th> -->
-            <th
-              style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-              Remarks
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-            *ngFor="let row of data.detailArray; let i = index">
-            <td
-              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-              {{ i + 1 }} </td>
-            <td
-              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-              {{ row.Parameter }}
-            </td>
-            <td
-              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-              {{ row.Specification
-              }} </td>
-            <td
-              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-              {{ row.Tolerance
-              }} </td>
-            <td
-              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-              {{ row.UOM }} </td>
-            <td
-              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-              {{ row.Instrument }}
-            </td>
-            <ng-container *ngFor="let cell of row | keyvalue; let i = index">
-              <td
-                *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument' && cell.key != 'Tolerance'"
-                style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-                {{ cell.value }}
-              </td>
-            </ng-container>
-            <td
-              style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-              {{
-              row.description }} </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-    <div style="border-top: 1px solid black;border-bottom: 1px solid black; display: flex;margin-top: 40px;">
-      <div style="width: 33.33%;padding: 15px;border-right: 1px solid black;">
-        <b style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Prepared By : </b>
-        <span style="padding-left: 80px;"> </span>
-      </div>
-      <div style="width: 33.33%;padding: 15px;border-right: 1px solid black;">
-        <b style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Checked By : </b>
-        <span style="padding-left: 80px;"> </span>
-      </div>
-      <div style="width: 33.33%;padding: 15px">
-        <b style="font-size: 15px;font-family: sans-serif;font-weight: 700;"> Approved By : </b>
-        <span style="padding-left: 80px;"> </span>
-      </div>
-    </div>
-
+    }
   </div>
-
-</div>
-
-
-<div style="margin: 10px;" *ngIf="balanceCertificateData" id="balanceCertificatePrintData">
-
-  <ng-container *ngFor="let data of balanceCertificateData">
+}
 
 
-    <div style="display: flex;">
+@if (balanceCertificateData) {
+  <div style="margin: 10px;" id="balanceCertificatePrintData">
+    @for (data of balanceCertificateData; track data) {
+      <div style="display: flex;">
       <img src="/assets/images/header.jpg" style="height: 100px;
       width: 55%;">
       <div style="padding: 24px;
@@ -234,139 +232,132 @@
       flex-direction: column;
   "> <span style="font-size: 35px;font-weight: 700;font-family: sans-serif;text-align: center;"> {{ data.heading }}
         </span> </div>
-    </div>
-
-    <div style="display: flex;margin-top: 10px;">
-      <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Customer Name </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+      </div>
+      <div style="display: flex;margin-top: 10px;">
+        <div style="width: 50%;padding-left: 15px;display: flex;">
+          <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Customer Name </b></div>
+          <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
           data?.headingObj?.supplierName }} </div>
-      </div>
-      <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Date </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+        </div>
+        <div style="width: 50%;padding-left: 15px;display: flex;">
+          <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Date </b></div>
+          <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
           data?.headingObj?.poDate | date }}</div>
-      </div>
-    </div>
-
-    <div style="display: flex;margin-top: 10px;">
-      <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Description </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
-          data?.headingObj?.description }} </div>
-      </div>
-      <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Reference No. </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: NA
         </div>
       </div>
-    </div>
-
-    <div style="display: flex;margin-top: 10px;">
-      <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Part/Drg No. </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+      <div style="display: flex;margin-top: 10px;">
+        <div style="width: 50%;padding-left: 15px;display: flex;">
+          <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Description </b></div>
+          <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+          data?.headingObj?.description }} </div>
+        </div>
+        <div style="width: 50%;padding-left: 15px;display: flex;">
+          <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Reference No. </b></div>
+          <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: NA
+          </div>
+        </div>
+      </div>
+      <div style="display: flex;margin-top: 10px;">
+        <div style="width: 50%;padding-left: 15px;display: flex;">
+          <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> Part/Drg No. </b></div>
+          <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
           data?.headingObj?.drgNo }} </div>
-      </div>
-      <div style="width: 50%;padding-left: 15px;display: flex;">
-        <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> AMT Item Code </b></div>
-        <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
+        </div>
+        <div style="width: 50%;padding-left: 15px;display: flex;">
+          <div style="width: 150px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b> AMT Item Code </b></div>
+          <div style="padding-left: 50px;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">: {{
           data?.headingObj?.materialCode }} </div>
+        </div>
       </div>
-    </div>
-
-    <div style="border-top: 1px solid black;border-bottom: 1px solid black;margin-top: 10px;">
-
-      <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-        *ngIf="data.detailArray && data.detailArray.length">
-        <table
-          style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
-          <thead>
-            <tr>
-              <th
-                style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-                S.No </th>
-              <th
-                style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
-                Parameter </th>
-              <!-- <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Specification </th>
-            <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Tolerance </th>
-            <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
-            <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th> -->
-              <ng-container *ngFor="let row of data.detailArray[0] | keyvalue; let i = index">
-                <th
-                  style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
-                  *ngIf="row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument' && row.key != 'Tolerance'">
-                  {{ row.key }}
-                </th>
-              </ng-container>
-              <!-- <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Remarks </th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-              *ngFor="let row of data.detailArray; let i = index">
-              <td
-                style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                {{ i + 1 }} </td>
-              <td
-                style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
-                {{ row.Parameter }}
-              </td>
-              <!-- <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Specification
-              }} </td>
-            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Tolerance
-            }} </td>
-            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.UOM }} </td>
-            <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Instrument }}
-            </td> -->
-              <ng-container *ngFor="let cell of row | keyvalue; let i = index">
-                <td
-                  *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument' && cell.key != 'Tolerance'"
-                  style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-                  {{ cell.value }}
-                </td>
-              </ng-container>
-              <!-- <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ row.description }} </td> -->
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
+      <div style="border-top: 1px solid black;border-bottom: 1px solid black;margin-top: 10px;">
+        @if (data.detailArray && data.detailArray.length) {
+          <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+            >
+            <table
+              style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+              <thead>
+                <tr>
+                  <th
+                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                  S.No </th>
+                  <th
+                    style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;">
+                  Parameter </th>
+                  <!-- <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Specification </th>
+                  <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Tolerance </th>
+                  <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
+                  <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th> -->
+                  @for (row of data.detailArray[0] | keyvalue; track row; let i = $index) {
+                    @if (row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument' && row.key != 'Tolerance') {
+                      <th
+                        style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;"
+                        >
+                        {{ row.key }}
+                      </th>
+                    }
+                  }
+                  <!-- <th style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;text-align: start;"> Remarks </th> -->
+                </tr>
+              </thead>
+              <tbody>
+                @for (row of data.detailArray; track row; let i = $index) {
+                  <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+                    >
+                    <td
+                      style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                    {{ i + 1 }} </td>
+                    <td
+                      style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;">
+                      {{ row.Parameter }}
+                    </td>
+                    <!-- <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Specification
+                  }} </td>
+                  <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Tolerance
+                  }} </td>
+                  <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.UOM }} </td>
+                  <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Instrument }}
+                  </td> -->
+                  @for (cell of row | keyvalue; track cell; let i = $index) {
+                    @if (cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument' && cell.key != 'Tolerance') {
+                      <td
+                        style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                        {{ cell.value }}
+                      </td>
+                    }
+                  }
+                  <!-- <td style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;text-align: start;"> {{ row.description }} </td> -->
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
       <!-- <div style="margin: 50px 75px">
       <ol>
         <li *ngFor="let arr of balanceCertificateData?.detailArray" style="padding: 7px;"> <div style="display: flex;"><div style="width: 220px;"><b> {{ arr.parameter }} </b> </div> <div> : {{ arr.result }} </div> </div> </li>
       </ol>
     </div> -->
-
-      <div style="margin:5px 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b>The above values are
-          well within Limits.</b></div>
-      <div style="margin:5px 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b>Reference Standard : ISO
-          1940-2003(E)</b></div>
-
-
-      <div style="display: flex;margin: 15px;justify-content: space-around;">
-        <div style="padding-left: 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;">
-          <b> Operator </b>
-        </div>
-        <div style="padding-left: 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;">
-          <b> Q.C. Inspector </b>
-        </div>
+    <div style="margin:5px 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b>The above values are
+    well within Limits.</b></div>
+    <div style="margin:5px 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;"><b>Reference Standard : ISO
+    1940-2003(E)</b></div>
+    <div style="display: flex;margin: 15px;justify-content: space-around;">
+      <div style="padding-left: 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;">
+        <b> Operator </b>
       </div>
-
+      <div style="padding-left: 15px;font-size: 15px;font-family: sans-serif;font-weight: 700;">
+        <b> Q.C. Inspector </b>
+      </div>
     </div>
-
-
-    <div style="text-align: center;">
+  </div>
+  <div style="text-align: center;">
       <img src="/assets/images/footer.jpg" style="height: 100px;
     width: 30%;margin: 15px;">
-      <div> <b> An ISO 9001:2015 Certified Company </b> </div>
-    </div>
-
-
-  </ng-container>
-
+    <div> <b> An ISO 9001:2015 Certified Company </b> </div>
+  </div>
+}
 </div>
+}
 
 <mat-card>
 
@@ -378,272 +369,255 @@
 
     <!-- <form [formGroup]="formData" autocomplete="off">
 
-      <div class="d--flex p-1 mat-form-field-height">
+    <div class="d--flex p-1 mat-form-field-height">
 
-        <mat-form-field class="form-element">
-          <mat-label>{{ 'inspectioncheck.company' | translate }}</mat-label>
-          <mat-select formControlName="company" tabIndex="1">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field class="form-element">
+        <mat-label>{{ 'inspectioncheck.company' | translate }}</mat-label>
+        <mat-select formControlName="company" tabIndex="1">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+            {{comp.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{'inspectioncheck.plant' | translate }}</mat-label>
-          <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let plant of plantList" [value]="plant.id">
-              {{plant.text}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'inspectioncheck.plant' | translate }}</mat-label>
+        <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let plant of plantList" [value]="plant.id">
+            {{plant.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{'inspectioncheck.branch' | translate }}</mat-label>
-          <mat-select formControlName="branch" appFocusOnEnter tabIndex="3">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let branch of branchList" [value]="branch.id">
-              {{branch.text}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'inspectioncheck.branch' | translate }}</mat-label>
+        <mat-select formControlName="branch" appFocusOnEnter tabIndex="3">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let branch of branchList" [value]="branch.id">
+            {{branch.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{'inspectioncheck.department' | translate }}</mat-label>
-          <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let dept of fdeptList" [value]="dept.code">
-              {{dept.description}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-
-        <mat-form-field>
-          <mat-label [translate]="'inspectioncheck.project'"></mat-label>
-          <mat-select formControlName="project" appFocusOnEnter tabIndex="1">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let costUnit of costunitList" [value]="costUnit.id">
-              {{costUnit.text}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="form-element">
-          <mat-label [translate]="'inspectioncheck.bomorderNumber'"></mat-label>
-          <input matInput formControlName="bomorderNumber" appFocusOnEnter tabIndex="7">
-        </mat-form-field>
-
-        <mat-form-field class="form-element">
-          <mat-label [translate]="'inspectioncheck.requisitionNmber'"></mat-label>
-          <input matInput formControlName="requisitionNmber" appFocusOnEnter tabIndex="7">
-        </mat-form-field>
-
-        <mat-form-field class="form-element">
-          <mat-label [translate]="'inspectioncheck.requisitionDate'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="requisitionDate"
-            appFocusOnEnter tabIndex="3">
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'inspectioncheck.department' | translate }}</mat-label>
+        <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let dept of fdeptList" [value]="dept.code">
+            {{dept.description}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
 
+      <mat-form-field>
+        <mat-label [translate]="'inspectioncheck.project'"></mat-label>
+        <mat-select formControlName="project" appFocusOnEnter tabIndex="1">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let costUnit of costunitList" [value]="costUnit.id">
+            {{costUnit.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      </div>
-    </form> -->
+      <mat-form-field class="form-element">
+        <mat-label [translate]="'inspectioncheck.bomorderNumber'"></mat-label>
+        <input matInput formControlName="bomorderNumber" appFocusOnEnter tabIndex="7">
+      </mat-form-field>
 
-    <div>
-      <!-- <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
-        [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table> -->
-      <app-table class="table-css" [tableData]="tableData" [showButtons]="false" (onEditEmit)="onEditEmit($event)"
-        (onLinkEmitEvent)="downLoadFile1($event)">
-      </app-table>
+      <mat-form-field class="form-element">
+        <mat-label [translate]="'inspectioncheck.requisitionNmber'"></mat-label>
+        <input matInput formControlName="requisitionNmber" appFocusOnEnter tabIndex="7">
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label [translate]="'inspectioncheck.requisitionDate'"></mat-label>
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1"  formControlName="requisitionDate"
+          appFocusOnEnter tabIndex="3">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+
+
     </div>
+  </form> -->
+
+  <div>
+    <!-- <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
+  [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table> -->
+  <app-table class="table-css" [tableData]="tableData" [showButtons]="false" (onEditEmit)="onEditEmit($event)"
+    (onLinkEmitEvent)="downLoadFile1($event)">
+  </app-table>
+</div>
 
 
-  </mat-card-content>
+</mat-card-content>
 
-  <mat-card-content>
+<mat-card-content>
 
-    <h6>
-      Production Details
-    </h6>
+  <h6>
+    Production Details
+  </h6>
 
-    <form [formGroup]="formData1" autocomplete="off" *ngIf="tableData1 && tableData1.length">
-
+  @if (tableData1 && tableData1.length) {
+    <form [formGroup]="formData1" autocomplete="off">
       <div class="row p-1">
-
-          <mat-form-field class="col-2">
-            <mat-label>{{'inspectioncheck.completionDate' | translate }}</mat-label>
-            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" formControlName="completionDate">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field class="col-2">
-            <mat-label>{{'inspectioncheck.status' | translate }}</mat-label>
-            <mat-select formControlName="status" appFocusOnEnter tabIndex="3">
-              <mat-option>None</mat-option>
-              <mat-option value="QC Passed">QC Passed </mat-option>
-              <mat-option value="QC Rejected">QC Rejected </mat-option>
-              <mat-option value="Move To Production"> Move To Production </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-slide-toggle class="col-2 d-flex" formControlName="inspectionTypeValue" (change)="approveOrReject()">
-            {{(formData1.get('inspectionTypeValue').value) ? 'Sampling Inspection' : '100% Inspection'}}
-          </mat-slide-toggle>
-
-          <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData1.value?.completedBy?.length > 0">
-            <label> {{ 'inspectioncheck.completedBy' | translate }} </label>
-            <ng-multiselect-dropdown placeholder=" "
-              formControlName="completedBy" [settings]="dropdownSettings1" [data]="employeesList">
-            </ng-multiselect-dropdown>
-          </div>
-
-          <mat-form-field class="col-2">
-            <mat-label [translate]="'inspectioncheck.description'"></mat-label>
-            <input matInput formControlName="description" appFocusOnEnter tabIndex="3">
-          </mat-form-field>
-
-          <mat-form-field class="col-2">
-            <mat-label [translate]="'inspectioncheck.heatNumber'"></mat-label>
-            <input matInput formControlName="heatNumber" appFocusOnEnter tabIndex="4">
-          </mat-form-field>
-
-          <!-- <div class="multiselect-dropdown-list">
-            <ng-multiselect-dropdown placeholder="{{ 'inspectioncheck.materialgrade' | translate }}"
-              formControlName="materialgrade" [settings]="dropdownSettings" [data]="mpatternList" appFocusOnEnter
-              tabIndex="5">
-            </ng-multiselect-dropdown>
-          </div> -->
-          <!-- <mat-form-field class="form-element">
-            <mat-label [translate]="'inspectioncheck.partDrgNo'"></mat-label>
-            <input matInput formControlName="partDrgNo" appFocusOnEnter tabIndex="5">
-          </mat-form-field> -->
-
-          <div class="col-2 d-flex flex-column justify-content-center">
-            <label> {{ 'inspectioncheck.designDocument' | translate }} </label>
-            <span class="underscore" (click)="downLoadFile()"> sdf {{ icmasters?.filePath }} </span>
-          </div>
-
-          <!-- <mat-form-field>
-                        <mat-label>{{'inspectioncheck.typeofWork' | translate }}</mat-label>
-                        <mat-select formControlName="typeofWork" appFocusOnEnter tabIndex="1">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let emp of citemList" [value]="emp.description">
-                                {{emp.description}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>{{'inspectioncheck.allocatedPerson' | translate }}</mat-label>
-                        <mat-select formControlName="allocatedPerson" appFocusOnEnter tabIndex="2">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let emp of employeesList" [value]="emp.text">
-                                {{emp.id}}- {{emp.text}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>{{'inspectioncheck.mechine' | translate }}</mat-label>
-                        <mat-select formControlName="mechine" appFocusOnEnter tabIndex="3">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let emp of mechenaryList" [value]="emp.description">
-                                {{emp.description}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>{{'inspectioncheck.startDate' | translate }}</mat-label>
-
-                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" tabIndex="4"
-                            placeholder="{{'inspectioncheck.startDate' | translate }}" formControlName="startDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>{{'inspectioncheck.endDate' | translate }}</mat-label>
-
-                        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" tabIndex="5"
-                            placeholder="{{'inspectioncheck.endDate' | translate }}" formControlName="endDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                        <mat-datepicker #picker2></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field class="form-element">
-                        <mat-label [translate]="'inspectioncheck.remarks'"></mat-label>
-                        <input matInput formControlName="remarks" appFocusOnEnter tabIndex="4">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>{{'inspectioncheck.workStatus' | translate }}</mat-label>
-                        <mat-select formControlName="workStatus" appFocusOnEnter tabIndex="3">
-                            <mat-option>None</mat-option>
-                            <mat-option value="Assigned"> Assigned </mat-option>
-                            <mat-option value="In Progress"> In Progress </mat-option>
-                            <mat-option value="Completed"> Completed </mat-option>
-                            <mat-option value="Rejected"> Rejected </mat-option>
-                            <mat-option value="Assigned to QC"> Assigned to QC </mat-option>
-                        </mat-select>
-                    </mat-form-field> -->
-
-
-
-
-      </div>
-      <!-- <div class="mb-3 d-flex justify-content-end">
-
-        <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
-          {{ 'COMMON.UPDATE' | translate }}
-        </button>
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
-          {{ 'COMMON.RESET' | translate }}
-        </button>
-
+        <mat-form-field class="col-2">
+          <mat-label>{{'inspectioncheck.completionDate' | translate }}</mat-label>
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" formControlName="completionDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label>{{'inspectioncheck.status' | translate }}</mat-label>
+          <mat-select formControlName="status" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            <mat-option value="QC Passed">QC Passed </mat-option>
+            <mat-option value="QC Rejected">QC Rejected </mat-option>
+            <mat-option value="Move To Production"> Move To Production </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle class="col-2 d-flex" formControlName="inspectionTypeValue" (change)="approveOrReject()">
+          {{(formData1.get('inspectionTypeValue').value) ? 'Sampling Inspection' : '100% Inspection'}}
+        </mat-slide-toggle>
+        <div class="multiselect-dropdown-list floating-dropdown col-2" [class.filled]="formData1.value?.completedBy?.length > 0">
+          <label> {{ 'inspectioncheck.completedBy' | translate }} </label>
+          <ng-multiselect-dropdown placeholder=" "
+            formControlName="completedBy" [settings]="dropdownSettings1" [data]="employeesList">
+          </ng-multiselect-dropdown>
+        </div>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'inspectioncheck.description'"></mat-label>
+          <input matInput formControlName="description" appFocusOnEnter tabIndex="3">
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'inspectioncheck.heatNumber'"></mat-label>
+          <input matInput formControlName="heatNumber" appFocusOnEnter tabIndex="4">
+        </mat-form-field>
+        <!-- <div class="multiselect-dropdown-list">
+        <ng-multiselect-dropdown placeholder="{{ 'inspectioncheck.materialgrade' | translate }}"
+          formControlName="materialgrade" [settings]="dropdownSettings" [data]="mpatternList" appFocusOnEnter
+          tabIndex="5">
+        </ng-multiselect-dropdown>
       </div> -->
-
-    </form>
-
-    <div>
-      <app-table #tableRef class="table-css" [tableData]="tableData1" [showButtons]="false"
-        (editOrDeleteEvent)="editOrDeleteEvent($event)" (tableButtonEvent)="tableButtonEvent($event)"
-        (tableCheckboxEvent)="tableCheckboxEvent($event)">
-      </app-table>
+      <!-- <mat-form-field class="form-element">
+      <mat-label [translate]="'inspectioncheck.partDrgNo'"></mat-label>
+      <input matInput formControlName="partDrgNo" appFocusOnEnter tabIndex="5">
+    </mat-form-field> -->
+    <div class="col-2 d-flex flex-column justify-content-center">
+      <label> {{ 'inspectioncheck.designDocument' | translate }} </label>
+      <span class="underscore" (click)="downLoadFile()"> sdf {{ icmasters?.filePath }} </span>
     </div>
+    <!-- <mat-form-field>
+    <mat-label>{{'inspectioncheck.typeofWork' | translate }}</mat-label>
+    <mat-select formControlName="typeofWork" appFocusOnEnter tabIndex="1">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let emp of citemList" [value]="emp.description">
+        {{emp.description}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{'inspectioncheck.allocatedPerson' | translate }}</mat-label>
+    <mat-select formControlName="allocatedPerson" appFocusOnEnter tabIndex="2">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let emp of employeesList" [value]="emp.text">
+        {{emp.id}}- {{emp.text}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{'inspectioncheck.mechine' | translate }}</mat-label>
+    <mat-select formControlName="mechine" appFocusOnEnter tabIndex="3">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let emp of mechenaryList" [value]="emp.description">
+        {{emp.description}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{'inspectioncheck.startDate' | translate }}</mat-label>
+    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" tabIndex="4"
+      placeholder="{{'inspectioncheck.startDate' | translate }}" formControlName="startDate">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{'inspectioncheck.endDate' | translate }}</mat-label>
+    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" tabIndex="5"
+      placeholder="{{'inspectioncheck.endDate' | translate }}" formControlName="endDate">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="form-element">
+    <mat-label [translate]="'inspectioncheck.remarks'"></mat-label>
+    <input matInput formControlName="remarks" appFocusOnEnter tabIndex="4">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{'inspectioncheck.workStatus' | translate }}</mat-label>
+    <mat-select formControlName="workStatus" appFocusOnEnter tabIndex="3">
+      <mat-option>None</mat-option>
+      <mat-option value="Assigned"> Assigned </mat-option>
+      <mat-option value="In Progress"> In Progress </mat-option>
+      <mat-option value="Completed"> Completed </mat-option>
+      <mat-option value="Rejected"> Rejected </mat-option>
+      <mat-option value="Assigned to QC"> Assigned to QC </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+</div>
+<!-- <div class="mb-3 d-flex justify-content-end">
+<button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
+  {{ 'COMMON.UPDATE' | translate }}
+</button>
+<button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
+  {{ 'COMMON.RESET' | translate }}
+</button>
+</div> -->
+</form>
+}
+
+<div>
+  <app-table #tableRef class="table-css" [tableData]="tableData1" [showButtons]="false"
+    (editOrDeleteEvent)="editOrDeleteEvent($event)" (tableButtonEvent)="tableButtonEvent($event)"
+    (tableCheckboxEvent)="tableCheckboxEvent($event)">
+  </app-table>
+</div>
 
 
-  </mat-card-content>
-  <mat-card-content class="d-flex justify-content-end py-1">
+</mat-card-content>
+<mat-card-content class="d-flex justify-content-end py-1">
 
-    <div>
-      <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="print()">
-        {{ 'inspectioncheck.INSPECTIONPRINT' | translate }}
-      </button>
-      <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-        (click)="balanceingCertificatePrint()">
-        {{ 'inspectioncheck.BALANCECERTIFICATEPRINT' | translate }}
-      </button>
-      <!-- <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="balanceCertificate()">
-        {{ 'inspectioncheck.balancecertificate' | translate }}
-      </button> -->
-      <!-- <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="inspectioncheck()">
-        {{ 'inspectioncheck.inspectioncheck' | translate }}
-      </button> -->
-      <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
-        {{ 'COMMON.SAVE' | translate }}
-      </button>
-      <button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();">
-        {{ 'COMMON.RESET' | translate }}
-      </button>
-      <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
-        {{ 'COMMON.BACK' | translate }}
-      </button>
-      <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3" (click)="return();">
-        {{ 'COMMON.RETURN' | translate }}
-      </button>
-    </div>
+  <div>
+    <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="print()">
+      {{ 'inspectioncheck.INSPECTIONPRINT' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+      (click)="balanceingCertificatePrint()">
+      {{ 'inspectioncheck.BALANCECERTIFICATEPRINT' | translate }}
+    </button>
+    <!-- <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="balanceCertificate()">
+    {{ 'inspectioncheck.balancecertificate' | translate }}
+  </button> -->
+  <!-- <button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="inspectioncheck()">
+  {{ 'inspectioncheck.inspectioncheck' | translate }}
+</button> -->
+<button mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()">
+  {{ 'COMMON.SAVE' | translate }}
+</button>
+<button [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();">
+  {{ 'COMMON.RESET' | translate }}
+</button>
+<button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+  {{ 'COMMON.BACK' | translate }}
+</button>
+<button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3" (click)="return();">
+  {{ 'COMMON.RETURN' | translate }}
+</button>
+</div>
 
-  </mat-card-content>
+</mat-card-content>
 
 </mat-card>

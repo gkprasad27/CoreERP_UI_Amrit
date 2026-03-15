@@ -14,8 +14,10 @@
           <mat-label [translate]="'formulas.formulaKey'"></mat-label>
           <input matInput formControlName="formulaKey"
             maxlength="5" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.formulaKey.valid && formControls.formulaKey.status != 'DISABLED'"
+          @if (!formControls.formulaKey.valid && formControls.formulaKey.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.formulaKey.valid  }">Formula Key is required</mat-error>
+          }
 
         </mat-form-field>
 
@@ -30,17 +32,21 @@
           <mat-label [translate]="'formulas.description'"></mat-label>
           <input matInput  formControlName="description"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Description is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'formulas.formulaType' | translate }}</mat-label>
           <mat-select formControlName="formulaType" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ftype of formulaType" [value]="ftype.value">
-              {{ftype.viewValue}}
-            </mat-option>
+            @for (ftype of formulaType; track ftype) {
+              <mat-option [value]="ftype.value">
+                {{ftype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -48,9 +54,11 @@
           <mat-label>{{'formulas.formula' | translate }}</mat-label>
           <mat-select formControlName="formula" appFocusOnEnter tabIndex="4" (selectionChange)="contactFormula($event)">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let fbar of formula" [value]="fbar.value">
-              {{fbar.viewValue}}
-            </mat-option>
+            @for (fbar of formula; track fbar) {
+              <mat-option [value]="fbar.value">
+                {{fbar.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -59,9 +67,11 @@
           <mat-select formControlName="operatorType" appFocusOnEnter tabIndex="5"
             (selectionChange)="contactFormula($event)">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ftype of operatorType" [value]="ftype.value">
-              {{ftype.viewValue}}
-            </mat-option>
+            @for (ftype of operatorType; track ftype) {
+              <mat-option [value]="ftype.value">
+                {{ftype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

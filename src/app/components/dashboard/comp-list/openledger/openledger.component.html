@@ -9,41 +9,50 @@
 
       <div class="row">
 
-          <mat-form-field class="col-3">
+        <mat-form-field class="col-3">
           <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
           <mat-select formControlName="compCode" appFocusOnEnter tabIndex="0">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
+            @for (comp of companyList; track comp) {
+              <mat-option [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error
-            *ngIf="!formControls.compCode.valid && formControls.compCode.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.compCode.valid  }"> Company Code is
-            required
-          </mat-error>
+          @if (!formControls.compCode.valid && formControls.compCode.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.compCode.valid  }"> Company Code is
+              required
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.ledgerKey.valid && formControls.ledgerKey.status != 'DISABLED', 
            'ng--invalid': !formControls.ledgerKey.valid && formControls.ledgerKey.status != 'DISABLED' }">
           <mat-label>{{'openledger.ledgerKey' | translate }}</mat-label>
           <mat-select formControlName="ledgerKey" appFocusOnEnter tabIndex="1">
-            <mat-option *ngFor="let ledger of ledgerList" [value]="ledger.code">
-              {{ledger.description}}
-            </mat-option>
+            @for (ledger of ledgerList; track ledger) {
+              <mat-option [value]="ledger.code">
+                {{ledger.description}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.ledgerKey.valid && formControls.ledgerKey.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.ledgerKey.valid  }">
+          @if (!formControls.ledgerKey.valid && formControls.ledgerKey.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.ledgerKey.valid  }">
             Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'openledger.financialYearStartFrom'"></mat-label>
           <mat-select formControlName="financialYearStartFrom" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ltype of financialYearEndTo" [value]="ltype.value">
-              {{ltype.value}} - {{ltype.viewValue}}
-            </mat-option>
+            @for (ltype of financialYearEndTo; track ltype) {
+              <mat-option [value]="ltype.value">
+                {{ltype.value}} - {{ltype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -51,9 +60,11 @@
           <mat-label [translate]="'openledger.financialYearEndTo'"></mat-label>
           <mat-select formControlName="financialYearEndTo" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ltype of financialYearEndTo" [value]="ltype.value">
-              {{ltype.value}} - {{ltype.viewValue}}
-            </mat-option>
+            @for (ltype of financialYearEndTo; track ltype) {
+              <mat-option [value]="ltype.value">
+                {{ltype.value}} - {{ltype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

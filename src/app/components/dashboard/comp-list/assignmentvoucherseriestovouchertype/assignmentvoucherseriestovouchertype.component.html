@@ -12,9 +12,11 @@
           <mat-label>{{'assignmentofvoucherseriestovouchertype.voucherType' | translate }}</mat-label>
           <mat-select formControlName="voucherType" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let vttype of vtypeList" [value]="vttype.voucherTypeId">
-              {{vttype.voucherTypeName}}
-            </mat-option>
+            @for (vttype of vtypeList; track vttype) {
+              <mat-option [value]="vttype.voucherTypeId">
+                {{vttype.voucherTypeName}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -22,9 +24,11 @@
           <mat-label>{{'assignmentofvoucherseriestovouchertype.voucherSeries' | translate }}</mat-label>
           <mat-select formControlName="voucherSeries" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let vcList of vcList" [value]="vcList.id">
-              {{vcList.id}}
-            </mat-option>
+            @for (vcList of vcList; track vcList) {
+              <mat-option [value]="vcList.id">
+                {{vcList.id}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -36,7 +40,7 @@
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'assignmentofvoucherseriestovouchertype.lastNumber'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="lastNumber" appFocusOnEnter tabIndex="5">
         </mat-form-field>
       </div>

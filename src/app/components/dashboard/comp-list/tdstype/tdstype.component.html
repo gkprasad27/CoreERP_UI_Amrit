@@ -12,9 +12,11 @@
           <mat-label [translate]="'tdstypes.tdsCode'"></mat-label>
           <input matInput formControlName="tdsCode" maxlength="5"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.tdsCode.valid &&formControls.tdsCode.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.tdsCode.valid  }">Code
+          @if (!formControls.tdsCode.valid &&formControls.tdsCode.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.tdsCode.valid  }">Code
             is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -22,8 +24,10 @@
           <mat-label [translate]="'tdstypes.desctiption'"></mat-label>
           <input matInput formControlName="desctiption"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.desctiption.valid"
+          @if (!formControls.desctiption.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.desctiption.valid  }">Name is required</mat-error>
+          }
         </mat-form-field>
       </div>
       <mat-divider></mat-divider>

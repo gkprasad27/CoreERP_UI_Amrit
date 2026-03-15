@@ -1,10 +1,10 @@
 <div class="form-element p-2 d-flex justify-content-end">
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="print()">
-        {{ 'COMMON.PRINT' | translate }}
-    </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="print()">
+    {{ 'COMMON.PRINT' | translate }}
+  </button>
 </div>
 <div style="margin: 10px;" id="printData">
-    <div style="display: flex;">
+  <div style="display: flex;">
         <img src="/assets/images/header.jpg" style="height: 100px;
         width: 65%;">
         <div style="padding: 24px;
@@ -19,175 +19,179 @@
         display: flex;
         height: 50px;
     "> {{ data.heading }} </div>
+  </div>
+
+  <div style="border-top: 1px solid black; display: flex;">
+    <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
+      <b> PO Number </b>
+      <span style="padding-left: 80px;">: {{ data?.headingObj?.purchaseOrderNumber }} </span>
     </div>
-
-    <div style="border-top: 1px solid black; display: flex;">
-        <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b> PO Number </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.purchaseOrderNumber }} </span>
-        </div>
-        <div style="width: 50%;padding-left: 15px;">
-            <b> Date </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.purchaseOrderDate | date }} </span>
-        </div>
+    <div style="width: 50%;padding-left: 15px;">
+      <b> Date </b>
+      <span style="padding-left: 80px;">: {{ data?.headingObj?.purchaseOrderDate | date }} </span>
     </div>
+  </div>
 
-    <div style="border-top: 1px solid black; display: flex;">
-        <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;">
-            <b> ADDRESS </b>
-            <div>{{ data?.headingObj?.address.companyName }}</div>
-            <div>{{ data?.headingObj?.address.address }}, {{ data?.headingObj?.address.address1 }}</div>
-            <div>{{ data?.headingObj?.address.city }}, {{ data?.headingObj?.address.stateName }}, {{ data?.headingObj?.address.pin }}</div>
-            <div>Phone: {{ data?.headingObj?.address.phone  }}</div>
-            <div>Email: {{ data?.headingObj?.address.email  }}</div>
-        </div>
-        <div style="width: 50%;padding-left: 15px;padding-top: 10px;">
-            <div style="display: flex;">
-                <span style="width: 200px;"> Dispatch Mode </span>
-                <span style="padding-left: 80px;">: By Road </span>
-            </div>
-            <div style="display: flex;">
-                <span style="width: 200px;"> Terms of delivery </span>
-                <span style="padding-left: 80px;">:  </span>
-            </div>
-            <div style="display: flex;">
-                <span style="width: 200px;"> Terms of payment </span>
-                <span style="padding-left: 80px;">:  </span>
-            </div>
-            <div style="display: flex;">
-                <span style="width: 200px;"> Currency </span>
-                <span style="padding-left: 80px;">: Rs </span>
-            </div>
-            <div style="display: flex;">
-                <span style="width: 200px;"> Our enquiry reference </span>
-                <span style="padding-left: 80px;">:  </span>
-            </div>
-            <div style="display: flex;">
-                <span style="width: 200px;"> Material </span>
-                <span style="padding-left: 80px;">:  </span>
-            </div>
-        </div>
+  <div style="border-top: 1px solid black; display: flex;">
+    <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;">
+      <b> ADDRESS </b>
+      <div>{{ data?.headingObj?.address.companyName }}</div>
+      <div>{{ data?.headingObj?.address.address }}, {{ data?.headingObj?.address.address1 }}</div>
+      <div>{{ data?.headingObj?.address.city }}, {{ data?.headingObj?.address.stateName }}, {{ data?.headingObj?.address.pin }}</div>
+      <div>Phone: {{ data?.headingObj?.address.phone  }}</div>
+      <div>Email: {{ data?.headingObj?.address.email  }}</div>
     </div>
-
-    <div style="border-top: 1px solid black; display: flex;">
-        <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Vendor Name & Address </b>
-        </div>
-        <div style="width: 50%;padding-left: 15px;">
-            <b> Deliver to this address </b>
-        </div>
+    <div style="width: 50%;padding-left: 15px;padding-top: 10px;">
+      <div style="display: flex;">
+        <span style="width: 200px;"> Dispatch Mode </span>
+        <span style="padding-left: 80px;">: By Road </span>
+      </div>
+      <div style="display: flex;">
+        <span style="width: 200px;"> Terms of delivery </span>
+        <span style="padding-left: 80px;">:  </span>
+      </div>
+      <div style="display: flex;">
+        <span style="width: 200px;"> Terms of payment </span>
+        <span style="padding-left: 80px;">:  </span>
+      </div>
+      <div style="display: flex;">
+        <span style="width: 200px;"> Currency </span>
+        <span style="padding-left: 80px;">: Rs </span>
+      </div>
+      <div style="display: flex;">
+        <span style="width: 200px;"> Our enquiry reference </span>
+        <span style="padding-left: 80px;">:  </span>
+      </div>
+      <div style="display: flex;">
+        <span style="width: 200px;"> Material </span>
+        <span style="padding-left: 80px;">:  </span>
+      </div>
     </div>
+  </div>
 
-    <div style="border-top: 1px solid black; display: flex; ">
-        <div
-            style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
-            <div>{{ data?.headingObj?.vAddress?.companyName }}</div>
-            <div>{{ data?.headingObj?.vAddress?.address }}, {{ data?.headingObj?.vAddress?.address1 }}</div>
-            <div>{{ data?.headingObj?.vAddress?.city }}, {{ data?.headingObj?.vAddress?.stateName }}, {{ data?.headingObj?.vAddress?.pin }}</div>
-            <!-- <div>Phone: {{ data?.headingObj?.vAddress?.phone  }}</div>
-            <div>Email: {{ data?.headingObj?.vAddress?.email  }}</div> -->
-
-            <b style="margin-top: 10px;"> GSTIN : {{ data?.headingObj?.vAddress?.gstno }}</b>
-        </div>
-        <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <div>{{ data?.headingObj?.pAddress?.companyName }}</div>
-            <div>{{ data?.headingObj?.pAddress?.address }}, {{ data?.headingObj?.pAddress?.address1 }}</div>
-            <div>{{ data?.headingObj?.pAddress?.city }}, {{ data?.headingObj?.pAddress?.stateName }}, {{ data?.headingObj?.pAddress?.pin }}</div>
-            <div>Phone: {{ data?.headingObj?.pAddress?.phone  }}</div>
-            <div>Email: {{ data?.headingObj?.pAddress?.email  }}</div>
-
-            <b style="margin-top: 10px;"> GSTIN : {{ data?.headingObj?.pAddress?.gstno }}</b>
-        </div>
+  <div style="border-top: 1px solid black; display: flex;">
+    <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
+      <b> Vendor Name & Address </b>
     </div>
-
-    <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;" *ngIf="data.detailArray && data.detailArray.length">
-        <table style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
-            <thead>
-                <tr>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Product Code </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Description </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Quantity </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Unit Weight </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Total Weight </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Price/KG </th>
-                    <th> Total Amount </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;" *ngFor="let row of data.detailArray; let i = index">
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialCode }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialName }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.netWeight }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty * row.netWeight}} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
-                </tr>
-                <tr style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;" colspan="2"> Grand Totals </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">Weight</td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{ data.headingObj1.amount }}</td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">Amount</td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{ data.headingObj1.totalAmount }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div style="width: 50%;padding-left: 15px;">
+      <b> Deliver to this address </b>
     </div>
+  </div>
+
+  <div style="border-top: 1px solid black; display: flex; ">
+    <div
+      style="width: 50%;padding-left: 15px;border-right: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
+      <div>{{ data?.headingObj?.vAddress?.companyName }}</div>
+      <div>{{ data?.headingObj?.vAddress?.address }}, {{ data?.headingObj?.vAddress?.address1 }}</div>
+      <div>{{ data?.headingObj?.vAddress?.city }}, {{ data?.headingObj?.vAddress?.stateName }}, {{ data?.headingObj?.vAddress?.pin }}</div>
+      <!-- <div>Phone: {{ data?.headingObj?.vAddress?.phone  }}</div>
+      <div>Email: {{ data?.headingObj?.vAddress?.email  }}</div> -->
+
+      <b style="margin-top: 10px;"> GSTIN : {{ data?.headingObj?.vAddress?.gstno }}</b>
+    </div>
+    <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
+      <div>{{ data?.headingObj?.pAddress?.companyName }}</div>
+      <div>{{ data?.headingObj?.pAddress?.address }}, {{ data?.headingObj?.pAddress?.address1 }}</div>
+      <div>{{ data?.headingObj?.pAddress?.city }}, {{ data?.headingObj?.pAddress?.stateName }}, {{ data?.headingObj?.pAddress?.pin }}</div>
+      <div>Phone: {{ data?.headingObj?.pAddress?.phone  }}</div>
+      <div>Email: {{ data?.headingObj?.pAddress?.email  }}</div>
+
+      <b style="margin-top: 10px;"> GSTIN : {{ data?.headingObj?.pAddress?.gstno }}</b>
+    </div>
+  </div>
+
+  @if (data.detailArray && data.detailArray.length) {
+    <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;">
+      <table style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+        <thead>
+          <tr>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Product Code </th>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Description </th>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Quantity </th>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Unit Weight </th>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Total Weight </th>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Price/KG </th>
+            <th> Total Amount </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of data.detailArray; track row; let i = $index) {
+            <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;">
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialCode }} </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialName }} </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty }} </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.netWeight }} </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.qty * row.netWeight}} </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.rate }} </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
+            </tr>
+          }
+          <tr style="border-top: 1px solid black; text-align: start;font-weight: bold;-webkit-print-color-adjust: exact;">
+            <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;" colspan="2"> Grand Totals </td>
+            <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
+            <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"></td>
+            <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">Weight</td>
+            <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{ data.headingObj1.amount }}</td>
+            <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">Amount</td>
+            <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">{{ data.headingObj1.totalAmount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  }
 
 
-    <div style="border-top: 1px solid black; display: flex; font-size: 15px;">
-        <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <b> Total amount in words: </b>
-            <div> {{ commonService.convertNumberToWords(data.headingObj?.totalAmount) }} </div>
+  <div style="border-top: 1px solid black; display: flex; font-size: 15px;">
+    <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
+      <b> Total amount in words: </b>
+      <div> {{ commonService.convertNumberToWords(data.headingObj?.totalAmount) }} </div>
 
+    </div>
+    <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
+      <div style="padding-left: 15px;padding-top: 10px;">
+        <div style="display: flex;">
+          <b style="width: 300px;"> Total Amount Before Tax </b>
+          <span style="padding-left: 80px;"> {{ data.headingObj?.amount }} </span>
         </div>
-        <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
-            <div style="padding-left: 15px;padding-top: 10px;">
-                <div style="display: flex;">
-                    <b style="width: 300px;"> Total Amount Before Tax </b>
-                    <span style="padding-left: 80px;"> {{ data.headingObj?.amount }} </span>
-                </div>
-                <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;"> Add: {{ data.headingObj1?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ data.headingObj?.cgst }} </span>
-                </div>
-                <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;"> Add: {{ data.headingObj1?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ data.headingObj?.sgst }} </span>
-                </div>
-                <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;"> Add: {{ data.headingObj1?.taxCode }} </b>
-                    <span style="padding-left: 80px;"> {{ data.headingObj?.igst }} </span>
-                </div>
-                <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;"> Total Amount with GST </b>
-                    <span style="padding-left: 80px;"> {{ data.headingObj?.totalAmount }} </span>
-                </div>
-                <div style="display: flex;border-top: 1px solid black;">
-                    <b style="width: 300px;"> Total Payable Reverse Charges </b>
-                    <span style="padding-left: 80px;">  </span>
-                </div>
-            </div>
+        <div style="display: flex;border-top: 1px solid black;">
+          <b style="width: 300px;"> Add: {{ data.headingObj1?.taxCode }} </b>
+          <span style="padding-left: 80px;"> {{ data.headingObj?.cgst }} </span>
         </div>
+        <div style="display: flex;border-top: 1px solid black;">
+          <b style="width: 300px;"> Add: {{ data.headingObj1?.taxCode }} </b>
+          <span style="padding-left: 80px;"> {{ data.headingObj?.sgst }} </span>
+        </div>
+        <div style="display: flex;border-top: 1px solid black;">
+          <b style="width: 300px;"> Add: {{ data.headingObj1?.taxCode }} </b>
+          <span style="padding-left: 80px;"> {{ data.headingObj?.igst }} </span>
+        </div>
+        <div style="display: flex;border-top: 1px solid black;">
+          <b style="width: 300px;"> Total Amount with GST </b>
+          <span style="padding-left: 80px;"> {{ data.headingObj?.totalAmount }} </span>
+        </div>
+        <div style="display: flex;border-top: 1px solid black;">
+          <b style="width: 300px;"> Total Payable Reverse Charges </b>
+          <span style="padding-left: 80px;">  </span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div style="border-top: 1px solid black;font-size: 15px;">
-        The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
-        PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
-        SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMT POWER TRANSMISSION RESERVES THE RIGHT TO WITH HOLD
-        ANY PAYMENT UNTIL SUCH TIME THAT A VALID TAX INVOICE IS PROVIDE
-    </div>
+  <div style="border-top: 1px solid black;font-size: 15px;">
+    The "TERMS AND CONDITIONS OF PURCHASE" ATTACHED TO THIS PURCHASE ORDER ARE A PART HEREOF, SHALL GOVERNTHE
+    PURCHASE OF THE ABOVE ITEMS, ARE BINDING UPON THE PARTIES, AND SUPPLIER ANY INCONSISTENT TERMS CONTAINED IN
+    SUPPLIER'S INVOICE OR OTHER DOCUMENT. PLEASE NOTE THAT AMT POWER TRANSMISSION RESERVES THE RIGHT TO WITH HOLD
+    ANY PAYMENT UNTIL SUCH TIME THAT A VALID TAX INVOICE IS PROVIDE
+  </div>
 
-    <div style="text-align: center;">
+  <div style="text-align: center;">
         <img src="/assets/images/footer.jpg" style="height: 100px;
         width: 20%;">
-    </div>
+  </div>
 
-    <div style="display: flex;">
+  <div style="display: flex;">
         <img src="/assets/images/header.jpg" style="height: 100px;
         width: 65%;">
         <h3 style="padding: 24px;
@@ -202,73 +206,73 @@
         display: flex;
         height: 50px;
     "> {{ data.heading }} </h3>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>WARRANTIES:</b>
+    <div>
+      The supplier shall guarantee that the goods are made from best material with first class workmanship and
+      will qualify to all quality
+      specifications and performance specification with us. The supplier shall guarantee the goods will give
+      satisfactory performance for the
+      period of 18 months from the date of putting in to operation or the date of invoice whichever is later. In
+      case of repair, replacement, it
+      would be at the expense of supplier only and the warranty period will be proportionately extended.
+    </div>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>GENERAL NOTES:</b>
+    <ol>
+      <li>The supplier shall thoroughly inspect before dispatch of goods.</li>
+      <li>A pre dispatch inspection report is mandatory which will state clearly the invoice Number and our PO
+      details.</li>
+      <li> Supplier should comply the requirements mentioned in our PO with respect to grade or material,
+        international standards to be
+      followed.</li>
+      <li>Our end customer may visit your premises during our business audit or ISO audit. You are requested to
+      cooperate for the same.</li>
+      <li>'Heat No. should be mentioned in the pre dispatch inspection report.</li>
+      <li> Hereby you are agreed to maintain secrecy of our specifications mentioned in our purchase order and
+        should not disclosed outside
+      people who are there in the similar line of business with you.</li>
+    </ol>
+
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>GENERAL TERMS:</b>
+    <ol>
+      <li>Please send acceptance of PO within seven days; Non-receipt of acceptance within seven days shall be
+        considered as acceptance of
+      the order.</li>
+      <li> In case of insurance by TPP, please furnish dispatch details by fax, email, immediately.</li>
+      <li> Material which is not as per specification mentioned in the P.O is liable to be rejected and returned
+      at your cost and risk</li>
+      <li>Submit bill in duplicate.</li>
+      <li> Kindly address all your correspondence to the address as given above.</li>
+      <li>All disputes shall be under the provisions of The India Arbitration and Reconciliations Act 1996 and
+        shall be subject to jurisdiction of
+      Hyderabad Courts, Telangana, India only.</li>
+    </ol>
+
+  </div>
+
+  <div style="margin-bottom: 15px;display: flex;">
+
+    <div style="width: 50%;">
+      <b> Prepared By: </b>
+    </div>
+    <div style="width: 50%;">
+      <b> For AMT Power Transmission </b>
     </div>
 
-    <div style="margin-bottom: 15px;">
-        <b>WARRANTIES:</b>
-        <div>
-            The supplier shall guarantee that the goods are made from best material with first class workmanship and
-            will qualify to all quality
-            specifications and performance specification with us. The supplier shall guarantee the goods will give
-            satisfactory performance for the
-            period of 18 months from the date of putting in to operation or the date of invoice whichever is later. In
-            case of repair, replacement, it
-            would be at the expense of supplier only and the warranty period will be proportionately extended.
-        </div>
-    </div>
+  </div>
 
-    <div style="margin-bottom: 15px;">
-        <b>GENERAL NOTES:</b>
-        <ol>
-            <li>The supplier shall thoroughly inspect before dispatch of goods.</li>
-            <li>A pre dispatch inspection report is mandatory which will state clearly the invoice Number and our PO
-                details.</li>
-            <li> Supplier should comply the requirements mentioned in our PO with respect to grade or material,
-                international standards to be
-                followed.</li>
-            <li>Our end customer may visit your premises during our business audit or ISO audit. You are requested to
-                cooperate for the same.</li>
-            <li>'Heat No. should be mentioned in the pre dispatch inspection report.</li>
-            <li> Hereby you are agreed to maintain secrecy of our specifications mentioned in our purchase order and
-                should not disclosed outside
-                people who are there in the similar line of business with you.</li>
-        </ol>
+  <div style="margin-bottom: 15px;">
 
-    </div>
+    <b> Signature/Date..................................................................... </b>
 
-    <div style="margin-bottom: 15px;">
-        <b>GENERAL TERMS:</b>
-        <ol>
-            <li>Please send acceptance of PO within seven days; Non-receipt of acceptance within seven days shall be
-                considered as acceptance of
-                the order.</li>
-            <li> In case of insurance by TPP, please furnish dispatch details by fax, email, immediately.</li>
-            <li> Material which is not as per specification mentioned in the P.O is liable to be rejected and returned
-                at your cost and risk</li>
-            <li>Submit bill in duplicate.</li>
-            <li> Kindly address all your correspondence to the address as given above.</li>
-            <li>All disputes shall be under the provisions of The India Arbitration and Reconciliations Act 1996 and
-                shall be subject to jurisdiction of
-                Hyderabad Courts, Telangana, India only.</li>
-        </ol>
-
-    </div>
-
-    <div style="margin-bottom: 15px;display: flex;">
-
-        <div style="width: 50%;">
-            <b> Prepared By: </b>
-        </div>
-        <div style="width: 50%;">
-            <b> For AMT Power Transmission </b>
-        </div>
-
-    </div>
-
-    <div style="margin-bottom: 15px;">
-
-            <b> Signature/Date..................................................................... </b>
-
-    </div>
+  </div>
 
 </div>

@@ -11,9 +11,11 @@
           <mat-label [translate]="'accountgroup.groupCode'"></mat-label>
           <input matInput disabled formControlName="groupCode"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.groupCode.valid  &&formControls.groupCode.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.groupCode.valid  }">
+          @if (!formControls.groupCode.valid  &&formControls.groupCode.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.groupCode.valid  }">
             Group Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -21,14 +23,16 @@
           <mat-label [translate]="'accountgroup.groupName'"></mat-label>
           <input matInput formControlName="groupName"
             appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.groupName.valid"
-            [ngClass]="{ 'ng--invalid': !formControls.groupName.valid  }">
+          @if (!formControls.groupName.valid) {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.groupName.valid  }">
             Group Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'accountgroup.numberRangeFrom'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="numberRangeFrom" (change)="validationcode()" appFocusOnEnter tabIndex="3">
         </mat-form-field>
         <mat-form-field class="col-3">
@@ -40,9 +44,11 @@
           <mat-label [translate]="'accountgroup.groupType'"></mat-label>
           <mat-select formControlName="groupType" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ltype of groupTypes" [value]="ltype.viewValue">
-              {{ltype.viewValue}}
-            </mat-option>
+            @for (ltype of groupTypes; track ltype) {
+              <mat-option [value]="ltype.viewValue">
+                {{ltype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>

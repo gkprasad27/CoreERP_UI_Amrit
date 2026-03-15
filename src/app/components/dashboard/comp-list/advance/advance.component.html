@@ -8,130 +8,146 @@
 
       <div class="row">
         <!-- <mat-form-field class="form-element">
-          <input matInput placeholder="{{'advance.employeeId' | translate }}"
-                 (input)="getProductByProductCode($event.target.value)" class="typeahead"
-                 [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'
-                 formControlName="employeeId" appFocusOnEnter tabIndex="1">
-        </mat-form-field> -->
+        <input matInput placeholder="{{'advance.employeeId' | translate }}"
+          (input)="getProductByProductCode($event.target.value)" class="typeahead"
+          [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'
+          formControlName="employeeId" appFocusOnEnter tabIndex="1">
+      </mat-form-field> -->
 
-        <div class="multiselect-dropdown-list floating-dropdown col-3" [class.filled]="modelFormData.value?.employeeId?.length > 0" *ngIf="dropdownSettings">
+      @if (dropdownSettings) {
+        <div class="multiselect-dropdown-list floating-dropdown col-3" [class.filled]="modelFormData.value?.employeeId?.length > 0">
           <label> {{ 'advance.employeeId' | translate }} </label>
           <ng-multiselect-dropdown placeholder=" "
             formControlName="employeeId"  [settings]="dropdownSettings" [data]="employeesList">
           </ng-multiselect-dropdown>
         </div>
-       
-        <mat-form-field class="col-3">
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'advance.applyDate' | translate }}"
-                 formControlName="applyDate" appFocusOnEnter tabIndex="1">
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
+      }
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'advance.advanceType' | translate }}</mat-label>
-          <mat-select formControlName="advanceType">
-            <mat-option *ngFor="let comp of advanceList" [value]="comp.advanceTypeId">
+      <mat-form-field class="col-3">
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'advance.applyDate' | translate }}"
+          formControlName="applyDate" appFocusOnEnter tabIndex="1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-3">
+        <mat-label>{{'advance.advanceType' | translate }}</mat-label>
+        <mat-select formControlName="advanceType">
+          @for (comp of advanceList; track comp) {
+            <mat-option [value]="comp.advanceTypeId">
               {{comp.advanceTypeName}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field  class="col-3">
-          <input matInput placeholder="{{'advance.advanceAmount' | translate }}" formControlName="advanceAmount" appFocusOnEnter tabIndex="2">
-        </mat-form-field>
+      <mat-form-field  class="col-3">
+        <input matInput placeholder="{{'advance.advanceAmount' | translate }}" formControlName="advanceAmount" appFocusOnEnter tabIndex="2">
+      </mat-form-field>
 
-        <mat-form-field  class="col-3">
-          <input matInput placeholder="{{'advance.reason' | translate }}" formControlName="reason" appFocusOnEnter tabIndex="3">
-        </mat-form-field>
-
-
-        <mat-form-field  class="col-3">
-          <input matInput placeholder="{{'advance.status' | translate }}" formControlName="status" appFocusOnEnter tabIndex="3">
-        </mat-form-field>
-
-        <mat-form-field  class="col-3">
-          <input matInput type="number" placeholder="{{'advance.balance' | translate }}" formControlName="balance" appFocusOnEnter tabIndex="3">
-        </mat-form-field>
-
-        <mat-form-field  class="col-3">
-          <input matInput type="number" placeholder="{{'advance.deductedAmount' | translate }}" formControlName="deductedAmount" appFocusOnEnter tabIndex="3">
-        </mat-form-field>
-        
-                <mat-form-field class="col-3" >
-                    <mat-label [translate]="'advance.startYear'"></mat-label>
-                    <mat-select formControlName="startYear" appFocusOnEnter tabIndex="1">
-                        <mat-option readonly>None</mat-option>
-                        <mat-option *ngFor="let comp of startYear" [value]="comp">
-                            {{comp}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error
-                        *ngIf="!modelFormData.controls.startYear.valid && modelFormData.controls.startYear.status != 'DISABLED'"
-                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.startYear.valid  }"> This field is required
-                    </mat-error>
-                </mat-form-field>
+      <mat-form-field  class="col-3">
+        <input matInput placeholder="{{'advance.reason' | translate }}" formControlName="reason" appFocusOnEnter tabIndex="3">
+      </mat-form-field>
 
 
-                <mat-form-field class="col-3" >
-                    <mat-label [translate]="'advance.startMonth'"></mat-label>
-                    <mat-select formControlName="startMonth" appFocusOnEnter tabIndex="1">
-                        <mat-option readonly>None</mat-option>
-                        <mat-option *ngFor="let comp of startMonth" [value]="comp">
-                            {{comp}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error
-                        *ngIf="!modelFormData.controls.startMonth.valid && modelFormData.controls.startMonth.status != 'DISABLED'"
-                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.startMonth.valid  }"> This field is required
-                    </mat-error>
-                </mat-form-field>
+      <mat-form-field  class="col-3">
+        <input matInput placeholder="{{'advance.status' | translate }}" formControlName="status" appFocusOnEnter tabIndex="3">
+      </mat-form-field>
+
+      <mat-form-field  class="col-3">
+        <input matInput type="number" placeholder="{{'advance.balance' | translate }}" formControlName="balance" appFocusOnEnter tabIndex="3">
+      </mat-form-field>
+
+      <mat-form-field  class="col-3">
+        <input matInput type="number" placeholder="{{'advance.deductedAmount' | translate }}" formControlName="deductedAmount" appFocusOnEnter tabIndex="3">
+      </mat-form-field>
+
+      <mat-form-field class="col-3" >
+        <mat-label [translate]="'advance.startYear'"></mat-label>
+        <mat-select formControlName="startYear" appFocusOnEnter tabIndex="1">
+          <mat-option readonly>None</mat-option>
+          @for (comp of startYear; track comp) {
+            <mat-option [value]="comp">
+              {{comp}}
+            </mat-option>
+          }
+        </mat-select>
+        @if (!modelFormData.controls.startYear.valid && modelFormData.controls.startYear.status != 'DISABLED') {
+          <mat-error
+            [ngClass]="{ 'ng--invalid': !modelFormData.controls.startYear.valid  }"> This field is required
+          </mat-error>
+        }
+      </mat-form-field>
 
 
-                <mat-form-field class="col-3" >
-                    <mat-label [translate]="'advance.endYear'"></mat-label>
-                    <mat-select formControlName="endYear" appFocusOnEnter tabIndex="1">
-                        <mat-option readonly>None</mat-option>
-                        <mat-option *ngFor="let comp of endYear" [value]="comp">
-                            {{comp}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error
-                        *ngIf="!modelFormData.controls.endYear.valid && modelFormData.controls.endYear.status != 'DISABLED'"
-                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.endYear.valid  }"> This field is required
-                    </mat-error>
-                </mat-form-field>
+      <mat-form-field class="col-3" >
+        <mat-label [translate]="'advance.startMonth'"></mat-label>
+        <mat-select formControlName="startMonth" appFocusOnEnter tabIndex="1">
+          <mat-option readonly>None</mat-option>
+          @for (comp of startMonth; track comp) {
+            <mat-option [value]="comp">
+              {{comp}}
+            </mat-option>
+          }
+        </mat-select>
+        @if (!modelFormData.controls.startMonth.valid && modelFormData.controls.startMonth.status != 'DISABLED') {
+          <mat-error
+            [ngClass]="{ 'ng--invalid': !modelFormData.controls.startMonth.valid  }"> This field is required
+          </mat-error>
+        }
+      </mat-form-field>
 
 
-                <mat-form-field class="col-3" >
-                    <mat-label [translate]="'advance.endYear'"></mat-label>
-                    <mat-select formControlName="endYear" appFocusOnEnter tabIndex="1">
-                        <mat-option readonly>None</mat-option>
-                        <mat-option *ngFor="let comp of endYear" [value]="comp">
-                            {{comp}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error
-                        *ngIf="!modelFormData.controls.endYear.valid && modelFormData.controls.endYear.status != 'DISABLED'"
-                        [ngClass]="{ 'ng--invalid': !modelFormData.controls.endYear.valid  }"> This field is required
-                    </mat-error>
-                </mat-form-field>
+      <mat-form-field class="col-3" >
+        <mat-label [translate]="'advance.endYear'"></mat-label>
+        <mat-select formControlName="endYear" appFocusOnEnter tabIndex="1">
+          <mat-option readonly>None</mat-option>
+          @for (comp of endYear; track comp) {
+            <mat-option [value]="comp">
+              {{comp}}
+            </mat-option>
+          }
+        </mat-select>
+        @if (!modelFormData.controls.endYear.valid && modelFormData.controls.endYear.status != 'DISABLED') {
+          <mat-error
+            [ngClass]="{ 'ng--invalid': !modelFormData.controls.endYear.valid  }"> This field is required
+          </mat-error>
+        }
+      </mat-form-field>
 
 
-      </div>
-      <mat-divider></mat-divider>
+      <mat-form-field class="col-3" >
+        <mat-label [translate]="'advance.endYear'"></mat-label>
+        <mat-select formControlName="endYear" appFocusOnEnter tabIndex="1">
+          <mat-option readonly>None</mat-option>
+          @for (comp of endYear; track comp) {
+            <mat-option [value]="comp">
+              {{comp}}
+            </mat-option>
+          }
+        </mat-select>
+        @if (!modelFormData.controls.endYear.valid && modelFormData.controls.endYear.status != 'DISABLED') {
+          <mat-error
+            [ngClass]="{ 'ng--invalid': !modelFormData.controls.endYear.valid  }"> This field is required
+          </mat-error>
+        }
+      </mat-form-field>
 
-      <div class="form-element mt-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-          {{ 'COMMON.CANCEL' | translate }}
-        </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
-                tabIndex="5">
-                {{ 'COMMON.SAVE' | translate }}
-        </button>
-      </div>
 
-    </form>
+    </div>
+    <mat-divider></mat-divider>
 
-  </mat-card-content>
+    <div class="form-element mt-2 d-flex justify-content-end">
+      <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+        {{ 'COMMON.CANCEL' | translate }}
+      </button>
+      <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+        tabIndex="5">
+        {{ 'COMMON.SAVE' | translate }}
+      </button>
+    </div>
+
+  </form>
+
+</mat-card-content>
 </div>

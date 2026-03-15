@@ -1,38 +1,36 @@
-<mat-card *ngIf="user.role == '1'">
-    
+@if (user.role == '1') {
+  <mat-card>
     <mat-card-content>
-
-        <div  class="row">
-            <div class="col-6">
-                <app-table class="table-css" [showButtons]="false" [tableData]="tableData" [routeParam]="'ordervssales'"></app-table>
-            </div>
-            <div class="col-6" *ngIf="chartOptions">
-                <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
-            </div>
+      <div  class="row">
+        <div class="col-6">
+          <app-table class="table-css" [showButtons]="false" [tableData]="tableData" [routeParam]="'ordervssales'"></app-table>
         </div>
-        
+        @if (chartOptions) {
+          <div class="col-6">
+            <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
+          </div>
+        }
+      </div>
     </mat-card-content>
-
     <mat-card-content>
-
-        <div  class="row">
-            <div class="col-6">
-                <app-table class="table-css" [showButtons]="false" [tableData]="tableData1" [routeParam]="'dashboardGraph'"></app-table>
-            </div>
-            <div class="col-6" *ngIf="chartOptions1">
-                <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions1"></highcharts-chart>
-            </div>
+      <div  class="row">
+        <div class="col-6">
+          <app-table class="table-css" [showButtons]="false" [tableData]="tableData1" [routeParam]="'dashboardGraph'"></app-table>
         </div>
-        
+        @if (chartOptions1) {
+          <div class="col-6">
+            <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions1"></highcharts-chart>
+          </div>
+        }
+      </div>
     </mat-card-content>
-
     <!-- <mat-card-content>
-        <div class="row">
-            <div class="col-12" style="text-align: center; margin-top: 20px;">
-                <button mat-raised-button color="primary" (click)="fileInput.click()">Upload Excel</button>
-                <input #fileInput type="file" accept=".xlsx, .xls" style="display: none;" (change)="onFileChange($event)" />
-            </div>
-        </div>
-    </mat-card-content> -->
-
+    <div class="row">
+      <div class="col-12" style="text-align: center; margin-top: 20px;">
+        <button mat-raised-button color="primary" (click)="fileInput.click()">Upload Excel</button>
+        <input #fileInput type="file" accept=".xlsx, .xls" style="display: none;" (change)="onFileChange($event)" />
+      </div>
+    </div>
+  </mat-card-content> -->
 </mat-card>
+}

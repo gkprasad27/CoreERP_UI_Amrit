@@ -11,22 +11,22 @@
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3" [class.filled]="modelFormData.value?.empCode?.length > 0" >
           <label> {{ 'applyod.empCode' | translate }} </label>
           <input matInput placeholder=" "
-                 (typeaheadOnSelect)="onSearchChange($event)" class="typeahead"
-                 (input)="getProductByProductCode($event.target.value)"
-                 [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'
-                 formControlName="empCode" appFocusOnEnter tabIndex="1">
+            (typeaheadOnSelect)="onSearchChange($event)" class="typeahead"
+            (input)="getProductByProductCode($event.target.value)"
+            [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'
+            formControlName="empCode" appFocusOnEnter tabIndex="1">
         </div>
 
         <mat-form-field class="col-3">
           <input matInput placeholder=" {{'applyod.empName' | translate }} " class="typeahead"
-                 formControlName="empName" [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'
-                 appFocusOnEnter tabIndex="2">
+            formControlName="empName" [typeaheadOptionsLimit]="100000" [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'
+            appFocusOnEnter tabIndex="2">
 
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" placeholder="{{'applyod.applDate' | translate }}"
-                 formControlName="applDate">
+            formControlName="applDate">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
@@ -38,9 +38,11 @@
         <mat-form-field class="col-3">
           <mat-label>Transport</mat-label>
           <mat-select formControlName="transport" placeholder="transport">
-            <mat-option *ngFor="let session of sessions" [value]="session.value">
-              {{session.viewValue}}
-            </mat-option>
+            @for (session of sessions; track session) {
+              <mat-option [value]="session.value">
+                {{session.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -54,7 +56,7 @@
 
         <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" placeholder="{{'applyod.fromDate' | translate }}"
-                 (dateChange)="orgValueChange()" formControlName="fromDate">
+            (dateChange)="orgValueChange()" formControlName="fromDate">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
@@ -65,7 +67,7 @@
 
         <mat-form-field class="col-3">
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" placeholder="{{'applyod.toDate' | translate }}"
-                 (dateChange)="leaveToValueChange()" formControlName="toDate">
+            (dateChange)="leaveToValueChange()" formControlName="toDate">
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>
         </mat-form-field>
@@ -86,7 +88,7 @@
           {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
-                tabIndex="5">
+          tabIndex="5">
           ApplyOd
         </button>
       </div>

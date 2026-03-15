@@ -13,16 +13,20 @@
            'ng--invalid': !formControls.purchaseType.valid&& formControls.purchaseType.status != 'DISABLED' }">
           <mat-label [translate]="'purchasingtype.purchaseType'"></mat-label>
           <input matInput formControlName="purchaseType" maxlength="5" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.purchaseType.valid && formControls.purchaseType.status != 'DISABLED'"
+          @if (!formControls.purchaseType.valid && formControls.purchaseType.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.purchaseType.valid  }">Purchase Type Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
           <mat-label [translate]="'purchasingtype.description'"></mat-label>
           <input matInput formControlName="description" maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Purchase Type Name is required</mat-error>
+          }
         </mat-form-field>
 
       </div>

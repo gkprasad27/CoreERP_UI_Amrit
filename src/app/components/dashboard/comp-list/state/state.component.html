@@ -12,9 +12,11 @@
           <mat-label [translate]="'state.stateCode'"></mat-label>
           <input matInput  formControlName="stateCode" appFocusOnEnter
             tabIndex="1" maxlength="5">
-          <mat-error *ngIf="!formControls.stateCode.valid && formControls.stateCode.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.stateCode.valid  }">
+          @if (!formControls.stateCode.valid && formControls.stateCode.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.stateCode.valid  }">
             State Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="form-element"
@@ -22,18 +24,22 @@
           <mat-label [translate]="'state.stateName'"></mat-label>
           <input matInput  formControlName="stateName" appFocusOnEnter
             tabIndex="2" maxlength="50">
-          <mat-error *ngIf="!formControls.stateName.valid"
-            [ngClass]="{ 'ng--invalid': !formControls.stateName.valid  }">
+          @if (!formControls.stateName.valid) {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.stateName.valid  }">
             State Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>{{'state.countryCode' | translate }}</mat-label>
           <mat-select formControlName="countryCode" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ctry of countrysList" [value]="ctry.id">
-              {{ctry.text}}
-            </mat-option>
+            @for (ctry of countrysList; track ctry) {
+              <mat-option [value]="ctry.id">
+                {{ctry.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -41,9 +47,11 @@
           <mat-label>{{'state.language' | translate }}</mat-label>
           <mat-select formControlName="language" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let lng of languageList" [value]="lng.id">
-              {{lng.text}}
-            </mat-option>
+            @for (lng of languageList; track lng) {
+              <mat-option [value]="lng.id">
+                {{lng.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>

@@ -10,19 +10,23 @@
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.numberRange.valid && formControls.numberRange.status != 'DISABLED',
            'ng--invalid': !formControls.numberRange.valid && formControls.numberRange.status != 'DISABLED' }">
           <mat-label [translate]="'quotationnumberrange.numberRange'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="numberRange" maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.numberRange.valid&& formControls.numberRange.status != 'DISABLED'"
+          @if (!formControls.numberRange.valid&& formControls.numberRange.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.numberRange.valid  }"> Number Range is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.fromInterval.valid, 'ng--invalid': !formControls.fromInterval.valid  }">
           <mat-label [translate]="'quotationnumberrange.fromInterval'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="fromInterval" maxlength="30" (change)="validationcode()" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.fromInterval.valid"
+          @if (!formControls.fromInterval.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.fromInterval.valid  }"> From Interval is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -32,7 +36,7 @@
         </mat-form-field>
         <mat-form-field class="col-3">
           <mat-label [translate]="'quotationnumberrange.currentNumber'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="currentNumber" maxlength="30" appFocusOnEnter tabIndex="4">
         </mat-form-field>
         <mat-form-field class="col-3">

@@ -8,74 +8,82 @@
     <form [formGroup]="modelFormData" autocomplete="off">
       <div class="row">
 
- 
+
         <!-- <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.userName.valid, 'ng--invalid': !formControls.userName.valid  }">
-          <mat-label [translate]="'erpuser.userName'"></mat-label>
-          <mat-select formControlName="userName">
-            <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-              {{emp.text}}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="!formControls.userName.valid" [ngClass]="{ 'ng--invalid': !formControls.userName.valid  }">
-            User Name is required</mat-error>
-        </mat-form-field> -->
+        <mat-label [translate]="'erpuser.userName'"></mat-label>
+        <mat-select formControlName="userName">
+          <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
+            {{emp.text}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!formControls.userName.valid" [ngClass]="{ 'ng--invalid': !formControls.userName.valid  }">
+        User Name is required</mat-error>
+      </mat-form-field> -->
 
 
-        <mat-form-field class="col-3"
-          [ngClass]="{ 'ng--valid': formControls.userName.valid, 'ng--invalid': !formControls.userName.valid  }">
-          <mat-label [translate]="'erpuser.userName'"></mat-label>
-          <input matInput formControlName="userName" maxlength="50"
-            appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.userName.valid" [ngClass]="{ 'ng--invalid': !formControls.userName.valid  }">
-            User Name is required</mat-error>
-        </mat-form-field>
+      <mat-form-field class="col-3"
+        [ngClass]="{ 'ng--valid': formControls.userName.valid, 'ng--invalid': !formControls.userName.valid  }">
+        <mat-label [translate]="'erpuser.userName'"></mat-label>
+        <input matInput formControlName="userName" maxlength="50"
+          appFocusOnEnter tabIndex="2">
+        @if (!formControls.userName.valid) {
+          <mat-error [ngClass]="{ 'ng--invalid': !formControls.userName.valid  }">
+          User Name is required</mat-error>
+        }
+      </mat-form-field>
 
-        <mat-form-field class="col-3"
-          [ngClass]="{ 'ng--valid': formControls.password.valid, 'ng--invalid': !formControls.password.valid  }">
-          <mat-label [translate]="'erpuser.password'"></mat-label>
-          <input matInput formControlName="password" maxlength="50"
-            appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.password.valid" [ngClass]="{ 'ng--invalid': !formControls.password.valid  }">
-            Password is required</mat-error>
-        </mat-form-field>
+      <mat-form-field class="col-3"
+        [ngClass]="{ 'ng--valid': formControls.password.valid, 'ng--invalid': !formControls.password.valid  }">
+        <mat-label [translate]="'erpuser.password'"></mat-label>
+        <input matInput formControlName="password" maxlength="50"
+          appFocusOnEnter tabIndex="2">
+        @if (!formControls.password.valid) {
+          <mat-error [ngClass]="{ 'ng--invalid': !formControls.password.valid  }">
+          Password is required</mat-error>
+        }
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'erpuser.role'"></mat-label>
-          <mat-select formControlName="role" appFocusOnEnter tabIndex="3">
-            <mat-option *ngFor="let role of RolesList" [value]="role.roleId">
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'erpuser.role'"></mat-label>
+        <mat-select formControlName="role" appFocusOnEnter tabIndex="3">
+          @for (role of RolesList; track role) {
+            <mat-option [value]="role.roleId">
               {{role.roleId}} - {{role.role}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'erpuser.companyCode'"></mat-label>
-          <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="5">
-            <mat-option *ngFor="let comp of companyList" [value]="comp.companyCode">
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'erpuser.companyCode'"></mat-label>
+        <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="5">
+          @for (comp of companyList; track comp) {
+            <mat-option [value]="comp.companyCode">
               {{comp.companyCode}}- {{comp.companyName}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <div class="col-1 d-flex align-items-center p-2">
-          <mat-slide-toggle formControlName="active" (change)="approveOrReject($event.checked)">
-            {{(modelFormData.get('active').value != null) ? 'Active' : 'InActive '}}
-          </mat-slide-toggle>
-        </div>
-
+      <div class="col-1 d-flex align-items-center p-2">
+        <mat-slide-toggle formControlName="active" (change)="approveOrReject($event.checked)">
+          {{(modelFormData.get('active').value != null) ? 'Active' : 'InActive '}}
+        </mat-slide-toggle>
       </div>
-      <mat-divider></mat-divider>
-    </form>
-  </mat-card-content>
 
-  <div class="form-element mt-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-      {{ 'COMMON.CANCEL' | translate }}
-    </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
-      tabIndex="25">
-      {{ 'COMMON.SAVE' | translate }}
-    </button>
-  </div>
+    </div>
+    <mat-divider></mat-divider>
+  </form>
+</mat-card-content>
+
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+    tabIndex="25">
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 
 </div>

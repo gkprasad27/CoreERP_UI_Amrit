@@ -14,12 +14,12 @@ import { CompListService } from './comp-list.service';
 import { ApiConfigService } from '../../../services/api-config.service';
 import { AddOrEditService } from './add-or-edit.service';
 import { CommonService } from '../../../services/common.service';
-import { CommonModule } from '@angular/common';
+
 import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-comp-list',
-  imports: [CommonModule, TableComponent],
+  imports: [TableComponent],
   templateUrl: './comp-list.component.html',
   styleUrls: ['./comp-list.component.scss']
 })

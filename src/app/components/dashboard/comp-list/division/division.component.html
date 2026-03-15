@@ -9,12 +9,14 @@
       <div class="row">
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid && formControls.code.status != 'DISABLED',
             'ng--invalid': !formControls.code.valid && formControls.code.status != 'DISABLED' }">
-            <mat-label [translate]="'division.code'"></mat-label>
+          <mat-label [translate]="'division.code'"></mat-label>
           <input matInput formControlName="code" appFocusOnEnter
             tabIndex="1" maxlength="5">
-          <mat-error *ngIf="!formControls.code.valid && formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Division
+          @if (!formControls.code.valid && formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Division
             Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -22,26 +24,32 @@
           <mat-label [translate]="'division.description'"></mat-label>
           <input matInput formControlName="description"
             appFocusOnEnter tabIndex="2" maxlength="50">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Division Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'division.responsiblePerson' | translate }}</mat-label>
           <mat-select formControlName="responsiblePerson" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-              {{emp.id}} - {{emp.text}}
-            </mat-option>
+            @for (emp of employeesList; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.id}} - {{emp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'division.active'"></mat-label>
           <mat-select formControlName="active" appFocusOnEnter tabIndex="4">
-            <mat-option *ngFor="let active of active" [value]="active.value">
-              {{active.viewValue}}
-            </mat-option>
+            @for (active of active; track active) {
+              <mat-option [value]="active.value">
+                {{active.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>

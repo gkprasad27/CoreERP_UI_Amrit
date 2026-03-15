@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -31,7 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-productstatus',
-    imports: [CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, TableComponent, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
+    imports: [ReactiveFormsModule, TranslatePipe, TranslateModule, NgMultiSelectDropDownModule, TableComponent, TypeaheadModule, NonEditableDatepicker, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
     templateUrl: './productstatus.component.html',
     styleUrls: ['./productstatus.component.scss'],
     providers: [

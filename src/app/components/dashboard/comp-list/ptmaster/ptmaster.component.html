@@ -4,62 +4,82 @@
     <span> {{'ptmaster.title' | translate }} </span>
     <mat-icon class="p-2 cursor--pointer" (click)="cancel()">close</mat-icon>
   </mat-card-title>
-    
-    <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
-       <form [formGroup]="modelFormData" autocomplete="off">
-  
-        <div class="row">
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="row">
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.ptslab.valid }" >
           <input matInput placeholder="{{'ptmaster.ptslab' | translate }}" disabled formControlName="ptslab" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="formControls.ptslab.errors" class="help-block">
-            <div *ngIf="formControls.ptslab.errors.required">PT Slab is required </div>
-          </mat-error>
-  
+          @if (formControls.ptslab.errors) {
+            <mat-error class="help-block">
+              @if (formControls.ptslab.errors.required) {
+                <div>PT Slab is required </div>
+              }
+            </mat-error>
+          }
+
         </mat-form-field>
-  
+
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.location.valid }">
           <input matInput placeholder="{{'ptmaster.location' | translate }}" formControlName="location" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="formControls.location.errors" class="help-block">
-            <div *ngIf="formControls.location.errors.required">Location is required</div>
-          </mat-error>
+          @if (formControls.location.errors) {
+            <mat-error class="help-block">
+              @if (formControls.location.errors.required) {
+                <div>Location is required</div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
-  
+
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.ptlowerLimit.valid }" >
           <input matInput placeholder="{{'ptmaster.ptlowerLimit' | translate }}" formControlName="ptlowerLimit" appFocusOnEnter tabIndex="3">
-          <mat-error *ngIf="formControls.ptlowerLimit.errors" class="help-block">
-            <div *ngIf="formControls.ptlowerLimit.errors.required">pt lowerLimit required and Only Numbers Allow </div>
-          </mat-error>
+          @if (formControls.ptlowerLimit.errors) {
+            <mat-error class="help-block">
+              @if (formControls.ptlowerLimit.errors.required) {
+                <div>pt lowerLimit required and Only Numbers Allow </div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.ptupperLimit.valid }" >
           <input matInput placeholder="{{'ptmaster.ptupperLimit' | translate }}" formControlName="ptupperLimit" appFocusOnEnter tabIndex="3">
-          <mat-error *ngIf="formControls.ptupperLimit.errors" class="help-block">
-            <div *ngIf="formControls.ptupperLimit.errors.required">pt upperLimit and required Only Numbers Allow </div>
-          </mat-error>
+          @if (formControls.ptupperLimit.errors) {
+            <mat-error class="help-block">
+              @if (formControls.ptupperLimit.errors.required) {
+                <div>pt upperLimit and required Only Numbers Allow </div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
-      
+
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.ptamt.valid }" >
           <input matInput placeholder="{{'ptmaster.ptamt' | translate }}" formControlName="ptamt" appFocusOnEnter tabIndex="4">
-          <mat-error *ngIf="formControls.ptamt.errors" class="help-block">
-            <div *ngIf="formControls.ptamt.errors.required">PT Amount is required and Only Numbers Allow </div>
-          </mat-error>
+          @if (formControls.ptamt.errors) {
+            <mat-error class="help-block">
+              @if (formControls.ptamt.errors.required) {
+                <div>PT Amount is required and Only Numbers Allow </div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
       </div>
       <mat-divider></mat-divider>
-  
-       
-  
-      </form>
-  
-    </mat-card-content>
-      <div  class="form-element mt-2 d-flex justify-content-end">
+
+
+
+    </form>
+
+  </mat-card-content>
+  <div  class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mr=x-1"  (click)="cancel()">
-      
+
       {{ 'COMMON.CANCEL' | translate }}
     </button>
-        <button mat-raised-button  type="submit" class="button-color-bule text-white mx-1"  (click)="save()" appFocusOnEnter tabIndex="4">
-          
-          {{ 'COMMON.SAVE' | translate }}
-         </button>
+    <button mat-raised-button  type="submit" class="button-color-bule text-white mx-1"  (click)="save()" appFocusOnEnter tabIndex="4">
+
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
   </div>
-  </div>
+</div>

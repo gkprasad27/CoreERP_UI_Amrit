@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -31,7 +31,7 @@ import { FileUploadComponent } from '../../../../reuse-components/file-upload/fi
 
 @Component({
   selector: 'app-receipt-of-goods',
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, NonEditableDatepicker, TranslateModule, FileUploadComponent, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
+  imports: [ReactiveFormsModule, TranslatePipe, NonEditableDatepicker, TranslateModule, FileUploadComponent, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './receipt-of-goods.component.html',
   styleUrls: ['./receipt-of-goods.component.scss'],
   providers: [

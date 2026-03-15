@@ -14,9 +14,11 @@
           <mat-label [translate]="'binscreation.binNumber'"></mat-label>
           <input matInput formControlName="binNumber"
             maxlength="5" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.binNumber.valid  && formControls.binNumber.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.binNumber.valid  }">
+          @if (!formControls.binNumber.valid  && formControls.binNumber.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.binNumber.valid  }">
             Bin Number is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -24,17 +26,21 @@
           <mat-label [translate]="'binscreation.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'binscreation.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plant of plantsList" [value]="plant.id">
-              {{plant.text}}
-            </mat-option>
+            @for (plant of plantsList; track plant) {
+              <mat-option [value]="plant.id">
+                {{plant.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -42,9 +48,11 @@
           <mat-label>{{'binscreation.storageLocation' | translate }}</mat-label>
           <mat-select formControlName="storageLocation" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let stloc of stlocList" [value]="stloc.code">
-              {{stloc.name}}
-            </mat-option>
+            @for (stloc of stlocList; track stloc) {
+              <mat-option [value]="stloc.code">
+                {{stloc.name}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -52,9 +60,11 @@
           <mat-label>{{'binscreation.material' | translate }}</mat-label>
           <mat-select formControlName="material" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let mtype of mmasterList" [value]="mtype.id">
-              {{mtype.text}}
-            </mat-option>
+            @for (mtype of mmasterList; track mtype) {
+              <mat-option [value]="mtype.id">
+                {{mtype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -86,9 +96,11 @@
           <mat-label>{{'binscreation.uom' | translate }}</mat-label>
           <mat-select formControlName="uom" appFocusOnEnter tabIndex="10">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let uom of UomList" [value]="uom.id">
-              {{uom.text}}
-            </mat-option>
+            @for (uom of UomList; track uom) {
+              <mat-option [value]="uom.id">
+                {{uom.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -96,9 +108,11 @@
           <mat-label>{{'binscreation.storeIncharge' | translate }}</mat-label>
           <mat-select formControlName="storeIncharge" appFocusOnEnter tabIndex="11">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let emp of emplist" [value]="emp.id">
-              {{emp.id}}- {{emp.text}}
-            </mat-option>
+            @for (emp of emplist; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.id}}- {{emp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

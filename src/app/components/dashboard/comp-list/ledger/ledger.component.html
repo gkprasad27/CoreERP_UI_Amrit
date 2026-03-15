@@ -14,9 +14,11 @@
           <mat-label [translate]="'ledger.code'"></mat-label>
           <input matInput formControlName="code" maxlength="5"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid  && formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
+          @if (!formControls.code.valid  && formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -24,17 +26,21 @@
           <mat-label [translate]="'ledger.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'ledger.ledgerType'"></mat-label>
           <mat-select formControlName="ledgerType" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ltype of ledgertype" [value]="ltype.viewValue">
-              {{ltype.viewValue}}
-            </mat-option>
+            @for (ltype of ledgertype; track ltype) {
+              <mat-option [value]="ltype.viewValue">
+                {{ltype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -42,9 +48,11 @@
           <mat-label>{{'ledger.ext' | translate }}</mat-label>
           <mat-select formControlName="ext" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cncy of currencyList" [value]="cncy.id">
-              {{cncy.text}}
-            </mat-option>
+            @for (cncy of currencyList; track cncy) {
+              <mat-option [value]="cncy.id">
+                {{cncy.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

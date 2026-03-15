@@ -1,98 +1,106 @@
 <mat-card>
 
-    <mat-card-content>
+  <mat-card-content>
 
-        <form [formGroup]="formData" autocomplete="off">
+    <form [formGroup]="formData" autocomplete="off">
 
-            <div class="row p-1">
+      <div class="row p-1">
 
-                <!-- <mat-form-field class="col-2">
-                    <mat-label>{{ 'quotationanalysis.company' | translate }}</mat-label>
-                    <mat-select formControlName="company">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                            {{comp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
+        <!-- <mat-form-field class="col-2">
+        <mat-label>{{ 'quotationanalysis.company' | translate }}</mat-label>
+        <mat-select formControlName="company">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+            {{comp.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
 
-                <mat-form-field class="col-2">
-                    <mat-label>{{'quotationanalysis.plant' | translate }}</mat-label>
-                    <mat-select formControlName="plant" appFocusOnEnter tabIndex="12">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let pnt of plantList" [value]="pnt.plantCode">
-                            {{pnt.plantCode}} - {{pnt.plantname}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-
-                <mat-form-field class="col-2">
-                    <mat-label>{{ 'quotationanalysis.branch' | translate }}</mat-label>
-                    <mat-select formControlName="branch">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let branch of branchList" [value]="branch.id">
-                            {{branch.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label>{{'quotationanalysis.profitCenter' | translate }}</mat-label>
-                    <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="6">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let pft of profitCenterList" [value]="pft.code">
-                            {{pft.code}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'quotationanalysis.supplier'"></mat-label>
-                    <mat-select formControlName="supplier" appFocusOnEnter tabIndex="2">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let bptype of bpaList" [value]="bptype.bpnumber">
-                            {{bptype.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'quotationanalysis.quotationNumber'"></mat-label>
-                    <input matInput type="number" formControlName="quotationNumber" maxlength="50" appFocusOnEnter tabIndex="2">
-                </mat-form-field>
-
-            </div>
-
-        </form>
+      <mat-form-field class="col-2">
+        <mat-label>{{'quotationanalysis.plant' | translate }}</mat-label>
+        <mat-select formControlName="plant" appFocusOnEnter tabIndex="12">
+          <mat-option>None</mat-option>
+          @for (pnt of plantList; track pnt) {
+            <mat-option [value]="pnt.plantCode">
+              {{pnt.plantCode}} - {{pnt.plantname}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
 
 
-        <div>
-            <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
-                [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
-        </div>
+      <mat-form-field class="col-2">
+        <mat-label>{{ 'quotationanalysis.branch' | translate }}</mat-label>
+        <mat-select formControlName="branch">
+          <mat-option>None</mat-option>
+          @for (branch of branchList; track branch) {
+            <mat-option [value]="branch.id">
+              {{branch.text}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-2">
+        <mat-label>{{'quotationanalysis.profitCenter' | translate }}</mat-label>
+        <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="6">
+          <mat-option>None</mat-option>
+          @for (pft of profitCenterList; track pft) {
+            <mat-option [value]="pft.code">
+              {{pft.code}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-2">
+        <mat-label [translate]="'quotationanalysis.supplier'"></mat-label>
+        <mat-select formControlName="supplier" appFocusOnEnter tabIndex="2">
+          <mat-option>None</mat-option>
+          @for (bptype of bpaList; track bptype) {
+            <mat-option [value]="bptype.bpnumber">
+              {{bptype.name}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-2">
+        <mat-label [translate]="'quotationanalysis.quotationNumber'"></mat-label>
+        <input matInput type="number" formControlName="quotationNumber" maxlength="50" appFocusOnEnter tabIndex="2">
+      </mat-form-field>
+
+    </div>
+
+  </form>
 
 
-    </mat-card-content>
+  <div>
+    <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
+    [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
+  </div>
 
-    <mat-card-content class="d-flex justify-content-end py-1">
 
-        <button [hidden]="routeEdit != ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-            (click)="save()">
-            {{ 'COMMON.SAVE' | translate }}
-        </button>
-        <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
-            {{ 'COMMON.BACK' | translate }}
-        </button>
-        <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
-            (click)="reset();">
-            {{ 'COMMON.RESET' | translate }}
-        </button>
-        <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
-            (click)="return();">
-            {{ 'COMMON.RETURN' | translate }}
-        </button>
+</mat-card-content>
 
-    </mat-card-content>
+<mat-card-content class="d-flex justify-content-end py-1">
+
+  <button [hidden]="routeEdit != ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+    (click)="save()">
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+  <button mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+    {{ 'COMMON.BACK' | translate }}
+  </button>
+  <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
+    (click)="reset();">
+    {{ 'COMMON.RESET' | translate }}
+  </button>
+  <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
+    (click)="return();">
+    {{ 'COMMON.RETURN' | translate }}
+  </button>
+
+</mat-card-content>
 
 </mat-card>

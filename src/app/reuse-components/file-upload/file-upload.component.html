@@ -1,33 +1,46 @@
 <input type="file" [multiple]="multiple" #myFileInput class="" id="Image{{id}}" (change)="onSelectFilebase($event)"
-    hidden>
+  hidden>
 
-<div [ngSwitch]="type">
-    <div *ngSwitchDefault>
+<div>
+  @switch (type) {
+    @default {
+      <div>
         <button id="uploadfile" class="jc-button-small my-2" (click)="myFileInput.click()"><i class="fa-solid fa-arrow-up-from-bracket"></i><b> UPLOAD</b></button>
-    </div>
-    <div *ngSwitchCase="'card'">
-        <div *ngIf="fileList.length">
-            <div class="resume-uplod file-uploaded height-50" *ngFor="let file of fileList; let i = index">
+      </div>
+    }
+    @case ('card') {
+      <div>
+        @if (fileList.length) {
+          <div>
+            @for (file of fileList; track file; let i = $index) {
+              <div class="resume-uplod file-uploaded height-50">
                 <div class="d-flex">
-                    <!-- <img src="assets/images/{{ getFileExtension(file.name) }}.svg" class="mb-2 mt-2" height="40px" width="40px" alt="logo"> -->
-                    <b class="file-name cursor-p"><a (click)="openFile(file)"> <span>{{ file.name }} </span></a> </b>
-
+                  <!-- <img src="assets/images/{{ getFileExtension(file.name) }}.svg" class="mb-2 mt-2" height="40px" width="40px" alt="logo"> -->
+                  <b class="file-name cursor-p"><a (click)="openFile(file)"> <span>{{ file.name }} </span></a> </b>
                 </div>
                 <mat-icon class="d-flex align-items-center" (click)="clearFile(i)"> close </mat-icon>
                 <!-- <span class="ml-3 cursor-p" (click)="clearFile(i)"><img
-                        src="assets/images/close.png" class="close-popup" alt="logo"></span> -->
+              src="assets/images/close.png" class="close-popup" alt="logo"></span> -->
             </div>
+          }
         </div>
-        <div class="file-upload cursor-p float-left ml-3" *ngIf="!fileList.length">
-            <div class="image-upload-wrap" (click)="myFileInput.click()">
-                <div class="drag-text">
-                    <span> Choose File </span>
-                    <!-- <img src="assets/images/folder.png" class="mb-2 mt-2" alt="logo"> -->
-                    <!-- <h3> <span  > {{ fileUploadMessage }} </span></h3> -->
-                    <b class="format">(Format: <span *ngFor="let ext of fileExtension"> .{{ ext }} </span> within ( 2Mb
-                        ))</b>
-                </div>
+      }
+      @if (!fileList.length) {
+        <div class="file-upload cursor-p float-left ml-3">
+          <div class="image-upload-wrap" (click)="myFileInput.click()">
+            <div class="drag-text">
+              <span> Choose File </span>
+              <!-- <img src="assets/images/folder.png" class="mb-2 mt-2" alt="logo"> -->
+              <!-- <h3> <span  > {{ fileUploadMessage }} </span></h3> -->
+              <b class="format">(Format: @for (ext of fileExtension; track ext) {
+                <span> .{{ ext }} </span>
+                } within ( 2Mb
+              ))</b>
             </div>
+          </div>
         </div>
+      }
     </div>
+  }
+}
 </div>

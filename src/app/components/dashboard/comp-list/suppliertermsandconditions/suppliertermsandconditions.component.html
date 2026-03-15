@@ -13,30 +13,34 @@
           <mat-label [translate]="'suppliertermsandconditions.code'"></mat-label>
           <input matInput  formControlName="code"
             maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid && formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
+          @if (!formControls.code.valid && formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
           <mat-label [translate]="'suppliertermsandconditions.description'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="description" maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.deliveryPeriod'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="deliveryPeriod" maxlength="12" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.deliveryDate'"></mat-label>
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2"
-             formControlName="deliveryDate"
+            formControlName="deliveryDate"
             appFocusOnEnter tabIndex="3">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
@@ -48,25 +52,27 @@
           <mat-label [translate]="'suppliertermsandconditions.deliveryMethod'"></mat-label>
           <mat-select formControlName="deliveryMethod" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let method of methodtype" [value]="method.value">
-              {{method.viewValue}}
-            </mat-option>
+            @for (method of methodtype; track method) {
+              <mat-option [value]="method.value">
+                {{method.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.deliveryPlace'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="deliveryPlace" maxlength="30" appFocusOnEnter tabIndex="6">
         </mat-form-field>
         <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.contactPerson'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="contactPerson" maxlength="30" appFocusOnEnter tabIndex="7">
         </mat-form-field>
         <mat-form-field class="col-3">
           <mat-label [translate]="'suppliertermsandconditions.phoneNumber'"></mat-label>
-          <input matInput 
+          <input matInput
             formControlName="phoneNumber" maxlength="12" appFocusOnEnter tabIndex="8">
         </mat-form-field>
         <mat-form-field class="col-3">

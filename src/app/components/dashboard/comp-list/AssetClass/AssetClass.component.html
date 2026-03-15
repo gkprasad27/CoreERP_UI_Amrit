@@ -13,8 +13,10 @@
           <mat-label [translate]="'AssetClass.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid &&formControls.code.status != 'DISABLED'"
+          @if (!formControls.code.valid &&formControls.code.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -22,8 +24,10 @@
           <mat-label [translate]="'AssetClass.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Name is required</mat-error>
+          }
         </mat-form-field>
 
 
@@ -31,9 +35,11 @@
           <mat-label>{{'AssetClass.numberRange' | translate }}</mat-label>
           <mat-select formControlName="numberRange" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let nrr of nrrList" [value]="nrr.code">
-              {{nrr.code}}
-            </mat-option>
+            @for (nrr of nrrList; track nrr) {
+              <mat-option [value]="nrr.code">
+                {{nrr.code}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -41,9 +47,11 @@
           <mat-label [translate]="'AssetClass.classType'"></mat-label>
           <mat-select formControlName="classType" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cltype of classtype" [value]="cltype.value">
-              {{cltype.viewValue}}
-            </mat-option>
+            @for (cltype of classtype; track cltype) {
+              <mat-option [value]="cltype.value">
+                {{cltype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -51,9 +59,11 @@
           <mat-label [translate]="'AssetClass.nature'"></mat-label>
           <mat-select formControlName="nature" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let nature of Nature" [value]="nature.value">
-              {{nature.viewValue}}
-            </mat-option>
+            @for (nature of Nature; track nature) {
+              <mat-option [value]="nature.value">
+                {{nature.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

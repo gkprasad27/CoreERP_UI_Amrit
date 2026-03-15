@@ -1,7 +1,9 @@
 <mat-sidenav-container>
   <mat-sidenav #appDrawer mode="over" opened="false">
     <mat-nav-list class="m-2">
-      <app-sidebar *ngFor="let item of navItems"  [item]="item"></app-sidebar>
+      @for (item of navItems; track item) {
+        <app-sidebar  [item]="item"></app-sidebar>
+      }
     </mat-nav-list>
   </mat-sidenav>
   <div class="p-2">
@@ -9,10 +11,10 @@
   </div>
   <!-- <div fxFlex></div> -->
   <!-- <section>
-    <div class="example-button-row">
-      <button mat-raised-button color="primary" (click)="btnSample()">Sample Requisition Form</button>
-      <button mat-raised-button color="accent" (click)="btnService()">Sample Service</button>
-    </div>
-  </section> -->
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="btnSample()">Sample Requisition Form</button>
+    <button mat-raised-button color="accent" (click)="btnService()">Sample Service</button>
+  </div>
+</section> -->
 </mat-sidenav-container>
 

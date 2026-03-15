@@ -14,12 +14,16 @@
           <mat-label>{{'requisitionnumberassignment.numberRange' | translate }}</mat-label>
           <mat-select formControlName="numberRange" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let norange of reqnorangeList" [value]="norange.numberRange">
-              {{norange.numberRange}}
-            </mat-option>
+            @for (norange of reqnorangeList; track norange) {
+              <mat-option [value]="norange.numberRange">
+                {{norange.numberRange}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.numberRange.valid && formControls.numberRange.status != 'DISABLED'"
+          @if (!formControls.numberRange.valid && formControls.numberRange.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.numberRange.valid  }"> Number Range is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -27,21 +31,27 @@
           <mat-label>{{'requisitionnumberassignment.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let company of companiesList" [value]="company.id">
-              {{company.text}}
-            </mat-option>
+            @for (company of companiesList; track company) {
+              <mat-option [value]="company.id">
+                {{company.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.company.valid" [ngClass]="{ 'ng--invalid': !formControls.company.valid  }">
+          @if (!formControls.company.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.company.valid  }">
             Company is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'requisitionnumberassignment.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plant of plantsList" [value]="plant.id">
-              {{plant.text}}
-            </mat-option>
+            @for (plant of plantsList; track plant) {
+              <mat-option [value]="plant.id">
+                {{plant.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -49,9 +59,11 @@
           <mat-label>{{'requisitionnumberassignment.department' | translate }}</mat-label>
           <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let dept of deptList " [value]="dept.id">
-              {{dept.text}}
-            </mat-option>
+            @for (dept of deptList ; track dept) {
+              <mat-option [value]="dept.id">
+                {{dept.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

@@ -8,13 +8,15 @@
 
       <div class="row">
 
-        <div class="multiselect-dropdown-list floating-dropdown col-3"  [class.filled]="modelFormData.value?.empCode?.length > 0" *ngIf="dropdownSettings">
-          <label> {{ 'Leaverequest.empCode' | translate }} </label>
-          <ng-multiselect-dropdown placeholder=" "
-            (onSelect)="getTableDataonempcodechangevent()" formControlName="empCode" [settings]="dropdownSettings"
-            [data]="getProductByProductCodeArray">
-          </ng-multiselect-dropdown>
-        </div>
+        @if (dropdownSettings) {
+          <div class="multiselect-dropdown-list floating-dropdown col-3"  [class.filled]="modelFormData.value?.empCode?.length > 0">
+            <label> {{ 'Leaverequest.empCode' | translate }} </label>
+            <ng-multiselect-dropdown placeholder=" "
+              (onSelect)="getTableDataonempcodechangevent()" formControlName="empCode" [settings]="dropdownSettings"
+              [data]="getProductByProductCodeArray">
+            </ng-multiselect-dropdown>
+          </div>
+        }
 
 
         <mat-form-field class="col-3">
@@ -27,9 +29,11 @@
         <mat-form-field class="col-3">
           <mat-label>Leave Type</mat-label>
           <mat-select placeholder="{{'Leaverequest.leaveCode' | translate }}" formControlName="leaveCode">
-            <mat-option *ngFor="let ptlist of leaveTypeatList" [value]="ptlist.empCode">
-              {{ptlist.empCode}}
-            </mat-option>
+            @for (ptlist of leaveTypeatList; track ptlist) {
+              <mat-option [value]="ptlist.empCode">
+                {{ptlist.empCode}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -43,64 +47,72 @@
         <mat-form-field class="col-3">
           <mat-label>Session</mat-label>
           <mat-select formControlName="session1" placeholder="Session1" (selectionChange)="sessionevent();">
-            <mat-option *ngFor="let session of sessions" [value]="session.value">
-              {{session.viewValue}}
-            </mat-option>
+            @for (session of sessions; track session) {
+              <mat-option [value]="session.value">
+                {{session.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
         <!--<mat-form-field>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" placeholder="{{'Leaverequest.leaveTo' | translate }}"
-                 formControlName="leaveTo" appFocusOnEnter tabIndex="4" (click)="picker3.open()" readonly>
-          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-          <mat-datepicker #picker3></mat-datepicker>
-        </mat-form-field>-->
-        <mat-form-field class="col-3">
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" placeholder="{{'Leaverequest.leaveTo' | translate }}"
-            (dateChange)="leaveToValueChange()" formControlName="leaveTo">
-          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-          <mat-datepicker #picker3></mat-datepicker>
-        </mat-form-field>
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" placeholder="{{'Leaverequest.leaveTo' | translate }}"
+          formControlName="leaveTo" appFocusOnEnter tabIndex="4" (click)="picker3.open()" readonly>
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>-->
+      <mat-form-field class="col-3">
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" placeholder="{{'Leaverequest.leaveTo' | translate }}"
+          (dateChange)="leaveToValueChange()" formControlName="leaveTo">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label>Session</mat-label>
-          <mat-select formControlName="session2" placeholder="Session2" (selectionChange)="sessionevent2();">
-            <mat-option *ngFor="let session of sessions" [value]="session.value">
+      <mat-form-field class="col-3">
+        <mat-label>Session</mat-label>
+        <mat-select formControlName="session2" placeholder="Session2" (selectionChange)="sessionevent2();">
+          @for (session of sessions; track session) {
+            <mat-option [value]="session.value">
               {{session.viewValue}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field  class="col-3">
-          <input matInput placeholder="{{'Leaverequest.leaveDays' | translate }}" formControlName="leaveDays"
-            readonly="readonly" type="number" appFocusOnEnter tabIndex="3">
-        </mat-form-field>
+      <mat-form-field  class="col-3">
+        <input matInput placeholder="{{'Leaverequest.leaveDays' | translate }}" formControlName="leaveDays"
+          readonly="readonly" type="number" appFocusOnEnter tabIndex="3">
+      </mat-form-field>
 
 
 
-        <mat-form-field  class="col-3" [ngClass]="{ 'ng--valid': formControls.reason.valid }">
-          <input matInput placeholder=" {{'Leaverequest.reason' | translate }}" formControlName="reason" appFocusOnEnter
-            tabIndex="1">
-          <mat-error *ngIf="formControls.reason.errors" class="help-block">
-            <div *ngIf="formControls.reason.errors.required">Reason is required </div>
+      <mat-form-field  class="col-3" [ngClass]="{ 'ng--valid': formControls.reason.valid }">
+        <input matInput placeholder=" {{'Leaverequest.reason' | translate }}" formControlName="reason" appFocusOnEnter
+          tabIndex="1">
+        @if (formControls.reason.errors) {
+          <mat-error class="help-block">
+            @if (formControls.reason.errors.required) {
+              <div>Reason is required </div>
+            }
           </mat-error>
-        </mat-form-field>
+        }
+      </mat-form-field>
 
-      </div>
+    </div>
 
-      <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-      <div class="form-element d-flex justify-content-end mt-2">
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-          {{ 'COMMON.CANCEL' | translate }}
-        </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
-          appFocusOnEnter tabIndex="5">
-          ApplyLeave
-        </button>
-      </div>
+    <div class="form-element d-flex justify-content-end mt-2">
+      <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+        {{ 'COMMON.CANCEL' | translate }}
+      </button>
+      <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
+        appFocusOnEnter tabIndex="5">
+        ApplyLeave
+      </button>
+    </div>
 
-    </form>
+  </form>
 
-  </mat-card-content>
+</mat-card-content>
 </div>

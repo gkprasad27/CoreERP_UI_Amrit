@@ -15,8 +15,10 @@
           <mat-label [translate]="'activities.activityCode'"></mat-label>
           <input matInput formControlName="activityCode"
             maxlength="5" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.activityCode.valid  && formControls.activityCode.status != 'DISABLED'"
+          @if (!formControls.activityCode.valid  && formControls.activityCode.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.activityCode.valid  }"> Activity Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -24,17 +26,21 @@
           <mat-label [translate]="'activities.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'activities.uom' | translate }}</mat-label>
           <mat-select formControlName="uom" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let uom of UomList" [value]="uom.id">
-              {{uom.text}}
-            </mat-option>
+            @for (uom of UomList; track uom) {
+              <mat-option [value]="uom.id">
+                {{uom.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -42,9 +48,11 @@
           <mat-label>{{'activities.basisofFixedPrice' | translate }}</mat-label>
           <mat-select formControlName="basisofFixedPrice" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let price of price" [value]="price.value">
-              {{price.viewValue}}
-            </mat-option>
+            @for (price of price; track price) {
+              <mat-option [value]="price.value">
+                {{price.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -52,9 +60,11 @@
           <mat-label>{{'activities.costElement' | translate }}</mat-label>
           <mat-select formControlName="costElement" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cs of csList" [value]="cs.id">
-              {{cs.text}}
-            </mat-option>
+            @for (cs of csList; track cs) {
+              <mat-option [value]="cs.id">
+                {{cs.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

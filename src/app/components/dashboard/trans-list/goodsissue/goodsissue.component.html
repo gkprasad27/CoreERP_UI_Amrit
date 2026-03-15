@@ -1,13 +1,13 @@
 @if(purchasingData) {
-<div style="margin: 10px;" id="purchasingPrintData">
+  <div style="margin: 10px;" id="purchasingPrintData">
 
     <div style="display: flex;">
-        @if(formData.value.company === '1000') {
-            <img src="/assets/images/header.jpg"  style="height: 100px; width: 65%;"> 
-        }
-        @if(formData.value.company !== '1000') {
-            <img src="/assets/images/AMRIT.jpg" style="height: 100px; width: 65%;">
-        }
+      @if(formData.value.company === '1000') {
+        <img src="/assets/images/header.jpg"  style="height: 100px; width: 65%;">
+      }
+      @if(formData.value.company !== '1000') {
+        <img src="/assets/images/AMRIT.jpg" style="height: 100px; width: 65%;">
+      }
 
         <div style="padding: 24px; border-top: 1px solid black; -webkit-print-color-adjust: exact; background: rgb(22 106 132) !important;
                     color: white;font-size: 20px;width: 35%;align-items: center; justify-content: space-around; display: flex; height: 50px;
@@ -15,71 +15,73 @@
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
-        <div style="padding: 5px;width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b> SO Number  </b>
-            <span style="padding-left: 60px;">:  {{ purchasingData?.soNumber }} </span>
-        </div>
-        <div style="padding: 5px;width: 50%;padding-left: 15px;">
-            <b> Date </b>
-            <span style="padding-left: 92px;">: {{ purchasingData?.requistionDate | date:'dd/MM/yyyy' }} </span>
-        </div>
+      <div style="padding: 5px;width: 50%;padding-left: 15px;border-right: 1px solid black;">
+        <b> SO Number  </b>
+        <span style="padding-left: 60px;">:  {{ purchasingData?.soNumber }} </span>
+      </div>
+      <div style="padding: 5px;width: 50%;padding-left: 15px;">
+        <b> Date </b>
+        <span style="padding-left: 92px;">: {{ purchasingData?.requistionDate | date:'dd/MM/yyyy' }} </span>
+      </div>
     </div>
 
     <div style="border-top: 1px solid black; display: flex;">
-        <div style="padding: 5px;width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Issued By  </b>
-            <span style="padding-left: 75px;">: {{ purchasingData?.storesPersonName }} </span>
-        </div>
-        <div style="padding: 5px;width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Issued To </b>
-            <span style="padding-left: 60px;">: {{ purchasingData?.productionPersonName }} </span>
-        </div>
+      <div style="padding: 5px;width: 50%;padding-left: 15px;border-right: 1px solid black;">
+        <b> Issued By  </b>
+        <span style="padding-left: 75px;">: {{ purchasingData?.storesPersonName }} </span>
+      </div>
+      <div style="padding: 5px;width: 50%;padding-left: 15px;border-right: 1px solid black;">
+        <b> Issued To </b>
+        <span style="padding-left: 60px;">: {{ purchasingData?.productionPersonName }} </span>
+      </div>
     </div>
 
 
     @if(purchasingData?.detailArray && purchasingData?.detailArray.length) {
-    <div style="border-top: 1px solid black;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;">
+      <div style="border-top: 1px solid black;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;">
         <table
-            style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
-            <thead>
-                <tr>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Material Code </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Material Name </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Required Qty </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Alloated Qty </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Production Plan Date </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Production Target Date </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-                    *ngFor="let row of purchasingData?.detailArray; let i = index">
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialCode }}</td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialName}} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.requiredqty }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.allocatedqty }}</td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.productionPlanDate }}</td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.productionTargetDate }}</td>
-                </tr>
-            </tbody>
+          style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+          <thead>
+            <tr>
+              <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
+              <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Material Code </th>
+              <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Material Name </th>
+              <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Required Qty </th>
+              <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Alloated Qty </th>
+              <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Production Plan Date </th>
+              <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Production Target Date </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of purchasingData?.detailArray; track row; let i = $index) {
+              <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+                >
+                <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
+                <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialCode }}</td>
+                <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.materialName}} </td>
+                <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.requiredqty }} </td>
+                <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.allocatedqty }}</td>
+                <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.productionPlanDate }}</td>
+                <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.productionTargetDate }}</td>
+              </tr>
+            }
+          </tbody>
         </table>
-    </div>
+      </div>
     }
 
 
     <div style="display: flex;margin-top: 250px;">
-        <div style="width: 50%;display: flex;justify-content: center;">
-            <b> Issued By </b>
-        </div>
-        <div style="width: 50%;display: flex;justify-content: center;">
-            <b>  Received By </b>
-        </div>
+      <div style="width: 50%;display: flex;justify-content: center;">
+        <b> Issued By </b>
+      </div>
+      <div style="width: 50%;display: flex;justify-content: center;">
+        <b>  Received By </b>
+      </div>
     </div>
 
 
-</div>
+  </div>
 }
 <mat-card>
 
@@ -97,217 +99,237 @@
 
         <!-- <mat-form-field class="col-2">
 
-          <mat-label>{{ 'goodsissue.company' | translate }}</mat-label>
-          <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
-          </mat-select>
+        <mat-label>{{ 'goodsissue.company' | translate }}</mat-label>
+        <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+            {{comp.text}}
+          </mat-option>
+        </mat-select>
 
-        </mat-form-field> -->
+      </mat-form-field> -->
 
 
 
-        <mat-form-field class="col-2">
-          <mat-label>{{'purchaseorder.profitCenter' | translate }}</mat-label>
-          <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
+      <mat-form-field class="col-2">
+        <mat-label>{{'purchaseorder.profitCenter' | translate }}</mat-label>
+        <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="2">
+          <mat-option>None</mat-option>
+          @for (pft of profitCenterList; track pft) {
+            <mat-option [value]="pft.id">
               {{pft.text}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
 
 
 
+      @if (!routeEdit) {
         <div class="multiselect-dropdown-list floating-dropdown col-2"
-          [class.filled]="formData.value?.storesPerson?.length > 0" *ngIf="!routeEdit">
+          [class.filled]="formData.value?.storesPerson?.length > 0">
           <label> {{ 'goodsissue.storesPerson' | translate }} </label>
           <ng-multiselect-dropdown placeholder=" " formControlName="storesPerson" [settings]="dropdownSettings1"
             [data]="employeesList">
           </ng-multiselect-dropdown>
         </div>
-        <mat-form-field *ngIf="routeEdit" class="col-2">
+      }
+      @if (routeEdit) {
+        <mat-form-field class="col-2">
           <mat-label>{{'goodsissue.storesPerson' | translate }}</mat-label>
           <input matInput type="text" readonly formControlName="storesPersonName" appFocusOnEnter tabIndex="3">
         </mat-form-field>
+      }
 
 
 
-        <mat-form-field class="col-2">
-          <mat-label>{{'goodsissue.department' | translate }}</mat-label>
-          <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let dept of fdeptList" [value]="dept.code">
+      <mat-form-field class="col-2">
+        <mat-label>{{'goodsissue.department' | translate }}</mat-label>
+        <mat-select formControlName="department" appFocusOnEnter tabIndex="4">
+          <mat-option>None</mat-option>
+          @for (dept of fdeptList; track dept) {
+            <mat-option [value]="dept.code">
               {{dept.description}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
 
 
 
 
-        <!-- <mat-form-field class="col-2">
-          <mat-label>{{'goodsissue.poType' | translate }}</mat-label>
-          <mat-select formControlName="saleOrder" appFocusOnEnter tabIndex="5" (selectionChange)="toggle()">
-            <mat-option>None</mat-option>
-            <mat-option value="Sale Order"> Sale Order </mat-option>
-            <mat-option value="Master Saleorder"> Master Saleorder </mat-option>
-            <mat-option value="Bill of Material"> Bill of Material </mat-option>
-          </mat-select>
-        </mat-form-field> -->
+      <!-- <mat-form-field class="col-2">
+      <mat-label>{{'goodsissue.poType' | translate }}</mat-label>
+      <mat-select formControlName="saleOrder" appFocusOnEnter tabIndex="5" (selectionChange)="toggle()">
+        <mat-option>None</mat-option>
+        <mat-option value="Sale Order"> Sale Order </mat-option>
+        <mat-option value="Master Saleorder"> Master Saleorder </mat-option>
+        <mat-option value="Bill of Material"> Bill of Material </mat-option>
+      </mat-select>
+    </mat-form-field> -->
 
 
 
-        <div class="multiselect-dropdown-list floating-dropdown col-2"
-          [class.filled]="formData.value?.saleOrderNumber?.length > 0" *ngIf="!routeEdit">
-          <label> {{ 'goodsissue.saleOrderNumber' | translate }} </label>
-          <ng-multiselect-dropdown placeholder=" " formControlName="saleOrderNumber" (onSelect)="getGoodsissueDetail()"
-            [settings]="dropdownSettings" [data]="mreqList">
-          </ng-multiselect-dropdown>
-        </div>
-        <mat-form-field class="col-2" *ngIf="routeEdit">
-          <mat-label>{{'goodsissue.saleOrderNumber' | translate }}</mat-label>
-          <input matInput type="text" readonly formControlName="saleOrderNumber" appFocusOnEnter tabIndex="5">
-        </mat-form-field>
-
-
-        <div class="multiselect-dropdown-list floating-dropdown col-2"
-          [class.filled]="formData.value?.productionPerson?.length > 0" *ngIf="!routeEdit">
-          <label> {{ 'goodsissue.productionPerson' | translate }} </label>
-          <ng-multiselect-dropdown placeholder=" " formControlName="productionPerson" [settings]="dropdownSettings1"
-            [data]="employeesList">
-          </ng-multiselect-dropdown>
-        </div>
-        <mat-form-field class="col-2" *ngIf="routeEdit">
-          <mat-label>{{'goodsissue.productionPerson' | translate }}</mat-label>
-          <input matInput type="text" readonly formControlName="productionPersonName" appFocusOnEnter tabIndex="6">
-        </mat-form-field>
-
-
-
-
-        <!-- <mat-form-field class="col-2">
-          <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="productionPlanDate"
-            appFocusOnEnter tabIndex="6">
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
-
-
-
-
-
-        <mat-form-field class="col-2">
-          <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="productionTargetDate"
-            appFocusOnEnter tabIndex="6">
-          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-          <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field> -->
-
-
-
-
+    @if (!routeEdit) {
+      <div class="multiselect-dropdown-list floating-dropdown col-2"
+        [class.filled]="formData.value?.saleOrderNumber?.length > 0">
+        <label> {{ 'goodsissue.saleOrderNumber' | translate }} </label>
+        <ng-multiselect-dropdown placeholder=" " formControlName="saleOrderNumber" (onSelect)="getGoodsissueDetail()"
+          [settings]="dropdownSettings" [data]="mreqList">
+        </ng-multiselect-dropdown>
       </div>
-    </form>
-
-    <div class="p-2 card">
-
-      <h6>
-        Material Details
-      </h6>
-
-      <form [formGroup]="formData1" autocomplete="off">
+    }
+    @if (routeEdit) {
+      <mat-form-field class="col-2">
+        <mat-label>{{'goodsissue.saleOrderNumber' | translate }}</mat-label>
+        <input matInput type="text" readonly formControlName="saleOrderNumber" appFocusOnEnter tabIndex="5">
+      </mat-form-field>
+    }
 
 
+    @if (!routeEdit) {
+      <div class="multiselect-dropdown-list floating-dropdown col-2"
+        [class.filled]="formData.value?.productionPerson?.length > 0">
+        <label> {{ 'goodsissue.productionPerson' | translate }} </label>
+        <ng-multiselect-dropdown placeholder=" " formControlName="productionPerson" [settings]="dropdownSettings1"
+          [data]="employeesList">
+        </ng-multiselect-dropdown>
+      </div>
+    }
+    @if (routeEdit) {
+      <mat-form-field class="col-2">
+        <mat-label>{{'goodsissue.productionPerson' | translate }}</mat-label>
+        <input matInput type="text" readonly formControlName="productionPersonName" appFocusOnEnter tabIndex="6">
+      </mat-form-field>
+    }
 
-        <div class="row p-1">
 
+
+
+    <!-- <mat-form-field class="col-2">
+    <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
+    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="productionPlanDate"
+      appFocusOnEnter tabIndex="6">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+
+
+
+
+    <mat-form-field class="col-2">
+      <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
+      <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="productionTargetDate"
+        appFocusOnEnter tabIndex="6">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field> -->
+
+
+
+
+    </div>
+  </form>
+
+  <div class="p-2 card">
+
+    <h6>
+      Material Details
+    </h6>
+
+    <form [formGroup]="formData1" autocomplete="off">
+
+
+
+      <div class="row p-1">
+
+        @if (routeEdit) {
           <div class="multiselect-dropdown-list floating-dropdown col-2"
-            [class.filled]="formData1.value?.materialCodeBomKey?.length > 0" *ngIf="routeEdit">
+            [class.filled]="formData1.value?.materialCodeBomKey?.length > 0">
             <label> {{ 'purchaseorder.materialCode' | translate }} </label>
             <ng-multiselect-dropdown (onSelect)="materialCodeChange()" placeholder=" "
               formControlName="materialCodeBomKey" [settings]="dropdownSettings4" [data]="materialCodeList">
             </ng-multiselect-dropdown>
           </div>
+        }
 
-          <mat-form-field class="col-2">
-            <mat-label [translate]="'goodsissue.qty'"></mat-label>
-            <input matInput type="number" readonly formControlName="qty" appFocusOnEnter tabIndex="7">
-          </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'goodsissue.qty'"></mat-label>
+          <input matInput type="number" readonly formControlName="qty" appFocusOnEnter tabIndex="7">
+        </mat-form-field>
 
-          <mat-form-field class="col-2">
-            <mat-label>{{'goodsissue.lotNo' | translate }}</mat-label>
-            <mat-select formControlName="lotNo" appFocusOnEnter tabIndex="8" (selectionChange)="lotChange()">
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="let pft of getLotList" [value]="pft.lotNo">
+        <mat-form-field class="col-2">
+          <mat-label>{{'goodsissue.lotNo' | translate }}</mat-label>
+          <mat-select formControlName="lotNo" appFocusOnEnter tabIndex="8" (selectionChange)="lotChange()">
+            <mat-option>None</mat-option>
+            @for (pft of getLotList; track pft) {
+              <mat-option [value]="pft.lotNo">
                 {{pft.lotNo}}
               </mat-option>
-            </mat-select>
-          </mat-form-field>
-          
-          <mat-form-field class="col-2">
-            <mat-label [translate]="'goodsissue.availableqty'"></mat-label>
-            <input matInput type="number" readonly formControlName="availableqty" appFocusOnEnter tabIndex="9">
-          </mat-form-field>
-          <mat-form-field class="col-2">
-            <mat-label [translate]="'goodsissue.allocatedqty'"></mat-label>
-            <input matInput type="number" formControlName="allocatedqty" appFocusOnEnter tabIndex="10"
-              (change)="allocatedqtyChange()">
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'goodsissue.availableqty'"></mat-label>
+          <input matInput type="number" readonly formControlName="availableqty" appFocusOnEnter tabIndex="9">
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'goodsissue.allocatedqty'"></mat-label>
+          <input matInput type="number" formControlName="allocatedqty" appFocusOnEnter tabIndex="10"
+            (change)="allocatedqtyChange()">
           </mat-form-field>
           <mat-form-field class="col-2">
             <mat-label [translate]="'goodsissue.productionPlanDate'"></mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3"
               [nonEditable]="picker3" formControlName="productionPlanDate" appFocusOnEnter tabIndex="11">
-            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-            <mat-datepicker #picker3></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field class="col-2">
-            <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
-            <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
-              appFocusOnEnter tabIndex="12">
-            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-            <mat-datepicker #picker4></mat-datepicker>
-          </mat-form-field>
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'goodsissue.productionTargetDate'"></mat-label>
+              <input matInput [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="productionTargetDate"
+                appFocusOnEnter tabIndex="12">
+                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+              </mat-form-field>
 
 
-          <div id="for" class="d-flex justify-content-end mb-3">
+              <div id="for" class="d-flex justify-content-end mb-3">
 
-            <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
-              (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
-              {{ 'COMMON.UPDATE' | translate }}
-            </button>
-            <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i
+                <button mat-raised-button id="submit" type="submit" class="button-color-bule mx-1 text-white"
+                  (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
+                  {{ 'COMMON.UPDATE' | translate }}
+                </button>
+                <button mat-raised-button id="reset" class="button-color-red text-white mx-1" (click)="resetForm();"><i
                 class="fa-solid fa-arrow-rotate-right"></i>
-              {{ 'COMMON.RESET' | translate }}
-            </button>
+                {{ 'COMMON.RESET' | translate }}
+              </button>
+
+            </div>
+
 
           </div>
 
+        </form>
 
+        <div>
+          <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
+            (editOrDeleteEvent)="editOrDeleteEvent($event)"  (tableCheckboxEvent)="tableCheckboxEvent($event)">
+          </app-table>
         </div>
-
-      </form>
-
-      <div>
-        <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
-          (editOrDeleteEvent)="editOrDeleteEvent($event)"  (tableCheckboxEvent)="tableCheckboxEvent($event)">
-        </app-table>
       </div>
-    </div>
 
 
 
-  </mat-card-content>
-  <mat-card-content class="d-flex justify-content-end py-1">
+    </mat-card-content>
+    <mat-card-content class="d-flex justify-content-end py-1">
 
-    <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i
-        class="fa-solid fa-floppy-disk"></i>
+      <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="save()"><i
+      class="fa-solid fa-floppy-disk"></i>
       {{ 'COMMON.SAVE' | translate }}
     </button>
     <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
@@ -320,9 +342,9 @@
     <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3" (click)="return();">
       {{ 'COMMON.RETURN' | translate }}
     </button>
-      <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3" (click)="print();">
-        {{ 'COMMON.PRINT' | translate }}
-      </button>
+    <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3" (click)="print();">
+      {{ 'COMMON.PRINT' | translate }}
+    </button>
   </mat-card-content>
 
 </mat-card>

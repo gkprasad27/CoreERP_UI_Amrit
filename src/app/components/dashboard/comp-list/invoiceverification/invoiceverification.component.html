@@ -13,152 +13,162 @@
               <mat-label [translate]="'invoiceverification.purchaseOrderNo'"></mat-label>
               <mat-select formControlName="purchaseOrderNo">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let poNo of purchaseordernoList" [value]="poNo.id">
-                  {{poNo.text}}
-                </mat-option>
+                @for (poNo of purchaseordernoList; track poNo) {
+                  <mat-option [value]="poNo.id">
+                    {{poNo.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <!-- <mat-form-field class="col-3">
-              <mat-label [translate]="'invoiceverification.company'"></mat-label>
-              <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                  {{comp.text}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field> -->
+            <mat-label [translate]="'invoiceverification.company'"></mat-label>
+            <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
 
-            <mat-form-field class="col-3">
-              <mat-label [translate]="'invoiceverification.plant'"></mat-label>
-              <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let plants of plantList" [value]="plants.id">
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'invoiceverification.plant'"></mat-label>
+            <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
+              <mat-option>None</mat-option>
+              @for (plants of plantList; track plants) {
+                <mat-option [value]="plants.id">
                   {{plants.text}}
                 </mat-option>
-              </mat-select>
-            </mat-form-field>
+              }
+            </mat-select>
+          </mat-form-field>
 
-            <mat-form-field class="col-3">
-              <mat-label>{{ 'invoiceverification.branch' | translate }}</mat-label>
-              <mat-select formControlName="branch">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let branch of branchList" [value]="branch.id">
+          <mat-form-field class="col-3">
+            <mat-label>{{ 'invoiceverification.branch' | translate }}</mat-label>
+            <mat-select formControlName="branch">
+              <mat-option>None</mat-option>
+              @for (branch of branchList; track branch) {
+                <mat-option [value]="branch.id">
                   {{branch.text}}
                 </mat-option>
-              </mat-select>
-            </mat-form-field>
+              }
+            </mat-select>
+          </mat-form-field>
 
 
-            <mat-form-field class="col-3">
-              <mat-label>{{'invoiceverification.profitCenter' | translate }}</mat-label>
-              <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="6">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let pft of profitCenterList" [value]="pft.id">
+          <mat-form-field class="col-3">
+            <mat-label>{{'invoiceverification.profitCenter' | translate }}</mat-label>
+            <mat-select formControlName="profitCenter" appFocusOnEnter tabIndex="6">
+              <mat-option>None</mat-option>
+              @for (pft of profitCenterList; track pft) {
+                <mat-option [value]="pft.id">
                   {{pft.text}}
                 </mat-option>
-              </mat-select>
-            </mat-form-field>
+              }
+            </mat-select>
+          </mat-form-field>
 
 
-            <mat-form-field class="col-3">
-              <mat-label [translate]="'invoiceverification.supplierCode'"></mat-label>
-              <mat-select formControlName="supplierCode" appFocusOnEnter tabIndex="2">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let bptype of bpaList" [value]="bptype.bpnumber">
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'invoiceverification.supplierCode'"></mat-label>
+            <mat-select formControlName="supplierCode" appFocusOnEnter tabIndex="2">
+              <mat-option>None</mat-option>
+              @for (bptype of bpaList; track bptype) {
+                <mat-option [value]="bptype.bpnumber">
                   {{bptype.name}}
                 </mat-option>
-              </mat-select>
-            </mat-form-field>
+              }
+            </mat-select>
+          </mat-form-field>
 
-            <mat-form-field class="col-3">
-              <mat-label [translate]="'invoiceverification.description'"></mat-label>
-              <input matInput formControlName="description" appFocusOnEnter tabIndex="5">
-            </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'invoiceverification.description'"></mat-label>
+            <input matInput formControlName="description" appFocusOnEnter tabIndex="5">
+          </mat-form-field>
 
-            <mat-form-field class="col-3">
-              <mat-label [translate]="'invoiceverification.invoiceAmount'"></mat-label>
-              <input matInput formControlName="invoiceAmount" appFocusOnEnter tabIndex="5">
-            </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'invoiceverification.invoiceAmount'"></mat-label>
+            <input matInput formControlName="invoiceAmount" appFocusOnEnter tabIndex="5">
+          </mat-form-field>
 
-            <mat-form-field class="col-3">
-              <mat-label [translate]="'invoiceverification.invoiceReferenceNo'"></mat-label>
-              <input matInput formControlName="invoiceReferenceNo" appFocusOnEnter tabIndex="5">
-            </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'invoiceverification.invoiceReferenceNo'"></mat-label>
+            <input matInput formControlName="invoiceReferenceNo" appFocusOnEnter tabIndex="5">
+          </mat-form-field>
 
-            <mat-form-field class="col-3">
-              <mat-label [translate]="'invoiceverification.invoiceDate'"></mat-label>
-              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="invoiceDate"
-                appFocusOnEnter tabIndex="3">
-              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-              <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'invoiceverification.invoiceDate'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="invoiceDate"
+              appFocusOnEnter tabIndex="3">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
 
-            <mat-form-field class="col-3">
-              <mat-label [translate]="'invoiceverification.grnno'"></mat-label>
-              <input matInput formControlName="grnno" appFocusOnEnter tabIndex="5">
-            </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'invoiceverification.grnno'"></mat-label>
+            <input matInput formControlName="grnno" appFocusOnEnter tabIndex="5">
+          </mat-form-field>
 
-            <mat-form-field class="col-3">
-              <mat-label [translate]="'invoiceverification.grndate'"></mat-label>
-              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="grndate"
-                appFocusOnEnter tabIndex="3">
-              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-              <mat-datepicker #picker3></mat-datepicker>
-            </mat-form-field>
-
-
-          </div>
-          <mat-divider></mat-divider>
-        </mat-card-content>
-
-      </mat-tab>
+          <mat-form-field class="col-3">
+            <mat-label [translate]="'invoiceverification.grndate'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3" formControlName="grndate"
+              appFocusOnEnter tabIndex="3">
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
 
 
-      <mat-tab label="{{'invoiceverification.title2' | translate }}">
+        </div>
+        <mat-divider></mat-divider>
+      </mat-card-content>
 
-        <mat-card-content class="py-3">
-
-          <app-dynamic-table [tableObJect]="dynTablePropsActivity" (emitColumnChanges)="emitColumnActivityData($event)"
-            [dynamicTableUpdate]="sendActivityDynTableData">
-          </app-dynamic-table>
-
-          <mat-divider></mat-divider>
-
-        </mat-card-content>
-
-      </mat-tab>
+    </mat-tab>
 
 
-      <mat-tab label="{{'invoiceverification.title3' | translate }}">
+    <mat-tab label="{{'invoiceverification.title2' | translate }}">
 
-        <mat-card-content class="py-3">
+      <mat-card-content class="py-3">
 
-          <app-dynamic-table [tableObJect]="dynTablePropsCapacity" (emitColumnChanges)="emitColumnCapacityData($event)"
-            [dynamicTableUpdate]="sendCapacityDynTableData">
-          </app-dynamic-table>
+        <app-dynamic-table [tableObJect]="dynTablePropsActivity" (emitColumnChanges)="emitColumnActivityData($event)"
+          [dynamicTableUpdate]="sendActivityDynTableData">
+        </app-dynamic-table>
+
+        <mat-divider></mat-divider>
+
+      </mat-card-content>
+
+    </mat-tab>
 
 
-        </mat-card-content>
+    <mat-tab label="{{'invoiceverification.title3' | translate }}">
 
-      </mat-tab>
+      <mat-card-content class="py-3">
+
+        <app-dynamic-table [tableObJect]="dynTablePropsCapacity" (emitColumnChanges)="emitColumnCapacityData($event)"
+          [dynamicTableUpdate]="sendCapacityDynTableData">
+        </app-dynamic-table>
 
 
-    </form>
+      </mat-card-content>
 
-  </mat-tab-group>
+    </mat-tab>
 
-  <div class="form-element mt-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="reset()" appFocusOnEnter tabIndex="21">
-      {{ 'COMMON.RESET' | translate }}
-    </button>
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="back();" tabIndex="21">
-      {{ 'COMMON.BACK' | translate }}
-    </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
-      tabIndex="22">
-      {{ 'COMMON.SAVE' | translate }}
-    </button>
-  </div>
+
+  </form>
+
+</mat-tab-group>
+
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="reset()" appFocusOnEnter tabIndex="21">
+    {{ 'COMMON.RESET' | translate }}
+  </button>
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="back();" tabIndex="21">
+    {{ 'COMMON.BACK' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+    tabIndex="22">
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 
 </div>

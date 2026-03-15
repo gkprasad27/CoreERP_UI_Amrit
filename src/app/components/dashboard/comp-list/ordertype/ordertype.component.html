@@ -14,9 +14,11 @@
           <mat-label [translate]="'ordertype.orderType'"></mat-label>
           <input matInput formControlName="orderType" maxlength="5"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.orderType.valid && formControls.orderType.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.orderType.valid  }">
+          @if (!formControls.orderType.valid && formControls.orderType.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.orderType.valid  }">
             Order Type is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -24,26 +26,32 @@
           <mat-label [translate]="'ordertype.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'ordertype.printText' | translate }}</mat-label>
           <mat-select formControlName="printText" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let print of printText" [value]="print.value">
-              {{print.viewValue}}
-            </mat-option>
+            @for (print of printText; track print) {
+              <mat-option [value]="print.value">
+                {{print.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-3">
           <mat-label>{{'ordertype.natureofOrder' | translate }}</mat-label>
           <mat-select formControlName="natureofOrder" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let nature of Natureoforder" [value]="nature.value">
-              {{nature.viewValue}}
-            </mat-option>
+            @for (nature of Natureoforder; track nature) {
+              <mat-option [value]="nature.value">
+                {{nature.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -63,9 +71,11 @@
           <mat-label>{{'ordertype.costUnit' | translate }}</mat-label>
           <mat-select formControlName="costUnit" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let culist of costunitList" [value]="culist.objectNumber">
-              {{culist.description}}
-            </mat-option>
+            @for (culist of costunitList; track culist) {
+              <mat-option [value]="culist.objectNumber">
+                {{culist.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

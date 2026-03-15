@@ -14,12 +14,16 @@
           <mat-label>{{'assignnumberseries.objectType' | translate }}</mat-label>
           <mat-select formControlName="objectType" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cot of cotList" [value]="cot.id">
-              {{cot.text}}
-            </mat-option>
+            @for (cot of cotList; track cot) {
+              <mat-option [value]="cot.id">
+                {{cot.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.objectType.valid && formControls.objectType.status != 'DISABLED'"
+          @if (!formControls.objectType.valid && formControls.objectType.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.objectType.valid  }"> Object Type is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -27,12 +31,16 @@
           <mat-label>{{'assignnumberseries.numberSeries' | translate }}</mat-label>
           <mat-select formControlName="numberSeries" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cs of cnsList" [value]="cs.id">
-              {{cs.text}}
-            </mat-option>
+            @for (cs of cnsList; track cs) {
+              <mat-option [value]="cs.id">
+                {{cs.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.numberSeries.valid"
+          @if (!formControls.numberSeries.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.numberSeries.valid  }"> Number Series is required</mat-error>
+          }
         </mat-form-field>
 
 

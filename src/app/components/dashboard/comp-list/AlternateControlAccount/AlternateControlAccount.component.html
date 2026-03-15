@@ -13,9 +13,11 @@
           <mat-label [translate]="'AlternateControlAccount.normalControlAccount'"></mat-label>
           <mat-select formControlName="normalControlAccount" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let nca of glList" [value]="nca.id">
-              {{nca.id}} - {{nca.text}}
-            </mat-option>
+            @for (nca of glList; track nca) {
+              <mat-option [value]="nca.id">
+                {{nca.id}} - {{nca.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -23,9 +25,11 @@
           <mat-label [translate]="'AlternateControlAccount.alternativeControlAccount'"></mat-label>
           <mat-select formControlName="alternativeControlAccount" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let acn of glList" [value]="acn.id">
-              {{acn.id}} - {{acn.text}}
-            </mat-option>
+            @for (acn of glList; track acn) {
+              <mat-option [value]="acn.id">
+                {{acn.id}} - {{acn.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -33,9 +37,11 @@
           <mat-label [translate]="'AlternateControlAccount.company'"></mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
+            @for (comp of companyList; track comp) {
+              <mat-option [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -43,9 +49,11 @@
           <mat-label [translate]="'AlternateControlAccount.chartofAccount'"></mat-label>
           <mat-select formControlName="chartofAccount" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let coa of coaList" [value]="coa.code">
-              {{coa.desctiption}}
-            </mat-option>
+            @for (coa of coaList; track coa) {
+              <mat-option [value]="coa.code">
+                {{coa.desctiption}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

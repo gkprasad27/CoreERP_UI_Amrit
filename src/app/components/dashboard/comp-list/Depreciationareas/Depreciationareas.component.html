@@ -13,9 +13,11 @@
           <mat-label [translate]="'Depreciationareas.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid &&formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
+          @if (!formControls.code.valid &&formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -23,17 +25,21 @@
           <mat-label [translate]="'Depreciationareas.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'Depreciationareas.depreciationType'"></mat-label>
           <mat-select formControlName="depreciationType" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ltype of DepreciationTypes" [value]="ltype.value">
-              {{ltype.viewValue}}
-            </mat-option>
+            @for (ltype of DepreciationTypes; track ltype) {
+              <mat-option [value]="ltype.value">
+                {{ltype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

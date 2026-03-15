@@ -10,63 +10,71 @@
         <mat-form-field class="col-3">
           <mat-label>{{'approvaltype.title' | translate }}</mat-label>
           <mat-select formControlName="approval"  >
-            <mat-option *ngFor="let aptype of aptypes" [value]="aptype.formId">
-              {{aptype.formName}}
-            </mat-option>
+            @for (aptype of aptypes; track aptype) {
+              <mat-option [value]="aptype.formId">
+                {{aptype.formName}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
         <!-- <mat-form-field class="col-3">
-          <mat-label>{{'approvaltype.branchCode' | translate }}</mat-label>
-          <mat-select formControlName="department">
-            <mat-option *ngFor="let branch of branchesList" [value]="branch.id">
-              {{branch.text}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field> -->
+        <mat-label>{{'approvaltype.branchCode' | translate }}</mat-label>
+        <mat-select formControlName="department">
+          <mat-option *ngFor="let branch of branchesList" [value]="branch.id">
+            {{branch.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'approvaltype.company' | translate }}</mat-label>
-          <mat-select formControlName="company">
-            <mat-option *ngFor="let comp of compiniesList" [value]="comp.id">
+      <mat-form-field class="col-3">
+        <mat-label>{{'approvaltype.company' | translate }}</mat-label>
+        <mat-select formControlName="company">
+          @for (comp of compiniesList; track comp) {
+            <mat-option [value]="comp.id">
               {{comp.text}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'approvaltype.recommendedBy' | translate }}</mat-label>
-          <mat-select formControlName="recommendedBy">
-            <mat-option *ngFor="let emp of employeesList" [value]="emp.userName">
+      <mat-form-field class="col-3">
+        <mat-label>{{'approvaltype.recommendedBy' | translate }}</mat-label>
+        <mat-select formControlName="recommendedBy">
+          @for (emp of employeesList; track emp) {
+            <mat-option [value]="emp.userName">
               {{emp.userName}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'approvaltype.approvedBy' | translate }}</mat-label>
-          <mat-select formControlName="approvedBy">
-            <mat-option *ngFor="let emp of employeesList" [value]="emp.userName">
+      <mat-form-field class="col-3">
+        <mat-label>{{'approvaltype.approvedBy' | translate }}</mat-label>
+        <mat-select formControlName="approvedBy">
+          @for (emp of employeesList; track emp) {
+            <mat-option [value]="emp.userName">
               {{emp.userName}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
 
-      </div>
-      <mat-divider></mat-divider>
+    </div>
+    <mat-divider></mat-divider>
 
-      <div class="form-element mt-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-          {{ 'COMMON.CANCEL' | translate }}
-        </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
-                tabIndex="5">
-          Apply Approval Type
-        </button>
-      </div>
+    <div class="form-element mt-2 d-flex justify-content-end">
+      <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+        {{ 'COMMON.CANCEL' | translate }}
+      </button>
+      <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+        tabIndex="5">
+        Apply Approval Type
+      </button>
+    </div>
 
-    </form>
+  </form>
 
-  </mat-card-content>
+</mat-card-content>
 </div>

@@ -14,9 +14,11 @@
           <mat-label [translate]="'movementtype.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid && formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
+          @if (!formControls.code.valid && formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -24,17 +26,21 @@
           <mat-label [translate]="'movementtype.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'movementtype.category'"></mat-label>
           <mat-select formControlName="category" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let category of category" [value]="category.value">
-              {{category.viewValue}}
-            </mat-option>
+            @for (category of category; track category) {
+              <mat-option [value]="category.value">
+                {{category.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

@@ -1,92 +1,79 @@
 <mat-card class="test">
 
-    <mat-card-content id="mat">
+  <mat-card-content id="mat">
 
-        <form [formGroup]="formData" class="card p-2 mb-3" autocomplete="off">
+    <form [formGroup]="formData" class="card p-2 mb-3" autocomplete="off">
 
-            <div id="form" class="row p-1 mat-form-field-height">
+      <div id="form" class="row p-1 mat-form-field-height">
 
-                <mat-slide-toggle class="col-1 d-flex" formControlName="swapType" (change)="onSwapTypeChange()">
-                    {{(formData.value.swapType) ? 'Full' : 'Partial' }}
-                </mat-slide-toggle>
+        <mat-slide-toggle class="col-1 d-flex" formControlName="swapType" (change)="onSwapTypeChange()">
+          {{(formData.value.swapType) ? 'Full' : 'Partial' }}
+        </mat-slide-toggle>
 
-                <div class="mat-mdc-form-field typeahead  floating-dropdown col-4"
-                    [class.filled]="formData.value?.fromSaleOrder?.length > 0">
-                    <label> {{ 'swaporder.fromSaleOrder' | translate }} </label>
-                    <input placeholder=" " formControlName="fromSaleOrder" (typeaheadOnSelect)="onSwapTypeChange()"
-                        [typeaheadOptionsLimit]="100000" [typeahead]="saleOrders" typeaheadOptionField='saleOrderNo' appFocusOnEnter tabIndex="1"
-                        class="form-control typeahead w-100">
-                </div>
-
-
-                <div class="mat-mdc-form-field typeahead  floating-dropdown col-4"
-                    [class.filled]="formData.value?.toSaleOrder?.length > 0">
-                    <label> {{ 'swaporder.toSaleOrder' | translate }} </label>
-                    <input placeholder=" " formControlName="toSaleOrder" [typeaheadOptionsLimit]="100000" [typeahead]="saleOrders"
-                        typeaheadOptionField='saleOrderNo' appFocusOnEnter tabIndex="2"
-                        class="form-control typeahead w-100">
-                </div>
-
-            </div>
-
-        </form>
-
-        <div class="p-2 card" *ngIf="tableData && tableData.length > 0">
-
-            <form [formGroup]="formData1" autocomplete="off">
-
-
-
-                <div class="row p-1">
-
-
-                    <mat-form-field class="col-3">
-                        <mat-label [translate]="'swaporder.qty'"></mat-label>
-                        <input matInput type="text" formControlName="qty" appFocusOnEnter tabIndex="13">
-                    </mat-form-field>
-
-
-                    <div class="col-3 d-flex align-items-center">
-
-                        <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white"
-                            (click)="saveForm()">
-                            {{ 'COMMON.ADD' | translate }}
-                        </button>
-                        <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
-                            {{ 'COMMON.RESET' | translate }}
-                        </button>
-
-                    </div>
-
-
-                </div>
-
-            </form>
-
-            <div>
-                <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
-                    (editOrDeleteEvent)="editOrDeleteEvent($event)" (tableCheckboxEvent)="tableCheckboxEvent($event)">
-                </app-table>
-            </div>
-
+        <div class="mat-mdc-form-field typeahead  floating-dropdown col-4"
+          [class.filled]="formData.value?.fromSaleOrder?.length > 0">
+          <label> {{ 'swaporder.fromSaleOrder' | translate }} </label>
+          <input placeholder=" " formControlName="fromSaleOrder" (typeaheadOnSelect)="onSwapTypeChange()"
+            [typeaheadOptionsLimit]="100000" [typeahead]="saleOrders" typeaheadOptionField='saleOrderNo' appFocusOnEnter tabIndex="1"
+            class="form-control typeahead w-100">
         </div>
 
-    </mat-card-content>
 
-    <mat-card-content class="d-flex justify-content-end py-1">
+        <div class="mat-mdc-form-field typeahead  floating-dropdown col-4"
+          [class.filled]="formData.value?.toSaleOrder?.length > 0">
+          <label> {{ 'swaporder.toSaleOrder' | translate }} </label>
+          <input placeholder=" " formControlName="toSaleOrder" [typeaheadOptionsLimit]="100000" [typeahead]="saleOrders"
+            typeaheadOptionField='saleOrderNo' appFocusOnEnter tabIndex="2"
+            class="form-control typeahead w-100">
+        </div>
 
-        <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="swap()"><i
-                class="fa-solid fa-floppy-disk"></i>
-            {{ 'swaporder.swap' | translate }}
-        </button>
-        <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
-            {{ 'COMMON.BACK' | translate }}
-        </button>
-        <button id="reset" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();"><i
-                class="fa-solid fa-arrow-rotate-right"></i>
-            {{ 'COMMON.RESET' | translate }}
-        </button>
+      </div>
 
-    </mat-card-content>
+    </form>
+
+    @if (tableData && tableData.length > 0) {
+      <div class="p-2 card">
+        <form [formGroup]="formData1" autocomplete="off">
+          <div class="row p-1">
+            <mat-form-field class="col-3">
+              <mat-label [translate]="'swaporder.qty'"></mat-label>
+              <input matInput type="text" formControlName="qty" appFocusOnEnter tabIndex="13">
+            </mat-form-field>
+            <div class="col-3 d-flex align-items-center">
+              <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white"
+                (click)="saveForm()">
+                {{ 'COMMON.ADD' | translate }}
+              </button>
+              <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
+                {{ 'COMMON.RESET' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+        <div>
+          <app-table class="table-css" [tableData]="tableData" [showButtons]="false"
+            (editOrDeleteEvent)="editOrDeleteEvent($event)" (tableCheckboxEvent)="tableCheckboxEvent($event)">
+          </app-table>
+        </div>
+      </div>
+    }
+
+  </mat-card-content>
+
+  <mat-card-content class="d-flex justify-content-end py-1">
+
+    <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white" (click)="swap()"><i
+    class="fa-solid fa-floppy-disk"></i>
+    {{ 'swaporder.swap' | translate }}
+  </button>
+  <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+    {{ 'COMMON.BACK' | translate }}
+  </button>
+  <button id="reset" mat-raised-button class="button-color-red text-white mx-3" (click)="reset();"><i
+  class="fa-solid fa-arrow-rotate-right"></i>
+  {{ 'COMMON.RESET' | translate }}
+</button>
+
+</mat-card-content>
 
 </mat-card>

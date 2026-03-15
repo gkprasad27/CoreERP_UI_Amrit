@@ -13,9 +13,11 @@
           <mat-label [translate]="'numberrange.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid  &&formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code
+          @if (!formControls.code.valid  &&formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code
             isrequired</mat-error>
+          }
 
         </mat-form-field>
 

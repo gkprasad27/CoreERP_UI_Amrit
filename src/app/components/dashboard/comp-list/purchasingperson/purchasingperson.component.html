@@ -14,13 +14,17 @@
           <mat-label>{{'purchasingperson.purchasePerson' | translate }}</mat-label>
           <mat-select formControlName="purchasePerson" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let emp of emplist" [value]="emp.id">
-              {{emp.id}} - {{emp.text}}
-            </mat-option>
+            @for (emp of emplist; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.id}} - {{emp.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.purchasePerson.valid && formControls.purchasePerson.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.purchasePerson.valid  }">Purchase Person Code is required
-          </mat-error>
+          @if (!formControls.purchasePerson.valid && formControls.purchasePerson.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.purchasePerson.valid  }">Purchase Person Code is required
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -28,52 +32,58 @@
           <mat-label [translate]="'purchasingperson.description'"></mat-label>
           <input matInput  formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Purchase Person Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'purchasingperson.purchaseGroup' | translate }}</mat-label>
           <mat-select formControlName="purchaseGroup" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let pcgroup of pcgroupList" [value]="pcgroup.pruchaseGroup">
-              {{pcgroup.description}}
-            </mat-option>
+            @for (pcgroup of pcgroupList; track pcgroup) {
+              <mat-option [value]="pcgroup.pruchaseGroup">
+                {{pcgroup.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-3">
           <mat-label>{{'purchasingperson.purchaseTypes' | translate }}</mat-label>
           <mat-select formControlName="purchaseTypes" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ptype of purchaseTypeList " [value]="ptype.purchaseType">
-              {{ptype.description}}
-            </mat-option>
+            @for (ptype of purchaseTypeList ; track ptype) {
+              <mat-option [value]="ptype.purchaseType">
+                {{ptype.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
         <!--<mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.glsubName.valid }">
-          <mat-label [translate]="'purchasingperson.glsubName'"></mat-label>
-    <input matInput 
-     formControlName="glsubName" maxlength="30" appFocusOnEnter tabIndex="3">
-    <mat-error *ngIf="formControls.glsubName.errors" class="help-block">
-      <div *ngIf="formControls.glsubName.errors.required">description  is required </div>
-    </mat-error>
-  </mat-form-field>-->
+        <mat-label [translate]="'purchasingperson.glsubName'"></mat-label>
+        <input matInput
+          formControlName="glsubName" maxlength="30" appFocusOnEnter tabIndex="3">
+        <mat-error *ngIf="formControls.glsubName.errors" class="help-block">
+          <div *ngIf="formControls.glsubName.errors.required">description  is required </div>
+        </mat-error>
+      </mat-form-field>-->
 
 
-      </div>
-      <mat-divider></mat-divider>
-    </form>
+    </div>
+    <mat-divider></mat-divider>
+  </form>
 
-  </mat-card-content>
-  <div class="form-element mt-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+</mat-card-content>
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
-      {{ 'COMMON.CANCEL' | translate }}
-    </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
 
-      {{ 'COMMON.SAVE' | translate }}
-    </button>
-  </div>
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 </div>

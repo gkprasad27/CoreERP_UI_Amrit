@@ -1,188 +1,202 @@
 <mat-card>
 
-    <mat-card-content>
+  <mat-card-content>
 
-        <form [formGroup]="formData" autocomplete="off">
+    <form [formGroup]="formData" autocomplete="off">
 
-            <div class="row p-1">
+      <div class="row p-1">
 
-                <!-- <mat-form-field class="col-2">
-                    <mat-label>{{ 'purchasesaleasset.company' | translate }}</mat-label>
-                    <mat-select formControlName="company">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-                            {{comp.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
+        <!-- <mat-form-field class="col-2">
+        <mat-label>{{ 'purchasesaleasset.company' | translate }}</mat-label>
+        <mat-select formControlName="company">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+            {{comp.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
 
-                <mat-form-field class="col-2">
-                    <mat-label>{{ 'purchasesaleasset.branch' | translate }}</mat-label>
-                    <mat-select formControlName="branch">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let branch of branchList" [value]="branch.id">
-                            {{branch.text}}
-                        </mat-option>
-                    </mat-select>
+      <mat-form-field class="col-2">
+        <mat-label>{{ 'purchasesaleasset.branch' | translate }}</mat-label>
+        <mat-select formControlName="branch">
+          <mat-option>None</mat-option>
+          @for (branch of branchList; track branch) {
+            <mat-option [value]="branch.id">
+              {{branch.text}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-2">
+        <mat-label>{{ 'purchasesaleasset.transactionType' | translate }}</mat-label>
+        <mat-select formControlName="transactionType" (selectionChange)="accountSelect()">
+          <mat-option>None</mat-option>
+          @for (trans of transactionTypeList; track trans) {
+            <mat-option [value]="trans">
+              {{ trans }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-2">
+        <mat-label>{{ 'purchasesaleasset.assetTransactionType' | translate }}</mat-label>
+        <mat-select formControlName="assetTransactionType">
+          <mat-option>None</mat-option>
+          @for (nature of natureofTransactionList; track nature) {
+            <mat-option [value]="nature">
+              {{ nature }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-2">
+        <mat-label>{{ 'purchasesaleasset.voucherType' | translate }}</mat-label>
+        <mat-select formControlName="voucherType"
+          (selectionChange)="voucherTypeSelect(); voucherNoCalculate();">
+          <mat-option>None</mat-option>
+          @for (type of vouchersTypeList; track type) {
+            <mat-option [value]="type.voucherTypeId">
+              {{type.voucherTypeName}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-2">
+        <mat-label [translate]="'purchasesaleasset.voucherNumber'"></mat-label>
+        <input matInput formControlName="voucherNumber" appFocusOnEnter tabIndex="2">
+      </mat-form-field>
+
+      <mat-form-field class="col-2">
+        <mat-label [translate]="'purchasesaleasset.voucherDate'"></mat-label>
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="voucherDate"
+          appFocusOnEnter tabIndex="3">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'purchasesaleasset.postingDate'"></mat-label>
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="postingDate"
+            appFocusOnEnter tabIndex="3">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-2">
+            <mat-label>{{ 'purchasesaleasset.bpcategory' | translate }}</mat-label>
+            <mat-select formControlName="bpcategory" (selectionChange)="onbpChange()">
+              <mat-option>None</mat-option>
+              @for (acc of bpTypeList; track acc) {
+                <mat-option [value]="acc.code">
+                  {{acc.description}}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-2">
+            <mat-label>{{ 'purchasesaleasset.partyAccount' | translate }}</mat-label>
+            <mat-select formControlName="partyAccount">
+              <mat-option>None</mat-option>
+              @for (acc of bpgLists; track acc) {
+                <mat-option [value]="acc.id">
+                  {{acc.text}}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-2">
+            <mat-label [translate]="'purchasesaleasset.referenceNumber'"></mat-label>
+            <input matInput formControlName="referenceNumber" appFocusOnEnter tabIndex="2">
+          </mat-form-field>
+
+          <mat-form-field class="col-2">
+            <mat-label [translate]="'purchasesaleasset.referenceDate'"></mat-label>
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="referenceDate"
+              appFocusOnEnter tabIndex="4">
+              <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+              <mat-datepicker #picker4></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'purchasesaleasset.partyInvoiceNo'"></mat-label>
+              <input matInput formControlName="partyInvoiceNo" appFocusOnEnter tabIndex="2">
+            </mat-form-field>
+
+            <mat-form-field class="col-2">
+              <mat-label [translate]="'purchasesaleasset.partyInvoiceDate'"></mat-label>
+              <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="partyInvoiceDatepicker4" [nonEditable]="partyInvoiceDatepicker4"
+                formControlName="partyInvoiceDate" appFocusOnEnter tabIndex="4">
+                <mat-datepicker-toggle matSuffix [for]="partyInvoiceDatepicker4"></mat-datepicker-toggle>
+                <mat-datepicker #partyInvoiceDatepicker4></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field class="col-2">
+                <mat-label [translate]="'purchasesaleasset.grnno'"></mat-label>
+                <input matInput formControlName="grnno"
+                  appFocusOnEnter tabIndex="2">
                 </mat-form-field>
 
                 <mat-form-field class="col-2">
-                    <mat-label>{{ 'purchasesaleasset.transactionType' | translate }}</mat-label>
-                    <mat-select formControlName="transactionType" (selectionChange)="accountSelect()">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let trans of transactionTypeList" [value]="trans">
-                            {{ trans }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label>{{ 'purchasesaleasset.assetTransactionType' | translate }}</mat-label>
-                    <mat-select formControlName="assetTransactionType">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let nature of natureofTransactionList" [value]="nature">
-                            {{ nature }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label>{{ 'purchasesaleasset.voucherType' | translate }}</mat-label>
-                    <mat-select formControlName="voucherType"
-                        (selectionChange)="voucherTypeSelect(); voucherNoCalculate();">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let type of vouchersTypeList" [value]="type.voucherTypeId">
-                            {{type.voucherTypeName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'purchasesaleasset.voucherNumber'"></mat-label>
-                    <input matInput formControlName="voucherNumber" appFocusOnEnter tabIndex="2">
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'purchasesaleasset.voucherDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="voucherDate"
-                        appFocusOnEnter tabIndex="3">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'purchasesaleasset.postingDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="postingDate"
-                        appFocusOnEnter tabIndex="3">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label>{{ 'purchasesaleasset.bpcategory' | translate }}</mat-label>
-                    <mat-select formControlName="bpcategory" (selectionChange)="onbpChange()">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let acc of bpTypeList" [value]="acc.code">
-                            {{acc.description}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label>{{ 'purchasesaleasset.partyAccount' | translate }}</mat-label>
-                    <mat-select formControlName="partyAccount">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let acc of bpgLists" [value]="acc.id">
-                            {{acc.text}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'purchasesaleasset.referenceNumber'"></mat-label>
-                    <input matInput formControlName="referenceNumber" appFocusOnEnter tabIndex="2">
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'purchasesaleasset.referenceDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4" formControlName="referenceDate"
-                        appFocusOnEnter tabIndex="4">
-                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-                    <mat-datepicker #picker4></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'purchasesaleasset.partyInvoiceNo'"></mat-label>
-                    <input matInput formControlName="partyInvoiceNo" appFocusOnEnter tabIndex="2">
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'purchasesaleasset.partyInvoiceDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="partyInvoiceDatepicker4" [nonEditable]="partyInvoiceDatepicker4"
-                       formControlName="partyInvoiceDate" appFocusOnEnter tabIndex="4">
-                    <mat-datepicker-toggle matSuffix [for]="partyInvoiceDatepicker4"></mat-datepicker-toggle>
-                    <mat-datepicker #partyInvoiceDatepicker4></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'purchasesaleasset.grnno'"></mat-label>
-                    <input matInput formControlName="grnno"
-                        appFocusOnEnter tabIndex="2">
-                </mat-form-field>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'purchasesaleasset.grndate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="gRNDatepicker4" [nonEditable]="gRNDatepicker4"
-                         formControlName="grndate"
-                        appFocusOnEnter tabIndex="4">
+                  <mat-label [translate]="'purchasesaleasset.grndate'"></mat-label>
+                  <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="gRNDatepicker4" [nonEditable]="gRNDatepicker4"
+                    formControlName="grndate"
+                    appFocusOnEnter tabIndex="4">
                     <mat-datepicker-toggle matSuffix [for]="gRNDatepicker4"></mat-datepicker-toggle>
                     <mat-datepicker #gRNDatepicker4></mat-datepicker>
-                </mat-form-field>
+                  </mat-form-field>
 
-                <mat-form-field class="col-2">
+                  <mat-form-field class="col-2">
                     <mat-label>{{ 'purchasesaleasset.paymentterms' | translate }}</mat-label>
                     <mat-select formControlName="paymentterms">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let nature of ptermsList" [value]="nature.id">
-                            {{ nature.text }}
+                      <mat-option>None</mat-option>
+                      @for (nature of ptermsList; track nature) {
+                        <mat-option [value]="nature.id">
+                          {{ nature.text }}
                         </mat-option>
+                      }
                     </mat-select>
-                </mat-form-field>
+                  </mat-form-field>
 
 
-                <mat-form-field class="col-2">
+                  <mat-form-field class="col-2">
                     <mat-label [translate]="'purchasesaleasset.narration'"></mat-label>
                     <input matInput formControlName="narration" appFocusOnEnter tabIndex="2">
-                </mat-form-field>
-            </div>
-        </form>
+                  </mat-form-field>
+                </div>
+              </form>
 
-        <div>
-            <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
+              <div>
+                <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
                 [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
-        </div>
+              </div>
 
 
-    </mat-card-content>
+            </mat-card-content>
 
-    <mat-card-content class="d-flex justify-content-end py-1">
+            <mat-card-content class="d-flex justify-content-end py-1">
 
-        <button id="save"  [hidden]="routeEdit != ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
-            (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
-            {{ 'COMMON.SAVE' | translate }}
-        </button>
-        <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
-            {{ 'COMMON.BACK' | translate }}
-        </button>
-        <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
-            (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
-            {{ 'COMMON.RESET' | translate }}
-        </button>
-        <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
-            (click)="return();">
-            {{ 'COMMON.RETURN' | translate }}
-        </button>
+              <button id="save"  [hidden]="routeEdit != ''" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+                (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
+                {{ 'COMMON.SAVE' | translate }}
+              </button>
+              <button id="back" mat-raised-button class="button-color-red text-white mx-3" (click)="back();">
+                {{ 'COMMON.BACK' | translate }}
+              </button>
+              <button id="reset" [hidden]="routeEdit != ''" mat-raised-button class="button-color-red text-white mx-3"
+                (click)="reset();"><i class="fa-solid fa-arrow-rotate-right"></i>
+                {{ 'COMMON.RESET' | translate }}
+              </button>
+              <button [hidden]="routeEdit == ''" mat-raised-button class="button-color-red text-white mx-3"
+                (click)="return();">
+                {{ 'COMMON.RETURN' | translate }}
+              </button>
 
-    </mat-card-content>
+            </mat-card-content>
 
-</mat-card>
+          </mat-card>

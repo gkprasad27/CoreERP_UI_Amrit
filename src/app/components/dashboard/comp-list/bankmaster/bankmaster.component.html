@@ -13,9 +13,11 @@
           <mat-label [translate]="'bankmaster.bankCode'"></mat-label>
           <input matInput formControlName="bankCode" maxlength="5"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.bankCode.valid&&formControls.bankCode.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.bankCode.valid  }">
+          @if (!formControls.bankCode.valid&&formControls.bankCode.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.bankCode.valid  }">
             Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -23,17 +25,21 @@
           <mat-label [translate]="'bankmaster.bankName'"></mat-label>
           <input matInput formControlName="bankName" maxlength="50"
             appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.bankName.valid" [ngClass]="{ 'ng--invalid': !formControls.bankName.valid  }">
+          @if (!formControls.bankName.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.bankName.valid  }">
             Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'bankmaster.accountType'"></mat-label>
           <mat-select formControlName="accountType" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let agl of AccountType" [value]="agl.value">
-              {{agl.viewValue}}
-            </mat-option>
+            @for (agl of AccountType; track agl) {
+              <mat-option [value]="agl.value">
+                {{agl.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -53,9 +59,11 @@
           <mat-label>{{'bankmaster.currency' | translate }}</mat-label>
           <mat-select formControlName="currency" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cncy of currencyList" [value]="cncy.id">
-              {{cncy.text}}
-            </mat-option>
+            @for (cncy of currencyList; track cncy) {
+              <mat-option [value]="cncy.id">
+                {{cncy.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -99,9 +107,11 @@
           <mat-label>{{'bankmaster.state' | translate }}</mat-label>
           <mat-select formControlName="state" appFocusOnEnter tabIndex="13">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let state of stateList" [value]="state.id">
-              {{state.text}}
-            </mat-option>
+            @for (state of stateList; track state) {
+              <mat-option [value]="state.id">
+                {{state.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -109,9 +119,11 @@
           <mat-label>{{'bankmaster.region' | translate }}</mat-label>
           <mat-select formControlName="region" appFocusOnEnter tabIndex="14">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let rgn of regionsList" [value]="rgn.id">
-              {{rgn.text}}
-            </mat-option>
+            @for (rgn of regionsList; track rgn) {
+              <mat-option [value]="rgn.id">
+                {{rgn.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -119,9 +131,11 @@
           <mat-label>{{'bankmaster.country' | translate }}</mat-label>
           <mat-select formControlName="country" appFocusOnEnter tabIndex="15">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cntry of countrysList" [value]="cntry.id">
-              {{cntry.text}}
-            </mat-option>
+            @for (cntry of countrysList; track cntry) {
+              <mat-option [value]="cntry.id">
+                {{cntry.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

@@ -1,210 +1,216 @@
-<div style="margin: 10px;" *ngIf="materialPrintData && materialPrintData.length" id="materialPrintData">
+@if (materialPrintData && materialPrintData.length) {
+  <div style="margin: 10px;" id="materialPrintData">
     <div style="display: flex;">
-        @if(formData.value.company === '1000') {
-            <img src="/assets/images/header.jpg"  style="height: 100px; width: 65%;"> 
-        }
-        @if(formData.value.company !== '1000') {
-            <img src="/assets/images/AMRIT.jpg" style="height: 100px; width: 65%;">
-        }
-        <span style="font-size: 25px;font-weight: 700;font-family: sans-serif;"> Production Scheduling </span>
+      @if(formData.value.company === '1000') {
+        <img src="/assets/images/header.jpg"  style="height: 100px; width: 65%;">
+      }
+      @if(formData.value.company !== '1000') {
+        <img src="/assets/images/AMRIT.jpg" style="height: 100px; width: 65%;">
+      }
+      <span style="font-size: 25px;font-weight: 700;font-family: sans-serif;"> Production Scheduling </span>
     </div>
-
     <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;">
-        <table
-            style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
-            <thead>
-                <tr>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        Sale Order Number </th>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        Material Code </th>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        Material Name </th>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        Production Tag </th>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        Type of Work </th>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        Allocated Person </th>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        Start Date </th>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        End Date </th>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        Production Plan Date </th>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        Production Target Date </th>
-                    <th
-                        style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
-                        Work Status </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-                    *ngFor="let row of materialPrintData; let i = index">
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.saleOrderNumber }} </td>
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.materialCode }}
-                    </td>
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.materialName }}
-                    </td>
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.productionTag }}
-                    </td>
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.typeofWork }}
-                    </td>
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.allocatedPerson }}
-                    </td>
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.startDate }}
-                    </td>
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.endDate }}
-                    </td>
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.productionPlanDate }}
-                    </td>
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.productionTargetDate }}
-                    </td>
-                    <td
-                        style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
-                        {{ row.workStatus }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+      <table
+        style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+        <thead>
+          <tr>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            Sale Order Number </th>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            Material Code </th>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            Material Name </th>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            Production Tag </th>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            Type of Work </th>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            Allocated Person </th>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            Start Date </th>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            End Date </th>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            Production Plan Date </th>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            Production Target Date </th>
+            <th
+              style="border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact; font-size: 12px;font-family: sans-serif;font-weight: normal;">
+            Work Status </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of materialPrintData; track row; let i = $index) {
+            <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+              >
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+              {{ row.saleOrderNumber }} </td>
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                {{ row.materialCode }}
+              </td>
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                {{ row.materialName }}
+              </td>
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                {{ row.productionTag }}
+              </td>
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                {{ row.typeofWork }}
+              </td>
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                {{ row.allocatedPerson }}
+              </td>
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                {{ row.startDate }}
+              </td>
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                {{ row.endDate }}
+              </td>
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                {{ row.productionPlanDate }}
+              </td>
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                {{ row.productionTargetDate }}
+              </td>
+              <td
+                style="border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;font-size: 12px;font-family: sans-serif;">
+                {{ row.workStatus }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
-
-</div>
+  </div>
+}
 
 <div class="position-relative ">
 
-    <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
-        <span> {{'materialrequisition.productionStatus' | translate }} </span>
-        <mat-icon class="my-2 cursor--pointer" (click)="back()">close</mat-icon>
-    </mat-card-title>
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'materialrequisition.productionStatus' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="back()">close</mat-icon>
+  </mat-card-title>
 
 
-    <mat-card-content class="pt-5 p-2 m-0 ">
+  <mat-card-content class="pt-5 p-2 m-0 ">
 
-        <form [formGroup]="formData" autocomplete="off">
+    <form [formGroup]="formData" autocomplete="off">
 
-            <div class="row p-1">
+      <div class="row p-1">
 
-                <div class="multiselect-dropdown-list floating-dropdown col-2" *ngIf="data.employeesList && data.employeesList.length"
-                [class.filled]="formData.value?.allocatedPerson?.length > 0" >
-                    <label> {{ 'materialrequisition.allocatedPerson' | translate }} </label>
-                    <ng-multiselect-dropdown placeholder=" " formControlName="allocatedPerson"
-                    [settings]="dropdownSettings" [data]="data.employeesList">
-                    </ng-multiselect-dropdown>
-                </div>
-
-
-                <div class="multiselect-dropdown-list floating-dropdown col-2" *ngIf="data.employeesList && data.employeesList.length"
-                [class.filled]="formData.value?.mechine?.length > 0" >
-                    <label> {{ 'materialrequisition.mechine' | translate }} </label>
-                    <ng-multiselect-dropdown placeholder=" " formControlName="mechine"
-                    [settings]="dropdownSettings1" [data]="data.mechenaryList">
-                    </ng-multiselect-dropdown>
-                </div>
-
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'materialrequisition.startDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="startDate"
-                        appFocusOnEnter tabIndex="3">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'materialrequisition.endDate'"></mat-label>
-                    <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="endDate"
-                        appFocusOnEnter tabIndex="4">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field class="col-2">
-                    <mat-label>{{'materialrequisition.workStatus' | translate }}</mat-label>
-                    <mat-select formControlName="workStatus" appFocusOnEnter tabIndex="3">
-                        <mat-option>None</mat-option>
-                        <mat-option value="Assigned"> Assigned </mat-option>
-                        <mat-option value="In Progress"> In Progress </mat-option>
-                        <mat-option value="Completed"> Completed </mat-option>
-                        <mat-option value="Rejected"> Rejected </mat-option>
-                        <mat-option value="Assigned to QC"> Assigned to QC </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'materialrequisition.productionPlanDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3"
-                        formControlName="productionPlanDate" appFocusOnEnter tabIndex="11">
-                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                    <mat-datepicker #picker3></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field class="col-2">
-                    <mat-label [translate]="'materialrequisition.productionTargetDate'"></mat-label>
-                    <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4"
-                        formControlName="productionTargetDate" appFocusOnEnter tabIndex="12">
-                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-                    <mat-datepicker #picker4></mat-datepicker>
-                </mat-form-field>
-            </div>
-
-            <div class="mb-3 d-flex justify-content-end">
-
-                <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
-                    {{ 'COMMON.ADD' | translate }}
-                </button>
-                <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
-                    {{ 'COMMON.RESET' | translate }}
-                </button>
-
-            </div>
-
-        </form>
-
-        <div>
-            <app-table #tableRef class="table-css" [routerParam]="'materialrequisition'" [tableData]="tableData"
-                (editOrDeleteEvent)="editOrDeleteEvent($event)" [showButtons]="false">
-            </app-table>
-        </div>
+        @if (data.employeesList && data.employeesList.length) {
+          <div class="multiselect-dropdown-list floating-dropdown col-2"
+            [class.filled]="formData.value?.allocatedPerson?.length > 0" >
+            <label> {{ 'materialrequisition.allocatedPerson' | translate }} </label>
+            <ng-multiselect-dropdown placeholder=" " formControlName="allocatedPerson"
+              [settings]="dropdownSettings" [data]="data.employeesList">
+            </ng-multiselect-dropdown>
+          </div>
+        }
 
 
-    </mat-card-content>
+        @if (data.employeesList && data.employeesList.length) {
+          <div class="multiselect-dropdown-list floating-dropdown col-2"
+            [class.filled]="formData.value?.mechine?.length > 0" >
+            <label> {{ 'materialrequisition.mechine' | translate }} </label>
+            <ng-multiselect-dropdown placeholder=" " formControlName="mechine"
+              [settings]="dropdownSettings1" [data]="data.mechenaryList">
+            </ng-multiselect-dropdown>
+          </div>
+        }
 
-    <div class="form-element p-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="print()">
-            {{ 'COMMON.PRINT' | translate }}
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'materialrequisition.startDate'"></mat-label>
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="startDate"
+            appFocusOnEnter tabIndex="3">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'materialrequisition.endDate'"></mat-label>
+          <input matInput [matDatepicker]="picker2" [nonEditable]="picker2" formControlName="endDate"
+            appFocusOnEnter tabIndex="4">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label>{{'materialrequisition.workStatus' | translate }}</mat-label>
+          <mat-select formControlName="workStatus" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            <mat-option value="Assigned"> Assigned </mat-option>
+            <mat-option value="In Progress"> In Progress </mat-option>
+            <mat-option value="Completed"> Completed </mat-option>
+            <mat-option value="Rejected"> Rejected </mat-option>
+            <mat-option value="Assigned to QC"> Assigned to QC </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'materialrequisition.productionPlanDate'"></mat-label>
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker3" [nonEditable]="picker3"
+            formControlName="productionPlanDate" appFocusOnEnter tabIndex="11">
+          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'materialrequisition.productionTargetDate'"></mat-label>
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker4" [nonEditable]="picker4"
+            formControlName="productionTargetDate" appFocusOnEnter tabIndex="12">
+          <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+          <mat-datepicker #picker4></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-3 d-flex justify-content-end">
+
+        <button mat-raised-button type="submit" class="button-color-bule mx-1 text-white" (click)="saveForm()">
+          {{ 'COMMON.ADD' | translate }}
         </button>
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="back()">
-            {{ 'COMMON.CANCEL' | translate }}
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="resetForm();">
+          {{ 'COMMON.RESET' | translate }}
         </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-            {{ 'COMMON.SAVE' | translate }}
-        </button>
+
+      </div>
+
+    </form>
+
+    <div>
+      <app-table #tableRef class="table-css" [routerParam]="'materialrequisition'" [tableData]="tableData"
+        (editOrDeleteEvent)="editOrDeleteEvent($event)" [showButtons]="false">
+      </app-table>
     </div>
+
+
+  </mat-card-content>
+
+  <div class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="print()">
+      {{ 'COMMON.PRINT' | translate }}
+    </button>
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="back()">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
 </div>

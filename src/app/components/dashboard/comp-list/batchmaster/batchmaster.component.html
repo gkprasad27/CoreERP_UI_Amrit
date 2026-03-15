@@ -13,9 +13,11 @@
           <mat-label>{{'batchmaster.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let company of companiesList" [value]="company.id">
-              {{company.text}}
-            </mat-option>
+            @for (company of companiesList; track company) {
+              <mat-option [value]="company.id">
+                {{company.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -23,9 +25,11 @@
           <mat-label>{{'batchmaster.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plant of plantList" [value]="plant.id">
-              {{plant.text}}
-            </mat-option>
+            @for (plant of plantList; track plant) {
+              <mat-option [value]="plant.id">
+                {{plant.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -34,8 +38,10 @@
           <mat-label [translate]="'batchmaster.batchNumber'"></mat-label>
           <input matInput formControlName="batchNumber"
             maxlength="50" appFocusOnEnter tabIndex="3">
-          <mat-error *ngIf="!formControls.batchNumber.valid && formControls.batchNumber.status != 'DISABLED'"
+          @if (!formControls.batchNumber.valid && formControls.batchNumber.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.batchNumber.valid  }">Batch Number is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -56,9 +62,11 @@
           <mat-label>{{'batchmaster.createdBy' | translate }}</mat-label>
           <mat-select formControlName="createdBy" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let emp of empList" [value]="emp.id">
-              {{emp.id}}- {{emp.text}}
-            </mat-option>
+            @for (emp of empList; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.id}}- {{emp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -85,77 +93,79 @@
           <mat-label>{{'activities.uom' | translate }}</mat-label>
           <mat-select formControlName="uom" appFocusOnEnter tabIndex="10">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let uom of UomList" [value]="uom.id">
-              {{uom.text}}
-            </mat-option>
+            @for (uom of UomList; track uom) {
+              <mat-option [value]="uom.id">
+                {{uom.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
         <!-- <mat-form-field class="col-3">
-          <mat-label [translate]="'batchmaster.plantStart'"></mat-label>
-          <input matInput formControlName="plantStart"
-            maxlength="50" appFocusOnEnter tabIndex="11">
-        </mat-form-field> -->
+        <mat-label [translate]="'batchmaster.plantStart'"></mat-label>
+        <input matInput formControlName="plantStart"
+          maxlength="50" appFocusOnEnter tabIndex="11">
+      </mat-form-field> -->
 
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'batchmaster.plantStart'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="plantStart" [nonEditable]="plantStart"
-            formControlName="plantStart" appFocusOnEnter
-            tabIndex="11">
-          <mat-datepicker-toggle matSuffix [for]="plantStart"></mat-datepicker-toggle>
-          <mat-datepicker #plantStart></mat-datepicker>
-        </mat-form-field>
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'batchmaster.plantStart'"></mat-label>
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="plantStart" [nonEditable]="plantStart"
+          formControlName="plantStart" appFocusOnEnter
+          tabIndex="11">
+        <mat-datepicker-toggle matSuffix [for]="plantStart"></mat-datepicker-toggle>
+        <mat-datepicker #plantStart></mat-datepicker>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'batchmaster.plantEndDate'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="plantEndDate" [nonEditable]="plantEndDate"
-            formControlName="plantEndDate" appFocusOnEnter
-            tabIndex="12">
-          <mat-datepicker-toggle matSuffix [for]="plantEndDate"></mat-datepicker-toggle>
-          <mat-datepicker #plantEndDate></mat-datepicker>
-        </mat-form-field>
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'batchmaster.plantEndDate'"></mat-label>
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="plantEndDate" [nonEditable]="plantEndDate"
+          formControlName="plantEndDate" appFocusOnEnter
+          tabIndex="12">
+        <mat-datepicker-toggle matSuffix [for]="plantEndDate"></mat-datepicker-toggle>
+        <mat-datepicker #plantEndDate></mat-datepicker>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'batchmaster.actualStartDate'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="actualStartDate" [nonEditable]="actualStartDate"
-            formControlName="actualStartDate"
-            appFocusOnEnter tabIndex="13">
-          <mat-datepicker-toggle matSuffix [for]="actualStartDate"></mat-datepicker-toggle>
-          <mat-datepicker #actualStartDate></mat-datepicker>
-        </mat-form-field>
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'batchmaster.actualStartDate'"></mat-label>
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="actualStartDate" [nonEditable]="actualStartDate"
+          formControlName="actualStartDate"
+          appFocusOnEnter tabIndex="13">
+        <mat-datepicker-toggle matSuffix [for]="actualStartDate"></mat-datepicker-toggle>
+        <mat-datepicker #actualStartDate></mat-datepicker>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'batchmaster.actualStartTime'"></mat-label>
-          <input matInput formControlName="actualStartTime"
-            maxlength="5" appFocusOnEnter tabIndex="14">
-        </mat-form-field>
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'batchmaster.actualStartTime'"></mat-label>
+        <input matInput formControlName="actualStartTime"
+          maxlength="5" appFocusOnEnter tabIndex="14">
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'batchmaster.actualEndDate'"></mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="actualEndDate" [nonEditable]="actualEndDate" 
-           formControlName="actualEndDate" appFocusOnEnter
-            tabIndex="15">
-          <mat-datepicker-toggle matSuffix [for]="actualEndDate"></mat-datepicker-toggle>
-          <mat-datepicker #actualEndDate></mat-datepicker>
-        </mat-form-field>
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'batchmaster.actualEndDate'"></mat-label>
+        <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="actualEndDate" [nonEditable]="actualEndDate"
+          formControlName="actualEndDate" appFocusOnEnter
+          tabIndex="15">
+        <mat-datepicker-toggle matSuffix [for]="actualEndDate"></mat-datepicker-toggle>
+        <mat-datepicker #actualEndDate></mat-datepicker>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'batchmaster.actualEndTime'"></mat-label>
-          <input matInput  formControlName="actualEndTime"
-            maxlength="5" appFocusOnEnter tabIndex="16">
-        </mat-form-field>
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'batchmaster.actualEndTime'"></mat-label>
+        <input matInput  formControlName="actualEndTime"
+          maxlength="5" appFocusOnEnter tabIndex="16">
+      </mat-form-field>
 
-      </div>
-      <mat-divider></mat-divider>
-    </form>
+    </div>
+    <mat-divider></mat-divider>
+  </form>
 
-  </mat-card-content>
-  <div class="form-element mt-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-      {{ 'COMMON.CANCEL' | translate }}
-    </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-      {{ 'COMMON.SAVE' | translate }}
-    </button>
-  </div>
+</mat-card-content>
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 </div>

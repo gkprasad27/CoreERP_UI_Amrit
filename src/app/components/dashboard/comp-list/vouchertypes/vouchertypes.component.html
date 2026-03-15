@@ -14,8 +14,10 @@
           <mat-label [translate]="'vouchertype.voucherTypeId'"></mat-label>
           <input matInput  formControlName="voucherTypeId"
             maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.voucherTypeId.valid &&formControls.voucherTypeId.status != 'DISABLED'"
+          @if (!formControls.voucherTypeId.valid &&formControls.voucherTypeId.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.voucherTypeId.valid  }">Voucher Type Key is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -23,18 +25,22 @@
           <mat-label [translate]="'vouchertype.voucherTypeName'"></mat-label>
           <input matInput formControlName="voucherTypeName"
             maxlength="40" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.voucherTypeName.valid"
-            [ngClass]="{ 'ng--invalid': !formControls.voucherTypeName.valid  }">voucher Type Name is required
-          </mat-error>
+          @if (!formControls.voucherTypeName.valid) {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.voucherTypeName.valid  }">voucher Type Name is required
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'vouchertype.voucherClass' | translate }}</mat-label>
           <mat-select formControlName="voucherClass" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let vcList of voucherClass" [value]="vcList.voucherKey">
-              {{vcList.description}}
-            </mat-option>
+            @for (vcList of voucherClass; track vcList) {
+              <mat-option [value]="vcList.voucherKey">
+                {{vcList.description}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -42,9 +48,11 @@
           <mat-label [translate]="'vouchertype.accountType'"></mat-label>
           <mat-select formControlName="accountType" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ltype of voucherNatures" [value]="ltype.viewValue">
-              {{ltype.viewValue}}
-            </mat-option>
+            @for (ltype of voucherNatures; track ltype) {
+              <mat-option [value]="ltype.viewValue">
+                {{ltype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

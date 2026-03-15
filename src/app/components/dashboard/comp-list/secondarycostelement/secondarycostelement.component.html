@@ -13,9 +13,11 @@
           <mat-label>{{'secondarycostelement.chartofAccount' | translate }}</mat-label>
           <mat-select formControlName="chartofAccount" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let coa of coaList" [value]="coa.code">
-              {{coa.desctiption}}
-            </mat-option>
+            @for (coa of coaList; track coa) {
+              <mat-option [value]="coa.code">
+                {{coa.desctiption}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -24,12 +26,16 @@
           <mat-label>{{'secondarycostelement.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let company of companiesList" [value]="company.id">
-              {{company.text}}
-            </mat-option>
+            @for (company of companiesList; track company) {
+              <mat-option [value]="company.id">
+                {{company.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.company.valid" [ngClass]="{ 'ng--invalid': !formControls.company.valid  }">
+          @if (!formControls.company.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.company.valid  }">
             Company is required</mat-error>
+          }
 
         </mat-form-field>
 
@@ -38,9 +44,10 @@
            'ng--invalid': !formControls.secondaryCostCode.valid && formControls.secondaryCostCode.status != 'DISABLED' }">
           <mat-label [translate]="'secondarycostelement.secondaryCostCode'"></mat-label>
           <input matInput formControlName="secondaryCostCode" maxlength="10" appFocusOnEnter tabIndex="1">
-          <mat-error
-            *ngIf="!formControls.secondaryCostCode.valid && formControls.secondaryCostCode.status != 'DISABLED'"
+          @if (!formControls.secondaryCostCode.valid && formControls.secondaryCostCode.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.secondaryCostCode.valid  }"> Cost Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -52,9 +59,11 @@
           <mat-label>{{'secondarycostelement.type' | translate }}</mat-label>
           <mat-select formControlName="type" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let type of type" [value]="type.value">
-              {{type.viewValue}}
-            </mat-option>
+            @for (type of type; track type) {
+              <mat-option [value]="type.value">
+                {{type.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -62,9 +71,11 @@
           <mat-label>{{'secondarycostelement.uom' | translate }}</mat-label>
           <mat-select formControlName="uom" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let uom of UomList" [value]="uom.id">
-              {{uom.text}}
-            </mat-option>
+            @for (uom of UomList; track uom) {
+              <mat-option [value]="uom.id">
+                {{uom.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

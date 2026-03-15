@@ -14,8 +14,10 @@
           <mat-label [translate]="'purchaseordertype.purchaseType'"></mat-label>
           <input matInput formControlName="purchaseType"
             maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.purchaseType.valid  && formControls.purchaseType.status != 'DISABLED'"
+          @if (!formControls.purchaseType.valid  && formControls.purchaseType.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.purchaseType.valid  }"> Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -23,8 +25,10 @@
           <mat-label [translate]="'purchaseordertype.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Description is required</mat-error>
+          }
         </mat-form-field>
 
 

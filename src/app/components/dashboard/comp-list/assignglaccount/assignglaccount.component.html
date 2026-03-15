@@ -9,89 +9,102 @@
 
         <!-- <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid&&formControls.code.status != 'DISABLED',
                            'ng--invalid': !formControls.code.valid &&formControls.code.status != 'DISABLED' }">
-          <mat-label [translate]="'assignglaccount.code'"></mat-label>
-          <input matInput formControlName="code" maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid &&formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
-            required</mat-error>
-        </mat-form-field> -->
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
-          <mat-select formControlName="compCode" appFocusOnEnter tabIndex="0">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+        <mat-label [translate]="'assignglaccount.code'"></mat-label>
+        <input matInput formControlName="code" maxlength="4" appFocusOnEnter tabIndex="1">
+        <mat-error *ngIf="!formControls.code.valid &&formControls.code.status != 'DISABLED'"
+          [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
+        required</mat-error>
+      </mat-form-field> -->
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
+        <mat-select formControlName="compCode" appFocusOnEnter tabIndex="0">
+          <mat-option>None</mat-option>
+          @for (comp of companyList; track comp) {
+            <mat-option [value]="comp.id">
               {{comp.text}}
             </mat-option>
-          </mat-select>
+          }
+        </mat-select>
+        @if (!formControls.compCode.valid && formControls.compCode.status != 'DISABLED') {
           <mat-error
-            *ngIf="!formControls.compCode.valid && formControls.compCode.status != 'DISABLED'"
             [ngClass]="{ 'ng--invalid': !formControls.compCode.valid  }"> Company Code is
             required
           </mat-error>
-        </mat-form-field>
+        }
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'assignglaccount.toGl' | translate }}</mat-label>
-          <mat-select formControlName="toGl" appFocusOnEnter tabIndex="1">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let stkey of structkeyList" [value]="stkey.structureKey">
+      <mat-form-field class="col-3">
+        <mat-label>{{'assignglaccount.toGl' | translate }}</mat-label>
+        <mat-select formControlName="toGl" appFocusOnEnter tabIndex="1">
+          <mat-option>None</mat-option>
+          @for (stkey of structkeyList; track stkey) {
+            <mat-option [value]="stkey.structureKey">
               {{stkey.structureName}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'assignglaccount.glgroup' | translate }}</mat-label>
-          <mat-select formControlName="glgroup" appFocusOnEnter tabIndex="2"
-            (selectionChange)="getSubacclist(); onGroupChange()">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let accgrp of glAccgrpList" [value]="accgrp.groupName">
+      <mat-form-field class="col-3">
+        <mat-label>{{'assignglaccount.glgroup' | translate }}</mat-label>
+        <mat-select formControlName="glgroup" appFocusOnEnter tabIndex="2"
+          (selectionChange)="getSubacclist(); onGroupChange()">
+          <mat-option>None</mat-option>
+          @for (accgrp of glAccgrpList; track accgrp) {
+            <mat-option [value]="accgrp.groupName">
               {{accgrp.groupName}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'assignglaccount.subAccount' | translate }}</mat-label>
-          <mat-select formControlName="subAccount" appFocusOnEnter tabIndex="3">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let under of subaccList" [value]="under.accountGroupId">
+      <mat-form-field class="col-3">
+        <mat-label>{{'assignglaccount.subAccount' | translate }}</mat-label>
+        <mat-select formControlName="subAccount" appFocusOnEnter tabIndex="3">
+          <mat-option>None</mat-option>
+          @for (under of subaccList; track under) {
+            <mat-option [value]="under.accountGroupId">
               {{under.accountGroupId}} - {{under.accountGroupName}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'assignglaccount.fromGl' | translate }}</mat-label>
-          <mat-select formControlName="fromGl" appFocusOnEnter tabIndex="4" multiple>
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let gl of fromGlList" [value]="gl.id">
+      <mat-form-field class="col-3">
+        <mat-label>{{'assignglaccount.fromGl' | translate }}</mat-label>
+        <mat-select formControlName="fromGl" appFocusOnEnter tabIndex="4" multiple>
+          <mat-option>None</mat-option>
+          @for (gl of fromGlList; track gl) {
+            <mat-option [value]="gl.id">
               {{gl.id}} - {{gl.text}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'assignglaccount.ext1'"></mat-label>
-          <mat-select formControlName="ext1" appFocusOnEnter tabIndex="3">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let nature of nature" [value]="nature.value">
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'assignglaccount.ext1'"></mat-label>
+        <mat-select formControlName="ext1" appFocusOnEnter tabIndex="3">
+          <mat-option>None</mat-option>
+          @for (nature of nature; track nature) {
+            <mat-option [value]="nature.value">
               {{nature.Description}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-      </div>
-      <mat-divider></mat-divider>
-    </form>
-  </mat-card-content>
-  <div class="form-element mt-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-      {{ 'COMMON.CANCEL' | translate }}
-    </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-      {{ 'COMMON.SAVE' | translate }}
-    </button>
-  </div>
+    </div>
+    <mat-divider></mat-divider>
+  </form>
+</mat-card-content>
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 </div>

@@ -9,7 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AlertService } from '../../services/alert.service';
 import { Static } from '../../enums/common/static';
 import { SnackBar, StatusCodes } from '../../enums/common/common';
-import { CommonModule } from '@angular/common';
+
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, RouterModule, TranslatePipe, TranslateModule, MatToolbarModule, MatButtonModule, MatIconModule],
+  imports: [RouterModule, TranslatePipe, TranslateModule, MatToolbarModule, MatButtonModule, MatIconModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })

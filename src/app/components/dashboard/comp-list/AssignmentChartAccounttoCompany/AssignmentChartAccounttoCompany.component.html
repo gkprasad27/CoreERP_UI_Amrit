@@ -11,20 +11,24 @@
 
         <mat-form-field  class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid&&formControls.code.status != 'DISABLED',
                    'ng--invalid': !formControls.code.valid &&formControls.code.status != 'DISABLED' }">
-        <mat-label [translate]="'AssignmentChartAccounttoCompany.code'"></mat-label>
+          <mat-label [translate]="'AssignmentChartAccounttoCompany.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid &&formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
+          @if (!formControls.code.valid &&formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'AssignmentChartAccounttoCompany.company' | translate }}</mat-label>
           <mat-select formControlName="company" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
+            @for (comp of companyList; track comp) {
+              <mat-option [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -32,9 +36,11 @@
           <mat-label [translate]="'AssignmentChartAccounttoCompany.operationCoa'"></mat-label>
           <mat-select formControlName="operationCoa" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let coa of operationCoaList" [value]="coa.code">
-              {{coa.desctiption}}
-            </mat-option>
+            @for (coa of operationCoaList; track coa) {
+              <mat-option [value]="coa.code">
+                {{coa.desctiption}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -42,9 +48,11 @@
           <mat-label [translate]="'AssignmentChartAccounttoCompany.groupCoa'"></mat-label>
           <mat-select formControlName="groupCoa" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let coa of groupCoaList" [value]="coa.code">
-              {{coa.desctiption}}
-            </mat-option>
+            @for (coa of groupCoaList; track coa) {
+              <mat-option [value]="coa.code">
+                {{coa.desctiption}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

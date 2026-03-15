@@ -13,8 +13,10 @@
           <mat-label [translate]="'country.countryCode'"></mat-label>
           <input matInput formControlName="countryCode"
             appFocusOnEnter tabIndex="1" maxlength="6">
-          <mat-error *ngIf="!formControls.countryCode.valid && formControls.countryCode.status != 'DISABLED'"
+          @if (!formControls.countryCode.valid && formControls.countryCode.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.countryCode.valid  }">Country Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -22,17 +24,21 @@
           <mat-label [translate]="'country.countryName'"></mat-label>
           <input matInput formControlName="countryName"
             appFocusOnEnter tabIndex="2" maxlength="50">
-          <mat-error *ngIf="!formControls.countryName.valid"
+          @if (!formControls.countryName.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.countryName.valid  }">Country Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'country.language' | translate }}</mat-label>
           <mat-select formControlName="language" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let lng of languageList" [value]="lng.languageCode">
-              {{lng.languageName}}
-            </mat-option>
+            @for (lng of languageList; track lng) {
+              <mat-option [value]="lng.languageCode">
+                {{lng.languageName}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -40,9 +46,11 @@
           <mat-label>{{'country.currency' | translate }}</mat-label>
           <mat-select formControlName="currency" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cncy of currencyList" [value]="cncy.currencySymbol">
-              {{cncy.currencyName}}
-            </mat-option>
+            @for (cncy of currencyList; track cncy) {
+              <mat-option [value]="cncy.currencySymbol">
+                {{cncy.currencyName}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

@@ -11,68 +11,74 @@
 
 
         <!-- <mat-form-field class="col-3"
-          [ngClass]="{ 'ng--valid': formControls.company.valid, 'ng--invalid': !formControls.company.valid  }">
-          <mat-label>{{'primarycostelement.company' | translate }}</mat-label>
-          <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let company of companiesList" [value]="company.id">
-              {{company.text}}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="!formControls.company.valid" [ngClass]="{ 'ng--invalid': !formControls.company.valid  }">
-            Company is
-            required</mat-error>
-        </mat-form-field> -->
+        [ngClass]="{ 'ng--valid': formControls.company.valid, 'ng--invalid': !formControls.company.valid  }">
+        <mat-label>{{'primarycostelement.company' | translate }}</mat-label>
+        <mat-select formControlName="company" appFocusOnEnter tabIndex="2">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let company of companiesList" [value]="company.id">
+            {{company.text}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!formControls.company.valid" [ngClass]="{ 'ng--invalid': !formControls.company.valid  }">
+          Company is
+        required</mat-error>
+      </mat-form-field> -->
 
 
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'primarycostelement.usage' | translate }}</mat-label>
-          <mat-select formControlName="usage" appFocusOnEnter tabIndex="6">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let usage of usage" [value]="usage.value">
+      <mat-form-field class="col-3">
+        <mat-label>{{'primarycostelement.usage' | translate }}</mat-label>
+        <mat-select formControlName="usage" appFocusOnEnter tabIndex="6">
+          <mat-option>None</mat-option>
+          @for (usage of usage; track usage) {
+            <mat-option [value]="usage.value">
               {{usage.viewValue}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'primarycostelement.element' | translate }}</mat-label>
-          <mat-select formControlName="element" appFocusOnEnter tabIndex="7">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let element of element" [value]="element.value">
+      <mat-form-field class="col-3">
+        <mat-label>{{'primarycostelement.element' | translate }}</mat-label>
+        <mat-select formControlName="element" appFocusOnEnter tabIndex="7">
+          <mat-option>None</mat-option>
+          @for (element of element; track element) {
+            <mat-option [value]="element.value">
               {{element.viewValue}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field class="col-3">
-          <mat-label>{{'primarycostelement.uom' | translate }}</mat-label>
-          <mat-select formControlName="uom" appFocusOnEnter tabIndex="4">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let uom of UomList" [value]="uom.id">
+      <mat-form-field class="col-3">
+        <mat-label>{{'primarycostelement.uom' | translate }}</mat-label>
+        <mat-select formControlName="uom" appFocusOnEnter tabIndex="4">
+          <mat-option>None</mat-option>
+          @for (uom of UomList; track uom) {
+            <mat-option [value]="uom.id">
               {{uom.text}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
 
-        <mat-slide-toggle class="col-1 d-flex align-item-center" formControlName="qty" (change)="approveOrReject($event.checked)">
-          {{(modelFormData.get('qty').value != null) ? 'Quantity' : 'Reject'}}
-        </mat-slide-toggle>
+      <mat-slide-toggle class="col-1 d-flex align-item-center" formControlName="qty" (change)="approveOrReject($event.checked)">
+        {{(modelFormData.get('qty').value != null) ? 'Quantity' : 'Reject'}}
+      </mat-slide-toggle>
 
-      </div>
+    </div>
 
-    </form>
+  </form>
 
-  </mat-card-content>
-  <div class="form-element mt-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+</mat-card-content>
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
-      {{ 'COMMON.CANCEL' | translate }}
-    </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
 
-      {{ 'COMMON.SAVE' | translate }}
-    </button>
-  </div>
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 </div>

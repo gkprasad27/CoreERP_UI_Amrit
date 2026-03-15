@@ -13,9 +13,11 @@
           <mat-label [translate]="'tdsrates.code'"></mat-label>
           <input matInput formControlName="code" maxlength="10"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid &&formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
+          @if (!formControls.code.valid &&formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="form-element"
@@ -23,26 +25,32 @@
           <mat-label [translate]="'tdsrates.desctiption'"></mat-label>
           <input matInput formControlName="desctiption"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.desctiption.valid"
+          @if (!formControls.desctiption.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.desctiption.valid  }">Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>{{'tdsrates.tdstype' | translate }}</mat-label>
           <mat-select formControlName="tdstype" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let tdstype of tdsList" [value]="tdstype.tdsCode">
-              {{tdstype.tdsCode}} - {{tdstype.desctiption}}
-            </mat-option>
+            @for (tdstype of tdsList; track tdstype) {
+              <mat-option [value]="tdstype.tdsCode">
+                {{tdstype.tdsCode}} - {{tdstype.desctiption}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field>
           <mat-label>{{'tdsrates.incomeType' | translate }}</mat-label>
           <mat-select formControlName="incomeType" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let incm of incmList" [value]="incm.code">
-              {{incm.code}} - {{incm.desctiption}}
-            </mat-option>
+            @for (incm of incmList; track incm) {
+              <mat-option [value]="incm.code">
+                {{incm.code}} - {{incm.desctiption}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field class="form-element">
@@ -59,9 +67,11 @@
           <mat-label [translate]="'tdsrates.status'"></mat-label>
           <mat-select formControlName="status" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ltype of status" [value]="ltype.value">
-              {{ltype.viewValue}}
-            </mat-option>
+            @for (ltype of status; track ltype) {
+              <mat-option [value]="ltype.value">
+                {{ltype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field>

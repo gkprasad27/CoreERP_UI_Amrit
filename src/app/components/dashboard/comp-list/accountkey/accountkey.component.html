@@ -14,9 +14,11 @@
           <mat-label [translate]="'accountkey.code'"></mat-label>
           <input matInput formControlName="code" maxlength="4"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid &&formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
+          @if (!formControls.code.valid &&formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -24,17 +26,21 @@
           <mat-label [translate]="'accountkey.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'accountkey.acquisitionsGl'"></mat-label>
           <mat-select formControlName="acquisitionsGl" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let agl of glList" [value]="agl.id">
-              {{agl.id}} - {{agl.text}}
-            </mat-option>
+            @for (agl of glList; track agl) {
+              <mat-option [value]="agl.id">
+                {{agl.id}} - {{agl.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -42,9 +48,11 @@
           <mat-label [translate]="'accountkey.accumulatedGl'"></mat-label>
           <mat-select formControlName="accumulatedGl" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cltype of glList" [value]="cltype.id">
-              {{cltype.id}} - {{cltype.text}}
-            </mat-option>
+            @for (cltype of glList; track cltype) {
+              <mat-option [value]="cltype.id">
+                {{cltype.id}} - {{cltype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -52,9 +60,11 @@
           <mat-label [translate]="'accountkey.auggl'"></mat-label>
           <mat-select formControlName="auggl" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cltype of glList" [value]="cltype.id">
-              {{cltype.id}} - {{cltype.text}}
-            </mat-option>
+            @for (cltype of glList; track cltype) {
+              <mat-option [value]="cltype.id">
+                {{cltype.id}} - {{cltype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -62,9 +72,11 @@
           <mat-label [translate]="'accountkey.salesRevenueGl'"></mat-label>
           <mat-select formControlName="salesRevenueGl" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cltype of gl2List" [value]="cltype.id">
-              {{cltype.id}} - {{cltype.text}}
-            </mat-option>
+            @for (cltype of gl2List; track cltype) {
+              <mat-option [value]="cltype.id">
+                {{cltype.id}} - {{cltype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -72,9 +84,11 @@
           <mat-label [translate]="'accountkey.lossOnSaleGl'"></mat-label>
           <mat-select formControlName="lossOnSaleGl" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cltype of gl2List" [value]="cltype.id">
-              {{cltype.id}} - {{cltype.text}}
-            </mat-option>
+            @for (cltype of gl2List; track cltype) {
+              <mat-option [value]="cltype.id">
+                {{cltype.id}} - {{cltype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -82,9 +96,11 @@
           <mat-label [translate]="'accountkey.gainOnSaleGl'"></mat-label>
           <mat-select formControlName="gainOnSaleGl" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cltype of gl2List" [value]="cltype.id">
-              {{cltype.id}} - {{cltype.text}}
-            </mat-option>
+            @for (cltype of gl2List; track cltype) {
+              <mat-option [value]="cltype.id">
+                {{cltype.id}} - {{cltype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -92,9 +108,11 @@
           <mat-label [translate]="'accountkey.scrappingGl'"></mat-label>
           <mat-select formControlName="scrappingGl" appFocusOnEnter tabIndex="9">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cltype of gl2List" [value]="cltype.id">
-              {{cltype.id}} - {{cltype.text}}
-            </mat-option>
+            @for (cltype of gl2List; track cltype) {
+              <mat-option [value]="cltype.id">
+                {{cltype.id}} - {{cltype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -102,9 +120,11 @@
           <mat-label [translate]="'accountkey.depreciationGl'"></mat-label>
           <mat-select formControlName="depreciationGl" appFocusOnEnter tabIndex="10">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cltype of gl2List" [value]="cltype.id">
-              {{cltype.id}} - {{cltype.text}}
-            </mat-option>
+            @for (cltype of gl2List; track cltype) {
+              <mat-option [value]="cltype.id">
+                {{cltype.id}} - {{cltype.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -112,9 +132,11 @@
           <mat-label [translate]="'accountkey.companyCode'"></mat-label>
           <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="11">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
-              {{comp.text}}
-            </mat-option>
+            @for (comp of companyList; track comp) {
+              <mat-option [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -122,9 +144,11 @@
           <mat-label [translate]="'accountkey.chartofAccount'"></mat-label>
           <mat-select formControlName="chartofAccount" appFocusOnEnter tabIndex="12">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let coa of coaList" [value]="coa.code">
-              {{coa.desctiption}}
-            </mat-option>
+            @for (coa of coaList; track coa) {
+              <mat-option [value]="coa.code">
+                {{coa.desctiption}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

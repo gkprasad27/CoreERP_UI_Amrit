@@ -11,7 +11,7 @@ import { SnackBar, StatusCodes } from '../../../../../enums/common/common';
 import { Static } from '../../../../../enums/common/static';
 
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -26,7 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-vendor-material-list',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ReactiveFormsModule, TranslatePipe, TranslateModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './vendor-material-list.component.html',
   styleUrls: ['./vendor-material-list.component.scss']
 })

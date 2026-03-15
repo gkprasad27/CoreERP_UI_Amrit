@@ -21,9 +21,11 @@
           <mat-label [translate]="'glsubgroups.structureKey'"></mat-label>
           <mat-select formControlName="structureKey" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let stkey of structkeyList" [value]="stkey.structureKey">
-              {{stkey.structureName}}
-            </mat-option>
+            @for (stkey of structkeyList; track stkey) {
+              <mat-option [value]="stkey.structureKey">
+                {{stkey.structureName}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -32,12 +34,16 @@
           <mat-label>{{'glsubgroups.nature' | translate }}</mat-label>
           <mat-select formControlName="nature" (selectionChange)="getAccountNamelist()" appFocusOnEnter tabIndex="2">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let accgrp of glAccgrpList" [value]="accgrp.groupName">
-              {{accgrp.groupName}}
-            </mat-option>
+            @for (accgrp of glAccgrpList; track accgrp) {
+              <mat-option [value]="accgrp.groupName">
+                {{accgrp.groupName}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.nature.valid" [ngClass]="{ 'ng--invalid': !formControls.nature.valid  }"> GL
+          @if (!formControls.nature.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.nature.valid  }"> GL
             Account is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -45,18 +51,22 @@
           <mat-select formControlName="groupUnder" (selectionChange)="getGLUnderGroupList()" appFocusOnEnter
             tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let under of glAccNameList" [value]="under.accountGroupId">
-              {{under.accountGroupId}} - {{under.accountGroupName}}
-            </mat-option>
+            @for (under of glAccNameList; track under) {
+              <mat-option [value]="under.accountGroupId">
+                {{under.accountGroupId}} - {{under.accountGroupName}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field  class="col-3" [hidden]="formData.item">
           <mat-label>{{'glsubgroups.Undersubaccount' | translate }}</mat-label>
           <mat-select formControlName="Undersubaccount" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let under of getAccSubGrpList" [value]="under.accountGroupId">
-              {{under.accountGroupId}} - {{under.accountGroupName}}
-            </mat-option>
+            @for (under of getAccSubGrpList; track under) {
+              <mat-option [value]="under.accountGroupId">
+                {{under.accountGroupId}} - {{under.accountGroupName}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -64,16 +74,20 @@
            'ng--invalid': !formControls.accountGroupId.valid &&formControls.accountGroupId.status != 'DISABLED'  }">
           <mat-label [translate]="'glsubgroups.accountGroupId'"></mat-label>
           <input matInput disabled formControlName="accountGroupId" appFocusOnEnter tabIndex="5">
-          <mat-error *ngIf="!formControls.accountGroupId.valid  &&formControls.accountGroupId.status != 'DISABLED'"
+          @if (!formControls.accountGroupId.valid  &&formControls.accountGroupId.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.accountGroupId.valid  }"> Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.accountGroupName.valid, 'ng--invalid': !formControls.accountGroupName.valid  }">
           <mat-label [translate]="'glsubgroups.accountGroupName'"></mat-label>
           <input matInput disabled formControlName="accountGroupName" appFocusOnEnter tabIndex="6">
-          <mat-error *ngIf="!formControls.accountGroupName.valid"
+          @if (!formControls.accountGroupName.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.accountGroupName.valid  }"> Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">

@@ -13,9 +13,11 @@
           <mat-label [translate]="'salesoffice.code'"></mat-label>
           <input matInput  formControlName="code" maxlength="5"
             appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.code.valid && formControls.code.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
+          @if (!formControls.code.valid && formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -23,8 +25,10 @@
           <mat-label [translate]="'salesoffice.name'"></mat-label>
           <input matInput formControlName="name" maxlength="50"
             appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.name.valid" [ngClass]="{ 'ng--invalid': !formControls.name.valid  }">Name is
+          @if (!formControls.name.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.name.valid  }">Name is
             required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -37,9 +41,11 @@
           <mat-label>{{'salesoffice.state' | translate }}</mat-label>
           <mat-select formControlName="state" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let state of stateList" [value]="state.id">
-              {{state.text}}
-            </mat-option>
+            @for (state of stateList; track state) {
+              <mat-option [value]="state.id">
+                {{state.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -47,9 +53,11 @@
           <mat-label>{{'salesoffice.region' | translate }}</mat-label>
           <mat-select formControlName="region" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let rgn of regionsList" [value]="rgn.id">
-              {{rgn.text}}
-            </mat-option>
+            @for (rgn of regionsList; track rgn) {
+              <mat-option [value]="rgn.id">
+                {{rgn.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -57,9 +65,11 @@
           <mat-label>{{'salesoffice.country' | translate }}</mat-label>
           <mat-select formControlName="country" appFocusOnEnter tabIndex="6">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cntry of countrysList" [value]="cntry.id">
-              {{cntry.text}}
-            </mat-option>
+            @for (cntry of countrysList; track cntry) {
+              <mat-option [value]="cntry.id">
+                {{cntry.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -67,9 +77,11 @@
           <mat-label>{{'salesoffice.currency' | translate }}</mat-label>
           <mat-select formControlName="currency" appFocusOnEnter tabIndex="7">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cncy of currencyList" [value]="cncy.id">
-              {{cncy.text}}
-            </mat-option>
+            @for (cncy of currencyList; track cncy) {
+              <mat-option [value]="cncy.id">
+                {{cncy.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -77,9 +89,11 @@
           <mat-label>{{'salesoffice.language' | translate }}</mat-label>
           <mat-select formControlName="language" appFocusOnEnter tabIndex="8">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let lng of languageList" [value]="lng.id">
-              {{lng.text}}
-            </mat-option>
+            @for (lng of languageList; track lng) {
+              <mat-option [value]="lng.id">
+                {{lng.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -117,9 +131,11 @@
           <mat-label>{{'salesoffice.responsiblePerson' | translate }}</mat-label>
           <mat-select formControlName="responsiblePerson" appFocusOnEnter tabIndex="14">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-              {{emp.id}} - {{emp.text}}
-            </mat-option>
+            @for (emp of employeesList; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.id}} - {{emp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

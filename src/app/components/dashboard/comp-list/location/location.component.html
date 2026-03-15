@@ -13,8 +13,10 @@
           <mat-label [translate]="'location.locationId'"></mat-label>
           <input matInput formControlName="locationId"
             maxlength="5" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.locationId.valid && formControls.locationId.status != 'DISABLED'"
+          @if (!formControls.locationId.valid && formControls.locationId.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.locationId.valid  }">Location Id is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -22,17 +24,21 @@
           <mat-label [translate]="'location.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Location Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'location.plant' | translate }}</mat-label>
           <mat-select formControlName="plant" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let plant of plantList" [value]="plant.id">
-              {{plant.text}}
-            </mat-option>
+            @for (plant of plantList; track plant) {
+              <mat-option [value]="plant.id">
+                {{plant.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

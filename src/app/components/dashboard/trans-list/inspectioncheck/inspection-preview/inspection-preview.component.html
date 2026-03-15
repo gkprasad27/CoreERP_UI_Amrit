@@ -1,18 +1,22 @@
 <div class="form-element p-2 d-flex justify-content-end">
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="print()">
-        {{ 'COMMON.PRINT' | translate }}
-    </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="print()">
+    {{ 'COMMON.PRINT' | translate }}
+  </button>
 </div>
 <div style="margin: 10px;" id="inspectionPrintData">
-    <div style="display: flex;">
-        <img *ngIf="data?.headingObj?.companyCode === '1000'" 
-        src="/assets/images/header.jpg" 
+  <div style="display: flex;">
+    @if (data?.headingObj?.companyCode === '1000') {
+      <img
+        src="/assets/images/header.jpg"
         style="height: 100px; width: 65%;">
+    }
 
-   <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
-   <img *ngIf="data?.headingObj?.companyCode !== '1000'" 
-        src="/assets/images/AMRIT.jpg" 
+    <!-- Display this image if the companyName is not 'AMT POWER TRANSMISSION' -->
+    @if (data?.headingObj?.companyCode !== '1000') {
+      <img
+        src="/assets/images/AMRIT.jpg"
         style="height: 100px; width: 65%;">
+    }
 
         <div style="padding: 24px;
         border-top: 1px solid black;
@@ -41,135 +45,142 @@
         height: 50px;
     "> {{ data.heading }} </div> -->
     </div>
+  </div>
+
+  <div style="border-top: 1px solid black; display: flex;">
+    <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
+      <b> Customer Name </b>
+      <span style="padding-left: 80px;">: {{ data?.headingObj?.supplierName }} </span>
     </div>
-
-    <div style="border-top: 1px solid black; display: flex;">
-        <div style="width: 50%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Customer Name </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.supplierName }} </span>
-        </div>
-        <div style="width: 50%;padding-left: 15px;">
-            <b> Item Description </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.description }} </span>
-        </div>
+    <div style="width: 50%;padding-left: 15px;">
+      <b> Item Description </b>
+      <span style="padding-left: 80px;">: {{ data?.headingObj?.description }} </span>
     </div>
+  </div>
 
-    <div style="border-top: 1px solid black; display: flex;">
-        <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Invoice Number </b>
-            <span style="padding-left: 80px;">:  </span>
-        </div>
-        <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
-            <b> PO Number </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.poNumber }} </span>
-        </div>
-        <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Heat Number </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.heatNumber }} </span>
-        </div>
-        <div style="width: 25%;padding-left: 15px;">
-            <b> Report Date </b>
-            <span style="padding-left: 80px;">: {{ date | date }} </span>
-        </div>
+  <div style="border-top: 1px solid black; display: flex;">
+    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
+      <b> Invoice Number </b>
+      <span style="padding-left: 80px;">:  </span>
     </div>
-
-    <div style="border-top: 1px solid black; display: flex;">
-        <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Invoice Date </b>
-            <span style="padding-left: 80px;">:  </span>
-        </div>
-        <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
-            <b> PO Date </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.poDate | date }} </span>
-        </div>
-        <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Part/Drg No </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.drgNo }} </span>
-        </div>
-        <div style="width: 25%;padding-left: 15px;">
-            <b> Drawing Rev. No </b>
-            <span style="padding-left: 80px;">:  </span>
-        </div>
+    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
+      <b> PO Number </b>
+      <span style="padding-left: 80px;">: {{ data?.headingObj?.poNumber }} </span>
     </div>
-
-    <div style="border-top: 1px solid black; display: flex;">
-        <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Invoice Quantity </b>
-            <span style="padding-left: 80px;">:  </span>
-        </div>
-        <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
-            <b> PO Quantity </b>
-            <span style="padding-left: 80px;">:  </span>
-        </div>
-        <div style="width: 25%;padding-left: 15px">
-            <!-- <b> Page </b>
-            <span style="padding-left: 80px;">: {{ data?.headingObj?.purchaseOrderNumber }} </span> -->
-        </div>
-        <div style="width: 25%;padding-left: 15px;">
-
-        </div>
+    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
+      <b> Heat Number </b>
+      <span style="padding-left: 80px;">: {{ data?.headingObj?.heatNumber }} </span>
     </div>
+    <div style="width: 25%;padding-left: 15px;">
+      <b> Report Date </b>
+      <span style="padding-left: 80px;">: {{ date | date }} </span>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid black; display: flex;">
+    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
+      <b> Invoice Date </b>
+      <span style="padding-left: 80px;">:  </span>
+    </div>
+    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
+      <b> PO Date </b>
+      <span style="padding-left: 80px;">: {{ data?.headingObj?.poDate | date }} </span>
+    </div>
+    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
+      <b> Part/Drg No </b>
+      <span style="padding-left: 80px;">: {{ data?.headingObj?.drgNo }} </span>
+    </div>
+    <div style="width: 25%;padding-left: 15px;">
+      <b> Drawing Rev. No </b>
+      <span style="padding-left: 80px;">:  </span>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid black; display: flex;">
+    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
+      <b> Invoice Quantity </b>
+      <span style="padding-left: 80px;">:  </span>
+    </div>
+    <div style="width: 25%;padding-left: 15px;border-right: 1px solid black;">
+      <b> PO Quantity </b>
+      <span style="padding-left: 80px;">:  </span>
+    </div>
+    <div style="width: 25%;padding-left: 15px">
+      <!-- <b> Page </b>
+      <span style="padding-left: 80px;">: {{ data?.headingObj?.purchaseOrderNumber }} </span> -->
+    </div>
+    <div style="width: 25%;padding-left: 15px;">
+
+    </div>
+  </div>
 
 
 
+  @if (data.detailArray && data.detailArray.length) {
     <div style="border-top: 1px solid black;border-bottom: 1px solid black;-webkit-print-color-adjust: exact;"
-        *ngIf="data.detailArray && data.detailArray.length">
-        <table style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
-            <thead>
-                <tr>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Parameter </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Specification </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
-                    <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th>
-                    <ng-container *ngFor="let row of data.detailArray[0] | keyvalue; let i = index">
-                        <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"
-                            *ngIf="row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument'">
-                            {{ row.key }}
-                        </th>
-                    </ng-container>
-                    <!-- <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Remarks </th> -->
-                    <th > Remarks </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
-                    *ngFor="let row of data.detailArray; let i = index">
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Parameter }}
-                    </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Specification
-                        }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.UOM }} </td>
-                    <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Instrument }}
-                    </td>
-                    <ng-container *ngFor="let cell of row | keyvalue; let i = index">
-
-                        <td *ngIf="cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument'"
-                            style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ cell.value }}
-                        </td>
-                    </ng-container>
-                    <td > {{ row.description }} </td>
-                </tr>
-            </tbody>
-        </table>
+      >
+      <table style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+        <thead>
+          <tr>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Parameter </th>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Specification </th>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> UOM </th>
+            <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Instrument </th>
+            @for (row of data.detailArray[0] | keyvalue; track row; let i = $index) {
+              @if (row.key != 'Parameter' && row.key != 'Specification' && row.key != 'UOM' && row.key != 'Instrument') {
+                <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"
+                  >
+                  {{ row.key }}
+                </th>
+              }
+            }
+            <!-- <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Remarks </th> -->
+            <th > Remarks </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of data.detailArray; track row; let i = $index) {
+            <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+              >
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Parameter }}
+              </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Specification
+              }} </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.UOM }} </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.Instrument }}
+              </td>
+              @for (cell of row | keyvalue; track cell; let i = $index) {
+                @if (cell.key != 'Parameter' && cell.key != 'Specification' && cell.key != 'UOM' && cell.key != 'Instrument') {
+                  <td
+                    style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ cell.value }}
+                  </td>
+                }
+              }
+              <td > {{ row.description }} </td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
+  }
 
 
-    <div style="border-top: 1px solid black;border-bottom: 1px solid black; display: flex;margin-top: 20px;">
-        <div style="width: 33.33%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Prepared By : </b>
-            <span style="padding-left: 80px;">:  </span>
-        </div>
-        <div style="width: 33.33%;padding-left: 15px;border-right: 1px solid black;">
-            <b> Checked By : </b>
-            <span style="padding-left: 80px;">:  </span>
-        </div>
-        <div style="width: 33.33%;padding-left: 15px">
-            <b> Approved By : </b>
-            <span style="padding-left: 80px;">:  </span>
-        </div>
+  <div style="border-top: 1px solid black;border-bottom: 1px solid black; display: flex;margin-top: 20px;">
+    <div style="width: 33.33%;padding-left: 15px;border-right: 1px solid black;">
+      <b> Prepared By : </b>
+      <span style="padding-left: 80px;">:  </span>
     </div>
+    <div style="width: 33.33%;padding-left: 15px;border-right: 1px solid black;">
+      <b> Checked By : </b>
+      <span style="padding-left: 80px;">:  </span>
+    </div>
+    <div style="width: 33.33%;padding-left: 15px">
+      <b> Approved By : </b>
+      <span style="padding-left: 80px;">:  </span>
+    </div>
+  </div>
 
 
 </div>

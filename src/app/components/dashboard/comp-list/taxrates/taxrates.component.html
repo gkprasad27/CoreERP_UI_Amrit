@@ -12,8 +12,10 @@
           <mat-label [translate]="'taxrates.taxRateCode'"></mat-label>
           <input matInput  formControlName="taxRateCode"
             maxlength="5" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.taxRateCode.valid  &&formControls.taxRateCode.status != 'DISABLED'"
+          @if (!formControls.taxRateCode.valid  &&formControls.taxRateCode.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.taxRateCode.valid  }">Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -21,17 +23,21 @@
           <mat-label [translate]="'taxrates.description'"></mat-label>
           <input matInput  formControlName="description"
             maxlength="50" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'taxrates.taxType'"></mat-label>
           <mat-select formControlName="taxType" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let taxtype of TaxTypess" [value]="taxtype.viewValue">
-              {{taxtype.viewValue}}
-            </mat-option>
+            @for (taxtype of TaxTypess; track taxtype) {
+              <mat-option [value]="taxtype.viewValue">
+                {{taxtype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -40,9 +46,11 @@
           <mat-select   formControlName="taxTransaction"
             appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let taxtrnsn of Taxtransaction" [value]="taxtrnsn.id">
-              {{taxtrnsn.text}}
-            </mat-option>
+            @for (taxtrnsn of Taxtransaction; track taxtrnsn) {
+              <mat-option [value]="taxtrnsn.id">
+                {{taxtrnsn.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -50,9 +58,11 @@
           <mat-label [translate]="'taxrates.taxCondition'"></mat-label>
           <mat-select formControlName="taxCondition" appFocusOnEnter tabIndex="5">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ltype of TaxConditions" [value]="ltype.viewValue">
-              {{ltype.viewValue}}
-            </mat-option>
+            @for (ltype of TaxConditions; track ltype) {
+              <mat-option [value]="ltype.viewValue">
+                {{ltype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

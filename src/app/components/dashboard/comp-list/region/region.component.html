@@ -12,8 +12,10 @@
           <mat-label [translate]="'region.regionCode'"></mat-label>
           <input matInput  formControlName="regionCode"
             appFocusOnEnter tabIndex="1" maxlength="5">
-          <mat-error *ngIf="!formControls.regionCode.valid && formControls.regionCode.status != 'DISABLED'"
+          @if (!formControls.regionCode.valid && formControls.regionCode.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.regionCode.valid  }">Region Code is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -21,20 +23,26 @@
           <mat-label [translate]="'region.regionName'"></mat-label>
           <input matInput  formControlName="regionName"
             appFocusOnEnter tabIndex="2" maxlength="50">
-          <mat-error *ngIf="!formControls.regionName.valid"
+          @if (!formControls.regionName.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.regionName.valid  }">Region Name is required</mat-error>
+          }
         </mat-form-field>
         <mat-form-field class="col-3">
           <mat-label>{{'region.country' | translate }}</mat-label>
           <mat-select formControlName="country" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ctry of countrysList" [value]="ctry.id">
-              {{ctry.text}}
-            </mat-option>
+            @for (ctry of countrysList; track ctry) {
+              <mat-option [value]="ctry.id">
+                {{ctry.text}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error *ngIf="!formControls.country.valid" [ngClass]="{ 'ng--invalid': !formControls.country.valid  }">
-            Region
+          @if (!formControls.country.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.country.valid  }">
+              Region
             Name is required</mat-error>
+          }
         </mat-form-field>
       </div>
       <mat-divider></mat-divider>

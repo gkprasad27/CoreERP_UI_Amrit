@@ -14,8 +14,10 @@
               <mat-label [translate]="'depreciationcode.code'"></mat-label>
               <input matInput formControlName="code"
                 maxlength="4" appFocusOnEnter tabIndex="1">
-              <mat-error *ngIf="!formControls.code.valid" [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code
+              @if (!formControls.code.valid) {
+                <mat-error [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code
                 is required</mat-error>
+              }
             </mat-form-field>
 
             <mat-form-field class="col-3"
@@ -23,23 +25,27 @@
               <mat-label [translate]="'depreciationcode.description'"></mat-label>
               <input matInput
                 formControlName="description" maxlength="30" appFocusOnEnter tabIndex="2">
-              <mat-error *ngIf="!formControls.description.valid"
+              @if (!formControls.description.valid) {
+                <mat-error
                 [ngClass]="{ 'ng--invalid': !formControls.description.valid  }"> Name is required</mat-error>
+              }
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label [translate]="'depreciationcode.depreciationMethod'"></mat-label>
               <mat-select formControlName="depreciationMethod" appFocusOnEnter tabIndex="3">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let dpc of Methodofdepreciation" [value]="dpc.value">
-                  {{dpc.viewValue}}
-                </mat-option>
+                @for (dpc of Methodofdepreciation; track dpc) {
+                  <mat-option [value]="dpc.value">
+                    {{dpc.viewValue}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-3">
               <mat-label [translate]="'depreciationcode.purchaseWithin'"></mat-label>
-              <input matInput 
+              <input matInput
                 formControlName="purchaseWithin" maxlength="6" appFocusOnEnter tabIndex="3">
             </mat-form-field>
 
@@ -56,7 +62,7 @@
 
       <mat-tab label="Depreciationcode  Details">
         <app-dynamic-table [tableObJect]="dynTableProps" (emitColumnChanges)="emitColumnChanges($event);"
-          [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
+        [dynamicTableUpdate]="sendDynTableData"></app-dynamic-table>
       </mat-tab>
     </form>
   </mat-tab-group>

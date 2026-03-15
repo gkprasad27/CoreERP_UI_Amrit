@@ -12,9 +12,11 @@
               <mat-label [translate]="'tasks.wbselement'"></mat-label>
               <mat-select formControlName="wbselement" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let wbs of wbsElementList" [value]="wbs.id">
-                  {{wbs.text}}
-                </mat-option>
+                @for (wbs of wbsElementList; track wbs) {
+                  <mat-option [value]="wbs.id">
+                    {{wbs.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 
@@ -34,9 +36,11 @@
               <mat-label [translate]="'tasks.immediatePrecedessors'"></mat-label>
               <mat-select formControlName="immediatePrecedessors" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let wbs of wbsElementList" [value]="wbs.id">
-                  {{wbs.text}}
-                </mat-option>
+                @for (wbs of wbsElementList; track wbs) {
+                  <mat-option [value]="wbs.id">
+                    {{wbs.text}}
+                  </mat-option>
+                }
 
               </mat-select>
             </mat-form-field>
@@ -45,9 +49,11 @@
               <mat-label [translate]="'tasks.successorTask'"></mat-label>
               <mat-select formControlName="successorTask" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let wbs of wbsElementList" [value]="wbs.id">
-                  {{wbs.text}}
-                </mat-option>
+                @for (wbs of wbsElementList; track wbs) {
+                  <mat-option [value]="wbs.id">
+                    {{wbs.text}}
+                  </mat-option>
+                }
 
               </mat-select>
             </mat-form-field>
@@ -94,9 +100,11 @@
               <mat-label [translate]="'tasks.person'"></mat-label>
               <mat-select formControlName="person" appFocusOnEnter tabIndex="1">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let person of personList" [value]="person.id">
-                  {{person.id}}- {{person.text}}
-                </mat-option>
+                @for (person of personList; track person) {
+                  <mat-option [value]="person.id">
+                    {{person.id}}- {{person.text}}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
 

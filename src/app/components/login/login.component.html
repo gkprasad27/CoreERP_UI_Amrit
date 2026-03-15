@@ -8,62 +8,69 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form my-3" autocomplete="off">
 
-      <ng-container *ngIf="!showOtp" >
-
-      <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.username.valid }">
-        <mat-label [translate]="'LOGIN.USERNAME'"></mat-label>
-        <input id="loginput" matInput formControlName="username">
-        <mat-error *ngIf="isSubmitted && formControls.username.errors" class="help-block">
-          <div *ngIf="formControls.username.errors.required">Username is required </div>
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.password.valid }">
-        <mat-label [translate]="'LOGIN.PASSWORD'"></mat-label>
-        <input id="passwordinput" matInput type="password" formControlName="password">
-        <mat-error *ngIf="isSubmitted && formControls.password.errors" class="help-block">
-          <div *ngIf="formControls.password.errors.required">Password is required</div>
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="form-element">
-        <mat-label [translate]="'COMMON.LANGUAGEPREFERENCE'"></mat-label>
-        <mat-select (selectionChange)="setLang(langSelect.value)" #langSelect formControlName="langSelect">
-          <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">
-            {{lang}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div class="form-element d-flex justify-content-end">
-        <button id="login" mat-raised-button class="button-green text-white mat-raised-button" type="submit">
-
-          {{ 'LOGIN.LOGIN' | translate}}
-        </button>
-      </div>
-
-      </ng-container>
+      @if (!showOtp) {
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.username.valid }">
+          <mat-label [translate]="'LOGIN.USERNAME'"></mat-label>
+          <input id="loginput" matInput formControlName="username">
+          @if (isSubmitted && formControls.username.errors) {
+            <mat-error class="help-block">
+              @if (formControls.username.errors.required) {
+                <div>Username is required </div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.password.valid }">
+          <mat-label [translate]="'LOGIN.PASSWORD'"></mat-label>
+          <input id="passwordinput" matInput type="password" formControlName="password">
+          @if (isSubmitted && formControls.password.errors) {
+            <mat-error class="help-block">
+              @if (formControls.password.errors.required) {
+                <div>Password is required</div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <mat-label [translate]="'COMMON.LANGUAGEPREFERENCE'"></mat-label>
+          <mat-select (selectionChange)="setLang(langSelect.value)" #langSelect formControlName="langSelect">
+            @for (lang of translate.getLangs(); track lang) {
+              <mat-option [value]="lang">
+                {{lang}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <div class="form-element d-flex justify-content-end">
+          <button id="login" mat-raised-button class="button-green text-white mat-raised-button" type="submit">
+            {{ 'LOGIN.LOGIN' | translate}}
+          </button>
+        </div>
+      }
 
     </form>
 
     <form [formGroup]="form" (ngSubmit)="onotp()" class="form my-3" autocomplete="off">
 
-      <ng-container *ngIf="showOtp" >
-
-      <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': form.controls.otp.valid }">
-        <mat-label [translate]="'COMMON.otp'"></mat-label>
-        <input id="loginput" matInput formControlName="otp">
-        <mat-error *ngIf="isSubmitted && form.controls.otp.errors" class="help-block">
-          <div *ngIf="form.controls.otp.errors.required"> Otp is required </div>
-          <div *ngIf="form.controls.otp.errors.invalid"> Invalid Otp </div>
-        </mat-error>
-      </mat-form-field>
-
-      <div class="form-element">
-        <button mat-raised-button class="button-green text-white mat-raised-button" type="submit"> {{ 'COMMON.submit' | translate}} </button>
-      </div>
-
-      </ng-container>
+      @if (showOtp) {
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': form.controls.otp.valid }">
+          <mat-label [translate]="'COMMON.otp'"></mat-label>
+          <input id="loginput" matInput formControlName="otp">
+          @if (isSubmitted && form.controls.otp.errors) {
+            <mat-error class="help-block">
+              @if (form.controls.otp.errors.required) {
+                <div> Otp is required </div>
+              }
+              @if (form.controls.otp.errors.invalid) {
+                <div> Invalid Otp </div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+        <div class="form-element">
+          <button mat-raised-button class="button-green text-white mat-raised-button" type="submit"> {{ 'COMMON.submit' | translate}} </button>
+        </div>
+      }
 
     </form>
 

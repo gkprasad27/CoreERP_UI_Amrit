@@ -11,9 +11,11 @@
           <mat-label>{{'wbdse.costUnit' | translate }}</mat-label>
           <mat-select formControlName="costUnit" appFocusOnEnter tabIndex="1">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let cot of costunitList" [value]="cot.objectNumber">
-              {{cot.description}}
-            </mat-option>
+            @for (cot of costunitList; track cot) {
+              <mat-option [value]="cot.objectNumber">
+                {{cot.description}}
+              </mat-option>
+            }
           </mat-select>
 
         </mat-form-field>
@@ -22,9 +24,11 @@
           [ngClass]="{ 'ng--valid': formControls.wbscode.valid, 'ng--invalid': !formControls.wbscode.valid  }">
           <input matInput placeholder=" {{'wbdse.wbscode' | translate }}" formControlName="wbscode" maxlength="50"
             appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.wbscode.valid" [ngClass]="{ 'ng--invalid': !formControls.wbscode.valid  }">
-            Code
+          @if (!formControls.wbscode.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.wbscode.valid  }">
+              Code
             is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -37,9 +41,11 @@
           <mat-label>{{'wbdse.responsiblePerson' | translate }}</mat-label>
           <mat-select formControlName="responsiblePerson" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-              {{emp.id}} - {{emp.text}}
-            </mat-option>
+            @for (emp of employeesList; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.id}} - {{emp.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -90,9 +96,11 @@
           <mat-label>{{'wbdse.underWbs' | translate }}</mat-label>
           <mat-select formControlName="underWbs" appFocusOnEnter tabIndex="4">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let wbs of wbsList" [value]="wbs.id">
-              {{wbs.text}}
-            </mat-option>
+            @for (wbs of wbsList; track wbs) {
+              <mat-option [value]="wbs.id">
+                {{wbs.text}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 

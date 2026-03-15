@@ -9,64 +9,82 @@
       <div class="row">
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.leaveCode.valid }">
           <input matInput placeholder="Leavecode" formControlName="leaveCode" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="formControls.leaveCode.errors" class="help-block">
-            <div *ngIf="formControls.leaveCode.errors.required">Code is required </div>
-          </mat-error>
+          @if (formControls.leaveCode.errors) {
+            <mat-error class="help-block">
+              @if (formControls.leaveCode.errors.required) {
+                <div>Code is required </div>
+              }
+            </mat-error>
+          }
 
         </mat-form-field>
 
         <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.leaveName.valid }">
           <input matInput placeholder="Name" formControlName="leaveName" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="formControls.leaveName.errors" class="help-block">
-            <div *ngIf="formControls.leaveName.errors.required">Name is required</div>
-          </mat-error>
+          @if (formControls.leaveName.errors) {
+            <mat-error class="help-block">
+              @if (formControls.leaveName.errors.required) {
+                <div>Name is required</div>
+              }
+            </mat-error>
+          }
         </mat-form-field>
         <!--<mat-form-field class="col-3">
-          <input matInput placeholder="leaveMinLimit" formControlName="leaveMinLimit" appFocusOnEnter tabIndex="3">
-        </mat-form-field>-->
+        <input matInput placeholder="leaveMinLimit" formControlName="leaveMinLimit" appFocusOnEnter tabIndex="3">
+      </mat-form-field>-->
 
-        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.leaveMinLimit.valid }">
-          <input matInput placeholder="leaveMinLimit" formControlName="leaveMinLimit" appFocusOnEnter tabIndex="3">
-          <mat-error *ngIf="formControls.leaveMinLimit.errors" class="help-block">
-            <div *ngIf="formControls.leaveMinLimit.errors.required"> only  Nummbers are allowed</div>
+      <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.leaveMinLimit.valid }">
+        <input matInput placeholder="leaveMinLimit" formControlName="leaveMinLimit" appFocusOnEnter tabIndex="3">
+        @if (formControls.leaveMinLimit.errors) {
+          <mat-error class="help-block">
+            @if (formControls.leaveMinLimit.errors.required) {
+              <div> only  Nummbers are allowed</div>
+            }
           </mat-error>
-        </mat-form-field>
-        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.leaveMaxLimit.valid }">
-          <input matInput placeholder="MaxLimit" formControlName="leaveMaxLimit" appFocusOnEnter tabIndex="4">
-          <mat-error *ngIf="formControls.leaveMaxLimit.errors" class="help-block">
-            <div *ngIf="formControls.leaveMaxLimit.errors.required"> only  Nummbers are allowed</div>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.leaveMaxLimit.valid }">
+        <input matInput placeholder="MaxLimit" formControlName="leaveMaxLimit" appFocusOnEnter tabIndex="4">
+        @if (formControls.leaveMaxLimit.errors) {
+          <mat-error class="help-block">
+            @if (formControls.leaveMaxLimit.errors.required) {
+              <div> only  Nummbers are allowed</div>
+            }
           </mat-error>
-        </mat-form-field>
-        <mat-form-field class="col-3">
-          <mat-label [translate]="'leavetype.companyName'"></mat-label>
-          <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="5">
-            <mat-option *ngFor="let comp of companyList" [value]="comp.id">
+        }
+      </mat-form-field>
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'leavetype.companyName'"></mat-label>
+        <mat-select formControlName="companyCode" appFocusOnEnter tabIndex="5">
+          @for (comp of companyList; track comp) {
+            <mat-option [value]="comp.id">
               {{comp.text}}
             </mat-option>
-          </mat-select>
-          <!-- <mat-error *ngIf="formControls.company.errors" class="help-block">
-            <div *ngIf="formControls.company.errors.required">Company is required </div>
-          </mat-error> -->
-        </mat-form-field>
-        <!-- <mat-form-field class="col-3">
-         <input matInput placeholder="companyCode" formControlName="companyCode" appFocusOnEnter tabIndex="4">
-        </mat-form-field> -->
-      </div>
-      <mat-divider></mat-divider>
+          }
+        </mat-select>
+        <!-- <mat-error *ngIf="formControls.company.errors" class="help-block">
+        <div *ngIf="formControls.company.errors.required">Company is required </div>
+      </mat-error> -->
+    </mat-form-field>
+    <!-- <mat-form-field class="col-3">
+    <input matInput placeholder="companyCode" formControlName="companyCode" appFocusOnEnter tabIndex="4">
+  </mat-form-field> -->
+</div>
+<mat-divider></mat-divider>
 
-      <div class="form-element mt-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
 
-          {{ 'COMMON.CANCEL' | translate }}
-        </button>
-        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
-                tabIndex="5">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+    tabIndex="5">
 
-          {{ 'COMMON.SAVE' | translate }}
-        </button>
-      </div>
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
 
-    </form>
+</form>
 
-  </mat-card-content>
+</mat-card-content>
 </div>

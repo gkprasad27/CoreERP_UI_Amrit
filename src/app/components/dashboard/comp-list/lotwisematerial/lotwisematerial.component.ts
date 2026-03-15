@@ -2,7 +2,7 @@ import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonService } from '../../../../services/common.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -24,7 +24,7 @@ import { NonEditableDatepicker } from '../../../../directives/format-datepicker'
 
 @Component({
     selector: 'app-lotwisematerial',
-    imports: [CommonModule, ReactiveFormsModule, TypeaheadModule, NonEditableDatepicker, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
+    imports: [ReactiveFormsModule, TypeaheadModule, NonEditableDatepicker, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
     templateUrl: './lotwisematerial.component.html',
     styleUrls: ['./lotwisematerial.component.scss']
 })

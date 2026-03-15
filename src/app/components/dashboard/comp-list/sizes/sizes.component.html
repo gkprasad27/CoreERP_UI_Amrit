@@ -14,9 +14,11 @@
           <mat-label [translate]="'sizes.unitId'"></mat-label>
           <input matInput disabled formControlName="unitId" maxlength="5"
             type="number" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.unitId.valid && formControls.unitId.status != 'DISABLED'"
-            [ngClass]="{ 'ng--invalid': !formControls.unitId.valid  }">Unit
+          @if (!formControls.unitId.valid && formControls.unitId.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.unitId.valid  }">Unit
             Id is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -24,8 +26,10 @@
           <mat-label [translate]="'sizes.unitName'"></mat-label>
           <input matInput formControlName="unitName" maxlength="50"
             appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.unitName.valid" [ngClass]="{ 'ng--invalid': !formControls.unitName.valid  }">
+          @if (!formControls.unitName.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.unitName.valid  }">
             Unit Name is required</mat-error>
+          }
         </mat-form-field>
 
 

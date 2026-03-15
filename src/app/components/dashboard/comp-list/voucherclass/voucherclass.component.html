@@ -14,8 +14,10 @@
           <mat-label [translate]="'voucherclass.voucherKey'"></mat-label>
           <input matInput  formControlName="voucherKey"
             maxlength="4" appFocusOnEnter tabIndex="1">
-          <mat-error *ngIf="!formControls.voucherKey.valid && formControls.voucherKey.status != 'DISABLED'"
+          @if (!formControls.voucherKey.valid && formControls.voucherKey.status != 'DISABLED') {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.voucherKey.valid  }">Voucher Key is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3"
@@ -23,17 +25,21 @@
           <mat-label [translate]="'voucherclass.description'"></mat-label>
           <input matInput formControlName="description"
             maxlength="30" appFocusOnEnter tabIndex="2">
-          <mat-error *ngIf="!formControls.description.valid"
+          @if (!formControls.description.valid) {
+            <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Name is required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'voucherclass.voucherNature'"></mat-label>
           <mat-select formControlName="voucherNature" appFocusOnEnter tabIndex="3">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let ltype of voucherNatures" [value]="ltype.viewValue">
-              {{ltype.viewValue}}
-            </mat-option>
+            @for (ltype of voucherNatures; track ltype) {
+              <mat-option [value]="ltype.viewValue">
+                {{ltype.viewValue}}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>
