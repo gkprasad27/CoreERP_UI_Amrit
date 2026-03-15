@@ -15,7 +15,7 @@
           <mat-label [translate]="'costobjecttypes.objectType'"></mat-label>
           <input matInput formControlName="objectType"
             maxlength="5" appFocusOnEnter tabIndex="1">
-          @if (!formControls.objectType.valid && formControls.objectType.status != 'DISABLED',) {
+          @if (!formControls.objectType.valid && formControls.objectType.status != 'DISABLED') {
             <mat-error
             [ngClass]="{ 'ng--invalid': !formControls.objectType.valid  }">Code is required</mat-error>
           }

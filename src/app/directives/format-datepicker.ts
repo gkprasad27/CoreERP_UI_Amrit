@@ -36,7 +36,7 @@ export class NonEditableDatepicker {
 
   constructor(private el: ElementRef) { }
 
-  @HostListener('click') onInput(event) {
+  @HostListener('click') onInput() {
     this.el.nativeElement.setAttribute('readonly', true);
     this.datePickerRef.open()
   }

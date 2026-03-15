@@ -13,7 +13,7 @@
           <mat-label [translate]="'maintenancearea.code'"></mat-label>
           <input matInput formControlName="code" maxlength="5"
             appFocusOnEnter tabIndex="1">
-          @if (!formControls.code.valid &&formControls.code.status != 'DISABLED',) {
+          @if (!formControls.code.valid &&formControls.code.status != 'DISABLED') {
             <mat-error
               [ngClass]="{ 'ng--invalid': !formControls.code.valid  }"> Code is
             required</mat-error>
