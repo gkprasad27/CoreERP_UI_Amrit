@@ -155,6 +155,8 @@ export class JobworkmaterialissueComponent {
       saleOrderType: ['Sale Order'],
       saleOrderNo: [null, Validators.required],
 
+      notes: [''],
+
       documentURL: [''],
       invoiceURL: [''],
     });
@@ -180,6 +182,7 @@ export class JobworkmaterialissueComponent {
       highlight: false,
       supplierCode: [''],
       availableQTY: [''],
+      grossWeight: [''],
 
       uom: [''],
       hsnSac: [''],
@@ -335,6 +338,7 @@ export class JobworkmaterialissueComponent {
             this.formData1.patchValue({
               stockQty: materialObj.availQTY,
               weight: this.formData1.value.weight ? this.formData1.value.weight: materialObj.netWeight,
+              grossWeight: materialObj.grossWeight,
             });
           }
         }

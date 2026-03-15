@@ -414,6 +414,7 @@ export class PurchasingComponent implements OnInit {
                   { id: 'Delete', type: 'delete' }
                 ];
                 s.index = index + 1;
+                s.material = s.material ? [{ description: s.material }] : '';
                 s.qty = s.qty;
                 s.stockQty = obj.availQTY;
               })

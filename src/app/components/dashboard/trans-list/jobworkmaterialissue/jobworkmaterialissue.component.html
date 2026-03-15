@@ -60,7 +60,7 @@
             </div>
             <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
                 <span style="width: 140px;"> Terms of delivery </span>
-                <span style="padding-left: 20px;">: {{ data?.headingObj?.deliveryDate }} </span>
+                <span style="padding-left: 20px;">: {{ data?.headingObj?.deliveryDate ? (data?.headingObj?.deliveryDate | date) : 'NA' }} </span>
             </div>
             <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
                 <span style="width: 140px;"> Terms of payment </span>
@@ -71,12 +71,16 @@
                 <span style="padding-left: 20px;">: INR </span>
             </div>
             <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
-                <span style="width: 140px;"> Our enquiry reference </span>
-                <span style="padding-left: 20px;">: NA </span>
+                <span style="width: 140px;"> SO Number </span>
+                <span style="padding-left: 20px;">: {{ data?.headingObj?.saleOrderNo }} </span>
             </div>
             <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
-                <span style="width: 140px;"> Material </span>
-                <span style="padding-left: 20px;">: NA</span>
+                <span style="width: 140px;"> Responsible Person </span>
+                <span style="padding-left: 20px;">: {{ data?.headingObj?.createdBy }} </span>
+            </div>
+            <div style="display: flex;font-size: 15px;font-family: sans-serif;align-items: center;display: flex;">
+                <span style="width: 140px;"> Contact Number </span>
+                <span style="padding-left: 20px;">: {{ data?.headingObj?.contactNo }} </span>
             </div>
         </div>
     </div>
@@ -233,10 +237,16 @@
 
     <div style="display: flex; font-size: 15px;">
         <div style="width: 50%;padding-left: 15px;padding-top: 10px;padding-bottom: 10px;">
-            <b style="font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total amount in words: </b>
-            <div style="font-size: 14px;font-family: sans-serif;"> {{
-                commonService.convertNumberToWords(data.headingObj?.totalAmount) }} </div>
-
+            <div style="padding-bottom: 10px;">
+                <b style="font-size: 14px;font-family: sans-serif;font-weight: 900;"> Total amount in words: </b>
+                <div style="font-size: 14px;font-family: sans-serif;"> {{
+                    commonService.convertNumberToWords(data.headingObj?.totalAmount) }} </div>
+            </div>
+            <div>
+                <b style="font-size: 14px;font-family: sans-serif;font-weight: 900;"> Note: </b>
+                 <div style="font-size: 14px;font-family: sans-serif;"> {{
+                    commonService.convertNumberToWords(data.headingObj?.notes) }} </div>
+            </div>
         </div>
         <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
             <div style="padding-left: 15px;padding-top: 10px;">
@@ -512,6 +522,12 @@
                         (uploadFile)="downLoadFile($event)" (emitFilesList)="emitFilesList1($event)"></app-file-upload>
                 </div>
 
+                
+                <mat-form-field class="col-6 margin-top-2">
+                    <mat-label [translate]="'jobworkmaterialissue.notes'"></mat-label>
+                    <input matInput type="text" formControlName="notes" appFocusOnEnter tabIndex="16">
+                </mat-form-field>
+
             </div>
 
         </form>
@@ -580,8 +596,6 @@
                     </mat-form-field>
 
 
-
-
                     <mat-form-field class="col-3">
                         <mat-label [translate]="'jobworkmaterialissue.deliveryDate'"></mat-label>
                         <input matInput [matDatepicker]="picker13"
@@ -589,7 +603,11 @@
                         <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
                         <mat-datepicker #picker13></mat-datepicker>
                     </mat-form-field>
-
+                    
+                    <mat-form-field class="col-3">
+                        <mat-label [translate]="'jobworkmaterialissue.grossWeight'"></mat-label>
+                        <input matInput type="number" readonly formControlName="grossWeight" appFocusOnEnter tabIndex="17">
+                    </mat-form-field>
                 </div>
 
                 <div id="for" class="d-flex justify-content-end mb-3">

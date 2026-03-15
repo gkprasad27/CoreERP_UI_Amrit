@@ -2397,6 +2397,7 @@
     "qty": "Quantity",
     "rate": "Rate",
     "weight": "Net Weight",
+    "grossWeight": "Gross Weight",
     "supplierName": "Vendor Name",
     "discount": "Discount",
     "amount": "Amount",

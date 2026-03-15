@@ -2998,6 +2998,8 @@
     "netWeight": "Net Weight",
     "qty": "Quantity",
     "rate": "Rate",
+    "notes": "Notes",
+    "grossWeight": "Gross Weight",
     "discount": "Discount %",
     "total": "Total",
     "deliveryDate": "Delivery Date",
