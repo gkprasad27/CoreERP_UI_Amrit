@@ -532,7 +532,7 @@ export class PurchasingComponent implements OnInit {
     obj.deliveryDate = this.formData.get('deliveryDate').value ? this.datepipe.transform(this.formData.get('deliveryDate').value, 'yyyy-MM-dd') : '';
 
     if(!this.commonService.checkNullOrUndefined(obj.recomendedBy) && obj.recomendedBy.length > 0) {
-      obj.recomendedBy = obj.recomendedBy[0].id;
+      obj.recomendedBy = obj.recomendedBy[0].text;
     }
 
     const requestObj = { preqHdr: obj, preqDtl: this.tableData };
