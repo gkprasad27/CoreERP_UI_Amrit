@@ -167,7 +167,7 @@ export class JobworkmaterialissueComponent {
       materialName: [''],
       taxCode: ['', Validators.required],
       qty: ['', Validators.required],
-      rate: ['', Validators.required],
+      rate: [0],
       discount: [0],
       sgst: [''],
       id: [0],

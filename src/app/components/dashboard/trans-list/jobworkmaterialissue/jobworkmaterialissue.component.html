@@ -1,5 +1,6 @@
 @if (data) {
   <div style="margin: 10px;" id="printData">
+    <div style="border: 1px solid black;">
     <div style="display: flex;">
       @if (data?.headingObj?.company === '1000') {
         <img src="/assets/images/header.jpg"
@@ -247,8 +248,7 @@
             </div>
             <div>
               <b style="font-size: 14px;font-family: sans-serif;font-weight: 900;"> Note: </b>
-              <div style="font-size: 14px;font-family: sans-serif;"> {{
-              commonService.convertNumberToWords(data.headingObj?.notes) }} </div>
+              <div style="font-size: 14px;font-family: sans-serif;"> {{ data.headingObj?.notes }} </div>
             </div>
           </div>
           <div style="width: 50%;padding-left: 5px;padding-bottom: 10px;">
@@ -410,6 +410,7 @@
 <img src="/assets/images/footer.jpg" style="height: 100px;
         width: 20%;">
           }
+        </div>
         </div>
       </div>
     }
