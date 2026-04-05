@@ -808,7 +808,7 @@ export class JobworkmaterialissueComponent {
       heading: 'Job Work Material Issue',
       headingObj: formObj,
       detailArray: list,
-      headingObj1: { ...this.formData1.value, ...this.formData.value }
+      headingObj1: { ...this.formData1.value, ...this.formData.value, totalWeight: this.tableData.reduce((a: any, b: any) => a + ((b.weight ? b.weight : 1) * b.qty), 0) },
     }
 
     this.data = obj;
