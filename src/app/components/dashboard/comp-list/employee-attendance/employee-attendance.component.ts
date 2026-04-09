@@ -26,7 +26,8 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
   selector: 'app-employee-attendance',
   imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, NgxMatTimepickerModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
   templateUrl: './employee-attendance.component.html',
-  styleUrls: ['./employee-attendance.component.scss']
+  styleUrls: ['./employee-attendance.component.scss'],
+  standalone: true
 })
 export class EmployeeAttendanceComponent {
 

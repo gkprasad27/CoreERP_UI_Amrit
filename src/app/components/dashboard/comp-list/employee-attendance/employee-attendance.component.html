@@ -6,47 +6,50 @@
 
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
 
-    <div class="form-element p-2 d-flex justify-content-end">
-      <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
-        {{ 'COMMON.CANCEL' | translate }}
-      </button>
-      <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="addTOgrid()">
-        {{ 'COMMON.ADD' | translate }}
-      </button>
-    </div>
-
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="row">
-
-        <mat-form-field class="col-3">
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker" placeholder="{{'empAttendance.dateTimeStamp' | translate }}"
-            formControlName="dateTimeStamp">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          @if (!modelFormData.controls.dateTimeStamp.valid && modelFormData.controls.dateTimeStamp.status != 'DISABLED') {
-            <mat-error
-              [ngClass]="{ 'ng--invalid': !modelFormData.controls.dateTimeStamp.valid  }"> This feild is
+      <div class="d-flex justify-content-between">
+        <div class="w-100">
+          <mat-form-field class="col-3">
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker"
+              placeholder="{{'empAttendance.dateTimeStamp' | translate }}" formControlName="dateTimeStamp">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            @if (!modelFormData.controls.dateTimeStamp.valid && modelFormData.controls.dateTimeStamp.status !=
+            'DISABLED')
+            {
+            <mat-error [ngClass]="{ 'ng--invalid': !modelFormData.controls.dateTimeStamp.valid  }"> This feild is
               required
             </mat-error>
-          }
-        </mat-form-field>
+            }
+          </mat-form-field>
 
-        <div class="timepicker col-3">
-          <input [ngxMatTimepicker]="picker12" format="24"
-            placeholder="{{'empAttendance.logDatetime' | translate }}" formControlName="logDatetime">
-          <ngx-mat-timepicker #picker12></ngx-mat-timepicker>
-          @if ((modelFormData.controls.logDatetime.dirty && modelFormData.controls.logDatetime.touched && modelFormData.controls.logDatetime.errors) ||
+          <mat-form-field class="timepicker col-3">
+            <input matInput [ngxMatTimepicker]="picker12" format="24"
+              placeholder="{{'empAttendance.logDatetime' | translate }}" formControlName="logDatetime">
+            @if ((modelFormData.controls.logDatetime.dirty && modelFormData.controls.logDatetime.touched &&
+            modelFormData.controls.logDatetime.errors) ||
             (submitted && modelFormData.controls.logDatetime.errors)) {
-            <div class="error_text mt-0">
-              @if (modelFormData.controls.logDatetime.errors.required) {
-                <div class="error_text mt-0">
-                  This feild is required
-                </div>
-              }
-            </div>
-          }
+            @if (modelFormData.controls.logDatetime.errors.required) {
+            <mat-error>
+              This field is required
+            </mat-error>
+            }
+            }
+          </mat-form-field>
+            <ngx-mat-timepicker #picker12></ngx-mat-timepicker>
+
         </div>
+
+        <div class="form-element p-2 d-flex justify-content-end">
+          <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+            {{ 'COMMON.CANCEL' | translate }}
+          </button>
+          <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="addTOgrid()">
+            {{ 'COMMON.ADD' | translate }}
+          </button>
+        </div>
+
 
         <!-- <div class="timepicker">
         <input [ngxMatTimepicker]="picker13" format="24" [min]="modelFormData.value.logintime"
@@ -60,22 +63,25 @@
         </div>
       </div> -->
 
-    </div>
-    <mat-divider></mat-divider>
-  </form>
-
-</mat-card-content>
+      </div>
 
 
-<div class="form-element mt-2 d-flex justify-content-end">
-  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
-    {{ 'COMMON.SAVE' | translate }}
-  </button>
-</div>
+
+      <mat-divider></mat-divider>
+    </form>
+
+  </mat-card-content>
 
 
-<app-table [tableData]="tableData" [routeParam]="'empAttendance'" (editOrDeleteEvent)="editOrDeleteEvent($event)">
-</app-table>
+  <div class="form-element mt-2 d-flex justify-content-end">
+    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+
+
+  <app-table [tableData]="tableData" [routeParam]="'empAttendance'" (editOrDeleteEvent)="editOrDeleteEvent($event)">
+  </app-table>
 
 
 
