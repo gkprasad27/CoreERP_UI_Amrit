@@ -739,6 +739,7 @@ export class ReportsComponent {
       arr: data.GoodsReceiptReport
     }
     setTimeout(() => {
+      
       var w = window.open();
       var html = document.getElementById('purchaseagainestsaleorderData').innerHTML;
       w.document.body.innerHTML = html;
