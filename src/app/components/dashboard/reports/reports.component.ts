@@ -70,6 +70,7 @@ export class ReportsComponent {
 
   salaryProcessData: any = [];
   consolidatedpaysData: any = [];
+  purchaseagainestsaleorderPrintData: any = null;
 
   dropdownSettings: IDropdownSettings = {
     singleSelection: true,
@@ -298,7 +299,8 @@ export class ReportsComponent {
       toMonth: [''],
       vendorCode: ['-1'],
       gstMonth: [''],
-      gstYear: ['']
+      gstYear: [''],
+      saleOrderNo: ['']
     });
     this.modelFormData.controls['companyCode'].disable();
     this.setValidator();
@@ -591,6 +593,8 @@ export class ReportsComponent {
     } else if (this.routeParam == 'employeeabsentreport') {
       const obj = this.employeesList.find((d: any) => d.text == this.modelFormData.value.employee);
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromYear}/${this.modelFormData.value.fromMonth}/${this.modelFormData.value.toYear}/${this.modelFormData.value.toMonth}/${obj ? obj.id : '-1'}`);
+    } else if (this.routeParam == 'purchaseagainestsaleorder') {
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.controls.companyCode.value}/${this.modelFormData.controls.saleOrderNo.value}`);
     }
     else {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value}`);
@@ -601,7 +605,14 @@ export class ReportsComponent {
           const res = response;
           this.spinner.hide();
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (this.routeParam == 'salaryprocess') {
+            if(this.routeParam == 'purchaseagainestsaleorder') {
+              this.purchaseagainestsaleorderPrintData = null;
+              if (!this.commonService.checkNullOrUndefined(res.response) && res.response.hasOwnProperty('GoodsReceiptReport')) {
+                this.purchaseagainestsaleorderPrint(res.response);
+              } else {
+                this.alertService.openSnackBar('No Data Found', Static.Close, SnackBar.error)
+              }
+            } else if (this.routeParam == 'salaryprocess') {
               this.salaryProcessData = [];
               if (!this.commonService.checkNullOrUndefined(res.response) && res.response.hasOwnProperty('Payslip')) {
                 this.salaryProcessPrint(res.response);
@@ -710,6 +721,29 @@ export class ReportsComponent {
       w.document.body.innerHTML = html;
       this.data = null;
       w.print();
+    }, 50);
+  }
+
+  purchaseagainestsaleorderPrint(data: any) {
+    let unitPrice = 0;
+    let totalCount = 0;
+    data.GoodsReceiptReport.forEach((p: any) => {
+      unitPrice = unitPrice + p.rate;
+      totalCount = totalCount + p.total;
+    })
+    this.purchaseagainestsaleorderPrintData = {
+      obj: {
+        unitPrice: unitPrice.toFixed(2),
+        totalCount: totalCount.toFixed(2)
+      },
+      arr: data.GoodsReceiptReport
+    }
+    setTimeout(() => {
+      var w = window.open();
+      var html = document.getElementById('purchaseagainestsaleorderData').innerHTML;
+      w.document.body.innerHTML = html;
+      w.print();
+      this.purchaseagainestsaleorderPrintData = null;
     }, 50);
   }
 
