@@ -626,7 +626,7 @@
 </div>
 
 <div style="margin: 10px;" id="purchaseagainestsaleorderData" *ngIf="purchaseagainestsaleorderPrintData">
-    <div style="border: 2px solid;">
+    <div style="border-left: 1px solid;">
         <div style="display: flex;">
             <!-- Display this image only if the companyName is 'AMT POWER TRANSMISSION' -->
             @if (modelFormData?.value?.companyCode === '1000') {
@@ -705,6 +705,12 @@
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                             Unit Price </th>
                         <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Tax </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Amount </th>
+                        <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;">
                             Total Amount </th>
                     </tr>
@@ -719,26 +725,34 @@
                             }
                         </td>
                         <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: left;">
                             {{ row.materialCode }}
                         </td>
                         <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: left;">
                             {{ row.materialName }}
                         </td>
                         <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
                             {{ row.receivedQty }}
                         </td>
                         <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
                             {{ row.netweight }} </td>
                         <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
-                            {{row.unitPrice}}
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
+                            {{row.rate}}
                         </td>
                         <td
-                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
+                            {{row.totalTax}}
+                        </td>
+                        <td
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
+                            {{row.amount}}
+                        </td>
+                        <td
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
                             {{ row.total }}
                         </td>
                     </tr>
