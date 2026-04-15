@@ -670,16 +670,18 @@
                 <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> PO Date </b>
                 <span
                     style="padding-left: 84px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
-                    {{ purchaseagainestsaleorderPrintData.arr[0]?.poDate ? (purchaseagainestsaleorderPrintData.arr[0]?.poDate | date) : '' }} </span>
+                    {{ purchaseagainestsaleorderPrintData.arr[0]?.poDate ?
+                    (purchaseagainestsaleorderPrintData.arr[0]?.poDate | date) : '' }} </span>
             </div>
             <div style="width: 50%;padding: 3px 15px;display: flex;">
                 <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> Date of Supply </b>
                 <span
                     style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
-                    {{ purchaseagainestsaleorderPrintData.arr[0]?.dateofSupply ? (purchaseagainestsaleorderPrintData.arr[0]?.dateofSupply | date) : '' }} </span>
+                    {{ purchaseagainestsaleorderPrintData.arr[0]?.dateofSupply ?
+                    (purchaseagainestsaleorderPrintData.arr[0]?.dateofSupply | date) : '' }} </span>
             </div>
         </div>
-        
+
         @if (purchaseagainestsaleorderPrintData.arr && purchaseagainestsaleorderPrintData.arr.length) {
         <div style="border-top: 1px solid black;-webkit-print-color-adjust: exact;">
             <table
@@ -760,14 +762,30 @@
                     <tr
                         style="border-top: 1px solid black; text-align: end;font-weight: bold;-webkit-print-color-adjust: exact;">
                         <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"
-                            colspan="5"> TOTAL AMOUNT </td>
+                            colspan="3"> TOTALS </td>
                         <td
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-                            {{ purchaseagainestsaleorderPrintData.obj.unitPrice }}
+                            {{ purchaseagainestsaleorderPrintData.obj.totalReceivedQty }}
+                        </td>
+                        <td
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+
+                        </td>
+                        <td
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+
+                        </td>
+                        <td
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
+                            {{ purchaseagainestsaleorderPrintData.obj.taxAmount?.toFixed(2) }}
                         </td>
                         <td
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                            {{ purchaseagainestsaleorderPrintData.obj.totalCount }}
+                            {{ purchaseagainestsaleorderPrintData.obj.totalAmount?.toFixed(2) }}
+                        </td>
+                        <td
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                            {{ purchaseagainestsaleorderPrintData.obj.grandTotal?.toFixed(2) }}
                         </td>
                     </tr>
                 </tbody>

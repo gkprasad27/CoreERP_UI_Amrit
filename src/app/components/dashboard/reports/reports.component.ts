@@ -725,16 +725,9 @@ export class ReportsComponent {
   }
 
   purchaseagainestsaleorderPrint(data: any) {
-    let unitPrice = 0;
-    let totalCount = 0;
-    data.GoodsReceiptReport.forEach((p: any) => {
-      unitPrice = unitPrice + p.rate;
-      totalCount = totalCount + p.total;
-    })
     this.purchaseagainestsaleorderPrintData = {
       obj: {
-        unitPrice: unitPrice.toFixed(2),
-        totalCount: totalCount.toFixed(2)
+        ...data.GoodsReceiptReportTotals[0]
       },
       arr: data.GoodsReceiptReport
     }
