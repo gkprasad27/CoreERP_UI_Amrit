@@ -661,7 +661,7 @@
             <div style="width: 50%;padding: 3px 15px;display: flex;">
                 <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> PO Number </b>
                 <span
-                    style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
+                    style="padding-left: 82px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
                     {{ purchaseagainestsaleorderPrintData.arr[0]?.poNumber }} </span>
             </div>
         </div>
@@ -669,14 +669,14 @@
             <div style="width: 50%;padding: 3px 15px;display: flex;border-right: 1px solid;">
                 <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> PO Date </b>
                 <span
-                    style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
+                    style="padding-left: 84px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
                     {{ purchaseagainestsaleorderPrintData.arr[0]?.poDate ? (purchaseagainestsaleorderPrintData.arr[0]?.poDate | date) : '' }} </span>
             </div>
             <div style="width: 50%;padding: 3px 15px;display: flex;">
                 <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> Date of Supply </b>
                 <span
                     style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
-                    {{ purchaseagainestsaleorderPrintData[0]?.dateofSupply }} </span>
+                    {{ purchaseagainestsaleorderPrintData.arr[0]?.dateofSupply ? (purchaseagainestsaleorderPrintData.arr[0]?.dateofSupply | date) : '' }} </span>
             </div>
         </div>
         
