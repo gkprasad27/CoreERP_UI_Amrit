@@ -28,6 +28,7 @@ import { MaterialissueComponent} from './materialissue/materialissue.component';
 import { StandardRateComponent } from '../comp-list/standardrateoutput/standardrateoutput.component';
 import { SwapOrderComponent } from './swap-order/swap-order.component';
 import { ProductstatusComponent } from './productstatus/productstatus.component';
+import { ProformaInvoiceComponent } from './proforma-invoice/proforma-invoice.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -248,6 +249,13 @@ export class TransListService {
       }
       case 'salesinvoice': {
         this.dynamicComp.component = SalesInvoiceComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getInvoiceList;
+        this.dynamicComp.list = 'InvoiceList';
+        this.dynamicComp.editKey = 'invoiceNo';
+        return this.dynamicComp;
+      }
+      case 'proformainvoice': {
+        this.dynamicComp.component = ProformaInvoiceComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getInvoiceList;
         this.dynamicComp.list = 'InvoiceList';
         this.dynamicComp.editKey = 'invoiceNo';
