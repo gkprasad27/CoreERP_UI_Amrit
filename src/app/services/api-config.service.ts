@@ -484,6 +484,7 @@ export class ApiConfigService {
    // ******************************** sales *********************************
    getSaleOrderApproveList = `${environment.baseUrl}Transactions/GetSaleOrderApproveList`;
    getInvoiceList = `${environment.baseUrl}sales/Billing/GetInvoiceList`;
+   getProformaInvoiceList = `${environment.baseUrl}sales/Billing/GetProformaInvoiceList`;
    getCashPartyAccountList = `${environment.baseUrl}sales/Billing/GetCashPartyAccountList`;
    getCustomerGstNumList = `${environment.baseUrl}sales/Billing/GetCustomerGstNumList`;
    getBillingBranchesList = `${environment.baseUrl}sales/Billing/GetBranchesList`;
@@ -495,6 +496,7 @@ export class ApiConfigService {
    getProductByProductName = `${environment.baseUrl}sales/Billing/GetProductByProductName`;
    getBillingDetailsRcd = `${environment.baseUrl}sales/Billing/GetBillingDetailsRcd`;
    registerInvoice = `${environment.baseUrl}sales/Billing/RegisterInvoice`;
+   registerProformaBilling = `${environment.baseUrl}sales/Billing/RegisterProformaBilling`;
    getStateList = `${environment.baseUrl}sales/Billing/GeStateList`;
    getSelectedState = `${environment.baseUrl}sales/Billing/GeSelectedState`;
    getVechiels = `${environment.baseUrl}sales/Billing/GetVechiels`;

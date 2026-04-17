@@ -256,7 +256,7 @@ export class TransListService {
       }
       case 'proformainvoice': {
         this.dynamicComp.component = ProformaInvoiceComponent;
-        this.dynamicComp.tableUrl = this.apiConfigService.getInvoiceList;
+        this.dynamicComp.tableUrl = this.apiConfigService.getProformaInvoiceList;
         this.dynamicComp.list = 'InvoiceList';
         this.dynamicComp.editKey = 'invoiceNo';
         return this.dynamicComp;

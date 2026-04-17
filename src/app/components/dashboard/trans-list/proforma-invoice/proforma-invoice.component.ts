@@ -697,7 +697,7 @@ export class ProformaInvoiceComponent implements OnInit {
   savegoodsreceipt() {
     this.formData.enable();
     const arr = this.tableData.filter((d: any) => !d.type && d.checkbox);
-    const registerInvoice = String.Join('/', this.apiConfigService.registerInvoice);
+    const registerInvoice = String.Join('/', this.apiConfigService.registerProformaBilling);
     const formData = this.formData.value;
     if (typeof formData.saleOrderNo != 'string') {
       formData.saleOrderNo = this.formData.value.saleOrderNo[0].saleOrderNo;
