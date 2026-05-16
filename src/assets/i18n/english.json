@@ -974,7 +974,7 @@
     "voucherDate": "Voucher Date",
     "postingDate": "Posting Date",
     "glaccount": "GL Account",
-    "subGlaccount": "Sub GL Account",
+    "glSubaccount": "Sub GL Account",
     "accountingIndicator": "Accounting Indicator",
     "amount": "Amount",
     "taxCode": "Tax",

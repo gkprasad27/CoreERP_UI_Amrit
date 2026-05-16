@@ -143,7 +143,7 @@ export class JournalComponent implements OnInit {
 
     this.formData1 = this.formBuilder.group({
       glaccount: [''],
-      subGlaccount: [''],
+      glSubaccount: [''],
       accountingIndicator: [''],
       amount: [''],
       taxCode: [''],
@@ -237,7 +237,7 @@ export class JournalComponent implements OnInit {
               const arr = [ ...res.response['JvDetail'] ];
               arr.forEach((s: any, index: number) => {
                 s.glaccount = s.glaccount ? s.glaccount : '';
-                s.subGlaccount = s.subGlaccount ? s.subGlaccount : '';
+                s.glSubaccount = s.glSubaccount ? s.glSubaccount : '';
                 s.accountingIndicator = s.accountingIndicator ? s.accountingIndicator : '';
                 s.amount = s.amount ? s.amount : 0;
                 s.taxCode = s.taxCode ? s.taxCode : '';
@@ -306,9 +306,9 @@ export class JournalComponent implements OnInit {
     fObj.glaccount = Array.isArray(fObj.glaccount) && fObj.glaccount.length > 0 && fObj.glaccount[0].glaccountName
       ? fObj.glaccount[0].glaccountName
       : fObj.glaccount;
-    fObj.subGlaccount = Array.isArray(fObj.subGlaccount) && fObj.subGlaccount.length > 0 && fObj.subGlaccount[0].glsubName
-      ? fObj.subGlaccount[0].glsubName
-      : fObj.subGlaccount;
+    fObj.glSubaccount = Array.isArray(fObj.glSubaccount) && fObj.glSubaccount.length > 0 && fObj.glSubaccount[0].glsubName
+      ? fObj.glSubaccount[0].glsubName
+      : fObj.glSubaccount;
 
     let data: any = this.tableData;
     this.tableData = null;
@@ -345,7 +345,7 @@ export class JournalComponent implements OnInit {
       this.formData1.patchValue(value.item);
       this.formData1.patchValue({
         glaccount: [{ glaccountName: value.item.glaccount }],
-        subGlaccount: [{ glsubName: value.item.subGlaccount }]
+        glSubaccount: [{ glsubName: value.item.glSubaccount }]
       })
     }
   }

@@ -114,10 +114,10 @@
           </div>
 
           <div class="multiselect-dropdown-list floating-dropdown col-2"
-            [class.filled]="formData1.value?.subGlaccount?.length > 0">
+            [class.filled]="formData1.value?.glSubaccount?.length > 0">
             <label> {{ 'journals.glsubName' | translate }} </label>
             <ng-multiselect-dropdown placeholder=" "
-              formControlName="subGlaccount" [settings]="dropdownSettings1"
+              formControlName="glSubaccount" [settings]="dropdownSettings1"
               [data]="subGlAccountList">
             </ng-multiselect-dropdown>
           </div>

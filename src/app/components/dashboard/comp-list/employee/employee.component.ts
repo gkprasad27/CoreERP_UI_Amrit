@@ -506,7 +506,7 @@ export class EmployeeComponent implements OnInit {
   editOrDeleteEvent1(value) {
     if (value.action === 'Delete') {
       if (value.item.id) {
-        this.deleteItem(value.item);
+        this.deleteItem1(value.item);
       } else {
         this.tableComponent.defaultValues();
         this.tableData1 = this.tableData1.filter((res: any) => res.index != value.item.index);
