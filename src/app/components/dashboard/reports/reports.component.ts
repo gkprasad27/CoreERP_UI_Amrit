@@ -727,7 +727,11 @@ export class ReportsComponent {
   purchaseagainestsaleorderPrint(data: any) {
     this.purchaseagainestsaleorderPrintData = {
       obj: {
-        ...data.GoodsReceiptReportTotals[0]
+        ...data.GoodsReceiptReportTotals[0],
+        saleOrderNo: data.GoodsReceiptReport.find((g: any) => g.saleOrderNo)?.saleOrderNo,
+        poNumber: data.GoodsReceiptReport.find((g: any) => g.poNumber)?.poNumber,
+        poDate: data.GoodsReceiptReport.find((g: any) => g.poDate)?.poDate,
+        dateOfSupply: data.GoodsReceiptReport.find((g: any) => g.dateOfSupply)?.dateOfSupply
       },
       arr: data.GoodsReceiptReport
     }

@@ -656,13 +656,13 @@
                 <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> SO Number </b>
                 <span
                     style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
-                    {{ purchaseagainestsaleorderPrintData.arr[0]?.saleOrderNo }} </span>
+                    {{ purchaseagainestsaleorderPrintData?.obj?.saleOrderNo }} </span>
             </div>
             <div style="width: 50%;padding: 3px 15px;display: flex;">
                 <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> PO Number </b>
                 <span
                     style="padding-left: 82px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
-                    {{ purchaseagainestsaleorderPrintData.arr[0]?.poNumber }} </span>
+                    {{ purchaseagainestsaleorderPrintData?.obj?.poNumber }} </span>
             </div>
         </div>
         <div style="border-top: 1px solid black; display: flex;">
@@ -670,15 +670,15 @@
                 <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> PO Date </b>
                 <span
                     style="padding-left: 84px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
-                    {{ purchaseagainestsaleorderPrintData.arr[0]?.poDate ?
-                    (purchaseagainestsaleorderPrintData.arr[0]?.poDate | date) : '' }} </span>
+                    {{ purchaseagainestsaleorderPrintData?.obj?.poDate ?
+                    (purchaseagainestsaleorderPrintData?.obj?.poDate | date) : '' }} </span>
             </div>
             <div style="width: 50%;padding: 3px 15px;display: flex;">
                 <b style="font-size: 15px;font-family: sans-serif;font-weight: 900;"> Date of Supply </b>
                 <span
                     style="padding-left: 60px;font-size: 12px;font-family: sans-serif;align-items: center;display: flex;">:
-                    {{ purchaseagainestsaleorderPrintData.arr[0]?.dateofSupply ?
-                    (purchaseagainestsaleorderPrintData.arr[0]?.dateofSupply | date) : '' }} </span>
+                    {{ purchaseagainestsaleorderPrintData?.obj?.dateOfSupply ?
+                    (purchaseagainestsaleorderPrintData?.obj?.dateOfSupply | date) : '' }} </span>
             </div>
         </div>
 
@@ -693,7 +693,10 @@
                             S.No </th>
                         <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                            Purchase Order No </th>
+                            Reference Number </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Source Type </th>
                         <!-- <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                             Material Code </th>
@@ -725,13 +728,15 @@
                     <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;">
                         <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;">
-                            @if (row.materialCode) {
                             <span> {{ i + 1 }} </span>
-                            }
                         </td>
                         <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: left;">
                             {{ row.purchaseOrderNo }}
+                        </td>
+                        <td
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: left;">
+                            {{ row.sourceType }}
                         </td>
                         <!-- <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: left;">
@@ -773,10 +778,6 @@
                         <td
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
                             {{ purchaseagainestsaleorderPrintData.obj.totalReceivedQty }}
-                        </td>
-                        <td
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-
                         </td>
                         <td
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
