@@ -14,6 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { StatusCodes } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../services/api-config.service';
@@ -23,7 +24,7 @@ import { AddOrEditService } from '../add-or-edit.service';
 
 @Component({
   selector: 'app-glsubaccount',
-  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, ReactiveFormsModule, TranslatePipe, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatAutocompleteModule ],
   templateUrl: './glsubaccount.component.html',
   styleUrls: ['./glsubaccount.component.scss']
 })
@@ -33,6 +34,7 @@ export class GLSubAccountComponent implements OnInit {
   modelFormData: FormGroup;
   formData: any;
   glList: any;
+  filteredGlList: any[] = [];
   constructor(private commonService: CommonService,
     private addOrEditService: AddOrEditService,
     private formBuilder: FormBuilder,
@@ -53,32 +55,66 @@ export class GLSubAccountComponent implements OnInit {
 
 
     this.formData = { ...data };
-    if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
-      this.modelFormData.patchValue(this.formData.item);
-      this.modelFormData.controls['glsubCode'].disable();
-    }
 
   }
 
   ngOnInit() {
     this.getGLAccountData();
+    this.modelFormData.get('glaccount')?.valueChanges.subscribe(value => {
+      this.filterGlList(value);
+    });
+  }
+
+  patchFormData() {
+    if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
+      this.modelFormData.patchValue(this.formData.item);
+      this.modelFormData.controls['glsubCode'].disable();
+    }
   }
   getGLAccountData() {
     const getGLAccountUrl = String.Join('/', this.apiConfigService.getGLAccountList);
     this.apiService.apiGetRequest(getGLAccountUrl)
       .subscribe(
         response => {
+          this.spinner.hide();
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.glList = res.response['glList'];
+              this.patchFormData();
             }
           }
-          this.spinner.hide();
         });
   }
 
+  filterGlList(value: any) {
+    if (!value || value.trim() === '') {
+      this.filteredGlList = [];
+      return;
+    }
+    const filterValue = typeof value === 'string' ? value.toLowerCase() : '';
+    this.filteredGlList = this.glList.filter((item: any) =>
+      item.accountNumber.toLowerCase().includes(filterValue) ||
+      item.glaccountName.toLowerCase().includes(filterValue)
+    );
+  }
+
+  onGlClick(autocomplete: any) {
+    if (this.modelFormData.get('glaccount')?.value === '' || !this.modelFormData.get('glaccount')?.value) {
+      this.filteredGlList = this.glList;
+    }
+    autocomplete.openPanel();
+  }
+
   get formControls() { return this.modelFormData.controls; }
+
+  displayGl = (value: any) => {
+    if (!value || !this.glList) {
+      return '';
+    }
+    const item = this.glList.find((gl: any) => gl.accountNumber === value);
+    return item ? `${item.accountNumber} - ${item.glaccountName}` : value;
+  };
 
   save() {
     if (this.modelFormData.invalid) {
