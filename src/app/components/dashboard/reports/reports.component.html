@@ -705,22 +705,31 @@
                             Description </th> -->
                         <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                            Quantity </th>
+                            Purchase Quantity </th>
                         <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                            Weight </th>
+                            Received Quantity </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Purchase Weight </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Received Weight </th>
                         <!-- <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                             Unit Price </th> -->
                         <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                            Tax </th>
+                            Purchase Rate </th>
                         <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                            Amount </th>
+                            Received Rate </th>
                         <th
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black; -webkit-print-color-adjust: exact;">
-                            Total Amount </th>
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Purchase Amount </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Received Amount </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -748,52 +757,51 @@
                         </td> -->
                         <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
+                            {{ row.poQty }}
+                        </td>
+                        <td
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
                             {{ row.receivedQty }}
                         </td>
                         <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
-                            {{ row.netweight }} </td>
+                            {{ row.poNetWeight }} </td>
+                        <td
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
+                            {{ row.grNetweight }} </td>
                         <!-- <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
                             {{row.rate}}
                         </td> -->
                         <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
-                            {{row.totalTax}}
+                            {{row.poAvgRate}}
                         </td>
                         <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
-                            {{row.amount}}
+                            {{row.grAvgRate}}
                         </td>
                         <td
                             style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
-                            {{ row.total }}
+                            {{row.poGrandTotal}}
+                        </td>
+                        <td
+                            style="font-size: 12px;font-family: sans-serif;border-bottom: 1px solid black;border-right: 1px solid black;padding: 10px; -webkit-print-color-adjust: exact;text-align: right;">
+                            {{row.grGrandTotal}}
                         </td>
                     </tr>
                     }
                     <tr
                         style="border-top: 1px solid black; text-align: end;font-weight: bold;-webkit-print-color-adjust: exact;">
                         <td style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;"
-                            colspan="3"> TOTALS </td>
+                            colspan="9"> TOTALS </td>
                         <td
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-                            {{ purchaseagainestsaleorderPrintData.obj.totalReceivedQty }}
-                        </td>
-                        <td
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-
-                        </td>
-                        <td
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;">
-                            {{ purchaseagainestsaleorderPrintData.obj.taxAmount?.toFixed(2) }}
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
+                            {{ purchaseagainestsaleorderPrintData.obj.poGrandTotal?.toFixed(2) }}
                         </td>
                         <td
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                            {{ purchaseagainestsaleorderPrintData.obj.totalAmount?.toFixed(2) }}
-                        </td>
-                        <td
-                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black;-webkit-print-color-adjust: exact;text-align: center;">
-                            {{ purchaseagainestsaleorderPrintData.obj.grandTotal?.toFixed(2) }}
+                            {{ purchaseagainestsaleorderPrintData.obj.grGrandTotal?.toFixed(2) }}
                         </td>
                     </tr>
                 </tbody>
