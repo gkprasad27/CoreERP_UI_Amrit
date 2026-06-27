@@ -35,6 +35,13 @@ export class RolesprevilagesComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = ['ext4', 'active', 'canAdd', 'canEdit', 'canDelete'];
 
+
+  // Header checkbox states
+  activeChecked = false;
+  canAddChecked = false;
+  canEditChecked = false;
+  canDeleteChecked = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -51,7 +58,6 @@ export class RolesprevilagesComponent implements OnInit, OnDestroy {
       parentMenu: [null]
     });
     this.formData.controls['parentMenu'].disable();
-
   }
 
   ngOnInit() {
@@ -63,14 +69,14 @@ export class RolesprevilagesComponent implements OnInit, OnDestroy {
     const getRolesUrl = this.apiConfigService.getRoles;
     this.apiService.apiGetRequest(getRolesUrl).subscribe(
       response => {
-        const res = response;
+      const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.roleArray = res.response['Roles'];
-          }
         }
-        this.spinner.hide();
-      });
+      }
+      this.spinner.hide();
+    });
   }
 
   onRuleChange(data) {
@@ -85,14 +91,14 @@ export class RolesprevilagesComponent implements OnInit, OnDestroy {
     const getRolesUrl = this.apiConfigService.getParentMenus;
     this.apiService.apiGetRequest(getRolesUrl).subscribe(
       response => {
-        const res = response;
+      const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.parentMenu = res.response['ParentMenus'];
-          }
         }
-        this.spinner.hide();
-      });
+      }
+      this.spinner.hide();
+    });
   }
 
   selectedParentMenu() {
@@ -100,35 +106,75 @@ export class RolesprevilagesComponent implements OnInit, OnDestroy {
       this.formData.get('parentMenu').value);
     this.apiService.apiGetRequest(getRolesUrl).subscribe(
       response => {
-        const res = response;
+      const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.actualData = res.response.map(x => ({ ...x }));
+          this.actualData = res.response.map(x => ({ ...x }));
             this.dataSource = new MatTableDataSource(res.response.map(x => ({ ...x })));
-            this.dataSource.paginator = this.paginator;
+          this.dataSource.paginator = this.paginator;
+          this.updateHeaderCheckboxes();
           }
         }
-        this.spinner.hide();
-      });
+      this.spinner.hide();
+    });
   }
 
-
-  checkboxCheck(event, column) {
-    if (!this.commonService.checkNullOrUndefined(this.dataSource)) {
-      this.dataSource.data = this.dataSource.data.map(val => {
-        val[column] = event.checked;
-        return val;
-      });
+  checkboxCheck(event: any, column: string) {
+    if (!this.dataSource?.data?.length) {
+      return;
     }
+
+    this.dataSource.data.forEach(row => {
+      row[column] = event.checked;
+    });
+
+    // Refresh table
+    this.dataSource.data = [...this.dataSource.data];
+
+    this.updateHeaderCheckboxes();
+  }
+
+  updateHeaderCheckboxes() {
+    if (!this.dataSource?.data?.length) {
+
+      this.activeChecked = false;
+      this.canAddChecked = false;
+      this.canEditChecked = false;
+      this.canDeleteChecked = false;
+
+      return;
+    }
+
+    this.activeChecked = this.dataSource.data.every(x => x.active);
+    this.canAddChecked = this.dataSource.data.every(x => x.canAdd);
+    this.canEditChecked = this.dataSource.data.every(x => x.canEdit);
+    this.canDeleteChecked = this.dataSource.data.every(x => x.canDelete);
   }
 
   save() {
-    let filterData = [];
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    const filterData = [];
+
     for (let d = 0; d < this.dataSource.data.length; d++) {
-      let filterValue = this.actualData.filter(res => res.operationCode == this.dataSource.data[d]['operationCode']);
+
+      const filterValue = this.actualData.filter(
+        res => res.operationCode === this.dataSource.data[d]['operationCode']
+      );
+
       if (filterValue.length) {
-        if (!this.commonService.IsObjectsMatch(filterValue[0], this.dataSource.data[d])) {
-          filterData.push(this.dataSource.data[d]);
+
+        if (!this.commonService.IsObjectsMatch(
+          filterValue[0],
+          this.dataSource.data[d]
+        )) {
+
+          const temp = { ...this.dataSource.data[d] };
+
+          temp['roleId'] = this.formData.get('role')?.value;
+          temp['userId'] = user.seqId;
+
+          filterData.push(temp);
         }
       }
     }
@@ -150,6 +196,12 @@ export class RolesprevilagesComponent implements OnInit, OnDestroy {
 
   reset() {
     this.formData.reset();
+
+    this.activeChecked = false;
+    this.canAddChecked = false;
+    this.canEditChecked = false;
+    this.canDeleteChecked = false;
+
     this.dataSource = undefined;
     this.formData.controls['parentMenu'].disable();
   }

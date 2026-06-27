@@ -41,7 +41,7 @@
 
         <ng-container matColumnDef="active">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox [hidden]="!dataSource" (change)="checkboxCheck($event, 'active')">
+            <mat-checkbox [(ngModel)]="activeChecked" [hidden]="!dataSource" (change)="checkboxCheck($event, 'active')">
             </mat-checkbox>
             <span class="m-1"> {{ "rolePrevilages/role.active" | translate }} </span>
           </th>
@@ -53,7 +53,7 @@
 
         <ng-container matColumnDef="canAdd">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox [hidden]="!dataSource" (change)="checkboxCheck($event, 'canAdd')">
+            <mat-checkbox [(ngModel)]="canAddChecked" [hidden]="!dataSource" (change)="checkboxCheck($event, 'canAdd')">
             </mat-checkbox>
             <span class="m-1"> {{ "rolePrevilages/role.add" | translate }} </span>
           </th>
@@ -65,7 +65,7 @@
 
         <ng-container matColumnDef="canEdit">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox [hidden]="!dataSource" (change)="checkboxCheck($event, 'canEdit')">
+            <mat-checkbox [(ngModel)]="canEditChecked" [hidden]="!dataSource" (change)="checkboxCheck($event, 'canEdit')">
             </mat-checkbox>
             <span class="m-1"> {{ "rolePrevilages/role.edit" | translate }} </span>
           </th>
@@ -77,7 +77,7 @@
 
         <ng-container matColumnDef="canDelete">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox [hidden]="!dataSource" (change)="checkboxCheck($event, 'canDelete')">
+            <mat-checkbox [(ngModel)]="canDeleteChecked" [hidden]="!dataSource" (change)="checkboxCheck($event, 'canDelete')">
             </mat-checkbox>
             <span class="m-1"> {{ "rolePrevilages/role.delete" | translate }} </span>
           </th>
