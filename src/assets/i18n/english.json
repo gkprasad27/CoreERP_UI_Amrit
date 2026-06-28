@@ -44,7 +44,8 @@
     "toMonth": "To Month",
     "totalOtherCharges":  "Other Charges",
     "UPLOAD": "Upload",
-    "SHOW": "Show"
+    "SHOW": "Show",
+    "accountledger": "Account Ledger"
   },
   "LOGIN": {
     "USERNAME": "Username",
@@ -3937,6 +3938,9 @@
   },
   "reports": {
     "saleOrderNo":"Sale Order Number"
+  },
+  "accountledger": {
+    "title": "Account Ledger"
   }
   
 }

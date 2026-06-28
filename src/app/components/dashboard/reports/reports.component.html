@@ -693,17 +693,41 @@
                             S.No </th>
                         <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                            Reference Number </th>
+                            PO Number/JWNumber/Journal </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            PO Date </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            PO Amount </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            JW Amount </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Journal Amount </th>
                         <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                             Source Type </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            PO Target Date </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Inward Amount </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Advance/Profoma/Invoice Paid Amount </th>
+                        <th
+                            style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
+                            Balance Payment </th>
                         <!-- <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                             Material Code </th>
                         <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                             Description </th> -->
-                        <th
+                        <!-- <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                             Purchase Quantity </th>
                         <th
@@ -714,11 +738,11 @@
                             Purchase Weight </th>
                         <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                            Received Weight </th>
+                            Received Weight </th> -->
                         <!-- <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                             Unit Price </th> -->
-                        <th
+                        <!-- <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
                             Purchase Rate </th>
                         <th
@@ -729,7 +753,7 @@
                             Purchase Amount </th>
                         <th
                             style="font-size: 14px;font-family: sans-serif;font-weight: 900;border-bottom: 1px solid black;border-right: 1px solid black; -webkit-print-color-adjust: exact;">
-                            Received Amount </th>
+                            Received Amount </th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -903,6 +927,14 @@
                     <label [translate]="'COMMON.CUSTOMERCODE'"></label>
                     <ng-multiselect-dropdown placeholder=" " formControlName="customerCode"
                         [settings]="dropdownSettings" [data]="customerList">
+                    </ng-multiselect-dropdown>
+                </div>
+                 <div class="multiselect-dropdown-list floating-dropdown col-3"
+                    [class.filled]="modelFormData.value?.accountledger?.length > 0"
+                    *ngIf="routeParam == 'accountledger'">
+                    <label [translate]="'COMMON.accountledger'"></label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="accountledger"
+                        [settings]="dropdownSettings" [data]="accountledgerList">
                     </ng-multiselect-dropdown>
                 </div>
                 <div class="multiselect-dropdown-list floating-dropdown col-3"

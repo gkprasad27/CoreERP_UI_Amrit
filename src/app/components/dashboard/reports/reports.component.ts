@@ -54,6 +54,7 @@ export class ReportsComponent {
 
   companyList: any[] = [];
   customerList: any[] = [];
+  accountledgerList: any[] = [];
   materialList: any[] = [];
   bpTypeList: any[] = [];
   bpList: any[] = [];
@@ -126,6 +127,9 @@ export class ReportsComponent {
       this.commonService.routeParam = params.id;
       switch (this.routeParam) {
         case 'salesanalysis':
+          this.getCustomerList();
+          break;
+        case 'accountledger':
           this.getCustomerList();
           break;
         case 'materialinward':
@@ -284,6 +288,7 @@ export class ReportsComponent {
     this.modelFormData = this.formBuilder.group({
       companyCode: [null, []],
       customerCode: ['-1'],
+      accountledger: ['-1'],
       materialCode: ['-1'],
       employee: ['-1'],
       companyName: [null],
@@ -382,6 +387,7 @@ export class ReportsComponent {
               const resp = res.response['bpList'];
               const data = resp.length && resp.filter((t: any) => t.bptype == 'Customer');
               this.customerList = data;
+              this.accountledgerList = resp;
             }
           }
         });
@@ -595,8 +601,9 @@ export class ReportsComponent {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.value.fromYear}/${this.modelFormData.value.fromMonth}/${this.modelFormData.value.toYear}/${this.modelFormData.value.toMonth}/${obj ? obj.id : '-1'}`);
     } else if (this.routeParam == 'purchaseagainestsaleorder') {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${this.modelFormData.controls.companyCode.value}/${this.modelFormData.controls.saleOrderNo.value}`);
-    }
-    else {
+    } else if (this.routeParam == 'accountledger') {
+      getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${(this.modelFormData.value.accountledger && this.modelFormData.value.accountledger.length) ? this.modelFormData.value.accountledger[0].id : '-1'}`);
+    } else {
       getUrl = String.Join('', environment.baseUrl, `${this.getComponentData.url}/${fromDate}/${toDate}/${this.modelFormData.controls.companyCode.value}`);
     }
     this.apiService.apiGetRequest(getUrl)
