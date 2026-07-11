@@ -62,7 +62,7 @@
 
         <mat-form-field class="col-3" >
           <mat-label>{{ 'openingBalance.voucherNo' | translate }}</mat-label>
-          <input matInput formControlName="voucherNo" appFocusOnEnter tabIndex="3">
+          <input matInput type="text" formControlName="voucherNo" appFocusOnEnter tabIndex="3">
         </mat-form-field>
 
 
@@ -77,13 +77,13 @@
 
         <mat-form-field class="col-3">
           <mat-label>{{ 'openingBalance.openingBalance' | translate }}</mat-label>
-          <input matInput formControlName="openingBalance"
+          <input matInput type="number" formControlName="openingBalance"
             appFocusOnEnter tabIndex="5">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{ 'openingBalance.closingBalance' | translate }}</mat-label>
-          <input matInput formControlName="closingBalance"
+          <input matInput type="number" formControlName="closingBalance"
             appFocusOnEnter tabIndex="6">
         </mat-form-field>
 
@@ -100,7 +100,7 @@
         <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="8">
           {{ 'COMMON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button type="submit" class="button-color-green text-white mx-1" (click)="save()"
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
           appFocusOnEnter tabIndex="9">
 
           {{ 'COMMON.SAVE' | translate }}

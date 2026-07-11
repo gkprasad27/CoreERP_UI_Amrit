@@ -48,6 +48,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   mpatternList = [];
   tableData = [];
   materialCodeList = [];
+  materialCodeListOriginal = [];
   perChaseOrderList = [];
 
 
@@ -310,6 +311,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
         : fObj.description;
     }
     fObj.documentURL = this.fileList2 ? this.fileList2.name.split('.')[0] : '';
+    this.materialCodeList = this.materialCodeList.filter((p: any) => p.materialCode != fObj.materialCode);
     if (this.formData1.value.index == 0) {
       // this.formData1.patchValue({
       fObj.index = data ? (data.length + 1) : 1
@@ -336,6 +338,10 @@ export class ReceiptOfGoodsComponent implements OnInit {
       this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
       this.calculate();
       this.resetForm();
+      const index = this.materialCodeListOriginal.findIndex((p: any) => p.materialCode == value.item.materialCode);
+      this.materialCodeList.splice(index, 0, this.materialCodeListOriginal[index]);
+      this.materialCodeList = [...this.materialCodeList];
+      console.log('this.materialCodeList', this.materialCodeList, this.materialCodeListOriginal);
     } else {
 
       let item = { ...value.item };
@@ -450,7 +456,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   materialCodeChange() {
-    const obj = this.materialCodeList.find((p: any) => p.materialCode == this.formData1.value.materialCode[0]['materialCode']);
+    const obj = this.materialCodeListOriginal.find((p: any) => p.materialCode == this.formData1.value.materialCode[0]['materialCode']);
     this.formData1.patchValue({
       qty: obj ? obj.qty : '',
       netWeight: obj ? obj.netWeight : '',
@@ -651,6 +657,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
               this.grDetail = res.response['grDetail'];
 
               this.materialCodeList = [];
+              this.materialCodeListOriginal = [];
               let data = [];
               this.perChaseOrderList = [];
               if (!this.commonService.checkNullOrUndefined(this.formData.get('purchaseOrderNo').value) && this.formData.value.purchaseOrderNo[0].id) {
@@ -693,6 +700,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
                   }
                 })
                 this.materialCodeList = this.perChaseOrderList;
+                this.materialCodeListOriginal = this.perChaseOrderList;
                 this.formData1.patchValue({
                   qty: '',
                   netWeight: '',
@@ -785,13 +793,14 @@ export class ReceiptOfGoodsComponent implements OnInit {
               // const unique = [...new Set(arr.map(item => item.materialCode))];
               // this.materialCodeList = this.podetailsList;
               this.materialCodeList = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.get('purchaseOrderNo').value);
+              this.materialCodeListOriginal = this.podetailsList.filter(resp => resp.purchaseOrderNumber == this.formData.get('purchaseOrderNo').value);
               this.formData.controls.purchaseOrderNo.disable();
               this.formData.controls.company.disable();
               this.formData.controls.customerName.disable();
               this.formData.controls.profitCenter.disable();
               this.tableData && this.tableData.forEach((t: any) => {
                 let pendingQty = 0;
-                const obj = this.materialCodeList.find((p: any) => p.materialCode == t.materialCode);
+                const obj = this.materialCodeListOriginal.find((p: any) => p.materialCode == t.materialCode);
                 if (obj) {
                   pendingQty = pendingQty + t.receivedQty
                   pendingQty = obj.qty - pendingQty

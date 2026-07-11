@@ -74,7 +74,7 @@
 
         @if (!routeEdit) {
           <div class="multiselect-dropdown-list floating-dropdown col-3"
-            [class.filled]="formData.value?.saleOrderNo?.length > 0">
+            [class.filled]="formData.value?.receivedBy?.length > 0">
             <label> {{ 'goodsreceipts.receivedBy' | translate }} </label>
             <ng-multiselect-dropdown placeholder=" " formControlName="receivedBy" [settings]="dropdownSettings1"
               [data]="employeesList">
