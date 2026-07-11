@@ -762,7 +762,7 @@
 
 <div id="button">
 
-  <button id="print" class="mx-2" mat-raised-button (click)="print()"
+  <button *ngIf="formData.value.approvalStatus === 'Approved'" id="print" class="mx-2" mat-raised-button (click)="print()"
     class="button-color-bule mx-3 text-white">
     <mat-icon>print</mat-icon> Print
   </button>

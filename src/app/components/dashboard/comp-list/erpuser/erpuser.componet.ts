@@ -47,8 +47,8 @@ export class ErpUsersComponent implements OnInit {
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
     this.modelFormData = this.formBuilder.group({
-      userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4)]],
-      password: ['', [Validators.required, Validators.minLength(2)]],
+      userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
       role: [null],
       seqId: ['0'],
       active: [null],

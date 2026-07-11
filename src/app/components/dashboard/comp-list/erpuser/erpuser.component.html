@@ -27,8 +27,9 @@
         <input matInput formControlName="userName" maxlength="50"
           appFocusOnEnter tabIndex="2">
         @if (!formControls.userName.valid) {
-          <mat-error [ngClass]="{ 'ng--invalid': !formControls.userName.valid  }">
-          User Name is required</mat-error>
+          <mat-error *ngIf="formControls.userName.errors?.required" [ngClass]="{ 'ng--invalid': !formControls?.userName?.errors?.required  }"> User Name is required</mat-error>
+          <mat-error *ngIf="formControls.userName.errors?.minlength" [ngClass]="{ 'ng--invalid': !formControls.userName.errors?.minlength  }"> User Name must be at least 4 characters</mat-error>
+          <mat-error *ngIf="formControls.userName.errors?.maxlength" [ngClass]="{ 'ng--invalid': !formControls.userName.errors?.maxlength  }"> User Name must be at most 40 characters</mat-error>
         }
       </mat-form-field>
 
@@ -38,8 +39,9 @@
         <input matInput formControlName="password" maxlength="50"
           appFocusOnEnter tabIndex="2">
         @if (!formControls.password.valid) {
-          <mat-error [ngClass]="{ 'ng--invalid': !formControls.password.valid  }">
-          Password is required</mat-error>
+          <mat-error *ngIf="formControls.password.errors?.required" [ngClass]="{ 'ng--invalid': !formControls.password.errors?.required  }"> Password is required</mat-error>
+          <mat-error *ngIf="formControls.password.errors?.minlength" [ngClass]="{ 'ng--invalid': !formControls.password.errors?.minlength  }"> Password must be at least 4 characters</mat-error>
+          <mat-error *ngIf="formControls.password.errors?.maxlength" [ngClass]="{ 'ng--invalid': !formControls.password.errors?.maxlength  }"> Password must be at most 40 characters</mat-error>
         }
       </mat-form-field>
 
