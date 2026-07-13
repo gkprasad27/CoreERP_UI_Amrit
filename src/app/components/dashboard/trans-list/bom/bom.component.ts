@@ -197,7 +197,7 @@ export class BillOfMaterialComponent implements OnInit {
       // saleOrder: ['', Validators.required],
       bomnumber: [null, [Validators.required]],
       description: [null, [Validators.required]],
-      profitCenter: ['', Validators.required],
+      profitCenter: [''],
       drawingDocument: [''],
       // product: ['', Validators.required],
       // materialCode: [''],
