@@ -353,7 +353,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       // Convert sheet to JSON
       this.excelData = XLSX.utils.sheet_to_json(worksheet);
 
-      const url = String.Join('/', this.apiConfigService.addSaleOrder);
+      const url = String.Join('/', this.apiConfigService.uploadMaterialMaster);
       
       this.apiService.apiPostRequest(url, { data: this.excelData }).subscribe(
         response => {

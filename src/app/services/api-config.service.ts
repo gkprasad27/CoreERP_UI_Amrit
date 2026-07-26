@@ -558,6 +558,9 @@ export class ApiConfigService {
    getSaleOrderDetailPO = `${environment.baseUrl}Transactions/GetSaleOrderDetailPO`;
    getSaleOrderDetailJO = `${environment.baseUrl}Transactions/GetSaleOrderDetailJO`;
 
+   uploadMaterialMaster = `${environment.baseUrl}MaterialMaster/UploadMaterialMaster`;
+
+
    getSaleOrderNumber = `${environment.baseUrl}Transactions/GetSaleOrderNumber`;
    getPurchaseOrderNumber = `${environment.baseUrl}Transactions/GetPurchaseOrderNumber`;
    uploadFile = `${environment.baseUrl}Transactions/UploadFile`;
