@@ -109,7 +109,7 @@ export class CommonService {
   }
 
   getLangConfig(): any {
-    this.http.get('../../assets/app-lang-config.json').subscribe(
+    this.http.get('../../assets/app-lang.json').subscribe(
       data => {
         const langConfig = data;
         localStorage.setItem('langConfig', JSON.stringify(langConfig));

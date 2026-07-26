@@ -31,6 +31,16 @@
           <button class="mx-2" mat-raised-button>
             <mat-icon>print</mat-icon> Print
           </button>
+          <input
+            #fileInput
+            type="file"
+            accept=".xlsx,.xls"
+            (change)="onFileChange($event)"
+            hidden
+          />
+          <button *ngIf="routeParam == 'materialsmaster'" class="mx-2" mat-raised-button (click)="openFilePicker()">
+            <mat-icon>excel</mat-icon> Excel
+          </button>
         </div>
       }
       <div id="filt" class="btn-group align-items-center" dropdown #dropdown="bs-dropdown" [autoClose]="false">

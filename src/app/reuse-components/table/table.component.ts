@@ -1,6 +1,7 @@
 import {
   Component, OnInit, ViewChild, Input, OnChanges,
-  ChangeDetectorRef, Output, EventEmitter, AfterViewInit, OnDestroy, HostListener
+  ChangeDetectorRef, Output, EventEmitter, AfterViewInit, OnDestroy, HostListener,
+  ElementRef
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -23,6 +24,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import * as XLSX from 'xlsx';
+import { ApiService } from '../../services/api.service';
+import { String } from 'typescript-string-operations';
+import { ApiConfigService } from '../../services/api-config.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SnackBar, StatusCodes } from '../../enums/common/common';
+import { Static } from '../../enums/common/static';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-table',
@@ -43,6 +52,9 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   public filteredTableMulti: ReplaySubject<any> = new ReplaySubject<any>(1);
 
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
+
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  excelData: any[] = [];
 
   /** Subject that emits when the component has been destroyed. */
   protected onDestroy = new Subject<void>();
@@ -79,7 +91,11 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     private activatedRoute: ActivatedRoute,
     private translate: TranslateService,
     private runtimeConfigService: RuntimeConfigService,
-    public commonService: CommonService
+    public commonService: CommonService,
+    private apiService: ApiService,
+    private apiConfigService: ApiConfigService,
+    private spinner: NgxSpinnerService,
+    private alertService: AlertService
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
     activatedRoute.params.subscribe(params => {
@@ -311,6 +327,49 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   getCount(name) {
     return this.dataSource && this.dataSource.data.filter(o => o.status === name).length;
+  }
+
+  openFilePicker(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  onFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files?.length) {
+      return;
+    }
+
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const workbook = XLSX.read(e.target.result, { type: 'array' });
+
+      // Read the first sheet
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+
+      // Convert sheet to JSON
+      this.excelData = XLSX.utils.sheet_to_json(worksheet);
+
+      const url = String.Join('/', this.apiConfigService.addSaleOrder);
+      
+      this.apiService.apiPostRequest(url, { data: this.excelData }).subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
+            }
+          }
+        });
+
+      console.log(this.excelData);
+    };
+
+    reader.readAsArrayBuffer(file);
   }
 
 }
