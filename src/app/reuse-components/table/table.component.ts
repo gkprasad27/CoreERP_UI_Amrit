@@ -54,7 +54,6 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-  excelData: any[] = [];
 
   /** Subject that emits when the component has been destroyed. */
   protected onDestroy = new Subject<void>();
@@ -351,11 +350,13 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       const worksheet = workbook.Sheets[sheetName];
 
       // Convert sheet to JSON
-      this.excelData = XLSX.utils.sheet_to_json(worksheet);
+      const excelData = XLSX.utils.sheet_to_json(worksheet);
+
+      excelData.forEach((item: any) => item.id = 0);
 
       const url = String.Join('/', this.apiConfigService.uploadMaterialMaster);
       
-      this.apiService.apiPostRequest(url, { data: this.excelData }).subscribe(
+      this.apiService.apiPostRequest(url, { data: excelData }).subscribe(
         response => {
           this.spinner.hide();
           const res = response;
@@ -366,7 +367,6 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
           }
         });
 
-      console.log(this.excelData);
     };
 
     reader.readAsArrayBuffer(file);
