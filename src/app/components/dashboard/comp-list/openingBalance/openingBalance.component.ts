@@ -248,7 +248,7 @@ export class OpeningBalanceComponent implements OnInit {
       return;
     }
     this.formData.item = this.modelFormData.getRawValue();
-    this.formData.item.effectiveFrom = this.formData.item.effectiveFrom ? this.datepipe.transform(this.formData.item.effectiveFrom, 'MM-dd-yyyy') : '';
+    this.formData.item.openingBalanceDate = this.formData.item.openingBalanceDate ? this.datepipe.transform(this.formData.item.openingBalanceDate, 'MM-dd-yyyy') : '';
     if(!this.data.item) {
       delete this.formData.item['openingBalanceId'];
     }

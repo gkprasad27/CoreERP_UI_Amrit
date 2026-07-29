@@ -155,7 +155,7 @@ import { OfferletterComponent } from './offerletter/offerletter.component';
   providedIn: 'root'
 })
 export class CompListService {
-  dynamicComp = { component: null, tableUrl: null, list: null, editKey: null, searchCol: null };
+  dynamicComp = { component: null, tableUrl: null, list: null, editKey: null, searchCol: null, height: '80vh' };
   // dynamicComp = { component: null };
 
   constructor(
@@ -170,6 +170,7 @@ export class CompListService {
         break;
       case 'glsubaccount':
         this.dynamicComp.component = GLSubAccountComponent;
+        this.dynamicComp.height = '25vh';
         return this.dynamicComp.component;
         break;
       case 'assetbegningacqusition':

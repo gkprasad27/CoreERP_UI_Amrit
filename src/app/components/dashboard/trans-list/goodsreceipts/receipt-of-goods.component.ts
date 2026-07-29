@@ -11,7 +11,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS, NonEditableDatepicker } from '../../../../directives/format-datepicker';
 import { TableComponent } from '../../../../reuse-components/table/table.component';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
@@ -31,7 +31,7 @@ import { FileUploadComponent } from '../../../../reuse-components/file-upload/fi
 
 @Component({
   selector: 'app-receipt-of-goods',
-  imports: [ReactiveFormsModule, TranslatePipe, NonEditableDatepicker, TranslateModule, FileUploadComponent, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, NonEditableDatepicker, TranslateModule, FileUploadComponent, NgMultiSelectDropDownModule, TableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './receipt-of-goods.component.html',
   styleUrls: ['./receipt-of-goods.component.scss'],
   providers: [
@@ -45,6 +45,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   formData: FormGroup;
   formData1: FormGroup;
   routeEdit = '';
+  routeUrl = '';
   mpatternList = [];
   tableData = [];
   materialCodeList = [];
@@ -137,6 +138,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
     private router: Router) {
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
+    }
+    if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.id)) {
+      this.routeUrl = this.route.snapshot.params.id;
     }
   }
 
@@ -903,7 +907,11 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
 
   back() {
-    this.router.navigate(['dashboard/transaction/goodsreceipts'])
+    if(this.routeUrl === 'goodsreceipts') {
+      this.router.navigate(['dashboard/transaction/goodsreceipts'])
+    } else if(this.routeUrl === 'GoodsReceiptApproval') {
+      this.router.navigate(['dashboard/transaction/GoodsReceiptApproval'])
+    }
   }
 
   save() {
@@ -946,10 +954,14 @@ export class ReceiptOfGoodsComponent implements OnInit {
             if (this.fileList) {
               this.uploadFile();
             } else {
+              this.spinner.hide();
               this.router.navigateByUrl('dashboard/transaction/goodsreceipts');
             }
             this.alertService.openSnackBar('Goods Receipt created Successfully..', Static.Close, SnackBar.success);
+          } else {
+            this.spinner.hide();
           }
+        } else {
           this.spinner.hide();
         }
       });
@@ -975,7 +987,6 @@ export class ReceiptOfGoodsComponent implements OnInit {
       observe: 'events'
     }).subscribe(
       (response: any) => {
-        this.spinner.hide();
         const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
@@ -985,6 +996,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
         if (this.fileList1) {
           this.uploadFile1();
         } else {
+          this.spinner.hide();
           this.router.navigateByUrl('dashboard/transaction/goodsreceipts');
         }
       });
@@ -1000,13 +1012,13 @@ export class ReceiptOfGoodsComponent implements OnInit {
       observe: 'events'
     }).subscribe(
       (response: any) => {
-        this.spinner.hide();
         const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response)) {
             this.alertService.openSnackBar('Quotation Supplier created Successfully..', Static.Close, SnackBar.success);
           }
         }
+        this.spinner.hide();
         this.router.navigateByUrl('dashboard/transaction/goodsreceipts');
       });
   }

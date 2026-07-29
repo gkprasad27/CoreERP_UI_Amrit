@@ -126,10 +126,9 @@ export class CompListComponent implements OnInit, OnDestroy {
       } else {
         value.tableData = this.tableData;
         const dialogRef = this.dialog.open(this.compListService.getDynComponents(this.tableUrl.formName), {
-          
-      width: '80%',
-        height: '80vh',
-      position: { top: '5%', left: '10%' },
+          width: '80%',
+          height: this.compListService.dynamicComp.height,
+          position: { top: '5%', left: '10%' },
           data: value,
           disableClose: true
         });

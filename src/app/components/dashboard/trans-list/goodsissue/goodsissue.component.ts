@@ -161,7 +161,7 @@ export class GoodsissueComponent implements OnInit {
       materialCode: [''],
       materialName: [''],
       qty: [''],
-      lotNo: ['', Validators.required],
+      lotNo: [''],
       id: 0,
       changed: true,
       availableqty: [''],
@@ -297,6 +297,10 @@ export class GoodsissueComponent implements OnInit {
     if (this.formData1.invalid) {
       return;
     }
+    if(this.formData1.value.requiredqty === 0) {
+      this.alertService.openSnackBar("Allocated quantity cannot be more than required quantity", Static.Close, SnackBar.error);
+      return;
+    }
     this.formData1.patchValue({
       changed: true,
       highlight: true
@@ -304,6 +308,9 @@ export class GoodsissueComponent implements OnInit {
     let data: any = this.tableData;
     this.tableData = null;
     this.tableComponent.defaultValues();
+    if(this.formData1.value.materialCodeBomKey) {
+      this.materialCodeList = this.materialCodeList.filter((s: any) => s.materialCodeBomKey != this.formData1.value.materialCodeBomKey[0].materialCodeBomKey);
+    }
     let fObj = JSON.parse(JSON.stringify(this.formData1.value));
     if (fObj.materialCode) {
       // fObj.materialCode = this.formData1.value.materialCode[0].materialCode;
@@ -396,6 +403,12 @@ export class GoodsissueComponent implements OnInit {
                 const storeObj = this.employeesList.find((c: any) => c.id == this.formData.value.storesPerson);
                 this.formData.patchValue({
                   storesPersonName: storeObj?.text
+                })
+              }
+              if (this.employeesList.length && this.formData.value.productionPerson) {
+                const storeObj = this.employeesList.find((c: any) => c.id == this.formData.value.productionPerson);
+                this.formData.patchValue({
+                  productionPersonName: storeObj?.text
                 })
               }
               // this.formData.patchValue({

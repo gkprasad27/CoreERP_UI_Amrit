@@ -257,13 +257,18 @@
         }
 
         <mat-form-field class="col-2">
+          <mat-label [translate]="'goodsissue.materialName'"></mat-label>
+          <input matInput type="text" readonly formControlName="materialName" appFocusOnEnter tabIndex="7">
+        </mat-form-field>
+
+        <mat-form-field class="col-2">
           <mat-label [translate]="'goodsissue.qty'"></mat-label>
           <input matInput type="number" readonly formControlName="qty" appFocusOnEnter tabIndex="7">
         </mat-form-field>
 
-        <mat-form-field class="col-2">
+        <mat-form-field class="col-2" *ngIf="formData.value.company !== '2000'">
           <mat-label>{{'goodsissue.lotNo' | translate }}</mat-label>
-          <mat-select formControlName="lotNo" appFocusOnEnter tabIndex="8" (selectionChange)="lotChange()">
+          <mat-select formControlName="lotNo" required appFocusOnEnter tabIndex="8" (selectionChange)="lotChange()">
             <mat-option>None</mat-option>
             @for (pft of getLotList; track pft) {
               <mat-option [value]="pft.lotNo">

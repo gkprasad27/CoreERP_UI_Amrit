@@ -68,6 +68,7 @@ export class PurchaseOrderComponent implements OnInit {
   tableData = [];
   dynTableProps: any;
   routeEdit = '';
+  routeUrl = '';
   materialList: any;
   pcgroupList: any;
   functionaldeptList: any;
@@ -152,6 +153,9 @@ export class PurchaseOrderComponent implements OnInit {
     this.loginUser = JSON.parse(localStorage.getItem('user'));
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
+    }
+    if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.id)) {
+      this.routeUrl = this.route.snapshot.params.id;
     }
   }
 
@@ -1126,7 +1130,11 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   back() {
+    if (this.routeUrl === 'purchaseorder') {
     this.router.navigate(['dashboard/transaction/purchaseorder'])
+    } else if (this.routeUrl === 'PurchaseorderApproval') {
+      this.router.navigate(['dashboard/transaction/PurchaseorderApproval'])
+    }
   }
 
   save() {

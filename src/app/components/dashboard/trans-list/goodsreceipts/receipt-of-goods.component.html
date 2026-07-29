@@ -260,7 +260,7 @@
 <div>
 
 
-  <button id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
+  <button *ngIf="routeUrl === 'goodsreceipts'" id="save" mat-raised-button type="submit" class="button-color-bule mx-3 text-white"
     (click)="save()"><i class="fa-solid fa-floppy-disk"></i>
     {{ 'COMMON.SAVE' | translate }}
   </button>
