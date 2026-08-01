@@ -975,6 +975,7 @@
     "voucherDate": "Voucher Date",
     "postingDate": "Posting Date",
     "glaccount": "GL Account",
+    "ledName": "GL Account Name",
     "glSubaccount": "Sub GL Account",
     "accountingIndicator": "Accounting Indicator",
     "amount": "Amount",

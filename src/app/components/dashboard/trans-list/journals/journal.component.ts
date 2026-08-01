@@ -237,6 +237,7 @@ export class JournalComponent implements OnInit {
               const arr = [ ...res.response['JvDetail'] ];
               arr.forEach((s: any, index: number) => {
                 s.glaccount = s.glaccount ? s.glaccount : '';
+                s.ledName = s.ledName ? s.ledName : '';
                 s.glSubaccount = s.glSubaccount ? s.glSubaccount : '';
                 s.accountingIndicator = s.accountingIndicator ? s.accountingIndicator : '';
                 s.amount = s.amount ? s.amount : 0;
