@@ -400,7 +400,7 @@ export class SalesorderComponent {
   }
 
   getBomDetail() {
-    if (this.tableData.some((t: any) => t.bomKey == this.formData.value.bom)) {
+    if (this.tableData && this.tableData.length && this.tableData.some((t: any) => t.bomKey == this.formData.value.bom)) {
       this.formData.patchValue({
         bom: ''
       })
