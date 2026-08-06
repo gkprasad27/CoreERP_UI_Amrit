@@ -94,6 +94,19 @@ export class ReceiptspaymentsComponent implements OnInit {
       allowSearchFilter: true
     };
 
+
+  dropdownSettings2: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'accountIdText',
+    textField: 'accountIdText',
+    enableCheckAll: false,
+    // selectAllText: 'Select All',
+    // unSelectAllText: 'UnSelect All',
+    // itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+
   constructor(public commonService: CommonService,
     private formBuilder: FormBuilder,
     private apiConfigService: ApiConfigService,
@@ -125,7 +138,7 @@ export class ReceiptspaymentsComponent implements OnInit {
       voucherType: [null, [Validators.required]],
       // voucherDate: [new Date()],
       // postingDate: [new Date()],
-      voucherDate: [],
+      voucherDate: [null, [Validators.required]],
       postingDate: [],
       period: [null],
       voucherNumber: [null, [Validators.required]],
@@ -134,6 +147,7 @@ export class ReceiptspaymentsComponent implements OnInit {
       transactionType: ['', [Validators.required]],
       natureofTransaction: ['', [Validators.required]],
       account: [null],
+      accountIdText: [null],
       accountingIndicator: [null],
       referenceNo: [null],
       referenceDate: [null],
@@ -278,6 +292,7 @@ export class ReceiptspaymentsComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               this.formData.patchValue(res.response['paymentreceiptMasters']);
+              this.formData.patchValue({ account: res.response['paymentreceiptMasters'].account && (res.response['paymentreceiptMasters'].account).toString() });
 
               this.accountSelect();
               this.onbpChange(false);
@@ -321,7 +336,11 @@ export class ReceiptspaymentsComponent implements OnInit {
   accountSelect() {
     this.accountList = [];
     if (!this.commonService.checkNullOrUndefined(this.formData.get('transactionType').value)) {
-      this.accountList = this.accountFilterList.filter(resp => resp.taxCategory == this.formData.get('transactionType').value);
+      const accountList = this.accountFilterList.filter(resp => resp.taxCategory == this.formData.get('transactionType').value);
+      this.accountList = accountList.length && accountList.map((s: any) => ({
+                  ...s,
+                  accountIdText: `${s.id}-${s.text}`
+                }));
     }
   }
 
@@ -561,6 +580,10 @@ export class ReceiptspaymentsComponent implements OnInit {
     }
     if (typeof formData.bpcategory != 'string') {
       formData.bpcategory = this.formData.value.bpcategory[0].code;
+    }
+    if (typeof formData.accountIdText != 'string') {
+      const accountObj = this.accountList.find((p: any) => p.accountIdText == this.formData.value.accountIdText[0].accountIdText);
+      formData.account = accountObj.id;
     }
     formData.voucherDate = this.formData.get('voucherDate').value ? this.datepipe.transform(this.formData.get('voucherDate').value, 'MM-dd-yyyy') : '';
     formData.postingDate = this.formData.get('postingDate').value ? this.datepipe.transform(this.formData.get('postingDate').value, 'MM-dd-yyyy') : '';

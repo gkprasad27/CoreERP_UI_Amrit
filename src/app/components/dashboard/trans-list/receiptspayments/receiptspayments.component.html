@@ -98,17 +98,29 @@
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="col-2">
-                    <mat-label>{{ 'receiptspayments.account' | translate }}</mat-label>
-                    <mat-select formControlName="account">
-                        <mat-option>None</mat-option>
-                        @for (acc of accountList; track acc.id) {
-                        <mat-option [value]="acc.id">
-                            {{ acc.id }} - {{acc.text}}
-                        </mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
+                
+                @if (!routeEdit) {
+                <div class="multiselect-dropdown-list floating-dropdown col-2" 
+                    [class.filled]="formData.value?.accountIdText?.length > 0">
+                    <label> {{ 'receiptspayments.account' | translate }} </label>
+                    <ng-multiselect-dropdown placeholder=" " formControlName="accountIdText" [settings]="dropdownSettings2"
+                        [data]="accountList" >
+                    </ng-multiselect-dropdown>
+                </div>
+                }
+                @if (routeEdit) {
+                    <mat-form-field class="col-2">
+                        <mat-label>{{ 'receiptspayments.account' | translate }}</mat-label>
+                        <mat-select formControlName="account">
+                            <mat-option>None</mat-option>
+                            @for (acc of accountList; track acc.id) {
+                            <mat-option [value]="acc.id">
+                                {{ acc.id }} - {{acc.text}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                }
 
                 <mat-form-field class="col-2">
                     <mat-label [translate]="'receiptspayments.referenceNo'"></mat-label>
