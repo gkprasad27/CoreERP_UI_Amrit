@@ -226,7 +226,6 @@
           (click)="resetForm();"><i class="fa-solid fa-arrow-rotate-right"></i>
           {{ 'COMMON.RESET' | translate }}
         </button>
-
       </div>
 
     </form>
@@ -273,8 +272,98 @@
   (click)="return();">
   {{ 'COMMON.RETURN' | translate }}
 </button>
+        <button [hidden]="routeEdit == ''" mat-raised-button type="submit" class="button-color-green text-white mx-1"
+          (click)="print()">
+          {{ 'COMMON.PRINT' | translate }}
+        </button>
 </div>
 
 </mat-card-content>
 
 </mat-card>
+
+@if(journalData) {
+  <div style="margin: 10px;" id="journalDataPrintData">
+
+    <div style="display: flex;">
+      @if(formData.value.company === '1000') {
+        <img src="/assets/images/header.jpg" style="height: 100px; width: 65%;">
+      }
+      @if(formData.value.company !== '1000') {
+        <img src="/assets/images/AMRIT.jpg" style="height: 100px; width: 65%;">
+      }
+
+        <div style="padding: 24px; border-top: 1px solid black; -webkit-print-color-adjust: exact; background: rgb(22 106 132) !important;
+                    color: white;font-size: 20px;width: 35%;align-items: center; justify-content: space-around; display: flex; height: 50px;
+    "> Cash Voucher/ Journal </div>
+    </div>
+
+    <div style="border-top: 1px solid black; display: flex;">
+      <div style="padding: 5px;width: 50%;padding-left: 15px;">
+        <b> VC Number </b>
+        <span style="padding-left: 60px;">: {{ journalData?.vcNumber }} </span>
+      </div>
+      <div style="padding: 5px;width: 50%;padding-left: 15px;">
+        <b> Date </b>
+        <span style="padding-left: 92px;">: {{ journalData?.voucherDate | date:'dd/MM/yyyy' }}
+        </span>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid black;">
+      <div style="padding: 5px;width: 100%;padding-left: 15px;">
+        <b> Description </b>
+        <span style="padding-left: 75px;">: {{ journalData?.narration }} </span>
+      </div>
+    </div>
+
+
+    @if(journalData?.detailArray && journalData?.detailArray.length) {
+      <div
+        style="border-top: 1px solid black;border-bottom: 1px solid black;-webkit-print-color-adjust: exact; margin-top: 10px;">
+        <table
+          style="border-collapse: collapse;width: 100%;text-align: center; font-size: 14px;-webkit-print-color-adjust: exact;">
+          <thead>
+            <tr>
+              <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> S.No </th>
+              <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Description </th>
+              <th style="border-right: 1px solid black; -webkit-print-color-adjust: exact;"> Amount </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of journalData?.detailArray; track row; let i = $index) {
+              <tr style="border-top: 1px solid black;-webkit-print-color-adjust: exact;"
+                >
+                <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ i + 1 }} </td>
+                <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.narration }} </td>
+                <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> {{ row.amount }} </td>
+              </tr>
+            }
+            <tr  style="border-top: 1px solid black;-webkit-print-color-adjust: exact;">
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;" > </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;"> Return Amount </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;">  </td>
+            </tr>
+            <tr  >
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact;" > </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact; border-top: 1px solid black;"> Total Amount </td>
+              <td style="border-right: 1px solid black;-webkit-print-color-adjust: exact; border-top: 1px solid black;"> {{ journalData?.totalAmount }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    }
+
+
+    <div style="display: flex;margin-top: 250px;">
+      <div style="width: 50%;display: flex;justify-content: center;">
+        <b> Issued By </b>
+      </div>
+      <div style="width: 50%;display: flex;justify-content: center;">
+        <b> Received By </b>
+      </div>
+    </div>
+
+
+  </div>
+}
