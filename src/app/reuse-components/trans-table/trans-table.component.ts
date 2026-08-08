@@ -134,7 +134,11 @@ export class TransTableComponent implements OnInit {
 
   openEditTrans(row) {
     this.addOrEditService.editData = 'Edit';
-    this.router.navigate(['dashboard/transaction', this.routeParam, 'Edit', { value: row[this.transListService.getDynComponents(this.routeParam).editKey] }]);
+    if (this.routeParam == 'goodsreceipts') {
+      this.router.navigate(['dashboard/transaction', this.routeParam, 'Edit', { value: row[this.transListService.getDynComponents(this.routeParam).editKey], value1: row.supplierReferenceNo }]);
+    } else {
+      this.router.navigate(['dashboard/transaction', this.routeParam, 'Edit', { value: row[this.transListService.getDynComponents(this.routeParam).editKey] }]);
+    }
   }
 
   newTransOpen() {

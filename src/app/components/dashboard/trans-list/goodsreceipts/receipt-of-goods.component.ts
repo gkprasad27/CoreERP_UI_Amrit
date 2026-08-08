@@ -45,6 +45,7 @@ export class ReceiptOfGoodsComponent implements OnInit {
   formData: FormGroup;
   formData1: FormGroup;
   routeEdit = '';
+  routeEdit1 = '';
   routeUrl = '';
   mpatternList = [];
   tableData = [];
@@ -138,6 +139,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
     private router: Router) {
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
+    }
+    if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value1)) {
+      this.routeEdit1 = this.route.snapshot.params.value1;
     }
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.id)) {
       this.routeUrl = this.route.snapshot.params.id;
@@ -650,8 +654,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
 
   grDetail: any[] = [];
   getRecepitOfGoodsDetails1(val) {
-    const cashDetUrl = String.Join('/', this.apiConfigService.getgoodsreceiptDetail, val);
-    this.apiService.apiGetRequest(cashDetUrl)
+    const cashDetUrl = String.Join('/', this.apiConfigService.getgoodsreceiptDetail);
+    const requestObj = { poNumber: val, invoiceNo: this.routeEdit1 };
+    this.apiService.apiPostRequest(cashDetUrl, requestObj)
       .subscribe(
         response => {
           this.spinner.hide();
@@ -718,8 +723,9 @@ export class ReceiptOfGoodsComponent implements OnInit {
   }
 
   getRecepitOfGoodsDetails(val) {
-    const cashDetUrl = String.Join('/', this.apiConfigService.getgoodsreceiptDetail, val);
-    this.apiService.apiGetRequest(cashDetUrl)
+    const cashDetUrl = String.Join('/', this.apiConfigService.getgoodsreceiptDetail);
+        const requestObj = { poNumber: val, invoiceNo: this.routeEdit1 };
+    this.apiService.apiPostRequest(cashDetUrl, requestObj)
       .subscribe(
         response => {
           this.spinner.hide();

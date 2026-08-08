@@ -1747,6 +1747,7 @@
     "checkAll": "Select",
     "title": "Goods Receipt",
     "purchaseOrderNo": "Purchase Order No",
+    "supplierReferenceNo": "Invoice Number",
     "supplierRefno": "Invoice Number",
     "customerName": "supplierName",
     "totalAmount": "Total Amount",
