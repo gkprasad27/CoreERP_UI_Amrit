@@ -136,6 +136,8 @@ export class TransTableComponent implements OnInit {
     this.addOrEditService.editData = 'Edit';
     if (this.routeParam == 'goodsreceipts') {
       this.router.navigate(['dashboard/transaction', this.routeParam, 'Edit', { value: row[this.transListService.getDynComponents(this.routeParam).editKey], value1: row.supplierReferenceNo }]);
+    } else if (this.routeParam == 'GoodsReceiptApproval') {
+      this.router.navigate(['dashboard/transaction', this.routeParam, 'Edit', { value: row[this.transListService.getDynComponents(this.routeParam).editKey], value1: row.supplierReferenceNo }]);
     } else {
       this.router.navigate(['dashboard/transaction', this.routeParam, 'Edit', { value: row[this.transListService.getDynComponents(this.routeParam).editKey] }]);
     }
