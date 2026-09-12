@@ -961,6 +961,7 @@
     "sgstamount": "SGST",
     "cgstamount": "CGST",
     "igstamount": "IGST",
+    "ext": "Invoice No",
     "ugstamount": "UGST",
     "delete": "Delete",
     "action": "Action"

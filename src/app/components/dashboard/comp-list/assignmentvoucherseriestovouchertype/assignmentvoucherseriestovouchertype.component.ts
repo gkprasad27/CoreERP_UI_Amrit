@@ -49,7 +49,7 @@ export class AssignmentVoucherSeriestoVoucherTypesComponent implements OnInit {
       voucherType: [null],
       voucherSeries: [null],
       lastNumber: null,
-      id: null,
+      id: 0,
       suffix: null
     });
 

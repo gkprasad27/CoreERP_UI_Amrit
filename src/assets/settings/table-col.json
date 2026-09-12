@@ -1558,8 +1558,7 @@
     "delete": "Delete",
     "requiredqty": "Required QTY",
     "productionPlanDate": "Date",
-    "productionTargetDate": "Date",
-    "action": "Action"
+    "productionTargetDate": "Date"
   },
   "materialrequisition": {
     "title": "Production Scheduling",
