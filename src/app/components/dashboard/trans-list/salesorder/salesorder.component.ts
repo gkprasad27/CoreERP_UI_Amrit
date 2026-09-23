@@ -135,20 +135,22 @@ export class SalesorderComponent {
       materialCode: [''],
       taxCode: ['', Validators.required],
       qty: ['', Validators.required],
-      rate: ['', Validators.required],
+      rate: [0, Validators.required],
       dubQty: [0],
       discount: [''],
       saleOrderNo: [0],
-      sgst: [''],
+      sgst: [0],
       id: [0],
-      igst: [''],
-      cgst: [''],
-      amount: [''],
+      igst: [0],
+      cgst: [0],
+      ugst: [0],
+      amount: [0],
       total: [''],
       netWeight: [''],
       mainComponent: [''],
       billable: [''],
       poQty:[0],
+      taxAmount: [0],
       bomKey: [''],
       bomName: [''],
       deliveryDate: [''],
@@ -424,6 +426,16 @@ export class SalesorderComponent {
                 // s.hsnsac = obj.hsnsac
                 s.id = 0;
                 s.changed = true;
+                s.igst = s.igst ? s.igst : 0;
+                s.cgst = s.cgst ? s.cgst : 0;
+                s.sgst = s.sgst ? s.sgst : 0;
+                s.taxCode = s.taxCode ? s.taxCode : '';
+                s.ugst = s.ugst ? s.ugst : 0;
+                s.amount = s.amount ? s.amount : 0;
+                s.qty = s.qty ? s.qty : 0;
+                s.bomName = s.bomName ? s.bomName : '';
+                s.rate = s.rate ? s.rate : 0;
+                s.taxAmount = s.taxAmount ? s.taxAmount : 0;
                 s.highlight = true;
                 s.dubQty = s.qty;
                 s.action = s?.billable == 'N' ? [
